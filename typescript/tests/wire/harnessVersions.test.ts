@@ -1,0 +1,60 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("HarnessVersionsClient", () => {
+    
+    test("create_harness_version (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "baseHarnessProfileId" : "baseHarnessProfileId" , "compatibilityProfileId" : "compatibilityProfileId" , "displayName" : "displayName" , "harnessId" : "harnessId" , "sourceArtifactId" : "sourceArtifactId" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/harness-versions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.harnessVersions.createHarnessVersion("project_id", {
+    baseHarnessProfileId: "baseHarnessProfileId",
+    compatibilityProfileId: "compatibilityProfileId",
+    displayName: "displayName",
+    harnessId: "harnessId",
+    sourceArtifactId: "sourceArtifactId"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("create_harness_version (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "baseHarnessProfileId" : "baseHarnessProfileId" , "compatibilityProfileId" : "compatibilityProfileId" , "displayName" : "displayName" , "harnessId" : "harnessId" , "sourceArtifactId" : "sourceArtifactId" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/harness-versions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.harnessVersions.createHarnessVersion("project_id", {
+    baseHarnessProfileId: "baseHarnessProfileId",
+    compatibilityProfileId: "compatibilityProfileId",
+    displayName: "displayName",
+    harnessId: "harnessId",
+    sourceArtifactId: "sourceArtifactId"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

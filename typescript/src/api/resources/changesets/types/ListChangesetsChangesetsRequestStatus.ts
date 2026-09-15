@@ -1,0 +1,11 @@
+
+export const ListChangesetsChangesetsRequestStatus = {
+        Draft: "draft",
+        ReadyForReview: "ready_for_review",
+        Approved: "approved",
+        Staging: "staging",
+        Production: "production",
+        Rejected: "rejected",
+        RolledBack: "rolled_back"
+    } as const;
+export type ListChangesetsChangesetsRequestStatus = typeof ListChangesetsChangesetsRequestStatus[keyof typeof ListChangesetsChangesetsRequestStatus];

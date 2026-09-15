@@ -1,0 +1,24 @@
+
+import * as Sikaru from "../../../../index.js";
+
+/**
+ * @example
+ *     {
+ *         publicSummary: "publicSummary",
+ *         publicTitle: "publicTitle",
+ *         scopeRef: "scopeRef",
+ *         scopeType: "global",
+ *         sourceType: "import"
+ *     }
+ */
+export interface CreateChangeSetRequest {
+    agentId?: string | null;
+    baseReleaseId?: string | null;
+    candidateReleaseId?: string | null;
+    publicSummary: string;
+    publicTitle: string;
+    scopeRef: string;
+    scopeType: Sikaru.ScopeType;
+    sourceType: Sikaru.SourceType;
+    workflowId?: string | null;
+}

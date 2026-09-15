@@ -1,0 +1,409 @@
+
+import typing
+
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.request_options import RequestOptions
+from .raw_client import AsyncRawRunSchedulesClient, RawRunSchedulesClient
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class RunSchedulesClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._raw_client = RawRunSchedulesClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> RawRunSchedulesClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        RawRunSchedulesClient
+        """
+        return self._raw_client
+
+    def list_schedules(
+        self,
+        project_id: str,
+        *,
+        session_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.run_schedules.list_schedules(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.list_schedules(project_id, session_id=session_id, request_options=request_options)
+        return _response.data
+
+    def create_schedule(
+        self,
+        project_id: str,
+        *,
+        input: typing.Dict[str, typing.Any],
+        interval_seconds: int,
+        session_id: str,
+        idempotency_key: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        input : typing.Dict[str, typing.Any]
+
+        interval_seconds : int
+
+        session_id : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.run_schedules.create_schedule(
+            project_id="project_id",
+            input={"key": "value"},
+            interval_seconds=1,
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.create_schedule(
+            project_id,
+            input=input,
+            interval_seconds=interval_seconds,
+            session_id=session_id,
+            idempotency_key=idempotency_key,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def delete_schedule(
+        self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.run_schedules.delete_schedule(
+            project_id="project_id",
+            schedule_id="schedule_id",
+        )
+        """
+        _response = self._raw_client.delete_schedule(project_id, schedule_id, request_options=request_options)
+        return _response.data
+
+    def pause_schedule(
+        self,
+        project_id: str,
+        schedule_id: str,
+        *,
+        paused: bool,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        paused : bool
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.run_schedules.pause_schedule(
+            project_id="project_id",
+            schedule_id="schedule_id",
+            paused=True,
+        )
+        """
+        _response = self._raw_client.pause_schedule(
+            project_id, schedule_id, paused=paused, request_options=request_options
+        )
+        return _response.data
+
+
+class AsyncRunSchedulesClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._raw_client = AsyncRawRunSchedulesClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> AsyncRawRunSchedulesClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        AsyncRawRunSchedulesClient
+        """
+        return self._raw_client
+
+    async def list_schedules(
+        self,
+        project_id: str,
+        *,
+        session_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.run_schedules.list_schedules(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_schedules(
+            project_id, session_id=session_id, request_options=request_options
+        )
+        return _response.data
+
+    async def create_schedule(
+        self,
+        project_id: str,
+        *,
+        input: typing.Dict[str, typing.Any],
+        interval_seconds: int,
+        session_id: str,
+        idempotency_key: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        input : typing.Dict[str, typing.Any]
+
+        interval_seconds : int
+
+        session_id : str
+
+        idempotency_key : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.run_schedules.create_schedule(
+                project_id="project_id",
+                input={"key": "value"},
+                interval_seconds=1,
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_schedule(
+            project_id,
+            input=input,
+            interval_seconds=interval_seconds,
+            session_id=session_id,
+            idempotency_key=idempotency_key,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def delete_schedule(
+        self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.run_schedules.delete_schedule(
+                project_id="project_id",
+                schedule_id="schedule_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_schedule(project_id, schedule_id, request_options=request_options)
+        return _response.data
+
+    async def pause_schedule(
+        self,
+        project_id: str,
+        schedule_id: str,
+        *,
+        paused: bool,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        paused : bool
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.run_schedules.pause_schedule(
+                project_id="project_id",
+                schedule_id="schedule_id",
+                paused=True,
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.pause_schedule(
+            project_id, schedule_id, paused=paused, request_options=request_options
+        )
+        return _response.data

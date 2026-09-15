@@ -1,0 +1,81 @@
+
+package api
+
+import (
+	json "encoding/json"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	modelGatewayCaptureRequestFieldError    = big.NewInt(1 << 0)
+	modelGatewayCaptureRequestFieldMetadata = big.NewInt(1 << 1)
+	modelGatewayCaptureRequestFieldRequest  = big.NewInt(1 << 2)
+	modelGatewayCaptureRequestFieldResponse = big.NewInt(1 << 3)
+)
+
+type ModelGatewayCaptureRequest struct {
+	Error    map[string]any `json:"error,omitempty" url:"-"`
+	Metadata map[string]any `json:"metadata,omitempty" url:"-"`
+	Request  map[string]any `json:"request" url:"-"`
+	Response map[string]any `json:"response,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (m *ModelGatewayCaptureRequest) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetError sets the Error field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ModelGatewayCaptureRequest) SetError(error_ map[string]any) {
+	m.Error = error_
+	m.require(modelGatewayCaptureRequestFieldError)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ModelGatewayCaptureRequest) SetMetadata(metadata map[string]any) {
+	m.Metadata = metadata
+	m.require(modelGatewayCaptureRequestFieldMetadata)
+}
+
+// SetRequest sets the Request field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ModelGatewayCaptureRequest) SetRequest(request map[string]any) {
+	m.Request = request
+	m.require(modelGatewayCaptureRequestFieldRequest)
+}
+
+// SetResponse sets the Response field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ModelGatewayCaptureRequest) SetResponse(response map[string]any) {
+	m.Response = response
+	m.require(modelGatewayCaptureRequestFieldResponse)
+}
+
+func (m *ModelGatewayCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ModelGatewayCaptureRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*m = ModelGatewayCaptureRequest(body)
+	return nil
+}
+
+func (m *ModelGatewayCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed ModelGatewayCaptureRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}

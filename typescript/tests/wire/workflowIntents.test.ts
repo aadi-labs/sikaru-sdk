@@ -1,0 +1,90 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("WorkflowIntentsClient", () => {
+    
+    test("create_project_workflow_intent (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "description" : "description" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/workflow-intents").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.workflowIntents.createProjectWorkflowIntent("project_id", {
+    description: "description"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("create_project_workflow_intent (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "description" : "description" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/workflow-intents").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.workflowIntents.createProjectWorkflowIntent("project_id", {
+    description: "description"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("compile_project_workflow_intent (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/workflow-intents/intent_id/compile").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.workflowIntents.compileProjectWorkflowIntent("project_id", "intent_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("compile_project_workflow_intent (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/workflow-intents/intent_id/compile").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.workflowIntents.compileProjectWorkflowIntent("project_id", "intent_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

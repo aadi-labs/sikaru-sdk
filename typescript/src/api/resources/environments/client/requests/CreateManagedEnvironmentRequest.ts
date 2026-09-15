@@ -1,0 +1,16 @@
+
+/**
+ * @example
+ *     {
+ *         environmentSlug: "environmentSlug",
+ *         providerType: "providerType",
+ *         runtimeProvider: "runtimeProvider"
+ *     }
+ */
+export interface CreateManagedEnvironmentRequest {
+    configRefs?: Record<string, unknown>;
+    environmentSlug: string;
+    providerType: string;
+    runtimeProvider: string;
+    status?: string;
+}

@@ -1,0 +1,33 @@
+
+/**
+ * @example
+ *     {
+ *         memoryId: "memoryId",
+ *         memoryType: "memoryType",
+ *         name: "name",
+ *         scope: "scope"
+ *     }
+ */
+export interface CreateMemoryRegistryChangeRequest {
+    action?: CreateMemoryRegistryChangeRequest.Action;
+    candidateReleaseId?: string | null;
+    confidence?: string | null;
+    memoryId: string;
+    memoryType: string;
+    name: string;
+    policy?: string | null;
+    provenance?: string | null;
+    scope: string;
+    source?: string | null;
+    sourceTraceIds?: string[];
+    ttl?: string | null;
+}
+
+export namespace CreateMemoryRegistryChangeRequest {
+    export const Action = {
+            Review: "review",
+            Approve: "approve",
+            Reject: "reject"
+        } as const;
+    export type Action = typeof Action[keyof typeof Action];
+}

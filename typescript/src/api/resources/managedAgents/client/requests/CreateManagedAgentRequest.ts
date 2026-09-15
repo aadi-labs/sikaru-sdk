@@ -1,0 +1,26 @@
+
+import * as Sikaru from "../../../../index.js";
+
+/**
+ * @example
+ *     {
+ *         agentSlug: "agentSlug"
+ *     }
+ */
+export interface CreateManagedAgentRequest {
+    activeHarnessVersionId?: string | null;
+    agentSlug: string;
+    compatibilityProfileId?: string | null;
+    displayName?: string | null;
+    harnessId?: string | null;
+    source?: Sikaru.CreateManagedAgentSourceRequest | null;
+    status?: CreateManagedAgentRequest.Status;
+}
+
+export namespace CreateManagedAgentRequest {
+    export const Status = {
+            Active: "active",
+            Inactive: "inactive"
+        } as const;
+    export type Status = typeof Status[keyof typeof Status];
+}

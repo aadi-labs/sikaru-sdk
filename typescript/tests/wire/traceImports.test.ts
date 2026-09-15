@@ -1,0 +1,326 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("TraceImportsClient", () => {
+    
+    test("list_trace_imports (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.listTraceImports("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("list_trace_imports (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.listTraceImports("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("create_trace_import (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "connectionId" , "converterVersion" : "converterVersion" , "dataset" : "dataset" , "externalProjectId" : "externalProjectId" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "sourceInstance" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.createTraceImport("project_id", {
+    connectionId: "connectionId",
+    converterVersion: "converterVersion",
+    dataset: "dataset",
+    externalProjectId: "externalProjectId",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "sourceInstance"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("create_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.createTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("plan_trace_import (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "connectionId" , "converterVersion" : "converterVersion" , "dataset" : "dataset" , "externalProjectId" : "externalProjectId" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "sourceInstance" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/plan").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.planTraceImport("project_id", {
+    connectionId: "connectionId",
+    converterVersion: "converterVersion",
+    dataset: "dataset",
+    externalProjectId: "externalProjectId",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "sourceInstance"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("plan_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/plan").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.planTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("get_trace_import (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.getTraceImport("project_id", "trace_import_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImport("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("cancel_trace_import (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.cancelTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("cancel_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.cancelTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("get_trace_import_receipt (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id/receipt").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.getTraceImportReceipt("project_id", "trace_import_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_trace_import_receipt (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id/receipt").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImportReceipt("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("retry_trace_import (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/retry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceImports.retryTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("retry_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/retry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.retryTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

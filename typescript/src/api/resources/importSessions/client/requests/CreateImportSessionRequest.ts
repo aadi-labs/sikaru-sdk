@@ -1,0 +1,21 @@
+
+/**
+ * @example
+ *     {
+ *         displayName: "displayName",
+ *         mode: "workflow"
+ *     }
+ */
+export interface CreateImportSessionRequest {
+    displayName: string;
+    mode: CreateImportSessionRequest.Mode;
+}
+
+export namespace CreateImportSessionRequest {
+    export const Mode = {
+            Workflow: "workflow",
+            Harness: "harness",
+            TraceOnly: "trace_only"
+        } as const;
+    export type Mode = typeof Mode[keyof typeof Mode];
+}

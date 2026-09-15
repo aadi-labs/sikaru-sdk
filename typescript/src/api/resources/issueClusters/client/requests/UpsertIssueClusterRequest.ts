@@ -1,0 +1,17 @@
+
+/**
+ * @example
+ *     {
+ *         label: "label",
+ *         traceIds: ["traceIds"]
+ *     }
+ */
+export interface UpsertIssueClusterRequest {
+    agentId?: string | null;
+    impact?: number | null;
+    issueId?: string | null;
+    issueTitle?: string | null;
+    label: string;
+    signalTags?: string[];
+    traceIds: string[];
+}

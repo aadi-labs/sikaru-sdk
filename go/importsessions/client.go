@@ -1,0 +1,352 @@
+
+package importsessions
+
+import (
+	context "context"
+	os "os"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+)
+
+type Client struct {
+	WithRawResponse *RawClient
+
+	options *core.RequestOptions
+	baseURL string
+	caller  *internal.Caller
+}
+
+func NewClient(options *core.RequestOptions) *Client {
+	if options.APIKey == "" {
+		options.APIKey = os.Getenv("SIKARU_API_KEY")
+	}
+	return &Client{
+		WithRawResponse: NewRawClient(options),
+		options:         options,
+		baseURL:         options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}
+
+// Example:
+//
+//	client.ImportSessions.ListImportSessions(
+//	    context.TODO(),
+//	    "project_id",
+//	)
+func (c *Client) ListImportSessions(
+	ctx context.Context,
+	projectID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListImportSessions(
+		ctx,
+		projectID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateImportSessionRequest{
+//	    DisplayName: "displayName",
+//	    Mode: _go.CreateImportSessionRequestModeWorkflow,
+//	}
+//	client.ImportSessions.CreateImportSession(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) CreateImportSession(
+	ctx context.Context,
+	projectID string,
+	request *_go.CreateImportSessionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateImportSession(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.ImportSessions.GetImportSession(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	)
+func (c *Client) GetImportSession(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetImportSession(
+		ctx,
+		projectID,
+		importSessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateCompatibilityProfileRequest{
+//	    DisplayName: "displayName",
+//	    HarnessID: "harnessId",
+//	}
+//	client.ImportSessions.CreateCompatibilityProfile(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	    request,
+//	)
+func (c *Client) CreateCompatibilityProfile(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	request *_go.CreateCompatibilityProfileRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateCompatibilityProfile(
+		ctx,
+		projectID,
+		importSessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.ImportSessions.ListImportSessionDiffs(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	)
+func (c *Client) ListImportSessionDiffs(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListImportSessionDiffs(
+		ctx,
+		projectID,
+		importSessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.ImportSessions.GetParityReport(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	)
+func (c *Client) GetParityReport(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetParityReport(
+		ctx,
+		projectID,
+		importSessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.PromoteImportSessionRequest{
+//	    ActiveHarnessVersionID: "activeHarnessVersionId",
+//	    AgentSlug: "agentSlug",
+//	    CompatibilityProfileID: "compatibilityProfileId",
+//	    DisplayName: "displayName",
+//	    HarnessID: "harnessId",
+//	}
+//	client.ImportSessions.PromoteImportSession(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	    request,
+//	)
+func (c *Client) PromoteImportSession(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	request *_go.PromoteImportSessionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.PromoteImportSession(
+		ctx,
+		projectID,
+		importSessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateParityRunRequest{
+//	    CompatibilityProfileID: "compatibilityProfileId",
+//	}
+//	client.ImportSessions.CreateReplayRun(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	    request,
+//	)
+func (c *Client) CreateReplayRun(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	request *_go.CreateParityRunRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateReplayRun(
+		ctx,
+		projectID,
+		importSessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.ImportSessions.ListSourceArtifacts(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	)
+func (c *Client) ListSourceArtifacts(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListSourceArtifacts(
+		ctx,
+		projectID,
+		importSessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateSourceArtifactRequest{
+//	    ContentDigest: "contentDigest",
+//	    ExportPolicy: _go.CreateSourceArtifactRequestExportPolicyCustomerSourceExportable,
+//	    SourceKind: _go.CreateSourceArtifactRequestSourceKindWorkflowJSON,
+//	    StorageRef: "storageRef",
+//	}
+//	client.ImportSessions.CreateSourceArtifact(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	    request,
+//	)
+func (c *Client) CreateSourceArtifact(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	request *_go.CreateSourceArtifactRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateSourceArtifact(
+		ctx,
+		projectID,
+		importSessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateParityRunRequest{
+//	    CompatibilityProfileID: "compatibilityProfileId",
+//	}
+//	client.ImportSessions.CreateStagingRun(
+//	    context.TODO(),
+//	    "project_id",
+//	    "import_session_id",
+//	    request,
+//	)
+func (c *Client) CreateStagingRun(
+	ctx context.Context,
+	projectID string,
+	importSessionID string,
+	request *_go.CreateParityRunRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateStagingRun(
+		ctx,
+		projectID,
+		importSessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

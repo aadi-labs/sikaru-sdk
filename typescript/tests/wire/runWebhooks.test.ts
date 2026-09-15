@@ -1,0 +1,130 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("RunWebhooksClient", () => {
+    
+    test("list_webhooks (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/run-webhooks").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runWebhooks.listWebhooks("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("list_webhooks (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/run-webhooks").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runWebhooks.listWebhooks("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("create_webhook (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "run_id" : "run_id" , "url" : "url" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/run-webhooks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runWebhooks.createWebhook("project_id", {
+    run_id: "run_id",
+    url: "url"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("create_webhook (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "run_id" : "x" , "url" : "url" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/run-webhooks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runWebhooks.createWebhook("project_id", {
+    run_id: "x",
+    url: "url"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("delete_webhook (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/run-webhooks/webhook_id").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runWebhooks.deleteWebhook("project_id", "webhook_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("delete_webhook (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/run-webhooks/webhook_id").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runWebhooks.deleteWebhook("project_id", "webhook_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

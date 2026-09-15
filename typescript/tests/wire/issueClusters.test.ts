@@ -1,0 +1,250 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("IssueClustersClient", () => {
+    
+    test("list_issue_clusters (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/issue-clusters").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.issueClusters.listIssueClusters("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("list_issue_clusters (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/issue-clusters").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.issueClusters.listIssueClusters("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("upsert_issue_cluster (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "label" : "label" , "traceIds" : [ "traceIds" ] };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/issue-clusters").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.issueClusters.upsertIssueCluster("project_id", {
+    label: "label",
+    traceIds: ["traceIds"]
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("upsert_issue_cluster (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "label" : "x" , "traceIds" : [ "traceIds" , "traceIds" ] };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/issue-clusters").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.issueClusters.upsertIssueCluster("project_id", {
+    label: "x",
+    traceIds: ["traceIds", "traceIds"]
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("mine_project_issue_clusters (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/issue-clusters/mine").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.issueClusters.mineProjectIssueClusters("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("mine_project_issue_clusters (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/issue-clusters/mine").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.issueClusters.mineProjectIssueClusters("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("get_issue_cluster (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/issue-clusters/cluster_id").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.issueClusters.getIssueCluster("project_id", "cluster_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_issue_cluster (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/issue-clusters/cluster_id").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.issueClusters.getIssueCluster("project_id", "cluster_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("update_issue_cluster_status (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "status" : "status" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/issue-clusters/cluster_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.issueClusters.updateIssueClusterStatus("project_id", "cluster_id", {
+    status: "status"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("update_issue_cluster_status (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "status" : "x" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/issue-clusters/cluster_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.issueClusters.updateIssueClusterStatus("project_id", "cluster_id", {
+    status: "x"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("propose_issue_cluster_fix (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/issue-clusters/cluster_id/propose-fix").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.issueClusters.proposeIssueClusterFix("project_id", "cluster_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("propose_issue_cluster_fix (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/issue-clusters/cluster_id/propose-fix").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.issueClusters.proposeIssueClusterFix("project_id", "cluster_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

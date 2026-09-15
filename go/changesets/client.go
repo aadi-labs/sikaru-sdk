@@ -1,0 +1,316 @@
+
+package changesets
+
+import (
+	context "context"
+	os "os"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+)
+
+type Client struct {
+	WithRawResponse *RawClient
+
+	options *core.RequestOptions
+	baseURL string
+	caller  *internal.Caller
+}
+
+func NewClient(options *core.RequestOptions) *Client {
+	if options.APIKey == "" {
+		options.APIKey = os.Getenv("SIKARU_API_KEY")
+	}
+	return &Client{
+		WithRawResponse: NewRawClient(options),
+		options:         options,
+		baseURL:         options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}
+
+// Example:
+//
+//	request := &_go.ListChangesetsChangesetsRequest{}
+//	client.Changesets.ListChangesets(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) ListChangesets(
+	ctx context.Context,
+	projectID string,
+	request *_go.ListChangesetsChangesetsRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListChangesets(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateChangeSetRequest{
+//	    PublicSummary: "publicSummary",
+//	    PublicTitle: "publicTitle",
+//	    ScopeRef: "scopeRef",
+//	    ScopeType: _go.ScopeTypeGlobal,
+//	    SourceType: _go.SourceTypeImport,
+//	}
+//	client.Changesets.CreateChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) CreateChangeset(
+	ctx context.Context,
+	projectID string,
+	request *_go.CreateChangeSetRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateChangeset(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Changesets.GetChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	)
+func (c *Client) GetChangeset(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetChangeset(
+		ctx,
+		projectID,
+		changesetID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ReleaseActionRequest{}
+//	client.Changesets.ApproveChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	    request,
+//	)
+func (c *Client) ApproveChangeset(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	request *_go.ReleaseActionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ApproveChangeset(
+		ctx,
+		projectID,
+		changesetID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Changesets.ListChangesetDiffs(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	)
+func (c *Client) ListChangesetDiffs(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListChangesetDiffs(
+		ctx,
+		projectID,
+		changesetID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Changesets.ListChangesetEvidence(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	)
+func (c *Client) ListChangesetEvidence(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListChangesetEvidence(
+		ctx,
+		projectID,
+		changesetID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ReleaseActionRequest{}
+//	client.Changesets.PromoteChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	    request,
+//	)
+func (c *Client) PromoteChangeset(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	request *_go.ReleaseActionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.PromoteChangeset(
+		ctx,
+		projectID,
+		changesetID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ReleaseActionRequest{}
+//	client.Changesets.RejectChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	    request,
+//	)
+func (c *Client) RejectChangeset(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	request *_go.ReleaseActionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.RejectChangeset(
+		ctx,
+		projectID,
+		changesetID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ReleaseActionRequest{}
+//	client.Changesets.RollbackChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	    request,
+//	)
+func (c *Client) RollbackChangeset(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	request *_go.ReleaseActionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.RollbackChangeset(
+		ctx,
+		projectID,
+		changesetID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ReleaseActionRequest{}
+//	client.Changesets.StageChangeset(
+//	    context.TODO(),
+//	    "project_id",
+//	    "changeset_id",
+//	    request,
+//	)
+func (c *Client) StageChangeset(
+	ctx context.Context,
+	projectID string,
+	changesetID string,
+	request *_go.ReleaseActionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.StageChangeset(
+		ctx,
+		projectID,
+		changesetID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

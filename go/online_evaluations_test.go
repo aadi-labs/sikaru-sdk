@@ -1,0 +1,456 @@
+
+package api
+
+import (
+	json "encoding/json"
+	assert "github.com/stretchr/testify/assert"
+	require "github.com/stretchr/testify/require"
+	testing "testing"
+)
+
+func TestSettersPolicyInput(t *testing.T) {
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &PolicyInput{}
+		var fernTestValueEnvironment *PolicyInputEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEvaluator", func(t *testing.T) {
+		obj := &PolicyInput{}
+		var fernTestValueEvaluator string
+		obj.SetEvaluator(fernTestValueEvaluator)
+		assert.Equal(t, fernTestValueEvaluator, obj.Evaluator)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetID", func(t *testing.T) {
+		obj := &PolicyInput{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRevision", func(t *testing.T) {
+		obj := &PolicyInput{}
+		var fernTestValueRevision string
+		obj.SetRevision(fernTestValueRevision)
+		assert.Equal(t, fernTestValueRevision, obj.Revision)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRubric", func(t *testing.T) {
+		obj := &PolicyInput{}
+		var fernTestValueRubric string
+		obj.SetRubric(fernTestValueRubric)
+		assert.Equal(t, fernTestValueRubric, obj.Rubric)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSamplePercent", func(t *testing.T) {
+		obj := &PolicyInput{}
+		var fernTestValueSamplePercent int
+		obj.SetSamplePercent(fernTestValueSamplePercent)
+		assert.Equal(t, fernTestValueSamplePercent, obj.SamplePercent)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitPolicyInput(t *testing.T) {
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyInput{}
+		var fernTestValueEnvironment *PolicyInputEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEvaluator_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyInput{}
+		var fernTestValueEvaluator string
+
+		// Act
+		obj.SetEvaluator(fernTestValueEvaluator)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyInput{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRevision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyInput{}
+		var fernTestValueRevision string
+
+		// Act
+		obj.SetRevision(fernTestValueRevision)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRubric_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyInput{}
+		var fernTestValueRubric string
+
+		// Act
+		obj.SetRubric(fernTestValueRubric)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSamplePercent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyInput{}
+		var fernTestValueSamplePercent int
+
+		// Act
+		obj.SetSamplePercent(fernTestValueSamplePercent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersListPoliciesOnlineEvaluationsRequest(t *testing.T) {
+	t.Run("SetAfter", func(t *testing.T) {
+		obj := &ListPoliciesOnlineEvaluationsRequest{}
+		var fernTestValueAfter *string
+		obj.SetAfter(fernTestValueAfter)
+		assert.Equal(t, fernTestValueAfter, obj.After)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitListPoliciesOnlineEvaluationsRequest(t *testing.T) {
+	t.Run("SetAfter_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListPoliciesOnlineEvaluationsRequest{}
+		var fernTestValueAfter *string
+
+		// Act
+		obj.SetAfter(fernTestValueAfter)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersPreviewPolicyEligibilityOnlineEvaluationsRequest(t *testing.T) {
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &PreviewPolicyEligibilityOnlineEvaluationsRequest{}
+		var fernTestValueEnvironment *PreviewPolicyEligibilityOnlineEvaluationsRequestEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitPreviewPolicyEligibilityOnlineEvaluationsRequest(t *testing.T) {
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PreviewPolicyEligibilityOnlineEvaluationsRequest{}
+		var fernTestValueEnvironment *PreviewPolicyEligibilityOnlineEvaluationsRequestEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersPolicyState(t *testing.T) {
+	t.Run("SetEnabled", func(t *testing.T) {
+		obj := &PolicyState{}
+		var fernTestValueEnabled bool
+		obj.SetEnabled(fernTestValueEnabled)
+		assert.Equal(t, fernTestValueEnabled, obj.Enabled)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitPolicyState(t *testing.T) {
+	t.Run("SetEnabled_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &PolicyState{}
+		var fernTestValueEnabled bool
+
+		// Act
+		obj.SetEnabled(fernTestValueEnabled)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestEnumPolicyInputEnvironment(t *testing.T) {
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPolicyInputEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PolicyInputEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_staging", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPolicyInputEnvironmentFromString("staging")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PolicyInputEnvironment("staging"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_development", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPolicyInputEnvironmentFromString("development")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PolicyInputEnvironment("development"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPolicyInputEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPolicyInputEnvironmentFromString("production")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumPreviewPolicyEligibilityOnlineEvaluationsRequestEnvironment(t *testing.T) {
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPreviewPolicyEligibilityOnlineEvaluationsRequestEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PreviewPolicyEligibilityOnlineEvaluationsRequestEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_staging", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPreviewPolicyEligibilityOnlineEvaluationsRequestEnvironmentFromString("staging")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PreviewPolicyEligibilityOnlineEvaluationsRequestEnvironment("staging"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_development", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewPreviewPolicyEligibilityOnlineEvaluationsRequestEnvironmentFromString("development")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, PreviewPolicyEligibilityOnlineEvaluationsRequestEnvironment("development"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewPreviewPolicyEligibilityOnlineEvaluationsRequestEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewPreviewPolicyEligibilityOnlineEvaluationsRequestEnvironmentFromString("production")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}

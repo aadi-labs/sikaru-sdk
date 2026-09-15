@@ -1,0 +1,331 @@
+
+package harnesses
+
+import (
+	context "context"
+	http "net/http"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+)
+
+type RawClient struct {
+	baseURL string
+	caller  *internal.Caller
+	options *core.RequestOptions
+}
+
+func NewRawClient(options *core.RequestOptions) *RawClient {
+	return &RawClient{
+		options: options,
+		baseURL: options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}
+
+func (r *RawClient) ImprovementOptions(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	opts ...option.RequestOption,
+) (*core.Response[map[string]any], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.sikaru.ai",
+	)
+	endpointURL := internal.EncodeURL(
+		baseURL+"/v1/projects/%v/harnesses/%v/improvement-options",
+		projectID,
+		harnessID,
+	)
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	var response map[string]any
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodGet,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(_go.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[map[string]any]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) ListImprovements(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	request *_go.ListImprovementsHarnessesRequest,
+	opts ...option.RequestOption,
+) (*core.Response[map[string]any], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.sikaru.ai",
+	)
+	endpointURL := internal.EncodeURL(
+		baseURL+"/v1/projects/%v/harnesses/%v/improvements",
+		projectID,
+		harnessID,
+	)
+	queryParams, err := internal.QueryValues(request)
+	if err != nil {
+		return nil, err
+	}
+	if len(queryParams) > 0 {
+		endpointURL += "?" + queryParams.Encode()
+	}
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	var response map[string]any
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodGet,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(_go.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[map[string]any]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) StartImprovement(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	request *_go.ImprovementInput,
+	opts ...option.RequestOption,
+) (*core.Response[map[string]any], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.sikaru.ai",
+	)
+	endpointURL := internal.EncodeURL(
+		baseURL+"/v1/projects/%v/harnesses/%v/improvements",
+		projectID,
+		harnessID,
+	)
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	headers.Add("Content-Type", "application/json")
+	var response map[string]any
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(_go.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[map[string]any]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) GetImprovement(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	jobID string,
+	opts ...option.RequestOption,
+) (*core.Response[map[string]any], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.sikaru.ai",
+	)
+	endpointURL := internal.EncodeURL(
+		baseURL+"/v1/projects/%v/harnesses/%v/improvements/%v",
+		projectID,
+		harnessID,
+		jobID,
+	)
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	var response map[string]any
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodGet,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(_go.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[map[string]any]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) ResumeImprovement(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	jobID string,
+	request *_go.ResumeImprovementInput,
+	opts ...option.RequestOption,
+) (*core.Response[map[string]any], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.sikaru.ai",
+	)
+	endpointURL := internal.EncodeURL(
+		baseURL+"/v1/projects/%v/harnesses/%v/improvements/%v/resume",
+		projectID,
+		harnessID,
+		jobID,
+	)
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	var response map[string]any
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Request:         request,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(_go.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[map[string]any]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}
+
+func (r *RawClient) TrainModelStub(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	opts ...option.RequestOption,
+) (*core.Response[map[string]any], error) {
+	options := core.NewRequestOptions(opts...)
+	baseURL := internal.ResolveBaseURL(
+		options.BaseURL,
+		r.baseURL,
+		"https://api.sikaru.ai",
+	)
+	endpointURL := internal.EncodeURL(
+		baseURL+"/v1/projects/%v/harnesses/%v/training",
+		projectID,
+		harnessID,
+	)
+	headers := internal.MergeHeaders(
+		r.options.ToHeader(),
+		options.ToHeader(),
+	)
+	var response map[string]any
+	raw, err := r.caller.Call(
+		ctx,
+		&internal.CallParams{
+			URL:             endpointURL,
+			Method:          http.MethodPost,
+			Headers:         headers,
+			MaxAttempts:     options.MaxAttempts,
+			DisableRetries:  options.DisableRetries,
+			BodyProperties:  options.BodyProperties,
+			QueryParameters: options.QueryParameters,
+			Client:          options.HTTPClient,
+			Response:        &response,
+			ErrorDecoder:    internal.NewErrorDecoder(_go.ErrorCodes),
+		},
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &core.Response[map[string]any]{
+		StatusCode: raw.StatusCode,
+		Header:     raw.Header,
+		Body:       response,
+	}, nil
+}

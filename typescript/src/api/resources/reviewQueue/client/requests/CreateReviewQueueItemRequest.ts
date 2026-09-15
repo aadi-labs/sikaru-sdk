@@ -1,0 +1,29 @@
+
+/**
+ * @example
+ *     {
+ *         traceIds: ["traceIds"]
+ *     }
+ */
+export interface CreateReviewQueueItemRequest {
+    action?: CreateReviewQueueItemRequest.Action;
+    agentId?: string | null;
+    backfillWindow?: string | null;
+    filterExpression?: string | null;
+    issueId?: string | null;
+    issueTitle?: string | null;
+    ruleId?: string | null;
+    ruleName?: string | null;
+    sampleRate?: string | null;
+    signalTags?: string[];
+    target?: string | null;
+    traceIds: string[];
+}
+
+export namespace CreateReviewQueueItemRequest {
+    export const Action = {
+            ReviewQueue: "review_queue",
+            NotifyReviewer: "notify_reviewer"
+        } as const;
+    export type Action = typeof Action[keyof typeof Action];
+}

@@ -1,0 +1,186 @@
+
+package online_evaluations_test
+
+import (
+	bytes "bytes"
+	context "context"
+	json "encoding/json"
+	http "net/http"
+	os "os"
+	testing "testing"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	client "github.com/aadi-labs/sikaru-sdk/go/client"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+	require "github.com/stretchr/testify/require"
+)
+
+func VerifyRequestCount(
+	t *testing.T,
+	testId string,
+	method string,
+	urlPath string,
+	queryParams map[string]any,
+	expected int,
+) {
+	wiremockURL := os.Getenv("WIREMOCK_URL")
+	if wiremockURL == "" {
+		wiremockURL = "http://localhost:8080"
+	}
+	WiremockAdminURL := wiremockURL + "/__admin"
+	var reqBody bytes.Buffer
+	reqBody.WriteString(`{"method":"`)
+	reqBody.WriteString(method)
+	reqBody.WriteString(`","urlPath":"`)
+	reqBody.WriteString(urlPath)
+	reqBody.WriteString(`","headers":{"X-Test-Id":{"equalTo":"`)
+	reqBody.WriteString(testId)
+	reqBody.WriteString(`"}}`)
+	if len(queryParams) > 0 {
+		reqBody.WriteString(`,"queryParameters":{`)
+		first := true
+		for key, value := range queryParams {
+			if !first {
+				reqBody.WriteString(",")
+			}
+			reqBody.WriteString(`"`)
+			reqBody.WriteString(key)
+			switch v := value.(type) {
+			case string:
+				reqBody.WriteString(`":{"equalTo":"`)
+				reqBody.WriteString(v)
+				reqBody.WriteString(`"}`)
+			case []string:
+				reqBody.WriteString(`":{"hasExactly":[`)
+				for i, item := range v {
+					if i > 0 {
+						reqBody.WriteString(",")
+					}
+					reqBody.WriteString(`{"equalTo":"`)
+					reqBody.WriteString(item)
+					reqBody.WriteString(`"}`)
+				}
+				reqBody.WriteString(`]}`)
+			}
+			first = false
+		}
+		reqBody.WriteString("}")
+	}
+	reqBody.WriteString("}")
+	resp, err := http.Post(WiremockAdminURL+"/requests/find", "application/json", &reqBody)
+	require.NoError(t, err)
+	var result struct {
+		Requests []interface{} `json:"requests"`
+	}
+	json.NewDecoder(resp.Body).Decode(&result)
+	require.Equal(t, expected, len(result.Requests))
+}
+
+func TestOnlineEvaluationsListPoliciesWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.ListPoliciesOnlineEvaluationsRequest{}
+	_, invocationErr := client.OnlineEvaluations.ListPolicies(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestOnlineEvaluationsListPoliciesWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestOnlineEvaluationsListPoliciesWithWireMock", "GET", "/v1/projects/project_id/online-evaluations", nil, 1)
+}
+
+func TestOnlineEvaluationsCreatePolicyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.PolicyInput{
+		Evaluator:     "evaluator",
+		ID:            "id",
+		Revision:      "revision",
+		Rubric:        "rubric",
+		SamplePercent: 1,
+	}
+	_, invocationErr := client.OnlineEvaluations.CreatePolicy(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestOnlineEvaluationsCreatePolicyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestOnlineEvaluationsCreatePolicyWithWireMock", "POST", "/v1/projects/project_id/online-evaluations", nil, 1)
+}
+
+func TestOnlineEvaluationsPreviewPolicyEligibilityWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.PreviewPolicyEligibilityOnlineEvaluationsRequest{}
+	_, invocationErr := client.OnlineEvaluations.PreviewPolicyEligibility(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestOnlineEvaluationsPreviewPolicyEligibilityWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestOnlineEvaluationsPreviewPolicyEligibilityWithWireMock", "GET", "/v1/projects/project_id/online-evaluations/preview", nil, 1)
+}
+
+func TestOnlineEvaluationsUpdatePolicyWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.PolicyState{
+		Enabled: true,
+	}
+	_, invocationErr := client.OnlineEvaluations.UpdatePolicy(
+		context.TODO(),
+		"project_id",
+		"policy_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestOnlineEvaluationsUpdatePolicyWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestOnlineEvaluationsUpdatePolicyWithWireMock", "PATCH", "/v1/projects/project_id/online-evaluations/policy_id", nil, 1)
+}

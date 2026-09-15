@@ -1,0 +1,1026 @@
+
+import typing
+
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.request_options import RequestOptions
+from .raw_client import AsyncRawExecutionSessionsClient, RawExecutionSessionsClient
+from .types.session_input_reasoning_effort import SessionInputReasoningEffort
+from .types.turn_input_delivery_mode import TurnInputDeliveryMode
+from .types.turn_input_execution_environment import TurnInputExecutionEnvironment
+from .types.turn_input_run_mode import TurnInputRunMode
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class ExecutionSessionsClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._raw_client = RawExecutionSessionsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> RawExecutionSessionsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        RawExecutionSessionsClient
+        """
+        return self._raw_client
+
+    def list(
+        self,
+        project_id: str,
+        *,
+        harness_id: typing.Optional[str] = None,
+        after: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        agent_slug: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : typing.Optional[str]
+
+        after : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        agent_slug : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.list(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.list(
+            project_id,
+            harness_id=harness_id,
+            after=after,
+            limit=limit,
+            agent_slug=agent_slug,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def get(
+        self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.get(
+            project_id="project_id",
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.get(project_id, session_id, request_options=request_options)
+        return _response.data
+
+    def branch(
+        self,
+        project_id: str,
+        session_id: str,
+        *,
+        idempotency_key: str,
+        source_run_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        idempotency_key : str
+
+        source_run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.branch(
+            project_id="project_id",
+            session_id="session_id",
+            idempotency_key="idempotency_key",
+            source_run_id="source_run_id",
+        )
+        """
+        _response = self._raw_client.branch(
+            project_id,
+            session_id,
+            idempotency_key=idempotency_key,
+            source_run_id=source_run_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def list_files(
+        self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.list_files(
+            project_id="project_id",
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.list_files(project_id, session_id, request_options=request_options)
+        return _response.data
+
+    def upload_file(
+        self,
+        project_id: str,
+        session_id: str,
+        *,
+        filename: str,
+        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        filename : str
+
+        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+        """
+        _response = self._raw_client.upload_file(
+            project_id, session_id, filename=filename, request=request, request_options=request_options
+        )
+        return _response.data
+
+    def delete_file(
+        self, project_id: str, session_id: str, file_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        file_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.delete_file(
+            project_id="project_id",
+            session_id="session_id",
+            file_id="file_id",
+        )
+        """
+        _response = self._raw_client.delete_file(project_id, session_id, file_id, request_options=request_options)
+        return _response.data
+
+    def download_file(
+        self, project_id: str, session_id: str, file_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Iterator[bytes]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        file_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+
+        Returns
+        -------
+        typing.Iterator[bytes]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.download_file(
+            project_id="project_id",
+            session_id="session_id",
+            file_id="file_id",
+        )
+        """
+        with self._raw_client.download_file(project_id, session_id, file_id, request_options=request_options) as r:
+            yield from r.data
+
+    def list_session_inputs(
+        self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.list_session_inputs(
+            project_id="project_id",
+            session_id="session_id",
+        )
+        """
+        _response = self._raw_client.list_session_inputs(project_id, session_id, request_options=request_options)
+        return _response.data
+
+    def append_turn(
+        self,
+        project_id: str,
+        session_id: str,
+        *,
+        idempotency_key: str,
+        input: typing.Dict[str, typing.Any],
+        capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
+        compute_provider_id: typing.Optional[str] = OMIT,
+        delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
+        execution_environment: typing.Optional[TurnInputExecutionEnvironment] = OMIT,
+        file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        run_mode: typing.Optional[TurnInputRunMode] = OMIT,
+        tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        idempotency_key : str
+
+        input : typing.Dict[str, typing.Any]
+
+        capability_grants : typing.Optional[typing.Sequence[str]]
+
+        compute_provider_id : typing.Optional[str]
+
+        delivery_mode : typing.Optional[TurnInputDeliveryMode]
+
+        execution_environment : typing.Optional[TurnInputExecutionEnvironment]
+
+        file_ids : typing.Optional[typing.Sequence[str]]
+
+        product_context : typing.Optional[typing.Dict[str, typing.Any]]
+
+        run_mode : typing.Optional[TurnInputRunMode]
+
+        tool_provider_refs : typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.append_turn(
+            project_id="project_id",
+            session_id="session_id",
+            idempotency_key="idempotency_key",
+            input={"key": "value"},
+        )
+        """
+        _response = self._raw_client.append_turn(
+            project_id,
+            session_id,
+            idempotency_key=idempotency_key,
+            input=input,
+            capability_grants=capability_grants,
+            compute_provider_id=compute_provider_id,
+            delivery_mode=delivery_mode,
+            execution_environment=execution_environment,
+            file_ids=file_ids,
+            product_context=product_context,
+            run_mode=run_mode,
+            tool_provider_refs=tool_provider_refs,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def create(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        tenant_id: str,
+        user_id: str,
+        conversation_id: typing.Optional[str] = OMIT,
+        final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        tenant_id : str
+
+        user_id : str
+
+        conversation_id : typing.Optional[str]
+
+        final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
+
+        reasoning_effort : typing.Optional[SessionInputReasoningEffort]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.create(
+            project_id="project_id",
+            harness_id="harness_id",
+            tenant_id="tenant_id",
+            user_id="user_id",
+        )
+        """
+        _response = self._raw_client.create(
+            project_id,
+            harness_id,
+            tenant_id=tenant_id,
+            user_id=user_id,
+            conversation_id=conversation_id,
+            final_output_schema=final_output_schema,
+            reasoning_effort=reasoning_effort,
+            request_options=request_options,
+        )
+        return _response.data
+
+
+class AsyncExecutionSessionsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._raw_client = AsyncRawExecutionSessionsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> AsyncRawExecutionSessionsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        AsyncRawExecutionSessionsClient
+        """
+        return self._raw_client
+
+    async def list(
+        self,
+        project_id: str,
+        *,
+        harness_id: typing.Optional[str] = None,
+        after: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        agent_slug: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : typing.Optional[str]
+
+        after : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        agent_slug : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.list(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list(
+            project_id,
+            harness_id=harness_id,
+            after=after,
+            limit=limit,
+            agent_slug=agent_slug,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def get(
+        self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.get(
+                project_id="project_id",
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get(project_id, session_id, request_options=request_options)
+        return _response.data
+
+    async def branch(
+        self,
+        project_id: str,
+        session_id: str,
+        *,
+        idempotency_key: str,
+        source_run_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        idempotency_key : str
+
+        source_run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.branch(
+                project_id="project_id",
+                session_id="session_id",
+                idempotency_key="idempotency_key",
+                source_run_id="source_run_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.branch(
+            project_id,
+            session_id,
+            idempotency_key=idempotency_key,
+            source_run_id=source_run_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def list_files(
+        self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.list_files(
+                project_id="project_id",
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_files(project_id, session_id, request_options=request_options)
+        return _response.data
+
+    async def upload_file(
+        self,
+        project_id: str,
+        session_id: str,
+        *,
+        filename: str,
+        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        filename : str
+
+        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+        """
+        _response = await self._raw_client.upload_file(
+            project_id, session_id, filename=filename, request=request, request_options=request_options
+        )
+        return _response.data
+
+    async def delete_file(
+        self, project_id: str, session_id: str, file_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        file_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.delete_file(
+                project_id="project_id",
+                session_id="session_id",
+                file_id="file_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_file(project_id, session_id, file_id, request_options=request_options)
+        return _response.data
+
+    async def download_file(
+        self, project_id: str, session_id: str, file_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.AsyncIterator[bytes]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        file_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration. You can pass in configuration such as `chunk_size`, and more to customize the request and response.
+
+        Returns
+        -------
+        typing.AsyncIterator[bytes]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.download_file(
+                project_id="project_id",
+                session_id="session_id",
+                file_id="file_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        async with self._raw_client.download_file(
+            project_id, session_id, file_id, request_options=request_options
+        ) as r:
+            async for _chunk in r.data:
+                yield _chunk
+
+    async def list_session_inputs(
+        self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.list_session_inputs(
+                project_id="project_id",
+                session_id="session_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_session_inputs(project_id, session_id, request_options=request_options)
+        return _response.data
+
+    async def append_turn(
+        self,
+        project_id: str,
+        session_id: str,
+        *,
+        idempotency_key: str,
+        input: typing.Dict[str, typing.Any],
+        capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
+        compute_provider_id: typing.Optional[str] = OMIT,
+        delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
+        execution_environment: typing.Optional[TurnInputExecutionEnvironment] = OMIT,
+        file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        run_mode: typing.Optional[TurnInputRunMode] = OMIT,
+        tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        session_id : str
+
+        idempotency_key : str
+
+        input : typing.Dict[str, typing.Any]
+
+        capability_grants : typing.Optional[typing.Sequence[str]]
+
+        compute_provider_id : typing.Optional[str]
+
+        delivery_mode : typing.Optional[TurnInputDeliveryMode]
+
+        execution_environment : typing.Optional[TurnInputExecutionEnvironment]
+
+        file_ids : typing.Optional[typing.Sequence[str]]
+
+        product_context : typing.Optional[typing.Dict[str, typing.Any]]
+
+        run_mode : typing.Optional[TurnInputRunMode]
+
+        tool_provider_refs : typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.append_turn(
+                project_id="project_id",
+                session_id="session_id",
+                idempotency_key="idempotency_key",
+                input={"key": "value"},
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.append_turn(
+            project_id,
+            session_id,
+            idempotency_key=idempotency_key,
+            input=input,
+            capability_grants=capability_grants,
+            compute_provider_id=compute_provider_id,
+            delivery_mode=delivery_mode,
+            execution_environment=execution_environment,
+            file_ids=file_ids,
+            product_context=product_context,
+            run_mode=run_mode,
+            tool_provider_refs=tool_provider_refs,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def create(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        tenant_id: str,
+        user_id: str,
+        conversation_id: typing.Optional[str] = OMIT,
+        final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        tenant_id : str
+
+        user_id : str
+
+        conversation_id : typing.Optional[str]
+
+        final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
+
+        reasoning_effort : typing.Optional[SessionInputReasoningEffort]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.create(
+                project_id="project_id",
+                harness_id="harness_id",
+                tenant_id="tenant_id",
+                user_id="user_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create(
+            project_id,
+            harness_id,
+            tenant_id=tenant_id,
+            user_id=user_id,
+            conversation_id=conversation_id,
+            final_output_schema=final_output_schema,
+            reasoning_effort=reasoning_effort,
+            request_options=request_options,
+        )
+        return _response.data

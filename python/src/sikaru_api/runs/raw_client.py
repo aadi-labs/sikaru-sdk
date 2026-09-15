@@ -1,0 +1,1218 @@
+
+import typing
+from json.decoder import JSONDecodeError
+
+from ..core.api_error import ApiError
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.http_response import AsyncHttpResponse, HttpResponse
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
+from ..core.pydantic_utilities import parse_obj_as
+from ..core.request_options import RequestOptions
+from ..core.serialization import convert_and_respect_annotation_metadata
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.event_delivery_request import EventDeliveryRequest
+from ..types.http_validation_error import HttpValidationError
+from ..types.managed_run import ManagedRun
+from ..types.run_events import RunEvents
+from ..types.tool_provider_ref_request import ToolProviderRefRequest
+from .types.approval_input_decision import ApprovalInputDecision
+from .types.start_harness_run_request_execution_environment import StartHarnessRunRequestExecutionEnvironment
+from .types.start_harness_run_request_run_mode import StartHarnessRunRequestRunMode
+from .types.submit_tool_result_request_status import SubmitToolResultRequestStatus
+from pydantic import ValidationError
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class RawRunsClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    def start(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        input: typing.Dict[str, typing.Any],
+        policy: typing.Dict[str, typing.Any],
+        product_context: typing.Dict[str, typing.Any],
+        tenant_id: str,
+        user_id: str,
+        capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
+        compute_provider_id: typing.Optional[str] = OMIT,
+        conversation_id: typing.Optional[str] = OMIT,
+        correlation_id: typing.Optional[str] = OMIT,
+        event_delivery: typing.Optional[EventDeliveryRequest] = OMIT,
+        execution_environment: typing.Optional[StartHarnessRunRequestExecutionEnvironment] = OMIT,
+        job_id: typing.Optional[str] = OMIT,
+        run_mode: typing.Optional[StartHarnessRunRequestRunMode] = OMIT,
+        tool_provider_refs: typing.Optional[typing.Sequence[ToolProviderRefRequest]] = OMIT,
+        trace_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ManagedRun]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        input : typing.Dict[str, typing.Any]
+
+        policy : typing.Dict[str, typing.Any]
+
+        product_context : typing.Dict[str, typing.Any]
+
+        tenant_id : str
+
+        user_id : str
+
+        capability_grants : typing.Optional[typing.Sequence[str]]
+
+        compute_provider_id : typing.Optional[str]
+
+        conversation_id : typing.Optional[str]
+
+        correlation_id : typing.Optional[str]
+
+        event_delivery : typing.Optional[EventDeliveryRequest]
+
+        execution_environment : typing.Optional[StartHarnessRunRequestExecutionEnvironment]
+
+        job_id : typing.Optional[str]
+
+        run_mode : typing.Optional[StartHarnessRunRequestRunMode]
+
+        tool_provider_refs : typing.Optional[typing.Sequence[ToolProviderRefRequest]]
+
+        trace_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ManagedRun]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/runs",
+            method="POST",
+            json={
+                "capability_grants": capability_grants,
+                "compute_provider_id": compute_provider_id,
+                "conversation_id": conversation_id,
+                "correlation_id": correlation_id,
+                "event_delivery": convert_and_respect_annotation_metadata(
+                    object_=event_delivery, annotation=EventDeliveryRequest, direction="write"
+                ),
+                "execution_environment": execution_environment,
+                "input": input,
+                "job_id": job_id,
+                "policy": policy,
+                "product_context": product_context,
+                "run_mode": run_mode,
+                "tenant_id": tenant_id,
+                "tool_provider_refs": convert_and_respect_annotation_metadata(
+                    object_=tool_provider_refs, annotation=typing.Sequence[ToolProviderRefRequest], direction="write"
+                ),
+                "trace_id": trace_id,
+                "user_id": user_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ManagedRun,
+                    parse_obj_as(
+                        type_=ManagedRun,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ManagedRun]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ManagedRun]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ManagedRun,
+                    parse_obj_as(
+                        type_=ManagedRun,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def pending_actions(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/actions",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def cancel(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/cancel",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def events(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        after: typing.Optional[str] = None,
+        limit: typing.Optional[str] = None,
+        stream: typing.Optional[str] = None,
+        last_event_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[RunEvents]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        after : typing.Optional[str]
+
+        limit : typing.Optional[str]
+
+        stream : typing.Optional[str]
+
+        last_event_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[RunEvents]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/events",
+            method="GET",
+            params={
+                "after": after,
+                "limit": limit,
+                "stream": stream,
+            },
+            headers={
+                "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    RunEvents,
+                    parse_obj_as(
+                        type_=RunEvents,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def recover(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        reason: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        reason : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/recover",
+            method="POST",
+            json={
+                "reason": reason,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def decide_approval(
+        self,
+        project_id: str,
+        run_id: str,
+        tool_call_id: str,
+        *,
+        decision: ApprovalInputDecision,
+        idempotency_key: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        tool_call_id : str
+
+        decision : ApprovalInputDecision
+
+        idempotency_key : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-calls/{encode_path_param(tool_call_id)}/approval",
+            method="POST",
+            json={
+                "decision": decision,
+                "idempotency_key": idempotency_key,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def submit_tool_result(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        capability_name: str,
+        idempotency_key: str,
+        payload: typing.Dict[str, typing.Any],
+        status: SubmitToolResultRequestStatus,
+        tool_call_id: str,
+        tool_provider_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        capability_name : str
+
+        idempotency_key : str
+
+        payload : typing.Dict[str, typing.Any]
+
+        status : SubmitToolResultRequestStatus
+
+        tool_call_id : str
+
+        tool_provider_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-results",
+            method="POST",
+            json={
+                "capability_name": capability_name,
+                "idempotency_key": idempotency_key,
+                "payload": payload,
+                "status": status,
+                "tool_call_id": tool_call_id,
+                "tool_provider_id": tool_provider_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+
+class AsyncRawRunsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    async def start(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        input: typing.Dict[str, typing.Any],
+        policy: typing.Dict[str, typing.Any],
+        product_context: typing.Dict[str, typing.Any],
+        tenant_id: str,
+        user_id: str,
+        capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
+        compute_provider_id: typing.Optional[str] = OMIT,
+        conversation_id: typing.Optional[str] = OMIT,
+        correlation_id: typing.Optional[str] = OMIT,
+        event_delivery: typing.Optional[EventDeliveryRequest] = OMIT,
+        execution_environment: typing.Optional[StartHarnessRunRequestExecutionEnvironment] = OMIT,
+        job_id: typing.Optional[str] = OMIT,
+        run_mode: typing.Optional[StartHarnessRunRequestRunMode] = OMIT,
+        tool_provider_refs: typing.Optional[typing.Sequence[ToolProviderRefRequest]] = OMIT,
+        trace_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ManagedRun]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        input : typing.Dict[str, typing.Any]
+
+        policy : typing.Dict[str, typing.Any]
+
+        product_context : typing.Dict[str, typing.Any]
+
+        tenant_id : str
+
+        user_id : str
+
+        capability_grants : typing.Optional[typing.Sequence[str]]
+
+        compute_provider_id : typing.Optional[str]
+
+        conversation_id : typing.Optional[str]
+
+        correlation_id : typing.Optional[str]
+
+        event_delivery : typing.Optional[EventDeliveryRequest]
+
+        execution_environment : typing.Optional[StartHarnessRunRequestExecutionEnvironment]
+
+        job_id : typing.Optional[str]
+
+        run_mode : typing.Optional[StartHarnessRunRequestRunMode]
+
+        tool_provider_refs : typing.Optional[typing.Sequence[ToolProviderRefRequest]]
+
+        trace_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ManagedRun]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/runs",
+            method="POST",
+            json={
+                "capability_grants": capability_grants,
+                "compute_provider_id": compute_provider_id,
+                "conversation_id": conversation_id,
+                "correlation_id": correlation_id,
+                "event_delivery": convert_and_respect_annotation_metadata(
+                    object_=event_delivery, annotation=EventDeliveryRequest, direction="write"
+                ),
+                "execution_environment": execution_environment,
+                "input": input,
+                "job_id": job_id,
+                "policy": policy,
+                "product_context": product_context,
+                "run_mode": run_mode,
+                "tenant_id": tenant_id,
+                "tool_provider_refs": convert_and_respect_annotation_metadata(
+                    object_=tool_provider_refs, annotation=typing.Sequence[ToolProviderRefRequest], direction="write"
+                ),
+                "trace_id": trace_id,
+                "user_id": user_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ManagedRun,
+                    parse_obj_as(
+                        type_=ManagedRun,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ManagedRun]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ManagedRun]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ManagedRun,
+                    parse_obj_as(
+                        type_=ManagedRun,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def pending_actions(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/actions",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def cancel(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/cancel",
+            method="POST",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def events(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        after: typing.Optional[str] = None,
+        limit: typing.Optional[str] = None,
+        stream: typing.Optional[str] = None,
+        last_event_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[RunEvents]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        after : typing.Optional[str]
+
+        limit : typing.Optional[str]
+
+        stream : typing.Optional[str]
+
+        last_event_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[RunEvents]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/events",
+            method="GET",
+            params={
+                "after": after,
+                "limit": limit,
+                "stream": stream,
+            },
+            headers={
+                "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    RunEvents,
+                    parse_obj_as(
+                        type_=RunEvents,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def recover(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        reason: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        reason : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/recover",
+            method="POST",
+            json={
+                "reason": reason,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def decide_approval(
+        self,
+        project_id: str,
+        run_id: str,
+        tool_call_id: str,
+        *,
+        decision: ApprovalInputDecision,
+        idempotency_key: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        tool_call_id : str
+
+        decision : ApprovalInputDecision
+
+        idempotency_key : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-calls/{encode_path_param(tool_call_id)}/approval",
+            method="POST",
+            json={
+                "decision": decision,
+                "idempotency_key": idempotency_key,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def submit_tool_result(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        capability_name: str,
+        idempotency_key: str,
+        payload: typing.Dict[str, typing.Any],
+        status: SubmitToolResultRequestStatus,
+        tool_call_id: str,
+        tool_provider_id: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        capability_name : str
+
+        idempotency_key : str
+
+        payload : typing.Dict[str, typing.Any]
+
+        status : SubmitToolResultRequestStatus
+
+        tool_call_id : str
+
+        tool_provider_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-results",
+            method="POST",
+            json={
+                "capability_name": capability_name,
+                "idempotency_key": idempotency_key,
+                "payload": payload,
+                "status": status,
+                "tool_call_id": tool_call_id,
+                "tool_provider_id": tool_provider_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

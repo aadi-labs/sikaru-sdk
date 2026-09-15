@@ -1,0 +1,167 @@
+
+import typing
+
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.request_options import RequestOptions
+from .raw_client import AsyncRawEvalSeedsClient, RawEvalSeedsClient
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class EvalSeedsClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._raw_client = RawEvalSeedsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> RawEvalSeedsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        RawEvalSeedsClient
+        """
+        return self._raw_client
+
+    def create_eval_seed(
+        self,
+        project_id: str,
+        *,
+        issue_id: str,
+        issue_title: str,
+        trace_ids: typing.Sequence[str],
+        dataset_name: typing.Optional[str] = OMIT,
+        evaluator_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        issue_id : str
+
+        issue_title : str
+
+        trace_ids : typing.Sequence[str]
+
+        dataset_name : typing.Optional[str]
+
+        evaluator_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.eval_seeds.create_eval_seed(
+            project_id="project_id",
+            issue_id="issueId",
+            issue_title="issueTitle",
+            trace_ids=["traceIds"],
+        )
+        """
+        _response = self._raw_client.create_eval_seed(
+            project_id,
+            issue_id=issue_id,
+            issue_title=issue_title,
+            trace_ids=trace_ids,
+            dataset_name=dataset_name,
+            evaluator_name=evaluator_name,
+            request_options=request_options,
+        )
+        return _response.data
+
+
+class AsyncEvalSeedsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._raw_client = AsyncRawEvalSeedsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> AsyncRawEvalSeedsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        AsyncRawEvalSeedsClient
+        """
+        return self._raw_client
+
+    async def create_eval_seed(
+        self,
+        project_id: str,
+        *,
+        issue_id: str,
+        issue_title: str,
+        trace_ids: typing.Sequence[str],
+        dataset_name: typing.Optional[str] = OMIT,
+        evaluator_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        issue_id : str
+
+        issue_title : str
+
+        trace_ids : typing.Sequence[str]
+
+        dataset_name : typing.Optional[str]
+
+        evaluator_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.eval_seeds.create_eval_seed(
+                project_id="project_id",
+                issue_id="issueId",
+                issue_title="issueTitle",
+                trace_ids=["traceIds"],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_eval_seed(
+            project_id,
+            issue_id=issue_id,
+            issue_title=issue_title,
+            trace_ids=trace_ids,
+            dataset_name=dataset_name,
+            evaluator_name=evaluator_name,
+            request_options=request_options,
+        )
+        return _response.data

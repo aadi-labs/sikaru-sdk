@@ -1,0 +1,62 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("TraceStreamsClient", () => {
+    
+    test("stream_openinference_spans (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "format" : "openinference.v1" , "metadata" : { "account_id" : "account_id" , "project_id" : "project_id" , "source" : "source" } };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/trace-streams").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.traceStreams.streamOpeninferenceSpans({
+    format: "openinference.v1",
+    metadata: {
+        account_id: "account_id",
+        project_id: "project_id",
+        source: "source"
+    }
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("stream_openinference_spans (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "format" : "openinference.v1" , "metadata" : { "account_id" : "account_id" , "project_id" : "project_id" , "source" : "source" } };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/trace-streams").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceStreams.streamOpeninferenceSpans({
+    format: "openinference.v1",
+    metadata: {
+        account_id: "account_id",
+        project_id: "project_id",
+        source: "source"
+    }
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

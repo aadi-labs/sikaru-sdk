@@ -1,0 +1,366 @@
+
+import datetime as dt
+import typing
+from json.decoder import JSONDecodeError
+
+from ..core.api_error import ApiError
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.http_response import AsyncHttpResponse, HttpResponse
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
+from ..core.pydantic_utilities import parse_obj_as
+from ..core.request_options import RequestOptions
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.http_validation_error import HttpValidationError
+from .types.delivered_message_environment import DeliveredMessageEnvironment
+from .types.delivered_message_role import DeliveredMessageRole
+from pydantic import ValidationError
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class RawConversationsClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    def list_messages(
+        self,
+        project_id: str,
+        conversation_id: str,
+        *,
+        account_id: str,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        conversation_id : str
+
+        account_id : str
+
+        limit : typing.Optional[int]
+
+        cursor : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/conversations/{encode_path_param(conversation_id)}/messages",
+            method="GET",
+            params={
+                "account_id": account_id,
+                "limit": limit,
+                "cursor": cursor,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def record_message(
+        self,
+        project_id: str,
+        conversation_id: str,
+        *,
+        account_id: str,
+        content: str,
+        delivered_at: dt.datetime,
+        message_id: str,
+        position: int,
+        role: DeliveredMessageRole,
+        environment: typing.Optional[DeliveredMessageEnvironment] = OMIT,
+        trace_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        conversation_id : str
+
+        account_id : str
+
+        content : str
+
+        delivered_at : dt.datetime
+
+        message_id : str
+
+        position : int
+
+        role : DeliveredMessageRole
+
+        environment : typing.Optional[DeliveredMessageEnvironment]
+
+        trace_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/conversations/{encode_path_param(conversation_id)}/messages",
+            method="POST",
+            params={
+                "account_id": account_id,
+            },
+            json={
+                "content": content,
+                "deliveredAt": delivered_at,
+                "environment": environment,
+                "messageId": message_id,
+                "position": position,
+                "role": role,
+                "traceId": trace_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+
+class AsyncRawConversationsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    async def list_messages(
+        self,
+        project_id: str,
+        conversation_id: str,
+        *,
+        account_id: str,
+        limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        conversation_id : str
+
+        account_id : str
+
+        limit : typing.Optional[int]
+
+        cursor : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/conversations/{encode_path_param(conversation_id)}/messages",
+            method="GET",
+            params={
+                "account_id": account_id,
+                "limit": limit,
+                "cursor": cursor,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def record_message(
+        self,
+        project_id: str,
+        conversation_id: str,
+        *,
+        account_id: str,
+        content: str,
+        delivered_at: dt.datetime,
+        message_id: str,
+        position: int,
+        role: DeliveredMessageRole,
+        environment: typing.Optional[DeliveredMessageEnvironment] = OMIT,
+        trace_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        conversation_id : str
+
+        account_id : str
+
+        content : str
+
+        delivered_at : dt.datetime
+
+        message_id : str
+
+        position : int
+
+        role : DeliveredMessageRole
+
+        environment : typing.Optional[DeliveredMessageEnvironment]
+
+        trace_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/conversations/{encode_path_param(conversation_id)}/messages",
+            method="POST",
+            params={
+                "account_id": account_id,
+            },
+            json={
+                "content": content,
+                "deliveredAt": delivered_at,
+                "environment": environment,
+                "messageId": message_id,
+                "position": position,
+                "role": role,
+                "traceId": trace_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

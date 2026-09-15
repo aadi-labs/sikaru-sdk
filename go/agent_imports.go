@@ -1,0 +1,753 @@
+
+package api
+
+import (
+	json "encoding/json"
+	fmt "fmt"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	createAgentImportRequestFieldEvalSuites   = big.NewInt(1 << 0)
+	createAgentImportRequestFieldImprove      = big.NewInt(1 << 1)
+	createAgentImportRequestFieldModelCapture = big.NewInt(1 << 2)
+	createAgentImportRequestFieldName         = big.NewInt(1 << 3)
+	createAgentImportRequestFieldRunner       = big.NewInt(1 << 4)
+	createAgentImportRequestFieldSourceRefs   = big.NewInt(1 << 5)
+)
+
+type CreateAgentImportRequest struct {
+	EvalSuites   []*AgentImportEvalSuiteRequest  `json:"evalSuites,omitempty" url:"-"`
+	Improve      *AgentImportImproveRequest      `json:"improve" url:"-"`
+	ModelCapture *AgentImportModelCaptureRequest `json:"modelCapture,omitempty" url:"-"`
+	Name         string                          `json:"name" url:"-"`
+	Runner       *AgentImportRunnerRequest       `json:"runner,omitempty" url:"-"`
+	SourceRefs   []*AgentImportSourceRefRequest  `json:"sourceRefs,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (c *CreateAgentImportRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetEvalSuites sets the EvalSuites field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateAgentImportRequest) SetEvalSuites(evalSuites []*AgentImportEvalSuiteRequest) {
+	c.EvalSuites = evalSuites
+	c.require(createAgentImportRequestFieldEvalSuites)
+}
+
+// SetImprove sets the Improve field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateAgentImportRequest) SetImprove(improve *AgentImportImproveRequest) {
+	c.Improve = improve
+	c.require(createAgentImportRequestFieldImprove)
+}
+
+// SetModelCapture sets the ModelCapture field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateAgentImportRequest) SetModelCapture(modelCapture *AgentImportModelCaptureRequest) {
+	c.ModelCapture = modelCapture
+	c.require(createAgentImportRequestFieldModelCapture)
+}
+
+// SetName sets the Name field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateAgentImportRequest) SetName(name string) {
+	c.Name = name
+	c.require(createAgentImportRequestFieldName)
+}
+
+// SetRunner sets the Runner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateAgentImportRequest) SetRunner(runner *AgentImportRunnerRequest) {
+	c.Runner = runner
+	c.require(createAgentImportRequestFieldRunner)
+}
+
+// SetSourceRefs sets the SourceRefs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateAgentImportRequest) SetSourceRefs(sourceRefs []*AgentImportSourceRefRequest) {
+	c.SourceRefs = sourceRefs
+	c.require(createAgentImportRequestFieldSourceRefs)
+}
+
+func (c *CreateAgentImportRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateAgentImportRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*c = CreateAgentImportRequest(body)
+	return nil
+}
+
+func (c *CreateAgentImportRequest) MarshalJSON() ([]byte, error) {
+	type embed CreateAgentImportRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	agentImportEvalSuiteRequestFieldKind          = big.NewInt(1 << 0)
+	agentImportEvalSuiteRequestFieldMetadata      = big.NewInt(1 << 1)
+	agentImportEvalSuiteRequestFieldPrimaryMetric = big.NewInt(1 << 2)
+	agentImportEvalSuiteRequestFieldStorageRef    = big.NewInt(1 << 3)
+)
+
+type AgentImportEvalSuiteRequest struct {
+	Kind          string         `json:"kind" url:"kind"`
+	Metadata      map[string]any `json:"metadata,omitempty" url:"metadata,omitempty"`
+	PrimaryMetric string         `json:"primaryMetric" url:"primaryMetric"`
+	StorageRef    string         `json:"storageRef" url:"storageRef"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgentImportEvalSuiteRequest) GetKind() string {
+	if a == nil {
+		return ""
+	}
+	return a.Kind
+}
+
+func (a *AgentImportEvalSuiteRequest) GetMetadata() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.Metadata
+}
+
+func (a *AgentImportEvalSuiteRequest) GetPrimaryMetric() string {
+	if a == nil {
+		return ""
+	}
+	return a.PrimaryMetric
+}
+
+func (a *AgentImportEvalSuiteRequest) GetStorageRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.StorageRef
+}
+
+func (a *AgentImportEvalSuiteRequest) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgentImportEvalSuiteRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportEvalSuiteRequest) SetKind(kind string) {
+	a.Kind = kind
+	a.require(agentImportEvalSuiteRequestFieldKind)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportEvalSuiteRequest) SetMetadata(metadata map[string]any) {
+	a.Metadata = metadata
+	a.require(agentImportEvalSuiteRequestFieldMetadata)
+}
+
+// SetPrimaryMetric sets the PrimaryMetric field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportEvalSuiteRequest) SetPrimaryMetric(primaryMetric string) {
+	a.PrimaryMetric = primaryMetric
+	a.require(agentImportEvalSuiteRequestFieldPrimaryMetric)
+}
+
+// SetStorageRef sets the StorageRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportEvalSuiteRequest) SetStorageRef(storageRef string) {
+	a.StorageRef = storageRef
+	a.require(agentImportEvalSuiteRequestFieldStorageRef)
+}
+
+func (a *AgentImportEvalSuiteRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgentImportEvalSuiteRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgentImportEvalSuiteRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgentImportEvalSuiteRequest) MarshalJSON() ([]byte, error) {
+	type embed AgentImportEvalSuiteRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgentImportEvalSuiteRequest) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agentImportImproveRequestFieldMode          = big.NewInt(1 << 0)
+	agentImportImproveRequestFieldObjective     = big.NewInt(1 << 1)
+	agentImportImproveRequestFieldPromotionGate = big.NewInt(1 << 2)
+)
+
+type AgentImportImproveRequest struct {
+	Mode          string `json:"mode" url:"mode"`
+	Objective     string `json:"objective" url:"objective"`
+	PromotionGate string `json:"promotionGate" url:"promotionGate"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgentImportImproveRequest) GetMode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Mode
+}
+
+func (a *AgentImportImproveRequest) GetObjective() string {
+	if a == nil {
+		return ""
+	}
+	return a.Objective
+}
+
+func (a *AgentImportImproveRequest) GetPromotionGate() string {
+	if a == nil {
+		return ""
+	}
+	return a.PromotionGate
+}
+
+func (a *AgentImportImproveRequest) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgentImportImproveRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetMode sets the Mode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportImproveRequest) SetMode(mode string) {
+	a.Mode = mode
+	a.require(agentImportImproveRequestFieldMode)
+}
+
+// SetObjective sets the Objective field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportImproveRequest) SetObjective(objective string) {
+	a.Objective = objective
+	a.require(agentImportImproveRequestFieldObjective)
+}
+
+// SetPromotionGate sets the PromotionGate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportImproveRequest) SetPromotionGate(promotionGate string) {
+	a.PromotionGate = promotionGate
+	a.require(agentImportImproveRequestFieldPromotionGate)
+}
+
+func (a *AgentImportImproveRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgentImportImproveRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgentImportImproveRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgentImportImproveRequest) MarshalJSON() ([]byte, error) {
+	type embed AgentImportImproveRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgentImportImproveRequest) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agentImportModelCaptureRequestFieldMetadata = big.NewInt(1 << 0)
+	agentImportModelCaptureRequestFieldMode     = big.NewInt(1 << 1)
+)
+
+type AgentImportModelCaptureRequest struct {
+	Metadata map[string]any `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Mode     string         `json:"mode" url:"mode"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgentImportModelCaptureRequest) GetMetadata() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.Metadata
+}
+
+func (a *AgentImportModelCaptureRequest) GetMode() string {
+	if a == nil {
+		return ""
+	}
+	return a.Mode
+}
+
+func (a *AgentImportModelCaptureRequest) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgentImportModelCaptureRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportModelCaptureRequest) SetMetadata(metadata map[string]any) {
+	a.Metadata = metadata
+	a.require(agentImportModelCaptureRequestFieldMetadata)
+}
+
+// SetMode sets the Mode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportModelCaptureRequest) SetMode(mode string) {
+	a.Mode = mode
+	a.require(agentImportModelCaptureRequestFieldMode)
+}
+
+func (a *AgentImportModelCaptureRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgentImportModelCaptureRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgentImportModelCaptureRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgentImportModelCaptureRequest) MarshalJSON() ([]byte, error) {
+	type embed AgentImportModelCaptureRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgentImportModelCaptureRequest) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agentImportRunnerRequestFieldEntrypoint     = big.NewInt(1 << 0)
+	agentImportRunnerRequestFieldEnvironmentRef = big.NewInt(1 << 1)
+	agentImportRunnerRequestFieldKind           = big.NewInt(1 << 2)
+	agentImportRunnerRequestFieldMetadata       = big.NewInt(1 << 3)
+)
+
+type AgentImportRunnerRequest struct {
+	Entrypoint     string         `json:"entrypoint" url:"entrypoint"`
+	EnvironmentRef *string        `json:"environmentRef,omitempty" url:"environmentRef,omitempty"`
+	Kind           string         `json:"kind" url:"kind"`
+	Metadata       map[string]any `json:"metadata,omitempty" url:"metadata,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgentImportRunnerRequest) GetEntrypoint() string {
+	if a == nil {
+		return ""
+	}
+	return a.Entrypoint
+}
+
+func (a *AgentImportRunnerRequest) GetEnvironmentRef() *string {
+	if a == nil {
+		return nil
+	}
+	return a.EnvironmentRef
+}
+
+func (a *AgentImportRunnerRequest) GetKind() string {
+	if a == nil {
+		return ""
+	}
+	return a.Kind
+}
+
+func (a *AgentImportRunnerRequest) GetMetadata() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.Metadata
+}
+
+func (a *AgentImportRunnerRequest) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgentImportRunnerRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetEntrypoint sets the Entrypoint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportRunnerRequest) SetEntrypoint(entrypoint string) {
+	a.Entrypoint = entrypoint
+	a.require(agentImportRunnerRequestFieldEntrypoint)
+}
+
+// SetEnvironmentRef sets the EnvironmentRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportRunnerRequest) SetEnvironmentRef(environmentRef *string) {
+	a.EnvironmentRef = environmentRef
+	a.require(agentImportRunnerRequestFieldEnvironmentRef)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportRunnerRequest) SetKind(kind string) {
+	a.Kind = kind
+	a.require(agentImportRunnerRequestFieldKind)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportRunnerRequest) SetMetadata(metadata map[string]any) {
+	a.Metadata = metadata
+	a.require(agentImportRunnerRequestFieldMetadata)
+}
+
+func (a *AgentImportRunnerRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgentImportRunnerRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgentImportRunnerRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgentImportRunnerRequest) MarshalJSON() ([]byte, error) {
+	type embed AgentImportRunnerRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgentImportRunnerRequest) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+var (
+	agentImportSourceRefRequestFieldContentDigest = big.NewInt(1 << 0)
+	agentImportSourceRefRequestFieldExportPolicy  = big.NewInt(1 << 1)
+	agentImportSourceRefRequestFieldMetadata      = big.NewInt(1 << 2)
+	agentImportSourceRefRequestFieldRole          = big.NewInt(1 << 3)
+	agentImportSourceRefRequestFieldStorageRef    = big.NewInt(1 << 4)
+)
+
+type AgentImportSourceRefRequest struct {
+	ContentDigest string                                   `json:"contentDigest" url:"contentDigest"`
+	ExportPolicy  *AgentImportSourceRefRequestExportPolicy `json:"exportPolicy,omitempty" url:"exportPolicy,omitempty"`
+	Metadata      map[string]any                           `json:"metadata,omitempty" url:"metadata,omitempty"`
+	Role          string                                   `json:"role" url:"role"`
+	StorageRef    string                                   `json:"storageRef" url:"storageRef"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AgentImportSourceRefRequest) GetContentDigest() string {
+	if a == nil {
+		return ""
+	}
+	return a.ContentDigest
+}
+
+func (a *AgentImportSourceRefRequest) GetExportPolicy() *AgentImportSourceRefRequestExportPolicy {
+	if a == nil {
+		return nil
+	}
+	return a.ExportPolicy
+}
+
+func (a *AgentImportSourceRefRequest) GetMetadata() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.Metadata
+}
+
+func (a *AgentImportSourceRefRequest) GetRole() string {
+	if a == nil {
+		return ""
+	}
+	return a.Role
+}
+
+func (a *AgentImportSourceRefRequest) GetStorageRef() string {
+	if a == nil {
+		return ""
+	}
+	return a.StorageRef
+}
+
+func (a *AgentImportSourceRefRequest) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AgentImportSourceRefRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetContentDigest sets the ContentDigest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportSourceRefRequest) SetContentDigest(contentDigest string) {
+	a.ContentDigest = contentDigest
+	a.require(agentImportSourceRefRequestFieldContentDigest)
+}
+
+// SetExportPolicy sets the ExportPolicy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportSourceRefRequest) SetExportPolicy(exportPolicy *AgentImportSourceRefRequestExportPolicy) {
+	a.ExportPolicy = exportPolicy
+	a.require(agentImportSourceRefRequestFieldExportPolicy)
+}
+
+// SetMetadata sets the Metadata field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportSourceRefRequest) SetMetadata(metadata map[string]any) {
+	a.Metadata = metadata
+	a.require(agentImportSourceRefRequestFieldMetadata)
+}
+
+// SetRole sets the Role field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportSourceRefRequest) SetRole(role string) {
+	a.Role = role
+	a.require(agentImportSourceRefRequestFieldRole)
+}
+
+// SetStorageRef sets the StorageRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AgentImportSourceRefRequest) SetStorageRef(storageRef string) {
+	a.StorageRef = storageRef
+	a.require(agentImportSourceRefRequestFieldStorageRef)
+}
+
+func (a *AgentImportSourceRefRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AgentImportSourceRefRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AgentImportSourceRefRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AgentImportSourceRefRequest) MarshalJSON() ([]byte, error) {
+	type embed AgentImportSourceRefRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AgentImportSourceRefRequest) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AgentImportSourceRefRequestExportPolicy string
+
+const (
+	AgentImportSourceRefRequestExportPolicyCustomerSourceExportable AgentImportSourceRefRequestExportPolicy = "customer_source_exportable"
+	AgentImportSourceRefRequestExportPolicyCustomerSourcePrivate    AgentImportSourceRefRequestExportPolicy = "customer_source_private"
+	AgentImportSourceRefRequestExportPolicyReferenceOnly            AgentImportSourceRefRequestExportPolicy = "reference_only"
+)
+
+func NewAgentImportSourceRefRequestExportPolicyFromString(s string) (AgentImportSourceRefRequestExportPolicy, error) {
+	switch s {
+	case "customer_source_exportable":
+		return AgentImportSourceRefRequestExportPolicyCustomerSourceExportable, nil
+	case "customer_source_private":
+		return AgentImportSourceRefRequestExportPolicyCustomerSourcePrivate, nil
+	case "reference_only":
+		return AgentImportSourceRefRequestExportPolicyReferenceOnly, nil
+	}
+	var t AgentImportSourceRefRequestExportPolicy
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AgentImportSourceRefRequestExportPolicy) Ptr() *AgentImportSourceRefRequestExportPolicy {
+	return &a
+}

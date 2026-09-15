@@ -1,0 +1,249 @@
+
+import typing
+
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.request_options import RequestOptions
+from ..types.create_managed_agent_source_request import CreateManagedAgentSourceRequest
+from .raw_client import AsyncRawManagedAgentsClient, RawManagedAgentsClient
+from .types.create_managed_agent_request_status import CreateManagedAgentRequestStatus
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class ManagedAgentsClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._raw_client = RawManagedAgentsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> RawManagedAgentsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        RawManagedAgentsClient
+        """
+        return self._raw_client
+
+    def list_managed_agents(
+        self, project_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.list_managed_agents(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.list_managed_agents(project_id, request_options=request_options)
+        return _response.data
+
+    def create_managed_agent(
+        self,
+        project_id: str,
+        *,
+        agent_slug: str,
+        active_harness_version_id: typing.Optional[str] = OMIT,
+        compatibility_profile_id: typing.Optional[str] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        harness_id: typing.Optional[str] = OMIT,
+        source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
+        status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        active_harness_version_id : typing.Optional[str]
+
+        compatibility_profile_id : typing.Optional[str]
+
+        display_name : typing.Optional[str]
+
+        harness_id : typing.Optional[str]
+
+        source : typing.Optional[CreateManagedAgentSourceRequest]
+
+        status : typing.Optional[CreateManagedAgentRequestStatus]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.create_managed_agent(
+            project_id="project_id",
+            agent_slug="agentSlug",
+        )
+        """
+        _response = self._raw_client.create_managed_agent(
+            project_id,
+            agent_slug=agent_slug,
+            active_harness_version_id=active_harness_version_id,
+            compatibility_profile_id=compatibility_profile_id,
+            display_name=display_name,
+            harness_id=harness_id,
+            source=source,
+            status=status,
+            request_options=request_options,
+        )
+        return _response.data
+
+
+class AsyncManagedAgentsClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._raw_client = AsyncRawManagedAgentsClient(client_wrapper=client_wrapper)
+
+    @property
+    def with_raw_response(self) -> AsyncRawManagedAgentsClient:
+        """
+        Retrieves a raw implementation of this client that returns raw responses.
+
+        Returns
+        -------
+        AsyncRawManagedAgentsClient
+        """
+        return self._raw_client
+
+    async def list_managed_agents(
+        self, project_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.list_managed_agents(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_managed_agents(project_id, request_options=request_options)
+        return _response.data
+
+    async def create_managed_agent(
+        self,
+        project_id: str,
+        *,
+        agent_slug: str,
+        active_harness_version_id: typing.Optional[str] = OMIT,
+        compatibility_profile_id: typing.Optional[str] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        harness_id: typing.Optional[str] = OMIT,
+        source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
+        status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        active_harness_version_id : typing.Optional[str]
+
+        compatibility_profile_id : typing.Optional[str]
+
+        display_name : typing.Optional[str]
+
+        harness_id : typing.Optional[str]
+
+        source : typing.Optional[CreateManagedAgentSourceRequest]
+
+        status : typing.Optional[CreateManagedAgentRequestStatus]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.create_managed_agent(
+                project_id="project_id",
+                agent_slug="agentSlug",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_managed_agent(
+            project_id,
+            agent_slug=agent_slug,
+            active_harness_version_id=active_harness_version_id,
+            compatibility_profile_id=compatibility_profile_id,
+            display_name=display_name,
+            harness_id=harness_id,
+            source=source,
+            status=status,
+            request_options=request_options,
+        )
+        return _response.data

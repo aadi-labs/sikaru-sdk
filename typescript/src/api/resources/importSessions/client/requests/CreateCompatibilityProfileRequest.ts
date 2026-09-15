@@ -1,0 +1,20 @@
+
+/**
+ * @example
+ *     {
+ *         displayName: "displayName",
+ *         harnessId: "harnessId"
+ *     }
+ */
+export interface CreateCompatibilityProfileRequest {
+    approvalMap?: Record<string, unknown>;
+    displayName: string;
+    evalMap?: Record<string, unknown>;
+    harnessId: string;
+    inputSchema?: Record<string, unknown>;
+    memoryMap?: Record<string, unknown>;
+    outputSchema?: Record<string, unknown>;
+    runModes?: string[];
+    toolMap?: Record<string, unknown>;
+    traceCoverageSummary?: Record<string, unknown>;
+}

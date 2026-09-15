@@ -1,0 +1,1037 @@
+
+package api
+
+import (
+	json "encoding/json"
+	assert "github.com/stretchr/testify/assert"
+	require "github.com/stretchr/testify/require"
+	testing "testing"
+)
+
+func TestSettersListResultsEvaluationResultsRequest(t *testing.T) {
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueEnvironment *ListResultsEvaluationResultsRequestEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEvaluator", func(t *testing.T) {
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueEvaluator *string
+		obj.SetEvaluator(fernTestValueEvaluator)
+		assert.Equal(t, fernTestValueEvaluator, obj.Evaluator)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVerdict", func(t *testing.T) {
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueVerdict *ListResultsEvaluationResultsRequestVerdict
+		obj.SetVerdict(fernTestValueVerdict)
+		assert.Equal(t, fernTestValueVerdict, obj.Verdict)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetLimit", func(t *testing.T) {
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueLimit *int
+		obj.SetLimit(fernTestValueLimit)
+		assert.Equal(t, fernTestValueLimit, obj.Limit)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCursor", func(t *testing.T) {
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueCursor *string
+		obj.SetCursor(fernTestValueCursor)
+		assert.Equal(t, fernTestValueCursor, obj.Cursor)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitListResultsEvaluationResultsRequest(t *testing.T) {
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueEnvironment *ListResultsEvaluationResultsRequestEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEvaluator_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueEvaluator *string
+
+		// Act
+		obj.SetEvaluator(fernTestValueEvaluator)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVerdict_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueVerdict *ListResultsEvaluationResultsRequestVerdict
+
+		// Act
+		obj.SetVerdict(fernTestValueVerdict)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetLimit_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueLimit *int
+
+		// Act
+		obj.SetLimit(fernTestValueLimit)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCursor_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ListResultsEvaluationResultsRequest{}
+		var fernTestValueCursor *string
+
+		// Act
+		obj.SetCursor(fernTestValueCursor)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersEvaluationResult(t *testing.T) {
+	t.Run("SetAdjudicates", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueAdjudicates []string
+		obj.SetAdjudicates(fernTestValueAdjudicates)
+		assert.Equal(t, fernTestValueAdjudicates, obj.Adjudicates)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContext", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueContext *JudgmentContext
+		obj.SetContext(fernTestValueContext)
+		assert.Equal(t, fernTestValueContext, obj.Context)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEnvironment", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueEnvironment EvaluationResultEnvironment
+		obj.SetEnvironment(fernTestValueEnvironment)
+		assert.Equal(t, fernTestValueEnvironment, obj.Environment)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetEvaluator", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueEvaluator string
+		obj.SetEvaluator(fernTestValueEvaluator)
+		assert.Equal(t, fernTestValueEvaluator, obj.Evaluator)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetID", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueID string
+		obj.SetID(fernTestValueID)
+		assert.Equal(t, fernTestValueID, obj.ID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetPublicReason", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValuePublicReason string
+		obj.SetPublicReason(fernTestValuePublicReason)
+		assert.Equal(t, fernTestValuePublicReason, obj.PublicReason)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRevision", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueRevision string
+		obj.SetRevision(fernTestValueRevision)
+		assert.Equal(t, fernTestValueRevision, obj.Revision)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSource", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueSource EvaluationResultSource
+		obj.SetSource(fernTestValueSource)
+		assert.Equal(t, fernTestValueSource, obj.Source)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTarget", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueTarget *JudgmentTarget
+		obj.SetTarget(fernTestValueTarget)
+		assert.Equal(t, fernTestValueTarget, obj.Target)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTraceID", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueTraceID string
+		obj.SetTraceID(fernTestValueTraceID)
+		assert.Equal(t, fernTestValueTraceID, obj.TraceID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetVerdict", func(t *testing.T) {
+		obj := &EvaluationResult{}
+		var fernTestValueVerdict EvaluationResultVerdict
+		obj.SetVerdict(fernTestValueVerdict)
+		assert.Equal(t, fernTestValueVerdict, obj.Verdict)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitEvaluationResult(t *testing.T) {
+	t.Run("SetAdjudicates_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueAdjudicates []string
+
+		// Act
+		obj.SetAdjudicates(fernTestValueAdjudicates)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetContext_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueContext *JudgmentContext
+
+		// Act
+		obj.SetContext(fernTestValueContext)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEnvironment_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueEnvironment EvaluationResultEnvironment
+
+		// Act
+		obj.SetEnvironment(fernTestValueEnvironment)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetEvaluator_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueEvaluator string
+
+		// Act
+		obj.SetEvaluator(fernTestValueEvaluator)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueID string
+
+		// Act
+		obj.SetID(fernTestValueID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetPublicReason_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValuePublicReason string
+
+		// Act
+		obj.SetPublicReason(fernTestValuePublicReason)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRevision_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueRevision string
+
+		// Act
+		obj.SetRevision(fernTestValueRevision)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSource_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueSource EvaluationResultSource
+
+		// Act
+		obj.SetSource(fernTestValueSource)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTarget_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueTarget *JudgmentTarget
+
+		// Act
+		obj.SetTarget(fernTestValueTarget)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTraceID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueTraceID string
+
+		// Act
+		obj.SetTraceID(fernTestValueTraceID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetVerdict_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &EvaluationResult{}
+		var fernTestValueVerdict EvaluationResultVerdict
+
+		// Act
+		obj.SetVerdict(fernTestValueVerdict)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersJudgmentContext(t *testing.T) {
+	t.Run("SetContent", func(t *testing.T) {
+		obj := &JudgmentContext{}
+		var fernTestValueContent string
+		obj.SetContent(fernTestValueContent)
+		assert.Equal(t, fernTestValueContent, obj.Content)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSha256", func(t *testing.T) {
+		obj := &JudgmentContext{}
+		var fernTestValueSha256 string
+		obj.SetSha256(fernTestValueSha256)
+		assert.Equal(t, fernTestValueSha256, obj.Sha256)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersJudgmentContext(t *testing.T) {
+	t.Run("GetContent", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &JudgmentContext{}
+		var expected string
+		obj.Content = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContent(), "getter should return the property value")
+	})
+
+	t.Run("GetContent_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *JudgmentContext
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContent() // Should return zero value
+	})
+
+	t.Run("GetSha256", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &JudgmentContext{}
+		var expected string
+		obj.Sha256 = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSha256(), "getter should return the property value")
+	})
+
+	t.Run("GetSha256_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *JudgmentContext
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSha256() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitJudgmentContext(t *testing.T) {
+	t.Run("SetContent_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &JudgmentContext{}
+		var fernTestValueContent string
+
+		// Act
+		obj.SetContent(fernTestValueContent)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSha256_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &JudgmentContext{}
+		var fernTestValueSha256 string
+
+		// Act
+		obj.SetSha256(fernTestValueSha256)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingJudgmentContext(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &JudgmentContext{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled JudgmentContext
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj JudgmentContext
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj JudgmentContext
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestStringJudgmentContext(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &JudgmentContext{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *JudgmentContext
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumEvaluationResultEnvironment(t *testing.T) {
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_staging", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultEnvironmentFromString("staging")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultEnvironment("staging"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_development", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultEnvironmentFromString("development")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultEnvironment("development"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewEvaluationResultEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewEvaluationResultEnvironmentFromString("production")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumEvaluationResultSource(t *testing.T) {
+	t.Run("NewFromString_human", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultSourceFromString("human")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultSource("human"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_automated", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultSourceFromString("automated")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultSource("automated"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewEvaluationResultSourceFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewEvaluationResultSourceFromString("human")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumEvaluationResultVerdict(t *testing.T) {
+	t.Run("NewFromString_pass", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultVerdictFromString("pass")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultVerdict("pass"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fail", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultVerdictFromString("fail")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultVerdict("fail"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unable_to_judge", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultVerdictFromString("unable_to_judge")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultVerdict("unable_to_judge"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_error", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewEvaluationResultVerdictFromString("error")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, EvaluationResultVerdict("error"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewEvaluationResultVerdictFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewEvaluationResultVerdictFromString("pass")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListResultsEvaluationResultsRequestEnvironment(t *testing.T) {
+	t.Run("NewFromString_production", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestEnvironmentFromString("production")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestEnvironment("production"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_staging", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestEnvironmentFromString("staging")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestEnvironment("staging"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_development", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestEnvironmentFromString("development")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestEnvironment("development"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewListResultsEvaluationResultsRequestEnvironmentFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewListResultsEvaluationResultsRequestEnvironmentFromString("production")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumListResultsEvaluationResultsRequestVerdict(t *testing.T) {
+	t.Run("NewFromString_pass", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestVerdictFromString("pass")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestVerdict("pass"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_fail", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestVerdictFromString("fail")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestVerdict("fail"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unable_to_judge", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestVerdictFromString("unable_to_judge")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestVerdict("unable_to_judge"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_error", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewListResultsEvaluationResultsRequestVerdictFromString("error")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ListResultsEvaluationResultsRequestVerdict("error"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewListResultsEvaluationResultsRequestVerdictFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewListResultsEvaluationResultsRequestVerdictFromString("pass")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestExtraPropertiesJudgmentContext(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &JudgmentContext{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *JudgmentContext
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}

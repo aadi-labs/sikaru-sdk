@@ -1,0 +1,19 @@
+
+/**
+ * @example
+ *     {
+ *         traceIds: ["traceIds"]
+ *     }
+ */
+export interface CreateEvaluatorRunRequest {
+    agentId?: string | null;
+    backfillWindow?: string | null;
+    datasetName?: string | null;
+    evaluatorName?: string | null;
+    filterExpression?: string | null;
+    issueId?: string | null;
+    issueTitle?: string | null;
+    sampleRate?: string | null;
+    signalTags?: string[];
+    traceIds: string[];
+}

@@ -1,0 +1,221 @@
+
+import typing
+from json.decoder import JSONDecodeError
+
+from ..core.api_error import ApiError
+from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from ..core.http_response import AsyncHttpResponse, HttpResponse
+from ..core.jsonable_encoder import encode_path_param
+from ..core.parse_error import ParsingError
+from ..core.pydantic_utilities import parse_obj_as
+from ..core.request_options import RequestOptions
+from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.http_validation_error import HttpValidationError
+from .types.create_feedback_request_kind import CreateFeedbackRequestKind
+from .types.create_feedback_request_target import CreateFeedbackRequestTarget
+from pydantic import ValidationError
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class RawFeedbackClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    def create_feedback(
+        self,
+        project_id: str,
+        *,
+        kind: CreateFeedbackRequestKind,
+        target: CreateFeedbackRequestTarget,
+        target_id: str,
+        issue_id: typing.Optional[str] = OMIT,
+        note: typing.Optional[str] = OMIT,
+        session_id: typing.Optional[str] = OMIT,
+        span_id: typing.Optional[str] = OMIT,
+        tag: typing.Optional[str] = OMIT,
+        trace_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        kind : CreateFeedbackRequestKind
+
+        target : CreateFeedbackRequestTarget
+
+        target_id : str
+
+        issue_id : typing.Optional[str]
+
+        note : typing.Optional[str]
+
+        session_id : typing.Optional[str]
+
+        span_id : typing.Optional[str]
+
+        tag : typing.Optional[str]
+
+        trace_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/feedback",
+            method="POST",
+            json={
+                "issueId": issue_id,
+                "kind": kind,
+                "note": note,
+                "sessionId": session_id,
+                "spanId": span_id,
+                "tag": tag,
+                "target": target,
+                "targetId": target_id,
+                "traceId": trace_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+
+class AsyncRawFeedbackClient:
+    def __init__(self, *, client_wrapper: AsyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    async def create_feedback(
+        self,
+        project_id: str,
+        *,
+        kind: CreateFeedbackRequestKind,
+        target: CreateFeedbackRequestTarget,
+        target_id: str,
+        issue_id: typing.Optional[str] = OMIT,
+        note: typing.Optional[str] = OMIT,
+        session_id: typing.Optional[str] = OMIT,
+        span_id: typing.Optional[str] = OMIT,
+        tag: typing.Optional[str] = OMIT,
+        trace_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        kind : CreateFeedbackRequestKind
+
+        target : CreateFeedbackRequestTarget
+
+        target_id : str
+
+        issue_id : typing.Optional[str]
+
+        note : typing.Optional[str]
+
+        session_id : typing.Optional[str]
+
+        span_id : typing.Optional[str]
+
+        tag : typing.Optional[str]
+
+        trace_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/feedback",
+            method="POST",
+            json={
+                "issueId": issue_id,
+                "kind": kind,
+                "note": note,
+                "sessionId": session_id,
+                "spanId": span_id,
+                "tag": tag,
+                "target": target,
+                "targetId": target_id,
+                "traceId": trace_id,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)

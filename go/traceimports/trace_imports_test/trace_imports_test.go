@@ -1,0 +1,272 @@
+
+package trace_imports_test
+
+import (
+	bytes "bytes"
+	context "context"
+	json "encoding/json"
+	http "net/http"
+	os "os"
+	testing "testing"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	client "github.com/aadi-labs/sikaru-sdk/go/client"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+	require "github.com/stretchr/testify/require"
+)
+
+func VerifyRequestCount(
+	t *testing.T,
+	testId string,
+	method string,
+	urlPath string,
+	queryParams map[string]any,
+	expected int,
+) {
+	wiremockURL := os.Getenv("WIREMOCK_URL")
+	if wiremockURL == "" {
+		wiremockURL = "http://localhost:8080"
+	}
+	WiremockAdminURL := wiremockURL + "/__admin"
+	var reqBody bytes.Buffer
+	reqBody.WriteString(`{"method":"`)
+	reqBody.WriteString(method)
+	reqBody.WriteString(`","urlPath":"`)
+	reqBody.WriteString(urlPath)
+	reqBody.WriteString(`","headers":{"X-Test-Id":{"equalTo":"`)
+	reqBody.WriteString(testId)
+	reqBody.WriteString(`"}}`)
+	if len(queryParams) > 0 {
+		reqBody.WriteString(`,"queryParameters":{`)
+		first := true
+		for key, value := range queryParams {
+			if !first {
+				reqBody.WriteString(",")
+			}
+			reqBody.WriteString(`"`)
+			reqBody.WriteString(key)
+			switch v := value.(type) {
+			case string:
+				reqBody.WriteString(`":{"equalTo":"`)
+				reqBody.WriteString(v)
+				reqBody.WriteString(`"}`)
+			case []string:
+				reqBody.WriteString(`":{"hasExactly":[`)
+				for i, item := range v {
+					if i > 0 {
+						reqBody.WriteString(",")
+					}
+					reqBody.WriteString(`{"equalTo":"`)
+					reqBody.WriteString(item)
+					reqBody.WriteString(`"}`)
+				}
+				reqBody.WriteString(`]}`)
+			}
+			first = false
+		}
+		reqBody.WriteString("}")
+	}
+	reqBody.WriteString("}")
+	resp, err := http.Post(WiremockAdminURL+"/requests/find", "application/json", &reqBody)
+	require.NoError(t, err)
+	var result struct {
+		Requests []interface{} `json:"requests"`
+	}
+	json.NewDecoder(resp.Body).Decode(&result)
+	require.Equal(t, expected, len(result.Requests))
+}
+
+func TestTraceImportsListTraceImportsWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.TraceImports.ListTraceImports(
+		context.TODO(),
+		"project_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsListTraceImportsWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsListTraceImportsWithWireMock", "GET", "/v1/projects/project_id/trace-imports", nil, 1)
+}
+
+func TestTraceImportsCreateTraceImportWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.CreateTraceImportRequest{
+		ConnectionID:      "connectionId",
+		ConverterVersion:  "converterVersion",
+		Dataset:           "dataset",
+		ExternalProjectID: "externalProjectId",
+		Mode:              _go.CreateTraceImportRequestModeHistorical,
+		Provider:          _go.CreateTraceImportRequestProviderLangsmith,
+		Scope:             &_go.TraceImportScopeRequest{},
+		SourceInstance:    "sourceInstance",
+	}
+	_, invocationErr := client.TraceImports.CreateTraceImport(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsCreateTraceImportWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsCreateTraceImportWithWireMock", "POST", "/v1/projects/project_id/trace-imports", nil, 1)
+}
+
+func TestTraceImportsPlanTraceImportWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.PlanTraceImportRequest{
+		ConnectionID:      "connectionId",
+		ConverterVersion:  "converterVersion",
+		Dataset:           "dataset",
+		ExternalProjectID: "externalProjectId",
+		Mode:              _go.PlanTraceImportRequestModeHistorical,
+		Provider:          _go.PlanTraceImportRequestProviderLangsmith,
+		Scope:             &_go.TraceImportScopeRequest{},
+		SourceInstance:    "sourceInstance",
+	}
+	_, invocationErr := client.TraceImports.PlanTraceImport(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsPlanTraceImportWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsPlanTraceImportWithWireMock", "POST", "/v1/projects/project_id/trace-imports/plan", nil, 1)
+}
+
+func TestTraceImportsGetTraceImportWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.TraceImports.GetTraceImport(
+		context.TODO(),
+		"project_id",
+		"trace_import_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsGetTraceImportWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsGetTraceImportWithWireMock", "GET", "/v1/projects/project_id/trace-imports/trace_import_id", nil, 1)
+}
+
+func TestTraceImportsCancelTraceImportWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.VersionedTraceImportAction{
+		ExpectedVersion: 1,
+	}
+	_, invocationErr := client.TraceImports.CancelTraceImport(
+		context.TODO(),
+		"project_id",
+		"trace_import_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsCancelTraceImportWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsCancelTraceImportWithWireMock", "POST", "/v1/projects/project_id/trace-imports/trace_import_id/cancel", nil, 1)
+}
+
+func TestTraceImportsGetTraceImportReceiptWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.TraceImports.GetTraceImportReceipt(
+		context.TODO(),
+		"project_id",
+		"trace_import_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsGetTraceImportReceiptWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsGetTraceImportReceiptWithWireMock", "GET", "/v1/projects/project_id/trace-imports/trace_import_id/receipt", nil, 1)
+}
+
+func TestTraceImportsRetryTraceImportWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.VersionedTraceImportAction{
+		ExpectedVersion: 1,
+	}
+	_, invocationErr := client.TraceImports.RetryTraceImport(
+		context.TODO(),
+		"project_id",
+		"trace_import_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestTraceImportsRetryTraceImportWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestTraceImportsRetryTraceImportWithWireMock", "POST", "/v1/projects/project_id/trace-imports/trace_import_id/retry", nil, 1)
+}

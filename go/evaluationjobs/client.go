@@ -1,0 +1,154 @@
+
+package evaluationjobs
+
+import (
+	context "context"
+	os "os"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+)
+
+type Client struct {
+	WithRawResponse *RawClient
+
+	options *core.RequestOptions
+	baseURL string
+	caller  *internal.Caller
+}
+
+func NewClient(options *core.RequestOptions) *Client {
+	if options.APIKey == "" {
+		options.APIKey = os.Getenv("SIKARU_API_KEY")
+	}
+	return &Client{
+		WithRawResponse: NewRawClient(options),
+		options:         options,
+		baseURL:         options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}
+
+// Example:
+//
+//	request := &_go.ListJobsEvaluationJobsRequest{}
+//	client.EvaluationJobs.ListJobs(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) ListJobs(
+	ctx context.Context,
+	projectID string,
+	request *_go.ListJobsEvaluationJobsRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListJobs(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.JobInput{
+//	    Evaluator: "evaluator",
+//	    RequestID: "requestId",
+//	    Revision: "revision",
+//	    Rubric: "rubric",
+//	    Targets: []*_go.TargetInput{
+//	        &_go.TargetInput{
+//	            Target: &_go.JudgmentTarget{
+//	                AccountID: "accountId",
+//	                Kind: _go.JudgmentTargetKindMessage,
+//	            },
+//	            TraceID: "traceId",
+//	        },
+//	    },
+//	}
+//	client.EvaluationJobs.CreateJob(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) CreateJob(
+	ctx context.Context,
+	projectID string,
+	request *_go.JobInput,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateJob(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.EvaluationJobs.GetJob(
+//	    context.TODO(),
+//	    "project_id",
+//	    "job_id",
+//	)
+func (c *Client) GetJob(
+	ctx context.Context,
+	projectID string,
+	jobID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetJob(
+		ctx,
+		projectID,
+		jobID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.EvaluationJobs.CancelJob(
+//	    context.TODO(),
+//	    "project_id",
+//	    "job_id",
+//	)
+func (c *Client) CancelJob(
+	ctx context.Context,
+	projectID string,
+	jobID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CancelJob(
+		ctx,
+		projectID,
+		jobID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

@@ -1,0 +1,105 @@
+from .conftest import get_client, verify_request_count
+
+
+def test_runs_start() -> None:
+    """Test start endpoint with WireMock"""
+    test_id = "runs.start.0"
+    client = get_client(test_id)
+    client.runs.start(
+        project_id="project_id",
+        harness_id="harness_id",
+        input={"key": "value"},
+        policy={"key": "value"},
+        product_context={"key": "value"},
+        tenant_id="tenant_id",
+        user_id="user_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/runs", None, 1)
+
+
+def test_runs_get() -> None:
+    """Test get endpoint with WireMock"""
+    test_id = "runs.get.0"
+    client = get_client(test_id)
+    client.runs.get(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id", None, 1)
+
+
+def test_runs_pending_actions() -> None:
+    """Test pending_actions endpoint with WireMock"""
+    test_id = "runs.pending_actions.0"
+    client = get_client(test_id)
+    client.runs.pending_actions(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/actions", None, 1)
+
+
+def test_runs_cancel() -> None:
+    """Test cancel endpoint with WireMock"""
+    test_id = "runs.cancel.0"
+    client = get_client(test_id)
+    client.runs.cancel(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/cancel", None, 1)
+
+
+def test_runs_events() -> None:
+    """Test events endpoint with WireMock"""
+    test_id = "runs.events.0"
+    client = get_client(test_id)
+    client.runs.events(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/events", None, 1)
+
+
+def test_runs_recover() -> None:
+    """Test recover endpoint with WireMock"""
+    test_id = "runs.recover.0"
+    client = get_client(test_id)
+    client.runs.recover(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/recover", None, 1)
+
+
+def test_runs_decide_approval() -> None:
+    """Test decide_approval endpoint with WireMock"""
+    test_id = "runs.decide_approval.0"
+    client = get_client(test_id)
+    client.runs.decide_approval(
+        project_id="project_id",
+        run_id="run_id",
+        tool_call_id="tool_call_id",
+        decision="approved",
+        idempotency_key="idempotency_key",
+    )
+    verify_request_count(
+        test_id, "POST", "/v1/projects/project_id/runs/run_id/tool-calls/tool_call_id/approval", None, 1
+    )
+
+
+def test_runs_submit_tool_result() -> None:
+    """Test submit_tool_result endpoint with WireMock"""
+    test_id = "runs.submit_tool_result.0"
+    client = get_client(test_id)
+    client.runs.submit_tool_result(
+        project_id="project_id",
+        run_id="run_id",
+        capability_name="capability_name",
+        idempotency_key="idempotency_key",
+        payload={"key": "value"},
+        status="completed",
+        tool_call_id="tool_call_id",
+        tool_provider_id="tool_provider_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/tool-results", None, 1)

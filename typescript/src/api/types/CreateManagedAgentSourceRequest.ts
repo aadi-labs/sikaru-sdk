@@ -1,0 +1,35 @@
+
+export interface CreateManagedAgentSourceRequest {
+    analysisSummary?: Record<string, unknown> | undefined;
+    contentDigest: string;
+    definition?: (Record<string, unknown> | null) | undefined;
+    exportPolicy?: CreateManagedAgentSourceRequest.ExportPolicy | undefined;
+    sourceKind?: CreateManagedAgentSourceRequest.SourceKind | undefined;
+    storageRef?: (string | null) | undefined;
+}
+
+export namespace CreateManagedAgentSourceRequest {
+    export const ExportPolicy = {
+            CustomerSourceExportable: "customer_source_exportable",
+            CustomerSourcePrivate: "customer_source_private",
+            ReferenceOnly: "reference_only"
+        } as const;
+    export type ExportPolicy = typeof ExportPolicy[keyof typeof ExportPolicy];
+    export const SourceKind = {
+            WorkflowJson: "workflow_json",
+            Langgraph: "langgraph",
+            N8NJson: "n8n_json",
+            YamlDag: "yaml_dag",
+            SourceBundle: "source_bundle",
+            RepoRef: "repo_ref",
+            ContainerRef: "container_ref",
+            AdapterEndpoint: "adapter_endpoint",
+            PromptBundle: "prompt_bundle",
+            SkillTree: "skill_tree",
+            MemoryProfile: "memory_profile",
+            EvalSuite: "eval_suite",
+            TraceBundle: "trace_bundle",
+            NaturalLanguage: "natural_language"
+        } as const;
+    export type SourceKind = typeof SourceKind[keyof typeof SourceKind];
+}

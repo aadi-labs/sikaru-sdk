@@ -1,0 +1,289 @@
+
+package api
+
+import (
+	json "encoding/json"
+	fmt "fmt"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	attachSourceToolSkillRequestFieldCapabilityRefs = big.NewInt(1 << 0)
+	attachSourceToolSkillRequestFieldDescription    = big.NewInt(1 << 1)
+	attachSourceToolSkillRequestFieldSource         = big.NewInt(1 << 2)
+)
+
+type AttachSourceToolSkillRequest struct {
+	CapabilityRefs []string                `json:"capability_refs" url:"-"`
+	Description    string                  `json:"description" url:"-"`
+	Source         *ToolSkillSourceRequest `json:"source" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *AttachSourceToolSkillRequest) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetCapabilityRefs sets the CapabilityRefs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachSourceToolSkillRequest) SetCapabilityRefs(capabilityRefs []string) {
+	a.CapabilityRefs = capabilityRefs
+	a.require(attachSourceToolSkillRequestFieldCapabilityRefs)
+}
+
+// SetDescription sets the Description field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachSourceToolSkillRequest) SetDescription(description string) {
+	a.Description = description
+	a.require(attachSourceToolSkillRequestFieldDescription)
+}
+
+// SetSource sets the Source field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachSourceToolSkillRequest) SetSource(source *ToolSkillSourceRequest) {
+	a.Source = source
+	a.require(attachSourceToolSkillRequestFieldSource)
+}
+
+func (a *AttachSourceToolSkillRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler AttachSourceToolSkillRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = AttachSourceToolSkillRequest(body)
+	return nil
+}
+
+func (a *AttachSourceToolSkillRequest) MarshalJSON() ([]byte, error) {
+	type embed AttachSourceToolSkillRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	registerToolProviderRequestFieldApprovalPolicyRef = big.NewInt(1 << 0)
+	registerToolProviderRequestFieldBrokerEndpointRef = big.NewInt(1 << 1)
+	registerToolProviderRequestFieldCapabilityPrefix  = big.NewInt(1 << 2)
+	registerToolProviderRequestFieldCredentialOwner   = big.NewInt(1 << 3)
+	registerToolProviderRequestFieldDisplayName       = big.NewInt(1 << 4)
+	registerToolProviderRequestFieldProviderType      = big.NewInt(1 << 5)
+	registerToolProviderRequestFieldToolCatalogRef    = big.NewInt(1 << 6)
+)
+
+type RegisterToolProviderRequest struct {
+	ApprovalPolicyRef *string `json:"approval_policy_ref,omitempty" url:"-"`
+	BrokerEndpointRef string  `json:"broker_endpoint_ref" url:"-"`
+	CapabilityPrefix  string  `json:"capability_prefix" url:"-"`
+	CredentialOwner   *string `json:"credential_owner,omitempty" url:"-"`
+	DisplayName       string  `json:"display_name" url:"-"`
+	ProviderType      string  `json:"provider_type" url:"-"`
+	ToolCatalogRef    string  `json:"tool_catalog_ref" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (r *RegisterToolProviderRequest) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetApprovalPolicyRef sets the ApprovalPolicyRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetApprovalPolicyRef(approvalPolicyRef *string) {
+	r.ApprovalPolicyRef = approvalPolicyRef
+	r.require(registerToolProviderRequestFieldApprovalPolicyRef)
+}
+
+// SetBrokerEndpointRef sets the BrokerEndpointRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetBrokerEndpointRef(brokerEndpointRef string) {
+	r.BrokerEndpointRef = brokerEndpointRef
+	r.require(registerToolProviderRequestFieldBrokerEndpointRef)
+}
+
+// SetCapabilityPrefix sets the CapabilityPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetCapabilityPrefix(capabilityPrefix string) {
+	r.CapabilityPrefix = capabilityPrefix
+	r.require(registerToolProviderRequestFieldCapabilityPrefix)
+}
+
+// SetCredentialOwner sets the CredentialOwner field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetCredentialOwner(credentialOwner *string) {
+	r.CredentialOwner = credentialOwner
+	r.require(registerToolProviderRequestFieldCredentialOwner)
+}
+
+// SetDisplayName sets the DisplayName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetDisplayName(displayName string) {
+	r.DisplayName = displayName
+	r.require(registerToolProviderRequestFieldDisplayName)
+}
+
+// SetProviderType sets the ProviderType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetProviderType(providerType string) {
+	r.ProviderType = providerType
+	r.require(registerToolProviderRequestFieldProviderType)
+}
+
+// SetToolCatalogRef sets the ToolCatalogRef field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RegisterToolProviderRequest) SetToolCatalogRef(toolCatalogRef string) {
+	r.ToolCatalogRef = toolCatalogRef
+	r.require(registerToolProviderRequestFieldToolCatalogRef)
+}
+
+func (r *RegisterToolProviderRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler RegisterToolProviderRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*r = RegisterToolProviderRequest(body)
+	return nil
+}
+
+func (r *RegisterToolProviderRequest) MarshalJSON() ([]byte, error) {
+	type embed RegisterToolProviderRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	toolSkillSourceRequestFieldContent = big.NewInt(1 << 0)
+	toolSkillSourceRequestFieldKind    = big.NewInt(1 << 1)
+	toolSkillSourceRequestFieldRef     = big.NewInt(1 << 2)
+)
+
+type ToolSkillSourceRequest struct {
+	Content *string `json:"content,omitempty" url:"content,omitempty"`
+	Kind    string  `json:"kind" url:"kind"`
+	Ref     *string `json:"ref,omitempty" url:"ref,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *ToolSkillSourceRequest) GetContent() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Content
+}
+
+func (t *ToolSkillSourceRequest) GetKind() string {
+	if t == nil {
+		return ""
+	}
+	return t.Kind
+}
+
+func (t *ToolSkillSourceRequest) GetRef() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Ref
+}
+
+func (t *ToolSkillSourceRequest) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *ToolSkillSourceRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetContent sets the Content field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *ToolSkillSourceRequest) SetContent(content *string) {
+	t.Content = content
+	t.require(toolSkillSourceRequestFieldContent)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *ToolSkillSourceRequest) SetKind(kind string) {
+	t.Kind = kind
+	t.require(toolSkillSourceRequestFieldKind)
+}
+
+// SetRef sets the Ref field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *ToolSkillSourceRequest) SetRef(ref *string) {
+	t.Ref = ref
+	t.require(toolSkillSourceRequestFieldRef)
+}
+
+func (t *ToolSkillSourceRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ToolSkillSourceRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = ToolSkillSourceRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *ToolSkillSourceRequest) MarshalJSON() ([]byte, error) {
+	type embed ToolSkillSourceRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *ToolSkillSourceRequest) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}

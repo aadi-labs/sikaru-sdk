@@ -1,0 +1,242 @@
+
+package traceimports
+
+import (
+	context "context"
+	os "os"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+)
+
+type Client struct {
+	WithRawResponse *RawClient
+
+	options *core.RequestOptions
+	baseURL string
+	caller  *internal.Caller
+}
+
+func NewClient(options *core.RequestOptions) *Client {
+	if options.APIKey == "" {
+		options.APIKey = os.Getenv("SIKARU_API_KEY")
+	}
+	return &Client{
+		WithRawResponse: NewRawClient(options),
+		options:         options,
+		baseURL:         options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}
+
+// Example:
+//
+//	client.TraceImports.ListTraceImports(
+//	    context.TODO(),
+//	    "project_id",
+//	)
+func (c *Client) ListTraceImports(
+	ctx context.Context,
+	projectID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListTraceImports(
+		ctx,
+		projectID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateTraceImportRequest{
+//	    ConnectionID: "connectionId",
+//	    ConverterVersion: "converterVersion",
+//	    Dataset: "dataset",
+//	    ExternalProjectID: "externalProjectId",
+//	    Mode: _go.CreateTraceImportRequestModeHistorical,
+//	    Provider: _go.CreateTraceImportRequestProviderLangsmith,
+//	    Scope: &_go.TraceImportScopeRequest{},
+//	    SourceInstance: "sourceInstance",
+//	}
+//	client.TraceImports.CreateTraceImport(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) CreateTraceImport(
+	ctx context.Context,
+	projectID string,
+	request *_go.CreateTraceImportRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateTraceImport(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.PlanTraceImportRequest{
+//	    ConnectionID: "connectionId",
+//	    ConverterVersion: "converterVersion",
+//	    Dataset: "dataset",
+//	    ExternalProjectID: "externalProjectId",
+//	    Mode: _go.PlanTraceImportRequestModeHistorical,
+//	    Provider: _go.PlanTraceImportRequestProviderLangsmith,
+//	    Scope: &_go.TraceImportScopeRequest{},
+//	    SourceInstance: "sourceInstance",
+//	}
+//	client.TraceImports.PlanTraceImport(
+//	    context.TODO(),
+//	    "project_id",
+//	    request,
+//	)
+func (c *Client) PlanTraceImport(
+	ctx context.Context,
+	projectID string,
+	request *_go.PlanTraceImportRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.PlanTraceImport(
+		ctx,
+		projectID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.TraceImports.GetTraceImport(
+//	    context.TODO(),
+//	    "project_id",
+//	    "trace_import_id",
+//	)
+func (c *Client) GetTraceImport(
+	ctx context.Context,
+	projectID string,
+	traceImportID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetTraceImport(
+		ctx,
+		projectID,
+		traceImportID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.VersionedTraceImportAction{
+//	    ExpectedVersion: 1,
+//	}
+//	client.TraceImports.CancelTraceImport(
+//	    context.TODO(),
+//	    "project_id",
+//	    "trace_import_id",
+//	    request,
+//	)
+func (c *Client) CancelTraceImport(
+	ctx context.Context,
+	projectID string,
+	traceImportID string,
+	request *_go.VersionedTraceImportAction,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CancelTraceImport(
+		ctx,
+		projectID,
+		traceImportID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.TraceImports.GetTraceImportReceipt(
+//	    context.TODO(),
+//	    "project_id",
+//	    "trace_import_id",
+//	)
+func (c *Client) GetTraceImportReceipt(
+	ctx context.Context,
+	projectID string,
+	traceImportID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetTraceImportReceipt(
+		ctx,
+		projectID,
+		traceImportID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.VersionedTraceImportAction{
+//	    ExpectedVersion: 1,
+//	}
+//	client.TraceImports.RetryTraceImport(
+//	    context.TODO(),
+//	    "project_id",
+//	    "trace_import_id",
+//	    request,
+//	)
+func (c *Client) RetryTraceImport(
+	ctx context.Context,
+	projectID string,
+	traceImportID string,
+	request *_go.VersionedTraceImportAction,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.RetryTraceImport(
+		ctx,
+		projectID,
+		traceImportID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

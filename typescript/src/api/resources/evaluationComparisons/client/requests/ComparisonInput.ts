@@ -1,0 +1,32 @@
+
+import * as Sikaru from "../../../../index.js";
+
+/**
+ * @example
+ *     {
+ *         cases: [{
+ *                 baseline: {
+ *                     accountId: "accountId",
+ *                     conversationId: "conversationId",
+ *                     messageId: "messageId"
+ *                 },
+ *                 candidate: {
+ *                     accountId: "accountId",
+ *                     conversationId: "conversationId",
+ *                     messageId: "messageId"
+ *                 },
+ *                 caseId: "caseId"
+ *             }],
+ *         evaluator: "evaluator",
+ *         id: "id",
+ *         revision: "revision",
+ *         rubric: "rubric"
+ *     }
+ */
+export interface ComparisonInput {
+    cases: Sikaru.CaseInput[];
+    evaluator: string;
+    id: string;
+    revision: string;
+    rubric: string;
+}

@@ -1,0 +1,17 @@
+
+export interface AgentImportSourceRefRequest {
+    contentDigest: string;
+    exportPolicy?: AgentImportSourceRefRequest.ExportPolicy | undefined;
+    metadata?: Record<string, unknown> | undefined;
+    role: string;
+    storageRef: string;
+}
+
+export namespace AgentImportSourceRefRequest {
+    export const ExportPolicy = {
+            CustomerSourceExportable: "customer_source_exportable",
+            CustomerSourcePrivate: "customer_source_private",
+            ReferenceOnly: "reference_only"
+        } as const;
+    export type ExportPolicy = typeof ExportPolicy[keyof typeof ExportPolicy];
+}

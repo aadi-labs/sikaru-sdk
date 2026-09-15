@@ -1,0 +1,242 @@
+
+package sessions
+
+import (
+	context "context"
+	os "os"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+)
+
+type Client struct {
+	WithRawResponse *RawClient
+
+	options *core.RequestOptions
+	baseURL string
+	caller  *internal.Caller
+}
+
+func NewClient(options *core.RequestOptions) *Client {
+	if options.APIKey == "" {
+		options.APIKey = os.Getenv("SIKARU_API_KEY")
+	}
+	return &Client{
+		WithRawResponse: NewRawClient(options),
+		options:         options,
+		baseURL:         options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}
+
+// Example:
+//
+//	client.Sessions.GetManagedSession(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	)
+func (c *Client) GetManagedSession(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.GetManagedSession(
+		ctx,
+		projectID,
+		sessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ListManagedSessionEventsSessionsRequest{}
+//	client.Sessions.ListManagedSessionEvents(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	    request,
+//	)
+func (c *Client) ListManagedSessionEvents(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	request *_go.ListManagedSessionEventsSessionsRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListManagedSessionEvents(
+		ctx,
+		projectID,
+		sessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Sessions.ListManagedSessionFiles(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	)
+func (c *Client) ListManagedSessionFiles(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListManagedSessionFiles(
+		ctx,
+		projectID,
+		sessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateManagedInterpreterRequest{
+//	    Language: "language",
+//	}
+//	client.Sessions.CreateManagedInterpreter(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	    request,
+//	)
+func (c *Client) CreateManagedInterpreter(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	request *_go.CreateManagedInterpreterRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.CreateManagedInterpreter(
+		ctx,
+		projectID,
+		sessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.ExecuteManagedInterpreterRequest{
+//	    Code: "code",
+//	    TimeoutSeconds: 1,
+//	}
+//	client.Sessions.ExecuteManagedInterpreter(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	    "interpreter_id",
+//	    request,
+//	)
+func (c *Client) ExecuteManagedInterpreter(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	interpreterID string,
+	request *_go.ExecuteManagedInterpreterRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ExecuteManagedInterpreter(
+		ctx,
+		projectID,
+		sessionID,
+		interpreterID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Sessions.ListManagedSessionPlan(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	)
+func (c *Client) ListManagedSessionPlan(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.ListManagedSessionPlan(
+		ctx,
+		projectID,
+		sessionID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.CreateSandboxExecutionRequest{
+//	    ContextPackageRef: "contextPackageRef",
+//	    IdempotencyKey: "idempotencyKey",
+//	    TimeoutSeconds: 1,
+//	    WorkflowRef: "workflowRef",
+//	}
+//	client.Sessions.StartManagedSandboxExecution(
+//	    context.TODO(),
+//	    "project_id",
+//	    "session_id",
+//	    request,
+//	)
+func (c *Client) StartManagedSandboxExecution(
+	ctx context.Context,
+	projectID string,
+	sessionID string,
+	request *_go.CreateSandboxExecutionRequest,
+	opts ...option.RequestOption,
+) (map[string]any, error) {
+	response, err := c.WithRawResponse.StartManagedSandboxExecution(
+		ctx,
+		projectID,
+		sessionID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}

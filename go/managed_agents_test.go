@@ -1,0 +1,969 @@
+
+package api
+
+import (
+	json "encoding/json"
+	assert "github.com/stretchr/testify/assert"
+	require "github.com/stretchr/testify/require"
+	testing "testing"
+)
+
+func TestSettersCreateManagedAgentRequest(t *testing.T) {
+	t.Run("SetActiveHarnessVersionID", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueActiveHarnessVersionID *string
+		obj.SetActiveHarnessVersionID(fernTestValueActiveHarnessVersionID)
+		assert.Equal(t, fernTestValueActiveHarnessVersionID, obj.ActiveHarnessVersionID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetAgentSlug", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueAgentSlug string
+		obj.SetAgentSlug(fernTestValueAgentSlug)
+		assert.Equal(t, fernTestValueAgentSlug, obj.AgentSlug)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetCompatibilityProfileID", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueCompatibilityProfileID *string
+		obj.SetCompatibilityProfileID(fernTestValueCompatibilityProfileID)
+		assert.Equal(t, fernTestValueCompatibilityProfileID, obj.CompatibilityProfileID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDisplayName", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueDisplayName *string
+		obj.SetDisplayName(fernTestValueDisplayName)
+		assert.Equal(t, fernTestValueDisplayName, obj.DisplayName)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetHarnessID", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueHarnessID *string
+		obj.SetHarnessID(fernTestValueHarnessID)
+		assert.Equal(t, fernTestValueHarnessID, obj.HarnessID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSource", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueSource *CreateManagedAgentSourceRequest
+		obj.SetSource(fernTestValueSource)
+		assert.Equal(t, fernTestValueSource, obj.Source)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueStatus *CreateManagedAgentRequestStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestSettersMarkExplicitCreateManagedAgentRequest(t *testing.T) {
+	t.Run("SetActiveHarnessVersionID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueActiveHarnessVersionID *string
+
+		// Act
+		obj.SetActiveHarnessVersionID(fernTestValueActiveHarnessVersionID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetAgentSlug_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueAgentSlug string
+
+		// Act
+		obj.SetAgentSlug(fernTestValueAgentSlug)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetCompatibilityProfileID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueCompatibilityProfileID *string
+
+		// Act
+		obj.SetCompatibilityProfileID(fernTestValueCompatibilityProfileID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDisplayName_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueDisplayName *string
+
+		// Act
+		obj.SetDisplayName(fernTestValueDisplayName)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetHarnessID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueHarnessID *string
+
+		// Act
+		obj.SetHarnessID(fernTestValueHarnessID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSource_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueSource *CreateManagedAgentSourceRequest
+
+		// Act
+		obj.SetSource(fernTestValueSource)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentRequest{}
+		var fernTestValueStatus *CreateManagedAgentRequestStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestSettersCreateManagedAgentSourceRequest(t *testing.T) {
+	t.Run("SetAnalysisSummary", func(t *testing.T) {
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueAnalysisSummary map[string]any
+		obj.SetAnalysisSummary(fernTestValueAnalysisSummary)
+		assert.Equal(t, fernTestValueAnalysisSummary, obj.AnalysisSummary)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetContentDigest", func(t *testing.T) {
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueContentDigest string
+		obj.SetContentDigest(fernTestValueContentDigest)
+		assert.Equal(t, fernTestValueContentDigest, obj.ContentDigest)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetDefinition", func(t *testing.T) {
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueDefinition map[string]any
+		obj.SetDefinition(fernTestValueDefinition)
+		assert.Equal(t, fernTestValueDefinition, obj.Definition)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetExportPolicy", func(t *testing.T) {
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueExportPolicy *CreateManagedAgentSourceRequestExportPolicy
+		obj.SetExportPolicy(fernTestValueExportPolicy)
+		assert.Equal(t, fernTestValueExportPolicy, obj.ExportPolicy)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetSourceKind", func(t *testing.T) {
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueSourceKind *CreateManagedAgentSourceRequestSourceKind
+		obj.SetSourceKind(fernTestValueSourceKind)
+		assert.Equal(t, fernTestValueSourceKind, obj.SourceKind)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStorageRef", func(t *testing.T) {
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueStorageRef *string
+		obj.SetStorageRef(fernTestValueStorageRef)
+		assert.Equal(t, fernTestValueStorageRef, obj.StorageRef)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersCreateManagedAgentSourceRequest(t *testing.T) {
+	t.Run("GetAnalysisSummary", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var expected map[string]any
+		obj.AnalysisSummary = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetAnalysisSummary(), "getter should return the property value")
+	})
+
+	t.Run("GetAnalysisSummary_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		obj.AnalysisSummary = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetAnalysisSummary(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetAnalysisSummary_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetAnalysisSummary() // Should return zero value
+	})
+
+	t.Run("GetContentDigest", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var expected string
+		obj.ContentDigest = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetContentDigest(), "getter should return the property value")
+	})
+
+	t.Run("GetContentDigest_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetContentDigest() // Should return zero value
+	})
+
+	t.Run("GetDefinition", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var expected map[string]any
+		obj.Definition = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetDefinition(), "getter should return the property value")
+	})
+
+	t.Run("GetDefinition_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		obj.Definition = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetDefinition(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetDefinition_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetDefinition() // Should return zero value
+	})
+
+	t.Run("GetExportPolicy", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var expected *CreateManagedAgentSourceRequestExportPolicy
+		obj.ExportPolicy = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetExportPolicy(), "getter should return the property value")
+	})
+
+	t.Run("GetExportPolicy_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		obj.ExportPolicy = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetExportPolicy(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetExportPolicy_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetExportPolicy() // Should return zero value
+	})
+
+	t.Run("GetSourceKind", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var expected *CreateManagedAgentSourceRequestSourceKind
+		obj.SourceKind = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetSourceKind(), "getter should return the property value")
+	})
+
+	t.Run("GetSourceKind_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		obj.SourceKind = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetSourceKind(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetSourceKind_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetSourceKind() // Should return zero value
+	})
+
+	t.Run("GetStorageRef", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var expected *string
+		obj.StorageRef = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStorageRef(), "getter should return the property value")
+	})
+
+	t.Run("GetStorageRef_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		obj.StorageRef = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetStorageRef(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetStorageRef_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStorageRef() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitCreateManagedAgentSourceRequest(t *testing.T) {
+	t.Run("SetAnalysisSummary_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueAnalysisSummary map[string]any
+
+		// Act
+		obj.SetAnalysisSummary(fernTestValueAnalysisSummary)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetContentDigest_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueContentDigest string
+
+		// Act
+		obj.SetContentDigest(fernTestValueContentDigest)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetDefinition_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueDefinition map[string]any
+
+		// Act
+		obj.SetDefinition(fernTestValueDefinition)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetExportPolicy_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueExportPolicy *CreateManagedAgentSourceRequestExportPolicy
+
+		// Act
+		obj.SetExportPolicy(fernTestValueExportPolicy)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetSourceKind_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueSourceKind *CreateManagedAgentSourceRequestSourceKind
+
+		// Act
+		obj.SetSourceKind(fernTestValueSourceKind)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStorageRef_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+		var fernTestValueStorageRef *string
+
+		// Act
+		obj.SetStorageRef(fernTestValueStorageRef)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
+func TestJSONMarshalingCreateManagedAgentSourceRequest(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &CreateManagedAgentSourceRequest{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled CreateManagedAgentSourceRequest
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateManagedAgentSourceRequest
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj CreateManagedAgentSourceRequest
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
+func TestStringCreateManagedAgentSourceRequest(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateManagedAgentSourceRequest{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestEnumCreateManagedAgentRequestStatus(t *testing.T) {
+	t.Run("NewFromString_active", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentRequestStatusFromString("active")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentRequestStatus("active"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_inactive", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentRequestStatusFromString("inactive")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentRequestStatus("inactive"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateManagedAgentRequestStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateManagedAgentRequestStatusFromString("active")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCreateManagedAgentSourceRequestExportPolicy(t *testing.T) {
+	t.Run("NewFromString_customer_source_exportable", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestExportPolicyFromString("customer_source_exportable")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestExportPolicy("customer_source_exportable"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_customer_source_private", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestExportPolicyFromString("customer_source_private")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestExportPolicy("customer_source_private"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_reference_only", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestExportPolicyFromString("reference_only")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestExportPolicy("reference_only"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateManagedAgentSourceRequestExportPolicyFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateManagedAgentSourceRequestExportPolicyFromString("customer_source_exportable")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumCreateManagedAgentSourceRequestSourceKind(t *testing.T) {
+	t.Run("NewFromString_workflow_json", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("workflow_json")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("workflow_json"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_langgraph", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("langgraph")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("langgraph"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_n8n_json", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("n8n_json")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("n8n_json"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_yaml_dag", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("yaml_dag")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("yaml_dag"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_source_bundle", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("source_bundle")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("source_bundle"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_repo_ref", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("repo_ref")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("repo_ref"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_container_ref", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("container_ref")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("container_ref"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_adapter_endpoint", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("adapter_endpoint")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("adapter_endpoint"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_prompt_bundle", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("prompt_bundle")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("prompt_bundle"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_skill_tree", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("skill_tree")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("skill_tree"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_memory_profile", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("memory_profile")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("memory_profile"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_eval_suite", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("eval_suite")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("eval_suite"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_trace_bundle", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("trace_bundle")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("trace_bundle"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_natural_language", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("natural_language")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, CreateManagedAgentSourceRequestSourceKind("natural_language"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewCreateManagedAgentSourceRequestSourceKindFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewCreateManagedAgentSourceRequestSourceKindFromString("workflow_json")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestExtraPropertiesCreateManagedAgentSourceRequest(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &CreateManagedAgentSourceRequest{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *CreateManagedAgentSourceRequest
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}

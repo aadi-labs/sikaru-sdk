@@ -1,0 +1,1021 @@
+
+from __future__ import annotations
+
+import os
+import typing
+
+import httpx
+from .core.api_error import ApiError
+from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
+from .core.logging import LogConfig, Logger
+from .environment import SikaruEnvironment
+
+if typing.TYPE_CHECKING:
+    from .activation.client import ActivationClient, AsyncActivationClient
+    from .agent_imports.client import AgentImportsClient, AsyncAgentImportsClient
+    from .agents.client import AgentsClient, AsyncAgentsClient
+    from .changesets.client import AsyncChangesetsClient, ChangesetsClient
+    from .context_registry.client import AsyncContextRegistryClient, ContextRegistryClient
+    from .conversations.client import AsyncConversationsClient, ConversationsClient
+    from .deployments.client import AsyncDeploymentsClient, DeploymentsClient
+    from .environments.client import AsyncEnvironmentsClient, EnvironmentsClient
+    from .eval_seeds.client import AsyncEvalSeedsClient, EvalSeedsClient
+    from .evaluation_comparisons.client import AsyncEvaluationComparisonsClient, EvaluationComparisonsClient
+    from .evaluation_criteria.client import AsyncEvaluationCriteriaClient, EvaluationCriteriaClient
+    from .evaluation_jobs.client import AsyncEvaluationJobsClient, EvaluationJobsClient
+    from .evaluation_results.client import AsyncEvaluationResultsClient, EvaluationResultsClient
+    from .evaluator_runs.client import AsyncEvaluatorRunsClient, EvaluatorRunsClient
+    from .execution_objectives.client import AsyncExecutionObjectivesClient, ExecutionObjectivesClient
+    from .execution_sessions.client import AsyncExecutionSessionsClient, ExecutionSessionsClient
+    from .executions.client import AsyncExecutionsClient, ExecutionsClient
+    from .feedback.client import AsyncFeedbackClient, FeedbackClient
+    from .harness_versions.client import AsyncHarnessVersionsClient, HarnessVersionsClient
+    from .harnesses.client import AsyncHarnessesClient, HarnessesClient
+    from .import_sessions.client import AsyncImportSessionsClient, ImportSessionsClient
+    from .issue_clusters.client import AsyncIssueClustersClient, IssueClustersClient
+    from .judge_alignment.client import AsyncJudgeAlignmentClient, JudgeAlignmentClient
+    from .managed_agents.client import AsyncManagedAgentsClient, ManagedAgentsClient
+    from .memory_registry.client import AsyncMemoryRegistryClient, MemoryRegistryClient
+    from .model_gateway.client import AsyncModelGatewayClient, ModelGatewayClient
+    from .model_settings.client import AsyncModelSettingsClient, ModelSettingsClient
+    from .online_evaluations.client import AsyncOnlineEvaluationsClient, OnlineEvaluationsClient
+    from .release_watches.client import AsyncReleaseWatchesClient, ReleaseWatchesClient
+    from .retention_policies.client import AsyncRetentionPoliciesClient, RetentionPoliciesClient
+    from .review_queue.client import AsyncReviewQueueClient, ReviewQueueClient
+    from .run_schedules.client import AsyncRunSchedulesClient, RunSchedulesClient
+    from .run_webhooks.client import AsyncRunWebhooksClient, RunWebhooksClient
+    from .runs.client import AsyncRunsClient, RunsClient
+    from .sessions.client import AsyncSessionsClient, SessionsClient
+    from .tool_providers.client import AsyncToolProvidersClient, ToolProvidersClient
+    from .trace_import_connections.client import AsyncTraceImportConnectionsClient, TraceImportConnectionsClient
+    from .trace_imports.client import AsyncTraceImportsClient, TraceImportsClient
+    from .trace_streams.client import AsyncTraceStreamsClient, TraceStreamsClient
+    from .workflow_intents.client import AsyncWorkflowIntentsClient, WorkflowIntentsClient
+    from .workflow_runs.client import AsyncWorkflowRunsClient, WorkflowRunsClient
+    from .workflows.client import AsyncWorkflowsClient, WorkflowsClient
+
+
+class SikaruApi:
+    """
+    Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
+
+    Parameters
+    ----------
+    base_url : typing.Optional[str]
+        The base url to use for requests from the client.
+
+    environment : SikaruEnvironment
+        The environment to use for requests from the client. from .environment import SikaruEnvironment
+
+
+
+        Defaults to SikaruEnvironment.DEFAULT
+
+
+
+    api_key : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
+    headers : typing.Optional[typing.Dict[str, str]]
+        Additional headers to send with every request.
+
+    timeout : typing.Optional[float]
+        The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
+
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
+
+    stream_reconnection_enabled : typing.Optional[bool]
+        Whether to automatically reconnect on stream disconnection for resumable streaming endpoints. Defaults to True. Per-request `stream_reconnection_enabled` in `request_options` takes precedence over this value.
+
+    max_stream_reconnection_attempts : typing.Optional[int]
+        The maximum number of reconnection attempts for resumable streaming endpoints. Defaults to no limit. Per-request `max_stream_reconnection_attempts` in `request_options` takes precedence over this value.
+
+    follow_redirects : typing.Optional[bool]
+        Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
+
+    httpx_client : typing.Optional[httpx.Client]
+        The httpx client to use for making requests, a preconfigured client is used by default, however this is useful should you want to pass in any custom httpx configuration.
+
+    logging : typing.Optional[typing.Union[LogConfig, Logger]]
+        Configure logging for the SDK. Accepts a LogConfig dict with 'level' (debug/info/warn/error), 'logger' (custom logger implementation), and 'silent' (boolean, defaults to True) fields. You can also pass a pre-configured Logger instance.
+
+    Examples
+    --------
+    from sikaru_api import SikaruApi
+
+    client = SikaruApi(
+        api_key="YOUR_API_KEY",
+    )
+    """
+
+    def __init__(
+        self,
+        *,
+        base_url: typing.Optional[str] = None,
+        environment: SikaruEnvironment = SikaruEnvironment.DEFAULT,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = os.getenv("SIKARU_API_KEY"),
+        headers: typing.Optional[typing.Dict[str, str]] = None,
+        timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
+        stream_reconnection_enabled: typing.Optional[bool] = None,
+        max_stream_reconnection_attempts: typing.Optional[int] = None,
+        follow_redirects: typing.Optional[bool] = True,
+        httpx_client: typing.Optional[httpx.Client] = None,
+        logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
+    ):
+        _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
+        _defaulted_max_retries = max_retries if max_retries is not None else 2
+        if api_key is None:
+            raise ApiError(
+                body="The client must be instantiated be either passing in api_key or setting SIKARU_API_KEY"
+            )
+        self._client_wrapper = SyncClientWrapper(
+            base_url=_get_base_url(base_url=base_url, environment=environment),
+            api_key=api_key,
+            headers=headers,
+            httpx_client=httpx_client
+            if httpx_client is not None
+            else httpx.Client(timeout=_defaulted_timeout, follow_redirects=follow_redirects)
+            if follow_redirects is not None
+            else httpx.Client(timeout=_defaulted_timeout),
+            timeout=_defaulted_timeout,
+            max_retries=_defaulted_max_retries,
+            stream_reconnection_enabled=stream_reconnection_enabled,
+            max_stream_reconnection_attempts=max_stream_reconnection_attempts,
+            logging=logging,
+        )
+        self._activation: typing.Optional[ActivationClient] = None
+        self._agent_imports: typing.Optional[AgentImportsClient] = None
+        self._agents: typing.Optional[AgentsClient] = None
+        self._changesets: typing.Optional[ChangesetsClient] = None
+        self._context_registry: typing.Optional[ContextRegistryClient] = None
+        self._conversations: typing.Optional[ConversationsClient] = None
+        self._deployments: typing.Optional[DeploymentsClient] = None
+        self._environments: typing.Optional[EnvironmentsClient] = None
+        self._eval_seeds: typing.Optional[EvalSeedsClient] = None
+        self._evaluation_comparisons: typing.Optional[EvaluationComparisonsClient] = None
+        self._evaluation_criteria: typing.Optional[EvaluationCriteriaClient] = None
+        self._evaluation_jobs: typing.Optional[EvaluationJobsClient] = None
+        self._evaluation_results: typing.Optional[EvaluationResultsClient] = None
+        self._evaluator_runs: typing.Optional[EvaluatorRunsClient] = None
+        self._execution_objectives: typing.Optional[ExecutionObjectivesClient] = None
+        self._execution_sessions: typing.Optional[ExecutionSessionsClient] = None
+        self._executions: typing.Optional[ExecutionsClient] = None
+        self._feedback: typing.Optional[FeedbackClient] = None
+        self._harness_versions: typing.Optional[HarnessVersionsClient] = None
+        self._harnesses: typing.Optional[HarnessesClient] = None
+        self._runs: typing.Optional[RunsClient] = None
+        self._import_sessions: typing.Optional[ImportSessionsClient] = None
+        self._issue_clusters: typing.Optional[IssueClustersClient] = None
+        self._judge_alignment: typing.Optional[JudgeAlignmentClient] = None
+        self._managed_agents: typing.Optional[ManagedAgentsClient] = None
+        self._memory_registry: typing.Optional[MemoryRegistryClient] = None
+        self._model_gateway: typing.Optional[ModelGatewayClient] = None
+        self._model_settings: typing.Optional[ModelSettingsClient] = None
+        self._online_evaluations: typing.Optional[OnlineEvaluationsClient] = None
+        self._release_watches: typing.Optional[ReleaseWatchesClient] = None
+        self._retention_policies: typing.Optional[RetentionPoliciesClient] = None
+        self._review_queue: typing.Optional[ReviewQueueClient] = None
+        self._run_schedules: typing.Optional[RunSchedulesClient] = None
+        self._run_webhooks: typing.Optional[RunWebhooksClient] = None
+        self._sessions: typing.Optional[SessionsClient] = None
+        self._tool_providers: typing.Optional[ToolProvidersClient] = None
+        self._trace_import_connections: typing.Optional[TraceImportConnectionsClient] = None
+        self._trace_imports: typing.Optional[TraceImportsClient] = None
+        self._workflow_intents: typing.Optional[WorkflowIntentsClient] = None
+        self._workflow_runs: typing.Optional[WorkflowRunsClient] = None
+        self._workflows: typing.Optional[WorkflowsClient] = None
+        self._trace_streams: typing.Optional[TraceStreamsClient] = None
+
+    @property
+    def activation(self):
+        if self._activation is None:
+            from .activation.client import ActivationClient  # noqa: E402
+
+            self._activation = ActivationClient(client_wrapper=self._client_wrapper)
+        return self._activation
+
+    @property
+    def agent_imports(self):
+        if self._agent_imports is None:
+            from .agent_imports.client import AgentImportsClient  # noqa: E402
+
+            self._agent_imports = AgentImportsClient(client_wrapper=self._client_wrapper)
+        return self._agent_imports
+
+    @property
+    def agents(self):
+        if self._agents is None:
+            from .agents.client import AgentsClient  # noqa: E402
+
+            self._agents = AgentsClient(client_wrapper=self._client_wrapper)
+        return self._agents
+
+    @property
+    def changesets(self):
+        if self._changesets is None:
+            from .changesets.client import ChangesetsClient  # noqa: E402
+
+            self._changesets = ChangesetsClient(client_wrapper=self._client_wrapper)
+        return self._changesets
+
+    @property
+    def context_registry(self):
+        if self._context_registry is None:
+            from .context_registry.client import ContextRegistryClient  # noqa: E402
+
+            self._context_registry = ContextRegistryClient(client_wrapper=self._client_wrapper)
+        return self._context_registry
+
+    @property
+    def conversations(self):
+        if self._conversations is None:
+            from .conversations.client import ConversationsClient  # noqa: E402
+
+            self._conversations = ConversationsClient(client_wrapper=self._client_wrapper)
+        return self._conversations
+
+    @property
+    def deployments(self):
+        if self._deployments is None:
+            from .deployments.client import DeploymentsClient  # noqa: E402
+
+            self._deployments = DeploymentsClient(client_wrapper=self._client_wrapper)
+        return self._deployments
+
+    @property
+    def environments(self):
+        if self._environments is None:
+            from .environments.client import EnvironmentsClient  # noqa: E402
+
+            self._environments = EnvironmentsClient(client_wrapper=self._client_wrapper)
+        return self._environments
+
+    @property
+    def eval_seeds(self):
+        if self._eval_seeds is None:
+            from .eval_seeds.client import EvalSeedsClient  # noqa: E402
+
+            self._eval_seeds = EvalSeedsClient(client_wrapper=self._client_wrapper)
+        return self._eval_seeds
+
+    @property
+    def evaluation_comparisons(self):
+        if self._evaluation_comparisons is None:
+            from .evaluation_comparisons.client import EvaluationComparisonsClient  # noqa: E402
+
+            self._evaluation_comparisons = EvaluationComparisonsClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_comparisons
+
+    @property
+    def evaluation_criteria(self):
+        if self._evaluation_criteria is None:
+            from .evaluation_criteria.client import EvaluationCriteriaClient  # noqa: E402
+
+            self._evaluation_criteria = EvaluationCriteriaClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_criteria
+
+    @property
+    def evaluation_jobs(self):
+        if self._evaluation_jobs is None:
+            from .evaluation_jobs.client import EvaluationJobsClient  # noqa: E402
+
+            self._evaluation_jobs = EvaluationJobsClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_jobs
+
+    @property
+    def evaluation_results(self):
+        if self._evaluation_results is None:
+            from .evaluation_results.client import EvaluationResultsClient  # noqa: E402
+
+            self._evaluation_results = EvaluationResultsClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_results
+
+    @property
+    def evaluator_runs(self):
+        if self._evaluator_runs is None:
+            from .evaluator_runs.client import EvaluatorRunsClient  # noqa: E402
+
+            self._evaluator_runs = EvaluatorRunsClient(client_wrapper=self._client_wrapper)
+        return self._evaluator_runs
+
+    @property
+    def execution_objectives(self):
+        if self._execution_objectives is None:
+            from .execution_objectives.client import ExecutionObjectivesClient  # noqa: E402
+
+            self._execution_objectives = ExecutionObjectivesClient(client_wrapper=self._client_wrapper)
+        return self._execution_objectives
+
+    @property
+    def execution_sessions(self):
+        if self._execution_sessions is None:
+            from .execution_sessions.client import ExecutionSessionsClient  # noqa: E402
+
+            self._execution_sessions = ExecutionSessionsClient(client_wrapper=self._client_wrapper)
+        return self._execution_sessions
+
+    @property
+    def executions(self):
+        if self._executions is None:
+            from .executions.client import ExecutionsClient  # noqa: E402
+
+            self._executions = ExecutionsClient(client_wrapper=self._client_wrapper)
+        return self._executions
+
+    @property
+    def feedback(self):
+        if self._feedback is None:
+            from .feedback.client import FeedbackClient  # noqa: E402
+
+            self._feedback = FeedbackClient(client_wrapper=self._client_wrapper)
+        return self._feedback
+
+    @property
+    def harness_versions(self):
+        if self._harness_versions is None:
+            from .harness_versions.client import HarnessVersionsClient  # noqa: E402
+
+            self._harness_versions = HarnessVersionsClient(client_wrapper=self._client_wrapper)
+        return self._harness_versions
+
+    @property
+    def harnesses(self):
+        if self._harnesses is None:
+            from .harnesses.client import HarnessesClient  # noqa: E402
+
+            self._harnesses = HarnessesClient(client_wrapper=self._client_wrapper)
+        return self._harnesses
+
+    @property
+    def runs(self):
+        if self._runs is None:
+            from .runs.client import RunsClient  # noqa: E402
+
+            self._runs = RunsClient(client_wrapper=self._client_wrapper)
+        return self._runs
+
+    @property
+    def import_sessions(self):
+        if self._import_sessions is None:
+            from .import_sessions.client import ImportSessionsClient  # noqa: E402
+
+            self._import_sessions = ImportSessionsClient(client_wrapper=self._client_wrapper)
+        return self._import_sessions
+
+    @property
+    def issue_clusters(self):
+        if self._issue_clusters is None:
+            from .issue_clusters.client import IssueClustersClient  # noqa: E402
+
+            self._issue_clusters = IssueClustersClient(client_wrapper=self._client_wrapper)
+        return self._issue_clusters
+
+    @property
+    def judge_alignment(self):
+        if self._judge_alignment is None:
+            from .judge_alignment.client import JudgeAlignmentClient  # noqa: E402
+
+            self._judge_alignment = JudgeAlignmentClient(client_wrapper=self._client_wrapper)
+        return self._judge_alignment
+
+    @property
+    def managed_agents(self):
+        if self._managed_agents is None:
+            from .managed_agents.client import ManagedAgentsClient  # noqa: E402
+
+            self._managed_agents = ManagedAgentsClient(client_wrapper=self._client_wrapper)
+        return self._managed_agents
+
+    @property
+    def memory_registry(self):
+        if self._memory_registry is None:
+            from .memory_registry.client import MemoryRegistryClient  # noqa: E402
+
+            self._memory_registry = MemoryRegistryClient(client_wrapper=self._client_wrapper)
+        return self._memory_registry
+
+    @property
+    def model_gateway(self):
+        if self._model_gateway is None:
+            from .model_gateway.client import ModelGatewayClient  # noqa: E402
+
+            self._model_gateway = ModelGatewayClient(client_wrapper=self._client_wrapper)
+        return self._model_gateway
+
+    @property
+    def model_settings(self):
+        if self._model_settings is None:
+            from .model_settings.client import ModelSettingsClient  # noqa: E402
+
+            self._model_settings = ModelSettingsClient(client_wrapper=self._client_wrapper)
+        return self._model_settings
+
+    @property
+    def online_evaluations(self):
+        if self._online_evaluations is None:
+            from .online_evaluations.client import OnlineEvaluationsClient  # noqa: E402
+
+            self._online_evaluations = OnlineEvaluationsClient(client_wrapper=self._client_wrapper)
+        return self._online_evaluations
+
+    @property
+    def release_watches(self):
+        if self._release_watches is None:
+            from .release_watches.client import ReleaseWatchesClient  # noqa: E402
+
+            self._release_watches = ReleaseWatchesClient(client_wrapper=self._client_wrapper)
+        return self._release_watches
+
+    @property
+    def retention_policies(self):
+        if self._retention_policies is None:
+            from .retention_policies.client import RetentionPoliciesClient  # noqa: E402
+
+            self._retention_policies = RetentionPoliciesClient(client_wrapper=self._client_wrapper)
+        return self._retention_policies
+
+    @property
+    def review_queue(self):
+        if self._review_queue is None:
+            from .review_queue.client import ReviewQueueClient  # noqa: E402
+
+            self._review_queue = ReviewQueueClient(client_wrapper=self._client_wrapper)
+        return self._review_queue
+
+    @property
+    def run_schedules(self):
+        if self._run_schedules is None:
+            from .run_schedules.client import RunSchedulesClient  # noqa: E402
+
+            self._run_schedules = RunSchedulesClient(client_wrapper=self._client_wrapper)
+        return self._run_schedules
+
+    @property
+    def run_webhooks(self):
+        if self._run_webhooks is None:
+            from .run_webhooks.client import RunWebhooksClient  # noqa: E402
+
+            self._run_webhooks = RunWebhooksClient(client_wrapper=self._client_wrapper)
+        return self._run_webhooks
+
+    @property
+    def sessions(self):
+        if self._sessions is None:
+            from .sessions.client import SessionsClient  # noqa: E402
+
+            self._sessions = SessionsClient(client_wrapper=self._client_wrapper)
+        return self._sessions
+
+    @property
+    def tool_providers(self):
+        if self._tool_providers is None:
+            from .tool_providers.client import ToolProvidersClient  # noqa: E402
+
+            self._tool_providers = ToolProvidersClient(client_wrapper=self._client_wrapper)
+        return self._tool_providers
+
+    @property
+    def trace_import_connections(self):
+        if self._trace_import_connections is None:
+            from .trace_import_connections.client import TraceImportConnectionsClient  # noqa: E402
+
+            self._trace_import_connections = TraceImportConnectionsClient(client_wrapper=self._client_wrapper)
+        return self._trace_import_connections
+
+    @property
+    def trace_imports(self):
+        if self._trace_imports is None:
+            from .trace_imports.client import TraceImportsClient  # noqa: E402
+
+            self._trace_imports = TraceImportsClient(client_wrapper=self._client_wrapper)
+        return self._trace_imports
+
+    @property
+    def workflow_intents(self):
+        if self._workflow_intents is None:
+            from .workflow_intents.client import WorkflowIntentsClient  # noqa: E402
+
+            self._workflow_intents = WorkflowIntentsClient(client_wrapper=self._client_wrapper)
+        return self._workflow_intents
+
+    @property
+    def workflow_runs(self):
+        if self._workflow_runs is None:
+            from .workflow_runs.client import WorkflowRunsClient  # noqa: E402
+
+            self._workflow_runs = WorkflowRunsClient(client_wrapper=self._client_wrapper)
+        return self._workflow_runs
+
+    @property
+    def workflows(self):
+        if self._workflows is None:
+            from .workflows.client import WorkflowsClient  # noqa: E402
+
+            self._workflows = WorkflowsClient(client_wrapper=self._client_wrapper)
+        return self._workflows
+
+    @property
+    def trace_streams(self):
+        if self._trace_streams is None:
+            from .trace_streams.client import TraceStreamsClient  # noqa: E402
+
+            self._trace_streams = TraceStreamsClient(client_wrapper=self._client_wrapper)
+        return self._trace_streams
+
+
+def _make_default_async_client(
+    timeout: typing.Optional[float],
+    follow_redirects: typing.Optional[bool],
+) -> httpx.AsyncClient:
+    try:
+        import httpx_aiohttp  # type: ignore[import-not-found]
+    except ImportError:
+        pass
+    else:
+        if follow_redirects is not None:
+            return httpx_aiohttp.HttpxAiohttpClient(timeout=timeout, follow_redirects=follow_redirects)
+        return httpx_aiohttp.HttpxAiohttpClient(timeout=timeout)
+
+    if follow_redirects is not None:
+        return httpx.AsyncClient(timeout=timeout, follow_redirects=follow_redirects)
+    return httpx.AsyncClient(timeout=timeout)
+
+
+class AsyncSikaruApi:
+    """
+    Use this class to access the different functions within the SDK. You can instantiate any number of clients with different configuration that will propagate to these functions.
+
+    Parameters
+    ----------
+    base_url : typing.Optional[str]
+        The base url to use for requests from the client.
+
+    environment : SikaruEnvironment
+        The environment to use for requests from the client. from .environment import SikaruEnvironment
+
+
+
+        Defaults to SikaruEnvironment.DEFAULT
+
+
+
+    api_key : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
+    headers : typing.Optional[typing.Dict[str, str]]
+        Additional headers to send with every request.
+
+    async_token : typing.Optional[typing.Callable[[], typing.Awaitable[str]]]
+        An async callable that returns a bearer token. Use this when token acquisition involves async I/O (e.g., refreshing tokens via an async HTTP client). When provided, this is used instead of the synchronous token for async requests.
+
+    timeout : typing.Optional[float]
+        The timeout to be used, in seconds, for requests. By default the timeout is 60 seconds, unless a custom httpx client is used, in which case this default is not enforced.
+
+    max_retries : typing.Optional[int]
+        The default maximum number of retries for failed requests. Defaults to 2. Per-request `max_retries` in `request_options` takes precedence over this value.
+
+    stream_reconnection_enabled : typing.Optional[bool]
+        Whether to automatically reconnect on stream disconnection for resumable streaming endpoints. Defaults to True. Per-request `stream_reconnection_enabled` in `request_options` takes precedence over this value.
+
+    max_stream_reconnection_attempts : typing.Optional[int]
+        The maximum number of reconnection attempts for resumable streaming endpoints. Defaults to no limit. Per-request `max_stream_reconnection_attempts` in `request_options` takes precedence over this value.
+
+    follow_redirects : typing.Optional[bool]
+        Whether the default httpx client follows redirects or not, this is irrelevant if a custom httpx client is passed in.
+
+    httpx_client : typing.Optional[httpx.AsyncClient]
+        The httpx client to use for making requests, a preconfigured client is used by default, however this is useful should you want to pass in any custom httpx configuration.
+
+    logging : typing.Optional[typing.Union[LogConfig, Logger]]
+        Configure logging for the SDK. Accepts a LogConfig dict with 'level' (debug/info/warn/error), 'logger' (custom logger implementation), and 'silent' (boolean, defaults to True) fields. You can also pass a pre-configured Logger instance.
+
+    Examples
+    --------
+    from sikaru_api import AsyncSikaruApi
+
+    client = AsyncSikaruApi(
+        api_key="YOUR_API_KEY",
+    )
+    """
+
+    def __init__(
+        self,
+        *,
+        base_url: typing.Optional[str] = None,
+        environment: SikaruEnvironment = SikaruEnvironment.DEFAULT,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = os.getenv("SIKARU_API_KEY"),
+        headers: typing.Optional[typing.Dict[str, str]] = None,
+        async_token: typing.Optional[typing.Callable[[], typing.Awaitable[str]]] = None,
+        timeout: typing.Optional[float] = None,
+        max_retries: typing.Optional[int] = None,
+        stream_reconnection_enabled: typing.Optional[bool] = None,
+        max_stream_reconnection_attempts: typing.Optional[int] = None,
+        follow_redirects: typing.Optional[bool] = True,
+        httpx_client: typing.Optional[httpx.AsyncClient] = None,
+        logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
+    ):
+        _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
+        _defaulted_max_retries = max_retries if max_retries is not None else 2
+        if api_key is None:
+            raise ApiError(
+                body="The client must be instantiated be either passing in api_key or setting SIKARU_API_KEY"
+            )
+        self._client_wrapper = AsyncClientWrapper(
+            base_url=_get_base_url(base_url=base_url, environment=environment),
+            api_key=api_key,
+            headers=headers,
+            async_token=async_token,
+            httpx_client=httpx_client
+            if httpx_client is not None
+            else _make_default_async_client(timeout=_defaulted_timeout, follow_redirects=follow_redirects),
+            timeout=_defaulted_timeout,
+            max_retries=_defaulted_max_retries,
+            stream_reconnection_enabled=stream_reconnection_enabled,
+            max_stream_reconnection_attempts=max_stream_reconnection_attempts,
+            logging=logging,
+        )
+        self._activation: typing.Optional[AsyncActivationClient] = None
+        self._agent_imports: typing.Optional[AsyncAgentImportsClient] = None
+        self._agents: typing.Optional[AsyncAgentsClient] = None
+        self._changesets: typing.Optional[AsyncChangesetsClient] = None
+        self._context_registry: typing.Optional[AsyncContextRegistryClient] = None
+        self._conversations: typing.Optional[AsyncConversationsClient] = None
+        self._deployments: typing.Optional[AsyncDeploymentsClient] = None
+        self._environments: typing.Optional[AsyncEnvironmentsClient] = None
+        self._eval_seeds: typing.Optional[AsyncEvalSeedsClient] = None
+        self._evaluation_comparisons: typing.Optional[AsyncEvaluationComparisonsClient] = None
+        self._evaluation_criteria: typing.Optional[AsyncEvaluationCriteriaClient] = None
+        self._evaluation_jobs: typing.Optional[AsyncEvaluationJobsClient] = None
+        self._evaluation_results: typing.Optional[AsyncEvaluationResultsClient] = None
+        self._evaluator_runs: typing.Optional[AsyncEvaluatorRunsClient] = None
+        self._execution_objectives: typing.Optional[AsyncExecutionObjectivesClient] = None
+        self._execution_sessions: typing.Optional[AsyncExecutionSessionsClient] = None
+        self._executions: typing.Optional[AsyncExecutionsClient] = None
+        self._feedback: typing.Optional[AsyncFeedbackClient] = None
+        self._harness_versions: typing.Optional[AsyncHarnessVersionsClient] = None
+        self._harnesses: typing.Optional[AsyncHarnessesClient] = None
+        self._runs: typing.Optional[AsyncRunsClient] = None
+        self._import_sessions: typing.Optional[AsyncImportSessionsClient] = None
+        self._issue_clusters: typing.Optional[AsyncIssueClustersClient] = None
+        self._judge_alignment: typing.Optional[AsyncJudgeAlignmentClient] = None
+        self._managed_agents: typing.Optional[AsyncManagedAgentsClient] = None
+        self._memory_registry: typing.Optional[AsyncMemoryRegistryClient] = None
+        self._model_gateway: typing.Optional[AsyncModelGatewayClient] = None
+        self._model_settings: typing.Optional[AsyncModelSettingsClient] = None
+        self._online_evaluations: typing.Optional[AsyncOnlineEvaluationsClient] = None
+        self._release_watches: typing.Optional[AsyncReleaseWatchesClient] = None
+        self._retention_policies: typing.Optional[AsyncRetentionPoliciesClient] = None
+        self._review_queue: typing.Optional[AsyncReviewQueueClient] = None
+        self._run_schedules: typing.Optional[AsyncRunSchedulesClient] = None
+        self._run_webhooks: typing.Optional[AsyncRunWebhooksClient] = None
+        self._sessions: typing.Optional[AsyncSessionsClient] = None
+        self._tool_providers: typing.Optional[AsyncToolProvidersClient] = None
+        self._trace_import_connections: typing.Optional[AsyncTraceImportConnectionsClient] = None
+        self._trace_imports: typing.Optional[AsyncTraceImportsClient] = None
+        self._workflow_intents: typing.Optional[AsyncWorkflowIntentsClient] = None
+        self._workflow_runs: typing.Optional[AsyncWorkflowRunsClient] = None
+        self._workflows: typing.Optional[AsyncWorkflowsClient] = None
+        self._trace_streams: typing.Optional[AsyncTraceStreamsClient] = None
+
+    @property
+    def activation(self):
+        if self._activation is None:
+            from .activation.client import AsyncActivationClient  # noqa: E402
+
+            self._activation = AsyncActivationClient(client_wrapper=self._client_wrapper)
+        return self._activation
+
+    @property
+    def agent_imports(self):
+        if self._agent_imports is None:
+            from .agent_imports.client import AsyncAgentImportsClient  # noqa: E402
+
+            self._agent_imports = AsyncAgentImportsClient(client_wrapper=self._client_wrapper)
+        return self._agent_imports
+
+    @property
+    def agents(self):
+        if self._agents is None:
+            from .agents.client import AsyncAgentsClient  # noqa: E402
+
+            self._agents = AsyncAgentsClient(client_wrapper=self._client_wrapper)
+        return self._agents
+
+    @property
+    def changesets(self):
+        if self._changesets is None:
+            from .changesets.client import AsyncChangesetsClient  # noqa: E402
+
+            self._changesets = AsyncChangesetsClient(client_wrapper=self._client_wrapper)
+        return self._changesets
+
+    @property
+    def context_registry(self):
+        if self._context_registry is None:
+            from .context_registry.client import AsyncContextRegistryClient  # noqa: E402
+
+            self._context_registry = AsyncContextRegistryClient(client_wrapper=self._client_wrapper)
+        return self._context_registry
+
+    @property
+    def conversations(self):
+        if self._conversations is None:
+            from .conversations.client import AsyncConversationsClient  # noqa: E402
+
+            self._conversations = AsyncConversationsClient(client_wrapper=self._client_wrapper)
+        return self._conversations
+
+    @property
+    def deployments(self):
+        if self._deployments is None:
+            from .deployments.client import AsyncDeploymentsClient  # noqa: E402
+
+            self._deployments = AsyncDeploymentsClient(client_wrapper=self._client_wrapper)
+        return self._deployments
+
+    @property
+    def environments(self):
+        if self._environments is None:
+            from .environments.client import AsyncEnvironmentsClient  # noqa: E402
+
+            self._environments = AsyncEnvironmentsClient(client_wrapper=self._client_wrapper)
+        return self._environments
+
+    @property
+    def eval_seeds(self):
+        if self._eval_seeds is None:
+            from .eval_seeds.client import AsyncEvalSeedsClient  # noqa: E402
+
+            self._eval_seeds = AsyncEvalSeedsClient(client_wrapper=self._client_wrapper)
+        return self._eval_seeds
+
+    @property
+    def evaluation_comparisons(self):
+        if self._evaluation_comparisons is None:
+            from .evaluation_comparisons.client import AsyncEvaluationComparisonsClient  # noqa: E402
+
+            self._evaluation_comparisons = AsyncEvaluationComparisonsClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_comparisons
+
+    @property
+    def evaluation_criteria(self):
+        if self._evaluation_criteria is None:
+            from .evaluation_criteria.client import AsyncEvaluationCriteriaClient  # noqa: E402
+
+            self._evaluation_criteria = AsyncEvaluationCriteriaClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_criteria
+
+    @property
+    def evaluation_jobs(self):
+        if self._evaluation_jobs is None:
+            from .evaluation_jobs.client import AsyncEvaluationJobsClient  # noqa: E402
+
+            self._evaluation_jobs = AsyncEvaluationJobsClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_jobs
+
+    @property
+    def evaluation_results(self):
+        if self._evaluation_results is None:
+            from .evaluation_results.client import AsyncEvaluationResultsClient  # noqa: E402
+
+            self._evaluation_results = AsyncEvaluationResultsClient(client_wrapper=self._client_wrapper)
+        return self._evaluation_results
+
+    @property
+    def evaluator_runs(self):
+        if self._evaluator_runs is None:
+            from .evaluator_runs.client import AsyncEvaluatorRunsClient  # noqa: E402
+
+            self._evaluator_runs = AsyncEvaluatorRunsClient(client_wrapper=self._client_wrapper)
+        return self._evaluator_runs
+
+    @property
+    def execution_objectives(self):
+        if self._execution_objectives is None:
+            from .execution_objectives.client import AsyncExecutionObjectivesClient  # noqa: E402
+
+            self._execution_objectives = AsyncExecutionObjectivesClient(client_wrapper=self._client_wrapper)
+        return self._execution_objectives
+
+    @property
+    def execution_sessions(self):
+        if self._execution_sessions is None:
+            from .execution_sessions.client import AsyncExecutionSessionsClient  # noqa: E402
+
+            self._execution_sessions = AsyncExecutionSessionsClient(client_wrapper=self._client_wrapper)
+        return self._execution_sessions
+
+    @property
+    def executions(self):
+        if self._executions is None:
+            from .executions.client import AsyncExecutionsClient  # noqa: E402
+
+            self._executions = AsyncExecutionsClient(client_wrapper=self._client_wrapper)
+        return self._executions
+
+    @property
+    def feedback(self):
+        if self._feedback is None:
+            from .feedback.client import AsyncFeedbackClient  # noqa: E402
+
+            self._feedback = AsyncFeedbackClient(client_wrapper=self._client_wrapper)
+        return self._feedback
+
+    @property
+    def harness_versions(self):
+        if self._harness_versions is None:
+            from .harness_versions.client import AsyncHarnessVersionsClient  # noqa: E402
+
+            self._harness_versions = AsyncHarnessVersionsClient(client_wrapper=self._client_wrapper)
+        return self._harness_versions
+
+    @property
+    def harnesses(self):
+        if self._harnesses is None:
+            from .harnesses.client import AsyncHarnessesClient  # noqa: E402
+
+            self._harnesses = AsyncHarnessesClient(client_wrapper=self._client_wrapper)
+        return self._harnesses
+
+    @property
+    def runs(self):
+        if self._runs is None:
+            from .runs.client import AsyncRunsClient  # noqa: E402
+
+            self._runs = AsyncRunsClient(client_wrapper=self._client_wrapper)
+        return self._runs
+
+    @property
+    def import_sessions(self):
+        if self._import_sessions is None:
+            from .import_sessions.client import AsyncImportSessionsClient  # noqa: E402
+
+            self._import_sessions = AsyncImportSessionsClient(client_wrapper=self._client_wrapper)
+        return self._import_sessions
+
+    @property
+    def issue_clusters(self):
+        if self._issue_clusters is None:
+            from .issue_clusters.client import AsyncIssueClustersClient  # noqa: E402
+
+            self._issue_clusters = AsyncIssueClustersClient(client_wrapper=self._client_wrapper)
+        return self._issue_clusters
+
+    @property
+    def judge_alignment(self):
+        if self._judge_alignment is None:
+            from .judge_alignment.client import AsyncJudgeAlignmentClient  # noqa: E402
+
+            self._judge_alignment = AsyncJudgeAlignmentClient(client_wrapper=self._client_wrapper)
+        return self._judge_alignment
+
+    @property
+    def managed_agents(self):
+        if self._managed_agents is None:
+            from .managed_agents.client import AsyncManagedAgentsClient  # noqa: E402
+
+            self._managed_agents = AsyncManagedAgentsClient(client_wrapper=self._client_wrapper)
+        return self._managed_agents
+
+    @property
+    def memory_registry(self):
+        if self._memory_registry is None:
+            from .memory_registry.client import AsyncMemoryRegistryClient  # noqa: E402
+
+            self._memory_registry = AsyncMemoryRegistryClient(client_wrapper=self._client_wrapper)
+        return self._memory_registry
+
+    @property
+    def model_gateway(self):
+        if self._model_gateway is None:
+            from .model_gateway.client import AsyncModelGatewayClient  # noqa: E402
+
+            self._model_gateway = AsyncModelGatewayClient(client_wrapper=self._client_wrapper)
+        return self._model_gateway
+
+    @property
+    def model_settings(self):
+        if self._model_settings is None:
+            from .model_settings.client import AsyncModelSettingsClient  # noqa: E402
+
+            self._model_settings = AsyncModelSettingsClient(client_wrapper=self._client_wrapper)
+        return self._model_settings
+
+    @property
+    def online_evaluations(self):
+        if self._online_evaluations is None:
+            from .online_evaluations.client import AsyncOnlineEvaluationsClient  # noqa: E402
+
+            self._online_evaluations = AsyncOnlineEvaluationsClient(client_wrapper=self._client_wrapper)
+        return self._online_evaluations
+
+    @property
+    def release_watches(self):
+        if self._release_watches is None:
+            from .release_watches.client import AsyncReleaseWatchesClient  # noqa: E402
+
+            self._release_watches = AsyncReleaseWatchesClient(client_wrapper=self._client_wrapper)
+        return self._release_watches
+
+    @property
+    def retention_policies(self):
+        if self._retention_policies is None:
+            from .retention_policies.client import AsyncRetentionPoliciesClient  # noqa: E402
+
+            self._retention_policies = AsyncRetentionPoliciesClient(client_wrapper=self._client_wrapper)
+        return self._retention_policies
+
+    @property
+    def review_queue(self):
+        if self._review_queue is None:
+            from .review_queue.client import AsyncReviewQueueClient  # noqa: E402
+
+            self._review_queue = AsyncReviewQueueClient(client_wrapper=self._client_wrapper)
+        return self._review_queue
+
+    @property
+    def run_schedules(self):
+        if self._run_schedules is None:
+            from .run_schedules.client import AsyncRunSchedulesClient  # noqa: E402
+
+            self._run_schedules = AsyncRunSchedulesClient(client_wrapper=self._client_wrapper)
+        return self._run_schedules
+
+    @property
+    def run_webhooks(self):
+        if self._run_webhooks is None:
+            from .run_webhooks.client import AsyncRunWebhooksClient  # noqa: E402
+
+            self._run_webhooks = AsyncRunWebhooksClient(client_wrapper=self._client_wrapper)
+        return self._run_webhooks
+
+    @property
+    def sessions(self):
+        if self._sessions is None:
+            from .sessions.client import AsyncSessionsClient  # noqa: E402
+
+            self._sessions = AsyncSessionsClient(client_wrapper=self._client_wrapper)
+        return self._sessions
+
+    @property
+    def tool_providers(self):
+        if self._tool_providers is None:
+            from .tool_providers.client import AsyncToolProvidersClient  # noqa: E402
+
+            self._tool_providers = AsyncToolProvidersClient(client_wrapper=self._client_wrapper)
+        return self._tool_providers
+
+    @property
+    def trace_import_connections(self):
+        if self._trace_import_connections is None:
+            from .trace_import_connections.client import AsyncTraceImportConnectionsClient  # noqa: E402
+
+            self._trace_import_connections = AsyncTraceImportConnectionsClient(client_wrapper=self._client_wrapper)
+        return self._trace_import_connections
+
+    @property
+    def trace_imports(self):
+        if self._trace_imports is None:
+            from .trace_imports.client import AsyncTraceImportsClient  # noqa: E402
+
+            self._trace_imports = AsyncTraceImportsClient(client_wrapper=self._client_wrapper)
+        return self._trace_imports
+
+    @property
+    def workflow_intents(self):
+        if self._workflow_intents is None:
+            from .workflow_intents.client import AsyncWorkflowIntentsClient  # noqa: E402
+
+            self._workflow_intents = AsyncWorkflowIntentsClient(client_wrapper=self._client_wrapper)
+        return self._workflow_intents
+
+    @property
+    def workflow_runs(self):
+        if self._workflow_runs is None:
+            from .workflow_runs.client import AsyncWorkflowRunsClient  # noqa: E402
+
+            self._workflow_runs = AsyncWorkflowRunsClient(client_wrapper=self._client_wrapper)
+        return self._workflow_runs
+
+    @property
+    def workflows(self):
+        if self._workflows is None:
+            from .workflows.client import AsyncWorkflowsClient  # noqa: E402
+
+            self._workflows = AsyncWorkflowsClient(client_wrapper=self._client_wrapper)
+        return self._workflows
+
+    @property
+    def trace_streams(self):
+        if self._trace_streams is None:
+            from .trace_streams.client import AsyncTraceStreamsClient  # noqa: E402
+
+            self._trace_streams = AsyncTraceStreamsClient(client_wrapper=self._client_wrapper)
+        return self._trace_streams
+
+
+def _get_base_url(*, base_url: typing.Optional[str] = None, environment: SikaruEnvironment) -> str:
+    if base_url is not None:
+        return base_url
+    elif environment is not None:
+        return environment.value
+    else:
+        raise Exception("Please pass in either base_url or environment to construct the client")

@@ -1,0 +1,188 @@
+
+package api
+
+import (
+	json "encoding/json"
+	fmt "fmt"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	listImprovementsHarnessesRequestFieldAfter = big.NewInt(1 << 0)
+	listImprovementsHarnessesRequestFieldLimit = big.NewInt(1 << 1)
+)
+
+type ListImprovementsHarnessesRequest struct {
+	After *string `json:"-" url:"after,omitempty"`
+	Limit *int    `json:"-" url:"limit,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (l *ListImprovementsHarnessesRequest) require(field *big.Int) {
+	if l.explicitFields == nil {
+		l.explicitFields = big.NewInt(0)
+	}
+	l.explicitFields.Or(l.explicitFields, field)
+}
+
+// SetAfter sets the After field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListImprovementsHarnessesRequest) SetAfter(after *string) {
+	l.After = after
+	l.require(listImprovementsHarnessesRequestFieldAfter)
+}
+
+// SetLimit sets the Limit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListImprovementsHarnessesRequest) SetLimit(limit *int) {
+	l.Limit = limit
+	l.require(listImprovementsHarnessesRequestFieldLimit)
+}
+
+var (
+	improvementInputFieldIdempotencyKey = big.NewInt(1 << 0)
+	improvementInputFieldObjective      = big.NewInt(1 << 1)
+)
+
+type ImprovementInput struct {
+	IdempotencyKey string                     `json:"idempotency_key" url:"-"`
+	Objective      *ImprovementInputObjective `json:"objective,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (i *ImprovementInput) require(field *big.Int) {
+	if i.explicitFields == nil {
+		i.explicitFields = big.NewInt(0)
+	}
+	i.explicitFields.Or(i.explicitFields, field)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImprovementInput) SetIdempotencyKey(idempotencyKey string) {
+	i.IdempotencyKey = idempotencyKey
+	i.require(improvementInputFieldIdempotencyKey)
+}
+
+// SetObjective sets the Objective field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (i *ImprovementInput) SetObjective(objective *ImprovementInputObjective) {
+	i.Objective = objective
+	i.require(improvementInputFieldObjective)
+}
+
+func (i *ImprovementInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler ImprovementInput
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*i = ImprovementInput(body)
+	return nil
+}
+
+func (i *ImprovementInput) MarshalJSON() ([]byte, error) {
+	type embed ImprovementInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*i),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, i.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+type ResumeImprovementInput struct {
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ResumeImprovementInput) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ResumeImprovementInput) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+func (r *ResumeImprovementInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler ResumeImprovementInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ResumeImprovementInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ResumeImprovementInput) MarshalJSON() ([]byte, error) {
+	type embed ResumeImprovementInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ResumeImprovementInput) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ImprovementInputObjective string
+
+const (
+	ImprovementInputObjectiveQuality  ImprovementInputObjective = "quality"
+	ImprovementInputObjectiveCost     ImprovementInputObjective = "cost"
+	ImprovementInputObjectiveBalanced ImprovementInputObjective = "balanced"
+)
+
+func NewImprovementInputObjectiveFromString(s string) (ImprovementInputObjective, error) {
+	switch s {
+	case "quality":
+		return ImprovementInputObjectiveQuality, nil
+	case "cost":
+		return ImprovementInputObjectiveCost, nil
+	case "balanced":
+		return ImprovementInputObjectiveBalanced, nil
+	}
+	var t ImprovementInputObjective
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (i ImprovementInputObjective) Ptr() *ImprovementInputObjective {
+	return &i
+}

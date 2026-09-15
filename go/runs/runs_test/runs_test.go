@@ -1,0 +1,304 @@
+
+package runs_test
+
+import (
+	bytes "bytes"
+	context "context"
+	json "encoding/json"
+	http "net/http"
+	os "os"
+	testing "testing"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	client "github.com/aadi-labs/sikaru-sdk/go/client"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+	require "github.com/stretchr/testify/require"
+)
+
+func VerifyRequestCount(
+	t *testing.T,
+	testId string,
+	method string,
+	urlPath string,
+	queryParams map[string]any,
+	expected int,
+) {
+	wiremockURL := os.Getenv("WIREMOCK_URL")
+	if wiremockURL == "" {
+		wiremockURL = "http://localhost:8080"
+	}
+	WiremockAdminURL := wiremockURL + "/__admin"
+	var reqBody bytes.Buffer
+	reqBody.WriteString(`{"method":"`)
+	reqBody.WriteString(method)
+	reqBody.WriteString(`","urlPath":"`)
+	reqBody.WriteString(urlPath)
+	reqBody.WriteString(`","headers":{"X-Test-Id":{"equalTo":"`)
+	reqBody.WriteString(testId)
+	reqBody.WriteString(`"}}`)
+	if len(queryParams) > 0 {
+		reqBody.WriteString(`,"queryParameters":{`)
+		first := true
+		for key, value := range queryParams {
+			if !first {
+				reqBody.WriteString(",")
+			}
+			reqBody.WriteString(`"`)
+			reqBody.WriteString(key)
+			switch v := value.(type) {
+			case string:
+				reqBody.WriteString(`":{"equalTo":"`)
+				reqBody.WriteString(v)
+				reqBody.WriteString(`"}`)
+			case []string:
+				reqBody.WriteString(`":{"hasExactly":[`)
+				for i, item := range v {
+					if i > 0 {
+						reqBody.WriteString(",")
+					}
+					reqBody.WriteString(`{"equalTo":"`)
+					reqBody.WriteString(item)
+					reqBody.WriteString(`"}`)
+				}
+				reqBody.WriteString(`]}`)
+			}
+			first = false
+		}
+		reqBody.WriteString("}")
+	}
+	reqBody.WriteString("}")
+	resp, err := http.Post(WiremockAdminURL+"/requests/find", "application/json", &reqBody)
+	require.NoError(t, err)
+	var result struct {
+		Requests []interface{} `json:"requests"`
+	}
+	json.NewDecoder(resp.Body).Decode(&result)
+	require.Equal(t, expected, len(result.Requests))
+}
+
+func TestRunsStartWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.StartHarnessRunRequest{
+		Input: map[string]any{
+			"key": "value",
+		},
+		Policy: map[string]any{
+			"key": "value",
+		},
+		ProductContext: map[string]any{
+			"key": "value",
+		},
+		TenantID: "tenant_id",
+		UserID:   "user_id",
+	}
+	_, invocationErr := client.Runs.Start(
+		context.TODO(),
+		"project_id",
+		"harness_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsStartWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsStartWithWireMock", "POST", "/v1/projects/project_id/harnesses/harness_id/runs", nil, 1)
+}
+
+func TestRunsGetWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.Runs.Get(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsGetWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsGetWithWireMock", "GET", "/v1/projects/project_id/runs/run_id", nil, 1)
+}
+
+func TestRunsPendingActionsWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.Runs.PendingActions(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsPendingActionsWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsPendingActionsWithWireMock", "GET", "/v1/projects/project_id/runs/run_id/actions", nil, 1)
+}
+
+func TestRunsCancelWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.Runs.Cancel(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsCancelWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsCancelWithWireMock", "POST", "/v1/projects/project_id/runs/run_id/cancel", nil, 1)
+}
+
+func TestRunsEventsWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.EventsRunsRequest{}
+	_, invocationErr := client.Runs.Events(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsEventsWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsEventsWithWireMock", "GET", "/v1/projects/project_id/runs/run_id/events", nil, 1)
+}
+
+func TestRunsRecoverWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.RecoverRunRequest{}
+	_, invocationErr := client.Runs.Recover(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsRecoverWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsRecoverWithWireMock", "POST", "/v1/projects/project_id/runs/run_id/recover", nil, 1)
+}
+
+func TestRunsDecideApprovalWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.ApprovalInput{
+		Decision:       _go.ApprovalInputDecisionApproved,
+		IdempotencyKey: "idempotency_key",
+	}
+	_, invocationErr := client.Runs.DecideApproval(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		"tool_call_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsDecideApprovalWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsDecideApprovalWithWireMock", "POST", "/v1/projects/project_id/runs/run_id/tool-calls/tool_call_id/approval", nil, 1)
+}
+
+func TestRunsSubmitToolResultWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.SubmitToolResultRequest{
+		CapabilityName: "capability_name",
+		IdempotencyKey: "idempotency_key",
+		Payload: map[string]any{
+			"key": "value",
+		},
+		Status:         _go.SubmitToolResultRequestStatusCompleted,
+		ToolCallID:     "tool_call_id",
+		ToolProviderID: "tool_provider_id",
+	}
+	_, invocationErr := client.Runs.SubmitToolResult(
+		context.TODO(),
+		"project_id",
+		"run_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunsSubmitToolResultWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunsSubmitToolResultWithWireMock", "POST", "/v1/projects/project_id/runs/run_id/tool-results", nil, 1)
+}

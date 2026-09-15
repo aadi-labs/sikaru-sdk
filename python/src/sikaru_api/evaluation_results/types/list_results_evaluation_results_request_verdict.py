@@ -1,0 +1,6 @@
+
+import typing
+
+ListResultsEvaluationResultsRequestVerdict = typing.Union[
+    typing.Literal["pass", "fail", "unable_to_judge", "error"], typing.Any
+]

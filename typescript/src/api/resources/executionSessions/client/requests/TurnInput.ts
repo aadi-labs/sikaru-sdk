@@ -1,0 +1,41 @@
+
+/**
+ * @example
+ *     {
+ *         idempotency_key: "idempotency_key",
+ *         input: {
+ *             "key": "value"
+ *         }
+ *     }
+ */
+export interface TurnInput {
+    capability_grants?: string[];
+    compute_provider_id?: string | null;
+    delivery_mode?: TurnInput.DeliveryMode;
+    execution_environment?: TurnInput.ExecutionEnvironment;
+    file_ids?: string[];
+    idempotency_key: string;
+    input: Record<string, unknown>;
+    product_context?: Record<string, unknown>;
+    run_mode?: TurnInput.RunMode;
+    tool_provider_refs?: Record<string, unknown>[];
+}
+
+export namespace TurnInput {
+    export const DeliveryMode = {
+            Steer: "steer",
+            Queue: "queue"
+        } as const;
+    export type DeliveryMode = typeof DeliveryMode[keyof typeof DeliveryMode];
+    export const ExecutionEnvironment = {
+            Managed: "managed",
+            Local: "local"
+        } as const;
+    export type ExecutionEnvironment = typeof ExecutionEnvironment[keyof typeof ExecutionEnvironment];
+    export const RunMode = {
+            Interactive: "interactive",
+            BackgroundSubagent: "background_subagent",
+            SandboxExecution: "sandbox_execution"
+        } as const;
+    export type RunMode = typeof RunMode[keyof typeof RunMode];
+}

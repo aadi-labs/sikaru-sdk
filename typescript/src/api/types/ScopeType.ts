@@ -1,0 +1,13 @@
+
+export const ScopeType = {
+        Global: "global",
+        Organization: "organization",
+        Project: "project",
+        Product: "product",
+        Agent: "agent",
+        Workflow: "workflow",
+        Cohort: "cohort",
+        User: "user",
+        Run: "run"
+    } as const;
+export type ScopeType = typeof ScopeType[keyof typeof ScopeType];

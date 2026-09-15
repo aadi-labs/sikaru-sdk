@@ -1,0 +1,58 @@
+
+import * as Sikaru from "../../src/api/index";
+import { SikaruApi } from "../../src/Client";
+import { mockServerPool } from "../mock-server/MockServerPool";
+
+describe("MemoryRegistryClient", () => {
+    
+    test("create_memory_registry_change (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "memoryId" : "memoryId" , "memoryType" : "memoryType" , "name" : "name" , "scope" : "scope" };
+        const rawResponseBody = { "key" : "value" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/memory-registry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.memoryRegistry.createMemoryRegistryChange("project_id", {
+    memoryId: "memoryId",
+    memoryType: "memoryType",
+    name: "name",
+    scope: "scope"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("create_memory_registry_change (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "memoryId" : "x" , "memoryType" : "x" , "name" : "x" , "scope" : "x" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/memory-registry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.memoryRegistry.createMemoryRegistryChange("project_id", {
+    memoryId: "x",
+    memoryType: "x",
+    name: "x",
+    scope: "x"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+});

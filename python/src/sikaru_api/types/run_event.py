@@ -1,0 +1,24 @@
+
+import typing
+
+import pydantic
+import typing_extensions
+from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.serialization import FieldMetadata
+
+
+class RunEvent(UniversalBaseModel):
+    created_at: typing_extensions.Annotated[str, FieldMetadata(alias="createdAt"), pydantic.Field(alias="createdAt")]
+    event_type: typing_extensions.Annotated[str, FieldMetadata(alias="eventType"), pydantic.Field(alias="eventType")]
+    id: str
+    payload: typing.Dict[str, typing.Any]
+    sequence: int
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow

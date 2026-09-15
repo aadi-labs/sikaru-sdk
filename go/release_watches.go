@@ -1,0 +1,153 @@
+
+package api
+
+import (
+	json "encoding/json"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	createReleaseWatchRequestFieldAgentID          = big.NewInt(1 << 0)
+	createReleaseWatchRequestFieldBackfillWindow   = big.NewInt(1 << 1)
+	createReleaseWatchRequestFieldFilterExpression = big.NewInt(1 << 2)
+	createReleaseWatchRequestFieldIssueID          = big.NewInt(1 << 3)
+	createReleaseWatchRequestFieldIssueTitle       = big.NewInt(1 << 4)
+	createReleaseWatchRequestFieldReleaseID        = big.NewInt(1 << 5)
+	createReleaseWatchRequestFieldRuleID           = big.NewInt(1 << 6)
+	createReleaseWatchRequestFieldRuleName         = big.NewInt(1 << 7)
+	createReleaseWatchRequestFieldSampleRate       = big.NewInt(1 << 8)
+	createReleaseWatchRequestFieldSignalTags       = big.NewInt(1 << 9)
+	createReleaseWatchRequestFieldTarget           = big.NewInt(1 << 10)
+	createReleaseWatchRequestFieldTraceIDs         = big.NewInt(1 << 11)
+)
+
+type CreateReleaseWatchRequest struct {
+	AgentID          *string  `json:"agentId,omitempty" url:"-"`
+	BackfillWindow   *string  `json:"backfillWindow,omitempty" url:"-"`
+	FilterExpression *string  `json:"filterExpression,omitempty" url:"-"`
+	IssueID          *string  `json:"issueId,omitempty" url:"-"`
+	IssueTitle       *string  `json:"issueTitle,omitempty" url:"-"`
+	ReleaseID        *string  `json:"releaseId,omitempty" url:"-"`
+	RuleID           *string  `json:"ruleId,omitempty" url:"-"`
+	RuleName         *string  `json:"ruleName,omitempty" url:"-"`
+	SampleRate       *string  `json:"sampleRate,omitempty" url:"-"`
+	SignalTags       []string `json:"signalTags,omitempty" url:"-"`
+	Target           *string  `json:"target,omitempty" url:"-"`
+	TraceIDs         []string `json:"traceIds" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (c *CreateReleaseWatchRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetAgentID sets the AgentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetAgentID(agentID *string) {
+	c.AgentID = agentID
+	c.require(createReleaseWatchRequestFieldAgentID)
+}
+
+// SetBackfillWindow sets the BackfillWindow field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetBackfillWindow(backfillWindow *string) {
+	c.BackfillWindow = backfillWindow
+	c.require(createReleaseWatchRequestFieldBackfillWindow)
+}
+
+// SetFilterExpression sets the FilterExpression field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetFilterExpression(filterExpression *string) {
+	c.FilterExpression = filterExpression
+	c.require(createReleaseWatchRequestFieldFilterExpression)
+}
+
+// SetIssueID sets the IssueID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetIssueID(issueID *string) {
+	c.IssueID = issueID
+	c.require(createReleaseWatchRequestFieldIssueID)
+}
+
+// SetIssueTitle sets the IssueTitle field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetIssueTitle(issueTitle *string) {
+	c.IssueTitle = issueTitle
+	c.require(createReleaseWatchRequestFieldIssueTitle)
+}
+
+// SetReleaseID sets the ReleaseID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetReleaseID(releaseID *string) {
+	c.ReleaseID = releaseID
+	c.require(createReleaseWatchRequestFieldReleaseID)
+}
+
+// SetRuleID sets the RuleID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetRuleID(ruleID *string) {
+	c.RuleID = ruleID
+	c.require(createReleaseWatchRequestFieldRuleID)
+}
+
+// SetRuleName sets the RuleName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetRuleName(ruleName *string) {
+	c.RuleName = ruleName
+	c.require(createReleaseWatchRequestFieldRuleName)
+}
+
+// SetSampleRate sets the SampleRate field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetSampleRate(sampleRate *string) {
+	c.SampleRate = sampleRate
+	c.require(createReleaseWatchRequestFieldSampleRate)
+}
+
+// SetSignalTags sets the SignalTags field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetSignalTags(signalTags []string) {
+	c.SignalTags = signalTags
+	c.require(createReleaseWatchRequestFieldSignalTags)
+}
+
+// SetTarget sets the Target field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetTarget(target *string) {
+	c.Target = target
+	c.require(createReleaseWatchRequestFieldTarget)
+}
+
+// SetTraceIDs sets the TraceIDs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateReleaseWatchRequest) SetTraceIDs(traceIDs []string) {
+	c.TraceIDs = traceIDs
+	c.require(createReleaseWatchRequestFieldTraceIDs)
+}
+
+func (c *CreateReleaseWatchRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateReleaseWatchRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*c = CreateReleaseWatchRequest(body)
+	return nil
+}
+
+func (c *CreateReleaseWatchRequest) MarshalJSON() ([]byte, error) {
+	type embed CreateReleaseWatchRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}

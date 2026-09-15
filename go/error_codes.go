@@ -1,0 +1,15 @@
+
+package api
+
+import (
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+)
+
+var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
+	422: func(apiError *core.APIError) error {
+		return &UnprocessableEntityError{
+			APIError: apiError,
+		}
+	},
+}

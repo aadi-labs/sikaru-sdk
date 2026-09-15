@@ -1,0 +1,195 @@
+
+package evaluation_comparisons_test
+
+import (
+	bytes "bytes"
+	context "context"
+	json "encoding/json"
+	http "net/http"
+	os "os"
+	testing "testing"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	client "github.com/aadi-labs/sikaru-sdk/go/client"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+	require "github.com/stretchr/testify/require"
+)
+
+func VerifyRequestCount(
+	t *testing.T,
+	testId string,
+	method string,
+	urlPath string,
+	queryParams map[string]any,
+	expected int,
+) {
+	wiremockURL := os.Getenv("WIREMOCK_URL")
+	if wiremockURL == "" {
+		wiremockURL = "http://localhost:8080"
+	}
+	WiremockAdminURL := wiremockURL + "/__admin"
+	var reqBody bytes.Buffer
+	reqBody.WriteString(`{"method":"`)
+	reqBody.WriteString(method)
+	reqBody.WriteString(`","urlPath":"`)
+	reqBody.WriteString(urlPath)
+	reqBody.WriteString(`","headers":{"X-Test-Id":{"equalTo":"`)
+	reqBody.WriteString(testId)
+	reqBody.WriteString(`"}}`)
+	if len(queryParams) > 0 {
+		reqBody.WriteString(`,"queryParameters":{`)
+		first := true
+		for key, value := range queryParams {
+			if !first {
+				reqBody.WriteString(",")
+			}
+			reqBody.WriteString(`"`)
+			reqBody.WriteString(key)
+			switch v := value.(type) {
+			case string:
+				reqBody.WriteString(`":{"equalTo":"`)
+				reqBody.WriteString(v)
+				reqBody.WriteString(`"}`)
+			case []string:
+				reqBody.WriteString(`":{"hasExactly":[`)
+				for i, item := range v {
+					if i > 0 {
+						reqBody.WriteString(",")
+					}
+					reqBody.WriteString(`{"equalTo":"`)
+					reqBody.WriteString(item)
+					reqBody.WriteString(`"}`)
+				}
+				reqBody.WriteString(`]}`)
+			}
+			first = false
+		}
+		reqBody.WriteString("}")
+	}
+	reqBody.WriteString("}")
+	resp, err := http.Post(WiremockAdminURL+"/requests/find", "application/json", &reqBody)
+	require.NoError(t, err)
+	var result struct {
+		Requests []interface{} `json:"requests"`
+	}
+	json.NewDecoder(resp.Body).Decode(&result)
+	require.Equal(t, expected, len(result.Requests))
+}
+
+func TestEvaluationComparisonsListComparisonsWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.ListComparisonsEvaluationComparisonsRequest{}
+	_, invocationErr := client.EvaluationComparisons.ListComparisons(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestEvaluationComparisonsListComparisonsWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestEvaluationComparisonsListComparisonsWithWireMock", "GET", "/v1/projects/project_id/evaluation-comparisons", nil, 1)
+}
+
+func TestEvaluationComparisonsCreateComparisonWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.ComparisonInput{
+		Cases: []*_go.CaseInput{
+			&_go.CaseInput{
+				Baseline: &_go.AnswerRef{
+					AccountID:      "accountId",
+					ConversationID: "conversationId",
+					MessageID:      "messageId",
+				},
+				Candidate: &_go.AnswerRef{
+					AccountID:      "accountId",
+					ConversationID: "conversationId",
+					MessageID:      "messageId",
+				},
+				CaseID: "caseId",
+			},
+		},
+		Evaluator: "evaluator",
+		ID:        "id",
+		Revision:  "revision",
+		Rubric:    "rubric",
+	}
+	_, invocationErr := client.EvaluationComparisons.CreateComparison(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestEvaluationComparisonsCreateComparisonWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestEvaluationComparisonsCreateComparisonWithWireMock", "POST", "/v1/projects/project_id/evaluation-comparisons", nil, 1)
+}
+
+func TestEvaluationComparisonsGetComparisonWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.EvaluationComparisons.GetComparison(
+		context.TODO(),
+		"project_id",
+		"comparison_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestEvaluationComparisonsGetComparisonWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestEvaluationComparisonsGetComparisonWithWireMock", "GET", "/v1/projects/project_id/evaluation-comparisons/comparison_id", nil, 1)
+}
+
+func TestEvaluationComparisonsCancelComparisonWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.EvaluationComparisons.CancelComparison(
+		context.TODO(),
+		"project_id",
+		"comparison_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestEvaluationComparisonsCancelComparisonWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestEvaluationComparisonsCancelComparisonWithWireMock", "POST", "/v1/projects/project_id/evaluation-comparisons/comparison_id/cancel", nil, 1)
+}

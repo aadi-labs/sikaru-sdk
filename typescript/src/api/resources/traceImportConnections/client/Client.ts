@@ -1,0 +1,72 @@
+
+import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClient.js";
+import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
+import * as core from "../../../../core/index.js";
+import { mergeHeaders } from "../../../../core/headers.js";
+import * as environments from "../../../../environments.js";
+import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
+import * as errors from "../../../../errors/index.js";
+import * as Sikaru from "../../../index.js";
+
+export declare namespace TraceImportConnectionsClient {
+    export type Options = BaseClientOptions;
+
+    export interface RequestOptions extends BaseRequestOptions {
+    }
+}
+
+export class TraceImportConnectionsClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<TraceImportConnectionsClient.Options>;
+
+    constructor(options: TraceImportConnectionsClient.Options = {}) {
+
+        this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {TraceImportConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.traceImportConnections.listTraceImportConnections("project_id")
+     */
+    public listTraceImportConnections(project_id: string, requestOptions?: TraceImportConnectionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+        return core.HttpResponsePromise.fromPromise(this.__listTraceImportConnections(project_id, requestOptions));
+    }
+
+    private async __listTraceImportConnections(project_id: string, requestOptions?: TraceImportConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/trace-import-connections`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/trace-import-connections");
+    }
+}

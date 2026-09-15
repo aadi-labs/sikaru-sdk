@@ -1,0 +1,81 @@
+
+package api
+
+import (
+	json "encoding/json"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	createManagedSessionRequestFieldEnvironmentID    = big.NewInt(1 << 0)
+	createManagedSessionRequestFieldExternalRunID    = big.NewInt(1 << 1)
+	createManagedSessionRequestFieldExternalThreadID = big.NewInt(1 << 2)
+	createManagedSessionRequestFieldIdempotencyKey   = big.NewInt(1 << 3)
+)
+
+type CreateManagedSessionRequest struct {
+	EnvironmentID    string  `json:"environmentId" url:"-"`
+	ExternalRunID    *string `json:"externalRunId,omitempty" url:"-"`
+	ExternalThreadID *string `json:"externalThreadId,omitempty" url:"-"`
+	IdempotencyKey   *string `json:"idempotencyKey,omitempty" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (c *CreateManagedSessionRequest) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetEnvironmentID sets the EnvironmentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateManagedSessionRequest) SetEnvironmentID(environmentID string) {
+	c.EnvironmentID = environmentID
+	c.require(createManagedSessionRequestFieldEnvironmentID)
+}
+
+// SetExternalRunID sets the ExternalRunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateManagedSessionRequest) SetExternalRunID(externalRunID *string) {
+	c.ExternalRunID = externalRunID
+	c.require(createManagedSessionRequestFieldExternalRunID)
+}
+
+// SetExternalThreadID sets the ExternalThreadID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateManagedSessionRequest) SetExternalThreadID(externalThreadID *string) {
+	c.ExternalThreadID = externalThreadID
+	c.require(createManagedSessionRequestFieldExternalThreadID)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateManagedSessionRequest) SetIdempotencyKey(idempotencyKey *string) {
+	c.IdempotencyKey = idempotencyKey
+	c.require(createManagedSessionRequestFieldIdempotencyKey)
+}
+
+func (c *CreateManagedSessionRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler CreateManagedSessionRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*c = CreateManagedSessionRequest(body)
+	return nil
+}
+
+func (c *CreateManagedSessionRequest) MarshalJSON() ([]byte, error) {
+	type embed CreateManagedSessionRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}

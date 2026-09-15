@@ -1,0 +1,47 @@
+
+import typing
+
+import pydantic
+import typing_extensions
+from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.serialization import FieldMetadata
+
+
+class ManagedRun(UniversalBaseModel):
+    compatibility_profile_id: typing_extensions.Annotated[
+        typing.Optional[str],
+        FieldMetadata(alias="compatibilityProfileId"),
+        pydantic.Field(alias="compatibilityProfileId"),
+    ] = None
+    completed_at: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="completedAt"), pydantic.Field(alias="completedAt")
+    ] = None
+    cost_summary: typing_extensions.Annotated[
+        typing.Optional[typing.Dict[str, typing.Any]],
+        FieldMetadata(alias="costSummary"),
+        pydantic.Field(alias="costSummary"),
+    ] = None
+    events_url: typing_extensions.Annotated[str, FieldMetadata(alias="eventsUrl"), pydantic.Field(alias="eventsUrl")]
+    harness_id: typing_extensions.Annotated[str, FieldMetadata(alias="harnessId"), pydantic.Field(alias="harnessId")]
+    harness_version_id: typing_extensions.Annotated[
+        str, FieldMetadata(alias="harnessVersionId"), pydantic.Field(alias="harnessVersionId")
+    ]
+    latency_ms: typing_extensions.Annotated[
+        typing.Optional[float], FieldMetadata(alias="latencyMs"), pydantic.Field(alias="latencyMs")
+    ] = None
+    run_id: typing_extensions.Annotated[str, FieldMetadata(alias="runId"), pydantic.Field(alias="runId")]
+    status: str
+    usage_summary: typing_extensions.Annotated[
+        typing.Optional[typing.Dict[str, typing.Any]],
+        FieldMetadata(alias="usageSummary"),
+        pydantic.Field(alias="usageSummary"),
+    ] = None
+
+    if IS_PYDANTIC_V2:
+        model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2
+    else:
+
+        class Config:
+            frozen = True
+            smart_union = True
+            extra = pydantic.Extra.allow

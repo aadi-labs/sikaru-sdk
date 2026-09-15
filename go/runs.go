@@ -1,0 +1,1165 @@
+
+package api
+
+import (
+	json "encoding/json"
+	fmt "fmt"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	approvalInputFieldDecision       = big.NewInt(1 << 0)
+	approvalInputFieldIdempotencyKey = big.NewInt(1 << 1)
+)
+
+type ApprovalInput struct {
+	Decision       ApprovalInputDecision `json:"decision" url:"-"`
+	IdempotencyKey string                `json:"idempotency_key" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (a *ApprovalInput) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetDecision sets the Decision field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ApprovalInput) SetDecision(decision ApprovalInputDecision) {
+	a.Decision = decision
+	a.require(approvalInputFieldDecision)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *ApprovalInput) SetIdempotencyKey(idempotencyKey string) {
+	a.IdempotencyKey = idempotencyKey
+	a.require(approvalInputFieldIdempotencyKey)
+}
+
+func (a *ApprovalInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler ApprovalInput
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*a = ApprovalInput(body)
+	return nil
+}
+
+func (a *ApprovalInput) MarshalJSON() ([]byte, error) {
+	type embed ApprovalInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	eventsRunsRequestFieldLastEventID = big.NewInt(1 << 0)
+	eventsRunsRequestFieldAfter       = big.NewInt(1 << 1)
+	eventsRunsRequestFieldLimit       = big.NewInt(1 << 2)
+	eventsRunsRequestFieldStream      = big.NewInt(1 << 3)
+)
+
+type EventsRunsRequest struct {
+	LastEventID *string `json:"-" url:"-"`
+	After       *string `json:"-" url:"after,omitempty"`
+	Limit       *string `json:"-" url:"limit,omitempty"`
+	Stream      *string `json:"-" url:"stream,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (e *EventsRunsRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetLastEventID sets the LastEventID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EventsRunsRequest) SetLastEventID(lastEventID *string) {
+	e.LastEventID = lastEventID
+	e.require(eventsRunsRequestFieldLastEventID)
+}
+
+// SetAfter sets the After field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EventsRunsRequest) SetAfter(after *string) {
+	e.After = after
+	e.require(eventsRunsRequestFieldAfter)
+}
+
+// SetLimit sets the Limit field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EventsRunsRequest) SetLimit(limit *string) {
+	e.Limit = limit
+	e.require(eventsRunsRequestFieldLimit)
+}
+
+// SetStream sets the Stream field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EventsRunsRequest) SetStream(stream *string) {
+	e.Stream = stream
+	e.require(eventsRunsRequestFieldStream)
+}
+
+var (
+	startHarnessRunRequestFieldCapabilityGrants     = big.NewInt(1 << 0)
+	startHarnessRunRequestFieldComputeProviderID    = big.NewInt(1 << 1)
+	startHarnessRunRequestFieldConversationID       = big.NewInt(1 << 2)
+	startHarnessRunRequestFieldCorrelationID        = big.NewInt(1 << 3)
+	startHarnessRunRequestFieldEventDelivery        = big.NewInt(1 << 4)
+	startHarnessRunRequestFieldExecutionEnvironment = big.NewInt(1 << 5)
+	startHarnessRunRequestFieldInput                = big.NewInt(1 << 6)
+	startHarnessRunRequestFieldJobID                = big.NewInt(1 << 7)
+	startHarnessRunRequestFieldPolicy               = big.NewInt(1 << 8)
+	startHarnessRunRequestFieldProductContext       = big.NewInt(1 << 9)
+	startHarnessRunRequestFieldRunMode              = big.NewInt(1 << 10)
+	startHarnessRunRequestFieldTenantID             = big.NewInt(1 << 11)
+	startHarnessRunRequestFieldToolProviderRefs     = big.NewInt(1 << 12)
+	startHarnessRunRequestFieldTraceID              = big.NewInt(1 << 13)
+	startHarnessRunRequestFieldUserID               = big.NewInt(1 << 14)
+)
+
+type StartHarnessRunRequest struct {
+	CapabilityGrants     []string                                    `json:"capability_grants,omitempty" url:"-"`
+	ComputeProviderID    *string                                     `json:"compute_provider_id,omitempty" url:"-"`
+	ConversationID       *string                                     `json:"conversation_id,omitempty" url:"-"`
+	CorrelationID        *string                                     `json:"correlation_id,omitempty" url:"-"`
+	EventDelivery        *EventDeliveryRequest                       `json:"event_delivery,omitempty" url:"-"`
+	ExecutionEnvironment *StartHarnessRunRequestExecutionEnvironment `json:"execution_environment,omitempty" url:"-"`
+	Input                map[string]any                              `json:"input" url:"-"`
+	JobID                *string                                     `json:"job_id,omitempty" url:"-"`
+	Policy               map[string]any                              `json:"policy" url:"-"`
+	ProductContext       map[string]any                              `json:"product_context" url:"-"`
+	RunMode              *StartHarnessRunRequestRunMode              `json:"run_mode,omitempty" url:"-"`
+	TenantID             string                                      `json:"tenant_id" url:"-"`
+	ToolProviderRefs     []*ToolProviderRefRequest                   `json:"tool_provider_refs,omitempty" url:"-"`
+	TraceID              *string                                     `json:"trace_id,omitempty" url:"-"`
+	UserID               string                                      `json:"user_id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *StartHarnessRunRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetCapabilityGrants sets the CapabilityGrants field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetCapabilityGrants(capabilityGrants []string) {
+	s.CapabilityGrants = capabilityGrants
+	s.require(startHarnessRunRequestFieldCapabilityGrants)
+}
+
+// SetComputeProviderID sets the ComputeProviderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetComputeProviderID(computeProviderID *string) {
+	s.ComputeProviderID = computeProviderID
+	s.require(startHarnessRunRequestFieldComputeProviderID)
+}
+
+// SetConversationID sets the ConversationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetConversationID(conversationID *string) {
+	s.ConversationID = conversationID
+	s.require(startHarnessRunRequestFieldConversationID)
+}
+
+// SetCorrelationID sets the CorrelationID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetCorrelationID(correlationID *string) {
+	s.CorrelationID = correlationID
+	s.require(startHarnessRunRequestFieldCorrelationID)
+}
+
+// SetEventDelivery sets the EventDelivery field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetEventDelivery(eventDelivery *EventDeliveryRequest) {
+	s.EventDelivery = eventDelivery
+	s.require(startHarnessRunRequestFieldEventDelivery)
+}
+
+// SetExecutionEnvironment sets the ExecutionEnvironment field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetExecutionEnvironment(executionEnvironment *StartHarnessRunRequestExecutionEnvironment) {
+	s.ExecutionEnvironment = executionEnvironment
+	s.require(startHarnessRunRequestFieldExecutionEnvironment)
+}
+
+// SetInput sets the Input field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetInput(input map[string]any) {
+	s.Input = input
+	s.require(startHarnessRunRequestFieldInput)
+}
+
+// SetJobID sets the JobID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetJobID(jobID *string) {
+	s.JobID = jobID
+	s.require(startHarnessRunRequestFieldJobID)
+}
+
+// SetPolicy sets the Policy field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetPolicy(policy map[string]any) {
+	s.Policy = policy
+	s.require(startHarnessRunRequestFieldPolicy)
+}
+
+// SetProductContext sets the ProductContext field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetProductContext(productContext map[string]any) {
+	s.ProductContext = productContext
+	s.require(startHarnessRunRequestFieldProductContext)
+}
+
+// SetRunMode sets the RunMode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetRunMode(runMode *StartHarnessRunRequestRunMode) {
+	s.RunMode = runMode
+	s.require(startHarnessRunRequestFieldRunMode)
+}
+
+// SetTenantID sets the TenantID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetTenantID(tenantID string) {
+	s.TenantID = tenantID
+	s.require(startHarnessRunRequestFieldTenantID)
+}
+
+// SetToolProviderRefs sets the ToolProviderRefs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetToolProviderRefs(toolProviderRefs []*ToolProviderRefRequest) {
+	s.ToolProviderRefs = toolProviderRefs
+	s.require(startHarnessRunRequestFieldToolProviderRefs)
+}
+
+// SetTraceID sets the TraceID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetTraceID(traceID *string) {
+	s.TraceID = traceID
+	s.require(startHarnessRunRequestFieldTraceID)
+}
+
+// SetUserID sets the UserID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetUserID(userID string) {
+	s.UserID = userID
+	s.require(startHarnessRunRequestFieldUserID)
+}
+
+func (s *StartHarnessRunRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler StartHarnessRunRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = StartHarnessRunRequest(body)
+	return nil
+}
+
+func (s *StartHarnessRunRequest) MarshalJSON() ([]byte, error) {
+	type embed StartHarnessRunRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	submitToolResultRequestFieldCapabilityName = big.NewInt(1 << 0)
+	submitToolResultRequestFieldIdempotencyKey = big.NewInt(1 << 1)
+	submitToolResultRequestFieldPayload        = big.NewInt(1 << 2)
+	submitToolResultRequestFieldStatus         = big.NewInt(1 << 3)
+	submitToolResultRequestFieldToolCallID     = big.NewInt(1 << 4)
+	submitToolResultRequestFieldToolProviderID = big.NewInt(1 << 5)
+)
+
+type SubmitToolResultRequest struct {
+	CapabilityName string                        `json:"capability_name" url:"-"`
+	IdempotencyKey string                        `json:"idempotency_key" url:"-"`
+	Payload        map[string]any                `json:"payload" url:"-"`
+	Status         SubmitToolResultRequestStatus `json:"status" url:"-"`
+	ToolCallID     string                        `json:"tool_call_id" url:"-"`
+	ToolProviderID string                        `json:"tool_provider_id" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (s *SubmitToolResultRequest) require(field *big.Int) {
+	if s.explicitFields == nil {
+		s.explicitFields = big.NewInt(0)
+	}
+	s.explicitFields.Or(s.explicitFields, field)
+}
+
+// SetCapabilityName sets the CapabilityName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitToolResultRequest) SetCapabilityName(capabilityName string) {
+	s.CapabilityName = capabilityName
+	s.require(submitToolResultRequestFieldCapabilityName)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitToolResultRequest) SetIdempotencyKey(idempotencyKey string) {
+	s.IdempotencyKey = idempotencyKey
+	s.require(submitToolResultRequestFieldIdempotencyKey)
+}
+
+// SetPayload sets the Payload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitToolResultRequest) SetPayload(payload map[string]any) {
+	s.Payload = payload
+	s.require(submitToolResultRequestFieldPayload)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitToolResultRequest) SetStatus(status SubmitToolResultRequestStatus) {
+	s.Status = status
+	s.require(submitToolResultRequestFieldStatus)
+}
+
+// SetToolCallID sets the ToolCallID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitToolResultRequest) SetToolCallID(toolCallID string) {
+	s.ToolCallID = toolCallID
+	s.require(submitToolResultRequestFieldToolCallID)
+}
+
+// SetToolProviderID sets the ToolProviderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SubmitToolResultRequest) SetToolProviderID(toolProviderID string) {
+	s.ToolProviderID = toolProviderID
+	s.require(submitToolResultRequestFieldToolProviderID)
+}
+
+func (s *SubmitToolResultRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler SubmitToolResultRequest
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*s = SubmitToolResultRequest(body)
+	return nil
+}
+
+func (s *SubmitToolResultRequest) MarshalJSON() ([]byte, error) {
+	type embed SubmitToolResultRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*s),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, s.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+var (
+	eventDeliveryRequestFieldCallbackURL = big.NewInt(1 << 0)
+	eventDeliveryRequestFieldMode        = big.NewInt(1 << 1)
+)
+
+type EventDeliveryRequest struct {
+	CallbackURL *string `json:"callback_url,omitempty" url:"callback_url,omitempty"`
+	Mode        *string `json:"mode,omitempty" url:"mode,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (e *EventDeliveryRequest) GetCallbackURL() *string {
+	if e == nil {
+		return nil
+	}
+	return e.CallbackURL
+}
+
+func (e *EventDeliveryRequest) GetMode() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Mode
+}
+
+func (e *EventDeliveryRequest) GetExtraProperties() map[string]interface{} {
+	if e == nil {
+		return nil
+	}
+	return e.extraProperties
+}
+
+func (e *EventDeliveryRequest) require(field *big.Int) {
+	if e.explicitFields == nil {
+		e.explicitFields = big.NewInt(0)
+	}
+	e.explicitFields.Or(e.explicitFields, field)
+}
+
+// SetCallbackURL sets the CallbackURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EventDeliveryRequest) SetCallbackURL(callbackURL *string) {
+	e.CallbackURL = callbackURL
+	e.require(eventDeliveryRequestFieldCallbackURL)
+}
+
+// SetMode sets the Mode field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (e *EventDeliveryRequest) SetMode(mode *string) {
+	e.Mode = mode
+	e.require(eventDeliveryRequestFieldMode)
+}
+
+func (e *EventDeliveryRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler EventDeliveryRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*e = EventDeliveryRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *e)
+	if err != nil {
+		return err
+	}
+	e.extraProperties = extraProperties
+	e.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (e *EventDeliveryRequest) MarshalJSON() ([]byte, error) {
+	type embed EventDeliveryRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*e),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, e.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (e *EventDeliveryRequest) String() string {
+	if e == nil {
+		return "<nil>"
+	}
+	if len(e.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(e.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(e); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", e)
+}
+
+var (
+	managedRunFieldCompatibilityProfileID = big.NewInt(1 << 0)
+	managedRunFieldCompletedAt            = big.NewInt(1 << 1)
+	managedRunFieldCostSummary            = big.NewInt(1 << 2)
+	managedRunFieldEventsURL              = big.NewInt(1 << 3)
+	managedRunFieldHarnessID              = big.NewInt(1 << 4)
+	managedRunFieldHarnessVersionID       = big.NewInt(1 << 5)
+	managedRunFieldLatencyMs              = big.NewInt(1 << 6)
+	managedRunFieldRunID                  = big.NewInt(1 << 7)
+	managedRunFieldStatus                 = big.NewInt(1 << 8)
+	managedRunFieldUsageSummary           = big.NewInt(1 << 9)
+)
+
+type ManagedRun struct {
+	CompatibilityProfileID *string        `json:"compatibilityProfileId,omitempty" url:"compatibilityProfileId,omitempty"`
+	CompletedAt            *string        `json:"completedAt,omitempty" url:"completedAt,omitempty"`
+	CostSummary            map[string]any `json:"costSummary,omitempty" url:"costSummary,omitempty"`
+	EventsURL              string         `json:"eventsUrl" url:"eventsUrl"`
+	HarnessID              string         `json:"harnessId" url:"harnessId"`
+	HarnessVersionID       string         `json:"harnessVersionId" url:"harnessVersionId"`
+	LatencyMs              *float64       `json:"latencyMs,omitempty" url:"latencyMs,omitempty"`
+	RunID                  string         `json:"runId" url:"runId"`
+	Status                 string         `json:"status" url:"status"`
+	UsageSummary           map[string]any `json:"usageSummary,omitempty" url:"usageSummary,omitempty"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (m *ManagedRun) GetCompatibilityProfileID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CompatibilityProfileID
+}
+
+func (m *ManagedRun) GetCompletedAt() *string {
+	if m == nil {
+		return nil
+	}
+	return m.CompletedAt
+}
+
+func (m *ManagedRun) GetCostSummary() map[string]any {
+	if m == nil {
+		return nil
+	}
+	return m.CostSummary
+}
+
+func (m *ManagedRun) GetEventsURL() string {
+	if m == nil {
+		return ""
+	}
+	return m.EventsURL
+}
+
+func (m *ManagedRun) GetHarnessID() string {
+	if m == nil {
+		return ""
+	}
+	return m.HarnessID
+}
+
+func (m *ManagedRun) GetHarnessVersionID() string {
+	if m == nil {
+		return ""
+	}
+	return m.HarnessVersionID
+}
+
+func (m *ManagedRun) GetLatencyMs() *float64 {
+	if m == nil {
+		return nil
+	}
+	return m.LatencyMs
+}
+
+func (m *ManagedRun) GetRunID() string {
+	if m == nil {
+		return ""
+	}
+	return m.RunID
+}
+
+func (m *ManagedRun) GetStatus() string {
+	if m == nil {
+		return ""
+	}
+	return m.Status
+}
+
+func (m *ManagedRun) GetUsageSummary() map[string]any {
+	if m == nil {
+		return nil
+	}
+	return m.UsageSummary
+}
+
+func (m *ManagedRun) GetExtraProperties() map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	return m.extraProperties
+}
+
+func (m *ManagedRun) require(field *big.Int) {
+	if m.explicitFields == nil {
+		m.explicitFields = big.NewInt(0)
+	}
+	m.explicitFields.Or(m.explicitFields, field)
+}
+
+// SetCompatibilityProfileID sets the CompatibilityProfileID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetCompatibilityProfileID(compatibilityProfileID *string) {
+	m.CompatibilityProfileID = compatibilityProfileID
+	m.require(managedRunFieldCompatibilityProfileID)
+}
+
+// SetCompletedAt sets the CompletedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetCompletedAt(completedAt *string) {
+	m.CompletedAt = completedAt
+	m.require(managedRunFieldCompletedAt)
+}
+
+// SetCostSummary sets the CostSummary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetCostSummary(costSummary map[string]any) {
+	m.CostSummary = costSummary
+	m.require(managedRunFieldCostSummary)
+}
+
+// SetEventsURL sets the EventsURL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetEventsURL(eventsURL string) {
+	m.EventsURL = eventsURL
+	m.require(managedRunFieldEventsURL)
+}
+
+// SetHarnessID sets the HarnessID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetHarnessID(harnessID string) {
+	m.HarnessID = harnessID
+	m.require(managedRunFieldHarnessID)
+}
+
+// SetHarnessVersionID sets the HarnessVersionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetHarnessVersionID(harnessVersionID string) {
+	m.HarnessVersionID = harnessVersionID
+	m.require(managedRunFieldHarnessVersionID)
+}
+
+// SetLatencyMs sets the LatencyMs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetLatencyMs(latencyMs *float64) {
+	m.LatencyMs = latencyMs
+	m.require(managedRunFieldLatencyMs)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetRunID(runID string) {
+	m.RunID = runID
+	m.require(managedRunFieldRunID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetStatus(status string) {
+	m.Status = status
+	m.require(managedRunFieldStatus)
+}
+
+// SetUsageSummary sets the UsageSummary field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (m *ManagedRun) SetUsageSummary(usageSummary map[string]any) {
+	m.UsageSummary = usageSummary
+	m.require(managedRunFieldUsageSummary)
+}
+
+func (m *ManagedRun) UnmarshalJSON(data []byte) error {
+	type unmarshaler ManagedRun
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*m = ManagedRun(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *m)
+	if err != nil {
+		return err
+	}
+	m.extraProperties = extraProperties
+	m.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (m *ManagedRun) MarshalJSON() ([]byte, error) {
+	type embed ManagedRun
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*m),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, m.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (m *ManagedRun) String() string {
+	if m == nil {
+		return "<nil>"
+	}
+	if len(m.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(m.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(m); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", m)
+}
+
+var (
+	runEventFieldCreatedAt = big.NewInt(1 << 0)
+	runEventFieldEventType = big.NewInt(1 << 1)
+	runEventFieldID        = big.NewInt(1 << 2)
+	runEventFieldPayload   = big.NewInt(1 << 3)
+	runEventFieldSequence  = big.NewInt(1 << 4)
+)
+
+type RunEvent struct {
+	CreatedAt string         `json:"createdAt" url:"createdAt"`
+	EventType string         `json:"eventType" url:"eventType"`
+	ID        string         `json:"id" url:"id"`
+	Payload   map[string]any `json:"payload" url:"payload"`
+	Sequence  int            `json:"sequence" url:"sequence"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RunEvent) GetCreatedAt() string {
+	if r == nil {
+		return ""
+	}
+	return r.CreatedAt
+}
+
+func (r *RunEvent) GetEventType() string {
+	if r == nil {
+		return ""
+	}
+	return r.EventType
+}
+
+func (r *RunEvent) GetID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ID
+}
+
+func (r *RunEvent) GetPayload() map[string]any {
+	if r == nil {
+		return nil
+	}
+	return r.Payload
+}
+
+func (r *RunEvent) GetSequence() int {
+	if r == nil {
+		return 0
+	}
+	return r.Sequence
+}
+
+func (r *RunEvent) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RunEvent) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetCreatedAt sets the CreatedAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvent) SetCreatedAt(createdAt string) {
+	r.CreatedAt = createdAt
+	r.require(runEventFieldCreatedAt)
+}
+
+// SetEventType sets the EventType field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvent) SetEventType(eventType string) {
+	r.EventType = eventType
+	r.require(runEventFieldEventType)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvent) SetID(id string) {
+	r.ID = id
+	r.require(runEventFieldID)
+}
+
+// SetPayload sets the Payload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvent) SetPayload(payload map[string]any) {
+	r.Payload = payload
+	r.require(runEventFieldPayload)
+}
+
+// SetSequence sets the Sequence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvent) SetSequence(sequence int) {
+	r.Sequence = sequence
+	r.require(runEventFieldSequence)
+}
+
+func (r *RunEvent) UnmarshalJSON(data []byte) error {
+	type unmarshaler RunEvent
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RunEvent(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RunEvent) MarshalJSON() ([]byte, error) {
+	type embed RunEvent
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RunEvent) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	runEventsFieldEvents    = big.NewInt(1 << 0)
+	runEventsFieldNextAfter = big.NewInt(1 << 1)
+)
+
+type RunEvents struct {
+	Events    []*RunEvent `json:"events" url:"events"`
+	NextAfter int         `json:"nextAfter" url:"nextAfter"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *RunEvents) GetEvents() []*RunEvent {
+	if r == nil {
+		return nil
+	}
+	return r.Events
+}
+
+func (r *RunEvents) GetNextAfter() int {
+	if r == nil {
+		return 0
+	}
+	return r.NextAfter
+}
+
+func (r *RunEvents) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *RunEvents) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetEvents sets the Events field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvents) SetEvents(events []*RunEvent) {
+	r.Events = events
+	r.require(runEventsFieldEvents)
+}
+
+// SetNextAfter sets the NextAfter field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *RunEvents) SetNextAfter(nextAfter int) {
+	r.NextAfter = nextAfter
+	r.require(runEventsFieldNextAfter)
+}
+
+func (r *RunEvents) UnmarshalJSON(data []byte) error {
+	type unmarshaler RunEvents
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = RunEvents(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *RunEvents) MarshalJSON() ([]byte, error) {
+	type embed RunEvents
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *RunEvents) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	toolProviderRefRequestFieldCapabilityPrefix = big.NewInt(1 << 0)
+	toolProviderRefRequestFieldSourceSkillRefs  = big.NewInt(1 << 1)
+	toolProviderRefRequestFieldToolProviderID   = big.NewInt(1 << 2)
+)
+
+type ToolProviderRefRequest struct {
+	CapabilityPrefix string   `json:"capability_prefix" url:"capability_prefix"`
+	SourceSkillRefs  []string `json:"source_skill_refs,omitempty" url:"source_skill_refs,omitempty"`
+	ToolProviderID   string   `json:"tool_provider_id" url:"tool_provider_id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (t *ToolProviderRefRequest) GetCapabilityPrefix() string {
+	if t == nil {
+		return ""
+	}
+	return t.CapabilityPrefix
+}
+
+func (t *ToolProviderRefRequest) GetSourceSkillRefs() []string {
+	if t == nil {
+		return nil
+	}
+	return t.SourceSkillRefs
+}
+
+func (t *ToolProviderRefRequest) GetToolProviderID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ToolProviderID
+}
+
+func (t *ToolProviderRefRequest) GetExtraProperties() map[string]interface{} {
+	if t == nil {
+		return nil
+	}
+	return t.extraProperties
+}
+
+func (t *ToolProviderRefRequest) require(field *big.Int) {
+	if t.explicitFields == nil {
+		t.explicitFields = big.NewInt(0)
+	}
+	t.explicitFields.Or(t.explicitFields, field)
+}
+
+// SetCapabilityPrefix sets the CapabilityPrefix field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *ToolProviderRefRequest) SetCapabilityPrefix(capabilityPrefix string) {
+	t.CapabilityPrefix = capabilityPrefix
+	t.require(toolProviderRefRequestFieldCapabilityPrefix)
+}
+
+// SetSourceSkillRefs sets the SourceSkillRefs field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *ToolProviderRefRequest) SetSourceSkillRefs(sourceSkillRefs []string) {
+	t.SourceSkillRefs = sourceSkillRefs
+	t.require(toolProviderRefRequestFieldSourceSkillRefs)
+}
+
+// SetToolProviderID sets the ToolProviderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (t *ToolProviderRefRequest) SetToolProviderID(toolProviderID string) {
+	t.ToolProviderID = toolProviderID
+	t.require(toolProviderRefRequestFieldToolProviderID)
+}
+
+func (t *ToolProviderRefRequest) UnmarshalJSON(data []byte) error {
+	type unmarshaler ToolProviderRefRequest
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*t = ToolProviderRefRequest(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *t)
+	if err != nil {
+		return err
+	}
+	t.extraProperties = extraProperties
+	t.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (t *ToolProviderRefRequest) MarshalJSON() ([]byte, error) {
+	type embed ToolProviderRefRequest
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*t),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, t.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (t *ToolProviderRefRequest) String() string {
+	if t == nil {
+		return "<nil>"
+	}
+	if len(t.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(t.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(t); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", t)
+}
+
+type ApprovalInputDecision string
+
+const (
+	ApprovalInputDecisionApproved ApprovalInputDecision = "approved"
+	ApprovalInputDecisionDenied   ApprovalInputDecision = "denied"
+)
+
+func NewApprovalInputDecisionFromString(s string) (ApprovalInputDecision, error) {
+	switch s {
+	case "approved":
+		return ApprovalInputDecisionApproved, nil
+	case "denied":
+		return ApprovalInputDecisionDenied, nil
+	}
+	var t ApprovalInputDecision
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a ApprovalInputDecision) Ptr() *ApprovalInputDecision {
+	return &a
+}
+
+type StartHarnessRunRequestExecutionEnvironment string
+
+const (
+	StartHarnessRunRequestExecutionEnvironmentManaged StartHarnessRunRequestExecutionEnvironment = "managed"
+	StartHarnessRunRequestExecutionEnvironmentLocal   StartHarnessRunRequestExecutionEnvironment = "local"
+)
+
+func NewStartHarnessRunRequestExecutionEnvironmentFromString(s string) (StartHarnessRunRequestExecutionEnvironment, error) {
+	switch s {
+	case "managed":
+		return StartHarnessRunRequestExecutionEnvironmentManaged, nil
+	case "local":
+		return StartHarnessRunRequestExecutionEnvironmentLocal, nil
+	}
+	var t StartHarnessRunRequestExecutionEnvironment
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s StartHarnessRunRequestExecutionEnvironment) Ptr() *StartHarnessRunRequestExecutionEnvironment {
+	return &s
+}
+
+type StartHarnessRunRequestRunMode string
+
+const (
+	StartHarnessRunRequestRunModeInteractive        StartHarnessRunRequestRunMode = "interactive"
+	StartHarnessRunRequestRunModeBackgroundSubagent StartHarnessRunRequestRunMode = "background_subagent"
+	StartHarnessRunRequestRunModeSandboxExecution   StartHarnessRunRequestRunMode = "sandbox_execution"
+)
+
+func NewStartHarnessRunRequestRunModeFromString(s string) (StartHarnessRunRequestRunMode, error) {
+	switch s {
+	case "interactive":
+		return StartHarnessRunRequestRunModeInteractive, nil
+	case "background_subagent":
+		return StartHarnessRunRequestRunModeBackgroundSubagent, nil
+	case "sandbox_execution":
+		return StartHarnessRunRequestRunModeSandboxExecution, nil
+	}
+	var t StartHarnessRunRequestRunMode
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s StartHarnessRunRequestRunMode) Ptr() *StartHarnessRunRequestRunMode {
+	return &s
+}
+
+type SubmitToolResultRequestStatus string
+
+const (
+	SubmitToolResultRequestStatusCompleted        SubmitToolResultRequestStatus = "completed"
+	SubmitToolResultRequestStatusFailed           SubmitToolResultRequestStatus = "failed"
+	SubmitToolResultRequestStatusRequiresApproval SubmitToolResultRequestStatus = "requires_approval"
+)
+
+func NewSubmitToolResultRequestStatusFromString(s string) (SubmitToolResultRequestStatus, error) {
+	switch s {
+	case "completed":
+		return SubmitToolResultRequestStatusCompleted, nil
+	case "failed":
+		return SubmitToolResultRequestStatusFailed, nil
+	case "requires_approval":
+		return SubmitToolResultRequestStatusRequiresApproval, nil
+	}
+	var t SubmitToolResultRequestStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (s SubmitToolResultRequestStatus) Ptr() *SubmitToolResultRequestStatus {
+	return &s
+}

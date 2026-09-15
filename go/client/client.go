@@ -1,0 +1,161 @@
+
+package client
+
+import (
+	os "os"
+
+	activation "github.com/aadi-labs/sikaru-sdk/go/activation"
+	agentimports "github.com/aadi-labs/sikaru-sdk/go/agentimports"
+	agents "github.com/aadi-labs/sikaru-sdk/go/agents"
+	changesets "github.com/aadi-labs/sikaru-sdk/go/changesets"
+	contextregistry "github.com/aadi-labs/sikaru-sdk/go/contextregistry"
+	conversations "github.com/aadi-labs/sikaru-sdk/go/conversations"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+	deployments "github.com/aadi-labs/sikaru-sdk/go/deployments"
+	environments "github.com/aadi-labs/sikaru-sdk/go/environments"
+	evalseeds "github.com/aadi-labs/sikaru-sdk/go/evalseeds"
+	evaluationcomparisons "github.com/aadi-labs/sikaru-sdk/go/evaluationcomparisons"
+	evaluationcriteria "github.com/aadi-labs/sikaru-sdk/go/evaluationcriteria"
+	evaluationjobs "github.com/aadi-labs/sikaru-sdk/go/evaluationjobs"
+	evaluationresults "github.com/aadi-labs/sikaru-sdk/go/evaluationresults"
+	evaluatorruns "github.com/aadi-labs/sikaru-sdk/go/evaluatorruns"
+	executionobjectives "github.com/aadi-labs/sikaru-sdk/go/executionobjectives"
+	executions "github.com/aadi-labs/sikaru-sdk/go/executions"
+	executionsessions "github.com/aadi-labs/sikaru-sdk/go/executionsessions"
+	feedback "github.com/aadi-labs/sikaru-sdk/go/feedback"
+	harnesses "github.com/aadi-labs/sikaru-sdk/go/harnesses"
+	harnessversions "github.com/aadi-labs/sikaru-sdk/go/harnessversions"
+	importsessions "github.com/aadi-labs/sikaru-sdk/go/importsessions"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	issueclusters "github.com/aadi-labs/sikaru-sdk/go/issueclusters"
+	judgealignment "github.com/aadi-labs/sikaru-sdk/go/judgealignment"
+	managedagents "github.com/aadi-labs/sikaru-sdk/go/managedagents"
+	memoryregistry "github.com/aadi-labs/sikaru-sdk/go/memoryregistry"
+	modelgateway "github.com/aadi-labs/sikaru-sdk/go/modelgateway"
+	modelsettings "github.com/aadi-labs/sikaru-sdk/go/modelsettings"
+	onlineevaluations "github.com/aadi-labs/sikaru-sdk/go/onlineevaluations"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+	releasewatches "github.com/aadi-labs/sikaru-sdk/go/releasewatches"
+	retentionpolicies "github.com/aadi-labs/sikaru-sdk/go/retentionpolicies"
+	reviewqueue "github.com/aadi-labs/sikaru-sdk/go/reviewqueue"
+	runs "github.com/aadi-labs/sikaru-sdk/go/runs"
+	runschedules "github.com/aadi-labs/sikaru-sdk/go/runschedules"
+	runwebhooks "github.com/aadi-labs/sikaru-sdk/go/runwebhooks"
+	sessions "github.com/aadi-labs/sikaru-sdk/go/sessions"
+	toolproviders "github.com/aadi-labs/sikaru-sdk/go/toolproviders"
+	traceimportconnections "github.com/aadi-labs/sikaru-sdk/go/traceimportconnections"
+	traceimports "github.com/aadi-labs/sikaru-sdk/go/traceimports"
+	tracestreams "github.com/aadi-labs/sikaru-sdk/go/tracestreams"
+	workflowintents "github.com/aadi-labs/sikaru-sdk/go/workflowintents"
+	workflowruns "github.com/aadi-labs/sikaru-sdk/go/workflowruns"
+	workflows "github.com/aadi-labs/sikaru-sdk/go/workflows"
+)
+
+type Sikaru struct {
+	Activation             *activation.Client
+	AgentImports           *agentimports.Client
+	Agents                 *agents.Client
+	Changesets             *changesets.Client
+	ContextRegistry        *contextregistry.Client
+	Conversations          *conversations.Client
+	Deployments            *deployments.Client
+	Environments           *environments.Client
+	EvalSeeds              *evalseeds.Client
+	EvaluationComparisons  *evaluationcomparisons.Client
+	EvaluationCriteria     *evaluationcriteria.Client
+	EvaluationJobs         *evaluationjobs.Client
+	EvaluationResults      *evaluationresults.Client
+	EvaluatorRuns          *evaluatorruns.Client
+	ExecutionObjectives    *executionobjectives.Client
+	ExecutionSessions      *executionsessions.Client
+	Executions             *executions.Client
+	Feedback               *feedback.Client
+	HarnessVersions        *harnessversions.Client
+	Harnesses              *harnesses.Client
+	Runs                   *runs.Client
+	ImportSessions         *importsessions.Client
+	IssueClusters          *issueclusters.Client
+	JudgeAlignment         *judgealignment.Client
+	ManagedAgents          *managedagents.Client
+	MemoryRegistry         *memoryregistry.Client
+	ModelGateway           *modelgateway.Client
+	ModelSettings          *modelsettings.Client
+	OnlineEvaluations      *onlineevaluations.Client
+	ReleaseWatches         *releasewatches.Client
+	RetentionPolicies      *retentionpolicies.Client
+	ReviewQueue            *reviewqueue.Client
+	RunSchedules           *runschedules.Client
+	RunWebhooks            *runwebhooks.Client
+	Sessions               *sessions.Client
+	ToolProviders          *toolproviders.Client
+	TraceImportConnections *traceimportconnections.Client
+	TraceImports           *traceimports.Client
+	WorkflowIntents        *workflowintents.Client
+	WorkflowRuns           *workflowruns.Client
+	Workflows              *workflows.Client
+	TraceStreams           *tracestreams.Client
+
+	options *core.RequestOptions
+	baseURL string
+	caller  *internal.Caller
+}
+
+func New(opts ...option.RequestOption) *Sikaru {
+	options := core.NewRequestOptions(opts...)
+	if options.APIKey == "" {
+		options.APIKey = os.Getenv("SIKARU_API_KEY")
+	}
+	return &Sikaru{
+		Activation:             activation.NewClient(options),
+		AgentImports:           agentimports.NewClient(options),
+		Agents:                 agents.NewClient(options),
+		Changesets:             changesets.NewClient(options),
+		ContextRegistry:        contextregistry.NewClient(options),
+		Conversations:          conversations.NewClient(options),
+		Deployments:            deployments.NewClient(options),
+		Environments:           environments.NewClient(options),
+		EvalSeeds:              evalseeds.NewClient(options),
+		EvaluationComparisons:  evaluationcomparisons.NewClient(options),
+		EvaluationCriteria:     evaluationcriteria.NewClient(options),
+		EvaluationJobs:         evaluationjobs.NewClient(options),
+		EvaluationResults:      evaluationresults.NewClient(options),
+		EvaluatorRuns:          evaluatorruns.NewClient(options),
+		ExecutionObjectives:    executionobjectives.NewClient(options),
+		ExecutionSessions:      executionsessions.NewClient(options),
+		Executions:             executions.NewClient(options),
+		Feedback:               feedback.NewClient(options),
+		HarnessVersions:        harnessversions.NewClient(options),
+		Harnesses:              harnesses.NewClient(options),
+		Runs:                   runs.NewClient(options),
+		ImportSessions:         importsessions.NewClient(options),
+		IssueClusters:          issueclusters.NewClient(options),
+		JudgeAlignment:         judgealignment.NewClient(options),
+		ManagedAgents:          managedagents.NewClient(options),
+		MemoryRegistry:         memoryregistry.NewClient(options),
+		ModelGateway:           modelgateway.NewClient(options),
+		ModelSettings:          modelsettings.NewClient(options),
+		OnlineEvaluations:      onlineevaluations.NewClient(options),
+		ReleaseWatches:         releasewatches.NewClient(options),
+		RetentionPolicies:      retentionpolicies.NewClient(options),
+		ReviewQueue:            reviewqueue.NewClient(options),
+		RunSchedules:           runschedules.NewClient(options),
+		RunWebhooks:            runwebhooks.NewClient(options),
+		Sessions:               sessions.NewClient(options),
+		ToolProviders:          toolproviders.NewClient(options),
+		TraceImportConnections: traceimportconnections.NewClient(options),
+		TraceImports:           traceimports.NewClient(options),
+		WorkflowIntents:        workflowintents.NewClient(options),
+		WorkflowRuns:           workflowruns.NewClient(options),
+		Workflows:              workflows.NewClient(options),
+		TraceStreams:           tracestreams.NewClient(options),
+		options:                options,
+		baseURL:                options.BaseURL,
+		caller: internal.NewCaller(
+			&internal.CallerParams{
+				Client:         options.HTTPClient,
+				MaxAttempts:    options.MaxAttempts,
+				DisableRetries: options.DisableRetries,
+			},
+		),
+	}
+}

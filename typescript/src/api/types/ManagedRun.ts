@@ -1,0 +1,13 @@
+
+export interface ManagedRun {
+    compatibilityProfileId?: (string | null) | undefined;
+    completedAt?: (string | null) | undefined;
+    costSummary?: (Record<string, unknown> | null) | undefined;
+    eventsUrl: string;
+    harnessId: string;
+    harnessVersionId: string;
+    latencyMs?: (number | null) | undefined;
+    runId: string;
+    status: string;
+    usageSummary?: (Record<string, unknown> | null) | undefined;
+}

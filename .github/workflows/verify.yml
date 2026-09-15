@@ -1,0 +1,104 @@
+name: Verify SDKs
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sdk-verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  language:
+    name: ${{ matrix.language }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: python
+            os: ubuntu-24.04
+          - language: typescript
+            os: ubuntu-24.04
+          - language: go
+            os: ubuntu-24.04
+          - language: rust
+            os: ubuntu-24.04
+          - language: ruby
+            os: ubuntu-24.04
+          - language: swift
+            os: macos-15
+    defaults:
+      run:
+        working-directory: ${{ matrix.language }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        if: matrix.language == 'python'
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        if: matrix.language == 'typescript'
+        with:
+          node-version: '22'
+      - uses: pnpm/action-setup@v4
+        if: matrix.language == 'typescript'
+        with:
+          package_json_file: typescript/package.json
+      - uses: actions/setup-go@v5
+        if: matrix.language == 'go'
+        with:
+          go-version: '1.x'
+          cache-dependency-path: go/go.sum
+      - uses: dtolnay/rust-toolchain@1.98.1
+        if: matrix.language == 'rust'
+      - uses: ruby/setup-ruby@v1
+        if: matrix.language == 'ruby'
+        with:
+          ruby-version: '3.4'
+          working-directory: ruby
+          bundler-cache: true
+      - uses: swift-actions/setup-swift@v2
+        if: matrix.language == 'swift'
+        with:
+          swift-version: '6.3'
+      - name: Build Python wheel and source distribution
+        if: matrix.language == 'python'
+        run: |
+          python -m pip install 'build>=1,<2'
+          python -m build
+          python -m pip install .
+          python -c 'from sikaru_api import SikaruApi, AsyncSikaruApi'
+      - name: Build TypeScript and run unit tests
+        if: matrix.language == 'typescript'
+        run: |
+          pnpm install --frozen-lockfile --ignore-scripts
+          pnpm build
+          pnpm exec vitest run --project unit
+      - name: Build and test Go
+        if: matrix.language == 'go'
+        run: |
+          go build ./...
+          go test ./... -run '^$'
+          go test ./internal/...
+      - name: Build and test Rust
+        if: matrix.language == 'rust'
+        run: |
+          cargo build --locked
+          cargo test --locked --lib
+      - name: Build and test Ruby
+        if: matrix.language == 'ruby'
+        run: |
+          bundle exec ruby -Ilib -Itest -rminitest/autorun -e 'Dir["test/unit/**/test_*.rb"].sort.each { |path| require_relative path }'
+          gem build Sikaru.gemspec --output /tmp/sikaru.gem
+      - name: Build and test Swift
+        if: matrix.language == 'swift'
+        run: |
+          swift build --package-path ..
+          swift test --package-path ..
+

@@ -1,0 +1,84 @@
+
+import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClient.js";
+import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
+import * as core from "../../../../core/index.js";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../core/requestBody.js";
+import * as environments from "../../../../environments.js";
+import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
+import * as errors from "../../../../errors/index.js";
+import * as Sikaru from "../../../index.js";
+
+export declare namespace TraceStreamsClient {
+    export type Options = BaseClientOptions;
+
+    export interface RequestOptions extends BaseRequestOptions {
+    }
+}
+
+export class TraceStreamsClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<TraceStreamsClient.Options>;
+
+    constructor(options: TraceStreamsClient.Options = {}) {
+
+        this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    /**
+     * @param {Sikaru.TraceStreamRequest} request
+     * @param {TraceStreamsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.traceStreams.streamOpeninferenceSpans({
+     *         format: "openinference.v1",
+     *         metadata: {
+     *             account_id: "account_id",
+     *             project_id: "project_id",
+     *             source: "source"
+     *         }
+     *     })
+     */
+    public streamOpeninferenceSpans(request: Sikaru.TraceStreamRequest, requestOptions?: TraceStreamsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamOpeninferenceSpans(request, requestOptions));
+    }
+
+    private async __streamOpeninferenceSpans(request: Sikaru.TraceStreamRequest, requestOptions?: TraceStreamsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const { "Idempotency-Key": idempotencyKey, "X-Sikaru-Client-Id": sikaruClientId, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, mergeOnlyDefinedHeaders({ "Idempotency-Key": idempotencyKey ?? undefined, "X-Sikaru-Client-Id": sikaruClientId ?? undefined }), requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), "v1/trace-streams"),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/trace-streams");
+    }
+}

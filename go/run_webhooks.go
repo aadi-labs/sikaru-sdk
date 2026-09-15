@@ -1,0 +1,72 @@
+
+package api
+
+import (
+	json "encoding/json"
+	internal "github.com/aadi-labs/sikaru-sdk/go/internal"
+	big "math/big"
+)
+
+var (
+	webhookInputFieldIdempotencyKey = big.NewInt(1 << 0)
+	webhookInputFieldRunID          = big.NewInt(1 << 1)
+	webhookInputFieldURL            = big.NewInt(1 << 2)
+)
+
+type WebhookInput struct {
+	IdempotencyKey *string `json:"idempotency_key,omitempty" url:"-"`
+	RunID          string  `json:"run_id" url:"-"`
+	URL            string  `json:"url" url:"-"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+}
+
+func (w *WebhookInput) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WebhookInput) SetIdempotencyKey(idempotencyKey *string) {
+	w.IdempotencyKey = idempotencyKey
+	w.require(webhookInputFieldIdempotencyKey)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WebhookInput) SetRunID(runID string) {
+	w.RunID = runID
+	w.require(webhookInputFieldRunID)
+}
+
+// SetURL sets the URL field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WebhookInput) SetURL(url string) {
+	w.URL = url
+	w.require(webhookInputFieldURL)
+}
+
+func (w *WebhookInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler WebhookInput
+	var body unmarshaler
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	*w = WebhookInput(body)
+	return nil
+}
+
+func (w *WebhookInput) MarshalJSON() ([]byte, error) {
+	type embed WebhookInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}

@@ -1,0 +1,152 @@
+
+package run_webhooks_test
+
+import (
+	bytes "bytes"
+	context "context"
+	json "encoding/json"
+	http "net/http"
+	os "os"
+	testing "testing"
+
+	_go "github.com/aadi-labs/sikaru-sdk/go"
+	client "github.com/aadi-labs/sikaru-sdk/go/client"
+	option "github.com/aadi-labs/sikaru-sdk/go/option"
+	require "github.com/stretchr/testify/require"
+)
+
+func VerifyRequestCount(
+	t *testing.T,
+	testId string,
+	method string,
+	urlPath string,
+	queryParams map[string]any,
+	expected int,
+) {
+	wiremockURL := os.Getenv("WIREMOCK_URL")
+	if wiremockURL == "" {
+		wiremockURL = "http://localhost:8080"
+	}
+	WiremockAdminURL := wiremockURL + "/__admin"
+	var reqBody bytes.Buffer
+	reqBody.WriteString(`{"method":"`)
+	reqBody.WriteString(method)
+	reqBody.WriteString(`","urlPath":"`)
+	reqBody.WriteString(urlPath)
+	reqBody.WriteString(`","headers":{"X-Test-Id":{"equalTo":"`)
+	reqBody.WriteString(testId)
+	reqBody.WriteString(`"}}`)
+	if len(queryParams) > 0 {
+		reqBody.WriteString(`,"queryParameters":{`)
+		first := true
+		for key, value := range queryParams {
+			if !first {
+				reqBody.WriteString(",")
+			}
+			reqBody.WriteString(`"`)
+			reqBody.WriteString(key)
+			switch v := value.(type) {
+			case string:
+				reqBody.WriteString(`":{"equalTo":"`)
+				reqBody.WriteString(v)
+				reqBody.WriteString(`"}`)
+			case []string:
+				reqBody.WriteString(`":{"hasExactly":[`)
+				for i, item := range v {
+					if i > 0 {
+						reqBody.WriteString(",")
+					}
+					reqBody.WriteString(`{"equalTo":"`)
+					reqBody.WriteString(item)
+					reqBody.WriteString(`"}`)
+				}
+				reqBody.WriteString(`]}`)
+			}
+			first = false
+		}
+		reqBody.WriteString("}")
+	}
+	reqBody.WriteString("}")
+	resp, err := http.Post(WiremockAdminURL+"/requests/find", "application/json", &reqBody)
+	require.NoError(t, err)
+	var result struct {
+		Requests []interface{} `json:"requests"`
+	}
+	json.NewDecoder(resp.Body).Decode(&result)
+	require.Equal(t, expected, len(result.Requests))
+}
+
+func TestRunWebhooksListWebhooksWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.RunWebhooks.ListWebhooks(
+		context.TODO(),
+		"project_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunWebhooksListWebhooksWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunWebhooksListWebhooksWithWireMock", "GET", "/v1/projects/project_id/run-webhooks", nil, 1)
+}
+
+func TestRunWebhooksCreateWebhookWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	request := &_go.WebhookInput{
+		RunID: "run_id",
+		URL:   "url",
+	}
+	_, invocationErr := client.RunWebhooks.CreateWebhook(
+		context.TODO(),
+		"project_id",
+		request,
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunWebhooksCreateWebhookWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunWebhooksCreateWebhookWithWireMock", "POST", "/v1/projects/project_id/run-webhooks", nil, 1)
+}
+
+func TestRunWebhooksDeleteWebhookWithWireMock(
+	t *testing.T,
+) {
+	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
+	if WireMockBaseURL == "" {
+		WireMockBaseURL = "http://localhost:8080"
+	}
+	client := client.New(
+		option.WithBaseURL(WireMockBaseURL),
+		option.WithAPIKey("test-token"),
+	)
+	_, invocationErr := client.RunWebhooks.DeleteWebhook(
+		context.TODO(),
+		"project_id",
+		"webhook_id",
+		option.WithHTTPHeader(
+			http.Header{"X-Test-Id": []string{"TestRunWebhooksDeleteWebhookWithWireMock"}},
+		),
+	)
+
+	require.NoError(t, invocationErr, "Client method call should succeed")
+	VerifyRequestCount(t, "TestRunWebhooksDeleteWebhookWithWireMock", "DELETE", "/v1/projects/project_id/run-webhooks/webhook_id", nil, 1)
+}

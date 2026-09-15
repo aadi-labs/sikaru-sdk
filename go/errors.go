@@ -1,0 +1,31 @@
+
+package api
+
+import (
+	json "encoding/json"
+	core "github.com/aadi-labs/sikaru-sdk/go/core"
+)
+
+// Validation Error
+type UnprocessableEntityError struct {
+	*core.APIError
+	Body *HTTPValidationError
+}
+
+func (u *UnprocessableEntityError) UnmarshalJSON(data []byte) error {
+	var body *HTTPValidationError
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	u.StatusCode = 422
+	u.Body = body
+	return nil
+}
+
+func (u *UnprocessableEntityError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(u.Body)
+}
+
+func (u *UnprocessableEntityError) Unwrap() error {
+	return u.APIError
+}
