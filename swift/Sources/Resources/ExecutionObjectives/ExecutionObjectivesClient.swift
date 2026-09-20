@@ -65,6 +65,7 @@ public final class ExecutionObjectivesClient: Sendable {
             path: "/v1/projects/\(projectId)/execution-objectives",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -117,6 +118,7 @@ public final class ExecutionObjectivesClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/execution-objectives/\(objectiveId)/cancel",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -143,6 +145,7 @@ public final class ExecutionObjectivesClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/execution-objectives/\(objectiveId)/pause",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -173,6 +176,7 @@ public final class ExecutionObjectivesClient: Sendable {
             path: "/v1/projects/\(projectId)/execution-objectives/\(objectiveId)/resume",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

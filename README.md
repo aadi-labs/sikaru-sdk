@@ -24,6 +24,11 @@ Use the clients to manage agents and sessions, start runs, read events, submit
 tool results and work with artifacts. The [Sikaru CLI](https://github.com/aadi-labs/sikaru-cli)
 exposes the same public API for scripts and terminal workflows.
 
+The clients are unmodified Fern output. Customer-source packaging is available
+as a separate [authoring companion](client-extensions/authoring/README.md):
+install with `pip install ./client-extensions/authoring`, then import
+`compile_directory` from `sikaru_authoring` and pass its definition to the generated API.
+
 To run commands on your own machine, set `execution_environment` to `local`
 and provide `compute_provider_id` when starting a run or appending a session
 turn. The provider must be registered for the project with the `compute.execute`

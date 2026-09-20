@@ -157,7 +157,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/interpreters",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -203,7 +204,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/interpreters/#{URI.encode_uri_component(params[:interpreter_id].to_s)}/execute",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -286,7 +288,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/sandbox-executions",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

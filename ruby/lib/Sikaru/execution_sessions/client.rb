@@ -121,7 +121,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/branches",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -200,7 +201,8 @@ module Sikaru
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/files",
           query: query_params,
           body: body_params,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -239,7 +241,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "DELETE",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/files/#{URI.encode_uri_component(params[:file_id].to_s)}",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -330,6 +333,45 @@ module Sikaru
       end
 
       # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :session_id
+      #
+      # @example
+      #   client.execution_sessions.spend(
+      #     project_id: "project_id",
+      #     session_id: "session_id"
+      #   )
+      #
+      # @return [Sikaru::Types::SessionSpend]
+      def spend(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/spend",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          Sikaru::Types::SessionSpend.load(response.body)
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # @param request_options [Hash]
       # @param params [Sikaru::ExecutionSessions::Types::TurnInput]
       # @option request_options [String] :base_url
       # @option request_options [Hash{String => Object}] :additional_headers
@@ -361,7 +403,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-sessions/#{URI.encode_uri_component(params[:session_id].to_s)}/turns",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -405,7 +448,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/execution-sessions",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

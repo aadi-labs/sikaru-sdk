@@ -62,6 +62,7 @@ public final class OnlineEvaluationsClient: Sendable {
             path: "/v1/projects/\(projectId)/online-evaluations",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -116,6 +117,7 @@ public final class OnlineEvaluationsClient: Sendable {
             path: "/v1/projects/\(projectId)/online-evaluations/\(policyId)",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

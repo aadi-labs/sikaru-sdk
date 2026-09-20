@@ -56,6 +56,7 @@ public final class RunWebhooksClient: Sendable {
             path: "/v1/projects/\(projectId)/run-webhooks",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -82,6 +83,7 @@ public final class RunWebhooksClient: Sendable {
             method: .delete,
             path: "/v1/projects/\(projectId)/run-webhooks/\(webhookId)",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

@@ -89,6 +89,7 @@ public final class ExecutionSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/execution-sessions/\(sessionId)/branches",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -129,6 +130,7 @@ public final class ExecutionSessionsClient: Sendable {
             ],
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -156,6 +158,7 @@ public final class ExecutionSessionsClient: Sendable {
             method: .delete,
             path: "/v1/projects/\(projectId)/execution-sessions/\(sessionId)/files/\(fileId)",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -220,6 +223,32 @@ public final class ExecutionSessionsClient: Sendable {
     /// private func main() async throws {
     ///     let client = Sikaru(apiKey: "<token>")
     ///
+    ///     _ = try await client.executionSessions.spend(
+    ///         projectId: "project_id",
+    ///         sessionId: "session_id"
+    ///     )
+    /// }
+    ///
+    /// try await main()
+    /// ```
+    ///
+    /// - Parameter requestOptions: Additional options for configuring the request, such as custom headers or timeout settings.
+    public func spend(projectId: String, sessionId: String, requestOptions: RequestOptions? = nil) async throws -> SessionSpend {
+        return try await httpClient.performRequest(
+            method: .get,
+            path: "/v1/projects/\(projectId)/execution-sessions/\(sessionId)/spend",
+            requestOptions: requestOptions,
+            responseType: SessionSpend.self
+        )
+    }
+
+    /// ```swift
+    /// import Foundation
+    /// import Sikaru
+    ///
+    /// private func main() async throws {
+    ///     let client = Sikaru(apiKey: "<token>")
+    ///
     ///     _ = try await client.executionSessions.appendTurn(
     ///         projectId: "project_id",
     ///         sessionId: "session_id",
@@ -242,6 +271,7 @@ public final class ExecutionSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/execution-sessions/\(sessionId)/turns",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -273,6 +303,7 @@ public final class ExecutionSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/harnesses/\(harnessId)/execution-sessions",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

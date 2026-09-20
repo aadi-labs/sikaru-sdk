@@ -41,7 +41,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/tool-providers",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -88,7 +89,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/tool-providers/#{URI.encode_uri_component(params[:tool_provider_id].to_s)}/skills",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

@@ -848,6 +848,783 @@ await client.changesets.stageChangeset("project_id", "changeset_id", {});
 </dl>
 </details>
 
+## Connections
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">listConnections</a>(project_id) -> Sikaru.Connection[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.listConnections("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">createConnection</a>(project_id, { ...params }) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.createConnection("project_id", {
+    config: {},
+    display_name: "display_name",
+    kind: "mcp"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CreateConnection` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">getConnection</a>(project_id, connection_id) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.getConnection("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">authorize</a>(project_id, connection_id) -> Sikaru.ConnectionAuthorization</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.authorize("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">complete</a>(project_id, connection_id, { ...params }) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.complete("project_id", "connection_id", {
+    state: "state"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CompleteAuthorization` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">credentials</a>(project_id, connection_id, { ...params }) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.credentials("project_id", "connection_id", {
+    credentials: {}
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReplaceCredentials` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">disable</a>(project_id, connection_id) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.disable("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">disconnect</a>(project_id, connection_id) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.disconnect("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">discover</a>(project_id, connection_id) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.discover("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">enable</a>(project_id, connection_id) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.enable("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">events</a>(project_id, connection_id) -> Sikaru.ConnectionEvent[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.events("project_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">grant</a>(project_id, connection_id, { ...params }) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.grant("project_id", "connection_id", {
+    agent_id: "agent_id",
+    tools: ["tools"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.GrantConnection` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">revokeGrant</a>(project_id, connection_id, grant_id) -> Sikaru.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.connections.revokeGrant("project_id", "connection_id", "grant_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grant_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConnectionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ContextRegistry
 <details><summary><code>client.contextRegistry.<a href="/src/api/resources/contextRegistry/client/Client.ts">createContextRegistryChange</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
@@ -2786,6 +3563,63 @@ await client.executionSessions.listSessionInputs("project_id", "session_id");
 </dl>
 </details>
 
+<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">spend</a>(project_id, session_id) -> Sikaru.SessionSpend</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.executionSessions.spend("project_id", "session_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExecutionSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">appendTurn</a>(project_id, session_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
 <dd>
@@ -2913,6 +3747,282 @@ await client.executionSessions.create("project_id", "harness_id", {
 <dd>
 
 **requestOptions:** `ExecutionSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Specialists
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client/Client.ts">list</a>(project_id, session_id) -> Sikaru.SpecialistThreads</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.specialists.list("project_id", "session_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpecialistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client/Client.ts">get</a>(project_id, session_id, thread_id) -> Sikaru.SpecialistThread</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.specialists.get("project_id", "session_id", "thread_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpecialistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client/Client.ts">cancel</a>(project_id, session_id, thread_id, { ...params }) -> Sikaru.SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.specialists.cancel("project_id", "session_id", "thread_id", {
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.SpecialistCancel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpecialistsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client/Client.ts">message</a>(project_id, session_id, thread_id, { ...params }) -> Sikaru.SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.specialists.message("project_id", "session_id", "thread_id", {
+    idempotency_key: "idempotency_key",
+    input: {
+        "key": "value"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.SpecialistMessage` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SpecialistsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3107,6 +4217,268 @@ await client.harnessVersions.createHarnessVersion("project_id", {
 <dd>
 
 **requestOptions:** `HarnessVersionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AgentBudgets
+<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">get</a>(project_id, harness_id) -> Sikaru.AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentBudgets.get("project_id", "harness_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentBudgetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">configureAutoReload</a>(project_id, harness_id, { ...params }) -> Sikaru.AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentBudgets.configureAutoReload("project_id", "harness_id", {
+    amount_usd: "amount_usd",
+    enabled: true,
+    threshold_usd: "threshold_usd"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReloadInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentBudgetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">add</a>(project_id, harness_id, { ...params }) -> Sikaru.FundingReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentBudgets.add("project_id", "harness_id", {
+    amount_usd: "amount_usd",
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.FundingInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentBudgetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">setupPaymentMethod</a>(project_id, harness_id, { ...params }) -> Sikaru.PaymentSetupLink</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentBudgets.setupPaymentMethod("project_id", "harness_id", {
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.SetupInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentBudgetsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -3831,6 +5203,91 @@ await client.runs.events("project_id", "run_id");
 </dl>
 </details>
 
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">streamEvents</a>(project_id, run_id, { ...params }) -> core.Stream&lt;Sikaru.RunEvent&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replay and stream durable run events; resume using after or Last-Event-ID.
+
+A terminal run event ends the stream. Idle streams may also close: callers
+can resume from their last delivered event without restarting the run.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.runs.streamEvents("project_id", "run_id");
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.StreamEventsRunsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">recover</a>(project_id, run_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
 <dd>
@@ -4027,6 +5484,81 @@ await client.runs.submitToolResult("project_id", "run_id", {
 <dd>
 
 **request:** `Sikaru.SubmitToolResultRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">getTrajectory</a>(project_id, run_id) -> Record&lt;string, unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Read retained ATIF structure and usage with private content redacted.
+
+This is a committed snapshot and can be partial while a run is active or
+interrupted. Messages, reasoning, tool payloads and provider metadata are
+omitted. No trajectory is synthesized when retained evidence is unavailable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runs.getTrajectory("project_id", "run_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
     
 </dd>
 </dl>
@@ -4848,6 +6380,25 @@ await client.issueClusters.upsertIssueCluster("project_id", {
 <details><summary><code>client.issueClusters.<a href="/src/api/resources/issueClusters/client/Client.ts">mineProjectIssueClusters</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run one failure-analysis agent pass over the project's recent traces.
+
+This is a model-latency operation on a request path: the endpoint is sync so
+the harness runs in the threadpool, and a project may only have one pass in
+flight. A background job queue is the long-term home for this work; the
+in-flight guard below is the interim bound.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -5995,7 +7546,6 @@ await client.runSchedules.createSchedule("project_id", {
     input: {
         "key": "value"
     },
-    interval_seconds: 1,
     session_id: "session_id"
 });
 
@@ -6146,6 +7696,71 @@ await client.runSchedules.pauseSchedule("project_id", "schedule_id", {
 <dd>
 
 **request:** `Sikaru.PauseInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunSchedulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">scheduleHistory</a>(project_id, schedule_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runSchedules.scheduleHistory("project_id", "schedule_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schedule_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ScheduleHistoryRunSchedulesRequest` 
     
 </dd>
 </dl>

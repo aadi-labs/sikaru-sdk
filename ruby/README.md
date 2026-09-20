@@ -1,5 +1,6 @@
 # Sikaru Ruby Library
 
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Sikaru%2FRuby)
 
 The Sikaru Ruby library provides convenient access to the Sikaru APIs from Ruby.
 
@@ -91,8 +92,84 @@ end
 
 ### Retries
 
-Only GET and HEAD requests may retry automatically. Mutations are never automatically retried, even when retry options are enabled. Retain operation receipts and reconcile uncertain results before issuing another mutation.
+The SDK is instrumented with automatic retries. A request will be retried as long as the request is deemed
+retryable and the number of retry attempts has not grown larger than the configured retry limit (default: 2).
+
+A request is deemed retryable when any of the following HTTP status codes is returned:
+
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) (Internal Server Error)
+
+The `retryStatusCodes` configuration controls which [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) status codes are retried:
+
+- `legacy` (default): Retries `408`, `429`, `500`, `502`, `503`, `504`, `521`, `522`, `524`
+- `recommended`: Retries `408`, `429`, `502`, `503`, `504` only (excludes `500 Internal Server Error` to avoid retrying non-idempotent failures)
+
+Use the `max_retries` option to configure this behavior.
+
+```ruby
+require "Sikaru"
+
+client = Sikaru::Client.new(
+    base_url: "https://example.com",
+    max_retries: 3  # Configure max retries (default is 2)
+)
+```
+
+### Timeouts
+
+The SDK defaults to a 60 second timeout. Use the `timeout` option to configure this behavior.
+
+```ruby
+require "Sikaru"
+
+response = client.agent_imports.create_agent_import(
+    ...,
+    timeout: 30  # 30 second timeout
+)
+```
+
+### Additional Headers
+
+If you would like to send additional headers as part of the request, use the `additional_headers` request option.
+
+```ruby
+require "Sikaru"
+
+response = client.agent_imports.create_agent_import(
+    ...,
+    request_options: {
+        additional_headers: {
+            "X-Custom-Header" => "custom-value"
+        }
+    }
+)
+```
+
+### Additional Query Parameters
+
+If you would like to send additional query parameters as part of the request, use the `additional_query_parameters` request option.
+
+```ruby
+require "Sikaru"
+
+response = client.agent_imports.create_agent_import(
+    ...,
+    request_options: {
+        additional_query_parameters: {
+            "custom_param" => "custom-value"
+        }
+    }
+)
+```
 
 ## Contributing
 
-Report bugs and proposed API changes through this repository. Include a minimal reproduction and never include API keys or private data.
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!

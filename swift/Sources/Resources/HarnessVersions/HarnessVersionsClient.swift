@@ -36,6 +36,7 @@ public final class HarnessVersionsClient: Sendable {
             path: "/v1/projects/\(projectId)/harness-versions",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

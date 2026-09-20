@@ -1007,6 +1007,929 @@ try await main()
 </dl>
 </details>
 
+## Connections
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">listConnections</a>(projectId: String, requestOptions: RequestOptions?) -> [Connection]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.listConnections(projectId: "project_id")
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">createConnection</a>(projectId: String, request: Requests.CreateConnection, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.createConnection(
+        projectId: "project_id",
+        request: .init(
+            config: ConnectionConfig(
+
+            ),
+            displayName: "display_name",
+            kind: .mcp
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.CreateConnection` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">getConnection</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.getConnection(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">authorize</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> ConnectionAuthorization</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.authorize(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">complete</a>(projectId: String, connectionId: String, request: Requests.CompleteAuthorization, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.complete(
+        projectId: "project_id",
+        connectionId: "connection_id",
+        request: .init(state: "state")
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.CompleteAuthorization` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">credentials</a>(projectId: String, connectionId: String, request: Requests.ReplaceCredentials, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.credentials(
+        projectId: "project_id",
+        connectionId: "connection_id",
+        request: .init(credentials: ConnectionCredentials(
+
+        ))
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.ReplaceCredentials` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">disable</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.disable(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">disconnect</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.disconnect(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">discover</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.discover(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">enable</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.enable(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">events</a>(projectId: String, connectionId: String, requestOptions: RequestOptions?) -> [ConnectionEvent]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.events(
+        projectId: "project_id",
+        connectionId: "connection_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">grant</a>(projectId: String, connectionId: String, request: Requests.GrantConnection, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.grant(
+        projectId: "project_id",
+        connectionId: "connection_id",
+        request: .init(
+            agentId: "agent_id",
+            tools: [
+                "tools"
+            ]
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.GrantConnection` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">revokeGrant</a>(projectId: String, connectionId: String, grantId: String, requestOptions: RequestOptions?) -> Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.connections.revokeGrant(
+        projectId: "project_id",
+        connectionId: "connection_id",
+        grantId: "grant_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grantId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ContextRegistry
 <details><summary><code>client.contextRegistry.<a href="/Sources/Resources/ContextRegistry/ContextRegistryClient.swift">createContextRegistryChange</a>(projectId: String, request: Requests.CreateContextRegistryChangeRequest, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
 <dl>
@@ -3389,6 +4312,74 @@ try await main()
 </dl>
 </details>
 
+<details><summary><code>client.executionSessions.<a href="/Sources/Resources/ExecutionSessions/ExecutionSessionsClient.swift">spend</a>(projectId: String, sessionId: String, requestOptions: RequestOptions?) -> SessionSpend</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.executionSessions.spend(
+        projectId: "project_id",
+        sessionId: "session_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.executionSessions.<a href="/Sources/Resources/ExecutionSessions/ExecutionSessionsClient.swift">appendTurn</a>(projectId: String, sessionId: String, request: Requests.TurnInput, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
 <dl>
 <dd>
@@ -3532,6 +4523,329 @@ try await main()
 <dd>
 
 **request:** `Requests.SessionInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Specialists
+<details><summary><code>client.specialists.<a href="/Sources/Resources/Specialists/SpecialistsClient.swift">list</a>(projectId: String, sessionId: String, requestOptions: RequestOptions?) -> SpecialistThreads</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.specialists.list(
+        projectId: "project_id",
+        sessionId: "session_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/Sources/Resources/Specialists/SpecialistsClient.swift">get</a>(projectId: String, sessionId: String, threadId: String, requestOptions: RequestOptions?) -> SpecialistThread</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.specialists.get(
+        projectId: "project_id",
+        sessionId: "session_id",
+        threadId: "thread_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threadId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/Sources/Resources/Specialists/SpecialistsClient.swift">cancel</a>(projectId: String, sessionId: String, threadId: String, request: Requests.SpecialistCancel, requestOptions: RequestOptions?) -> SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.specialists.cancel(
+        projectId: "project_id",
+        sessionId: "session_id",
+        threadId: "thread_id",
+        request: .init(idempotencyKey: "idempotency_key")
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threadId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.SpecialistCancel` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/Sources/Resources/Specialists/SpecialistsClient.swift">message</a>(projectId: String, sessionId: String, threadId: String, request: Requests.SpecialistMessage, requestOptions: RequestOptions?) -> SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.specialists.message(
+        projectId: "project_id",
+        sessionId: "session_id",
+        threadId: "thread_id",
+        request: .init(
+            idempotencyKey: "idempotency_key",
+            input: [
+                "key": .string("value")
+            ]
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threadId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.SpecialistMessage` 
     
 </dd>
 </dl>
@@ -3766,6 +5080,313 @@ try await main()
 <dd>
 
 **request:** `Requests.CreateHarnessVersionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AgentBudgets
+<details><summary><code>client.agentBudgets.<a href="/Sources/Resources/AgentBudgets/AgentBudgetsClient.swift">get</a>(projectId: String, harnessId: String, requestOptions: RequestOptions?) -> AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.agentBudgets.get(
+        projectId: "project_id",
+        harnessId: "harness_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentBudgets.<a href="/Sources/Resources/AgentBudgets/AgentBudgetsClient.swift">configureAutoReload</a>(projectId: String, harnessId: String, request: Requests.ReloadInput, requestOptions: RequestOptions?) -> AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.agentBudgets.configureAutoReload(
+        projectId: "project_id",
+        harnessId: "harness_id",
+        request: .init(
+            amountUsd: "amount_usd",
+            enabled: true,
+            thresholdUsd: "threshold_usd"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.ReloadInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentBudgets.<a href="/Sources/Resources/AgentBudgets/AgentBudgetsClient.swift">add</a>(projectId: String, harnessId: String, request: Requests.FundingInput, requestOptions: RequestOptions?) -> FundingReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.agentBudgets.add(
+        projectId: "project_id",
+        harnessId: "harness_id",
+        request: .init(
+            amountUsd: "amount_usd",
+            idempotencyKey: "idempotency_key"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.FundingInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentBudgets.<a href="/Sources/Resources/AgentBudgets/AgentBudgetsClient.swift">setupPaymentMethod</a>(projectId: String, harnessId: String, request: Requests.SetupInput, requestOptions: RequestOptions?) -> PaymentSetupLink</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.agentBudgets.setupPaymentMethod(
+        projectId: "project_id",
+        harnessId: "harness_id",
+        request: .init(idempotencyKey: "idempotency_key")
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.SetupInput` 
     
 </dd>
 </dl>
@@ -4556,7 +6177,7 @@ try await main()
 </dl>
 </details>
 
-<details><summary><code>client.runs.<a href="/Sources/Resources/Runs/RunsClient.swift">events</a>(projectId: String, runId: String, after: String?, limit: String?, stream: String?, requestOptions: RequestOptions?) -> RunEvents</code></summary>
+<details><summary><code>client.runs.<a href="/Sources/Resources/Runs/RunsClient.swift">events</a>(projectId: String, runId: String, after: String?, limit: String?, requestOptions: RequestOptions?) -> RunEvents</code></summary>
 <dl>
 <dd>
 
@@ -4621,14 +6242,6 @@ try await main()
 <dd>
 
 **limit:** `String?` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**stream:** `String?` 
     
 </dd>
 </dl>
@@ -4883,6 +6496,92 @@ try await main()
 <dd>
 
 **request:** `Requests.SubmitToolResultRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/Sources/Resources/Runs/RunsClient.swift">getTrajectory</a>(projectId: String, runId: String, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Read retained ATIF structure and usage with private content redacted.
+
+This is a committed snapshot and can be partial while a run is active or
+interrupted. Messages, reasoning, tool payloads and provider metadata are
+omitted. No trajectory is synthesized when retained evidence is unavailable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.runs.getTrajectory(
+        projectId: "project_id",
+        runId: "run_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runId:** `String` 
     
 </dd>
 </dl>
@@ -5856,6 +7555,25 @@ try await main()
 <details><summary><code>client.issueClusters.<a href="/Sources/Resources/IssueClusters/IssueClustersClient.swift">mineProjectIssueClusters</a>(projectId: String, since: Nullable&lt;String&gt;?, until: Nullable&lt;String&gt;?, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run one failure-analysis agent pass over the project's recent traces.
+
+This is a model-latency operation on a request path: the endpoint is sync so
+the harness runs in the threadpool, and a project may only have one pass in
+flight. A background job queue is the long-term home for this work; the
+in-flight guard below is the interim bound.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -7217,7 +8935,6 @@ private func main() async throws {
             input: [
                 "key": .string("value")
             ],
-            intervalSeconds: 1,
             sessionId: "session_id"
         )
     )
@@ -7392,6 +9109,90 @@ try await main()
 <dd>
 
 **request:** `Requests.PauseInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runSchedules.<a href="/Sources/Resources/RunSchedules/RunSchedulesClient.swift">scheduleHistory</a>(projectId: String, scheduleId: String, before: Nullable&lt;Double&gt;?, limit: Int?, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.runSchedules.scheduleHistory(
+        projectId: "project_id",
+        scheduleId: "schedule_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduleId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**before:** `Nullable<Double>?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Int?` 
     
 </dd>
 </dl>

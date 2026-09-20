@@ -32,6 +32,7 @@ public final class ReviewQueueClient: Sendable {
             path: "/v1/projects/\(projectId)/review-queue",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

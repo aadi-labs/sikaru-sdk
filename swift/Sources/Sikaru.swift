@@ -6,6 +6,7 @@ public final class Sikaru: Sendable {
     public let agentImports: AgentImportsClient
     public let agents: AgentsClient
     public let changesets: ChangesetsClient
+    public let connections: ConnectionsClient
     public let contextRegistry: ContextRegistryClient
     public let conversations: ConversationsClient
     public let deployments: DeploymentsClient
@@ -18,9 +19,11 @@ public final class Sikaru: Sendable {
     public let evaluatorRuns: EvaluatorRunsClient
     public let executionObjectives: ExecutionObjectivesClient
     public let executionSessions: ExecutionSessionsClient
+    public let specialists: SpecialistsClient
     public let executions: ExecutionsClient
     public let feedback: FeedbackClient
     public let harnessVersions: HarnessVersionsClient
+    public let agentBudgets: AgentBudgetsClient
     public let harnesses: HarnessesClient
     public let runs: RunsClient
     public let importSessions: ImportSessionsClient
@@ -126,6 +129,7 @@ public final class Sikaru: Sendable {
         self.agentImports = AgentImportsClient(config: config)
         self.agents = AgentsClient(config: config)
         self.changesets = ChangesetsClient(config: config)
+        self.connections = ConnectionsClient(config: config)
         self.contextRegistry = ContextRegistryClient(config: config)
         self.conversations = ConversationsClient(config: config)
         self.deployments = DeploymentsClient(config: config)
@@ -138,9 +142,11 @@ public final class Sikaru: Sendable {
         self.evaluatorRuns = EvaluatorRunsClient(config: config)
         self.executionObjectives = ExecutionObjectivesClient(config: config)
         self.executionSessions = ExecutionSessionsClient(config: config)
+        self.specialists = SpecialistsClient(config: config)
         self.executions = ExecutionsClient(config: config)
         self.feedback = FeedbackClient(config: config)
         self.harnessVersions = HarnessVersionsClient(config: config)
+        self.agentBudgets = AgentBudgetsClient(config: config)
         self.harnesses = HarnessesClient(config: config)
         self.runs = RunsClient(config: config)
         self.importSessions = ImportSessionsClient(config: config)

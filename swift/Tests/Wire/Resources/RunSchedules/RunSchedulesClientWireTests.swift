@@ -86,7 +86,6 @@ import Sikaru
                 input: [
                     "key": .string("value")
                 ],
-                intervalSeconds: 1,
                 sessionId: "session_id"
             ),
             requestOptions: RequestOptions(additionalHeaders: stub.headers)
@@ -127,7 +126,6 @@ import Sikaru
                         "key": .string("value")
                     ])
                 ],
-                intervalSeconds: 2592000,
                 sessionId: "x"
             ),
             requestOptions: RequestOptions(additionalHeaders: stub.headers)
@@ -252,6 +250,66 @@ import Sikaru
             projectId: "project_id",
             scheduleId: "schedule_id",
             request: .init(paused: true),
+            requestOptions: RequestOptions(additionalHeaders: stub.headers)
+        )
+        try #require(response == expectedResponse)
+    }
+
+    @Test func scheduleHistory1() async throws -> Void {
+        let stub = HTTPStub()
+        stub.setResponse(
+            body: Foundation.Data(
+                #"""
+                {
+                  "key": "value"
+                }
+                """#.utf8
+            )
+        )
+        let client = Sikaru(
+            baseURL: "https://api.fern.com",
+            apiKey: "<token>",
+            urlSession: stub.urlSession
+        )
+        let expectedResponse = [
+            "key": JSONValue.string("value")
+        ]
+        let response = try await client.runSchedules.scheduleHistory(
+            projectId: "project_id",
+            scheduleId: "schedule_id",
+            requestOptions: RequestOptions(additionalHeaders: stub.headers)
+        )
+        try #require(response == expectedResponse)
+    }
+
+    @Test func scheduleHistory2() async throws -> Void {
+        let stub = HTTPStub()
+        stub.setResponse(
+            body: Foundation.Data(
+                #"""
+                {
+                  "string": {
+                    "key": "value"
+                  }
+                }
+                """#.utf8
+            )
+        )
+        let client = Sikaru(
+            baseURL: "https://api.fern.com",
+            apiKey: "<token>",
+            urlSession: stub.urlSession
+        )
+        let expectedResponse = [
+            "string": JSONValue.object(
+                [
+                    "key": JSONValue.string("value")
+                ]
+            )
+        ]
+        let response = try await client.runSchedules.scheduleHistory(
+            projectId: "project_id",
+            scheduleId: "schedule_id",
             requestOptions: RequestOptions(additionalHeaders: stub.headers)
         )
         try #require(response == expectedResponse)

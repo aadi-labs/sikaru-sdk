@@ -36,6 +36,7 @@ public final class ToolProvidersClient: Sendable {
             path: "/v1/projects/\(projectId)/tool-providers",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -72,6 +73,7 @@ public final class ToolProvidersClient: Sendable {
             path: "/v1/projects/\(projectId)/tool-providers/\(toolProviderId)/skills",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

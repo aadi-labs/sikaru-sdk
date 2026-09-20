@@ -120,7 +120,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/improvements",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -203,7 +204,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/improvements/#{URI.encode_uri_component(params[:job_id].to_s)}/resume",
           body: body_params,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -242,7 +244,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/training",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

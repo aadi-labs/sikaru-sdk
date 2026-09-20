@@ -59,6 +59,7 @@ public final class WorkflowRunsClient: Sendable {
             path: "/v1/projects/\(projectId)/workflow-runs/\(runId)/recover",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

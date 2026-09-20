@@ -6,6 +6,7 @@
 //! - **AgentImports**
 //! - **Agents**
 //! - **Changesets**
+//! - **Connections**
 //! - **ContextRegistry**
 //! - **Conversations**
 //! - **Deployments**
@@ -18,9 +19,11 @@
 //! - **EvaluatorRuns**
 //! - **ExecutionObjectives**
 //! - **ExecutionSessions**
+//! - **Specialists**
 //! - **Executions**
 //! - **Feedback**
 //! - **HarnessVersions**
+//! - **AgentBudgets**
 //! - **Harnesses**
 //! - **Runs**
 //! - **ImportSessions**
@@ -48,9 +51,11 @@
 use crate::{ApiError, ClientConfig};
 
 pub mod activation;
+pub mod agent_budgets;
 pub mod agent_imports;
 pub mod agents;
 pub mod changesets;
+pub mod connections;
 pub mod context_registry;
 pub mod conversations;
 pub mod deployments;
@@ -82,6 +87,7 @@ pub mod run_schedules;
 pub mod run_webhooks;
 pub mod runs;
 pub mod sessions;
+pub mod specialists;
 pub mod tool_providers;
 pub mod trace_import_connections;
 pub mod trace_imports;
@@ -95,6 +101,7 @@ pub struct Sikaru {
     pub agent_imports: AgentImportsClient,
     pub agents: AgentsClient,
     pub changesets: ChangesetsClient,
+    pub connections: ConnectionsClient,
     pub context_registry: ContextRegistryClient,
     pub conversations: ConversationsClient,
     pub deployments: DeploymentsClient,
@@ -107,9 +114,11 @@ pub struct Sikaru {
     pub evaluator_runs: EvaluatorRunsClient,
     pub execution_objectives: ExecutionObjectivesClient,
     pub execution_sessions: ExecutionSessionsClient,
+    pub specialists: SpecialistsClient,
     pub executions: ExecutionsClient,
     pub feedback: FeedbackClient,
     pub harness_versions: HarnessVersionsClient,
+    pub agent_budgets: AgentBudgetsClient,
     pub harnesses: HarnessesClient,
     pub runs: RunsClient,
     pub import_sessions: ImportSessionsClient,
@@ -143,6 +152,7 @@ impl Sikaru {
             agent_imports: AgentImportsClient::new(config.clone())?,
             agents: AgentsClient::new(config.clone())?,
             changesets: ChangesetsClient::new(config.clone())?,
+            connections: ConnectionsClient::new(config.clone())?,
             context_registry: ContextRegistryClient::new(config.clone())?,
             conversations: ConversationsClient::new(config.clone())?,
             deployments: DeploymentsClient::new(config.clone())?,
@@ -155,9 +165,11 @@ impl Sikaru {
             evaluator_runs: EvaluatorRunsClient::new(config.clone())?,
             execution_objectives: ExecutionObjectivesClient::new(config.clone())?,
             execution_sessions: ExecutionSessionsClient::new(config.clone())?,
+            specialists: SpecialistsClient::new(config.clone())?,
             executions: ExecutionsClient::new(config.clone())?,
             feedback: FeedbackClient::new(config.clone())?,
             harness_versions: HarnessVersionsClient::new(config.clone())?,
+            agent_budgets: AgentBudgetsClient::new(config.clone())?,
             harnesses: HarnessesClient::new(config.clone())?,
             runs: RunsClient::new(config.clone())?,
             import_sessions: ImportSessionsClient::new(config.clone())?,
@@ -186,9 +198,11 @@ impl Sikaru {
 }
 
 pub use activation::ActivationClient;
+pub use agent_budgets::AgentBudgetsClient;
 pub use agent_imports::AgentImportsClient;
 pub use agents::AgentsClient;
 pub use changesets::ChangesetsClient;
+pub use connections::ConnectionsClient;
 pub use context_registry::ContextRegistryClient;
 pub use conversations::ConversationsClient;
 pub use deployments::DeploymentsClient;
@@ -220,6 +234,7 @@ pub use run_schedules::RunSchedulesClient;
 pub use run_webhooks::RunWebhooksClient;
 pub use runs::RunsClient;
 pub use sessions::SessionsClient;
+pub use specialists::SpecialistsClient;
 pub use tool_providers::ToolProvidersClient;
 pub use trace_import_connections::TraceImportConnectionsClient;
 pub use trace_imports::TraceImportsClient;

@@ -57,6 +57,7 @@ public final class EnvironmentsClient: Sendable {
             path: "/v1/projects/\(projectId)/environments",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

@@ -74,12 +74,15 @@ jobs:
           python -m build
           python -m pip install .
           python -c 'from sikaru_api import SikaruApi, AsyncSikaruApi'
+          python -m pip install ../client-extensions/authoring
+          python -c 'from sikaru_authoring import compile_directory'
       - name: Build TypeScript and run unit tests
         if: matrix.language == 'typescript'
         run: |
           pnpm install --frozen-lockfile --ignore-scripts
-          pnpm build
-          pnpm exec vitest run --project unit
+          npm run build:cjs
+          npm run build:esm
+          node_modules/.bin/vitest run --project unit
       - name: Build and test Go
         if: matrix.language == 'go'
         run: |
@@ -89,8 +92,8 @@ jobs:
       - name: Build and test Rust
         if: matrix.language == 'rust'
         run: |
-          cargo build --locked
-          cargo test --locked --lib
+          cargo build
+          cargo test --lib
       - name: Build and test Ruby
         if: matrix.language == 'ruby'
         run: |
@@ -99,6 +102,5 @@ jobs:
       - name: Build and test Swift
         if: matrix.language == 'swift'
         run: |
-          swift build --package-path ..
-          swift test --package-path ..
-
+          swift build
+          swift test

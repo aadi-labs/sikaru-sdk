@@ -36,6 +36,7 @@ public final class EvalSeedsClient: Sendable {
             path: "/v1/projects/\(projectId)/eval-seeds",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

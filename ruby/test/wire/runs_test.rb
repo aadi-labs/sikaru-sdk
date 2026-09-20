@@ -209,4 +209,26 @@ class RunsWireTest < WireMockTestCase
       expected: 1
     )
   end
+
+  def test_runs_get_trajectory_with_wiremock
+    test_id = "runs.get_trajectory.0"
+
+    @client.runs.get_trajectory(
+      project_id: "project_id",
+      run_id: "run_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "runs.get_trajectory.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v1/projects/project_id/runs/run_id/trajectory",
+      query_params: nil,
+      expected: 1
+    )
+  end
 end

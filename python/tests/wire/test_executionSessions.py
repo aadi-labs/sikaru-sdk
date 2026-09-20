@@ -86,6 +86,17 @@ def test_executionSessions_list_session_inputs() -> None:
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/inputs", None, 1)
 
 
+def test_executionSessions_spend() -> None:
+    """Test spend endpoint with WireMock"""
+    test_id = "execution_sessions.spend.0"
+    client = get_client(test_id)
+    client.execution_sessions.spend(
+        project_id="project_id",
+        session_id="session_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/spend", None, 1)
+
+
 def test_executionSessions_append_turn() -> None:
     """Test append_turn endpoint with WireMock"""
     test_id = "execution_sessions.append_turn.0"

@@ -31,6 +31,7 @@ public final class AgentsClient: Sendable {
             path: "/v1/projects/\(projectId)/agents/\(agentId)/sessions",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

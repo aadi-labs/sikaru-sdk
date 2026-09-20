@@ -56,6 +56,7 @@ public final class ImportSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/import-sessions",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -113,6 +114,7 @@ public final class ImportSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/import-sessions/\(importSessionId)/compatibility-profile",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -199,6 +201,7 @@ public final class ImportSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/import-sessions/\(importSessionId)/promote",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -229,6 +232,7 @@ public final class ImportSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/import-sessions/\(importSessionId)/replay-runs",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -288,6 +292,7 @@ public final class ImportSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/import-sessions/\(importSessionId)/source-artifacts",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -318,6 +323,7 @@ public final class ImportSessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/import-sessions/\(importSessionId)/staging-runs",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

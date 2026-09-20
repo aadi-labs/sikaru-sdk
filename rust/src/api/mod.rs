@@ -12,16 +12,16 @@ pub mod resources;
 pub mod types;
 
 pub use resources::{
-    ActivationClient, AgentImportsClient, AgentsClient, ChangesetsClient, ContextRegistryClient,
-    ConversationsClient, DeploymentsClient, EnvironmentsClient, EvalSeedsClient,
-    EvaluationComparisonsClient, EvaluationCriteriaClient, EvaluationJobsClient,
-    EvaluationResultsClient, EvaluatorRunsClient, ExecutionObjectivesClient,
+    ActivationClient, AgentBudgetsClient, AgentImportsClient, AgentsClient, ChangesetsClient,
+    ConnectionsClient, ContextRegistryClient, ConversationsClient, DeploymentsClient,
+    EnvironmentsClient, EvalSeedsClient, EvaluationComparisonsClient, EvaluationCriteriaClient,
+    EvaluationJobsClient, EvaluationResultsClient, EvaluatorRunsClient, ExecutionObjectivesClient,
     ExecutionSessionsClient, ExecutionsClient, FeedbackClient, HarnessVersionsClient,
     HarnessesClient, ImportSessionsClient, IssueClustersClient, JudgeAlignmentClient,
     ManagedAgentsClient, MemoryRegistryClient, ModelGatewayClient, ModelSettingsClient,
     OnlineEvaluationsClient, ReleaseWatchesClient, RetentionPoliciesClient, ReviewQueueClient,
-    RunSchedulesClient, RunWebhooksClient, RunsClient, SessionsClient, Sikaru, ToolProvidersClient,
-    TraceImportConnectionsClient, TraceImportsClient, TraceStreamsClient, WorkflowIntentsClient,
-    WorkflowRunsClient, WorkflowsClient,
+    RunSchedulesClient, RunWebhooksClient, RunsClient, SessionsClient, Sikaru, SpecialistsClient,
+    ToolProvidersClient, TraceImportConnectionsClient, TraceImportsClient, TraceStreamsClient,
+    WorkflowIntentsClient, WorkflowRunsClient, WorkflowsClient,
 };
 pub use types::*;

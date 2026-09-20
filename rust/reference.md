@@ -1058,6 +1058,960 @@ async fn main() {
 </dl>
 </details>
 
+## Connections
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">list_connections</a>(project_id: String) -> Result&lt;Vec&lt;Connection&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .list_connections(&"project_id".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">create_connection</a>(project_id: String, request: CreateConnection) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .create_connection(
+            &"project_id".to_string(),
+            &CreateConnection {
+                config: ConnectionConfig {
+                    ..Default::default()
+                },
+                display_name: "display_name".to_string(),
+                kind: CreateConnectionKind::Mcp,
+                credentials: None,
+                ownership: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**config:** `ConnectionConfig` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentials:** `Option<ConnectionCredentials>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**display_name:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kind:** `CreateConnectionKind` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownership:** `Option<CreateConnectionOwnership>` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">get_connection</a>(project_id: String, connection_id: String) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .get_connection(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">authorize</a>(project_id: String, connection_id: String) -> Result&lt;ConnectionAuthorization, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .authorize(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">complete</a>(project_id: String, connection_id: String, request: CompleteAuthorization) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .complete(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            &CompleteAuthorization {
+                state: "state".to_string(),
+                query: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**query:** `Option<std::collections::HashMap<String, String>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">credentials</a>(project_id: String, connection_id: String, request: ReplaceCredentials) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .credentials(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            &ReplaceCredentials {
+                credentials: ConnectionCredentials {
+                    ..Default::default()
+                },
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentials:** `ConnectionCredentials` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">disable</a>(project_id: String, connection_id: String) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .disable(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">disconnect</a>(project_id: String, connection_id: String) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .disconnect(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">discover</a>(project_id: String, connection_id: String) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .discover(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">enable</a>(project_id: String, connection_id: String) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .enable(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">events</a>(project_id: String, connection_id: String) -> Result&lt;Vec&lt;ConnectionEvent&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .events(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">grant</a>(project_id: String, connection_id: String, request: GrantConnection) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .grant(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            &GrantConnection {
+                agent_id: "agent_id".to_string(),
+                tools: vec!["tools".to_string()],
+                approval: None,
+                environment: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**approval:** `Option<GrantConnectionApproval>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `Option<GrantConnectionEnvironment>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tools:** `Vec<String>` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client.rs">revoke_grant</a>(project_id: String, connection_id: String, grant_id: String) -> Result&lt;Connection, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .connections
+        .revoke_grant(
+            &"project_id".to_string(),
+            &"connection_id".to_string(),
+            &"grant_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grant_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ContextRegistry
 <details><summary><code>client.context_registry.<a href="/src/api/resources/context_registry/client.rs">create_context_registry_change</a>(project_id: String, request: CreateContextRegistryChangeRequest) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
 <dl>
@@ -3036,6 +3990,7 @@ async fn main() {
                 run_id: "run_id".to_string(),
                 session_id: "session_id".to_string(),
                 evidence_paths: None,
+                max_rounds: None,
             },
             None,
         )
@@ -3080,6 +4035,14 @@ async fn main() {
 <dd>
 
 **idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**max_rounds:** `Option<i64>` 
     
 </dd>
 </dl>
@@ -3874,6 +4837,67 @@ async fn main() {
 </dl>
 </details>
 
+<details><summary><code>client.execution_sessions.<a href="/src/api/resources/execution_sessions/client.rs">spend</a>(project_id: String, session_id: String) -> Result&lt;SessionSpend, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .execution_sessions
+        .spend(&"project_id".to_string(), &"session_id".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.execution_sessions.<a href="/src/api/resources/execution_sessions/client.rs">append_turn</a>(project_id: String, session_id: String, request: TurnInput) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
@@ -4061,7 +5085,9 @@ async fn main() {
             &SessionInput {
                 tenant_id: "tenant_id".to_string(),
                 user_id: "user_id".to_string(),
+                auto_improve: None,
                 conversation_id: None,
+                environment: None,
                 final_output_schema: None,
                 reasoning_effort: None,
             },
@@ -4099,7 +5125,23 @@ async fn main() {
 <dl>
 <dd>
 
+**auto_improve:** `Option<bool>` — Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **conversation_id:** `Option<Option<String>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `Option<SessionInputEnvironment>` — Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
     
 </dd>
 </dl>
@@ -4132,6 +5174,330 @@ async fn main() {
 <dd>
 
 **user_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Specialists
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client.rs">list</a>(project_id: String, session_id: String) -> Result&lt;SpecialistThreads, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .specialists
+        .list(&"project_id".to_string(), &"session_id".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client.rs">get</a>(project_id: String, session_id: String, thread_id: String) -> Result&lt;SpecialistThread, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .specialists
+        .get(
+            &"project_id".to_string(),
+            &"session_id".to_string(),
+            &"thread_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client.rs">cancel</a>(project_id: String, session_id: String, thread_id: String, request: SpecialistCancel) -> Result&lt;SpecialistReceipt, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .specialists
+        .cancel(
+            &"project_id".to_string(),
+            &"session_id".to_string(),
+            &"thread_id".to_string(),
+            &SpecialistCancel {
+                idempotency_key: "idempotency_key".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client.rs">message</a>(project_id: String, session_id: String, thread_id: String, request: SpecialistMessage) -> Result&lt;SpecialistReceipt, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .specialists
+        .message(
+            &"project_id".to_string(),
+            &"session_id".to_string(),
+            &"thread_id".to_string(),
+            &SpecialistMessage {
+                idempotency_key: "idempotency_key".to_string(),
+                input: HashMap::from([("key".to_string(), serde_json::json!("value"))]),
+                delivery_mode: None,
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**delivery_mode:** `Option<SpecialistMessageDeliveryMode>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**input:** `std::collections::HashMap<String, serde_json::Value>` 
     
 </dd>
 </dl>
@@ -4480,6 +5846,323 @@ async fn main() {
 <dd>
 
 **status:** `Option<CreateHarnessVersionRequestStatus>` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AgentBudgets
+<details><summary><code>client.agent_budgets.<a href="/src/api/resources/agent_budgets/client.rs">get</a>(project_id: String, harness_id: String) -> Result&lt;AgentBudget, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .agent_budgets
+        .get(&"project_id".to_string(), &"harness_id".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agent_budgets.<a href="/src/api/resources/agent_budgets/client.rs">configure_auto_reload</a>(project_id: String, harness_id: String, request: ReloadInput) -> Result&lt;AgentBudget, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .agent_budgets
+        .configure_auto_reload(
+            &"project_id".to_string(),
+            &"harness_id".to_string(),
+            &ReloadInput {
+                amount_usd: "amount_usd".to_string(),
+                enabled: true,
+                threshold_usd: "threshold_usd".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount_usd:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enabled:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threshold_usd:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agent_budgets.<a href="/src/api/resources/agent_budgets/client.rs">add</a>(project_id: String, harness_id: String, request: FundingInput) -> Result&lt;FundingReceipt, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .agent_budgets
+        .add(
+            &"project_id".to_string(),
+            &"harness_id".to_string(),
+            &FundingInput {
+                amount_usd: "amount_usd".to_string(),
+                idempotency_key: "idempotency_key".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount_usd:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agent_budgets.<a href="/src/api/resources/agent_budgets/client.rs">setup_payment_method</a>(project_id: String, harness_id: String, request: SetupInput) -> Result&lt;PaymentSetupLink, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .agent_budgets
+        .setup_payment_method(
+            &"project_id".to_string(),
+            &"harness_id".to_string(),
+            &SetupInput {
+                idempotency_key: "idempotency_key".to_string(),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
     
 </dd>
 </dl>
@@ -4982,6 +6665,7 @@ async fn main() {
                 product_context: HashMap::from([("key".to_string(), serde_json::json!("value"))]),
                 tenant_id: "tenant_id".to_string(),
                 user_id: "user_id".to_string(),
+                auto_improve: None,
                 capability_grants: None,
                 compute_provider_id: None,
                 conversation_id: None,
@@ -4989,6 +6673,7 @@ async fn main() {
                 event_delivery: None,
                 execution_environment: None,
                 job_id: None,
+                model: None,
                 run_mode: None,
                 tool_provider_refs: None,
                 trace_id: None,
@@ -5020,6 +6705,14 @@ async fn main() {
 <dd>
 
 **harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**auto_improve:** `Option<bool>` — Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
     
 </dd>
 </dl>
@@ -5084,6 +6777,14 @@ async fn main() {
 <dd>
 
 **job_id:** `Option<Option<String>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**model:** `Option<Option<String>>` — Catalog model for this run. Omit to use the project default; list choices through model settings.
     
 </dd>
 </dl>
@@ -5334,7 +7035,7 @@ async fn main() {
 </dl>
 </details>
 
-<details><summary><code>client.runs.<a href="/src/api/resources/runs/client.rs">events</a>(project_id: String, run_id: String, after: Option&lt;Option&lt;String&gt;&gt;, limit: Option&lt;Option&lt;String&gt;&gt;, stream: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;RunEvents, ApiError&gt;</code></summary>
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client.rs">events</a>(project_id: String, run_id: String, after: Option&lt;Option&lt;String&gt;&gt;, limit: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;RunEvents, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -5410,11 +7111,96 @@ async fn main() {
     
 </dd>
 </dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client.rs">stream_events</a>(project_id: String, run_id: String, after: Option&lt;Option&lt;String&gt;&gt;) -> Result&lt;Stream&lt;Vec&lt;u8&gt;&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
 
 <dl>
 <dd>
 
-**stream:** `Option<String>` 
+<dl>
+<dd>
+
+Replay and stream durable run events; resume using after or Last-Event-ID.
+
+A terminal run event ends the stream. Idle streams may also close: callers
+can resume from their last delivered event without restarting the run.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .runs
+        .stream_events(
+            &"project_id".to_string(),
+            &"run_id".to_string(),
+            &StreamEventsQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**after:** `Option<String>` 
     
 </dd>
 </dl>
@@ -5698,6 +7484,85 @@ async fn main() {
 <dd>
 
 **tool_provider_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client.rs">get_trajectory</a>(project_id: String, run_id: String) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Read retained ATIF structure and usage with private content redacted.
+
+This is a committed snapshot and can be partial while a run is active or
+interrupted. Messages, reasoning, tool payloads and provider metadata are
+omitted. No trajectory is synthesized when retained evidence is unavailable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .runs
+        .get_trajectory(&"project_id".to_string(), &"run_id".to_string(), None)
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
     
 </dd>
 </dl>
@@ -6818,6 +8683,25 @@ async fn main() {
 <details><summary><code>client.issue_clusters.<a href="/src/api/resources/issue_clusters/client.rs">mine_project_issue_clusters</a>(project_id: String, since: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;, until: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run one failure-analysis agent pass over the project's recent traces.
+
+This is a model-latency operation on a request path: the endpoint is sync so
+the harness runs in the threadpool, and a project may only have one pass in
+flight. A background job queue is the long-term home for this work; the
+in-flight guard below is the interim bound.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -8659,9 +10543,12 @@ async fn main() {
             &"project_id".to_string(),
             &ScheduleInput {
                 input: HashMap::from([("key".to_string(), serde_json::json!("value"))]),
-                interval_seconds: 1,
                 session_id: "session_id".to_string(),
+                cron: None,
                 idempotency_key: None,
+                interval_seconds: None,
+                session_mode: None,
+                timezone: None,
             },
             None,
         )
@@ -8689,6 +10576,14 @@ async fn main() {
 <dl>
 <dd>
 
+**cron:** `Option<Option<String>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **idempotency_key:** `Option<Option<String>>` 
     
 </dd>
@@ -8705,7 +10600,7 @@ async fn main() {
 <dl>
 <dd>
 
-**interval_seconds:** `i64` 
+**interval_seconds:** `Option<Option<i64>>` 
     
 </dd>
 </dl>
@@ -8714,6 +10609,22 @@ async fn main() {
 <dd>
 
 **session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_mode:** `Option<ScheduleInputSessionMode>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `Option<String>` 
     
 </dd>
 </dl>
@@ -8849,6 +10760,90 @@ async fn main() {
 <dd>
 
 **paused:** `bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.run_schedules.<a href="/src/api/resources/run_schedules/client.rs">schedule_history</a>(project_id: String, schedule_id: String, before: Option&lt;Option&lt;Option&lt;f64&gt;&gt;&gt;, limit: Option&lt;Option&lt;i64&gt;&gt;) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .run_schedules
+        .schedule_history(
+            &"project_id".to_string(),
+            &"schedule_id".to_string(),
+            &ScheduleHistoryQueryRequest {
+                ..Default::default()
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schedule_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**before:** `Option<Option<f64>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Option<i64>` 
     
 </dd>
 </dl>

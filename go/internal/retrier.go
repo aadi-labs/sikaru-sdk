@@ -96,7 +96,7 @@ func (r *Retrier) Run(
 	if options.disabled {
 		disabled = true
 	}
-	if disabled || (request.Method != http.MethodGet && request.Method != http.MethodHead) {
+	if disabled {
 		maxRetryAttempts = 1
 	}
 	var (

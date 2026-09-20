@@ -70,6 +70,7 @@ public final class EvaluationJobsClient: Sendable {
             path: "/v1/projects/\(projectId)/evaluation-jobs",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -122,6 +123,7 @@ public final class EvaluationJobsClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/evaluation-jobs/\(jobId)/cancel",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

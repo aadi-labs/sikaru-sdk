@@ -77,7 +77,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/trace-imports",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -125,7 +126,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/trace-imports/plan",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -204,7 +206,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/trace-imports/#{URI.encode_uri_component(params[:trace_import_id].to_s)}/cancel",
           body: Sikaru::Types::VersionedTraceImportAction.new(body_params).to_h,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -283,7 +286,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/trace-imports/#{URI.encode_uri_component(params[:trace_import_id].to_s)}/retry",
           body: Sikaru::Types::VersionedTraceImportAction.new(body_params).to_h,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

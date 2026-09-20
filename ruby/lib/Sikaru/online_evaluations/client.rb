@@ -79,7 +79,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/online-evaluations",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -160,7 +161,8 @@ module Sikaru
           method: "PATCH",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/online-evaluations/#{URI.encode_uri_component(params[:policy_id].to_s)}",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

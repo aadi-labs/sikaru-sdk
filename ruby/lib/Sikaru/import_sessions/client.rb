@@ -71,7 +71,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/import-sessions",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -152,7 +153,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/import-sessions/#{URI.encode_uri_component(params[:import_session_id].to_s)}/compatibility-profile",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -273,7 +275,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/import-sessions/#{URI.encode_uri_component(params[:import_session_id].to_s)}/promote",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -315,7 +318,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/import-sessions/#{URI.encode_uri_component(params[:import_session_id].to_s)}/replay-runs",
           body: Sikaru::Types::CreateParityRunRequest.new(body_params).to_h,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -398,7 +402,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/import-sessions/#{URI.encode_uri_component(params[:import_session_id].to_s)}/source-artifacts",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -440,7 +445,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/import-sessions/#{URI.encode_uri_component(params[:import_session_id].to_s)}/staging-runs",
           body: Sikaru::Types::CreateParityRunRequest.new(body_params).to_h,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

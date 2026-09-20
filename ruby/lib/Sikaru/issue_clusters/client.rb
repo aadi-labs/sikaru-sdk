@@ -78,7 +78,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/issue-clusters",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -92,6 +93,13 @@ module Sikaru
         raise error_class.new(response.body, code: code)
       end
 
+      # Run one failure-analysis agent pass over the project's recent traces.
+      #
+      # This is a model-latency operation on a request path: the endpoint is sync so
+      # the harness runs in the threadpool, and a project may only have one pass in
+      # flight. A background job queue is the long-term home for this work; the
+      # in-flight guard below is the interim bound.
+      #
       # @param request_options [Hash]
       # @param params [Hash]
       # @option request_options [String] :base_url
@@ -118,7 +126,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/issue-clusters/mine",
           query: query_params,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -198,7 +207,8 @@ module Sikaru
           method: "PATCH",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/issue-clusters/#{URI.encode_uri_component(params[:cluster_id].to_s)}",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -235,7 +245,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/issue-clusters/#{URI.encode_uri_component(params[:cluster_id].to_s)}/propose-fix",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

@@ -32,6 +32,7 @@ public final class ReleaseWatchesClient: Sendable {
             path: "/v1/projects/\(projectId)/release-watches",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

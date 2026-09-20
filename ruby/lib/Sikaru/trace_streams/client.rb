@@ -47,7 +47,8 @@ module Sikaru
           path: "v1/trace-streams",
           headers: headers,
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

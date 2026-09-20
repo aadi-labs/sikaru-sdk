@@ -33,6 +33,7 @@ public final class ContextRegistryClient: Sendable {
             path: "/v1/projects/\(projectId)/context-registry",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

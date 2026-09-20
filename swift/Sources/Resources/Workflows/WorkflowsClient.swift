@@ -32,6 +32,7 @@ public final class WorkflowsClient: Sendable {
             path: "/v1/projects/\(projectId)/workflows/import",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -86,6 +87,7 @@ public final class WorkflowsClient: Sendable {
             path: "/v1/projects/\(projectId)/workflows/\(workflowId)/runs",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -114,6 +116,7 @@ public final class WorkflowsClient: Sendable {
             path: "/v1/projects/\(projectId)/workflows/\(workflowId)/versions",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

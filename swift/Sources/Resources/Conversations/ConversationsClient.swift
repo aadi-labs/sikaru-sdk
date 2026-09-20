@@ -73,6 +73,7 @@ public final class ConversationsClient: Sendable {
             ],
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

@@ -30,6 +30,7 @@ public final class WorkflowIntentsClient: Sendable {
             path: "/v1/projects/\(projectId)/workflow-intents",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: String].self
         )
     }
@@ -56,6 +57,7 @@ public final class WorkflowIntentsClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/workflow-intents/\(intentId)/compile",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

@@ -62,6 +62,7 @@ public final class ChangesetsClient: Sendable {
             path: "/v1/projects/\(projectId)/changesets",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -118,6 +119,7 @@ public final class ChangesetsClient: Sendable {
             path: "/v1/projects/\(projectId)/changesets/\(changesetId)/approve",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -200,6 +202,7 @@ public final class ChangesetsClient: Sendable {
             path: "/v1/projects/\(projectId)/changesets/\(changesetId)/promote",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -230,6 +233,7 @@ public final class ChangesetsClient: Sendable {
             path: "/v1/projects/\(projectId)/changesets/\(changesetId)/reject",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -260,6 +264,7 @@ public final class ChangesetsClient: Sendable {
             path: "/v1/projects/\(projectId)/changesets/\(changesetId)/rollback",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -290,6 +295,7 @@ public final class ChangesetsClient: Sendable {
             path: "/v1/projects/\(projectId)/changesets/\(changesetId)/stage",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

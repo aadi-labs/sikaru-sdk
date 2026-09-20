@@ -18,7 +18,6 @@ def test_runSchedules_create_schedule() -> None:
     client.run_schedules.create_schedule(
         project_id="project_id",
         input={"key": "value"},
-        interval_seconds=1,
         session_id="session_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/run-schedules", None, 1)
@@ -45,3 +44,14 @@ def test_runSchedules_pause_schedule() -> None:
         paused=True,
     )
     verify_request_count(test_id, "PATCH", "/v1/projects/project_id/run-schedules/schedule_id", None, 1)
+
+
+def test_runSchedules_schedule_history() -> None:
+    """Test schedule_history endpoint with WireMock"""
+    test_id = "run_schedules.schedule_history.0"
+    client = get_client(test_id)
+    client.run_schedules.schedule_history(
+        project_id="project_id",
+        schedule_id="schedule_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/run-schedules/schedule_id/occurrences", None, 1)

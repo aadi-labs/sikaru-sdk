@@ -64,6 +64,7 @@ public final class TraceImportsClient: Sendable {
             path: "/v1/projects/\(projectId)/trace-imports",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -102,6 +103,7 @@ public final class TraceImportsClient: Sendable {
             path: "/v1/projects/\(projectId)/trace-imports/plan",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -158,6 +160,7 @@ public final class TraceImportsClient: Sendable {
             path: "/v1/projects/\(projectId)/trace-imports/\(traceImportId)/cancel",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -214,6 +217,7 @@ public final class TraceImportsClient: Sendable {
             path: "/v1/projects/\(projectId)/trace-imports/\(traceImportId)/retry",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

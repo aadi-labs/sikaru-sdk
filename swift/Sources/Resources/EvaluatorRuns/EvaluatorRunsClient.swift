@@ -32,6 +32,7 @@ public final class EvaluatorRunsClient: Sendable {
             path: "/v1/projects/\(projectId)/evaluator-runs",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

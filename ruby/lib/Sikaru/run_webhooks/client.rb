@@ -71,7 +71,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/run-webhooks",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -108,7 +109,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "DELETE",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/run-webhooks/#{URI.encode_uri_component(params[:webhook_id].to_s)}",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

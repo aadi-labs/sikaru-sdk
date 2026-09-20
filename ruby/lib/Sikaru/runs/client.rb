@@ -49,7 +49,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/runs",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -164,7 +165,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/runs/#{URI.encode_uri_component(params[:run_id].to_s)}/cancel",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -189,7 +191,6 @@ module Sikaru
       # @option params [String] :run_id
       # @option params [String, nil] :after
       # @option params [String, nil] :limit
-      # @option params [String, nil] :stream
       # @option params [String, nil] :last_event_id
       #
       # @example
@@ -204,7 +205,6 @@ module Sikaru
         query_params = {}
         query_params["after"] = params[:after] if params.key?(:after)
         query_params["limit"] = params[:limit] if params.key?(:limit)
-        query_params["stream"] = params[:stream] if params.key?(:stream)
 
         headers = {}
         headers["Last-Event-ID"] = params[:last_event_id] if params[:last_event_id]
@@ -258,7 +258,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/runs/#{URI.encode_uri_component(params[:run_id].to_s)}/recover",
           body: Sikaru::Types::RecoverRunRequest.new(body_params).to_h,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -304,7 +305,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/runs/#{URI.encode_uri_component(params[:run_id].to_s)}/tool-calls/#{URI.encode_uri_component(params[:tool_call_id].to_s)}/approval",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -354,6 +356,50 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/runs/#{URI.encode_uri_component(params[:run_id].to_s)}/tool-results",
           body: body,
+          request_options: request_options,
+          max_retries: 0
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        return if code.between?(200, 299)
+
+        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(response.body, code: code)
+      end
+
+      # Read retained ATIF structure and usage with private content redacted.
+      #
+      # This is a committed snapshot and can be partial while a run is active or
+      # interrupted. Messages, reasoning, tool payloads and provider metadata are
+      # omitted. No trajectory is synthesized when retained evidence is unavailable.
+      #
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :run_id
+      #
+      # @example
+      #   client.runs.get_trajectory(
+      #     project_id: "project_id",
+      #     run_id: "run_id"
+      #   )
+      #
+      # @return [Hash[String, Object]]
+      def get_trajectory(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/runs/#{URI.encode_uri_component(params[:run_id].to_s)}/trajectory",
           request_options: request_options
         )
         begin

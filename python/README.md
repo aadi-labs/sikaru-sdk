@@ -1,5 +1,6 @@
 # Sikaru Python Library
 
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Sikaru%2FPython)
 [![pypi](https://img.shields.io/pypi/v/sikaru_api)](https://pypi.python.org/pypi/sikaru_api)
 
 The Sikaru Python library provides convenient access to the Sikaru APIs from Python.
@@ -12,6 +13,7 @@ The Sikaru Python library provides convenient access to the Sikaru APIs from Pyt
 - [Environments](#environments)
 - [Async Client](#async-client)
 - [Exception Handling](#exception-handling)
+- [Streaming](#streaming)
 - [Advanced](#advanced)
   - [Access Raw Response Data](#access-raw-response-data)
   - [Retries](#retries)
@@ -108,6 +110,23 @@ except ApiError as e:
     print(e.body)
 ```
 
+## Streaming
+
+The SDK supports streaming responses, as well, the response will be a generator that you can loop over.
+
+```python
+from sikaru_api import SikaruApi
+
+client = SikaruApi(
+    api_key="<token>",
+)
+
+client.runs.stream_events(
+    project_id="project_id",
+    run_id="run_id",
+)
+```
+
 ## Advanced
 
 ### Access Raw Response Data
@@ -127,8 +146,73 @@ print(response.data)  # access the underlying object
 
 ### Retries
 
-Only GET and HEAD requests may retry automatically. Mutations are never automatically retried, even when retry options are enabled. Retain operation receipts and reconcile uncertain results before issuing another mutation.
+The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
+retry limit (default: 2).
+
+Which status codes are retried depends on the `retryStatusCodes` generator configuration:
+
+**`legacy`** (current default): retries on
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) (All server errors, including 500)
+
+**`recommended`**: retries on
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [409](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409) (Conflict)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [502](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502) (Bad Gateway)
+- [503](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503) (Service Unavailable)
+- [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504) (Gateway Timeout)
+
+Use the `max_retries` request option to configure this behavior.
+
+```python
+client.agent_imports.create_agent_import(..., request_options={
+    "max_retries": 1
+})
+```
+
+### Timeouts
+
+The SDK defaults to a 60 second timeout. You can configure this with a timeout option at the client or request level.
+
+```python
+from sikaru_api import SikaruApi
+
+client = SikaruApi(..., timeout=20.0)
+
+# Override timeout for a specific method
+client.agent_imports.create_agent_import(..., request_options={
+    "timeout": 1
+})
+```
+
+### Custom Client
+
+You can override the `httpx` client to customize it for your use-case. Some common use-cases include support for proxies
+and transports.
+
+```python
+import httpx
+from sikaru_api import SikaruApi
+
+client = SikaruApi(
+    ...,
+    httpx_client=httpx.Client(
+        proxy="http://my.test.proxy.example.com",
+        transport=httpx.HTTPTransport(local_address="0.0.0.0"),
+    ),
+)
+```
 
 ## Contributing
 
-Report bugs and proposed API changes through this repository. Include a minimal reproduction and never include API keys or private data.
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!

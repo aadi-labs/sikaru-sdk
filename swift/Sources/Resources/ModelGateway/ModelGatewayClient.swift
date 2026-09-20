@@ -33,6 +33,7 @@ public final class ModelGatewayClient: Sendable {
             path: "/v1/projects/\(projectId)/model-gateway/\(provider)/chat/completions/capture",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

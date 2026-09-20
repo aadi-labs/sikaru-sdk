@@ -8,6 +8,8 @@ pub struct ObjectiveInput {
     pub evidence_paths: Option<Vec<String>>,
     #[serde(default)]
     pub idempotency_key: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_rounds: Option<i64>,
     #[serde(default)]
     pub objective: String,
     #[serde(default)]
@@ -28,6 +30,7 @@ pub struct ObjectiveInputBuilder {
     criterion: Option<String>,
     evidence_paths: Option<Vec<String>>,
     idempotency_key: Option<String>,
+    max_rounds: Option<i64>,
     objective: Option<String>,
     run_id: Option<String>,
     session_id: Option<String>,
@@ -46,6 +49,11 @@ impl ObjectiveInputBuilder {
 
     pub fn idempotency_key(mut self, value: impl Into<String>) -> Self {
         self.idempotency_key = Some(value.into());
+        self
+    }
+
+    pub fn max_rounds(mut self, value: i64) -> Self {
+        self.max_rounds = Some(value);
         self
     }
 
@@ -80,6 +88,7 @@ impl ObjectiveInputBuilder {
             idempotency_key: self
                 .idempotency_key
                 .ok_or_else(|| BuildError::missing_field("idempotency_key"))?,
+            max_rounds: self.max_rounds,
             objective: self
                 .objective
                 .ok_or_else(|| BuildError::missing_field("objective"))?,

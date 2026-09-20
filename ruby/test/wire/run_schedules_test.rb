@@ -41,7 +41,6 @@ class RunSchedulesWireTest < WireMockTestCase
       input: {
         key: "value"
       },
-      interval_seconds: 1,
       session_id: "session_id",
       request_options: {
         additional_headers: {
@@ -99,6 +98,28 @@ class RunSchedulesWireTest < WireMockTestCase
       test_id: test_id,
       method: "PATCH",
       url_path: "/v1/projects/project_id/run-schedules/schedule_id",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_run_schedules_schedule_history_with_wiremock
+    test_id = "run_schedules.schedule_history.0"
+
+    @client.run_schedules.schedule_history(
+      project_id: "project_id",
+      schedule_id: "schedule_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "run_schedules.schedule_history.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v1/projects/project_id/run-schedules/schedule_id/occurrences",
       query_params: nil,
       expected: 1
     )

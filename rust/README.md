@@ -1,5 +1,6 @@
 # Sikaru Rust Library
 
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Sikaru%2FRust)
 [![crates.io shield](https://img.shields.io/crates/v/sikaru)](https://crates.io/crates/sikaru)
 
 The Sikaru Rust library provides convenient access to the Sikaru APIs from Rust.
@@ -124,8 +125,97 @@ let request = CreateAgentImportRequest {
 
 ### Retries
 
-Only GET and HEAD requests may retry automatically. Mutations are never automatically retried, even when retry options are enabled. Retain operation receipts and reconcile uncertain results before issuing another mutation.
+The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
+retry limit (default: 2).
+
+A request is deemed retryable when any of the following HTTP status codes is returned:
+
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) (Internal Server Error)
+
+The `retryStatusCodes` configuration controls which [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) status codes are retried:
+
+- `legacy` (default): Retries `408`, `429`, and all `>= 500`
+- `recommended`: Retries `408`, `429`, `502`, `503`, `504` only (excludes `500 Internal Server Error` to avoid retrying non-idempotent failures)
+
+Use the `max_retries` method to configure this behavior.
+
+```rust
+let response = client.agent_imports.create_agent_import(
+    Some(RequestOptions::new().max_retries(3))
+)?.await;
+```
+
+### Timeouts
+
+The SDK defaults to a 30 second timeout. Use the `timeout` method to configure this behavior.
+
+```rust
+let response = client.agent_imports.create_agent_import(
+    Some(RequestOptions::new().timeout_seconds(30))
+)?.await;
+```
+
+### Additional Headers
+
+You can add custom headers to requests using `RequestOptions`.
+
+```rust
+let response = client.agent_imports.create_agent_import(
+    Some(
+        RequestOptions::new()
+            .additional_header("X-Custom-Header", "custom-value")
+            .additional_header("X-Another-Header", "another-value")
+    )
+)?
+.await;
+```
+
+### Additional Query String Parameters
+
+You can add custom query parameters to requests using `RequestOptions`.
+
+```rust
+let response = client.agent_imports.create_agent_import(
+    Some(
+        RequestOptions::new()
+            .additional_query_param("filter", "active")
+            .additional_query_param("sort", "desc")
+    )
+)?
+.await;
+```
+
+### Custom Client
+
+The SDK builds its own `reqwest` client by default, but you can supply your own through
+`ClientConfig.reqwest_client` (or `ApiClientBuilder::reqwest_client`) when you need control over the
+transport — custom root certificates, client certificates, proxies or connection tuning. The supplied
+client is used as-is; authentication, custom headers and retries are still applied by the SDK.
+
+```rust
+use sikaru::prelude::*;
+
+let certificate = reqwest::Certificate::from_pem(&std::fs::read("ca.pem")?)?;
+let reqwest_client = reqwest::Client::builder()
+    .add_root_certificate(certificate)
+    .build()
+    .expect("Failed to build reqwest client");
+let config = ClientConfig {
+    reqwest_client: Some(reqwest_client),
+    ..Default::default()
+};
+let client = Sikaru::new(config).expect("Failed to build client");
+```
 
 ## Contributing
 
-Report bugs and proposed API changes through this repository. Include a minimal reproduction and never include API keys or private data.
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!

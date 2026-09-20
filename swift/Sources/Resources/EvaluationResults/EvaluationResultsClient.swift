@@ -69,6 +69,7 @@ public final class EvaluationResultsClient: Sendable {
             path: "/v1/projects/\(projectId)/evaluation-results",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

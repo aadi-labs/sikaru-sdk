@@ -193,7 +193,7 @@ export async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIR
                     args.duplex,
                     args.responseType === "streaming" || args.responseType === "sse",
                 ),
-            ["GET", "HEAD"].includes(args.method.toUpperCase()) ? args.maxRetries : 0,
+            args.maxRetries,
         );
 
         if (response.status >= 200 && response.status < 400) {

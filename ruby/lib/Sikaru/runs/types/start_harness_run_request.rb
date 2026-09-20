@@ -8,6 +8,8 @@ module Sikaru
 
         field :harness_id, -> { String }, optional: false, nullable: false
 
+        field :auto_improve, -> { Internal::Types::Boolean }, optional: true, nullable: false
+
         field :capability_grants, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
         field :compute_provider_id, -> { String }, optional: true, nullable: false
@@ -23,6 +25,8 @@ module Sikaru
         field :input, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
 
         field :job_id, -> { String }, optional: true, nullable: false
+
+        field :model, -> { String }, optional: true, nullable: false
 
         field :policy, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
 

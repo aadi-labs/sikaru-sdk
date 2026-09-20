@@ -46,7 +46,6 @@ public final class RunSchedulesClient: Sendable {
     ///             input: [
     ///                 "key": .string("value")
     ///             ],
-    ///             intervalSeconds: 1,
     ///             sessionId: "session_id"
     ///         )
     ///     )
@@ -62,6 +61,7 @@ public final class RunSchedulesClient: Sendable {
             path: "/v1/projects/\(projectId)/run-schedules",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -88,6 +88,7 @@ public final class RunSchedulesClient: Sendable {
             method: .delete,
             path: "/v1/projects/\(projectId)/run-schedules/\(scheduleId)",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -115,6 +116,37 @@ public final class RunSchedulesClient: Sendable {
             method: .patch,
             path: "/v1/projects/\(projectId)/run-schedules/\(scheduleId)",
             body: request,
+            requestOptions: requestOptions,
+            retriesDisabled: true,
+            responseType: [String: JSONValue].self
+        )
+    }
+
+    /// ```swift
+    /// import Foundation
+    /// import Sikaru
+    ///
+    /// private func main() async throws {
+    ///     let client = Sikaru(apiKey: "<token>")
+    ///
+    ///     _ = try await client.runSchedules.scheduleHistory(
+    ///         projectId: "project_id",
+    ///         scheduleId: "schedule_id"
+    ///     )
+    /// }
+    ///
+    /// try await main()
+    /// ```
+    ///
+    /// - Parameter requestOptions: Additional options for configuring the request, such as custom headers or timeout settings.
+    public func scheduleHistory(projectId: String, scheduleId: String, before: Nullable<Double>? = nil, limit: Int? = nil, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
+        return try await httpClient.performRequest(
+            method: .get,
+            path: "/v1/projects/\(projectId)/run-schedules/\(scheduleId)/occurrences",
+            queryParams: [
+                "before": before?.wrappedValue.map { .double($0) }, 
+                "limit": limit.map { .int($0) }
+            ],
             requestOptions: requestOptions,
             responseType: [String: JSONValue].self
         )

@@ -53,6 +53,7 @@ public final class ModelSettingsClient: Sendable {
             path: "/v1/projects/\(projectId)/model-settings",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

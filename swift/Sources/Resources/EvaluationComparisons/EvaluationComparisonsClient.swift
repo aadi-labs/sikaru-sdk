@@ -76,6 +76,7 @@ public final class EvaluationComparisonsClient: Sendable {
             path: "/v1/projects/\(projectId)/evaluation-comparisons",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -128,6 +129,7 @@ public final class EvaluationComparisonsClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/evaluation-comparisons/\(comparisonId)/cancel",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

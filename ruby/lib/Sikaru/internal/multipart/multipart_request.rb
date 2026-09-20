@@ -14,8 +14,9 @@ module Sikaru
         # @param query [Hash] Query parameters for the request (optional)
         # @param body [MultipartFormData, nil] The multipart form data for the request (optional)
         # @param request_options [Sikaru::RequestOptions, Hash{Symbol=>Object}, nil]
-        def initialize(base_url:, path:, method:, headers: {}, query: {}, body: nil, request_options: {})
-          super(base_url:, path:, method:, headers:, query:, request_options:)
+        # @param max_retries [Integer, nil] Overrides the client's retry count for this request
+        def initialize(base_url:, path:, method:, headers: {}, query: {}, body: nil, request_options: {}, max_retries: nil)
+          super(base_url:, path:, method:, headers:, query:, request_options:, max_retries:)
 
           @body = body
         end

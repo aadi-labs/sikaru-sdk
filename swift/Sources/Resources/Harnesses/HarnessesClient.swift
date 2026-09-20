@@ -87,6 +87,7 @@ public final class HarnessesClient: Sendable {
             path: "/v1/projects/\(projectId)/harnesses/\(harnessId)/improvements",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -145,6 +146,7 @@ public final class HarnessesClient: Sendable {
             path: "/v1/projects/\(projectId)/harnesses/\(harnessId)/improvements/\(jobId)/resume",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -173,6 +175,7 @@ public final class HarnessesClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/harnesses/\(harnessId)/training",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

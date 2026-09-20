@@ -32,6 +32,7 @@ public final class RetentionPoliciesClient: Sendable {
             path: "/v1/projects/\(projectId)/retention-policies",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

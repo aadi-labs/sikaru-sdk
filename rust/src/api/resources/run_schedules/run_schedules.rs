@@ -75,9 +75,12 @@ impl RunSchedulesClient {
     ///             &"project_id".to_string(),
     ///             &ScheduleInput {
     ///                 input: HashMap::from([("key".to_string(), serde_json::json!("value"))]),
-    ///                 interval_seconds: 1,
     ///                 session_id: "session_id".to_string(),
+    ///                 cron: None,
     ///                 idempotency_key: None,
+    ///                 interval_seconds: None,
+    ///                 session_mode: None,
+    ///                 timezone: None,
     ///             },
     ///             None,
     ///         )
@@ -90,6 +93,11 @@ impl RunSchedulesClient {
         request: &ScheduleInput,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -125,6 +133,11 @@ impl RunSchedulesClient {
         schedule_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -166,12 +179,66 @@ impl RunSchedulesClient {
         request: &PauseInput,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PATCH,
                 &format!("v1/projects/{}/run-schedules/{}", project_id, schedule_id),
                 Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
                 None,
+                options,
+            )
+            .await
+    }
+
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use sikaru::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         token: Some("<token>".to_string()),
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Sikaru::new(config).expect("Failed to build client");
+    ///     client
+    ///         .run_schedules
+    ///         .schedule_history(
+    ///             &"project_id".to_string(),
+    ///             &"schedule_id".to_string(),
+    ///             &ScheduleHistoryQueryRequest {
+    ///                 ..Default::default()
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn schedule_history(
+        &self,
+        project_id: &str,
+        schedule_id: &str,
+        request: &ScheduleHistoryQueryRequest,
+        options: Option<RequestOptions>,
+    ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!(
+                    "v1/projects/{}/run-schedules/{}/occurrences",
+                    project_id, schedule_id
+                ),
+                None,
+                QueryBuilder::new()
+                    .serialize("before", request.before.clone())
+                    .int("limit", request.limit.clone())
+                    .build(),
                 options,
             )
             .await

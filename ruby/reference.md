@@ -995,6 +995,866 @@ client.changesets.stage_changeset(
 </dl>
 </details>
 
+## Connections
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">list_connections</a>(project_id:) -> Internal::Types::Array[Sikaru::Types::Connection]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.list_connections(project_id: "project_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">create_connection</a>(project_id:, request) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.create_connection(
+  project_id: "project_id",
+  config: {},
+  display_name: "display_name",
+  kind: "mcp"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**config:** `Sikaru::Types::ConnectionConfig` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentials:** `Sikaru::Types::ConnectionCredentials` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**display_name:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kind:** `Sikaru::Connections::Types::CreateConnectionKind` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownership:** `Sikaru::Connections::Types::CreateConnectionOwnership` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">get_connection</a>(project_id:, connection_id:) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.get_connection(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">authorize</a>(project_id:, connection_id:) -> Sikaru::Types::ConnectionAuthorization</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.authorize(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">complete</a>(project_id:, connection_id:, request) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.complete(
+  project_id: "project_id",
+  connection_id: "connection_id",
+  state: "state"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**query:** `Internal::Types::Hash[String, String]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">credentials</a>(project_id:, connection_id:, request) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.credentials(
+  project_id: "project_id",
+  connection_id: "connection_id",
+  credentials: {}
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentials:** `Sikaru::Types::ConnectionCredentials` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">disable</a>(project_id:, connection_id:) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.disable(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">disconnect</a>(project_id:, connection_id:) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.disconnect(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">discover</a>(project_id:, connection_id:) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.discover(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">enable</a>(project_id:, connection_id:) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.enable(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">events</a>(project_id:, connection_id:) -> Internal::Types::Array[Sikaru::Types::ConnectionEvent]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.events(
+  project_id: "project_id",
+  connection_id: "connection_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">grant</a>(project_id:, connection_id:, request) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.grant(
+  project_id: "project_id",
+  connection_id: "connection_id",
+  agent_id: "agent_id",
+  tools: ["tools"]
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**approval:** `Sikaru::Connections::Types::GrantConnectionApproval` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `Sikaru::Connections::Types::GrantConnectionEnvironment` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tools:** `Internal::Types::Array[String]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">revoke_grant</a>(project_id:, connection_id:, grant_id:) -> Sikaru::Types::Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.connections.revoke_grant(
+  project_id: "project_id",
+  connection_id: "connection_id",
+  grant_id: "grant_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grant_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Connections::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ContextRegistry
 <details><summary><code>client.context_registry.<a href="/lib/Sikaru/context_registry/client.rb">create_context_registry_change</a>(project_id:, request) -> Internal::Types::Hash[String, Object]</code></summary>
 <dl>
@@ -2813,6 +3673,14 @@ client.execution_objectives.create(
 <dl>
 <dd>
 
+**max_rounds:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **objective:** `String` 
     
 </dd>
@@ -3565,6 +4433,65 @@ client.execution_sessions.list_session_inputs(
 </dl>
 </details>
 
+<details><summary><code>client.execution_sessions.<a href="/lib/Sikaru/execution_sessions/client.rb">spend</a>(project_id:, session_id:) -> Sikaru::Types::SessionSpend</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.execution_sessions.spend(
+  project_id: "project_id",
+  session_id: "session_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ExecutionSessions::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.execution_sessions.<a href="/lib/Sikaru/execution_sessions/client.rb">append_turn</a>(project_id:, session_id:, request) -> Internal::Types::Hash[String, Object]</code></summary>
 <dl>
 <dd>
@@ -3757,7 +4684,23 @@ client.execution_sessions.create(
 <dl>
 <dd>
 
+**auto_improve:** `Internal::Types::Boolean` — Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **conversation_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `Sikaru::ExecutionSessions::Types::SessionInputEnvironment` — Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
     
 </dd>
 </dl>
@@ -3798,6 +4741,307 @@ client.execution_sessions.create(
 <dd>
 
 **request_options:** `Sikaru::ExecutionSessions::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Specialists
+<details><summary><code>client.specialists.<a href="/lib/Sikaru/specialists/client.rb">list</a>(project_id:, session_id:) -> Sikaru::Types::SpecialistThreads</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.specialists.list(
+  project_id: "project_id",
+  session_id: "session_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Specialists::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/lib/Sikaru/specialists/client.rb">get</a>(project_id:, session_id:, thread_id:) -> Sikaru::Types::SpecialistThread</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.specialists.get(
+  project_id: "project_id",
+  session_id: "session_id",
+  thread_id: "thread_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Specialists::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/lib/Sikaru/specialists/client.rb">cancel</a>(project_id:, session_id:, thread_id:, request) -> Sikaru::Types::SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.specialists.cancel(
+  project_id: "project_id",
+  session_id: "session_id",
+  thread_id: "thread_id",
+  idempotency_key: "idempotency_key"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Specialists::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.specialists.<a href="/lib/Sikaru/specialists/client.rb">message</a>(project_id:, session_id:, thread_id:, request) -> Sikaru::Types::SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.specialists.message(
+  project_id: "project_id",
+  session_id: "session_id",
+  thread_id: "thread_id",
+  idempotency_key: "idempotency_key",
+  input: {
+    key: "value"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thread_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**delivery_mode:** `Sikaru::Specialists::Types::SpecialistMessageDeliveryMode` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**input:** `Internal::Types::Hash[String, Object]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Specialists::RequestOptions` 
     
 </dd>
 </dl>
@@ -4113,6 +5357,297 @@ client.harness_versions.create_harness_version(
 <dd>
 
 **request_options:** `Sikaru::HarnessVersions::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AgentBudgets
+<details><summary><code>client.agent_budgets.<a href="/lib/Sikaru/agent_budgets/client.rb">get</a>(project_id:, harness_id:) -> Sikaru::Types::AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.agent_budgets.get(
+  project_id: "project_id",
+  harness_id: "harness_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::AgentBudgets::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agent_budgets.<a href="/lib/Sikaru/agent_budgets/client.rb">configure_auto_reload</a>(project_id:, harness_id:, request) -> Sikaru::Types::AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.agent_budgets.configure_auto_reload(
+  project_id: "project_id",
+  harness_id: "harness_id",
+  amount_usd: "amount_usd",
+  enabled: true,
+  threshold_usd: "threshold_usd"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount_usd:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enabled:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threshold_usd:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::AgentBudgets::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agent_budgets.<a href="/lib/Sikaru/agent_budgets/client.rb">add</a>(project_id:, harness_id:, request) -> Sikaru::Types::FundingReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.agent_budgets.add(
+  project_id: "project_id",
+  harness_id: "harness_id",
+  amount_usd: "amount_usd",
+  idempotency_key: "idempotency_key"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amount_usd:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::AgentBudgets::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agent_budgets.<a href="/lib/Sikaru/agent_budgets/client.rb">setup_payment_method</a>(project_id:, harness_id:, request) -> Sikaru::Types::PaymentSetupLink</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.agent_budgets.setup_payment_method(
+  project_id: "project_id",
+  harness_id: "harness_id",
+  idempotency_key: "idempotency_key"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::AgentBudgets::RequestOptions` 
     
 </dd>
 </dl>
@@ -4612,6 +6147,14 @@ client.runs.start(
 <dl>
 <dd>
 
+**auto_improve:** `Internal::Types::Boolean` — Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **capability_grants:** `Internal::Types::Array[String]` 
     
 </dd>
@@ -4669,6 +6212,14 @@ client.runs.start(
 <dd>
 
 **job_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**model:** `String` — Catalog model for this run. Omit to use the project default; list choices through model settings.
     
 </dd>
 </dl>
@@ -4984,14 +6535,6 @@ client.runs.events(
 <dl>
 <dd>
 
-**stream:** `String` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **last_event_id:** `String` 
     
 </dd>
@@ -5261,6 +6804,83 @@ client.runs.submit_tool_result(
 <dd>
 
 **tool_provider_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Runs::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/lib/Sikaru/runs/client.rb">get_trajectory</a>(project_id:, run_id:) -> Internal::Types::Hash[String, Object]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Read retained ATIF structure and usage with private content redacted.
+
+This is a committed snapshot and can be partial while a run is active or
+interrupted. Messages, reasoning, tool payloads and provider metadata are
+omitted. No trajectory is synthesized when retained evidence is unavailable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.runs.get_trajectory(
+  project_id: "project_id",
+  run_id: "run_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
     
 </dd>
 </dl>
@@ -6293,6 +7913,25 @@ client.issue_clusters.upsert_issue_cluster(
 <details><summary><code>client.issue_clusters.<a href="/lib/Sikaru/issue_clusters/client.rb">mine_project_issue_clusters</a>(project_id:) -> Internal::Types::Hash[String, Object]</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run one failure-analysis agent pass over the project's recent traces.
+
+This is a model-latency operation on a request path: the endpoint is sync so
+the harness runs in the threadpool, and a project may only have one pass in
+flight. A background job queue is the long-term home for this work; the
+in-flight guard below is the interim bound.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -7930,7 +9569,6 @@ client.run_schedules.create_schedule(
   input: {
     key: "value"
   },
-  interval_seconds: 1,
   session_id: "session_id"
 )
 ```
@@ -7948,6 +9586,14 @@ client.run_schedules.create_schedule(
 <dd>
 
 **project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cron:** `String` 
     
 </dd>
 </dl>
@@ -7980,6 +9626,22 @@ client.run_schedules.create_schedule(
 <dd>
 
 **session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_mode:** `Sikaru::RunSchedules::Types::ScheduleInputSessionMode` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `String` 
     
 </dd>
 </dl>
@@ -8107,6 +9769,81 @@ client.run_schedules.pause_schedule(
 <dd>
 
 **paused:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::RunSchedules::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.run_schedules.<a href="/lib/Sikaru/run_schedules/client.rb">schedule_history</a>(project_id:, schedule_id:) -> Internal::Types::Hash[String, Object]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.run_schedules.schedule_history(
+  project_id: "project_id",
+  schedule_id: "schedule_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schedule_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**before:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` 
     
 </dd>
 </dl>

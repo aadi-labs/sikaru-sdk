@@ -38,6 +38,11 @@ module Sikaru
       @changesets ||= Sikaru::Changesets::Client.new(client: @raw_client)
     end
 
+    # @return [Sikaru::Connections::Client]
+    def connections
+      @connections ||= Sikaru::Connections::Client.new(client: @raw_client)
+    end
+
     # @return [Sikaru::ContextRegistry::Client]
     def context_registry
       @context_registry ||= Sikaru::ContextRegistry::Client.new(client: @raw_client)
@@ -98,6 +103,11 @@ module Sikaru
       @execution_sessions ||= Sikaru::ExecutionSessions::Client.new(client: @raw_client)
     end
 
+    # @return [Sikaru::Specialists::Client]
+    def specialists
+      @specialists ||= Sikaru::Specialists::Client.new(client: @raw_client)
+    end
+
     # @return [Sikaru::Executions::Client]
     def executions
       @executions ||= Sikaru::Executions::Client.new(client: @raw_client)
@@ -111,6 +121,11 @@ module Sikaru
     # @return [Sikaru::HarnessVersions::Client]
     def harness_versions
       @harness_versions ||= Sikaru::HarnessVersions::Client.new(client: @raw_client)
+    end
+
+    # @return [Sikaru::AgentBudgets::Client]
+    def agent_budgets
+      @agent_budgets ||= Sikaru::AgentBudgets::Client.new(client: @raw_client)
     end
 
     # @return [Sikaru::Harnesses::Client]

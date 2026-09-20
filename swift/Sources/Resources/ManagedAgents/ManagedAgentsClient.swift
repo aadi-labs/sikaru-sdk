@@ -53,6 +53,7 @@ public final class ManagedAgentsClient: Sendable {
             path: "/v1/projects/\(projectId)/managed-agents",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

@@ -62,6 +62,7 @@ async fn test_execution_objectives_create_with_wiremock() {
                 run_id: "run_id".to_string(),
                 session_id: "session_id".to_string(),
                 evidence_paths: None,
+                max_rounds: None,
             },
             None,
         )

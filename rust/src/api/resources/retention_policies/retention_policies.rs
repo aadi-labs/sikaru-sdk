@@ -55,6 +55,11 @@ impl RetentionPoliciesClient {
         request: &CreateRetentionPolicyUpdateRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

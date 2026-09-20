@@ -12,6 +12,8 @@ module Sikaru
 
         field :idempotency_key, -> { String }, optional: false, nullable: false
 
+        field :max_rounds, -> { Integer }, optional: true, nullable: false
+
         field :objective, -> { String }, optional: false, nullable: false
 
         field :run_id, -> { String }, optional: false, nullable: false

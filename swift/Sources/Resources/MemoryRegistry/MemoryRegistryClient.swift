@@ -35,6 +35,7 @@ public final class MemoryRegistryClient: Sendable {
             path: "/v1/projects/\(projectId)/memory-registry",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

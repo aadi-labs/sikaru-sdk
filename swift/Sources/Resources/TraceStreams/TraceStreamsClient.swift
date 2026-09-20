@@ -34,6 +34,7 @@ public final class TraceStreamsClient: Sendable {
             path: "/v1/trace-streams",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

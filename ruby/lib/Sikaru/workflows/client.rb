@@ -39,7 +39,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/workflows/import",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -123,7 +124,8 @@ module Sikaru
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/workflows/#{URI.encode_uri_component(params[:workflow_id].to_s)}/runs",
           headers: headers,
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -165,7 +167,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/workflows/#{URI.encode_uri_component(params[:workflow_id].to_s)}/versions",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

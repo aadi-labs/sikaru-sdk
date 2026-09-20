@@ -43,6 +43,7 @@ public final class RunsClient: Sendable {
             path: "/v1/projects/\(projectId)/harnesses/\(harnessId)/runs",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: ManagedRun.self
         )
     }
@@ -121,6 +122,7 @@ public final class RunsClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/runs/\(runId)/cancel",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -142,14 +144,13 @@ public final class RunsClient: Sendable {
     /// ```
     ///
     /// - Parameter requestOptions: Additional options for configuring the request, such as custom headers or timeout settings.
-    public func events(projectId: String, runId: String, after: String? = nil, limit: String? = nil, stream: String? = nil, requestOptions: RequestOptions? = nil) async throws -> RunEvents {
+    public func events(projectId: String, runId: String, after: String? = nil, limit: String? = nil, requestOptions: RequestOptions? = nil) async throws -> RunEvents {
         return try await httpClient.performRequest(
             method: .get,
             path: "/v1/projects/\(projectId)/runs/\(runId)/events",
             queryParams: [
                 "after": after.map { .string($0) }, 
-                "limit": limit.map { .string($0) }, 
-                "stream": stream.map { .string($0) }
+                "limit": limit.map { .string($0) }
             ],
             requestOptions: requestOptions,
             responseType: RunEvents.self
@@ -182,6 +183,7 @@ public final class RunsClient: Sendable {
             path: "/v1/projects/\(projectId)/runs/\(runId)/recover",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -214,6 +216,7 @@ public final class RunsClient: Sendable {
             path: "/v1/projects/\(projectId)/runs/\(runId)/tool-calls/\(toolCallId)/approval",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -250,6 +253,39 @@ public final class RunsClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/runs/\(runId)/tool-results",
             body: request,
+            requestOptions: requestOptions,
+            retriesDisabled: true,
+            responseType: [String: JSONValue].self
+        )
+    }
+
+    /// Read retained ATIF structure and usage with private content redacted.
+    ///
+    /// This is a committed snapshot and can be partial while a run is active or
+    /// interrupted. Messages, reasoning, tool payloads and provider metadata are
+    /// omitted. No trajectory is synthesized when retained evidence is unavailable.
+    ///
+    /// ```swift
+    /// import Foundation
+    /// import Sikaru
+    ///
+    /// private func main() async throws {
+    ///     let client = Sikaru(apiKey: "<token>")
+    ///
+    ///     _ = try await client.runs.getTrajectory(
+    ///         projectId: "project_id",
+    ///         runId: "run_id"
+    ///     )
+    /// }
+    ///
+    /// try await main()
+    /// ```
+    ///
+    /// - Parameter requestOptions: Additional options for configuring the request, such as custom headers or timeout settings.
+    public func getTrajectory(projectId: String, runId: String, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
+        return try await httpClient.performRequest(
+            method: .get,
+            path: "/v1/projects/\(projectId)/runs/\(runId)/trajectory",
             requestOptions: requestOptions,
             responseType: [String: JSONValue].self
         )

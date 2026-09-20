@@ -1,5 +1,6 @@
 # Sikaru Go Library
 
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=Sikaru%2FGo)
 
 The Sikaru Go library provides convenient access to the Sikaru APIs from Go.
 
@@ -139,8 +140,79 @@ fmt.Printf("Got status code: %d", response.StatusCode)
 
 ### Retries
 
-Only GET and HEAD requests may retry automatically. Mutations are never automatically retried, even when retry options are enabled. Retain operation receipts and reconcile uncertain results before issuing another mutation.
+The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
+retry limit (default: 2).
+
+Which status codes are retried depends on the `retryStatusCodes` generator configuration:
+
+**`legacy`** (current default): retries on
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) (All server errors, including 500)
+
+**`recommended`**: retries on
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [502](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502) (Bad Gateway)
+- [503](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503) (Service Unavailable)
+- [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504) (Gateway Timeout)
+
+If the `Retry-After` header is present in the response, the SDK will prioritize respecting its value exactly
+over the default exponential backoff.
+
+Use the `option.WithMaxAttempts` option to configure this behavior for the entire client or an individual request:
+
+```go
+client := client.NewClient(
+    option.WithMaxAttempts(1),
+)
+
+response, err := client.AgentImports.CreateAgentImport(
+    ...,
+    option.WithMaxAttempts(1),
+)
+```
+
+### Timeouts
+
+Setting a timeout for each individual request is as simple as using the standard context library. Setting a one second timeout for an individual API call looks like the following:
+
+```go
+ctx, cancel := context.WithTimeout(ctx, time.Second)
+defer cancel()
+
+response, err := client.AgentImports.CreateAgentImport(ctx, ...)
+```
+
+### Explicit Null
+
+If you want to send the explicit `null` JSON value through an optional parameter, you can use the setters\
+that come with every object. Calling a setter method for a property will flip a bit in the `explicitFields`
+bitfield for that setter's object; during serialization, any property with a flipped bit will have its
+omittable status stripped, so zero or `nil` values will be sent explicitly rather than omitted altogether:
+
+```go
+type ExampleRequest struct {
+    // An optional string parameter.
+    Name *string `json:"name,omitempty" url:"-"`
+
+    // Private bitmask of fields set to an explicit value and therefore not to be omitted
+    explicitFields *big.Int `json:"-" url:"-"`
+}
+
+request := &ExampleRequest{}
+request.SetName(nil)
+
+response, err := client.AgentImports.CreateAgentImport(ctx, request, ...)
+```
 
 ## Contributing
 
-Report bugs and proposed API changes through this repository. Include a minimal reproduction and never include API keys or private data.
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!

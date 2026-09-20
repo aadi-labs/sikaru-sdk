@@ -50,6 +50,11 @@ impl ToolProvidersClient {
         request: &RegisterToolProviderRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -98,6 +103,11 @@ impl ToolProvidersClient {
         request: &AttachSourceToolSkillRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

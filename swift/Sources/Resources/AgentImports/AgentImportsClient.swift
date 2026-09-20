@@ -60,6 +60,7 @@ public final class AgentImportsClient: Sendable {
             path: "/v1/projects/\(projectId)/agent-imports",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

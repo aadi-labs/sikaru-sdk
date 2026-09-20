@@ -62,10 +62,18 @@ public final class IssueClustersClient: Sendable {
             path: "/v1/projects/\(projectId)/issue-clusters",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
 
+    /// Run one failure-analysis agent pass over the project's recent traces.
+    ///
+    /// This is a model-latency operation on a request path: the endpoint is sync so
+    /// the harness runs in the threadpool, and a project may only have one pass in
+    /// flight. A background job queue is the long-term home for this work; the
+    /// in-flight guard below is the interim bound.
+    ///
     /// ```swift
     /// import Foundation
     /// import Sikaru
@@ -89,6 +97,7 @@ public final class IssueClustersClient: Sendable {
                 "until": until?.wrappedValue.map { .string($0) }
             ],
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -143,6 +152,7 @@ public final class IssueClustersClient: Sendable {
             path: "/v1/projects/\(projectId)/issue-clusters/\(clusterId)",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -169,6 +179,7 @@ public final class IssueClustersClient: Sendable {
             method: .post,
             path: "/v1/projects/\(projectId)/issue-clusters/\(clusterId)/propose-fix",
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

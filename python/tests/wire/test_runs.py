@@ -61,6 +61,18 @@ def test_runs_events() -> None:
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/events", None, 1)
 
 
+def test_runs_stream_events() -> None:
+    """Test stream_events endpoint with WireMock"""
+    test_id = "runs.stream_events.0"
+    client = get_client(test_id)
+    for _ in client.runs.stream_events(
+        project_id="project_id",
+        run_id="run_id",
+    ):
+        pass
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/events/stream", None, 1)
+
+
 def test_runs_recover() -> None:
     """Test recover endpoint with WireMock"""
     test_id = "runs.recover.0"
@@ -103,3 +115,14 @@ def test_runs_submit_tool_result() -> None:
         tool_provider_id="tool_provider_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/tool-results", None, 1)
+
+
+def test_runs_get_trajectory() -> None:
+    """Test get_trajectory endpoint with WireMock"""
+    test_id = "runs.get_trajectory.0"
+    client = get_client(test_id)
+    client.runs.get_trajectory(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/trajectory", None, 1)

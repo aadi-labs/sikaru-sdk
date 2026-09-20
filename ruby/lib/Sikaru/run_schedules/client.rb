@@ -63,7 +63,6 @@ module Sikaru
       #     input: {
       #       key: "value"
       #     },
-      #     interval_seconds: 1,
       #     session_id: "session_id"
       #   )
       #
@@ -79,7 +78,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/run-schedules",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -116,7 +116,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "DELETE",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/run-schedules/#{URI.encode_uri_component(params[:schedule_id].to_s)}",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -159,6 +160,51 @@ module Sikaru
           method: "PATCH",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/run-schedules/#{URI.encode_uri_component(params[:schedule_id].to_s)}",
           body: body,
+          request_options: request_options,
+          max_retries: 0
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        return if code.between?(200, 299)
+
+        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+        raise error_class.new(response.body, code: code)
+      end
+
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :schedule_id
+      # @option params [Integer, nil] :before
+      # @option params [Integer, nil] :limit
+      #
+      # @example
+      #   client.run_schedules.schedule_history(
+      #     project_id: "project_id",
+      #     schedule_id: "schedule_id"
+      #   )
+      #
+      # @return [Hash[String, Object]]
+      def schedule_history(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        query_params = {}
+        query_params["before"] = params[:before] if params.key?(:before)
+        query_params["limit"] = params[:limit] if params.key?(:limit)
+
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/run-schedules/#{URI.encode_uri_component(params[:schedule_id].to_s)}/occurrences",
+          query: query_params,
           request_options: request_options
         )
         begin

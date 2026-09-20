@@ -919,6 +919,791 @@ client.Changesets.StageChangeset(
 </dl>
 </details>
 
+## Connections
+<details><summary><code>client.Connections.ListConnections(ProjectID) -> []*_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.ListConnections(
+    context.TODO(),
+    "project_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.CreateConnection(ProjectID, request) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.CreateConnection{
+    Config: &_go.ConnectionConfig{},
+    DisplayName: "display_name",
+    Kind: _go.CreateConnectionKindMcp,
+}
+client.Connections.CreateConnection(
+    context.TODO(),
+    "project_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**config:** `*_go.ConnectionConfig` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentials:** `*_go.ConnectionCredentials` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**displayName:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**kind:** `*_go.CreateConnectionKind` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownership:** `*_go.CreateConnectionOwnership` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.GetConnection(ProjectID, ConnectionID) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.GetConnection(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Authorize(ProjectID, ConnectionID) -> *_go.ConnectionAuthorization</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.Authorize(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Complete(ProjectID, ConnectionID, request) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.CompleteAuthorization{
+    State: "state",
+}
+client.Connections.Complete(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**query:** `map[string]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**state:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Credentials(ProjectID, ConnectionID, request) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ReplaceCredentials{
+    Credentials: &_go.ConnectionCredentials{},
+}
+client.Connections.Credentials(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentials:** `*_go.ConnectionCredentials` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Disable(ProjectID, ConnectionID) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.Disable(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Disconnect(ProjectID, ConnectionID) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.Disconnect(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Discover(ProjectID, ConnectionID) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.Discover(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Enable(ProjectID, ConnectionID) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.Enable(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Events(ProjectID, ConnectionID) -> []*_go.ConnectionEvent</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.Events(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.Grant(ProjectID, ConnectionID, request) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.GrantConnection{
+    AgentID: "agent_id",
+    Tools: []string{
+        "tools",
+    },
+}
+client.Connections.Grant(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**approval:** `*_go.GrantConnectionApproval` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `*_go.GrantConnectionEnvironment` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tools:** `[]string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Connections.RevokeGrant(ProjectID, ConnectionID, GrantID) -> *_go.Connection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Connections.RevokeGrant(
+    context.TODO(),
+    "project_id",
+    "connection_id",
+    "grant_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connectionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**grantID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ContextRegistry
 <details><summary><code>client.ContextRegistry.CreateContextRegistryChange(ProjectID, request) -> map[string]any</code></summary>
 <dl>
@@ -2662,6 +3447,14 @@ client.ExecutionObjectives.Create(
 <dl>
 <dd>
 
+**maxRounds:** `*int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **objective:** `string` 
     
 </dd>
@@ -3337,6 +4130,58 @@ client.ExecutionSessions.ListSessionInputs(
 </dl>
 </details>
 
+<details><summary><code>client.ExecutionSessions.Spend(ProjectID, SessionID) -> *_go.SessionSpend</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ExecutionSessions.Spend(
+    context.TODO(),
+    "project_id",
+    "session_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.ExecutionSessions.AppendTurn(ProjectID, SessionID, request) -> map[string]any</code></summary>
 <dl>
 <dd>
@@ -3529,7 +4374,23 @@ client.ExecutionSessions.Create(
 <dl>
 <dd>
 
+**autoImprove:** `*bool` — Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **conversationID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `*_go.SessionInputEnvironment` — Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
     
 </dd>
 </dl>
@@ -3562,6 +4423,285 @@ client.ExecutionSessions.Create(
 <dd>
 
 **userID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Specialists
+<details><summary><code>client.Specialists.List(ProjectID, SessionID) -> *_go.SpecialistThreads</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Specialists.List(
+    context.TODO(),
+    "project_id",
+    "session_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Specialists.Get(ProjectID, SessionID, ThreadID) -> *_go.SpecialistThread</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Specialists.Get(
+    context.TODO(),
+    "project_id",
+    "session_id",
+    "thread_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threadID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Specialists.Cancel(ProjectID, SessionID, ThreadID, request) -> *_go.SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.SpecialistCancel{
+    IdempotencyKey: "idempotency_key",
+}
+client.Specialists.Cancel(
+    context.TODO(),
+    "project_id",
+    "session_id",
+    "thread_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threadID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Specialists.Message(ProjectID, SessionID, ThreadID, request) -> *_go.SpecialistReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.SpecialistMessage{
+    IdempotencyKey: "idempotency_key",
+    Input: map[string]any{
+        "key": "value",
+    },
+}
+client.Specialists.Message(
+    context.TODO(),
+    "project_id",
+    "session_id",
+    "thread_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**threadID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**deliveryMode:** `*_go.SpecialistMessageDeliveryMode` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**input:** `map[string]any` 
     
 </dd>
 </dl>
@@ -3865,6 +5005,278 @@ client.HarnessVersions.CreateHarnessVersion(
 <dd>
 
 **status:** `*_go.CreateHarnessVersionRequestStatus` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## AgentBudgets
+<details><summary><code>client.AgentBudgets.Get(ProjectID, HarnessID) -> *_go.AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.AgentBudgets.Get(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.AgentBudgets.ConfigureAutoReload(ProjectID, HarnessID, request) -> *_go.AgentBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ReloadInput{
+    AmountUsd: "amount_usd",
+    Enabled: true,
+    ThresholdUsd: "threshold_usd",
+}
+client.AgentBudgets.ConfigureAutoReload(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amountUsd:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**enabled:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**thresholdUsd:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.AgentBudgets.Add(ProjectID, HarnessID, request) -> *_go.FundingReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.FundingInput{
+    AmountUsd: "amount_usd",
+    IdempotencyKey: "idempotency_key",
+}
+client.AgentBudgets.Add(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**amountUsd:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.AgentBudgets.SetupPaymentMethod(ProjectID, HarnessID, request) -> *_go.PaymentSetupLink</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.SetupInput{
+    IdempotencyKey: "idempotency_key",
+}
+client.AgentBudgets.SetupPaymentMethod(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
     
 </dd>
 </dl>
@@ -4332,6 +5744,14 @@ client.Runs.Start(
 <dl>
 <dd>
 
+**autoImprove:** `*bool` — Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **capabilityGrants:** `[]string` 
     
 </dd>
@@ -4389,6 +5809,14 @@ client.Runs.Start(
 <dd>
 
 **jobID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**model:** `*string` — Catalog model for this run. Omit to use the project default; list choices through model settings.
     
 </dd>
 </dl>
@@ -4678,7 +6106,86 @@ client.Runs.Events(
 <dl>
 <dd>
 
-**stream:** `*string` 
+**lastEventID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Runs.StreamEvents(ProjectID, RunID) -> _go.RunEvent</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Replay and stream durable run events; resume using after or Last-Event-ID.
+
+A terminal run event ends the stream. Idle streams may also close: callers
+can resume from their last delivered event without restarting the run.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.StreamEventsRunsRequest{}
+client.Runs.StreamEvents(
+    context.TODO(),
+    "project_id",
+    "run_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**after:** `*string` 
     
 </dd>
 </dl>
@@ -4942,6 +6449,76 @@ client.Runs.SubmitToolResult(
 <dd>
 
 **toolProviderID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Runs.GetTrajectory(ProjectID, RunID) -> map[string]any</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Read retained ATIF structure and usage with private content redacted.
+
+This is a committed snapshot and can be partial while a run is active or
+interrupted. Messages, reasoning, tool payloads and provider metadata are
+omitted. No trajectory is synthesized when retained evidence is unavailable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Runs.GetTrajectory(
+    context.TODO(),
+    "project_id",
+    "run_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runID:** `string` 
     
 </dd>
 </dl>
@@ -5904,6 +7481,25 @@ client.IssueClusters.UpsertIssueCluster(
 <details><summary><code>client.IssueClusters.MineProjectIssueClusters(ProjectID) -> map[string]any</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Run one failure-analysis agent pass over the project's recent traces.
+
+This is a model-latency operation on a request path: the endpoint is sync so
+the harness runs in the threadpool, and a project may only have one pass in
+flight. A background job queue is the long-term home for this work; the
+in-flight guard below is the interim bound.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -7466,7 +9062,6 @@ request := &_go.ScheduleInput{
     Input: map[string]any{
         "key": "value",
     },
-    IntervalSeconds: 1,
     SessionID: "session_id",
 }
 client.RunSchedules.CreateSchedule(
@@ -7496,6 +9091,14 @@ client.RunSchedules.CreateSchedule(
 <dl>
 <dd>
 
+**cron:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **idempotencyKey:** `*string` 
     
 </dd>
@@ -7512,7 +9115,7 @@ client.RunSchedules.CreateSchedule(
 <dl>
 <dd>
 
-**intervalSeconds:** `int` 
+**intervalSeconds:** `*int` 
     
 </dd>
 </dl>
@@ -7521,6 +9124,22 @@ client.RunSchedules.CreateSchedule(
 <dd>
 
 **sessionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionMode:** `*_go.ScheduleInputSessionMode` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**timezone:** `*string` 
     
 </dd>
 </dl>
@@ -7637,6 +9256,76 @@ client.RunSchedules.PauseSchedule(
 <dd>
 
 **paused:** `bool` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.RunSchedules.ScheduleHistory(ProjectID, ScheduleID) -> map[string]any</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ScheduleHistoryRunSchedulesRequest{}
+client.RunSchedules.ScheduleHistory(
+    context.TODO(),
+    "project_id",
+    "schedule_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**scheduleID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**before:** `*float64` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `*int` 
     
 </dd>
 </dl>

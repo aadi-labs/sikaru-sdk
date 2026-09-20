@@ -12,8 +12,6 @@ module Sikaru
 
         field :limit, -> { String }, optional: true, nullable: false
 
-        field :stream, -> { String }, optional: true, nullable: false
-
         field :last_event_id, -> { String }, optional: true, nullable: false, api_name: "Last-Event-ID"
       end
     end

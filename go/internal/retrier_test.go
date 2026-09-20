@@ -243,9 +243,9 @@ var expectedRetryDurations = []time.Duration{
 	8000 * time.Millisecond, // 500ms * 2^4 = 8000ms
 }
 
-func TestMutationWithRequestBodyIsNotRetried(t *testing.T) {
-	// A POST may already have taken effect before its retryable error response.
-	// Preserve the first failure instead of replaying the mutation.
+func TestRetryWithRequestBody(t *testing.T) {
+	// This test verifies that POST requests with a body are properly retried.
+	// The request body should be re-sent on each retry attempt.
 	expectedBody := `{"id":"test-id"}`
 	var requestBodies []string
 	var requestCount int
@@ -286,12 +286,13 @@ func TestMutationWithRequestBodyIsNotRetried(t *testing.T) {
 		},
 	)
 
-	require.Error(t, err)
-	require.IsType(t, &core.APIError{}, err)
-	require.Equal(t, http.StatusServiceUnavailable, err.(*core.APIError).StatusCode)
-	require.Equal(t, 1, requestCount, "Mutations must not be retried")
-	require.Len(t, requestBodies, 1, "Expected only the original request body")
-	assert.Equal(t, expectedBody, requestBodies[0], "Original request body should match expected")
+	require.NoError(t, err)
+	require.Equal(t, 2, requestCount, "Expected exactly 2 requests")
+	require.Len(t, requestBodies, 2, "Expected 2 request bodies to be captured")
+
+	// Both requests should have the same non-empty body
+	assert.Equal(t, expectedBody, requestBodies[0], "First request body should match expected")
+	assert.Equal(t, expectedBody, requestBodies[1], "Second request body should match expected (retry should re-send body)")
 }
 
 func TestRetryWaitIsInterruptedByContext(t *testing.T) {

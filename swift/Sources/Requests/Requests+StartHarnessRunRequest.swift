@@ -2,6 +2,8 @@ import Foundation
 
 extension Requests {
     public struct StartHarnessRunRequest: Codable, Hashable, Sendable {
+        /// Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
+        public let autoImprove: Bool?
         public let capabilityGrants: [String]?
         public let computeProviderId: Nullable<String>?
         public let conversationId: Nullable<String>?
@@ -10,6 +12,8 @@ extension Requests {
         public let executionEnvironment: StartHarnessRunRequestExecutionEnvironment?
         public let input: [String: JSONValue]
         public let jobId: Nullable<String>?
+        /// Catalog model for this run. Omit to use the project default; list choices through model settings.
+        public let model: Nullable<String>?
         public let policy: [String: JSONValue]
         public let productContext: [String: JSONValue]
         public let runMode: StartHarnessRunRequestRunMode?
@@ -21,6 +25,7 @@ extension Requests {
         public let additionalProperties: [String: JSONValue]
 
         public init(
+            autoImprove: Bool? = nil,
             capabilityGrants: [String]? = nil,
             computeProviderId: Nullable<String>? = nil,
             conversationId: Nullable<String>? = nil,
@@ -29,6 +34,7 @@ extension Requests {
             executionEnvironment: StartHarnessRunRequestExecutionEnvironment? = nil,
             input: [String: JSONValue],
             jobId: Nullable<String>? = nil,
+            model: Nullable<String>? = nil,
             policy: [String: JSONValue],
             productContext: [String: JSONValue],
             runMode: StartHarnessRunRequestRunMode? = nil,
@@ -38,6 +44,7 @@ extension Requests {
             userId: String,
             additionalProperties: [String: JSONValue] = .init()
         ) {
+            self.autoImprove = autoImprove
             self.capabilityGrants = capabilityGrants
             self.computeProviderId = computeProviderId
             self.conversationId = conversationId
@@ -46,6 +53,7 @@ extension Requests {
             self.executionEnvironment = executionEnvironment
             self.input = input
             self.jobId = jobId
+            self.model = model
             self.policy = policy
             self.productContext = productContext
             self.runMode = runMode
@@ -58,6 +66,7 @@ extension Requests {
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.autoImprove = try container.decodeIfPresent(Bool.self, forKey: .autoImprove)
             self.capabilityGrants = try container.decodeIfPresent([String].self, forKey: .capabilityGrants)
             self.computeProviderId = try container.decodeNullableIfPresent(String.self, forKey: .computeProviderId)
             self.conversationId = try container.decodeNullableIfPresent(String.self, forKey: .conversationId)
@@ -66,6 +75,7 @@ extension Requests {
             self.executionEnvironment = try container.decodeIfPresent(StartHarnessRunRequestExecutionEnvironment.self, forKey: .executionEnvironment)
             self.input = try container.decode([String: JSONValue].self, forKey: .input)
             self.jobId = try container.decodeNullableIfPresent(String.self, forKey: .jobId)
+            self.model = try container.decodeNullableIfPresent(String.self, forKey: .model)
             self.policy = try container.decode([String: JSONValue].self, forKey: .policy)
             self.productContext = try container.decode([String: JSONValue].self, forKey: .productContext)
             self.runMode = try container.decodeIfPresent(StartHarnessRunRequestRunMode.self, forKey: .runMode)
@@ -79,6 +89,7 @@ extension Requests {
         public func encode(to encoder: Encoder) throws -> Void {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try encoder.encodeAdditionalProperties(self.additionalProperties)
+            try container.encodeIfPresent(self.autoImprove, forKey: .autoImprove)
             try container.encodeIfPresent(self.capabilityGrants, forKey: .capabilityGrants)
             try container.encodeNullableIfPresent(self.computeProviderId, forKey: .computeProviderId)
             try container.encodeNullableIfPresent(self.conversationId, forKey: .conversationId)
@@ -87,6 +98,7 @@ extension Requests {
             try container.encodeIfPresent(self.executionEnvironment, forKey: .executionEnvironment)
             try container.encode(self.input, forKey: .input)
             try container.encodeNullableIfPresent(self.jobId, forKey: .jobId)
+            try container.encodeNullableIfPresent(self.model, forKey: .model)
             try container.encode(self.policy, forKey: .policy)
             try container.encode(self.productContext, forKey: .productContext)
             try container.encodeIfPresent(self.runMode, forKey: .runMode)
@@ -98,6 +110,7 @@ extension Requests {
 
         /// Keys for encoding/decoding struct properties.
         enum CodingKeys: String, CodingKey, CaseIterable {
+            case autoImprove = "auto_improve"
             case capabilityGrants = "capability_grants"
             case computeProviderId = "compute_provider_id"
             case conversationId = "conversation_id"
@@ -106,6 +119,7 @@ extension Requests {
             case executionEnvironment = "execution_environment"
             case input
             case jobId = "job_id"
+            case model
             case policy
             case productContext = "product_context"
             case runMode = "run_mode"

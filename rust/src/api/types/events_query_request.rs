@@ -7,8 +7,6 @@ pub struct EventsQueryRequest {
     pub after: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub limit: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub stream: Option<String>,
 }
 
 impl EventsQueryRequest {
@@ -22,7 +20,6 @@ impl EventsQueryRequest {
 pub struct EventsQueryRequestBuilder {
     after: Option<String>,
     limit: Option<String>,
-    stream: Option<String>,
 }
 
 impl EventsQueryRequestBuilder {
@@ -36,17 +33,11 @@ impl EventsQueryRequestBuilder {
         self
     }
 
-    pub fn stream(mut self, value: impl Into<String>) -> Self {
-        self.stream = Some(value.into());
-        self
-    }
-
     /// Consumes the builder and constructs a [`EventsQueryRequest`].
     pub fn build(self) -> Result<EventsQueryRequest, BuildError> {
         Ok(EventsQueryRequest {
             after: self.after,
             limit: self.limit,
-            stream: self.stream,
         })
     }
 }

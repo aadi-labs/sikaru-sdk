@@ -238,6 +238,36 @@ async fn test_execution_sessions_list_session_inputs_with_wiremock() {
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
+async fn test_execution_sessions_spend_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = Sikaru::new(config).expect("Failed to build client");
+
+    let result = client
+        .execution_sessions
+        .spend(&"project_id".to_string(), &"session_id".to_string(), None)
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/spend",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
 async fn test_execution_sessions_append_turn_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
@@ -303,7 +333,9 @@ async fn test_execution_sessions_create_with_wiremock() {
             &SessionInput {
                 tenant_id: "tenant_id".to_string(),
                 user_id: "user_id".to_string(),
+                auto_improve: None,
                 conversation_id: None,
+                environment: None,
                 final_output_schema: None,
                 reasoning_effort: None,
             },

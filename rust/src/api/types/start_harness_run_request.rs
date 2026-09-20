@@ -2,6 +2,9 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq)]
 pub struct StartHarnessRunRequest {
+    /// Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub auto_improve: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub capability_grants: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -18,6 +21,9 @@ pub struct StartHarnessRunRequest {
     pub input: HashMap<String, serde_json::Value>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub job_id: Option<String>,
+    /// Catalog model for this run. Omit to use the project default; list choices through model settings.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub model: Option<String>,
     #[serde(default)]
     pub policy: HashMap<String, serde_json::Value>,
     #[serde(default)]
@@ -43,6 +49,7 @@ impl StartHarnessRunRequest {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct StartHarnessRunRequestBuilder {
+    auto_improve: Option<bool>,
     capability_grants: Option<Vec<String>>,
     compute_provider_id: Option<String>,
     conversation_id: Option<String>,
@@ -51,6 +58,7 @@ pub struct StartHarnessRunRequestBuilder {
     execution_environment: Option<StartHarnessRunRequestExecutionEnvironment>,
     input: Option<HashMap<String, serde_json::Value>>,
     job_id: Option<String>,
+    model: Option<String>,
     policy: Option<HashMap<String, serde_json::Value>>,
     product_context: Option<HashMap<String, serde_json::Value>>,
     run_mode: Option<StartHarnessRunRequestRunMode>,
@@ -61,6 +69,11 @@ pub struct StartHarnessRunRequestBuilder {
 }
 
 impl StartHarnessRunRequestBuilder {
+    pub fn auto_improve(mut self, value: bool) -> Self {
+        self.auto_improve = Some(value);
+        self
+    }
+
     pub fn capability_grants(mut self, value: Vec<String>) -> Self {
         self.capability_grants = Some(value);
         self
@@ -101,6 +114,11 @@ impl StartHarnessRunRequestBuilder {
 
     pub fn job_id(mut self, value: impl Into<String>) -> Self {
         self.job_id = Some(value.into());
+        self
+    }
+
+    pub fn model(mut self, value: impl Into<String>) -> Self {
+        self.model = Some(value.into());
         self
     }
 
@@ -148,6 +166,7 @@ impl StartHarnessRunRequestBuilder {
     /// - [`user_id`](StartHarnessRunRequestBuilder::user_id)
     pub fn build(self) -> Result<StartHarnessRunRequest, BuildError> {
         Ok(StartHarnessRunRequest {
+            auto_improve: self.auto_improve,
             capability_grants: self.capability_grants,
             compute_provider_id: self.compute_provider_id,
             conversation_id: self.conversation_id,
@@ -158,6 +177,7 @@ impl StartHarnessRunRequestBuilder {
                 .input
                 .ok_or_else(|| BuildError::missing_field("input"))?,
             job_id: self.job_id,
+            model: self.model,
             policy: self
                 .policy
                 .ok_or_else(|| BuildError::missing_field("policy"))?,

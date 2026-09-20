@@ -94,6 +94,11 @@ impl IssueClustersClient {
         request: &UpsertIssueClusterRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -105,6 +110,21 @@ impl IssueClustersClient {
             .await
     }
 
+    /// Run one failure-analysis agent pass over the project's recent traces.
+    ///
+    /// This is a model-latency operation on a request path: the endpoint is sync so
+    /// the harness runs in the threadpool, and a project may only have one pass in
+    /// flight. A background job queue is the long-term home for this work; the
+    /// in-flight guard below is the interim bound.
+    ///
+    /// # Arguments
+    ///
+    /// * `options` - Additional request options such as headers, timeout, etc.
+    ///
+    /// # Returns
+    ///
+    /// JSON response from the API
+    ///
     /// # Examples
     ///
     /// ```no_run
@@ -135,6 +155,11 @@ impl IssueClustersClient {
         request: &MineProjectIssueClustersQueryRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -216,6 +241,11 @@ impl IssueClustersClient {
         request: &UpdateIssueClusterStatusRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::PATCH,
@@ -251,6 +281,11 @@ impl IssueClustersClient {
         cluster_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

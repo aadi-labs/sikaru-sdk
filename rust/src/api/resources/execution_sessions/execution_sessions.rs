@@ -131,6 +131,11 @@ impl ExecutionSessionsClient {
         request: &BranchInput,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -190,6 +195,11 @@ impl ExecutionSessionsClient {
         request: &UploadFileRequest,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_bytes_request(
                 Method::POST,
@@ -236,6 +246,11 @@ impl ExecutionSessionsClient {
         file_id: &str,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::DELETE,
@@ -346,6 +361,44 @@ impl ExecutionSessionsClient {
     ///     let client = Sikaru::new(config).expect("Failed to build client");
     ///     client
     ///         .execution_sessions
+    ///         .spend(&"project_id".to_string(), &"session_id".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn spend(
+        &self,
+        project_id: &str,
+        session_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<SessionSpend, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!(
+                    "v1/projects/{}/execution-sessions/{}/spend",
+                    project_id, session_id
+                ),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use sikaru::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         token: Some("<token>".to_string()),
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Sikaru::new(config).expect("Failed to build client");
+    ///     client
+    ///         .execution_sessions
     ///         .append_turn(
     ///             &"project_id".to_string(),
     ///             &"session_id".to_string(),
@@ -373,6 +426,11 @@ impl ExecutionSessionsClient {
         request: &TurnInput,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,
@@ -407,7 +465,9 @@ impl ExecutionSessionsClient {
     ///             &SessionInput {
     ///                 tenant_id: "tenant_id".to_string(),
     ///                 user_id: "user_id".to_string(),
+    ///                 auto_improve: None,
     ///                 conversation_id: None,
+    ///                 environment: None,
     ///                 final_output_schema: None,
     ///                 reasoning_effort: None,
     ///             },
@@ -423,6 +483,11 @@ impl ExecutionSessionsClient {
         request: &SessionInput,
         options: Option<RequestOptions>,
     ) -> Result<HashMap<String, serde_json::Value>, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
         self.http_client
             .execute_request(
                 Method::POST,

@@ -85,7 +85,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-objectives",
           body: body,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -159,7 +160,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-objectives/#{URI.encode_uri_component(params[:objective_id].to_s)}/cancel",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -196,7 +198,8 @@ module Sikaru
           base_url: request_options[:base_url],
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-objectives/#{URI.encode_uri_component(params[:objective_id].to_s)}/pause",
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)
@@ -238,7 +241,8 @@ module Sikaru
           method: "POST",
           path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/execution-objectives/#{URI.encode_uri_component(params[:objective_id].to_s)}/resume",
           body: body_params,
-          request_options: request_options
+          request_options: request_options,
+          max_retries: 0
         )
         begin
           response = @client.send(request)

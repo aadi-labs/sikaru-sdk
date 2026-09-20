@@ -34,6 +34,7 @@ public final class FeedbackClient: Sendable {
             path: "/v1/projects/\(projectId)/feedback",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }

@@ -169,6 +169,28 @@ class ExecutionSessionsWireTest < WireMockTestCase
     )
   end
 
+  def test_execution_sessions_spend_with_wiremock
+    test_id = "execution_sessions.spend.0"
+
+    @client.execution_sessions.spend(
+      project_id: "project_id",
+      session_id: "session_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "execution_sessions.spend.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v1/projects/project_id/execution-sessions/session_id/spend",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
   def test_execution_sessions_append_turn_with_wiremock
     test_id = "execution_sessions.append_turn.0"
 

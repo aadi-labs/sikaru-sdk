@@ -371,6 +371,102 @@ import Sikaru
         try #require(response == expectedResponse)
     }
 
+    @Test func spend1() async throws -> Void {
+        let stub = HTTPStub()
+        stub.setResponse(
+            body: Foundation.Data(
+                #"""
+                {
+                  "reserved_usd": "reserved_usd",
+                  "runs": [
+                    {
+                      "reserved_usd": "reserved_usd",
+                      "run_id": "run_id",
+                      "used_usd": "used_usd"
+                    }
+                  ],
+                  "used_usd": "used_usd"
+                }
+                """#.utf8
+            )
+        )
+        let client = Sikaru(
+            baseURL: "https://api.fern.com",
+            apiKey: "<token>",
+            urlSession: stub.urlSession
+        )
+        let expectedResponse = SessionSpend(
+            reservedUsd: "reserved_usd",
+            runs: [
+                RunSpend(
+                    reservedUsd: "reserved_usd",
+                    runId: "run_id",
+                    usedUsd: "used_usd"
+                )
+            ],
+            usedUsd: "used_usd"
+        )
+        let response = try await client.executionSessions.spend(
+            projectId: "project_id",
+            sessionId: "session_id",
+            requestOptions: RequestOptions(additionalHeaders: stub.headers)
+        )
+        try #require(response == expectedResponse)
+    }
+
+    @Test func spend2() async throws -> Void {
+        let stub = HTTPStub()
+        stub.setResponse(
+            body: Foundation.Data(
+                #"""
+                {
+                  "reserved_usd": "reserved_usd",
+                  "runs": [
+                    {
+                      "reserved_usd": "reserved_usd",
+                      "run_id": "run_id",
+                      "used_usd": "used_usd"
+                    },
+                    {
+                      "reserved_usd": "reserved_usd",
+                      "run_id": "run_id",
+                      "used_usd": "used_usd"
+                    }
+                  ],
+                  "used_usd": "used_usd"
+                }
+                """#.utf8
+            )
+        )
+        let client = Sikaru(
+            baseURL: "https://api.fern.com",
+            apiKey: "<token>",
+            urlSession: stub.urlSession
+        )
+        let expectedResponse = SessionSpend(
+            reservedUsd: "reserved_usd",
+            runs: [
+                RunSpend(
+                    reservedUsd: "reserved_usd",
+                    runId: "run_id",
+                    usedUsd: "used_usd"
+                ),
+                RunSpend(
+                    reservedUsd: "reserved_usd",
+                    runId: "run_id",
+                    usedUsd: "used_usd"
+                )
+            ],
+            usedUsd: "used_usd"
+        )
+        let response = try await client.executionSessions.spend(
+            projectId: "project_id",
+            sessionId: "session_id",
+            requestOptions: RequestOptions(additionalHeaders: stub.headers)
+        )
+        try #require(response == expectedResponse)
+    }
+
     @Test func appendTurn1() async throws -> Void {
         let stub = HTTPStub()
         stub.setResponse(

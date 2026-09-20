@@ -113,6 +113,7 @@ public final class SessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/sessions/\(sessionId)/interpreters",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -145,6 +146,7 @@ public final class SessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/sessions/\(sessionId)/interpreters/\(interpreterId)/execute",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
@@ -204,6 +206,7 @@ public final class SessionsClient: Sendable {
             path: "/v1/projects/\(projectId)/sessions/\(sessionId)/sandbox-executions",
             body: request,
             requestOptions: requestOptions,
+            retriesDisabled: true,
             responseType: [String: JSONValue].self
         )
     }
