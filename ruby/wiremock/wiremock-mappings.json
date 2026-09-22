@@ -532,6 +532,897 @@
       }
     },
     {
+      "id": "3b6bd3cf-e34a-4a36-868c-ccb6fefe1193",
+      "name": "Get Compute Attachment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3b6bd3cf-e34a-4a36-868c-ccb6fefe1193",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "40390411-b6c8-4dc9-9ba2-deb9e284c430",
+      "name": "Abandon Compute Attachment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/abandon",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "40390411-b6c8-4dc9-9ba2-deb9e284c430",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "e7846a1b-f703-43d6-9949-abb8e3699588",
+      "name": "Cancel Compute Attachment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/cancel",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e7846a1b-f703-43d6-9949-abb8e3699588",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "6ecc062f-3151-4c28-9e79-9bfe1e7983b6",
+      "name": "Claim Compute Attachment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/claim",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"attachment_id\": \"attachment_id\",\n  \"id\": \"id\",\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"startup_ttl_seconds\": 1,\n  \"status\": \"status\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6ecc062f-3151-4c28-9e79-9bfe1e7983b6",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "f6db1f80-4bb9-4334-b125-9f168ad687fe",
+      "name": "Cleanup Compute Executor - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/cleanup",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "f6db1f80-4bb9-4334-b125-9f168ad687fe",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3bcad77f-6841-4a43-8e0a-91c261c07650",
+      "name": "Connect Compute Executor - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/connect",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3bcad77f-6841-4a43-8e0a-91c261c07650",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "53177ccd-b0cb-4826-9000-19cf62f088fb",
+      "name": "Issue Compute Executor Credential - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/credentials",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"credential_id\": \"credential_id\",\n  \"expires_at\": 1.1,\n  \"token\": \"token\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "53177ccd-b0cb-4826-9000-19cf62f088fb",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "367496cc-6d2b-49b5-b192-9f7f1fad92ca",
+      "name": "Heartbeat Compute Executor - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/heartbeat",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "367496cc-6d2b-49b5-b192-9f7f1fad92ca",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "1f2d2985-1866-4f40-9ca1-af8a3657b743",
+      "name": "Ready Compute Executor - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/ready",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "1f2d2985-1866-4f40-9ca1-af8a3657b743",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "7ae1c57d-9493-45e4-a705-78aadfab61ce",
+      "name": "Reconcile Compute Executor - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/reconcile",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"attachment\": {\n    \"capabilities\": [\n      \"capabilities\"\n    ],\n    \"cleanup_at\": 1.1,\n    \"cleanup_status\": \"unconfirmed\",\n    \"environment_id\": \"environment_id\",\n    \"id\": \"id\",\n    \"journal_id\": \"journal_id\",\n    \"lease_ttl_seconds\": 1,\n    \"lease_until\": 1.1,\n    \"owner_epoch\": 1,\n    \"owner_id\": \"owner_id\",\n    \"processes\": [\n      {\n        \"evidence\": \"evidence\",\n        \"handle_id\": \"handle_id\",\n        \"status\": \"running\"\n      }\n    ],\n    \"project_id\": \"project_id\",\n    \"protocol_version\": \"protocol_version\",\n    \"provider_id\": \"provider_id\",\n    \"session_id\": \"session_id\",\n    \"startup_deadline\": 1.1,\n    \"status\": \"pending\",\n    \"uncertain_operations\": [\n      {\n        \"method\": \"method\",\n        \"owner_epoch\": 1,\n        \"request_digest\": \"request_digest\",\n        \"run_id\": \"run_id\",\n        \"tool_call_id\": \"tool_call_id\",\n        \"workspace_generation\": \"workspace_generation\"\n      }\n    ],\n    \"workspace_generation\": \"workspace_generation\",\n    \"workspace_provenance\": {\n      \"identity\": \"identity\",\n      \"kind\": \"existing_directory\"\n    }\n  },\n  \"receipts\": [\n    {\n      \"created\": true,\n      \"status\": \"accepted\",\n      \"tool_call_id\": \"tool_call_id\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "7ae1c57d-9493-45e4-a705-78aadfab61ce",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "4d1c2087-d904-4ad4-9c31-dfb6d0474b7c",
+      "name": "Compute Executor Status - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/status",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "4d1c2087-d904-4ad4-9c31-dfb6d0474b7c",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "f6365721-e899-4bc7-bbd3-5a49f396a6b5",
+      "name": "Stop Compute Executor - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/stop",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "f6365721-e899-4bc7-bbd3-5a49f396a6b5",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "6315e60d-f35b-436c-a74c-94169a117cdc",
+      "name": "Report Compute Teardown - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/teardown",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6315e60d-f35b-436c-a74c-94169a117cdc",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "e55b582e-6949-4edc-a70b-c66e86e6ab92",
+      "name": "Create Compute Attachment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/execution-sessions/{session_id}/compute-attachments",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "session_id": {
+            "equalTo": "session_id"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": "{\n  \"capabilities\": [\n    \"capabilities\"\n  ],\n  \"cleanup_at\": 1.1,\n  \"cleanup_status\": \"unconfirmed\",\n  \"environment_id\": \"environment_id\",\n  \"id\": \"id\",\n  \"journal_id\": \"journal_id\",\n  \"lease_ttl_seconds\": 1,\n  \"lease_until\": 1.1,\n  \"owner_epoch\": 1,\n  \"owner_id\": \"owner_id\",\n  \"processes\": [\n    {\n      \"evidence\": \"evidence\",\n      \"handle_id\": \"handle_id\",\n      \"status\": \"running\"\n    }\n  ],\n  \"project_id\": \"project_id\",\n  \"protocol_version\": \"protocol_version\",\n  \"provider_id\": \"provider_id\",\n  \"session_id\": \"session_id\",\n  \"startup_deadline\": 1.1,\n  \"status\": \"pending\",\n  \"uncertain_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"workspace_generation\": \"workspace_generation\",\n  \"workspace_provenance\": {\n    \"identity\": \"identity\",\n    \"kind\": \"existing_directory\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e55b582e-6949-4edc-a70b-c66e86e6ab92",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "0accb5d2-1fcb-4a5c-a5bc-45505e03a76a",
+      "name": "Submit Compute Receipt - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/receipts",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"created\": true,\n  \"status\": \"accepted\",\n  \"tool_call_id\": \"tool_call_id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "0accb5d2-1fcb-4a5c-a5bc-45505e03a76a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "631968d9-ef91-4e98-9a80-0155d03c601b",
+      "name": "Poll Compute Work - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/work",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "attachment_id": {
+            "equalTo": "attachment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"attachment\": {\n    \"capabilities\": [\n      \"capabilities\"\n    ],\n    \"cleanup_at\": 1.1,\n    \"cleanup_status\": \"unconfirmed\",\n    \"environment_id\": \"environment_id\",\n    \"id\": \"id\",\n    \"journal_id\": \"journal_id\",\n    \"lease_ttl_seconds\": 1,\n    \"lease_until\": 1.1,\n    \"owner_epoch\": 1,\n    \"owner_id\": \"owner_id\",\n    \"processes\": [\n      {\n        \"evidence\": \"evidence\",\n        \"handle_id\": \"handle_id\",\n        \"status\": \"running\"\n      }\n    ],\n    \"project_id\": \"project_id\",\n    \"protocol_version\": \"protocol_version\",\n    \"provider_id\": \"provider_id\",\n    \"session_id\": \"session_id\",\n    \"startup_deadline\": 1.1,\n    \"status\": \"pending\",\n    \"uncertain_operations\": [\n      {\n        \"method\": \"method\",\n        \"owner_epoch\": 1,\n        \"request_digest\": \"request_digest\",\n        \"run_id\": \"run_id\",\n        \"tool_call_id\": \"tool_call_id\",\n        \"workspace_generation\": \"workspace_generation\"\n      }\n    ],\n    \"workspace_generation\": \"workspace_generation\",\n    \"workspace_provenance\": {\n      \"identity\": \"identity\",\n      \"kind\": \"existing_directory\"\n    }\n  },\n  \"execution\": {\n    \"approval_required\": true,\n    \"run_id\": \"run_id\",\n    \"status\": \"status\",\n    \"terminal\": true\n  },\n  \"execution_phase\": \"idle\",\n  \"issued_operations\": [\n    {\n      \"method\": \"method\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"live_handles\": [\n    {\n      \"handle_id\": \"handle_id\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\"\n    }\n  ],\n  \"operations\": [\n    {\n      \"arguments\": {\n        \"key\": \"value\"\n      },\n      \"capability_name\": \"compute.execute\",\n      \"method\": \"bash.start\",\n      \"owner_epoch\": 1,\n      \"request_digest\": \"request_digest\",\n      \"run_id\": \"run_id\",\n      \"tool_call_id\": \"tool_call_id\",\n      \"tool_provider_id\": \"tool_provider_id\",\n      \"workspace_generation\": \"workspace_generation\"\n    }\n  ],\n  \"poll_after_seconds\": 1\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "631968d9-ef91-4e98-9a80-0155d03c601b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "2cc1b52f-9fa0-479a-b7b9-023b497fadb0",
+      "name": "Renew Compute Credential - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-credentials/renew",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"credential_id\": \"credential_id\",\n  \"expires_at\": 1.1\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "2cc1b52f-9fa0-479a-b7b9-023b497fadb0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ea4fb770-fe90-4a35-ab44-0bb003511426",
+      "name": "Revoke Compute Credential - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-credentials/{credential_id}/revoke",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "credential_id": {
+            "equalTo": "credential_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"credential_id\": \"credential_id\",\n  \"revoked_at\": 1.1\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ea4fb770-fe90-4a35-ab44-0bb003511426",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "a14e3dae-0db7-4d45-9533-f7340639c1ba",
+      "name": "Create Compute Environment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": "{\n  \"environment_slug\": \"environment_slug\",\n  \"id\": \"id\",\n  \"product_id\": \"product_id\",\n  \"project_id\": \"project_id\",\n  \"status\": \"active\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "a14e3dae-0db7-4d45-9533-f7340639c1ba",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "0e96a259-e261-4cba-aa9e-551b6745c44e",
+      "name": "Get Compute Environment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments/{environment_id}",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "environment_id": {
+            "equalTo": "environment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"environment_slug\": \"environment_slug\",\n  \"id\": \"id\",\n  \"product_id\": \"product_id\",\n  \"project_id\": \"project_id\",\n  \"status\": \"active\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "0e96a259-e261-4cba-aa9e-551b6745c44e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "dd6d97de-e7da-4904-a071-f3127962fd50",
+      "name": "Disable Compute Environment - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments/{environment_id}/disable",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "environment_id": {
+            "equalTo": "environment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"environment_slug\": \"environment_slug\",\n  \"id\": \"id\",\n  \"product_id\": \"product_id\",\n  \"project_id\": \"project_id\",\n  \"status\": \"active\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "dd6d97de-e7da-4904-a071-f3127962fd50",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "82d46862-979e-4ad6-b26f-91a0357d09e0",
+      "name": "Issue Compute Worker Credential - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments/{environment_id}/credentials",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "environment_id": {
+            "equalTo": "environment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"credential_id\": \"credential_id\",\n  \"expires_at\": 1.1,\n  \"token\": \"token\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "82d46862-979e-4ad6-b26f-91a0357d09e0",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "01d7f808-df45-495a-af6f-c2dd0d38cda9",
+      "name": "Poll Compute Queue - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments/{environment_id}/queue",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "environment_id": {
+            "equalTo": "environment_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"attachments\": [\n    {\n      \"capabilities\": [\n        \"capabilities\"\n      ],\n      \"cleanup_at\": 1.1,\n      \"cleanup_status\": \"unconfirmed\",\n      \"environment_id\": \"environment_id\",\n      \"id\": \"id\",\n      \"journal_id\": \"journal_id\",\n      \"lease_ttl_seconds\": 1,\n      \"lease_until\": 1.1,\n      \"owner_epoch\": 1,\n      \"owner_id\": \"owner_id\",\n      \"processes\": [\n        {\n          \"evidence\": \"evidence\",\n          \"handle_id\": \"handle_id\",\n          \"status\": \"running\"\n        }\n      ],\n      \"project_id\": \"project_id\",\n      \"protocol_version\": \"protocol_version\",\n      \"provider_id\": \"provider_id\",\n      \"session_id\": \"session_id\",\n      \"startup_deadline\": 1.1,\n      \"status\": \"pending\",\n      \"uncertain_operations\": [\n        {\n          \"method\": \"method\",\n          \"owner_epoch\": 1,\n          \"request_digest\": \"request_digest\",\n          \"run_id\": \"run_id\",\n          \"tool_call_id\": \"tool_call_id\",\n          \"workspace_generation\": \"workspace_generation\"\n        }\n      ],\n      \"workspace_generation\": \"workspace_generation\",\n      \"workspace_provenance\": {\n        \"identity\": \"identity\",\n        \"kind\": \"existing_directory\"\n      }\n    }\n  ],\n  \"poll_after_seconds\": 1\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "01d7f808-df45-495a-af6f-c2dd0d38cda9",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "d3738304-8b8b-456a-9fd5-21930e9988f8",
       "name": "List Connections - default",
       "request": {
@@ -2794,6 +3685,162 @@
         }
       },
       "uuid": "7e833345-99d0-4944-a11f-2fe738beb99f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "7a474fe2-5879-4270-afe5-03a80ff459de",
+      "name": "Get Invoice Budget - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/invoice",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "harness_id": {
+            "equalTo": "harness_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"learning\": {\n    \"limit_usd\": \"limit_usd\",\n    \"reserved_usd\": \"reserved_usd\",\n    \"used_usd\": \"used_usd\"\n  },\n  \"period_end\": 1,\n  \"period_start\": 1,\n  \"production\": {\n    \"limit_usd\": \"limit_usd\",\n    \"reserved_usd\": \"reserved_usd\",\n    \"used_usd\": \"used_usd\"\n  },\n  \"state\": \"state\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "7a474fe2-5879-4270-afe5-03a80ff459de",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "7385e6ec-33a4-4ac8-98fd-fa8650160548",
+      "name": "Get Subscription - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "harness_id": {
+            "equalTo": "harness_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"cancel_at\": 1,\n  \"configured\": true,\n  \"mode\": \"prepaid\",\n  \"plan\": \"build\",\n  \"state\": \"state\",\n  \"trial\": {\n    \"ends_at\": 1,\n    \"remaining_usd\": \"remaining_usd\",\n    \"state\": \"available\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "7385e6ec-33a4-4ac8-98fd-fa8650160548",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "0c05f216-ab44-43d1-ad52-64f4621f6456",
+      "name": "Subscribe - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "harness_id": {
+            "equalTo": "harness_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"cancel_at\": 1,\n  \"configured\": true,\n  \"mode\": \"prepaid\",\n  \"plan\": \"build\",\n  \"state\": \"state\",\n  \"trial\": {\n    \"ends_at\": 1,\n    \"remaining_usd\": \"remaining_usd\",\n    \"state\": \"available\"\n  },\n  \"url\": \"url\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "0c05f216-ab44-43d1-ad52-64f4621f6456",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "05efb3fd-704f-4d4e-8530-041989eaf1b4",
+      "name": "Cancel Subscription - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription/cancel",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "harness_id": {
+            "equalTo": "harness_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"cancel_at\": 1,\n  \"state\": \"cancellation_pending\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "05efb3fd-704f-4d4e-8530-041989eaf1b4",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -5855,6 +6902,6 @@
     }
   ],
   "meta": {
-    "total": 153
+    "total": 180
   }
 }

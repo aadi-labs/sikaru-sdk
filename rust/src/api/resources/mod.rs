@@ -6,6 +6,11 @@
 //! - **AgentImports**
 //! - **Agents**
 //! - **Changesets**
+//! - **ComputeAttachments**
+//! - **ComputeOperations**
+//! - **ComputeCredentials**
+//! - **ComputeEnvironments**
+//! - **ComputeWorkers**
 //! - **Connections**
 //! - **ContextRegistry**
 //! - **Conversations**
@@ -55,6 +60,11 @@ pub mod agent_budgets;
 pub mod agent_imports;
 pub mod agents;
 pub mod changesets;
+pub mod compute_attachments;
+pub mod compute_credentials;
+pub mod compute_environments;
+pub mod compute_operations;
+pub mod compute_workers;
 pub mod connections;
 pub mod context_registry;
 pub mod conversations;
@@ -101,6 +111,11 @@ pub struct Sikaru {
     pub agent_imports: AgentImportsClient,
     pub agents: AgentsClient,
     pub changesets: ChangesetsClient,
+    pub compute_attachments: ComputeAttachmentsClient,
+    pub compute_operations: ComputeOperationsClient,
+    pub compute_credentials: ComputeCredentialsClient,
+    pub compute_environments: ComputeEnvironmentsClient,
+    pub compute_workers: ComputeWorkersClient,
     pub connections: ConnectionsClient,
     pub context_registry: ContextRegistryClient,
     pub conversations: ConversationsClient,
@@ -152,6 +167,11 @@ impl Sikaru {
             agent_imports: AgentImportsClient::new(config.clone())?,
             agents: AgentsClient::new(config.clone())?,
             changesets: ChangesetsClient::new(config.clone())?,
+            compute_attachments: ComputeAttachmentsClient::new(config.clone())?,
+            compute_operations: ComputeOperationsClient::new(config.clone())?,
+            compute_credentials: ComputeCredentialsClient::new(config.clone())?,
+            compute_environments: ComputeEnvironmentsClient::new(config.clone())?,
+            compute_workers: ComputeWorkersClient::new(config.clone())?,
             connections: ConnectionsClient::new(config.clone())?,
             context_registry: ContextRegistryClient::new(config.clone())?,
             conversations: ConversationsClient::new(config.clone())?,
@@ -202,6 +222,11 @@ pub use agent_budgets::AgentBudgetsClient;
 pub use agent_imports::AgentImportsClient;
 pub use agents::AgentsClient;
 pub use changesets::ChangesetsClient;
+pub use compute_attachments::ComputeAttachmentsClient;
+pub use compute_credentials::ComputeCredentialsClient;
+pub use compute_environments::ComputeEnvironmentsClient;
+pub use compute_operations::ComputeOperationsClient;
+pub use compute_workers::ComputeWorkersClient;
 pub use connections::ConnectionsClient;
 pub use context_registry::ContextRegistryClient;
 pub use conversations::ConversationsClient;

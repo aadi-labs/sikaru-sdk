@@ -7,6 +7,126 @@ import (
 	core "github.com/aadi-labs/sikaru-sdk/go/core"
 )
 
+// Conflict
+type ConflictError struct {
+	*core.APIError
+	Body *ComputeError
+}
+
+func (c *ConflictError) UnmarshalJSON(data []byte) error {
+	var body *ComputeError
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	c.StatusCode = 409
+	c.Body = body
+	return nil
+}
+
+func (c *ConflictError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(c.Body)
+}
+
+func (c *ConflictError) Unwrap() error {
+	return c.APIError
+}
+
+// Forbidden
+type ForbiddenError struct {
+	*core.APIError
+	Body *ComputeError
+}
+
+func (f *ForbiddenError) UnmarshalJSON(data []byte) error {
+	var body *ComputeError
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	f.StatusCode = 403
+	f.Body = body
+	return nil
+}
+
+func (f *ForbiddenError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(f.Body)
+}
+
+func (f *ForbiddenError) Unwrap() error {
+	return f.APIError
+}
+
+// Not Found
+type NotFoundError struct {
+	*core.APIError
+	Body *ComputeError
+}
+
+func (n *NotFoundError) UnmarshalJSON(data []byte) error {
+	var body *ComputeError
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	n.StatusCode = 404
+	n.Body = body
+	return nil
+}
+
+func (n *NotFoundError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(n.Body)
+}
+
+func (n *NotFoundError) Unwrap() error {
+	return n.APIError
+}
+
+// Service Unavailable
+type ServiceUnavailableError struct {
+	*core.APIError
+	Body *ComputeError
+}
+
+func (s *ServiceUnavailableError) UnmarshalJSON(data []byte) error {
+	var body *ComputeError
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	s.StatusCode = 503
+	s.Body = body
+	return nil
+}
+
+func (s *ServiceUnavailableError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(s.Body)
+}
+
+func (s *ServiceUnavailableError) Unwrap() error {
+	return s.APIError
+}
+
+// Unauthorized
+type UnauthorizedError struct {
+	*core.APIError
+	Body *ComputeError
+}
+
+func (u *UnauthorizedError) UnmarshalJSON(data []byte) error {
+	var body *ComputeError
+	if err := json.Unmarshal(data, &body); err != nil {
+		return err
+	}
+	u.StatusCode = 401
+	u.Body = body
+	return nil
+}
+
+func (u *UnauthorizedError) MarshalJSON() ([]byte, error) {
+	return json.Marshal(u.Body)
+}
+
+func (u *UnauthorizedError) Unwrap() error {
+	return u.APIError
+}
+
 // Validation Error
 type UnprocessableEntityError struct {
 	*core.APIError

@@ -17,7 +17,6 @@ from ..types.session_spend import SessionSpend
 from .types.session_input_environment import SessionInputEnvironment
 from .types.session_input_reasoning_effort import SessionInputReasoningEffort
 from .types.turn_input_delivery_mode import TurnInputDeliveryMode
-from .types.turn_input_execution_environment import TurnInputExecutionEnvironment
 from .types.turn_input_run_mode import TurnInputRunMode
 from pydantic import ValidationError
 
@@ -589,9 +588,8 @@ class RawExecutionSessionsClient:
         idempotency_key: str,
         input: typing.Dict[str, typing.Any],
         capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
-        compute_provider_id: typing.Optional[str] = OMIT,
+        compute_attachment_id: typing.Optional[str] = OMIT,
         delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
-        execution_environment: typing.Optional[TurnInputExecutionEnvironment] = OMIT,
         file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
         product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
@@ -611,11 +609,9 @@ class RawExecutionSessionsClient:
 
         capability_grants : typing.Optional[typing.Sequence[str]]
 
-        compute_provider_id : typing.Optional[str]
+        compute_attachment_id : typing.Optional[str]
 
         delivery_mode : typing.Optional[TurnInputDeliveryMode]
-
-        execution_environment : typing.Optional[TurnInputExecutionEnvironment]
 
         file_ids : typing.Optional[typing.Sequence[str]]
 
@@ -641,9 +637,8 @@ class RawExecutionSessionsClient:
             method="POST",
             json={
                 "capability_grants": capability_grants,
-                "compute_provider_id": compute_provider_id,
+                "compute_attachment_id": compute_attachment_id,
                 "delivery_mode": delivery_mode,
-                "execution_environment": execution_environment,
                 "file_ids": file_ids,
                 "idempotency_key": idempotency_key,
                 "input": input,
@@ -698,6 +693,7 @@ class RawExecutionSessionsClient:
         conversation_id: typing.Optional[str] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        idempotency_key: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Dict[str, typing.Any]]:
@@ -722,6 +718,8 @@ class RawExecutionSessionsClient:
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
 
+        idempotency_key : typing.Optional[str]
+
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
         request_options : typing.Optional[RequestOptions]
@@ -743,6 +741,7 @@ class RawExecutionSessionsClient:
                 "conversation_id": conversation_id,
                 "environment": environment,
                 "final_output_schema": final_output_schema,
+                "idempotency_key": idempotency_key,
                 "reasoning_effort": reasoning_effort,
                 "tenant_id": tenant_id,
                 "user_id": user_id,
@@ -1349,9 +1348,8 @@ class AsyncRawExecutionSessionsClient:
         idempotency_key: str,
         input: typing.Dict[str, typing.Any],
         capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
-        compute_provider_id: typing.Optional[str] = OMIT,
+        compute_attachment_id: typing.Optional[str] = OMIT,
         delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
-        execution_environment: typing.Optional[TurnInputExecutionEnvironment] = OMIT,
         file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
         product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
@@ -1371,11 +1369,9 @@ class AsyncRawExecutionSessionsClient:
 
         capability_grants : typing.Optional[typing.Sequence[str]]
 
-        compute_provider_id : typing.Optional[str]
+        compute_attachment_id : typing.Optional[str]
 
         delivery_mode : typing.Optional[TurnInputDeliveryMode]
-
-        execution_environment : typing.Optional[TurnInputExecutionEnvironment]
 
         file_ids : typing.Optional[typing.Sequence[str]]
 
@@ -1401,9 +1397,8 @@ class AsyncRawExecutionSessionsClient:
             method="POST",
             json={
                 "capability_grants": capability_grants,
-                "compute_provider_id": compute_provider_id,
+                "compute_attachment_id": compute_attachment_id,
                 "delivery_mode": delivery_mode,
-                "execution_environment": execution_environment,
                 "file_ids": file_ids,
                 "idempotency_key": idempotency_key,
                 "input": input,
@@ -1458,6 +1453,7 @@ class AsyncRawExecutionSessionsClient:
         conversation_id: typing.Optional[str] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        idempotency_key: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
@@ -1482,6 +1478,8 @@ class AsyncRawExecutionSessionsClient:
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
 
+        idempotency_key : typing.Optional[str]
+
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
         request_options : typing.Optional[RequestOptions]
@@ -1503,6 +1501,7 @@ class AsyncRawExecutionSessionsClient:
                 "conversation_id": conversation_id,
                 "environment": environment,
                 "final_output_schema": final_output_schema,
+                "idempotency_key": idempotency_key,
                 "reasoning_effort": reasoning_effort,
                 "tenant_id": tenant_id,
                 "user_id": user_id,

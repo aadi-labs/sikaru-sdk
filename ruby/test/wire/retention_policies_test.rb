@@ -7,7 +7,7 @@ class RetentionPoliciesWireTest < WireMockTestCase
     super
 
     @client = Sikaru::Client.new(
-      api_key: "<token>",
+      token: "<token>",
       base_url: WIREMOCK_BASE_URL
     )
   end

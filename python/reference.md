@@ -1127,6 +1127,2035 @@ client.changesets.stage_changeset(
 </dl>
 </details>
 
+## ComputeAttachments
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">get</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.get(
+    project_id="project_id",
+    attachment_id="attachment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">abandon</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Irreversibly abandon execution authority, preserving unknown effects. Cleanup is still required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.abandon(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    evidence="evidence",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">cancel</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently request stopping. This never asserts child cleanup.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.cancel(
+    project_id="project_id",
+    attachment_id="attachment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">claim</a>(...) -> ClaimView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same attachment/key/worker returns the same launch identity, never another launch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.claim(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    idempotency_key="idempotency_key",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">cleanup</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.cleanup(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    children_terminated=True,
+    evidence="evidence",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**children_terminated:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">connect</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attest original workspace/journal. Reconnection never replays uncertain effects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, WorkspaceProvenance
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.connect(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    capabilities=[
+        "compute.execute"
+    ],
+    executor_instance_id="executor_instance_id",
+    journal_id="journal_id",
+    protocol_version="sikaru-compute-v1",
+    workspace_provenance=WorkspaceProvenance(
+        identity="identity",
+        kind="existing_directory",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">issue_credential</a>(...) -> CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.issue_credential(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    owner_epoch=1,
+    owner_id="owner_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_epoch:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">heartbeat</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.heartbeat(
+    project_id="project_id",
+    attachment_id="attachment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">ready</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, WorkspaceProvenance
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.ready(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    capabilities=[
+        "compute.execute"
+    ],
+    executor_instance_id="executor_instance_id",
+    journal_id="journal_id",
+    protocol_version="sikaru-compute-v1",
+    workspace_provenance=WorkspaceProvenance(
+        identity="identity",
+        kind="existing_directory",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">reconcile</a>(...) -> ReconcileView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, WorkspaceProvenance
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.reconcile(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    executor_instance_id="executor_instance_id",
+    journal_id="journal_id",
+    workspace_provenance=WorkspaceProvenance(
+        identity="identity",
+        kind="existing_directory",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**executor_instance_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**journal_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_provenance:** `WorkspaceProvenance` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**processes:** `typing.Optional[typing.List[ProcessObservation]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipts:** `typing.Optional[typing.List[ReceiptInput]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**uncertain_operation_ids:** `typing.Optional[typing.List[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">status</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.status(
+    project_id="project_id",
+    attachment_id="attachment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">stop</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Executor can stop its own attachment and cancel its runs; cleanup is separately reported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.stop(
+    project_id="project_id",
+    attachment_id="attachment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">teardown</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.teardown(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    children_terminated=True,
+    evidence="evidence",
+    owner_epoch=1,
+    owner_id="owner_id",
+    workspace_generation="workspace_generation",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**children_terminated:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_epoch:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_generation:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="src/sikaru_api/compute_attachments/client.py">create</a>(...) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same session/key/workspace returns the original binding; changed workspace conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, WorkspaceProvenance
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_attachments.create(
+    project_id="project_id",
+    session_id="session_id",
+    environment_id="environment_id",
+    idempotency_key="idempotency_key",
+    workspace_provenance=WorkspaceProvenance(
+        identity="identity",
+        kind="existing_directory",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_provenance:** `WorkspaceProvenance` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**replace_existing:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeOperations
+<details><summary><code>client.compute_operations.<a href="src/sikaru_api/compute_operations/client.py">submit_receipt</a>(...) -> ReceiptView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Only exact immutable receipt retries are idempotent; changed content conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_operations.submit_receipt(
+    project_id="project_id",
+    attachment_id="attachment_id",
+    idempotency_key="idempotency_key",
+    payload={
+        "key": "value"
+    },
+    request_digest="request_digest",
+    run_id="run_id",
+    status="completed",
+    tool_call_id="tool_call_id",
+    tool_provider_id="tool_provider_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ReceiptInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_operations.<a href="src/sikaru_api/compute_operations/client.py">poll</a>(...) -> WorkPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_operations.poll(
+    project_id="project_id",
+    attachment_id="attachment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**wait_seconds:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeCredentials
+<details><summary><code>client.compute_credentials.<a href="src/sikaru_api/compute_credentials/client.py">renew</a>(...) -> CredentialRenewed</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_credentials.renew(
+    project_id="project_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_credentials.<a href="src/sikaru_api/compute_credentials/client.py">revoke</a>(...) -> CredentialRevoked</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_credentials.revoke(
+    project_id="project_id",
+    credential_id="credential_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeEnvironments
+<details><summary><code>client.compute_environments.<a href="src/sikaru_api/compute_environments/client.py">create</a>(...) -> EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key + same configuration returns the same environment; changed input conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_environments.create(
+    project_id="project_id",
+    environment_slug="environment_slug",
+    idempotency_key="idempotency_key",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**product_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_environments.<a href="src/sikaru_api/compute_environments/client.py">get</a>(...) -> EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_environments.get(
+    project_id="project_id",
+    environment_id="environment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_environments.<a href="src/sikaru_api/compute_environments/client.py">disable</a>(...) -> EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently disable future claims and credentials; existing cleanup remains required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_environments.disable(
+    project_id="project_id",
+    environment_id="environment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkers
+<details><summary><code>client.compute_workers.<a href="src/sikaru_api/compute_workers/client.py">issue_credential</a>(...) -> CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Issue a new secret once; retries issue independent revocable credentials.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_workers.issue_credential(
+    project_id="project_id",
+    environment_id="environment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_workers.<a href="src/sikaru_api/compute_workers/client.py">poll</a>(...) -> QueuePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Bounded queue snapshot. wait_seconds is a maximum; server may return immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.compute_workers.poll(
+    project_id="project_id",
+    environment_id="environment_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**wait_seconds:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Connections
 <details><summary><code>client.connections.<a href="src/sikaru_api/connections/client.py">list_connections</a>(...) -> typing.List[Connection]</code></summary>
 <dl>
@@ -5223,7 +7252,7 @@ client.execution_sessions.append_turn(
 <dl>
 <dd>
 
-**compute_provider_id:** `typing.Optional[str]` 
+**compute_attachment_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -5232,14 +7261,6 @@ client.execution_sessions.append_turn(
 <dd>
 
 **delivery_mode:** `typing.Optional[TurnInputDeliveryMode]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**execution_environment:** `typing.Optional[TurnInputExecutionEnvironment]` 
     
 </dd>
 </dl>
@@ -5390,6 +7411,14 @@ client.execution_sessions.create(
 <dd>
 
 **final_output_schema:** `typing.Optional[typing.Dict[str, typing.Any]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -6424,6 +8453,305 @@ client.agent_budgets.setup_payment_method(
 </details>
 
 ## Harnesses
+<details><summary><code>client.harnesses.<a href="src/sikaru_api/harnesses/client.py">get_invoice_budget</a>(...) -> InvoiceBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.harnesses.get_invoice_budget(
+    project_id="project_id",
+    harness_id="harness_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="src/sikaru_api/harnesses/client.py">get_subscription</a>(...) -> SubscriptionStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.harnesses.get_subscription(
+    project_id="project_id",
+    harness_id="harness_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="src/sikaru_api/harnesses/client.py">subscribe</a>(...) -> SubscriptionSetup</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.harnesses.subscribe(
+    project_id="project_id",
+    harness_id="harness_id",
+    accepted_recurring_terms=True,
+    idempotency_key="idempotency_key",
+    plan="build",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accepted_recurring_terms:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**plan:** `SubscriptionInputPlan` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="src/sikaru_api/harnesses/client.py">cancel_subscription</a>(...) -> SubscriptionCancellation</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.harnesses.cancel_subscription(
+    project_id="project_id",
+    harness_id="harness_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.harnesses.<a href="src/sikaru_api/harnesses/client.py">improvement_options</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
 <dd>
@@ -7030,7 +9358,15 @@ client.runs.start(
 <dl>
 <dd>
 
-**compute_provider_id:** `typing.Optional[str]` 
+**compute_environment_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**compute_workspace_provenance:** `typing.Optional[WorkspaceProvenance]` 
     
 </dd>
 </dl>
@@ -7062,7 +9398,7 @@ client.runs.start(
 <dl>
 <dd>
 
-**execution_environment:** `typing.Optional[StartHarnessRunRequestExecutionEnvironment]` 
+**idempotency_key:** `typing.Optional[str]` 
     
 </dd>
 </dl>

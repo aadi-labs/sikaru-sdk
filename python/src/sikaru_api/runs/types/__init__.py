@@ -7,12 +7,10 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .approval_input_decision import ApprovalInputDecision
-    from .start_harness_run_request_execution_environment import StartHarnessRunRequestExecutionEnvironment
     from .start_harness_run_request_run_mode import StartHarnessRunRequestRunMode
     from .submit_tool_result_request_status import SubmitToolResultRequestStatus
 _dynamic_imports: typing.Dict[str, str] = {
     "ApprovalInputDecision": ".approval_input_decision",
-    "StartHarnessRunRequestExecutionEnvironment": ".start_harness_run_request_execution_environment",
     "StartHarnessRunRequestRunMode": ".start_harness_run_request_run_mode",
     "SubmitToolResultRequestStatus": ".submit_tool_result_request_status",
 }
@@ -39,9 +37,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = [
-    "ApprovalInputDecision",
-    "StartHarnessRunRequestExecutionEnvironment",
-    "StartHarnessRunRequestRunMode",
-    "SubmitToolResultRequestStatus",
-]
+__all__ = ["ApprovalInputDecision", "StartHarnessRunRequestRunMode", "SubmitToolResultRequestStatus"]

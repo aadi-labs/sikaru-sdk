@@ -6,6 +6,168 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("HarnessesClient", () => {
     
+    test("get_invoice_budget (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "learning" : { "limit_usd" : "limit_usd" , "reserved_usd" : "reserved_usd" , "used_usd" : "used_usd" } , "period_end" : 1 , "period_start" : 1 , "production" : { "limit_usd" : "limit_usd" , "reserved_usd" : "reserved_usd" , "used_usd" : "used_usd" } , "state" : "state" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/harnesses/harness_id/budget/invoice").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.harnesses.getInvoiceBudget("project_id", "harness_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_invoice_budget (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/harnesses/harness_id/budget/invoice").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.harnesses.getInvoiceBudget("project_id", "harness_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("get_subscription (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "cancel_at" : 1 , "configured" : true , "mode" : "prepaid" , "plan" : "build" , "state" : "state" , "trial" : { "ends_at" : 1 , "remaining_usd" : "remaining_usd" , "state" : "available" } };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/harnesses/harness_id/budget/subscription").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.harnesses.getSubscription("project_id", "harness_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_subscription (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/harnesses/harness_id/budget/subscription").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.harnesses.getSubscription("project_id", "harness_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("subscribe (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "accepted_recurring_terms" : true , "idempotency_key" : "idempotency_key" , "plan" : "build" };
+        const rawResponseBody = { "cancel_at" : 1 , "configured" : true , "mode" : "prepaid" , "plan" : "build" , "state" : "state" , "trial" : { "ends_at" : 1 , "remaining_usd" : "remaining_usd" , "state" : "available" } , "url" : "url" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/harnesses/harness_id/budget/subscription").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.harnesses.subscribe("project_id", "harness_id", {
+    accepted_recurring_terms: true,
+    idempotency_key: "idempotency_key",
+    plan: "build"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("subscribe (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "accepted_recurring_terms" : true , "idempotency_key" : "x" , "plan" : "build" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/harnesses/harness_id/budget/subscription").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.harnesses.subscribe("project_id", "harness_id", {
+    accepted_recurring_terms: true,
+    idempotency_key: "x",
+    plan: "build"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("cancel_subscription (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "cancel_at" : 1 , "state" : "cancellation_pending" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/harnesses/harness_id/budget/subscription/cancel").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.harnesses.cancelSubscription("project_id", "harness_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("cancel_subscription (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/harnesses/harness_id/budget/subscription/cancel").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.harnesses.cancelSubscription("project_id", "harness_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("improvement_options (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });

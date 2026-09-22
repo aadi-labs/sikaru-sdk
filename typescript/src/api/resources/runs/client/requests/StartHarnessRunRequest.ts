@@ -22,11 +22,12 @@ export interface StartHarnessRunRequest {
     /** Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release. */
     auto_improve?: boolean;
     capability_grants?: string[];
-    compute_provider_id?: string | null;
+    compute_environment_id?: string | null;
+    compute_workspace_provenance?: Sikaru.WorkspaceProvenance | null;
     conversation_id?: string | null;
     correlation_id?: string | null;
     event_delivery?: Sikaru.EventDeliveryRequest;
-    execution_environment?: StartHarnessRunRequest.ExecutionEnvironment;
+    idempotency_key?: string | null;
     input: Record<string, unknown>;
     job_id?: string | null;
     /** Catalog model for this run. Omit to use the project default; list choices through model settings. */
@@ -41,11 +42,6 @@ export interface StartHarnessRunRequest {
 }
 
 export namespace StartHarnessRunRequest {
-    export const ExecutionEnvironment = {
-            Managed: "managed",
-            Local: "local"
-        } as const;
-    export type ExecutionEnvironment = typeof ExecutionEnvironment[keyof typeof ExecutionEnvironment];
     export const RunMode = {
             Interactive: "interactive",
             BackgroundSubagent: "background_subagent",

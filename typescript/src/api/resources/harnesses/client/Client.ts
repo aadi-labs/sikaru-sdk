@@ -35,6 +35,206 @@ export class HarnessesClient {
      * @throws {@link errors.SikaruTimeoutError}
      *
      * @example
+     *     await client.harnesses.getInvoiceBudget("project_id", "harness_id")
+     */
+    public getInvoiceBudget(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): core.HttpResponsePromise<Sikaru.InvoiceBudget> {
+        return core.HttpResponsePromise.fromPromise(this.__getInvoiceBudget(project_id, harness_id, requestOptions));
+    }
+
+    private async __getInvoiceBudget(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.InvoiceBudget>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/harnesses/${core.url.encodePathParam(harness_id)}/budget/invoice`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.InvoiceBudget, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/harnesses/{harness_id}/budget/invoice");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} harness_id
+     * @param {HarnessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.harnesses.getSubscription("project_id", "harness_id")
+     */
+    public getSubscription(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): core.HttpResponsePromise<Sikaru.SubscriptionStatus> {
+        return core.HttpResponsePromise.fromPromise(this.__getSubscription(project_id, harness_id, requestOptions));
+    }
+
+    private async __getSubscription(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.SubscriptionStatus>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/harnesses/${core.url.encodePathParam(harness_id)}/budget/subscription`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.SubscriptionStatus, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} harness_id
+     * @param {Sikaru.SubscriptionInput} request
+     * @param {HarnessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.harnesses.subscribe("project_id", "harness_id", {
+     *         accepted_recurring_terms: true,
+     *         idempotency_key: "idempotency_key",
+     *         plan: "build"
+     *     })
+     */
+    public subscribe(project_id: string, harness_id: string, request: Sikaru.SubscriptionInput, requestOptions?: HarnessesClient.RequestOptions): core.HttpResponsePromise<Sikaru.SubscriptionSetup> {
+        return core.HttpResponsePromise.fromPromise(this.__subscribe(project_id, harness_id, request, requestOptions));
+    }
+
+    private async __subscribe(project_id: string, harness_id: string, request: Sikaru.SubscriptionInput, requestOptions?: HarnessesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.SubscriptionSetup>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/harnesses/${core.url.encodePathParam(harness_id)}/budget/subscription`),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.SubscriptionSetup, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} harness_id
+     * @param {HarnessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.harnesses.cancelSubscription("project_id", "harness_id")
+     */
+    public cancelSubscription(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): core.HttpResponsePromise<Sikaru.SubscriptionCancellation> {
+        return core.HttpResponsePromise.fromPromise(this.__cancelSubscription(project_id, harness_id, requestOptions));
+    }
+
+    private async __cancelSubscription(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.SubscriptionCancellation>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/harnesses/${core.url.encodePathParam(harness_id)}/budget/subscription/cancel`),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.SubscriptionCancellation, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription/cancel");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} harness_id
+     * @param {HarnessesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
      *     await client.harnesses.improvementOptions("project_id", "harness_id")
      */
     public improvementOptions(project_id: string, harness_id: string, requestOptions?: HarnessesClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {

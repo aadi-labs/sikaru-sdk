@@ -62,6 +62,61 @@
             },
             "default": "./dist/cjs/api/resources/changesets/exports.js"
         },
+        "./computeAttachments": {
+            "import": {
+                "types": "./dist/esm/api/resources/computeAttachments/exports.d.mts",
+                "default": "./dist/esm/api/resources/computeAttachments/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/computeAttachments/exports.d.ts",
+                "default": "./dist/cjs/api/resources/computeAttachments/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/computeAttachments/exports.js"
+        },
+        "./computeOperations": {
+            "import": {
+                "types": "./dist/esm/api/resources/computeOperations/exports.d.mts",
+                "default": "./dist/esm/api/resources/computeOperations/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/computeOperations/exports.d.ts",
+                "default": "./dist/cjs/api/resources/computeOperations/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/computeOperations/exports.js"
+        },
+        "./computeCredentials": {
+            "import": {
+                "types": "./dist/esm/api/resources/computeCredentials/exports.d.mts",
+                "default": "./dist/esm/api/resources/computeCredentials/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/computeCredentials/exports.d.ts",
+                "default": "./dist/cjs/api/resources/computeCredentials/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/computeCredentials/exports.js"
+        },
+        "./computeEnvironments": {
+            "import": {
+                "types": "./dist/esm/api/resources/computeEnvironments/exports.d.mts",
+                "default": "./dist/esm/api/resources/computeEnvironments/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/computeEnvironments/exports.d.ts",
+                "default": "./dist/cjs/api/resources/computeEnvironments/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/computeEnvironments/exports.js"
+        },
+        "./computeWorkers": {
+            "import": {
+                "types": "./dist/esm/api/resources/computeWorkers/exports.d.mts",
+                "default": "./dist/esm/api/resources/computeWorkers/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/computeWorkers/exports.d.ts",
+                "default": "./dist/cjs/api/resources/computeWorkers/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/computeWorkers/exports.js"
+        },
         "./connections": {
             "import": {
                 "types": "./dist/esm/api/resources/connections/exports.d.mts",

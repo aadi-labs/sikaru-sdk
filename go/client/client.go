@@ -10,6 +10,11 @@ import (
 	agentimports "github.com/aadi-labs/sikaru-sdk/go/agentimports"
 	agents "github.com/aadi-labs/sikaru-sdk/go/agents"
 	changesets "github.com/aadi-labs/sikaru-sdk/go/changesets"
+	computeattachments "github.com/aadi-labs/sikaru-sdk/go/computeattachments"
+	computecredentials "github.com/aadi-labs/sikaru-sdk/go/computecredentials"
+	computeenvironments "github.com/aadi-labs/sikaru-sdk/go/computeenvironments"
+	computeoperations "github.com/aadi-labs/sikaru-sdk/go/computeoperations"
+	computeworkers "github.com/aadi-labs/sikaru-sdk/go/computeworkers"
 	connections "github.com/aadi-labs/sikaru-sdk/go/connections"
 	contextregistry "github.com/aadi-labs/sikaru-sdk/go/contextregistry"
 	conversations "github.com/aadi-labs/sikaru-sdk/go/conversations"
@@ -60,6 +65,11 @@ type Sikaru struct {
 	AgentImports           *agentimports.Client
 	Agents                 *agents.Client
 	Changesets             *changesets.Client
+	ComputeAttachments     *computeattachments.Client
+	ComputeOperations      *computeoperations.Client
+	ComputeCredentials     *computecredentials.Client
+	ComputeEnvironments    *computeenvironments.Client
+	ComputeWorkers         *computeworkers.Client
 	Connections            *connections.Client
 	ContextRegistry        *contextregistry.Client
 	Conversations          *conversations.Client
@@ -117,6 +127,11 @@ func New(opts ...option.RequestOption) *Sikaru {
 		AgentImports:           agentimports.NewClient(options),
 		Agents:                 agents.NewClient(options),
 		Changesets:             changesets.NewClient(options),
+		ComputeAttachments:     computeattachments.NewClient(options),
+		ComputeOperations:      computeoperations.NewClient(options),
+		ComputeCredentials:     computecredentials.NewClient(options),
+		ComputeEnvironments:    computeenvironments.NewClient(options),
+		ComputeWorkers:         computeworkers.NewClient(options),
 		Connections:            connections.NewClient(options),
 		ContextRegistry:        contextregistry.NewClient(options),
 		Conversations:          conversations.NewClient(options),

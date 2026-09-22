@@ -4,6 +4,135 @@ mod wire_test_utils;
 
 #[tokio::test]
 #[allow(unused_variables, unreachable_code)]
+async fn test_harnesses_get_invoice_budget_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = Sikaru::new(config).expect("Failed to build client");
+
+    let result = client
+        .harnesses
+        .get_invoice_budget(&"project_id".to_string(), &"harness_id".to_string(), None)
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/v1/projects/project_id/harnesses/harness_id/budget/invoice",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_harnesses_get_subscription_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = Sikaru::new(config).expect("Failed to build client");
+
+    let result = client
+        .harnesses
+        .get_subscription(&"project_id".to_string(), &"harness_id".to_string(), None)
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "GET",
+        "/v1/projects/project_id/harnesses/harness_id/budget/subscription",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_harnesses_subscribe_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = Sikaru::new(config).expect("Failed to build client");
+
+    let result = client
+        .harnesses
+        .subscribe(
+            &"project_id".to_string(),
+            &"harness_id".to_string(),
+            &SubscriptionInput {
+                accepted_recurring_terms: true,
+                idempotency_key: "idempotency_key".to_string(),
+                plan: SubscriptionInputPlan::Build,
+            },
+            None,
+        )
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/budget/subscription",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
+async fn test_harnesses_cancel_subscription_with_wiremock() {
+    wire_test_utils::reset_wiremock_requests().await.unwrap();
+    let wiremock_base_url = wire_test_utils::get_wiremock_base_url();
+
+    let mut config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    config.base_url = wiremock_base_url.to_string();
+    let client = Sikaru::new(config).expect("Failed to build client");
+
+    let result = client
+        .harnesses
+        .cancel_subscription(&"project_id".to_string(), &"harness_id".to_string(), None)
+        .await;
+
+    assert!(result.is_ok(), "Client method call should succeed");
+
+    wire_test_utils::verify_request_count(
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/budget/subscription/cancel",
+        None,
+        1,
+    )
+    .await
+    .unwrap();
+}
+
+#[tokio::test]
+#[allow(unused_variables, unreachable_code)]
 async fn test_harnesses_improvement_options_with_wiremock() {
     wire_test_utils::reset_wiremock_requests().await.unwrap();
     let wiremock_base_url = wire_test_utils::get_wiremock_base_url();

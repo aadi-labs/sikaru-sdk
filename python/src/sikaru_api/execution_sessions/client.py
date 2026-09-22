@@ -9,7 +9,6 @@ from .raw_client import AsyncRawExecutionSessionsClient, RawExecutionSessionsCli
 from .types.session_input_environment import SessionInputEnvironment
 from .types.session_input_reasoning_effort import SessionInputReasoningEffort
 from .types.turn_input_delivery_mode import TurnInputDeliveryMode
-from .types.turn_input_execution_environment import TurnInputExecutionEnvironment
 from .types.turn_input_run_mode import TurnInputRunMode
 
 # this is used as the default value for optional parameters
@@ -379,9 +378,8 @@ class ExecutionSessionsClient:
         idempotency_key: str,
         input: typing.Dict[str, typing.Any],
         capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
-        compute_provider_id: typing.Optional[str] = OMIT,
+        compute_attachment_id: typing.Optional[str] = OMIT,
         delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
-        execution_environment: typing.Optional[TurnInputExecutionEnvironment] = OMIT,
         file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
         product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
@@ -401,11 +399,9 @@ class ExecutionSessionsClient:
 
         capability_grants : typing.Optional[typing.Sequence[str]]
 
-        compute_provider_id : typing.Optional[str]
+        compute_attachment_id : typing.Optional[str]
 
         delivery_mode : typing.Optional[TurnInputDeliveryMode]
-
-        execution_environment : typing.Optional[TurnInputExecutionEnvironment]
 
         file_ids : typing.Optional[typing.Sequence[str]]
 
@@ -443,9 +439,8 @@ class ExecutionSessionsClient:
             idempotency_key=idempotency_key,
             input=input,
             capability_grants=capability_grants,
-            compute_provider_id=compute_provider_id,
+            compute_attachment_id=compute_attachment_id,
             delivery_mode=delivery_mode,
-            execution_environment=execution_environment,
             file_ids=file_ids,
             product_context=product_context,
             run_mode=run_mode,
@@ -465,6 +460,7 @@ class ExecutionSessionsClient:
         conversation_id: typing.Optional[str] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        idempotency_key: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
@@ -488,6 +484,8 @@ class ExecutionSessionsClient:
             Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
+
+        idempotency_key : typing.Optional[str]
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
@@ -522,6 +520,7 @@ class ExecutionSessionsClient:
             conversation_id=conversation_id,
             environment=environment,
             final_output_schema=final_output_schema,
+            idempotency_key=idempotency_key,
             reasoning_effort=reasoning_effort,
             request_options=request_options,
         )
@@ -958,9 +957,8 @@ class AsyncExecutionSessionsClient:
         idempotency_key: str,
         input: typing.Dict[str, typing.Any],
         capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
-        compute_provider_id: typing.Optional[str] = OMIT,
+        compute_attachment_id: typing.Optional[str] = OMIT,
         delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
-        execution_environment: typing.Optional[TurnInputExecutionEnvironment] = OMIT,
         file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
         product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
@@ -980,11 +978,9 @@ class AsyncExecutionSessionsClient:
 
         capability_grants : typing.Optional[typing.Sequence[str]]
 
-        compute_provider_id : typing.Optional[str]
+        compute_attachment_id : typing.Optional[str]
 
         delivery_mode : typing.Optional[TurnInputDeliveryMode]
-
-        execution_environment : typing.Optional[TurnInputExecutionEnvironment]
 
         file_ids : typing.Optional[typing.Sequence[str]]
 
@@ -1030,9 +1026,8 @@ class AsyncExecutionSessionsClient:
             idempotency_key=idempotency_key,
             input=input,
             capability_grants=capability_grants,
-            compute_provider_id=compute_provider_id,
+            compute_attachment_id=compute_attachment_id,
             delivery_mode=delivery_mode,
-            execution_environment=execution_environment,
             file_ids=file_ids,
             product_context=product_context,
             run_mode=run_mode,
@@ -1052,6 +1047,7 @@ class AsyncExecutionSessionsClient:
         conversation_id: typing.Optional[str] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
+        idempotency_key: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
@@ -1075,6 +1071,8 @@ class AsyncExecutionSessionsClient:
             Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
+
+        idempotency_key : typing.Optional[str]
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
@@ -1117,6 +1115,7 @@ class AsyncExecutionSessionsClient:
             conversation_id=conversation_id,
             environment=environment,
             final_output_schema=final_output_schema,
+            idempotency_key=idempotency_key,
             reasoning_effort=reasoning_effort,
             request_options=request_options,
         )

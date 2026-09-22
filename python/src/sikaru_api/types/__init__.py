@@ -14,7 +14,12 @@ if typing.TYPE_CHECKING:
     from .agent_import_source_ref_request import AgentImportSourceRefRequest
     from .agent_import_source_ref_request_export_policy import AgentImportSourceRefRequestExportPolicy
     from .answer_ref import AnswerRef
+    from .attachment_view import AttachmentView
+    from .attachment_view_cleanup_status import AttachmentViewCleanupStatus
+    from .attachment_view_status import AttachmentViewStatus
     from .case_input import CaseInput
+    from .claim_view import ClaimView
+    from .compute_error import ComputeError
     from .connection import Connection
     from .connection_authorization import ConnectionAuthorization
     from .connection_config import ConnectionConfig
@@ -27,19 +32,43 @@ if typing.TYPE_CHECKING:
     from .create_managed_agent_source_request_export_policy import CreateManagedAgentSourceRequestExportPolicy
     from .create_managed_agent_source_request_source_kind import CreateManagedAgentSourceRequestSourceKind
     from .create_parity_run_request import CreateParityRunRequest
+    from .credential_issued import CredentialIssued
+    from .credential_renewed import CredentialRenewed
+    from .credential_revoked import CredentialRevoked
+    from .environment_view import EnvironmentView
+    from .environment_view_status import EnvironmentViewStatus
     from .event_delivery_request import EventDeliveryRequest
+    from .execution_view import ExecutionView
     from .funding_receipt import FundingReceipt
     from .funding_status import FundingStatus
     from .http_validation_error import HttpValidationError
+    from .invoice_budget import InvoiceBudget
     from .judgment_context import JudgmentContext
     from .judgment_target import JudgmentTarget
     from .judgment_target_kind import JudgmentTargetKind
+    from .live_handle import LiveHandle
     from .managed_run import ManagedRun
     from .open_inference_span import OpenInferenceSpan
+    from .operation_view import OperationView
+    from .operation_view_capability_name import OperationViewCapabilityName
+    from .operation_view_method import OperationViewMethod
     from .payment_setup_link import PaymentSetupLink
+    from .process_observation import ProcessObservation
+    from .process_observation_status import ProcessObservationStatus
+    from .queue_page import QueuePage
+    from .ready_input import ReadyInput
+    from .ready_input_capabilities_item import ReadyInputCapabilitiesItem
+    from .ready_input_protocol_version import ReadyInputProtocolVersion
+    from .receipt_input import ReceiptInput
+    from .receipt_input_capability_name import ReceiptInputCapabilityName
+    from .receipt_input_status import ReceiptInputStatus
+    from .receipt_view import ReceiptView
+    from .receipt_view_status import ReceiptViewStatus
+    from .reconcile_view import ReconcileView
     from .recover_run_request import RecoverRunRequest
     from .release_action_request import ReleaseActionRequest
     from .reload_settings import ReloadSettings
+    from .resource_budget import ResourceBudget
     from .resume_improvement_input import ResumeImprovementInput
     from .resume_input import ResumeInput
     from .run_event import RunEvent
@@ -51,6 +80,14 @@ if typing.TYPE_CHECKING:
     from .specialist_receipt import SpecialistReceipt
     from .specialist_thread import SpecialistThread
     from .specialist_threads import SpecialistThreads
+    from .subscription_cancellation import SubscriptionCancellation
+    from .subscription_cancellation_state import SubscriptionCancellationState
+    from .subscription_setup import SubscriptionSetup
+    from .subscription_setup_mode import SubscriptionSetupMode
+    from .subscription_setup_plan import SubscriptionSetupPlan
+    from .subscription_status import SubscriptionStatus
+    from .subscription_status_mode import SubscriptionStatusMode
+    from .subscription_status_plan import SubscriptionStatusPlan
     from .target_input import TargetInput
     from .tool_provider_ref_request import ToolProviderRefRequest
     from .tool_skill_source_request import ToolSkillSourceRequest
@@ -58,9 +95,16 @@ if typing.TYPE_CHECKING:
     from .trace_import_options_request import TraceImportOptionsRequest
     from .trace_import_scope_request import TraceImportScopeRequest
     from .trace_metadata import TraceMetadata
+    from .trial_status import TrialStatus
+    from .trial_status_state import TrialStatusState
+    from .uncertain_operation import UncertainOperation
     from .validation_error import ValidationError
     from .validation_error_loc_item import ValidationErrorLocItem
     from .versioned_trace_import_action import VersionedTraceImportAction
+    from .work_page import WorkPage
+    from .work_page_execution_phase import WorkPageExecutionPhase
+    from .workspace_provenance import WorkspaceProvenance
+    from .workspace_provenance_kind import WorkspaceProvenanceKind
 _dynamic_imports: typing.Dict[str, str] = {
     "AgentBudget": ".agent_budget",
     "AgentImportEvalSuiteRequest": ".agent_import_eval_suite_request",
@@ -70,7 +114,12 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AgentImportSourceRefRequest": ".agent_import_source_ref_request",
     "AgentImportSourceRefRequestExportPolicy": ".agent_import_source_ref_request_export_policy",
     "AnswerRef": ".answer_ref",
+    "AttachmentView": ".attachment_view",
+    "AttachmentViewCleanupStatus": ".attachment_view_cleanup_status",
+    "AttachmentViewStatus": ".attachment_view_status",
     "CaseInput": ".case_input",
+    "ClaimView": ".claim_view",
+    "ComputeError": ".compute_error",
     "Connection": ".connection",
     "ConnectionAuthorization": ".connection_authorization",
     "ConnectionConfig": ".connection_config",
@@ -83,19 +132,43 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CreateManagedAgentSourceRequestExportPolicy": ".create_managed_agent_source_request_export_policy",
     "CreateManagedAgentSourceRequestSourceKind": ".create_managed_agent_source_request_source_kind",
     "CreateParityRunRequest": ".create_parity_run_request",
+    "CredentialIssued": ".credential_issued",
+    "CredentialRenewed": ".credential_renewed",
+    "CredentialRevoked": ".credential_revoked",
+    "EnvironmentView": ".environment_view",
+    "EnvironmentViewStatus": ".environment_view_status",
     "EventDeliveryRequest": ".event_delivery_request",
+    "ExecutionView": ".execution_view",
     "FundingReceipt": ".funding_receipt",
     "FundingStatus": ".funding_status",
     "HttpValidationError": ".http_validation_error",
+    "InvoiceBudget": ".invoice_budget",
     "JudgmentContext": ".judgment_context",
     "JudgmentTarget": ".judgment_target",
     "JudgmentTargetKind": ".judgment_target_kind",
+    "LiveHandle": ".live_handle",
     "ManagedRun": ".managed_run",
     "OpenInferenceSpan": ".open_inference_span",
+    "OperationView": ".operation_view",
+    "OperationViewCapabilityName": ".operation_view_capability_name",
+    "OperationViewMethod": ".operation_view_method",
     "PaymentSetupLink": ".payment_setup_link",
+    "ProcessObservation": ".process_observation",
+    "ProcessObservationStatus": ".process_observation_status",
+    "QueuePage": ".queue_page",
+    "ReadyInput": ".ready_input",
+    "ReadyInputCapabilitiesItem": ".ready_input_capabilities_item",
+    "ReadyInputProtocolVersion": ".ready_input_protocol_version",
+    "ReceiptInput": ".receipt_input",
+    "ReceiptInputCapabilityName": ".receipt_input_capability_name",
+    "ReceiptInputStatus": ".receipt_input_status",
+    "ReceiptView": ".receipt_view",
+    "ReceiptViewStatus": ".receipt_view_status",
+    "ReconcileView": ".reconcile_view",
     "RecoverRunRequest": ".recover_run_request",
     "ReleaseActionRequest": ".release_action_request",
     "ReloadSettings": ".reload_settings",
+    "ResourceBudget": ".resource_budget",
     "ResumeImprovementInput": ".resume_improvement_input",
     "ResumeInput": ".resume_input",
     "RunEvent": ".run_event",
@@ -107,6 +180,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SpecialistReceipt": ".specialist_receipt",
     "SpecialistThread": ".specialist_thread",
     "SpecialistThreads": ".specialist_threads",
+    "SubscriptionCancellation": ".subscription_cancellation",
+    "SubscriptionCancellationState": ".subscription_cancellation_state",
+    "SubscriptionSetup": ".subscription_setup",
+    "SubscriptionSetupMode": ".subscription_setup_mode",
+    "SubscriptionSetupPlan": ".subscription_setup_plan",
+    "SubscriptionStatus": ".subscription_status",
+    "SubscriptionStatusMode": ".subscription_status_mode",
+    "SubscriptionStatusPlan": ".subscription_status_plan",
     "TargetInput": ".target_input",
     "ToolProviderRefRequest": ".tool_provider_ref_request",
     "ToolSkillSourceRequest": ".tool_skill_source_request",
@@ -114,9 +195,16 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TraceImportOptionsRequest": ".trace_import_options_request",
     "TraceImportScopeRequest": ".trace_import_scope_request",
     "TraceMetadata": ".trace_metadata",
+    "TrialStatus": ".trial_status",
+    "TrialStatusState": ".trial_status_state",
+    "UncertainOperation": ".uncertain_operation",
     "ValidationError": ".validation_error",
     "ValidationErrorLocItem": ".validation_error_loc_item",
     "VersionedTraceImportAction": ".versioned_trace_import_action",
+    "WorkPage": ".work_page",
+    "WorkPageExecutionPhase": ".work_page_execution_phase",
+    "WorkspaceProvenance": ".workspace_provenance",
+    "WorkspaceProvenanceKind": ".workspace_provenance_kind",
 }
 
 
@@ -150,7 +238,12 @@ __all__ = [
     "AgentImportSourceRefRequest",
     "AgentImportSourceRefRequestExportPolicy",
     "AnswerRef",
+    "AttachmentView",
+    "AttachmentViewCleanupStatus",
+    "AttachmentViewStatus",
     "CaseInput",
+    "ClaimView",
+    "ComputeError",
     "Connection",
     "ConnectionAuthorization",
     "ConnectionConfig",
@@ -163,19 +256,43 @@ __all__ = [
     "CreateManagedAgentSourceRequestExportPolicy",
     "CreateManagedAgentSourceRequestSourceKind",
     "CreateParityRunRequest",
+    "CredentialIssued",
+    "CredentialRenewed",
+    "CredentialRevoked",
+    "EnvironmentView",
+    "EnvironmentViewStatus",
     "EventDeliveryRequest",
+    "ExecutionView",
     "FundingReceipt",
     "FundingStatus",
     "HttpValidationError",
+    "InvoiceBudget",
     "JudgmentContext",
     "JudgmentTarget",
     "JudgmentTargetKind",
+    "LiveHandle",
     "ManagedRun",
     "OpenInferenceSpan",
+    "OperationView",
+    "OperationViewCapabilityName",
+    "OperationViewMethod",
     "PaymentSetupLink",
+    "ProcessObservation",
+    "ProcessObservationStatus",
+    "QueuePage",
+    "ReadyInput",
+    "ReadyInputCapabilitiesItem",
+    "ReadyInputProtocolVersion",
+    "ReceiptInput",
+    "ReceiptInputCapabilityName",
+    "ReceiptInputStatus",
+    "ReceiptView",
+    "ReceiptViewStatus",
+    "ReconcileView",
     "RecoverRunRequest",
     "ReleaseActionRequest",
     "ReloadSettings",
+    "ResourceBudget",
     "ResumeImprovementInput",
     "ResumeInput",
     "RunEvent",
@@ -187,6 +304,14 @@ __all__ = [
     "SpecialistReceipt",
     "SpecialistThread",
     "SpecialistThreads",
+    "SubscriptionCancellation",
+    "SubscriptionCancellationState",
+    "SubscriptionSetup",
+    "SubscriptionSetupMode",
+    "SubscriptionSetupPlan",
+    "SubscriptionStatus",
+    "SubscriptionStatusMode",
+    "SubscriptionStatusPlan",
     "TargetInput",
     "ToolProviderRefRequest",
     "ToolSkillSourceRequest",
@@ -194,7 +319,14 @@ __all__ = [
     "TraceImportOptionsRequest",
     "TraceImportScopeRequest",
     "TraceMetadata",
+    "TrialStatus",
+    "TrialStatusState",
+    "UncertainOperation",
     "ValidationError",
     "ValidationErrorLocItem",
     "VersionedTraceImportAction",
+    "WorkPage",
+    "WorkPageExecutionPhase",
+    "WorkspaceProvenance",
+    "WorkspaceProvenanceKind",
 ]

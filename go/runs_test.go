@@ -233,11 +233,19 @@ func TestSettersStartHarnessRunRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetComputeProviderID", func(t *testing.T) {
+	t.Run("SetComputeEnvironmentID", func(t *testing.T) {
 		obj := &StartHarnessRunRequest{}
-		var fernTestValueComputeProviderID *string
-		obj.SetComputeProviderID(fernTestValueComputeProviderID)
-		assert.Equal(t, fernTestValueComputeProviderID, obj.ComputeProviderID)
+		var fernTestValueComputeEnvironmentID *string
+		obj.SetComputeEnvironmentID(fernTestValueComputeEnvironmentID)
+		assert.Equal(t, fernTestValueComputeEnvironmentID, obj.ComputeEnvironmentID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetComputeWorkspaceProvenance", func(t *testing.T) {
+		obj := &StartHarnessRunRequest{}
+		var fernTestValueComputeWorkspaceProvenance *WorkspaceProvenance
+		obj.SetComputeWorkspaceProvenance(fernTestValueComputeWorkspaceProvenance)
+		assert.Equal(t, fernTestValueComputeWorkspaceProvenance, obj.ComputeWorkspaceProvenance)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -265,11 +273,11 @@ func TestSettersStartHarnessRunRequest(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetExecutionEnvironment", func(t *testing.T) {
+	t.Run("SetIdempotencyKey", func(t *testing.T) {
 		obj := &StartHarnessRunRequest{}
-		var fernTestValueExecutionEnvironment *StartHarnessRunRequestExecutionEnvironment
-		obj.SetExecutionEnvironment(fernTestValueExecutionEnvironment)
-		assert.Equal(t, fernTestValueExecutionEnvironment, obj.ExecutionEnvironment)
+		var fernTestValueIdempotencyKey *string
+		obj.SetIdempotencyKey(fernTestValueIdempotencyKey)
+		assert.Equal(t, fernTestValueIdempotencyKey, obj.IdempotencyKey)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -418,14 +426,45 @@ func TestSettersMarkExplicitStartHarnessRunRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetComputeProviderID_MarksExplicit", func(t *testing.T) {
+	t.Run("SetComputeEnvironmentID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &StartHarnessRunRequest{}
-		var fernTestValueComputeProviderID *string
+		var fernTestValueComputeEnvironmentID *string
 
 		// Act
-		obj.SetComputeProviderID(fernTestValueComputeProviderID)
+		obj.SetComputeEnvironmentID(fernTestValueComputeEnvironmentID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetComputeWorkspaceProvenance_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &StartHarnessRunRequest{}
+		var fernTestValueComputeWorkspaceProvenance *WorkspaceProvenance
+
+		// Act
+		obj.SetComputeWorkspaceProvenance(fernTestValueComputeWorkspaceProvenance)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -542,14 +581,14 @@ func TestSettersMarkExplicitStartHarnessRunRequest(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetExecutionEnvironment_MarksExplicit", func(t *testing.T) {
+	t.Run("SetIdempotencyKey_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &StartHarnessRunRequest{}
-		var fernTestValueExecutionEnvironment *StartHarnessRunRequestExecutionEnvironment
+		var fernTestValueIdempotencyKey *string
 
 		// Act
-		obj.SetExecutionEnvironment(fernTestValueExecutionEnvironment)
+		obj.SetIdempotencyKey(fernTestValueIdempotencyKey)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -2985,35 +3024,6 @@ func TestEnumApprovalInputDecision(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewApprovalInputDecisionFromString("approved")
-		assert.NoError(t, err)
-		ptr := val.Ptr()
-		assert.NotNil(t, ptr)
-		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestEnumStartHarnessRunRequestExecutionEnvironment(t *testing.T) {
-	t.Run("NewFromString_managed", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewStartHarnessRunRequestExecutionEnvironmentFromString("managed")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, StartHarnessRunRequestExecutionEnvironment("managed"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_local", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewStartHarnessRunRequestExecutionEnvironmentFromString("local")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, StartHarnessRunRequestExecutionEnvironment("local"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewStartHarnessRunRequestExecutionEnvironmentFromString("invalid_value_that_does_not_exist")
-		assert.Error(t, err)
-	})
-
-	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewStartHarnessRunRequestExecutionEnvironmentFromString("managed")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

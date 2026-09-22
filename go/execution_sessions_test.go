@@ -18,11 +18,11 @@ func TestSettersTurnInput(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
-	t.Run("SetComputeProviderID", func(t *testing.T) {
+	t.Run("SetComputeAttachmentID", func(t *testing.T) {
 		obj := &TurnInput{}
-		var fernTestValueComputeProviderID *string
-		obj.SetComputeProviderID(fernTestValueComputeProviderID)
-		assert.Equal(t, fernTestValueComputeProviderID, obj.ComputeProviderID)
+		var fernTestValueComputeAttachmentID *string
+		obj.SetComputeAttachmentID(fernTestValueComputeAttachmentID)
+		assert.Equal(t, fernTestValueComputeAttachmentID, obj.ComputeAttachmentID)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -31,14 +31,6 @@ func TestSettersTurnInput(t *testing.T) {
 		var fernTestValueDeliveryMode *TurnInputDeliveryMode
 		obj.SetDeliveryMode(fernTestValueDeliveryMode)
 		assert.Equal(t, fernTestValueDeliveryMode, obj.DeliveryMode)
-		assert.NotNil(t, obj.explicitFields)
-	})
-
-	t.Run("SetExecutionEnvironment", func(t *testing.T) {
-		obj := &TurnInput{}
-		var fernTestValueExecutionEnvironment *TurnInputExecutionEnvironment
-		obj.SetExecutionEnvironment(fernTestValueExecutionEnvironment)
-		assert.Equal(t, fernTestValueExecutionEnvironment, obj.ExecutionEnvironment)
 		assert.NotNil(t, obj.explicitFields)
 	})
 
@@ -124,14 +116,14 @@ func TestSettersMarkExplicitTurnInput(t *testing.T) {
 		// It verifies that setting a field via setter allows successful JSON round-trip
 	})
 
-	t.Run("SetComputeProviderID_MarksExplicit", func(t *testing.T) {
+	t.Run("SetComputeAttachmentID_MarksExplicit", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &TurnInput{}
-		var fernTestValueComputeProviderID *string
+		var fernTestValueComputeAttachmentID *string
 
 		// Act
-		obj.SetComputeProviderID(fernTestValueComputeProviderID)
+		obj.SetComputeAttachmentID(fernTestValueComputeAttachmentID)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -163,37 +155,6 @@ func TestSettersMarkExplicitTurnInput(t *testing.T) {
 
 		// Act
 		obj.SetDeliveryMode(fernTestValueDeliveryMode)
-
-		// Assert - object with explicitly set field can be marshaled/unmarshaled
-		bytes, err := json.Marshal(obj)
-		require.NoError(t, err, "marshaling should succeed for test setup")
-
-		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
-		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
-		if len(bytes) > 0 && bytes[0] == '{' {
-			// JSON object - unmarshal into map
-			var unmarshaled map[string]interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		} else {
-			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
-			var unmarshaled interface{}
-			err = json.Unmarshal(bytes, &unmarshaled)
-			require.NoError(t, err, "unmarshaling should succeed for test verification")
-		}
-
-		// Note: This does not explicitly assert the presence of a specific JSON field
-		// It verifies that setting a field via setter allows successful JSON round-trip
-	})
-
-	t.Run("SetExecutionEnvironment_MarksExplicit", func(t *testing.T) {
-		t.Parallel()
-		// Arrange
-		obj := &TurnInput{}
-		var fernTestValueExecutionEnvironment *TurnInputExecutionEnvironment
-
-		// Act
-		obj.SetExecutionEnvironment(fernTestValueExecutionEnvironment)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -522,6 +483,14 @@ func TestSettersSessionInput(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetIdempotencyKey", func(t *testing.T) {
+		obj := &SessionInput{}
+		var fernTestValueIdempotencyKey *string
+		obj.SetIdempotencyKey(fernTestValueIdempotencyKey)
+		assert.Equal(t, fernTestValueIdempotencyKey, obj.IdempotencyKey)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetReasoningEffort", func(t *testing.T) {
 		obj := &SessionInput{}
 		var fernTestValueReasoningEffort *SessionInputReasoningEffort
@@ -650,6 +619,37 @@ func TestSettersMarkExplicitSessionInput(t *testing.T) {
 
 		// Act
 		obj.SetFinalOutputSchema(fernTestValueFinalOutputSchema)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetIdempotencyKey_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &SessionInput{}
+		var fernTestValueIdempotencyKey *string
+
+		// Act
+		obj.SetIdempotencyKey(fernTestValueIdempotencyKey)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1581,35 +1581,6 @@ func TestEnumTurnInputDeliveryMode(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewTurnInputDeliveryModeFromString("steer")
-		assert.NoError(t, err)
-		ptr := val.Ptr()
-		assert.NotNil(t, ptr)
-		assert.Equal(t, val, *ptr)
-	})
-}
-
-func TestEnumTurnInputExecutionEnvironment(t *testing.T) {
-	t.Run("NewFromString_managed", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewTurnInputExecutionEnvironmentFromString("managed")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, TurnInputExecutionEnvironment("managed"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_local", func(t *testing.T) {
-		t.Parallel()
-		val, err := NewTurnInputExecutionEnvironmentFromString("local")
-		assert.NoError(t, err, "valid enum value should not return error")
-		assert.Equal(t, TurnInputExecutionEnvironment("local"), val, "enum value should match expected wire value")
-	})
-
-	t.Run("NewFromString_Invalid", func(t *testing.T) {
-		_, err := NewTurnInputExecutionEnvironmentFromString("invalid_value_that_does_not_exist")
-		assert.Error(t, err)
-	})
-
-	t.Run("Ptr", func(t *testing.T) {
-		val, err := NewTurnInputExecutionEnvironmentFromString("managed")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)

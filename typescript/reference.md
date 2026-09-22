@@ -848,6 +848,1639 @@ await client.changesets.stageChangeset("project_id", "changeset_id", {});
 </dl>
 </details>
 
+## ComputeAttachments
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">get</a>(project_id, attachment_id) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.get("project_id", "attachment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">abandon</a>(project_id, attachment_id, { ...params }) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Irreversibly abandon execution authority, preserving unknown effects. Cleanup is still required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.abandon("project_id", "attachment_id", {
+    evidence: "evidence"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.AbandonInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">cancel</a>(project_id, attachment_id) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently request stopping. This never asserts child cleanup.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.cancel("project_id", "attachment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">claim</a>(project_id, attachment_id, { ...params }) -> Sikaru.ClaimView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same attachment/key/worker returns the same launch identity, never another launch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.claim("project_id", "attachment_id", {
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ClaimInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">cleanup</a>(project_id, attachment_id, { ...params }) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.cleanup("project_id", "attachment_id", {
+    children_terminated: true,
+    evidence: "evidence"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CleanupInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">connect</a>(project_id, attachment_id, { ...params }) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attest original workspace/journal. Reconnection never replays uncertain effects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.connect("project_id", "attachment_id", {
+    capabilities: ["compute.execute"],
+    executor_instance_id: "executor_instance_id",
+    journal_id: "journal_id",
+    protocol_version: "sikaru-compute-v1",
+    workspace_provenance: {
+        identity: "identity",
+        kind: "existing_directory"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">issueCredential</a>(project_id, attachment_id, { ...params }) -> Sikaru.CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.issueCredential("project_id", "attachment_id", {
+    owner_epoch: 1,
+    owner_id: "owner_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ExecutorCredentialInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">heartbeat</a>(project_id, attachment_id) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.heartbeat("project_id", "attachment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">ready</a>(project_id, attachment_id, { ...params }) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.ready("project_id", "attachment_id", {
+    capabilities: ["compute.execute"],
+    executor_instance_id: "executor_instance_id",
+    journal_id: "journal_id",
+    protocol_version: "sikaru-compute-v1",
+    workspace_provenance: {
+        identity: "identity",
+        kind: "existing_directory"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">reconcile</a>(project_id, attachment_id, { ...params }) -> Sikaru.ReconcileView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.reconcile("project_id", "attachment_id", {
+    executor_instance_id: "executor_instance_id",
+    journal_id: "journal_id",
+    workspace_provenance: {
+        identity: "identity",
+        kind: "existing_directory"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReconcileInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">status</a>(project_id, attachment_id) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.status("project_id", "attachment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">stop</a>(project_id, attachment_id) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Executor can stop its own attachment and cancel its runs; cleanup is separately reported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.stop("project_id", "attachment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">teardown</a>(project_id, attachment_id, { ...params }) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.teardown("project_id", "attachment_id", {
+    children_terminated: true,
+    evidence: "evidence",
+    owner_epoch: 1,
+    owner_id: "owner_id",
+    workspace_generation: "workspace_generation"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.TeardownInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/src/api/resources/computeAttachments/client/Client.ts">create</a>(project_id, session_id, { ...params }) -> Sikaru.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same session/key/workspace returns the original binding; changed workspace conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeAttachments.create("project_id", "session_id", {
+    environment_id: "environment_id",
+    idempotency_key: "idempotency_key",
+    workspace_provenance: {
+        identity: "identity",
+        kind: "existing_directory"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.AttachmentInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeAttachmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeOperations
+<details><summary><code>client.computeOperations.<a href="/src/api/resources/computeOperations/client/Client.ts">submitReceipt</a>(project_id, attachment_id, { ...params }) -> Sikaru.ReceiptView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Only exact immutable receipt retries are idempotent; changed content conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeOperations.submitReceipt("project_id", "attachment_id", {
+    idempotency_key: "idempotency_key",
+    payload: {
+        "key": "value"
+    },
+    request_digest: "request_digest",
+    run_id: "run_id",
+    status: "completed",
+    tool_call_id: "tool_call_id",
+    tool_provider_id: "tool_provider_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReceiptInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeOperationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeOperations.<a href="/src/api/resources/computeOperations/client/Client.ts">poll</a>(project_id, attachment_id, { ...params }) -> Sikaru.WorkPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeOperations.poll("project_id", "attachment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.PollComputeOperationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeOperationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeCredentials
+<details><summary><code>client.computeCredentials.<a href="/src/api/resources/computeCredentials/client/Client.ts">renew</a>(project_id) -> Sikaru.CredentialRenewed</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeCredentials.renew("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeCredentialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeCredentials.<a href="/src/api/resources/computeCredentials/client/Client.ts">revoke</a>(project_id, credential_id) -> Sikaru.CredentialRevoked</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeCredentials.revoke("project_id", "credential_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeCredentialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeEnvironments
+<details><summary><code>client.computeEnvironments.<a href="/src/api/resources/computeEnvironments/client/Client.ts">create</a>(project_id, { ...params }) -> Sikaru.EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key + same configuration returns the same environment; changed input conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeEnvironments.create("project_id", {
+    environment_slug: "environment_slug",
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.EnvironmentInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeEnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeEnvironments.<a href="/src/api/resources/computeEnvironments/client/Client.ts">get</a>(project_id, environment_id) -> Sikaru.EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeEnvironments.get("project_id", "environment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeEnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeEnvironments.<a href="/src/api/resources/computeEnvironments/client/Client.ts">disable</a>(project_id, environment_id) -> Sikaru.EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently disable future claims and credentials; existing cleanup remains required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeEnvironments.disable("project_id", "environment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeEnvironmentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkers
+<details><summary><code>client.computeWorkers.<a href="/src/api/resources/computeWorkers/client/Client.ts">issueCredential</a>(project_id, environment_id) -> Sikaru.CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Issue a new secret once; retries issue independent revocable credentials.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeWorkers.issueCredential("project_id", "environment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeWorkersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeWorkers.<a href="/src/api/resources/computeWorkers/client/Client.ts">poll</a>(project_id, environment_id, { ...params }) -> Sikaru.QueuePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Bounded queue snapshot. wait_seconds is a maximum; server may return immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeWorkers.poll("project_id", "environment_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.PollComputeWorkersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeWorkersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Connections
 <details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">listConnections</a>(project_id) -> Sikaru.Connection[]</code></summary>
 <dl>
@@ -4491,6 +6124,246 @@ await client.agentBudgets.setupPaymentMethod("project_id", "harness_id", {
 </details>
 
 ## Harnesses
+<details><summary><code>client.harnesses.<a href="/src/api/resources/harnesses/client/Client.ts">getInvoiceBudget</a>(project_id, harness_id) -> Sikaru.InvoiceBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.harnesses.getInvoiceBudget("project_id", "harness_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HarnessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/src/api/resources/harnesses/client/Client.ts">getSubscription</a>(project_id, harness_id) -> Sikaru.SubscriptionStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.harnesses.getSubscription("project_id", "harness_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HarnessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/src/api/resources/harnesses/client/Client.ts">subscribe</a>(project_id, harness_id, { ...params }) -> Sikaru.SubscriptionSetup</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.harnesses.subscribe("project_id", "harness_id", {
+    accepted_recurring_terms: true,
+    idempotency_key: "idempotency_key",
+    plan: "build"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.SubscriptionInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HarnessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/src/api/resources/harnesses/client/Client.ts">cancelSubscription</a>(project_id, harness_id) -> Sikaru.SubscriptionCancellation</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.harnesses.cancelSubscription("project_id", "harness_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HarnessesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.harnesses.<a href="/src/api/resources/harnesses/client/Client.ts">improvementOptions</a>(project_id, harness_id) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
 <dd>

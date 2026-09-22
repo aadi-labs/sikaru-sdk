@@ -6,8 +6,20 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .conflict_error import ConflictError
+    from .forbidden_error import ForbiddenError
+    from .not_found_error import NotFoundError
+    from .service_unavailable_error import ServiceUnavailableError
+    from .unauthorized_error import UnauthorizedError
     from .unprocessable_entity_error import UnprocessableEntityError
-_dynamic_imports: typing.Dict[str, str] = {"UnprocessableEntityError": ".unprocessable_entity_error"}
+_dynamic_imports: typing.Dict[str, str] = {
+    "ConflictError": ".conflict_error",
+    "ForbiddenError": ".forbidden_error",
+    "NotFoundError": ".not_found_error",
+    "ServiceUnavailableError": ".service_unavailable_error",
+    "UnauthorizedError": ".unauthorized_error",
+    "UnprocessableEntityError": ".unprocessable_entity_error",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +43,11 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["UnprocessableEntityError"]
+__all__ = [
+    "ConflictError",
+    "ForbiddenError",
+    "NotFoundError",
+    "ServiceUnavailableError",
+    "UnauthorizedError",
+    "UnprocessableEntityError",
+]

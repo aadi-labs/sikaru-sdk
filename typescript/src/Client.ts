@@ -5,6 +5,11 @@ import { AgentBudgetsClient } from "./api/resources/agentBudgets/client/Client.j
 import { AgentImportsClient } from "./api/resources/agentImports/client/Client.js";
 import { AgentsClient } from "./api/resources/agents/client/Client.js";
 import { ChangesetsClient } from "./api/resources/changesets/client/Client.js";
+import { ComputeAttachmentsClient } from "./api/resources/computeAttachments/client/Client.js";
+import { ComputeCredentialsClient } from "./api/resources/computeCredentials/client/Client.js";
+import { ComputeEnvironmentsClient } from "./api/resources/computeEnvironments/client/Client.js";
+import { ComputeOperationsClient } from "./api/resources/computeOperations/client/Client.js";
+import { ComputeWorkersClient } from "./api/resources/computeWorkers/client/Client.js";
 import { ConnectionsClient } from "./api/resources/connections/client/Client.js";
 import { ContextRegistryClient } from "./api/resources/contextRegistry/client/Client.js";
 import { ConversationsClient } from "./api/resources/conversations/client/Client.js";
@@ -63,6 +68,11 @@ export class SikaruApi {
     protected _agentImports: AgentImportsClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _changesets: ChangesetsClient | undefined;
+    protected _computeAttachments: ComputeAttachmentsClient | undefined;
+    protected _computeOperations: ComputeOperationsClient | undefined;
+    protected _computeCredentials: ComputeCredentialsClient | undefined;
+    protected _computeEnvironments: ComputeEnvironmentsClient | undefined;
+    protected _computeWorkers: ComputeWorkersClient | undefined;
     protected _connections: ConnectionsClient | undefined;
     protected _contextRegistry: ContextRegistryClient | undefined;
     protected _conversations: ConversationsClient | undefined;
@@ -124,6 +134,26 @@ export class SikaruApi {
 
     public get changesets(): ChangesetsClient {
         return (this._changesets ??= new ChangesetsClient(this._options));
+    }
+
+    public get computeAttachments(): ComputeAttachmentsClient {
+        return (this._computeAttachments ??= new ComputeAttachmentsClient(this._options));
+    }
+
+    public get computeOperations(): ComputeOperationsClient {
+        return (this._computeOperations ??= new ComputeOperationsClient(this._options));
+    }
+
+    public get computeCredentials(): ComputeCredentialsClient {
+        return (this._computeCredentials ??= new ComputeCredentialsClient(this._options));
+    }
+
+    public get computeEnvironments(): ComputeEnvironmentsClient {
+        return (this._computeEnvironments ??= new ComputeEnvironmentsClient(this._options));
+    }
+
+    public get computeWorkers(): ComputeWorkersClient {
+        return (this._computeWorkers ??= new ComputeWorkersClient(this._options));
     }
 
     public get connections(): ConnectionsClient {

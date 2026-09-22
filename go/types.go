@@ -10,6 +10,658 @@ import (
 )
 
 var (
+	attachmentViewFieldCapabilities        = big.NewInt(1 << 0)
+	attachmentViewFieldCleanupAt           = big.NewInt(1 << 1)
+	attachmentViewFieldCleanupStatus       = big.NewInt(1 << 2)
+	attachmentViewFieldEnvironmentID       = big.NewInt(1 << 3)
+	attachmentViewFieldID                  = big.NewInt(1 << 4)
+	attachmentViewFieldJournalID           = big.NewInt(1 << 5)
+	attachmentViewFieldLeaseTTLSeconds     = big.NewInt(1 << 6)
+	attachmentViewFieldLeaseUntil          = big.NewInt(1 << 7)
+	attachmentViewFieldOwnerEpoch          = big.NewInt(1 << 8)
+	attachmentViewFieldOwnerID             = big.NewInt(1 << 9)
+	attachmentViewFieldProcesses           = big.NewInt(1 << 10)
+	attachmentViewFieldProjectID           = big.NewInt(1 << 11)
+	attachmentViewFieldProtocolVersion     = big.NewInt(1 << 12)
+	attachmentViewFieldProviderID          = big.NewInt(1 << 13)
+	attachmentViewFieldSessionID           = big.NewInt(1 << 14)
+	attachmentViewFieldStartupDeadline     = big.NewInt(1 << 15)
+	attachmentViewFieldStatus              = big.NewInt(1 << 16)
+	attachmentViewFieldUncertainOperations = big.NewInt(1 << 17)
+	attachmentViewFieldWorkspaceGeneration = big.NewInt(1 << 18)
+	attachmentViewFieldWorkspaceProvenance = big.NewInt(1 << 19)
+)
+
+type AttachmentView struct {
+	Capabilities  []string                    `json:"capabilities" url:"capabilities"`
+	CleanupAt     *float64                    `json:"cleanup_at,omitempty" url:"cleanup_at,omitempty"`
+	CleanupStatus AttachmentViewCleanupStatus `json:"cleanup_status" url:"cleanup_status"`
+	EnvironmentID string                      `json:"environment_id" url:"environment_id"`
+	ID            string                      `json:"id" url:"id"`
+	JournalID     string                      `json:"journal_id" url:"journal_id"`
+	// Renewal TTL; anchor only ready/heartbeat acknowledgments to request-start monotonic time. Status and poll responses never renew the lease.
+	LeaseTTLSeconds     *int                  `json:"lease_ttl_seconds,omitempty" url:"lease_ttl_seconds,omitempty"`
+	LeaseUntil          float64               `json:"lease_until" url:"lease_until"`
+	OwnerEpoch          int                   `json:"owner_epoch" url:"owner_epoch"`
+	OwnerID             *string               `json:"owner_id,omitempty" url:"owner_id,omitempty"`
+	Processes           []*ProcessObservation `json:"processes" url:"processes"`
+	ProjectID           string                `json:"project_id" url:"project_id"`
+	ProtocolVersion     *string               `json:"protocol_version,omitempty" url:"protocol_version,omitempty"`
+	ProviderID          string                `json:"provider_id" url:"provider_id"`
+	SessionID           string                `json:"session_id" url:"session_id"`
+	StartupDeadline     float64               `json:"startup_deadline" url:"startup_deadline"`
+	Status              AttachmentViewStatus  `json:"status" url:"status"`
+	UncertainOperations []*UncertainOperation `json:"uncertain_operations" url:"uncertain_operations"`
+	WorkspaceGeneration string                `json:"workspace_generation" url:"workspace_generation"`
+	WorkspaceProvenance *WorkspaceProvenance  `json:"workspace_provenance" url:"workspace_provenance"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (a *AttachmentView) GetCapabilities() []string {
+	if a == nil {
+		return nil
+	}
+	return a.Capabilities
+}
+
+func (a *AttachmentView) GetCleanupAt() *float64 {
+	if a == nil {
+		return nil
+	}
+	return a.CleanupAt
+}
+
+func (a *AttachmentView) GetCleanupStatus() AttachmentViewCleanupStatus {
+	if a == nil {
+		return ""
+	}
+	return a.CleanupStatus
+}
+
+func (a *AttachmentView) GetEnvironmentID() string {
+	if a == nil {
+		return ""
+	}
+	return a.EnvironmentID
+}
+
+func (a *AttachmentView) GetID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ID
+}
+
+func (a *AttachmentView) GetJournalID() string {
+	if a == nil {
+		return ""
+	}
+	return a.JournalID
+}
+
+func (a *AttachmentView) GetLeaseTTLSeconds() *int {
+	if a == nil {
+		return nil
+	}
+	return a.LeaseTTLSeconds
+}
+
+func (a *AttachmentView) GetLeaseUntil() float64 {
+	if a == nil {
+		return 0
+	}
+	return a.LeaseUntil
+}
+
+func (a *AttachmentView) GetOwnerEpoch() int {
+	if a == nil {
+		return 0
+	}
+	return a.OwnerEpoch
+}
+
+func (a *AttachmentView) GetOwnerID() *string {
+	if a == nil {
+		return nil
+	}
+	return a.OwnerID
+}
+
+func (a *AttachmentView) GetProcesses() []*ProcessObservation {
+	if a == nil {
+		return nil
+	}
+	return a.Processes
+}
+
+func (a *AttachmentView) GetProjectID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ProjectID
+}
+
+func (a *AttachmentView) GetProtocolVersion() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ProtocolVersion
+}
+
+func (a *AttachmentView) GetProviderID() string {
+	if a == nil {
+		return ""
+	}
+	return a.ProviderID
+}
+
+func (a *AttachmentView) GetSessionID() string {
+	if a == nil {
+		return ""
+	}
+	return a.SessionID
+}
+
+func (a *AttachmentView) GetStartupDeadline() float64 {
+	if a == nil {
+		return 0
+	}
+	return a.StartupDeadline
+}
+
+func (a *AttachmentView) GetStatus() AttachmentViewStatus {
+	if a == nil {
+		return ""
+	}
+	return a.Status
+}
+
+func (a *AttachmentView) GetUncertainOperations() []*UncertainOperation {
+	if a == nil {
+		return nil
+	}
+	return a.UncertainOperations
+}
+
+func (a *AttachmentView) GetWorkspaceGeneration() string {
+	if a == nil {
+		return ""
+	}
+	return a.WorkspaceGeneration
+}
+
+func (a *AttachmentView) GetWorkspaceProvenance() *WorkspaceProvenance {
+	if a == nil {
+		return nil
+	}
+	return a.WorkspaceProvenance
+}
+
+func (a *AttachmentView) GetExtraProperties() map[string]interface{} {
+	if a == nil {
+		return nil
+	}
+	return a.extraProperties
+}
+
+func (a *AttachmentView) require(field *big.Int) {
+	if a.explicitFields == nil {
+		a.explicitFields = big.NewInt(0)
+	}
+	a.explicitFields.Or(a.explicitFields, field)
+}
+
+// SetCapabilities sets the Capabilities field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetCapabilities(capabilities []string) {
+	a.Capabilities = capabilities
+	a.require(attachmentViewFieldCapabilities)
+}
+
+// SetCleanupAt sets the CleanupAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetCleanupAt(cleanupAt *float64) {
+	a.CleanupAt = cleanupAt
+	a.require(attachmentViewFieldCleanupAt)
+}
+
+// SetCleanupStatus sets the CleanupStatus field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetCleanupStatus(cleanupStatus AttachmentViewCleanupStatus) {
+	a.CleanupStatus = cleanupStatus
+	a.require(attachmentViewFieldCleanupStatus)
+}
+
+// SetEnvironmentID sets the EnvironmentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetEnvironmentID(environmentID string) {
+	a.EnvironmentID = environmentID
+	a.require(attachmentViewFieldEnvironmentID)
+}
+
+// SetID sets the ID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetID(id string) {
+	a.ID = id
+	a.require(attachmentViewFieldID)
+}
+
+// SetJournalID sets the JournalID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetJournalID(journalID string) {
+	a.JournalID = journalID
+	a.require(attachmentViewFieldJournalID)
+}
+
+// SetLeaseTTLSeconds sets the LeaseTTLSeconds field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetLeaseTTLSeconds(leaseTTLSeconds *int) {
+	a.LeaseTTLSeconds = leaseTTLSeconds
+	a.require(attachmentViewFieldLeaseTTLSeconds)
+}
+
+// SetLeaseUntil sets the LeaseUntil field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetLeaseUntil(leaseUntil float64) {
+	a.LeaseUntil = leaseUntil
+	a.require(attachmentViewFieldLeaseUntil)
+}
+
+// SetOwnerEpoch sets the OwnerEpoch field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetOwnerEpoch(ownerEpoch int) {
+	a.OwnerEpoch = ownerEpoch
+	a.require(attachmentViewFieldOwnerEpoch)
+}
+
+// SetOwnerID sets the OwnerID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetOwnerID(ownerID *string) {
+	a.OwnerID = ownerID
+	a.require(attachmentViewFieldOwnerID)
+}
+
+// SetProcesses sets the Processes field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetProcesses(processes []*ProcessObservation) {
+	a.Processes = processes
+	a.require(attachmentViewFieldProcesses)
+}
+
+// SetProjectID sets the ProjectID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetProjectID(projectID string) {
+	a.ProjectID = projectID
+	a.require(attachmentViewFieldProjectID)
+}
+
+// SetProtocolVersion sets the ProtocolVersion field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetProtocolVersion(protocolVersion *string) {
+	a.ProtocolVersion = protocolVersion
+	a.require(attachmentViewFieldProtocolVersion)
+}
+
+// SetProviderID sets the ProviderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetProviderID(providerID string) {
+	a.ProviderID = providerID
+	a.require(attachmentViewFieldProviderID)
+}
+
+// SetSessionID sets the SessionID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetSessionID(sessionID string) {
+	a.SessionID = sessionID
+	a.require(attachmentViewFieldSessionID)
+}
+
+// SetStartupDeadline sets the StartupDeadline field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetStartupDeadline(startupDeadline float64) {
+	a.StartupDeadline = startupDeadline
+	a.require(attachmentViewFieldStartupDeadline)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetStatus(status AttachmentViewStatus) {
+	a.Status = status
+	a.require(attachmentViewFieldStatus)
+}
+
+// SetUncertainOperations sets the UncertainOperations field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetUncertainOperations(uncertainOperations []*UncertainOperation) {
+	a.UncertainOperations = uncertainOperations
+	a.require(attachmentViewFieldUncertainOperations)
+}
+
+// SetWorkspaceGeneration sets the WorkspaceGeneration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetWorkspaceGeneration(workspaceGeneration string) {
+	a.WorkspaceGeneration = workspaceGeneration
+	a.require(attachmentViewFieldWorkspaceGeneration)
+}
+
+// SetWorkspaceProvenance sets the WorkspaceProvenance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (a *AttachmentView) SetWorkspaceProvenance(workspaceProvenance *WorkspaceProvenance) {
+	a.WorkspaceProvenance = workspaceProvenance
+	a.require(attachmentViewFieldWorkspaceProvenance)
+}
+
+func (a *AttachmentView) UnmarshalJSON(data []byte) error {
+	type unmarshaler AttachmentView
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*a = AttachmentView(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *a)
+	if err != nil {
+		return err
+	}
+	a.extraProperties = extraProperties
+	a.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (a *AttachmentView) MarshalJSON() ([]byte, error) {
+	type embed AttachmentView
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*a),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, a.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (a *AttachmentView) String() string {
+	if a == nil {
+		return "<nil>"
+	}
+	if len(a.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(a.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(a); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", a)
+}
+
+type AttachmentViewCleanupStatus string
+
+const (
+	AttachmentViewCleanupStatusUnconfirmed AttachmentViewCleanupStatus = "unconfirmed"
+	AttachmentViewCleanupStatusConfirmed   AttachmentViewCleanupStatus = "confirmed"
+)
+
+func NewAttachmentViewCleanupStatusFromString(s string) (AttachmentViewCleanupStatus, error) {
+	switch s {
+	case "unconfirmed":
+		return AttachmentViewCleanupStatusUnconfirmed, nil
+	case "confirmed":
+		return AttachmentViewCleanupStatusConfirmed, nil
+	}
+	var t AttachmentViewCleanupStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AttachmentViewCleanupStatus) Ptr() *AttachmentViewCleanupStatus {
+	return &a
+}
+
+type AttachmentViewStatus string
+
+const (
+	AttachmentViewStatusPending          AttachmentViewStatus = "pending"
+	AttachmentViewStatusStarting         AttachmentViewStatus = "starting"
+	AttachmentViewStatusReady            AttachmentViewStatus = "ready"
+	AttachmentViewStatusStopping         AttachmentViewStatus = "stopping"
+	AttachmentViewStatusCleaned          AttachmentViewStatus = "cleaned"
+	AttachmentViewStatusStartupExpired   AttachmentViewStatus = "startup_expired"
+	AttachmentViewStatusRecoveryRequired AttachmentViewStatus = "recovery_required"
+	AttachmentViewStatusAbandoned        AttachmentViewStatus = "abandoned"
+)
+
+func NewAttachmentViewStatusFromString(s string) (AttachmentViewStatus, error) {
+	switch s {
+	case "pending":
+		return AttachmentViewStatusPending, nil
+	case "starting":
+		return AttachmentViewStatusStarting, nil
+	case "ready":
+		return AttachmentViewStatusReady, nil
+	case "stopping":
+		return AttachmentViewStatusStopping, nil
+	case "cleaned":
+		return AttachmentViewStatusCleaned, nil
+	case "startup_expired":
+		return AttachmentViewStatusStartupExpired, nil
+	case "recovery_required":
+		return AttachmentViewStatusRecoveryRequired, nil
+	case "abandoned":
+		return AttachmentViewStatusAbandoned, nil
+	}
+	var t AttachmentViewStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (a AttachmentViewStatus) Ptr() *AttachmentViewStatus {
+	return &a
+}
+
+var (
+	computeErrorFieldDetail = big.NewInt(1 << 0)
+)
+
+type ComputeError struct {
+	Detail string `json:"detail" url:"detail"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *ComputeError) GetDetail() string {
+	if c == nil {
+		return ""
+	}
+	return c.Detail
+}
+
+func (c *ComputeError) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *ComputeError) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetDetail sets the Detail field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *ComputeError) SetDetail(detail string) {
+	c.Detail = detail
+	c.require(computeErrorFieldDetail)
+}
+
+func (c *ComputeError) UnmarshalJSON(data []byte) error {
+	type unmarshaler ComputeError
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = ComputeError(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *ComputeError) MarshalJSON() ([]byte, error) {
+	type embed ComputeError
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *ComputeError) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
+	credentialIssuedFieldCredentialID = big.NewInt(1 << 0)
+	credentialIssuedFieldExpiresAt    = big.NewInt(1 << 1)
+	credentialIssuedFieldToken        = big.NewInt(1 << 2)
+)
+
+type CredentialIssued struct {
+	CredentialID string  `json:"credential_id" url:"credential_id"`
+	ExpiresAt    float64 `json:"expires_at" url:"expires_at"`
+	// Secret returned only on issuance. Never passed as a command-line argument.
+	Token string `json:"token" url:"token"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (c *CredentialIssued) GetCredentialID() string {
+	if c == nil {
+		return ""
+	}
+	return c.CredentialID
+}
+
+func (c *CredentialIssued) GetExpiresAt() float64 {
+	if c == nil {
+		return 0
+	}
+	return c.ExpiresAt
+}
+
+func (c *CredentialIssued) GetToken() string {
+	if c == nil {
+		return ""
+	}
+	return c.Token
+}
+
+func (c *CredentialIssued) GetExtraProperties() map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	return c.extraProperties
+}
+
+func (c *CredentialIssued) require(field *big.Int) {
+	if c.explicitFields == nil {
+		c.explicitFields = big.NewInt(0)
+	}
+	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetCredentialID sets the CredentialID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CredentialIssued) SetCredentialID(credentialID string) {
+	c.CredentialID = credentialID
+	c.require(credentialIssuedFieldCredentialID)
+}
+
+// SetExpiresAt sets the ExpiresAt field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CredentialIssued) SetExpiresAt(expiresAt float64) {
+	c.ExpiresAt = expiresAt
+	c.require(credentialIssuedFieldExpiresAt)
+}
+
+// SetToken sets the Token field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CredentialIssued) SetToken(token string) {
+	c.Token = token
+	c.require(credentialIssuedFieldToken)
+}
+
+func (c *CredentialIssued) UnmarshalJSON(data []byte) error {
+	type unmarshaler CredentialIssued
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*c = CredentialIssued(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *c)
+	if err != nil {
+		return err
+	}
+	c.extraProperties = extraProperties
+	c.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (c *CredentialIssued) MarshalJSON() ([]byte, error) {
+	type embed CredentialIssued
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*c),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, c.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (c *CredentialIssued) String() string {
+	if c == nil {
+		return "<nil>"
+	}
+	if len(c.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(c.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(c); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", c)
+}
+
+var (
 	hTTPValidationErrorFieldDetail = big.NewInt(1 << 0)
 )
 
@@ -264,6 +916,522 @@ func (j JudgmentTargetKind) Ptr() *JudgmentTargetKind {
 }
 
 var (
+	processObservationFieldEvidence = big.NewInt(1 << 0)
+	processObservationFieldHandleID = big.NewInt(1 << 1)
+	processObservationFieldStatus   = big.NewInt(1 << 2)
+)
+
+type ProcessObservation struct {
+	Evidence string                   `json:"evidence" url:"evidence"`
+	HandleID string                   `json:"handle_id" url:"handle_id"`
+	Status   ProcessObservationStatus `json:"status" url:"status"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (p *ProcessObservation) GetEvidence() string {
+	if p == nil {
+		return ""
+	}
+	return p.Evidence
+}
+
+func (p *ProcessObservation) GetHandleID() string {
+	if p == nil {
+		return ""
+	}
+	return p.HandleID
+}
+
+func (p *ProcessObservation) GetStatus() ProcessObservationStatus {
+	if p == nil {
+		return ""
+	}
+	return p.Status
+}
+
+func (p *ProcessObservation) GetExtraProperties() map[string]interface{} {
+	if p == nil {
+		return nil
+	}
+	return p.extraProperties
+}
+
+func (p *ProcessObservation) require(field *big.Int) {
+	if p.explicitFields == nil {
+		p.explicitFields = big.NewInt(0)
+	}
+	p.explicitFields.Or(p.explicitFields, field)
+}
+
+// SetEvidence sets the Evidence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *ProcessObservation) SetEvidence(evidence string) {
+	p.Evidence = evidence
+	p.require(processObservationFieldEvidence)
+}
+
+// SetHandleID sets the HandleID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *ProcessObservation) SetHandleID(handleID string) {
+	p.HandleID = handleID
+	p.require(processObservationFieldHandleID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (p *ProcessObservation) SetStatus(status ProcessObservationStatus) {
+	p.Status = status
+	p.require(processObservationFieldStatus)
+}
+
+func (p *ProcessObservation) UnmarshalJSON(data []byte) error {
+	type unmarshaler ProcessObservation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*p = ProcessObservation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *p)
+	if err != nil {
+		return err
+	}
+	p.extraProperties = extraProperties
+	p.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (p *ProcessObservation) MarshalJSON() ([]byte, error) {
+	type embed ProcessObservation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*p),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, p.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (p *ProcessObservation) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	if len(p.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(p.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(p); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", p)
+}
+
+type ProcessObservationStatus string
+
+const (
+	ProcessObservationStatusRunning   ProcessObservationStatus = "running"
+	ProcessObservationStatusExited    ProcessObservationStatus = "exited"
+	ProcessObservationStatusCancelled ProcessObservationStatus = "cancelled"
+	ProcessObservationStatusLost      ProcessObservationStatus = "lost"
+)
+
+func NewProcessObservationStatusFromString(s string) (ProcessObservationStatus, error) {
+	switch s {
+	case "running":
+		return ProcessObservationStatusRunning, nil
+	case "exited":
+		return ProcessObservationStatusExited, nil
+	case "cancelled":
+		return ProcessObservationStatusCancelled, nil
+	case "lost":
+		return ProcessObservationStatusLost, nil
+	}
+	var t ProcessObservationStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (p ProcessObservationStatus) Ptr() *ProcessObservationStatus {
+	return &p
+}
+
+var (
+	receiptInputFieldCapabilityName = big.NewInt(1 << 0)
+	receiptInputFieldIdempotencyKey = big.NewInt(1 << 1)
+	receiptInputFieldPayload        = big.NewInt(1 << 2)
+	receiptInputFieldRequestDigest  = big.NewInt(1 << 3)
+	receiptInputFieldRunID          = big.NewInt(1 << 4)
+	receiptInputFieldStatus         = big.NewInt(1 << 5)
+	receiptInputFieldToolCallID     = big.NewInt(1 << 6)
+	receiptInputFieldToolProviderID = big.NewInt(1 << 7)
+)
+
+type ReceiptInput struct {
+	CapabilityName *ReceiptInputCapabilityName `json:"capability_name,omitempty" url:"capability_name,omitempty"`
+	IdempotencyKey string                      `json:"idempotency_key" url:"idempotency_key"`
+	Payload        map[string]any              `json:"payload" url:"payload"`
+	RequestDigest  string                      `json:"request_digest" url:"request_digest"`
+	RunID          string                      `json:"run_id" url:"run_id"`
+	Status         ReceiptInputStatus          `json:"status" url:"status"`
+	ToolCallID     string                      `json:"tool_call_id" url:"tool_call_id"`
+	ToolProviderID string                      `json:"tool_provider_id" url:"tool_provider_id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptInput) GetCapabilityName() *ReceiptInputCapabilityName {
+	if r == nil {
+		return nil
+	}
+	return r.CapabilityName
+}
+
+func (r *ReceiptInput) GetIdempotencyKey() string {
+	if r == nil {
+		return ""
+	}
+	return r.IdempotencyKey
+}
+
+func (r *ReceiptInput) GetPayload() map[string]any {
+	if r == nil {
+		return nil
+	}
+	return r.Payload
+}
+
+func (r *ReceiptInput) GetRequestDigest() string {
+	if r == nil {
+		return ""
+	}
+	return r.RequestDigest
+}
+
+func (r *ReceiptInput) GetRunID() string {
+	if r == nil {
+		return ""
+	}
+	return r.RunID
+}
+
+func (r *ReceiptInput) GetStatus() ReceiptInputStatus {
+	if r == nil {
+		return ""
+	}
+	return r.Status
+}
+
+func (r *ReceiptInput) GetToolCallID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ToolCallID
+}
+
+func (r *ReceiptInput) GetToolProviderID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ToolProviderID
+}
+
+func (r *ReceiptInput) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptInput) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetCapabilityName sets the CapabilityName field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetCapabilityName(capabilityName *ReceiptInputCapabilityName) {
+	r.CapabilityName = capabilityName
+	r.require(receiptInputFieldCapabilityName)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetIdempotencyKey(idempotencyKey string) {
+	r.IdempotencyKey = idempotencyKey
+	r.require(receiptInputFieldIdempotencyKey)
+}
+
+// SetPayload sets the Payload field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetPayload(payload map[string]any) {
+	r.Payload = payload
+	r.require(receiptInputFieldPayload)
+}
+
+// SetRequestDigest sets the RequestDigest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetRequestDigest(requestDigest string) {
+	r.RequestDigest = requestDigest
+	r.require(receiptInputFieldRequestDigest)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetRunID(runID string) {
+	r.RunID = runID
+	r.require(receiptInputFieldRunID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetStatus(status ReceiptInputStatus) {
+	r.Status = status
+	r.require(receiptInputFieldStatus)
+}
+
+// SetToolCallID sets the ToolCallID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetToolCallID(toolCallID string) {
+	r.ToolCallID = toolCallID
+	r.require(receiptInputFieldToolCallID)
+}
+
+// SetToolProviderID sets the ToolProviderID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptInput) SetToolProviderID(toolProviderID string) {
+	r.ToolProviderID = toolProviderID
+	r.require(receiptInputFieldToolProviderID)
+}
+
+func (r *ReceiptInput) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptInput
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptInput(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptInput) MarshalJSON() ([]byte, error) {
+	type embed ReceiptInput
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptInput) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ReceiptInputCapabilityName string
+
+const (
+	ReceiptInputCapabilityNameComputeExecute ReceiptInputCapabilityName = "compute.execute"
+)
+
+func NewReceiptInputCapabilityNameFromString(s string) (ReceiptInputCapabilityName, error) {
+	switch s {
+	case "compute.execute":
+		return ReceiptInputCapabilityNameComputeExecute, nil
+	}
+	var t ReceiptInputCapabilityName
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReceiptInputCapabilityName) Ptr() *ReceiptInputCapabilityName {
+	return &r
+}
+
+type ReceiptInputStatus string
+
+const (
+	ReceiptInputStatusCompleted ReceiptInputStatus = "completed"
+	ReceiptInputStatusFailed    ReceiptInputStatus = "failed"
+)
+
+func NewReceiptInputStatusFromString(s string) (ReceiptInputStatus, error) {
+	switch s {
+	case "completed":
+		return ReceiptInputStatusCompleted, nil
+	case "failed":
+		return ReceiptInputStatusFailed, nil
+	}
+	var t ReceiptInputStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReceiptInputStatus) Ptr() *ReceiptInputStatus {
+	return &r
+}
+
+var (
+	receiptViewFieldCreated    = big.NewInt(1 << 0)
+	receiptViewFieldStatus     = big.NewInt(1 << 1)
+	receiptViewFieldToolCallID = big.NewInt(1 << 2)
+)
+
+type ReceiptView struct {
+	Created    bool               `json:"created" url:"created"`
+	Status     *ReceiptViewStatus `json:"status,omitempty" url:"status,omitempty"`
+	ToolCallID string             `json:"tool_call_id" url:"tool_call_id"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (r *ReceiptView) GetCreated() bool {
+	if r == nil {
+		return false
+	}
+	return r.Created
+}
+
+func (r *ReceiptView) GetStatus() *ReceiptViewStatus {
+	if r == nil {
+		return nil
+	}
+	return r.Status
+}
+
+func (r *ReceiptView) GetToolCallID() string {
+	if r == nil {
+		return ""
+	}
+	return r.ToolCallID
+}
+
+func (r *ReceiptView) GetExtraProperties() map[string]interface{} {
+	if r == nil {
+		return nil
+	}
+	return r.extraProperties
+}
+
+func (r *ReceiptView) require(field *big.Int) {
+	if r.explicitFields == nil {
+		r.explicitFields = big.NewInt(0)
+	}
+	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetCreated sets the Created field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptView) SetCreated(created bool) {
+	r.Created = created
+	r.require(receiptViewFieldCreated)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptView) SetStatus(status *ReceiptViewStatus) {
+	r.Status = status
+	r.require(receiptViewFieldStatus)
+}
+
+// SetToolCallID sets the ToolCallID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReceiptView) SetToolCallID(toolCallID string) {
+	r.ToolCallID = toolCallID
+	r.require(receiptViewFieldToolCallID)
+}
+
+func (r *ReceiptView) UnmarshalJSON(data []byte) error {
+	type unmarshaler ReceiptView
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*r = ReceiptView(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *r)
+	if err != nil {
+		return err
+	}
+	r.extraProperties = extraProperties
+	r.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (r *ReceiptView) MarshalJSON() ([]byte, error) {
+	type embed ReceiptView
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*r),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, r.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (r *ReceiptView) String() string {
+	if r == nil {
+		return "<nil>"
+	}
+	if len(r.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(r.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(r); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", r)
+}
+
+type ReceiptViewStatus string
+
+const (
+	ReceiptViewStatusAccepted ReceiptViewStatus = "accepted"
+)
+
+func NewReceiptViewStatusFromString(s string) (ReceiptViewStatus, error) {
+	switch s {
+	case "accepted":
+		return ReceiptViewStatusAccepted, nil
+	}
+	var t ReceiptViewStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (r ReceiptViewStatus) Ptr() *ReceiptViewStatus {
+	return &r
+}
+
+var (
 	recoverRunRequestFieldReason = big.NewInt(1 << 0)
 )
 
@@ -345,6 +1513,170 @@ func (r *RecoverRunRequest) String() string {
 		return value
 	}
 	return fmt.Sprintf("%#v", r)
+}
+
+var (
+	uncertainOperationFieldMethod              = big.NewInt(1 << 0)
+	uncertainOperationFieldOwnerEpoch          = big.NewInt(1 << 1)
+	uncertainOperationFieldRequestDigest       = big.NewInt(1 << 2)
+	uncertainOperationFieldRunID               = big.NewInt(1 << 3)
+	uncertainOperationFieldToolCallID          = big.NewInt(1 << 4)
+	uncertainOperationFieldWorkspaceGeneration = big.NewInt(1 << 5)
+)
+
+type UncertainOperation struct {
+	Method              string `json:"method" url:"method"`
+	OwnerEpoch          int    `json:"owner_epoch" url:"owner_epoch"`
+	RequestDigest       string `json:"request_digest" url:"request_digest"`
+	RunID               string `json:"run_id" url:"run_id"`
+	ToolCallID          string `json:"tool_call_id" url:"tool_call_id"`
+	WorkspaceGeneration string `json:"workspace_generation" url:"workspace_generation"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (u *UncertainOperation) GetMethod() string {
+	if u == nil {
+		return ""
+	}
+	return u.Method
+}
+
+func (u *UncertainOperation) GetOwnerEpoch() int {
+	if u == nil {
+		return 0
+	}
+	return u.OwnerEpoch
+}
+
+func (u *UncertainOperation) GetRequestDigest() string {
+	if u == nil {
+		return ""
+	}
+	return u.RequestDigest
+}
+
+func (u *UncertainOperation) GetRunID() string {
+	if u == nil {
+		return ""
+	}
+	return u.RunID
+}
+
+func (u *UncertainOperation) GetToolCallID() string {
+	if u == nil {
+		return ""
+	}
+	return u.ToolCallID
+}
+
+func (u *UncertainOperation) GetWorkspaceGeneration() string {
+	if u == nil {
+		return ""
+	}
+	return u.WorkspaceGeneration
+}
+
+func (u *UncertainOperation) GetExtraProperties() map[string]interface{} {
+	if u == nil {
+		return nil
+	}
+	return u.extraProperties
+}
+
+func (u *UncertainOperation) require(field *big.Int) {
+	if u.explicitFields == nil {
+		u.explicitFields = big.NewInt(0)
+	}
+	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetMethod sets the Method field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UncertainOperation) SetMethod(method string) {
+	u.Method = method
+	u.require(uncertainOperationFieldMethod)
+}
+
+// SetOwnerEpoch sets the OwnerEpoch field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UncertainOperation) SetOwnerEpoch(ownerEpoch int) {
+	u.OwnerEpoch = ownerEpoch
+	u.require(uncertainOperationFieldOwnerEpoch)
+}
+
+// SetRequestDigest sets the RequestDigest field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UncertainOperation) SetRequestDigest(requestDigest string) {
+	u.RequestDigest = requestDigest
+	u.require(uncertainOperationFieldRequestDigest)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UncertainOperation) SetRunID(runID string) {
+	u.RunID = runID
+	u.require(uncertainOperationFieldRunID)
+}
+
+// SetToolCallID sets the ToolCallID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UncertainOperation) SetToolCallID(toolCallID string) {
+	u.ToolCallID = toolCallID
+	u.require(uncertainOperationFieldToolCallID)
+}
+
+// SetWorkspaceGeneration sets the WorkspaceGeneration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UncertainOperation) SetWorkspaceGeneration(workspaceGeneration string) {
+	u.WorkspaceGeneration = workspaceGeneration
+	u.require(uncertainOperationFieldWorkspaceGeneration)
+}
+
+func (u *UncertainOperation) UnmarshalJSON(data []byte) error {
+	type unmarshaler UncertainOperation
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*u = UncertainOperation(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *u)
+	if err != nil {
+		return err
+	}
+	u.extraProperties = extraProperties
+	u.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (u *UncertainOperation) MarshalJSON() ([]byte, error) {
+	type embed UncertainOperation
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*u),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, u.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (u *UncertainOperation) String() string {
+	if u == nil {
+		return "<nil>"
+	}
+	if len(u.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(u.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(u); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", u)
 }
 
 var (
@@ -555,4 +1887,129 @@ func (v *ValidationErrorLocItem) Accept(visitor ValidationErrorLocItemVisitor) e
 		return visitor.VisitInteger(v.Integer)
 	}
 	return fmt.Errorf("type %T does not include a non-empty union type", v)
+}
+
+var (
+	workspaceProvenanceFieldIdentity = big.NewInt(1 << 0)
+	workspaceProvenanceFieldKind     = big.NewInt(1 << 1)
+)
+
+type WorkspaceProvenance struct {
+	Identity string                  `json:"identity" url:"identity"`
+	Kind     WorkspaceProvenanceKind `json:"kind" url:"kind"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WorkspaceProvenance) GetIdentity() string {
+	if w == nil {
+		return ""
+	}
+	return w.Identity
+}
+
+func (w *WorkspaceProvenance) GetKind() WorkspaceProvenanceKind {
+	if w == nil {
+		return ""
+	}
+	return w.Kind
+}
+
+func (w *WorkspaceProvenance) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WorkspaceProvenance) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetIdentity sets the Identity field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceProvenance) SetIdentity(identity string) {
+	w.Identity = identity
+	w.require(workspaceProvenanceFieldIdentity)
+}
+
+// SetKind sets the Kind field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceProvenance) SetKind(kind WorkspaceProvenanceKind) {
+	w.Kind = kind
+	w.require(workspaceProvenanceFieldKind)
+}
+
+func (w *WorkspaceProvenance) UnmarshalJSON(data []byte) error {
+	type unmarshaler WorkspaceProvenance
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WorkspaceProvenance(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WorkspaceProvenance) MarshalJSON() ([]byte, error) {
+	type embed WorkspaceProvenance
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WorkspaceProvenance) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+type WorkspaceProvenanceKind string
+
+const (
+	WorkspaceProvenanceKindExistingDirectory WorkspaceProvenanceKind = "existing_directory"
+	WorkspaceProvenanceKindContainer         WorkspaceProvenanceKind = "container"
+	WorkspaceProvenanceKindSandbox           WorkspaceProvenanceKind = "sandbox"
+)
+
+func NewWorkspaceProvenanceKindFromString(s string) (WorkspaceProvenanceKind, error) {
+	switch s {
+	case "existing_directory":
+		return WorkspaceProvenanceKindExistingDirectory, nil
+	case "container":
+		return WorkspaceProvenanceKindContainer, nil
+	case "sandbox":
+		return WorkspaceProvenanceKindSandbox, nil
+	}
+	var t WorkspaceProvenanceKind
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WorkspaceProvenanceKind) Ptr() *WorkspaceProvenanceKind {
+	return &w
 }

@@ -42,7 +42,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::SpecialistThreads.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SpecialistThreads.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -83,7 +83,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::SpecialistThread.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SpecialistThread.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -131,7 +131,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::SpecialistReceipt.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SpecialistReceipt.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -182,7 +182,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::SpecialistReceipt.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SpecialistReceipt.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

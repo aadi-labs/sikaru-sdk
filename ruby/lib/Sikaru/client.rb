@@ -38,6 +38,31 @@ module Sikaru
       @changesets ||= Sikaru::Changesets::Client.new(client: @raw_client)
     end
 
+    # @return [Sikaru::ComputeAttachments::Client]
+    def compute_attachments
+      @compute_attachments ||= Sikaru::ComputeAttachments::Client.new(client: @raw_client)
+    end
+
+    # @return [Sikaru::ComputeOperations::Client]
+    def compute_operations
+      @compute_operations ||= Sikaru::ComputeOperations::Client.new(client: @raw_client)
+    end
+
+    # @return [Sikaru::ComputeCredentials::Client]
+    def compute_credentials
+      @compute_credentials ||= Sikaru::ComputeCredentials::Client.new(client: @raw_client)
+    end
+
+    # @return [Sikaru::ComputeEnvironments::Client]
+    def compute_environments
+      @compute_environments ||= Sikaru::ComputeEnvironments::Client.new(client: @raw_client)
+    end
+
+    # @return [Sikaru::ComputeWorkers::Client]
+    def compute_workers
+      @compute_workers ||= Sikaru::ComputeWorkers::Client.new(client: @raw_client)
+    end
+
     # @return [Sikaru::Connections::Client]
     def connections
       @connections ||= Sikaru::Connections::Client.new(client: @raw_client)

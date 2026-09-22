@@ -21,6 +21,172 @@ module Sikaru
       # @option params [String] :harness_id
       #
       # @example
+      #   client.harnesses.get_invoice_budget(
+      #     project_id: "project_id",
+      #     harness_id: "harness_id"
+      #   )
+      #
+      # @return [Sikaru::Types::InvoiceBudget]
+      def get_invoice_budget(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/budget/invoice",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::InvoiceBudget.load(response.body))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :harness_id
+      #
+      # @example
+      #   client.harnesses.get_subscription(
+      #     project_id: "project_id",
+      #     harness_id: "harness_id"
+      #   )
+      #
+      # @return [Sikaru::Types::SubscriptionStatus]
+      def get_subscription(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "GET",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/budget/subscription",
+          request_options: request_options
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SubscriptionStatus.load(response.body))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # @param request_options [Hash]
+      # @param params [Sikaru::Harnesses::Types::SubscriptionInput]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :harness_id
+      #
+      # @example
+      #   client.harnesses.subscribe(
+      #     project_id: "project_id",
+      #     harness_id: "harness_id",
+      #     accepted_recurring_terms: true,
+      #     idempotency_key: "idempotency_key",
+      #     plan: "build"
+      #   )
+      #
+      # @return [Sikaru::Types::SubscriptionSetup]
+      def subscribe(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        request_data = Sikaru::Harnesses::Types::SubscriptionInput.new(params).to_h
+        non_body_param_names = %w[project_id harness_id]
+        body = request_data.except(*non_body_param_names)
+
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/budget/subscription",
+          body: body,
+          request_options: request_options,
+          max_retries: 0
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SubscriptionSetup.load(response.body))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :harness_id
+      #
+      # @example
+      #   client.harnesses.cancel_subscription(
+      #     project_id: "project_id",
+      #     harness_id: "harness_id"
+      #   )
+      #
+      # @return [Sikaru::Types::SubscriptionCancellation]
+      def cancel_subscription(request_options: {}, **params)
+        params = Sikaru::Internal::Types::Utils.normalize_keys(params)
+        request = Sikaru::Internal::JSON::Request.new(
+          base_url: request_options[:base_url],
+          method: "POST",
+          path: "v1/projects/#{URI.encode_uri_component(params[:project_id].to_s)}/harnesses/#{URI.encode_uri_component(params[:harness_id].to_s)}/budget/subscription/cancel",
+          request_options: request_options,
+          max_retries: 0
+        )
+        begin
+          response = @client.send(request)
+        rescue Net::HTTPRequestTimeout
+          raise Sikaru::Errors::TimeoutError
+        end
+        code = response.code.to_i
+        if code.between?(200, 299)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::SubscriptionCancellation.load(response.body))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
+      end
+
+      # @param request_options [Hash]
+      # @param params [Hash]
+      # @option request_options [String] :base_url
+      # @option request_options [Hash{String => Object}] :additional_headers
+      # @option request_options [Hash{String => Object}] :additional_query_parameters
+      # @option request_options [Hash{String => Object}] :additional_body_parameters
+      # @option request_options [Integer] :timeout_in_seconds
+      # @option params [String] :project_id
+      # @option params [String] :harness_id
+      #
+      # @example
       #   client.harnesses.improvement_options(
       #     project_id: "project_id",
       #     harness_id: "harness_id"
@@ -41,10 +207,12 @@ module Sikaru
           raise Sikaru::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Sikaru::Internal::Types::Utils.coerce(Internal::Types::Hash[String, Object], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # @param request_options [Hash]
@@ -85,10 +253,12 @@ module Sikaru
           raise Sikaru::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Sikaru::Internal::Types::Utils.coerce(Internal::Types::Hash[String, Object], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # @param request_options [Hash]
@@ -129,10 +299,12 @@ module Sikaru
           raise Sikaru::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Sikaru::Internal::Types::Utils.coerce(Internal::Types::Hash[String, Object], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # @param request_options [Hash]
@@ -168,10 +340,12 @@ module Sikaru
           raise Sikaru::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Sikaru::Internal::Types::Utils.coerce(Internal::Types::Hash[String, Object], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # @param request_options [Hash]
@@ -213,10 +387,12 @@ module Sikaru
           raise Sikaru::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Sikaru::Internal::Types::Utils.coerce(Internal::Types::Hash[String, Object], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
 
       # Reserved, unavailable model-training step; no learning job is submitted.
@@ -253,10 +429,12 @@ module Sikaru
           raise Sikaru::Errors::TimeoutError
         end
         code = response.code.to_i
-        return if code.between?(200, 299)
-
-        error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
-        raise error_class.new(response.body, code: code)
+        if code.between?(200, 299)
+          Sikaru::Internal::Types::Utils.coerce(Internal::Types::Hash[String, Object], (response.body.to_s.empty? ? nil : JSON.parse(response.body, symbolize_names: true)))
+        else
+          error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
+          raise error_class.new(response.body, code: code)
+        end
       end
     end
   end

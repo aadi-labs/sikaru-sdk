@@ -995,6 +995,1822 @@ client.changesets.stage_changeset(
 </dl>
 </details>
 
+## ComputeAttachments
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">get</a>(project_id:, attachment_id:) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.get(
+  project_id: "project_id",
+  attachment_id: "attachment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">abandon</a>(project_id:, attachment_id:, request) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Irreversibly abandon execution authority, preserving unknown effects. Cleanup is still required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.abandon(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  evidence: "evidence"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">cancel</a>(project_id:, attachment_id:) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently request stopping. This never asserts child cleanup.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.cancel(
+  project_id: "project_id",
+  attachment_id: "attachment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">claim</a>(project_id:, attachment_id:, request) -> Sikaru::Types::ClaimView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same attachment/key/worker returns the same launch identity, never another launch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.claim(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  idempotency_key: "idempotency_key"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">cleanup</a>(project_id:, attachment_id:, request) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.cleanup(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  children_terminated: true,
+  evidence: "evidence"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**children_terminated:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">connect</a>(project_id:, attachment_id:, request) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attest original workspace/journal. Reconnection never replays uncertain effects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.connect(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  capabilities: ["compute.execute"],
+  executor_instance_id: "executor_instance_id",
+  journal_id: "journal_id",
+  protocol_version: "sikaru-compute-v1",
+  workspace_provenance: {
+    identity: "identity",
+    kind: "existing_directory"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru::Types::ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">issue_credential</a>(project_id:, attachment_id:, request) -> Sikaru::Types::CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.issue_credential(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  owner_epoch: 1,
+  owner_id: "owner_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_epoch:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">heartbeat</a>(project_id:, attachment_id:) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.heartbeat(
+  project_id: "project_id",
+  attachment_id: "attachment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">ready</a>(project_id:, attachment_id:, request) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.ready(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  capabilities: ["compute.execute"],
+  executor_instance_id: "executor_instance_id",
+  journal_id: "journal_id",
+  protocol_version: "sikaru-compute-v1",
+  workspace_provenance: {
+    identity: "identity",
+    kind: "existing_directory"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru::Types::ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">reconcile</a>(project_id:, attachment_id:, request) -> Sikaru::Types::ReconcileView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.reconcile(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  executor_instance_id: "executor_instance_id",
+  journal_id: "journal_id",
+  workspace_provenance: {
+    identity: "identity",
+    kind: "existing_directory"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**executor_instance_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**journal_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**processes:** `Internal::Types::Array[Sikaru::Types::ProcessObservation]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipts:** `Internal::Types::Array[Sikaru::Types::ReceiptInput]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**uncertain_operation_ids:** `Internal::Types::Array[String]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_provenance:** `Sikaru::Types::WorkspaceProvenance` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">status</a>(project_id:, attachment_id:) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.status(
+  project_id: "project_id",
+  attachment_id: "attachment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">stop</a>(project_id:, attachment_id:) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Executor can stop its own attachment and cancel its runs; cleanup is separately reported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.stop(
+  project_id: "project_id",
+  attachment_id: "attachment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">teardown</a>(project_id:, attachment_id:, request) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.teardown(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  children_terminated: true,
+  evidence: "evidence",
+  owner_epoch: 1,
+  owner_id: "owner_id",
+  workspace_generation: "workspace_generation"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**children_terminated:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_epoch:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**owner_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_generation:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_attachments.<a href="/lib/Sikaru/compute_attachments/client.rb">create</a>(project_id:, session_id:, request) -> Sikaru::Types::AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same session/key/workspace returns the original binding; changed workspace conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_attachments.create(
+  project_id: "project_id",
+  session_id: "session_id",
+  environment_id: "environment_id",
+  idempotency_key: "idempotency_key",
+  workspace_provenance: {
+    identity: "identity",
+    kind: "existing_directory"
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**replace_existing:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspace_provenance:** `Sikaru::Types::WorkspaceProvenance` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeAttachments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeOperations
+<details><summary><code>client.compute_operations.<a href="/lib/Sikaru/compute_operations/client.rb">submit_receipt</a>(project_id:, attachment_id:, request) -> Sikaru::Types::ReceiptView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Only exact immutable receipt retries are idempotent; changed content conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_operations.submit_receipt(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  idempotency_key: "idempotency_key",
+  payload: {
+    key: "value"
+  },
+  request_digest: "request_digest",
+  run_id: "run_id",
+  status: "completed",
+  tool_call_id: "tool_call_id",
+  tool_provider_id: "tool_provider_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru::Types::ReceiptInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeOperations::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_operations.<a href="/lib/Sikaru/compute_operations/client.rb">poll</a>(project_id:, attachment_id:) -> Sikaru::Types::WorkPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_operations.poll(
+  project_id: "project_id",
+  attachment_id: "attachment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**wait_seconds:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeOperations::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeCredentials
+<details><summary><code>client.compute_credentials.<a href="/lib/Sikaru/compute_credentials/client.rb">renew</a>(project_id:) -> Sikaru::Types::CredentialRenewed</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_credentials.renew(project_id: "project_id")
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeCredentials::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_credentials.<a href="/lib/Sikaru/compute_credentials/client.rb">revoke</a>(project_id:, credential_id:) -> Sikaru::Types::CredentialRevoked</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_credentials.revoke(
+  project_id: "project_id",
+  credential_id: "credential_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeCredentials::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeEnvironments
+<details><summary><code>client.compute_environments.<a href="/lib/Sikaru/compute_environments/client.rb">create</a>(project_id:, request) -> Sikaru::Types::EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key + same configuration returns the same environment; changed input conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_environments.create(
+  project_id: "project_id",
+  environment_slug: "environment_slug",
+  idempotency_key: "idempotency_key"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_slug:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**product_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeEnvironments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_environments.<a href="/lib/Sikaru/compute_environments/client.rb">get</a>(project_id:, environment_id:) -> Sikaru::Types::EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_environments.get(
+  project_id: "project_id",
+  environment_id: "environment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeEnvironments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_environments.<a href="/lib/Sikaru/compute_environments/client.rb">disable</a>(project_id:, environment_id:) -> Sikaru::Types::EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently disable future claims and credentials; existing cleanup remains required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_environments.disable(
+  project_id: "project_id",
+  environment_id: "environment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeEnvironments::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkers
+<details><summary><code>client.compute_workers.<a href="/lib/Sikaru/compute_workers/client.rb">issue_credential</a>(project_id:, environment_id:) -> Sikaru::Types::CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Issue a new secret once; retries issue independent revocable credentials.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_workers.issue_credential(
+  project_id: "project_id",
+  environment_id: "environment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeWorkers::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_workers.<a href="/lib/Sikaru/compute_workers/client.rb">poll</a>(project_id:, environment_id:) -> Sikaru::Types::QueuePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Bounded queue snapshot. wait_seconds is a maximum; server may return immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_workers.poll(
+  project_id: "project_id",
+  environment_id: "environment_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**wait_seconds:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Integer` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeWorkers::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Connections
 <details><summary><code>client.connections.<a href="/lib/Sikaru/connections/client.rb">list_connections</a>(project_id:) -> Internal::Types::Array[Sikaru::Types::Connection]</code></summary>
 <dl>
@@ -4551,7 +6367,7 @@ client.execution_sessions.append_turn(
 <dl>
 <dd>
 
-**compute_provider_id:** `String` 
+**compute_attachment_id:** `String` 
     
 </dd>
 </dl>
@@ -4560,14 +6376,6 @@ client.execution_sessions.append_turn(
 <dd>
 
 **delivery_mode:** `Sikaru::ExecutionSessions::Types::TurnInputDeliveryMode` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**execution_environment:** `Sikaru::ExecutionSessions::Types::TurnInputExecutionEnvironment` 
     
 </dd>
 </dl>
@@ -4709,6 +6517,14 @@ client.execution_sessions.create(
 <dd>
 
 **final_output_schema:** `Internal::Types::Hash[String, Object]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
     
 </dd>
 </dl>
@@ -5660,6 +7476,269 @@ client.agent_budgets.setup_payment_method(
 </details>
 
 ## Harnesses
+<details><summary><code>client.harnesses.<a href="/lib/Sikaru/harnesses/client.rb">get_invoice_budget</a>(project_id:, harness_id:) -> Sikaru::Types::InvoiceBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.harnesses.get_invoice_budget(
+  project_id: "project_id",
+  harness_id: "harness_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Harnesses::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/lib/Sikaru/harnesses/client.rb">get_subscription</a>(project_id:, harness_id:) -> Sikaru::Types::SubscriptionStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.harnesses.get_subscription(
+  project_id: "project_id",
+  harness_id: "harness_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Harnesses::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/lib/Sikaru/harnesses/client.rb">subscribe</a>(project_id:, harness_id:, request) -> Sikaru::Types::SubscriptionSetup</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.harnesses.subscribe(
+  project_id: "project_id",
+  harness_id: "harness_id",
+  accepted_recurring_terms: true,
+  idempotency_key: "idempotency_key",
+  plan: "build"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**accepted_recurring_terms:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**plan:** `Sikaru::Harnesses::Types::SubscriptionInputPlan` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Harnesses::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/lib/Sikaru/harnesses/client.rb">cancel_subscription</a>(project_id:, harness_id:) -> Sikaru::Types::SubscriptionCancellation</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.harnesses.cancel_subscription(
+  project_id: "project_id",
+  harness_id: "harness_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::Harnesses::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.harnesses.<a href="/lib/Sikaru/harnesses/client.rb">improvement_options</a>(project_id:, harness_id:) -> Internal::Types::Hash[String, Object]</code></summary>
 <dl>
 <dd>
@@ -6163,7 +8242,15 @@ client.runs.start(
 <dl>
 <dd>
 
-**compute_provider_id:** `String` 
+**compute_environment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**compute_workspace_provenance:** `Sikaru::Types::WorkspaceProvenance` 
     
 </dd>
 </dl>
@@ -6195,7 +8282,7 @@ client.runs.start(
 <dl>
 <dd>
 
-**execution_environment:** `Sikaru::Runs::Types::StartHarnessRunRequestExecutionEnvironment` 
+**idempotency_key:** `String` 
     
 </dd>
 </dl>

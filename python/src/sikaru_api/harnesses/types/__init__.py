@@ -7,7 +7,11 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .improvement_input_objective import ImprovementInputObjective
-_dynamic_imports: typing.Dict[str, str] = {"ImprovementInputObjective": ".improvement_input_objective"}
+    from .subscription_input_plan import SubscriptionInputPlan
+_dynamic_imports: typing.Dict[str, str] = {
+    "ImprovementInputObjective": ".improvement_input_objective",
+    "SubscriptionInputPlan": ".subscription_input_plan",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +35,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["ImprovementInputObjective"]
+__all__ = ["ImprovementInputObjective", "SubscriptionInputPlan"]

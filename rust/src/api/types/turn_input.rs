@@ -5,11 +5,9 @@ pub struct TurnInput {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub capability_grants: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub compute_provider_id: Option<String>,
+    pub compute_attachment_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub delivery_mode: Option<TurnInputDeliveryMode>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub execution_environment: Option<TurnInputExecutionEnvironment>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub file_ids: Option<Vec<String>>,
     #[serde(default)]
@@ -34,9 +32,8 @@ impl TurnInput {
 #[non_exhaustive]
 pub struct TurnInputBuilder {
     capability_grants: Option<Vec<String>>,
-    compute_provider_id: Option<String>,
+    compute_attachment_id: Option<String>,
     delivery_mode: Option<TurnInputDeliveryMode>,
-    execution_environment: Option<TurnInputExecutionEnvironment>,
     file_ids: Option<Vec<String>>,
     idempotency_key: Option<String>,
     input: Option<HashMap<String, serde_json::Value>>,
@@ -51,18 +48,13 @@ impl TurnInputBuilder {
         self
     }
 
-    pub fn compute_provider_id(mut self, value: impl Into<String>) -> Self {
-        self.compute_provider_id = Some(value.into());
+    pub fn compute_attachment_id(mut self, value: impl Into<String>) -> Self {
+        self.compute_attachment_id = Some(value.into());
         self
     }
 
     pub fn delivery_mode(mut self, value: TurnInputDeliveryMode) -> Self {
         self.delivery_mode = Some(value);
-        self
-    }
-
-    pub fn execution_environment(mut self, value: TurnInputExecutionEnvironment) -> Self {
-        self.execution_environment = Some(value);
         self
     }
 
@@ -103,9 +95,8 @@ impl TurnInputBuilder {
     pub fn build(self) -> Result<TurnInput, BuildError> {
         Ok(TurnInput {
             capability_grants: self.capability_grants,
-            compute_provider_id: self.compute_provider_id,
+            compute_attachment_id: self.compute_attachment_id,
             delivery_mode: self.delivery_mode,
-            execution_environment: self.execution_environment,
             file_ids: self.file_ids,
             idempotency_key: self
                 .idempotency_key

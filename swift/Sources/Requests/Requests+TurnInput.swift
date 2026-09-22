@@ -3,9 +3,8 @@ import Foundation
 extension Requests {
     public struct TurnInput: Codable, Hashable, Sendable {
         public let capabilityGrants: [String]?
-        public let computeProviderId: Nullable<String>?
+        public let computeAttachmentId: Nullable<String>?
         public let deliveryMode: TurnInputDeliveryMode?
-        public let executionEnvironment: TurnInputExecutionEnvironment?
         public let fileIds: [String]?
         public let idempotencyKey: String
         public let input: [String: JSONValue]
@@ -17,9 +16,8 @@ extension Requests {
 
         public init(
             capabilityGrants: [String]? = nil,
-            computeProviderId: Nullable<String>? = nil,
+            computeAttachmentId: Nullable<String>? = nil,
             deliveryMode: TurnInputDeliveryMode? = nil,
-            executionEnvironment: TurnInputExecutionEnvironment? = nil,
             fileIds: [String]? = nil,
             idempotencyKey: String,
             input: [String: JSONValue],
@@ -29,9 +27,8 @@ extension Requests {
             additionalProperties: [String: JSONValue] = .init()
         ) {
             self.capabilityGrants = capabilityGrants
-            self.computeProviderId = computeProviderId
+            self.computeAttachmentId = computeAttachmentId
             self.deliveryMode = deliveryMode
-            self.executionEnvironment = executionEnvironment
             self.fileIds = fileIds
             self.idempotencyKey = idempotencyKey
             self.input = input
@@ -44,9 +41,8 @@ extension Requests {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.capabilityGrants = try container.decodeIfPresent([String].self, forKey: .capabilityGrants)
-            self.computeProviderId = try container.decodeNullableIfPresent(String.self, forKey: .computeProviderId)
+            self.computeAttachmentId = try container.decodeNullableIfPresent(String.self, forKey: .computeAttachmentId)
             self.deliveryMode = try container.decodeIfPresent(TurnInputDeliveryMode.self, forKey: .deliveryMode)
-            self.executionEnvironment = try container.decodeIfPresent(TurnInputExecutionEnvironment.self, forKey: .executionEnvironment)
             self.fileIds = try container.decodeIfPresent([String].self, forKey: .fileIds)
             self.idempotencyKey = try container.decode(String.self, forKey: .idempotencyKey)
             self.input = try container.decode([String: JSONValue].self, forKey: .input)
@@ -60,9 +56,8 @@ extension Requests {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try encoder.encodeAdditionalProperties(self.additionalProperties)
             try container.encodeIfPresent(self.capabilityGrants, forKey: .capabilityGrants)
-            try container.encodeNullableIfPresent(self.computeProviderId, forKey: .computeProviderId)
+            try container.encodeNullableIfPresent(self.computeAttachmentId, forKey: .computeAttachmentId)
             try container.encodeIfPresent(self.deliveryMode, forKey: .deliveryMode)
-            try container.encodeIfPresent(self.executionEnvironment, forKey: .executionEnvironment)
             try container.encodeIfPresent(self.fileIds, forKey: .fileIds)
             try container.encode(self.idempotencyKey, forKey: .idempotencyKey)
             try container.encode(self.input, forKey: .input)
@@ -74,9 +69,8 @@ extension Requests {
         /// Keys for encoding/decoding struct properties.
         enum CodingKeys: String, CodingKey, CaseIterable {
             case capabilityGrants = "capability_grants"
-            case computeProviderId = "compute_provider_id"
+            case computeAttachmentId = "compute_attachment_id"
             case deliveryMode = "delivery_mode"
-            case executionEnvironment = "execution_environment"
             case fileIds = "file_ids"
             case idempotencyKey = "idempotency_key"
             case input

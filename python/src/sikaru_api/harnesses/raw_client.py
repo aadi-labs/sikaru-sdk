@@ -13,8 +13,13 @@ from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
+from ..types.invoice_budget import InvoiceBudget
 from ..types.resume_improvement_input import ResumeImprovementInput
+from ..types.subscription_cancellation import SubscriptionCancellation
+from ..types.subscription_setup import SubscriptionSetup
+from ..types.subscription_status import SubscriptionStatus
 from .types.improvement_input_objective import ImprovementInputObjective
+from .types.subscription_input_plan import SubscriptionInputPlan
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -24,6 +29,246 @@ OMIT = typing.cast(typing.Any, ...)
 class RawHarnessesClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    def get_invoice_budget(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[InvoiceBudget]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[InvoiceBudget]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/invoice",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InvoiceBudget,
+                    parse_obj_as(
+                        type_=InvoiceBudget,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SubscriptionStatus]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[SubscriptionStatus]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/subscription",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SubscriptionStatus,
+                    parse_obj_as(
+                        type_=SubscriptionStatus,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def subscribe(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        accepted_recurring_terms: bool,
+        idempotency_key: str,
+        plan: SubscriptionInputPlan,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[SubscriptionSetup]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        accepted_recurring_terms : bool
+
+        idempotency_key : str
+
+        plan : SubscriptionInputPlan
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[SubscriptionSetup]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/subscription",
+            method="POST",
+            json={
+                "accepted_recurring_terms": accepted_recurring_terms,
+                "idempotency_key": idempotency_key,
+                "plan": plan,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SubscriptionSetup,
+                    parse_obj_as(
+                        type_=SubscriptionSetup,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def cancel_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[SubscriptionCancellation]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[SubscriptionCancellation]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/subscription/cancel",
+            method="POST",
+            request_options=_request_options_with_retries_disabled,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SubscriptionCancellation,
+                    parse_obj_as(
+                        type_=SubscriptionCancellation,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def improvement_options(
         self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
@@ -406,6 +651,246 @@ class RawHarnessesClient:
 class AsyncRawHarnessesClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    async def get_invoice_budget(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[InvoiceBudget]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[InvoiceBudget]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/invoice",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    InvoiceBudget,
+                    parse_obj_as(
+                        type_=InvoiceBudget,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[SubscriptionStatus]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[SubscriptionStatus]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/subscription",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SubscriptionStatus,
+                    parse_obj_as(
+                        type_=SubscriptionStatus,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def subscribe(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        accepted_recurring_terms: bool,
+        idempotency_key: str,
+        plan: SubscriptionInputPlan,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[SubscriptionSetup]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        accepted_recurring_terms : bool
+
+        idempotency_key : str
+
+        plan : SubscriptionInputPlan
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[SubscriptionSetup]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/subscription",
+            method="POST",
+            json={
+                "accepted_recurring_terms": accepted_recurring_terms,
+                "idempotency_key": idempotency_key,
+                "plan": plan,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SubscriptionSetup,
+                    parse_obj_as(
+                        type_=SubscriptionSetup,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def cancel_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[SubscriptionCancellation]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[SubscriptionCancellation]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/subscription/cancel",
+            method="POST",
+            request_options=_request_options_with_retries_disabled,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    SubscriptionCancellation,
+                    parse_obj_as(
+                        type_=SubscriptionCancellation,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def improvement_options(
         self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None

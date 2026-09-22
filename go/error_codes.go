@@ -13,4 +13,29 @@ var ErrorCodes internal.ErrorCodes = internal.ErrorCodes{
 			APIError: apiError,
 		}
 	},
+	401: func(apiError *core.APIError) error {
+		return &UnauthorizedError{
+			APIError: apiError,
+		}
+	},
+	403: func(apiError *core.APIError) error {
+		return &ForbiddenError{
+			APIError: apiError,
+		}
+	},
+	404: func(apiError *core.APIError) error {
+		return &NotFoundError{
+			APIError: apiError,
+		}
+	},
+	409: func(apiError *core.APIError) error {
+		return &ConflictError{
+			APIError: apiError,
+		}
+	},
+	503: func(apiError *core.APIError) error {
+		return &ServiceUnavailableError{
+			APIError: apiError,
+		}
+	},
 }

@@ -10,29 +10,27 @@ import (
 )
 
 var (
-	turnInputFieldCapabilityGrants     = big.NewInt(1 << 0)
-	turnInputFieldComputeProviderID    = big.NewInt(1 << 1)
-	turnInputFieldDeliveryMode         = big.NewInt(1 << 2)
-	turnInputFieldExecutionEnvironment = big.NewInt(1 << 3)
-	turnInputFieldFileIDs              = big.NewInt(1 << 4)
-	turnInputFieldIdempotencyKey       = big.NewInt(1 << 5)
-	turnInputFieldInput                = big.NewInt(1 << 6)
-	turnInputFieldProductContext       = big.NewInt(1 << 7)
-	turnInputFieldRunMode              = big.NewInt(1 << 8)
-	turnInputFieldToolProviderRefs     = big.NewInt(1 << 9)
+	turnInputFieldCapabilityGrants    = big.NewInt(1 << 0)
+	turnInputFieldComputeAttachmentID = big.NewInt(1 << 1)
+	turnInputFieldDeliveryMode        = big.NewInt(1 << 2)
+	turnInputFieldFileIDs             = big.NewInt(1 << 3)
+	turnInputFieldIdempotencyKey      = big.NewInt(1 << 4)
+	turnInputFieldInput               = big.NewInt(1 << 5)
+	turnInputFieldProductContext      = big.NewInt(1 << 6)
+	turnInputFieldRunMode             = big.NewInt(1 << 7)
+	turnInputFieldToolProviderRefs    = big.NewInt(1 << 8)
 )
 
 type TurnInput struct {
-	CapabilityGrants     []string                       `json:"capability_grants,omitempty" url:"-"`
-	ComputeProviderID    *string                        `json:"compute_provider_id,omitempty" url:"-"`
-	DeliveryMode         *TurnInputDeliveryMode         `json:"delivery_mode,omitempty" url:"-"`
-	ExecutionEnvironment *TurnInputExecutionEnvironment `json:"execution_environment,omitempty" url:"-"`
-	FileIDs              []string                       `json:"file_ids,omitempty" url:"-"`
-	IdempotencyKey       string                         `json:"idempotency_key" url:"-"`
-	Input                map[string]any                 `json:"input" url:"-"`
-	ProductContext       map[string]any                 `json:"product_context,omitempty" url:"-"`
-	RunMode              *TurnInputRunMode              `json:"run_mode,omitempty" url:"-"`
-	ToolProviderRefs     []map[string]any               `json:"tool_provider_refs,omitempty" url:"-"`
+	CapabilityGrants    []string               `json:"capability_grants,omitempty" url:"-"`
+	ComputeAttachmentID *string                `json:"compute_attachment_id,omitempty" url:"-"`
+	DeliveryMode        *TurnInputDeliveryMode `json:"delivery_mode,omitempty" url:"-"`
+	FileIDs             []string               `json:"file_ids,omitempty" url:"-"`
+	IdempotencyKey      string                 `json:"idempotency_key" url:"-"`
+	Input               map[string]any         `json:"input" url:"-"`
+	ProductContext      map[string]any         `json:"product_context,omitempty" url:"-"`
+	RunMode             *TurnInputRunMode      `json:"run_mode,omitempty" url:"-"`
+	ToolProviderRefs    []map[string]any       `json:"tool_provider_refs,omitempty" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -52,11 +50,11 @@ func (t *TurnInput) SetCapabilityGrants(capabilityGrants []string) {
 	t.require(turnInputFieldCapabilityGrants)
 }
 
-// SetComputeProviderID sets the ComputeProviderID field and marks it as non-optional;
+// SetComputeAttachmentID sets the ComputeAttachmentID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TurnInput) SetComputeProviderID(computeProviderID *string) {
-	t.ComputeProviderID = computeProviderID
-	t.require(turnInputFieldComputeProviderID)
+func (t *TurnInput) SetComputeAttachmentID(computeAttachmentID *string) {
+	t.ComputeAttachmentID = computeAttachmentID
+	t.require(turnInputFieldComputeAttachmentID)
 }
 
 // SetDeliveryMode sets the DeliveryMode field and marks it as non-optional;
@@ -64,13 +62,6 @@ func (t *TurnInput) SetComputeProviderID(computeProviderID *string) {
 func (t *TurnInput) SetDeliveryMode(deliveryMode *TurnInputDeliveryMode) {
 	t.DeliveryMode = deliveryMode
 	t.require(turnInputFieldDeliveryMode)
-}
-
-// SetExecutionEnvironment sets the ExecutionEnvironment field and marks it as non-optional;
-// this prevents an empty or null value for this field from being omitted during serialization.
-func (t *TurnInput) SetExecutionEnvironment(executionEnvironment *TurnInputExecutionEnvironment) {
-	t.ExecutionEnvironment = executionEnvironment
-	t.require(turnInputFieldExecutionEnvironment)
 }
 
 // SetFileIDs sets the FileIDs field and marks it as non-optional;
@@ -196,9 +187,10 @@ var (
 	sessionInputFieldConversationID    = big.NewInt(1 << 1)
 	sessionInputFieldEnvironment       = big.NewInt(1 << 2)
 	sessionInputFieldFinalOutputSchema = big.NewInt(1 << 3)
-	sessionInputFieldReasoningEffort   = big.NewInt(1 << 4)
-	sessionInputFieldTenantID          = big.NewInt(1 << 5)
-	sessionInputFieldUserID            = big.NewInt(1 << 6)
+	sessionInputFieldIdempotencyKey    = big.NewInt(1 << 4)
+	sessionInputFieldReasoningEffort   = big.NewInt(1 << 5)
+	sessionInputFieldTenantID          = big.NewInt(1 << 6)
+	sessionInputFieldUserID            = big.NewInt(1 << 7)
 )
 
 type SessionInput struct {
@@ -208,6 +200,7 @@ type SessionInput struct {
 	// Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
 	Environment       *SessionInputEnvironment     `json:"environment,omitempty" url:"-"`
 	FinalOutputSchema map[string]any               `json:"final_output_schema,omitempty" url:"-"`
+	IdempotencyKey    *string                      `json:"idempotency_key,omitempty" url:"-"`
 	ReasoningEffort   *SessionInputReasoningEffort `json:"reasoning_effort,omitempty" url:"-"`
 	TenantID          string                       `json:"tenant_id" url:"-"`
 	UserID            string                       `json:"user_id" url:"-"`
@@ -249,6 +242,13 @@ func (s *SessionInput) SetEnvironment(environment *SessionInputEnvironment) {
 func (s *SessionInput) SetFinalOutputSchema(finalOutputSchema map[string]any) {
 	s.FinalOutputSchema = finalOutputSchema
 	s.require(sessionInputFieldFinalOutputSchema)
+}
+
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SessionInput) SetIdempotencyKey(idempotencyKey *string) {
+	s.IdempotencyKey = idempotencyKey
+	s.require(sessionInputFieldIdempotencyKey)
 }
 
 // SetReasoningEffort sets the ReasoningEffort field and marks it as non-optional;
@@ -653,28 +653,6 @@ func NewTurnInputDeliveryModeFromString(s string) (TurnInputDeliveryMode, error)
 }
 
 func (t TurnInputDeliveryMode) Ptr() *TurnInputDeliveryMode {
-	return &t
-}
-
-type TurnInputExecutionEnvironment string
-
-const (
-	TurnInputExecutionEnvironmentManaged TurnInputExecutionEnvironment = "managed"
-	TurnInputExecutionEnvironmentLocal   TurnInputExecutionEnvironment = "local"
-)
-
-func NewTurnInputExecutionEnvironmentFromString(s string) (TurnInputExecutionEnvironment, error) {
-	switch s {
-	case "managed":
-		return TurnInputExecutionEnvironmentManaged, nil
-	case "local":
-		return TurnInputExecutionEnvironmentLocal, nil
-	}
-	var t TurnInputExecutionEnvironment
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (t TurnInputExecutionEnvironment) Ptr() *TurnInputExecutionEnvironment {
 	return &t
 }
 

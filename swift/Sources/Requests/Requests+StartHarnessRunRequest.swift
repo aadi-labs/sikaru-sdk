@@ -5,11 +5,12 @@ extension Requests {
         /// Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
         public let autoImprove: Bool?
         public let capabilityGrants: [String]?
-        public let computeProviderId: Nullable<String>?
+        public let computeEnvironmentId: Nullable<String>?
+        public let computeWorkspaceProvenance: Nullable<WorkspaceProvenance>?
         public let conversationId: Nullable<String>?
         public let correlationId: Nullable<String>?
         public let eventDelivery: EventDeliveryRequest?
-        public let executionEnvironment: StartHarnessRunRequestExecutionEnvironment?
+        public let idempotencyKey: Nullable<String>?
         public let input: [String: JSONValue]
         public let jobId: Nullable<String>?
         /// Catalog model for this run. Omit to use the project default; list choices through model settings.
@@ -27,11 +28,12 @@ extension Requests {
         public init(
             autoImprove: Bool? = nil,
             capabilityGrants: [String]? = nil,
-            computeProviderId: Nullable<String>? = nil,
+            computeEnvironmentId: Nullable<String>? = nil,
+            computeWorkspaceProvenance: Nullable<WorkspaceProvenance>? = nil,
             conversationId: Nullable<String>? = nil,
             correlationId: Nullable<String>? = nil,
             eventDelivery: EventDeliveryRequest? = nil,
-            executionEnvironment: StartHarnessRunRequestExecutionEnvironment? = nil,
+            idempotencyKey: Nullable<String>? = nil,
             input: [String: JSONValue],
             jobId: Nullable<String>? = nil,
             model: Nullable<String>? = nil,
@@ -46,11 +48,12 @@ extension Requests {
         ) {
             self.autoImprove = autoImprove
             self.capabilityGrants = capabilityGrants
-            self.computeProviderId = computeProviderId
+            self.computeEnvironmentId = computeEnvironmentId
+            self.computeWorkspaceProvenance = computeWorkspaceProvenance
             self.conversationId = conversationId
             self.correlationId = correlationId
             self.eventDelivery = eventDelivery
-            self.executionEnvironment = executionEnvironment
+            self.idempotencyKey = idempotencyKey
             self.input = input
             self.jobId = jobId
             self.model = model
@@ -68,11 +71,12 @@ extension Requests {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.autoImprove = try container.decodeIfPresent(Bool.self, forKey: .autoImprove)
             self.capabilityGrants = try container.decodeIfPresent([String].self, forKey: .capabilityGrants)
-            self.computeProviderId = try container.decodeNullableIfPresent(String.self, forKey: .computeProviderId)
+            self.computeEnvironmentId = try container.decodeNullableIfPresent(String.self, forKey: .computeEnvironmentId)
+            self.computeWorkspaceProvenance = try container.decodeNullableIfPresent(WorkspaceProvenance.self, forKey: .computeWorkspaceProvenance)
             self.conversationId = try container.decodeNullableIfPresent(String.self, forKey: .conversationId)
             self.correlationId = try container.decodeNullableIfPresent(String.self, forKey: .correlationId)
             self.eventDelivery = try container.decodeIfPresent(EventDeliveryRequest.self, forKey: .eventDelivery)
-            self.executionEnvironment = try container.decodeIfPresent(StartHarnessRunRequestExecutionEnvironment.self, forKey: .executionEnvironment)
+            self.idempotencyKey = try container.decodeNullableIfPresent(String.self, forKey: .idempotencyKey)
             self.input = try container.decode([String: JSONValue].self, forKey: .input)
             self.jobId = try container.decodeNullableIfPresent(String.self, forKey: .jobId)
             self.model = try container.decodeNullableIfPresent(String.self, forKey: .model)
@@ -91,11 +95,12 @@ extension Requests {
             try encoder.encodeAdditionalProperties(self.additionalProperties)
             try container.encodeIfPresent(self.autoImprove, forKey: .autoImprove)
             try container.encodeIfPresent(self.capabilityGrants, forKey: .capabilityGrants)
-            try container.encodeNullableIfPresent(self.computeProviderId, forKey: .computeProviderId)
+            try container.encodeNullableIfPresent(self.computeEnvironmentId, forKey: .computeEnvironmentId)
+            try container.encodeNullableIfPresent(self.computeWorkspaceProvenance, forKey: .computeWorkspaceProvenance)
             try container.encodeNullableIfPresent(self.conversationId, forKey: .conversationId)
             try container.encodeNullableIfPresent(self.correlationId, forKey: .correlationId)
             try container.encodeIfPresent(self.eventDelivery, forKey: .eventDelivery)
-            try container.encodeIfPresent(self.executionEnvironment, forKey: .executionEnvironment)
+            try container.encodeNullableIfPresent(self.idempotencyKey, forKey: .idempotencyKey)
             try container.encode(self.input, forKey: .input)
             try container.encodeNullableIfPresent(self.jobId, forKey: .jobId)
             try container.encodeNullableIfPresent(self.model, forKey: .model)
@@ -112,11 +117,12 @@ extension Requests {
         enum CodingKeys: String, CodingKey, CaseIterable {
             case autoImprove = "auto_improve"
             case capabilityGrants = "capability_grants"
-            case computeProviderId = "compute_provider_id"
+            case computeEnvironmentId = "compute_environment_id"
+            case computeWorkspaceProvenance = "compute_workspace_provenance"
             case conversationId = "conversation_id"
             case correlationId = "correlation_id"
             case eventDelivery = "event_delivery"
-            case executionEnvironment = "execution_environment"
+            case idempotencyKey = "idempotency_key"
             case input
             case jobId = "job_id"
             case model

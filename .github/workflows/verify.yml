@@ -39,7 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        if: matrix.language == 'python'
         with:
           python-version: '3.13'
       - uses: actions/setup-node@v4
@@ -103,3 +102,28 @@ jobs:
         run: |
           xcrun swift build
           xcrun swift test
+      - name: Python compute lifecycle wire contract
+        if: matrix.language == 'python'
+        run: python ../client-extensions/compute-contracts/wire.py python ../client-extensions/compute-contracts/python_contract.py
+      - name: TypeScript compute lifecycle wire contract
+        if: matrix.language == 'typescript'
+        run: |
+          node_modules/.bin/tsc --project ../client-extensions/compute-contracts/tsconfig.json
+          python ../client-extensions/compute-contracts/wire.py node ../client-extensions/compute-contracts/typescript_contract.js
+      - name: Go compute lifecycle wire contract
+        if: matrix.language == 'go'
+        working-directory: client-extensions/compute-contracts/go
+        run: python ../wire.py go run .
+      - name: Rust compute lifecycle wire contract
+        if: matrix.language == 'rust'
+        env:
+          CARGO_BUILD_JOBS: 2
+          CARGO_PROFILE_DEV_DEBUG: 0
+          CARGO_INCREMENTAL: 0
+        run: python ../client-extensions/compute-contracts/wire.py cargo run --locked --manifest-path ../client-extensions/compute-contracts/rust/Cargo.toml
+      - name: Ruby compute lifecycle wire contract
+        if: matrix.language == 'ruby'
+        run: python ../client-extensions/compute-contracts/wire.py bundle exec ruby -Ilib ../client-extensions/compute-contracts/ruby_contract.rb
+      - name: Swift compute lifecycle wire contract
+        if: matrix.language == 'swift'
+        run: python ../client-extensions/compute-contracts/wire.py swift run --package-path ../client-extensions/compute-contracts/swift-contract ComputeContract

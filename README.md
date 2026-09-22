@@ -29,10 +29,13 @@ as a separate [authoring companion](client-extensions/authoring/README.md):
 install with `pip install ./client-extensions/authoring`, then import
 `compile_directory` from `sikaru_authoring` and pass its definition to the generated API.
 
-To run commands on your own machine, set `execution_environment` to `local`
-and provide `compute_provider_id` when starting a run or appending a session
-turn. The provider must be registered for the project with the `compute.execute`
-capability. Runs default to `managed`. Sikaru manages the agent loop; local
-compute uses the same run events and tool-result APIs.
+Self-hosted compute uses generated `compute_environments`, `compute_workers`,
+`compute_attachments`, `compute_credentials`, and `compute_operations` clients.
+Create an execution session and bind an attachment before appending admitted
+turns with `compute.execute`. Controllers issue restricted worker/executor
+credentials; neither receives project-wide controller authority. The native CLI
+also provides `sikaru exec` and `sikaru compute serve/worker`. Managed orchestration
+remains hosted, and task files remain on customer compute unless exported.
+See [polling lifecycle examples](client-extensions/compute-contracts/README.md).
 
 Please report API issues and proposed changes through this repository. 

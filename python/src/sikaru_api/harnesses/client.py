@@ -4,9 +4,14 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.invoice_budget import InvoiceBudget
 from ..types.resume_improvement_input import ResumeImprovementInput
+from ..types.subscription_cancellation import SubscriptionCancellation
+from ..types.subscription_setup import SubscriptionSetup
+from ..types.subscription_status import SubscriptionStatus
 from .raw_client import AsyncRawHarnessesClient, RawHarnessesClient
 from .types.improvement_input_objective import ImprovementInputObjective
+from .types.subscription_input_plan import SubscriptionInputPlan
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -26,6 +31,161 @@ class HarnessesClient:
         RawHarnessesClient
         """
         return self._raw_client
+
+    def get_invoice_budget(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> InvoiceBudget:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InvoiceBudget
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.harnesses.get_invoice_budget(
+            project_id="project_id",
+            harness_id="harness_id",
+        )
+        """
+        _response = self._raw_client.get_invoice_budget(project_id, harness_id, request_options=request_options)
+        return _response.data
+
+    def get_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SubscriptionStatus:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscriptionStatus
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.harnesses.get_subscription(
+            project_id="project_id",
+            harness_id="harness_id",
+        )
+        """
+        _response = self._raw_client.get_subscription(project_id, harness_id, request_options=request_options)
+        return _response.data
+
+    def subscribe(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        accepted_recurring_terms: bool,
+        idempotency_key: str,
+        plan: SubscriptionInputPlan,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SubscriptionSetup:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        accepted_recurring_terms : bool
+
+        idempotency_key : str
+
+        plan : SubscriptionInputPlan
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscriptionSetup
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.harnesses.subscribe(
+            project_id="project_id",
+            harness_id="harness_id",
+            accepted_recurring_terms=True,
+            idempotency_key="idempotency_key",
+            plan="build",
+        )
+        """
+        _response = self._raw_client.subscribe(
+            project_id,
+            harness_id,
+            accepted_recurring_terms=accepted_recurring_terms,
+            idempotency_key=idempotency_key,
+            plan=plan,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def cancel_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SubscriptionCancellation:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscriptionCancellation
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.harnesses.cancel_subscription(
+            project_id="project_id",
+            harness_id="harness_id",
+        )
+        """
+        _response = self._raw_client.cancel_subscription(project_id, harness_id, request_options=request_options)
+        return _response.data
 
     def improvement_options(
         self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
@@ -288,6 +448,193 @@ class AsyncHarnessesClient:
         AsyncRawHarnessesClient
         """
         return self._raw_client
+
+    async def get_invoice_budget(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> InvoiceBudget:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        InvoiceBudget
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.harnesses.get_invoice_budget(
+                project_id="project_id",
+                harness_id="harness_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_invoice_budget(project_id, harness_id, request_options=request_options)
+        return _response.data
+
+    async def get_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SubscriptionStatus:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscriptionStatus
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.harnesses.get_subscription(
+                project_id="project_id",
+                harness_id="harness_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_subscription(project_id, harness_id, request_options=request_options)
+        return _response.data
+
+    async def subscribe(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        accepted_recurring_terms: bool,
+        idempotency_key: str,
+        plan: SubscriptionInputPlan,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> SubscriptionSetup:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        accepted_recurring_terms : bool
+
+        idempotency_key : str
+
+        plan : SubscriptionInputPlan
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscriptionSetup
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.harnesses.subscribe(
+                project_id="project_id",
+                harness_id="harness_id",
+                accepted_recurring_terms=True,
+                idempotency_key="idempotency_key",
+                plan="build",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.subscribe(
+            project_id,
+            harness_id,
+            accepted_recurring_terms=accepted_recurring_terms,
+            idempotency_key=idempotency_key,
+            plan=plan,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def cancel_subscription(
+        self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> SubscriptionCancellation:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        SubscriptionCancellation
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.harnesses.cancel_subscription(
+                project_id="project_id",
+                harness_id="harness_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.cancel_subscription(project_id, harness_id, request_options=request_options)
+        return _response.data
 
     async def improvement_options(
         self, project_id: str, harness_id: str, *, request_options: typing.Optional[RequestOptions] = None

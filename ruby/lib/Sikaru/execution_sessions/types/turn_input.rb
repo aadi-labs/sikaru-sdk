@@ -10,11 +10,9 @@ module Sikaru
 
         field :capability_grants, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-        field :compute_provider_id, -> { String }, optional: true, nullable: false
+        field :compute_attachment_id, -> { String }, optional: true, nullable: false
 
         field :delivery_mode, -> { Sikaru::ExecutionSessions::Types::TurnInputDeliveryMode }, optional: true, nullable: false
-
-        field :execution_environment, -> { Sikaru::ExecutionSessions::Types::TurnInputExecutionEnvironment }, optional: true, nullable: false
 
         field :file_ids, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 

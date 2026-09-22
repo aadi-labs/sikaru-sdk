@@ -42,7 +42,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::AgentBudget.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::AgentBudget.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -90,7 +90,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::AgentBudget.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::AgentBudget.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -137,7 +137,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::FundingReceipt.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::FundingReceipt.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)
@@ -183,7 +183,7 @@ module Sikaru
         end
         code = response.code.to_i
         if code.between?(200, 299)
-          Sikaru::Types::PaymentSetupLink.load(response.body)
+          (response.body.to_s.empty? ? nil : Sikaru::Types::PaymentSetupLink.load(response.body))
         else
           error_class = Sikaru::Errors::ResponseError.subclass_for_code(code)
           raise error_class.new(response.body, code: code)

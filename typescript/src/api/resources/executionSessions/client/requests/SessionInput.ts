@@ -14,6 +14,7 @@ export interface SessionInput {
     /** Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write. */
     environment?: SessionInput.Environment;
     final_output_schema?: Record<string, unknown> | null;
+    idempotency_key?: string | null;
     reasoning_effort?: SessionInput.ReasoningEffort | null;
     tenant_id: string;
     user_id: string;

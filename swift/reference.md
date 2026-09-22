@@ -1007,6 +1007,1915 @@ try await main()
 </dl>
 </details>
 
+## ComputeAttachments
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">get</a>(projectId: String, attachmentId: String, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.get(
+        projectId: "project_id",
+        attachmentId: "attachment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">abandon</a>(projectId: String, attachmentId: String, request: Requests.AbandonInput, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Irreversibly abandon execution authority, preserving unknown effects. Cleanup is still required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.abandon(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: .init(evidence: "evidence")
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.AbandonInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">cancel</a>(projectId: String, attachmentId: String, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently request stopping. This never asserts child cleanup.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.cancel(
+        projectId: "project_id",
+        attachmentId: "attachment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">claim</a>(projectId: String, attachmentId: String, request: Requests.ClaimInput, requestOptions: RequestOptions?) -> ClaimView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same attachment/key/worker returns the same launch identity, never another launch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.claim(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: .init(idempotencyKey: "idempotency_key")
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.ClaimInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">cleanup</a>(projectId: String, attachmentId: String, request: Requests.CleanupInput, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.cleanup(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: .init(
+            childrenTerminated: true,
+            evidence: "evidence"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.CleanupInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">connect</a>(projectId: String, attachmentId: String, request: ReadyInput, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attest original workspace/journal. Reconnection never replays uncertain effects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.connect(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: ReadyInput(
+            capabilities: [
+                .computeExecute
+            ],
+            executorInstanceId: "executor_instance_id",
+            journalId: "journal_id",
+            protocolVersion: .sikaruComputeV1,
+            workspaceProvenance: WorkspaceProvenance(
+                identity: "identity",
+                kind: .existingDirectory
+            )
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">issueCredential</a>(projectId: String, attachmentId: String, request: Requests.ExecutorCredentialInput, requestOptions: RequestOptions?) -> CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.issueCredential(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: .init(
+            ownerEpoch: 1,
+            ownerId: "owner_id"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.ExecutorCredentialInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">heartbeat</a>(projectId: String, attachmentId: String, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.heartbeat(
+        projectId: "project_id",
+        attachmentId: "attachment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">ready</a>(projectId: String, attachmentId: String, request: ReadyInput, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.ready(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: ReadyInput(
+            capabilities: [
+                .computeExecute
+            ],
+            executorInstanceId: "executor_instance_id",
+            journalId: "journal_id",
+            protocolVersion: .sikaruComputeV1,
+            workspaceProvenance: WorkspaceProvenance(
+                identity: "identity",
+                kind: .existingDirectory
+            )
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ReadyInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">reconcile</a>(projectId: String, attachmentId: String, request: Requests.ReconcileInput, requestOptions: RequestOptions?) -> ReconcileView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.reconcile(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: .init(
+            executorInstanceId: "executor_instance_id",
+            journalId: "journal_id",
+            workspaceProvenance: WorkspaceProvenance(
+                identity: "identity",
+                kind: .existingDirectory
+            )
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.ReconcileInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">status</a>(projectId: String, attachmentId: String, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.status(
+        projectId: "project_id",
+        attachmentId: "attachment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">stop</a>(projectId: String, attachmentId: String, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Executor can stop its own attachment and cancel its runs; cleanup is separately reported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.stop(
+        projectId: "project_id",
+        attachmentId: "attachment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">teardown</a>(projectId: String, attachmentId: String, request: Requests.TeardownInput, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.teardown(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: .init(
+            childrenTerminated: true,
+            evidence: "evidence",
+            ownerEpoch: 1,
+            ownerId: "owner_id",
+            workspaceGeneration: "workspace_generation"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.TeardownInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeAttachments.<a href="/Sources/Resources/ComputeAttachments/ComputeAttachmentsClient.swift">create</a>(projectId: String, sessionId: String, request: Requests.AttachmentInput, requestOptions: RequestOptions?) -> AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same session/key/workspace returns the original binding; changed workspace conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeAttachments.create(
+        projectId: "project_id",
+        sessionId: "session_id",
+        request: .init(
+            environmentId: "environment_id",
+            idempotencyKey: "idempotency_key",
+            workspaceProvenance: WorkspaceProvenance(
+                identity: "identity",
+                kind: .existingDirectory
+            )
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.AttachmentInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeOperations
+<details><summary><code>client.computeOperations.<a href="/Sources/Resources/ComputeOperations/ComputeOperationsClient.swift">submitReceipt</a>(projectId: String, attachmentId: String, request: ReceiptInput, requestOptions: RequestOptions?) -> ReceiptView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Only exact immutable receipt retries are idempotent; changed content conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeOperations.submitReceipt(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        request: ReceiptInput(
+            idempotencyKey: "idempotency_key",
+            payload: [
+                "key": .string("value")
+            ],
+            requestDigest: "request_digest",
+            runId: "run_id",
+            status: .completed,
+            toolCallId: "tool_call_id",
+            toolProviderId: "tool_provider_id"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `ReceiptInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeOperations.<a href="/Sources/Resources/ComputeOperations/ComputeOperationsClient.swift">poll</a>(projectId: String, attachmentId: String, waitSeconds: Int?, limit: Int?, requestOptions: RequestOptions?) -> WorkPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeOperations.poll(
+        projectId: "project_id",
+        attachmentId: "attachment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**waitSeconds:** `Int?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Int?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeCredentials
+<details><summary><code>client.computeCredentials.<a href="/Sources/Resources/ComputeCredentials/ComputeCredentialsClient.swift">renew</a>(projectId: String, requestOptions: RequestOptions?) -> CredentialRenewed</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeCredentials.renew(projectId: "project_id")
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeCredentials.<a href="/Sources/Resources/ComputeCredentials/ComputeCredentialsClient.swift">revoke</a>(projectId: String, credentialId: String, requestOptions: RequestOptions?) -> CredentialRevoked</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeCredentials.revoke(
+        projectId: "project_id",
+        credentialId: "credential_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentialId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeEnvironments
+<details><summary><code>client.computeEnvironments.<a href="/Sources/Resources/ComputeEnvironments/ComputeEnvironmentsClient.swift">create</a>(projectId: String, request: Requests.EnvironmentInput, requestOptions: RequestOptions?) -> EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key + same configuration returns the same environment; changed input conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeEnvironments.create(
+        projectId: "project_id",
+        request: .init(
+            environmentSlug: "environment_slug",
+            idempotencyKey: "idempotency_key"
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.EnvironmentInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeEnvironments.<a href="/Sources/Resources/ComputeEnvironments/ComputeEnvironmentsClient.swift">get</a>(projectId: String, environmentId: String, requestOptions: RequestOptions?) -> EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeEnvironments.get(
+        projectId: "project_id",
+        environmentId: "environment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeEnvironments.<a href="/Sources/Resources/ComputeEnvironments/ComputeEnvironmentsClient.swift">disable</a>(projectId: String, environmentId: String, requestOptions: RequestOptions?) -> EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently disable future claims and credentials; existing cleanup remains required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeEnvironments.disable(
+        projectId: "project_id",
+        environmentId: "environment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkers
+<details><summary><code>client.computeWorkers.<a href="/Sources/Resources/ComputeWorkers/ComputeWorkersClient.swift">issueCredential</a>(projectId: String, environmentId: String, requestOptions: RequestOptions?) -> CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Issue a new secret once; retries issue independent revocable credentials.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeWorkers.issueCredential(
+        projectId: "project_id",
+        environmentId: "environment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeWorkers.<a href="/Sources/Resources/ComputeWorkers/ComputeWorkersClient.swift">poll</a>(projectId: String, environmentId: String, waitSeconds: Int?, limit: Int?, requestOptions: RequestOptions?) -> QueuePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Bounded queue snapshot. wait_seconds is a maximum; server may return immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeWorkers.poll(
+        projectId: "project_id",
+        environmentId: "environment_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**waitSeconds:** `Int?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `Int?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Connections
 <details><summary><code>client.connections.<a href="/Sources/Resources/Connections/ConnectionsClient.swift">listConnections</a>(projectId: String, requestOptions: RequestOptions?) -> [Connection]</code></summary>
 <dl>
@@ -5407,6 +7316,291 @@ try await main()
 </details>
 
 ## Harnesses
+<details><summary><code>client.harnesses.<a href="/Sources/Resources/Harnesses/HarnessesClient.swift">getInvoiceBudget</a>(projectId: String, harnessId: String, requestOptions: RequestOptions?) -> InvoiceBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.harnesses.getInvoiceBudget(
+        projectId: "project_id",
+        harnessId: "harness_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/Sources/Resources/Harnesses/HarnessesClient.swift">getSubscription</a>(projectId: String, harnessId: String, requestOptions: RequestOptions?) -> SubscriptionStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.harnesses.getSubscription(
+        projectId: "project_id",
+        harnessId: "harness_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/Sources/Resources/Harnesses/HarnessesClient.swift">subscribe</a>(projectId: String, harnessId: String, request: Requests.SubscriptionInput, requestOptions: RequestOptions?) -> SubscriptionSetup</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.harnesses.subscribe(
+        projectId: "project_id",
+        harnessId: "harness_id",
+        request: .init(
+            acceptedRecurringTerms: true,
+            idempotencyKey: "idempotency_key",
+            plan: .build
+        )
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.SubscriptionInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.harnesses.<a href="/Sources/Resources/Harnesses/HarnessesClient.swift">cancelSubscription</a>(projectId: String, harnessId: String, requestOptions: RequestOptions?) -> SubscriptionCancellation</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.harnesses.cancelSubscription(
+        projectId: "project_id",
+        harnessId: "harness_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.harnesses.<a href="/Sources/Resources/Harnesses/HarnessesClient.swift">improvementOptions</a>(projectId: String, harnessId: String, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
 <dl>
 <dd>

@@ -17,6 +17,11 @@ if typing.TYPE_CHECKING:
     from .agent_imports.client import AgentImportsClient, AsyncAgentImportsClient
     from .agents.client import AgentsClient, AsyncAgentsClient
     from .changesets.client import AsyncChangesetsClient, ChangesetsClient
+    from .compute_attachments.client import AsyncComputeAttachmentsClient, ComputeAttachmentsClient
+    from .compute_credentials.client import AsyncComputeCredentialsClient, ComputeCredentialsClient
+    from .compute_environments.client import AsyncComputeEnvironmentsClient, ComputeEnvironmentsClient
+    from .compute_operations.client import AsyncComputeOperationsClient, ComputeOperationsClient
+    from .compute_workers.client import AsyncComputeWorkersClient, ComputeWorkersClient
     from .connections.client import AsyncConnectionsClient, ConnectionsClient
     from .context_registry.client import AsyncContextRegistryClient, ContextRegistryClient
     from .conversations.client import AsyncConversationsClient, ConversationsClient
@@ -151,6 +156,11 @@ class SikaruApi:
         self._agent_imports: typing.Optional[AgentImportsClient] = None
         self._agents: typing.Optional[AgentsClient] = None
         self._changesets: typing.Optional[ChangesetsClient] = None
+        self._compute_attachments: typing.Optional[ComputeAttachmentsClient] = None
+        self._compute_operations: typing.Optional[ComputeOperationsClient] = None
+        self._compute_credentials: typing.Optional[ComputeCredentialsClient] = None
+        self._compute_environments: typing.Optional[ComputeEnvironmentsClient] = None
+        self._compute_workers: typing.Optional[ComputeWorkersClient] = None
         self._connections: typing.Optional[ConnectionsClient] = None
         self._context_registry: typing.Optional[ContextRegistryClient] = None
         self._conversations: typing.Optional[ConversationsClient] = None
@@ -224,6 +234,46 @@ class SikaruApi:
 
             self._changesets = ChangesetsClient(client_wrapper=self._client_wrapper)
         return self._changesets
+
+    @property
+    def compute_attachments(self):
+        if self._compute_attachments is None:
+            from .compute_attachments.client import ComputeAttachmentsClient  # noqa: E402
+
+            self._compute_attachments = ComputeAttachmentsClient(client_wrapper=self._client_wrapper)
+        return self._compute_attachments
+
+    @property
+    def compute_operations(self):
+        if self._compute_operations is None:
+            from .compute_operations.client import ComputeOperationsClient  # noqa: E402
+
+            self._compute_operations = ComputeOperationsClient(client_wrapper=self._client_wrapper)
+        return self._compute_operations
+
+    @property
+    def compute_credentials(self):
+        if self._compute_credentials is None:
+            from .compute_credentials.client import ComputeCredentialsClient  # noqa: E402
+
+            self._compute_credentials = ComputeCredentialsClient(client_wrapper=self._client_wrapper)
+        return self._compute_credentials
+
+    @property
+    def compute_environments(self):
+        if self._compute_environments is None:
+            from .compute_environments.client import ComputeEnvironmentsClient  # noqa: E402
+
+            self._compute_environments = ComputeEnvironmentsClient(client_wrapper=self._client_wrapper)
+        return self._compute_environments
+
+    @property
+    def compute_workers(self):
+        if self._compute_workers is None:
+            from .compute_workers.client import ComputeWorkersClient  # noqa: E402
+
+            self._compute_workers = ComputeWorkersClient(client_wrapper=self._client_wrapper)
+        return self._compute_workers
 
     @property
     def connections(self):
@@ -667,6 +717,11 @@ class AsyncSikaruApi:
         self._agent_imports: typing.Optional[AsyncAgentImportsClient] = None
         self._agents: typing.Optional[AsyncAgentsClient] = None
         self._changesets: typing.Optional[AsyncChangesetsClient] = None
+        self._compute_attachments: typing.Optional[AsyncComputeAttachmentsClient] = None
+        self._compute_operations: typing.Optional[AsyncComputeOperationsClient] = None
+        self._compute_credentials: typing.Optional[AsyncComputeCredentialsClient] = None
+        self._compute_environments: typing.Optional[AsyncComputeEnvironmentsClient] = None
+        self._compute_workers: typing.Optional[AsyncComputeWorkersClient] = None
         self._connections: typing.Optional[AsyncConnectionsClient] = None
         self._context_registry: typing.Optional[AsyncContextRegistryClient] = None
         self._conversations: typing.Optional[AsyncConversationsClient] = None
@@ -740,6 +795,46 @@ class AsyncSikaruApi:
 
             self._changesets = AsyncChangesetsClient(client_wrapper=self._client_wrapper)
         return self._changesets
+
+    @property
+    def compute_attachments(self):
+        if self._compute_attachments is None:
+            from .compute_attachments.client import AsyncComputeAttachmentsClient  # noqa: E402
+
+            self._compute_attachments = AsyncComputeAttachmentsClient(client_wrapper=self._client_wrapper)
+        return self._compute_attachments
+
+    @property
+    def compute_operations(self):
+        if self._compute_operations is None:
+            from .compute_operations.client import AsyncComputeOperationsClient  # noqa: E402
+
+            self._compute_operations = AsyncComputeOperationsClient(client_wrapper=self._client_wrapper)
+        return self._compute_operations
+
+    @property
+    def compute_credentials(self):
+        if self._compute_credentials is None:
+            from .compute_credentials.client import AsyncComputeCredentialsClient  # noqa: E402
+
+            self._compute_credentials = AsyncComputeCredentialsClient(client_wrapper=self._client_wrapper)
+        return self._compute_credentials
+
+    @property
+    def compute_environments(self):
+        if self._compute_environments is None:
+            from .compute_environments.client import AsyncComputeEnvironmentsClient  # noqa: E402
+
+            self._compute_environments = AsyncComputeEnvironmentsClient(client_wrapper=self._client_wrapper)
+        return self._compute_environments
+
+    @property
+    def compute_workers(self):
+        if self._compute_workers is None:
+            from .compute_workers.client import AsyncComputeWorkersClient  # noqa: E402
+
+            self._compute_workers = AsyncComputeWorkersClient(client_wrapper=self._client_wrapper)
+        return self._compute_workers
 
     @property
     def connections(self):

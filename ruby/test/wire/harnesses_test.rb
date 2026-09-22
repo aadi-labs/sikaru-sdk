@@ -7,8 +7,99 @@ class HarnessesWireTest < WireMockTestCase
     super
 
     @client = Sikaru::Client.new(
-      api_key: "<token>",
+      token: "<token>",
       base_url: WIREMOCK_BASE_URL
+    )
+  end
+
+  def test_harnesses_get_invoice_budget_with_wiremock
+    test_id = "harnesses.get_invoice_budget.0"
+
+    @client.harnesses.get_invoice_budget(
+      project_id: "project_id",
+      harness_id: "harness_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "harnesses.get_invoice_budget.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v1/projects/project_id/harnesses/harness_id/budget/invoice",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_harnesses_get_subscription_with_wiremock
+    test_id = "harnesses.get_subscription.0"
+
+    @client.harnesses.get_subscription(
+      project_id: "project_id",
+      harness_id: "harness_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "harnesses.get_subscription.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "GET",
+      url_path: "/v1/projects/project_id/harnesses/harness_id/budget/subscription",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_harnesses_subscribe_with_wiremock
+    test_id = "harnesses.subscribe.0"
+
+    @client.harnesses.subscribe(
+      project_id: "project_id",
+      harness_id: "harness_id",
+      accepted_recurring_terms: true,
+      idempotency_key: "idempotency_key",
+      plan: "build",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "harnesses.subscribe.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v1/projects/project_id/harnesses/harness_id/budget/subscription",
+      query_params: nil,
+      expected: 1
+    )
+  end
+
+  def test_harnesses_cancel_subscription_with_wiremock
+    test_id = "harnesses.cancel_subscription.0"
+
+    @client.harnesses.cancel_subscription(
+      project_id: "project_id",
+      harness_id: "harness_id",
+      request_options: {
+        additional_headers: {
+          "X-Test-Id" => "harnesses.cancel_subscription.0"
+        }
+      }
+    )
+
+    verify_request_count(
+      test_id: test_id,
+      method: "POST",
+      url_path: "/v1/projects/project_id/harnesses/harness_id/budget/subscription/cancel",
+      query_params: nil,
+      expected: 1
     )
   end
 

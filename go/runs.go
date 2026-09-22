@@ -108,36 +108,38 @@ func (e *EventsRunsRequest) SetLimit(limit *string) {
 }
 
 var (
-	startHarnessRunRequestFieldAutoImprove          = big.NewInt(1 << 0)
-	startHarnessRunRequestFieldCapabilityGrants     = big.NewInt(1 << 1)
-	startHarnessRunRequestFieldComputeProviderID    = big.NewInt(1 << 2)
-	startHarnessRunRequestFieldConversationID       = big.NewInt(1 << 3)
-	startHarnessRunRequestFieldCorrelationID        = big.NewInt(1 << 4)
-	startHarnessRunRequestFieldEventDelivery        = big.NewInt(1 << 5)
-	startHarnessRunRequestFieldExecutionEnvironment = big.NewInt(1 << 6)
-	startHarnessRunRequestFieldInput                = big.NewInt(1 << 7)
-	startHarnessRunRequestFieldJobID                = big.NewInt(1 << 8)
-	startHarnessRunRequestFieldModel                = big.NewInt(1 << 9)
-	startHarnessRunRequestFieldPolicy               = big.NewInt(1 << 10)
-	startHarnessRunRequestFieldProductContext       = big.NewInt(1 << 11)
-	startHarnessRunRequestFieldRunMode              = big.NewInt(1 << 12)
-	startHarnessRunRequestFieldTenantID             = big.NewInt(1 << 13)
-	startHarnessRunRequestFieldToolProviderRefs     = big.NewInt(1 << 14)
-	startHarnessRunRequestFieldTraceID              = big.NewInt(1 << 15)
-	startHarnessRunRequestFieldUserID               = big.NewInt(1 << 16)
+	startHarnessRunRequestFieldAutoImprove                = big.NewInt(1 << 0)
+	startHarnessRunRequestFieldCapabilityGrants           = big.NewInt(1 << 1)
+	startHarnessRunRequestFieldComputeEnvironmentID       = big.NewInt(1 << 2)
+	startHarnessRunRequestFieldComputeWorkspaceProvenance = big.NewInt(1 << 3)
+	startHarnessRunRequestFieldConversationID             = big.NewInt(1 << 4)
+	startHarnessRunRequestFieldCorrelationID              = big.NewInt(1 << 5)
+	startHarnessRunRequestFieldEventDelivery              = big.NewInt(1 << 6)
+	startHarnessRunRequestFieldIdempotencyKey             = big.NewInt(1 << 7)
+	startHarnessRunRequestFieldInput                      = big.NewInt(1 << 8)
+	startHarnessRunRequestFieldJobID                      = big.NewInt(1 << 9)
+	startHarnessRunRequestFieldModel                      = big.NewInt(1 << 10)
+	startHarnessRunRequestFieldPolicy                     = big.NewInt(1 << 11)
+	startHarnessRunRequestFieldProductContext             = big.NewInt(1 << 12)
+	startHarnessRunRequestFieldRunMode                    = big.NewInt(1 << 13)
+	startHarnessRunRequestFieldTenantID                   = big.NewInt(1 << 14)
+	startHarnessRunRequestFieldToolProviderRefs           = big.NewInt(1 << 15)
+	startHarnessRunRequestFieldTraceID                    = big.NewInt(1 << 16)
+	startHarnessRunRequestFieldUserID                     = big.NewInt(1 << 17)
 )
 
 type StartHarnessRunRequest struct {
 	// Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy; active runs keep their pinned release.
-	AutoImprove          *bool                                       `json:"auto_improve,omitempty" url:"-"`
-	CapabilityGrants     []string                                    `json:"capability_grants,omitempty" url:"-"`
-	ComputeProviderID    *string                                     `json:"compute_provider_id,omitempty" url:"-"`
-	ConversationID       *string                                     `json:"conversation_id,omitempty" url:"-"`
-	CorrelationID        *string                                     `json:"correlation_id,omitempty" url:"-"`
-	EventDelivery        *EventDeliveryRequest                       `json:"event_delivery,omitempty" url:"-"`
-	ExecutionEnvironment *StartHarnessRunRequestExecutionEnvironment `json:"execution_environment,omitempty" url:"-"`
-	Input                map[string]any                              `json:"input" url:"-"`
-	JobID                *string                                     `json:"job_id,omitempty" url:"-"`
+	AutoImprove                *bool                 `json:"auto_improve,omitempty" url:"-"`
+	CapabilityGrants           []string              `json:"capability_grants,omitempty" url:"-"`
+	ComputeEnvironmentID       *string               `json:"compute_environment_id,omitempty" url:"-"`
+	ComputeWorkspaceProvenance *WorkspaceProvenance  `json:"compute_workspace_provenance,omitempty" url:"-"`
+	ConversationID             *string               `json:"conversation_id,omitempty" url:"-"`
+	CorrelationID              *string               `json:"correlation_id,omitempty" url:"-"`
+	EventDelivery              *EventDeliveryRequest `json:"event_delivery,omitempty" url:"-"`
+	IdempotencyKey             *string               `json:"idempotency_key,omitempty" url:"-"`
+	Input                      map[string]any        `json:"input" url:"-"`
+	JobID                      *string               `json:"job_id,omitempty" url:"-"`
 	// Catalog model for this run. Omit to use the project default; list choices through model settings.
 	Model            *string                        `json:"model,omitempty" url:"-"`
 	Policy           map[string]any                 `json:"policy" url:"-"`
@@ -173,11 +175,18 @@ func (s *StartHarnessRunRequest) SetCapabilityGrants(capabilityGrants []string) 
 	s.require(startHarnessRunRequestFieldCapabilityGrants)
 }
 
-// SetComputeProviderID sets the ComputeProviderID field and marks it as non-optional;
+// SetComputeEnvironmentID sets the ComputeEnvironmentID field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *StartHarnessRunRequest) SetComputeProviderID(computeProviderID *string) {
-	s.ComputeProviderID = computeProviderID
-	s.require(startHarnessRunRequestFieldComputeProviderID)
+func (s *StartHarnessRunRequest) SetComputeEnvironmentID(computeEnvironmentID *string) {
+	s.ComputeEnvironmentID = computeEnvironmentID
+	s.require(startHarnessRunRequestFieldComputeEnvironmentID)
+}
+
+// SetComputeWorkspaceProvenance sets the ComputeWorkspaceProvenance field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *StartHarnessRunRequest) SetComputeWorkspaceProvenance(computeWorkspaceProvenance *WorkspaceProvenance) {
+	s.ComputeWorkspaceProvenance = computeWorkspaceProvenance
+	s.require(startHarnessRunRequestFieldComputeWorkspaceProvenance)
 }
 
 // SetConversationID sets the ConversationID field and marks it as non-optional;
@@ -201,11 +210,11 @@ func (s *StartHarnessRunRequest) SetEventDelivery(eventDelivery *EventDeliveryRe
 	s.require(startHarnessRunRequestFieldEventDelivery)
 }
 
-// SetExecutionEnvironment sets the ExecutionEnvironment field and marks it as non-optional;
+// SetIdempotencyKey sets the IdempotencyKey field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (s *StartHarnessRunRequest) SetExecutionEnvironment(executionEnvironment *StartHarnessRunRequestExecutionEnvironment) {
-	s.ExecutionEnvironment = executionEnvironment
-	s.require(startHarnessRunRequestFieldExecutionEnvironment)
+func (s *StartHarnessRunRequest) SetIdempotencyKey(idempotencyKey *string) {
+	s.IdempotencyKey = idempotencyKey
+	s.require(startHarnessRunRequestFieldIdempotencyKey)
 }
 
 // SetInput sets the Input field and marks it as non-optional;
@@ -1136,28 +1145,6 @@ func NewApprovalInputDecisionFromString(s string) (ApprovalInputDecision, error)
 
 func (a ApprovalInputDecision) Ptr() *ApprovalInputDecision {
 	return &a
-}
-
-type StartHarnessRunRequestExecutionEnvironment string
-
-const (
-	StartHarnessRunRequestExecutionEnvironmentManaged StartHarnessRunRequestExecutionEnvironment = "managed"
-	StartHarnessRunRequestExecutionEnvironmentLocal   StartHarnessRunRequestExecutionEnvironment = "local"
-)
-
-func NewStartHarnessRunRequestExecutionEnvironmentFromString(s string) (StartHarnessRunRequestExecutionEnvironment, error) {
-	switch s {
-	case "managed":
-		return StartHarnessRunRequestExecutionEnvironmentManaged, nil
-	case "local":
-		return StartHarnessRunRequestExecutionEnvironmentLocal, nil
-	}
-	var t StartHarnessRunRequestExecutionEnvironment
-	return "", fmt.Errorf("%s is not a valid %T", s, t)
-}
-
-func (s StartHarnessRunRequestExecutionEnvironment) Ptr() *StartHarnessRunRequestExecutionEnvironment {
-	return &s
 }
 
 type StartHarnessRunRequestRunMode string

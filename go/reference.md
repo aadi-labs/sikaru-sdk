@@ -919,6 +919,1704 @@ client.Changesets.StageChangeset(
 </dl>
 </details>
 
+## ComputeAttachments
+<details><summary><code>client.ComputeAttachments.Get(ProjectID, AttachmentID) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeAttachments.Get(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Abandon(ProjectID, AttachmentID, request) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Irreversibly abandon execution authority, preserving unknown effects. Cleanup is still required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.AbandonInput{
+    Evidence: "evidence",
+}
+client.ComputeAttachments.Abandon(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Cancel(ProjectID, AttachmentID) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently request stopping. This never asserts child cleanup.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeAttachments.Cancel(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Claim(ProjectID, AttachmentID, request) -> *_go.ClaimView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same attachment/key/worker returns the same launch identity, never another launch.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ClaimInput{
+    IdempotencyKey: "idempotency_key",
+}
+client.ComputeAttachments.Claim(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Cleanup(ProjectID, AttachmentID, request) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.CleanupInput{
+    ChildrenTerminated: true,
+    Evidence: "evidence",
+}
+client.ComputeAttachments.Cleanup(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**childrenTerminated:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Connect(ProjectID, AttachmentID, request) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Attest original workspace/journal. Reconnection never replays uncertain effects.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ReadyInput{
+    Capabilities: []_go.ReadyInputCapabilitiesItem{
+        _go.ReadyInputCapabilitiesItemComputeExecute,
+    },
+    ExecutorInstanceID: "executor_instance_id",
+    JournalID: "journal_id",
+    ProtocolVersion: _go.ReadyInputProtocolVersionSikaruComputeV1,
+    WorkspaceProvenance: &_go.WorkspaceProvenance{
+        Identity: "identity",
+        Kind: _go.WorkspaceProvenanceKindExistingDirectory,
+    },
+}
+client.ComputeAttachments.Connect(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `*_go.ReadyInput` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.IssueCredential(ProjectID, AttachmentID, request) -> *_go.CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ExecutorCredentialInput{
+    OwnerEpoch: 1,
+    OwnerID: "owner_id",
+}
+client.ComputeAttachments.IssueCredential(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownerEpoch:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownerID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Heartbeat(ProjectID, AttachmentID) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeAttachments.Heartbeat(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Ready(ProjectID, AttachmentID, request) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ReadyInput{
+    Capabilities: []_go.ReadyInputCapabilitiesItem{
+        _go.ReadyInputCapabilitiesItemComputeExecute,
+    },
+    ExecutorInstanceID: "executor_instance_id",
+    JournalID: "journal_id",
+    ProtocolVersion: _go.ReadyInputProtocolVersionSikaruComputeV1,
+    WorkspaceProvenance: &_go.WorkspaceProvenance{
+        Identity: "identity",
+        Kind: _go.WorkspaceProvenanceKindExistingDirectory,
+    },
+}
+client.ComputeAttachments.Ready(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `*_go.ReadyInput` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Reconcile(ProjectID, AttachmentID, request) -> *_go.ReconcileView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ReconcileInput{
+    ExecutorInstanceID: "executor_instance_id",
+    JournalID: "journal_id",
+    WorkspaceProvenance: &_go.WorkspaceProvenance{
+        Identity: "identity",
+        Kind: _go.WorkspaceProvenanceKindExistingDirectory,
+    },
+}
+client.ComputeAttachments.Reconcile(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**executorInstanceID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**journalID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**processes:** `[]*_go.ProcessObservation` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipts:** `[]*_go.ReceiptInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**uncertainOperationIDs:** `[]string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspaceProvenance:** `*_go.WorkspaceProvenance` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Status(ProjectID, AttachmentID) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeAttachments.Status(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Stop(ProjectID, AttachmentID) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Executor can stop its own attachment and cancel its runs; cleanup is separately reported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeAttachments.Stop(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Teardown(ProjectID, AttachmentID, request) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.TeardownInput{
+    ChildrenTerminated: true,
+    Evidence: "evidence",
+    OwnerEpoch: 1,
+    OwnerID: "owner_id",
+    WorkspaceGeneration: "workspace_generation",
+}
+client.ComputeAttachments.Teardown(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**childrenTerminated:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**evidence:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownerEpoch:** `int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**ownerID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspaceGeneration:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeAttachments.Create(ProjectID, SessionID, request) -> *_go.AttachmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same session/key/workspace returns the original binding; changed workspace conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.AttachmentInput{
+    EnvironmentID: "environment_id",
+    IdempotencyKey: "idempotency_key",
+    WorkspaceProvenance: &_go.WorkspaceProvenance{
+        Identity: "identity",
+        Kind: _go.WorkspaceProvenanceKindExistingDirectory,
+    },
+}
+client.ComputeAttachments.Create(
+    context.TODO(),
+    "project_id",
+    "session_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**replaceExisting:** `*bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**workspaceProvenance:** `*_go.WorkspaceProvenance` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeOperations
+<details><summary><code>client.ComputeOperations.SubmitReceipt(ProjectID, AttachmentID, request) -> *_go.ReceiptView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Only exact immutable receipt retries are idempotent; changed content conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.ReceiptInput{
+    IdempotencyKey: "idempotency_key",
+    Payload: map[string]any{
+        "key": "value",
+    },
+    RequestDigest: "request_digest",
+    RunID: "run_id",
+    Status: _go.ReceiptInputStatusCompleted,
+    ToolCallID: "tool_call_id",
+    ToolProviderID: "tool_provider_id",
+}
+client.ComputeOperations.SubmitReceipt(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `*_go.ReceiptInput` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeOperations.Poll(ProjectID, AttachmentID) -> *_go.WorkPage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.PollComputeOperationsRequest{}
+client.ComputeOperations.Poll(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**waitSeconds:** `*int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `*int` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeCredentials
+<details><summary><code>client.ComputeCredentials.Renew(ProjectID) -> *_go.CredentialRenewed</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeCredentials.Renew(
+    context.TODO(),
+    "project_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeCredentials.Revoke(ProjectID, CredentialID) -> *_go.CredentialRevoked</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeCredentials.Revoke(
+    context.TODO(),
+    "project_id",
+    "credential_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credentialID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeEnvironments
+<details><summary><code>client.ComputeEnvironments.Create(ProjectID, request) -> *_go.EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key + same configuration returns the same environment; changed input conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.EnvironmentInput{
+    EnvironmentSlug: "environment_slug",
+    IdempotencyKey: "idempotency_key",
+}
+client.ComputeEnvironments.Create(
+    context.TODO(),
+    "project_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentSlug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**productID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**sessionID:** `*string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeEnvironments.Get(ProjectID, EnvironmentID) -> *_go.EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeEnvironments.Get(
+    context.TODO(),
+    "project_id",
+    "environment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeEnvironments.Disable(ProjectID, EnvironmentID) -> *_go.EnvironmentView</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Idempotently disable future claims and credentials; existing cleanup remains required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeEnvironments.Disable(
+    context.TODO(),
+    "project_id",
+    "environment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkers
+<details><summary><code>client.ComputeWorkers.IssueCredential(ProjectID, EnvironmentID) -> *_go.CredentialIssued</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Issue a new secret once; retries issue independent revocable credentials.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeWorkers.IssueCredential(
+    context.TODO(),
+    "project_id",
+    "environment_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeWorkers.Poll(ProjectID, EnvironmentID) -> *_go.QueuePage</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Bounded queue snapshot. wait_seconds is a maximum; server may return immediately.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.PollComputeWorkersRequest{}
+client.ComputeWorkers.Poll(
+    context.TODO(),
+    "project_id",
+    "environment_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**waitSeconds:** `*int` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `*int` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Connections
 <details><summary><code>client.Connections.ListConnections(ProjectID) -> []*_go.Connection</code></summary>
 <dl>
@@ -4245,7 +5943,7 @@ client.ExecutionSessions.AppendTurn(
 <dl>
 <dd>
 
-**computeProviderID:** `*string` 
+**computeAttachmentID:** `*string` 
     
 </dd>
 </dl>
@@ -4254,14 +5952,6 @@ client.ExecutionSessions.AppendTurn(
 <dd>
 
 **deliveryMode:** `*_go.TurnInputDeliveryMode` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**executionEnvironment:** `*_go.TurnInputExecutionEnvironment` 
     
 </dd>
 </dl>
@@ -4399,6 +6089,14 @@ client.ExecutionSessions.Create(
 <dd>
 
 **finalOutputSchema:** `map[string]any` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `*string` 
     
 </dd>
 </dl>
@@ -5289,6 +6987,244 @@ client.AgentBudgets.SetupPaymentMethod(
 </details>
 
 ## Harnesses
+<details><summary><code>client.Harnesses.GetInvoiceBudget(ProjectID, HarnessID) -> *_go.InvoiceBudget</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Harnesses.GetInvoiceBudget(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Harnesses.GetSubscription(ProjectID, HarnessID) -> *_go.SubscriptionStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Harnesses.GetSubscription(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Harnesses.Subscribe(ProjectID, HarnessID, request) -> *_go.SubscriptionSetup</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.SubscriptionInput{
+    AcceptedRecurringTerms: true,
+    IdempotencyKey: "idempotency_key",
+    Plan: _go.SubscriptionInputPlanBuild,
+}
+client.Harnesses.Subscribe(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**acceptedRecurringTerms:** `bool` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotencyKey:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**plan:** `*_go.SubscriptionInputPlan` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Harnesses.CancelSubscription(ProjectID, HarnessID) -> *_go.SubscriptionCancellation</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.Harnesses.CancelSubscription(
+    context.TODO(),
+    "project_id",
+    "harness_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harnessID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.Harnesses.ImprovementOptions(ProjectID, HarnessID) -> map[string]any</code></summary>
 <dl>
 <dd>
@@ -5760,7 +7696,15 @@ client.Runs.Start(
 <dl>
 <dd>
 
-**computeProviderID:** `*string` 
+**computeEnvironmentID:** `*string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**computeWorkspaceProvenance:** `*_go.WorkspaceProvenance` 
     
 </dd>
 </dl>
@@ -5792,7 +7736,7 @@ client.Runs.Start(
 <dl>
 <dd>
 
-**executionEnvironment:** `*_go.StartHarnessRunRequestExecutionEnvironment` 
+**idempotencyKey:** `*string` 
     
 </dd>
 </dl>

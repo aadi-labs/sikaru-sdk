@@ -8,7 +8,9 @@ pub struct StartHarnessRunRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub capability_grants: Option<Vec<String>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub compute_provider_id: Option<String>,
+    pub compute_environment_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub compute_workspace_provenance: Option<WorkspaceProvenance>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub conversation_id: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -16,7 +18,7 @@ pub struct StartHarnessRunRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub event_delivery: Option<EventDeliveryRequest>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub execution_environment: Option<StartHarnessRunRequestExecutionEnvironment>,
+    pub idempotency_key: Option<String>,
     #[serde(default)]
     pub input: HashMap<String, serde_json::Value>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -51,11 +53,12 @@ impl StartHarnessRunRequest {
 pub struct StartHarnessRunRequestBuilder {
     auto_improve: Option<bool>,
     capability_grants: Option<Vec<String>>,
-    compute_provider_id: Option<String>,
+    compute_environment_id: Option<String>,
+    compute_workspace_provenance: Option<WorkspaceProvenance>,
     conversation_id: Option<String>,
     correlation_id: Option<String>,
     event_delivery: Option<EventDeliveryRequest>,
-    execution_environment: Option<StartHarnessRunRequestExecutionEnvironment>,
+    idempotency_key: Option<String>,
     input: Option<HashMap<String, serde_json::Value>>,
     job_id: Option<String>,
     model: Option<String>,
@@ -79,8 +82,13 @@ impl StartHarnessRunRequestBuilder {
         self
     }
 
-    pub fn compute_provider_id(mut self, value: impl Into<String>) -> Self {
-        self.compute_provider_id = Some(value.into());
+    pub fn compute_environment_id(mut self, value: impl Into<String>) -> Self {
+        self.compute_environment_id = Some(value.into());
+        self
+    }
+
+    pub fn compute_workspace_provenance(mut self, value: WorkspaceProvenance) -> Self {
+        self.compute_workspace_provenance = Some(value);
         self
     }
 
@@ -99,11 +107,8 @@ impl StartHarnessRunRequestBuilder {
         self
     }
 
-    pub fn execution_environment(
-        mut self,
-        value: StartHarnessRunRequestExecutionEnvironment,
-    ) -> Self {
-        self.execution_environment = Some(value);
+    pub fn idempotency_key(mut self, value: impl Into<String>) -> Self {
+        self.idempotency_key = Some(value.into());
         self
     }
 
@@ -168,11 +173,12 @@ impl StartHarnessRunRequestBuilder {
         Ok(StartHarnessRunRequest {
             auto_improve: self.auto_improve,
             capability_grants: self.capability_grants,
-            compute_provider_id: self.compute_provider_id,
+            compute_environment_id: self.compute_environment_id,
+            compute_workspace_provenance: self.compute_workspace_provenance,
             conversation_id: self.conversation_id,
             correlation_id: self.correlation_id,
             event_delivery: self.event_delivery,
-            execution_environment: self.execution_environment,
+            idempotency_key: self.idempotency_key,
             input: self
                 .input
                 .ok_or_else(|| BuildError::missing_field("input"))?,

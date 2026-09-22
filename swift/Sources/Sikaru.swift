@@ -6,6 +6,11 @@ public final class Sikaru: Sendable {
     public let agentImports: AgentImportsClient
     public let agents: AgentsClient
     public let changesets: ChangesetsClient
+    public let computeAttachments: ComputeAttachmentsClient
+    public let computeOperations: ComputeOperationsClient
+    public let computeCredentials: ComputeCredentialsClient
+    public let computeEnvironments: ComputeEnvironmentsClient
+    public let computeWorkers: ComputeWorkersClient
     public let connections: ConnectionsClient
     public let contextRegistry: ContextRegistryClient
     public let conversations: ConversationsClient
@@ -129,6 +134,11 @@ public final class Sikaru: Sendable {
         self.agentImports = AgentImportsClient(config: config)
         self.agents = AgentsClient(config: config)
         self.changesets = ChangesetsClient(config: config)
+        self.computeAttachments = ComputeAttachmentsClient(config: config)
+        self.computeOperations = ComputeOperationsClient(config: config)
+        self.computeCredentials = ComputeCredentialsClient(config: config)
+        self.computeEnvironments = ComputeEnvironmentsClient(config: config)
+        self.computeWorkers = ComputeWorkersClient(config: config)
         self.connections = ConnectionsClient(config: config)
         self.contextRegistry = ContextRegistryClient(config: config)
         self.conversations = ConversationsClient(config: config)

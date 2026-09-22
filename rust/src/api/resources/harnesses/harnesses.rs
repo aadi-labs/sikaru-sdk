@@ -28,6 +28,178 @@ impl HarnessesClient {
     ///     let client = Sikaru::new(config).expect("Failed to build client");
     ///     client
     ///         .harnesses
+    ///         .get_invoice_budget(&"project_id".to_string(), &"harness_id".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn get_invoice_budget(
+        &self,
+        project_id: &str,
+        harness_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<InvoiceBudget, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!(
+                    "v1/projects/{}/harnesses/{}/budget/invoice",
+                    project_id, harness_id
+                ),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use sikaru::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         token: Some("<token>".to_string()),
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Sikaru::new(config).expect("Failed to build client");
+    ///     client
+    ///         .harnesses
+    ///         .get_subscription(&"project_id".to_string(), &"harness_id".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn get_subscription(
+        &self,
+        project_id: &str,
+        harness_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<SubscriptionStatus, ApiError> {
+        self.http_client
+            .execute_request(
+                Method::GET,
+                &format!(
+                    "v1/projects/{}/harnesses/{}/budget/subscription",
+                    project_id, harness_id
+                ),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use sikaru::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         token: Some("<token>".to_string()),
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Sikaru::new(config).expect("Failed to build client");
+    ///     client
+    ///         .harnesses
+    ///         .subscribe(
+    ///             &"project_id".to_string(),
+    ///             &"harness_id".to_string(),
+    ///             &SubscriptionInput {
+    ///                 accepted_recurring_terms: true,
+    ///                 idempotency_key: "idempotency_key".to_string(),
+    ///                 plan: SubscriptionInputPlan::Build,
+    ///             },
+    ///             None,
+    ///         )
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn subscribe(
+        &self,
+        project_id: &str,
+        harness_id: &str,
+        request: &SubscriptionInput,
+        options: Option<RequestOptions>,
+    ) -> Result<SubscriptionSetup, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!(
+                    "v1/projects/{}/harnesses/{}/budget/subscription",
+                    project_id, harness_id
+                ),
+                Some(serde_json::to_value(request).map_err(ApiError::Serialization)?),
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use sikaru::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         token: Some("<token>".to_string()),
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Sikaru::new(config).expect("Failed to build client");
+    ///     client
+    ///         .harnesses
+    ///         .cancel_subscription(&"project_id".to_string(), &"harness_id".to_string(), None)
+    ///         .await;
+    /// }
+    /// ```
+    pub async fn cancel_subscription(
+        &self,
+        project_id: &str,
+        harness_id: &str,
+        options: Option<RequestOptions>,
+    ) -> Result<SubscriptionCancellation, ApiError> {
+        let options = {
+            let mut o = options.unwrap_or_default();
+            o.max_retries = Some(0);
+            Some(o)
+        };
+        self.http_client
+            .execute_request(
+                Method::POST,
+                &format!(
+                    "v1/projects/{}/harnesses/{}/budget/subscription/cancel",
+                    project_id, harness_id
+                ),
+                None,
+                None,
+                options,
+            )
+            .await
+    }
+
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use sikaru::prelude::*;
+    ///
+    /// #[tokio::main]
+    /// async fn main() {
+    ///     let config = ClientConfig {
+    ///         token: Some("<token>".to_string()),
+    ///         ..Default::default()
+    ///     };
+    ///     let client = Sikaru::new(config).expect("Failed to build client");
+    ///     client
+    ///         .harnesses
     ///         .improvement_options(&"project_id".to_string(), &"harness_id".to_string(), None)
     ///         .await;
     /// }

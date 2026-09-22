@@ -12,7 +12,9 @@ module Sikaru
 
         field :capability_grants, -> { Internal::Types::Array[String] }, optional: true, nullable: false
 
-        field :compute_provider_id, -> { String }, optional: true, nullable: false
+        field :compute_environment_id, -> { String }, optional: true, nullable: false
+
+        field :compute_workspace_provenance, -> { Sikaru::Types::WorkspaceProvenance }, optional: true, nullable: false
 
         field :conversation_id, -> { String }, optional: true, nullable: false
 
@@ -20,7 +22,7 @@ module Sikaru
 
         field :event_delivery, -> { Sikaru::Types::EventDeliveryRequest }, optional: true, nullable: false
 
-        field :execution_environment, -> { Sikaru::Runs::Types::StartHarnessRunRequestExecutionEnvironment }, optional: true, nullable: false
+        field :idempotency_key, -> { String }, optional: true, nullable: false
 
         field :input, -> { Internal::Types::Hash[String, Object] }, optional: false, nullable: false
 

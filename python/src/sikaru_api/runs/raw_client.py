@@ -21,8 +21,8 @@ from ..types.managed_run import ManagedRun
 from ..types.run_event import RunEvent
 from ..types.run_events import RunEvents
 from ..types.tool_provider_ref_request import ToolProviderRefRequest
+from ..types.workspace_provenance import WorkspaceProvenance
 from .types.approval_input_decision import ApprovalInputDecision
-from .types.start_harness_run_request_execution_environment import StartHarnessRunRequestExecutionEnvironment
 from .types.start_harness_run_request_run_mode import StartHarnessRunRequestRunMode
 from .types.submit_tool_result_request_status import SubmitToolResultRequestStatus
 from pydantic import ValidationError
@@ -47,11 +47,12 @@ class RawRunsClient:
         user_id: str,
         auto_improve: typing.Optional[bool] = OMIT,
         capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
-        compute_provider_id: typing.Optional[str] = OMIT,
+        compute_environment_id: typing.Optional[str] = OMIT,
+        compute_workspace_provenance: typing.Optional[WorkspaceProvenance] = OMIT,
         conversation_id: typing.Optional[str] = OMIT,
         correlation_id: typing.Optional[str] = OMIT,
         event_delivery: typing.Optional[EventDeliveryRequest] = OMIT,
-        execution_environment: typing.Optional[StartHarnessRunRequestExecutionEnvironment] = OMIT,
+        idempotency_key: typing.Optional[str] = OMIT,
         job_id: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
         run_mode: typing.Optional[StartHarnessRunRequestRunMode] = OMIT,
@@ -81,7 +82,9 @@ class RawRunsClient:
 
         capability_grants : typing.Optional[typing.Sequence[str]]
 
-        compute_provider_id : typing.Optional[str]
+        compute_environment_id : typing.Optional[str]
+
+        compute_workspace_provenance : typing.Optional[WorkspaceProvenance]
 
         conversation_id : typing.Optional[str]
 
@@ -89,7 +92,7 @@ class RawRunsClient:
 
         event_delivery : typing.Optional[EventDeliveryRequest]
 
-        execution_environment : typing.Optional[StartHarnessRunRequestExecutionEnvironment]
+        idempotency_key : typing.Optional[str]
 
         job_id : typing.Optional[str]
 
@@ -119,13 +122,18 @@ class RawRunsClient:
             json={
                 "auto_improve": auto_improve,
                 "capability_grants": capability_grants,
-                "compute_provider_id": compute_provider_id,
+                "compute_environment_id": compute_environment_id,
+                "compute_workspace_provenance": convert_and_respect_annotation_metadata(
+                    object_=compute_workspace_provenance,
+                    annotation=typing.Optional[WorkspaceProvenance],
+                    direction="write",
+                ),
                 "conversation_id": conversation_id,
                 "correlation_id": correlation_id,
                 "event_delivery": convert_and_respect_annotation_metadata(
                     object_=event_delivery, annotation=EventDeliveryRequest, direction="write"
                 ),
-                "execution_environment": execution_environment,
+                "idempotency_key": idempotency_key,
                 "input": input,
                 "job_id": job_id,
                 "model": model,
@@ -829,11 +837,12 @@ class AsyncRawRunsClient:
         user_id: str,
         auto_improve: typing.Optional[bool] = OMIT,
         capability_grants: typing.Optional[typing.Sequence[str]] = OMIT,
-        compute_provider_id: typing.Optional[str] = OMIT,
+        compute_environment_id: typing.Optional[str] = OMIT,
+        compute_workspace_provenance: typing.Optional[WorkspaceProvenance] = OMIT,
         conversation_id: typing.Optional[str] = OMIT,
         correlation_id: typing.Optional[str] = OMIT,
         event_delivery: typing.Optional[EventDeliveryRequest] = OMIT,
-        execution_environment: typing.Optional[StartHarnessRunRequestExecutionEnvironment] = OMIT,
+        idempotency_key: typing.Optional[str] = OMIT,
         job_id: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
         run_mode: typing.Optional[StartHarnessRunRequestRunMode] = OMIT,
@@ -863,7 +872,9 @@ class AsyncRawRunsClient:
 
         capability_grants : typing.Optional[typing.Sequence[str]]
 
-        compute_provider_id : typing.Optional[str]
+        compute_environment_id : typing.Optional[str]
+
+        compute_workspace_provenance : typing.Optional[WorkspaceProvenance]
 
         conversation_id : typing.Optional[str]
 
@@ -871,7 +882,7 @@ class AsyncRawRunsClient:
 
         event_delivery : typing.Optional[EventDeliveryRequest]
 
-        execution_environment : typing.Optional[StartHarnessRunRequestExecutionEnvironment]
+        idempotency_key : typing.Optional[str]
 
         job_id : typing.Optional[str]
 
@@ -901,13 +912,18 @@ class AsyncRawRunsClient:
             json={
                 "auto_improve": auto_improve,
                 "capability_grants": capability_grants,
-                "compute_provider_id": compute_provider_id,
+                "compute_environment_id": compute_environment_id,
+                "compute_workspace_provenance": convert_and_respect_annotation_metadata(
+                    object_=compute_workspace_provenance,
+                    annotation=typing.Optional[WorkspaceProvenance],
+                    direction="write",
+                ),
                 "conversation_id": conversation_id,
                 "correlation_id": correlation_id,
                 "event_delivery": convert_and_respect_annotation_metadata(
                     object_=event_delivery, annotation=EventDeliveryRequest, direction="write"
                 ),
-                "execution_environment": execution_environment,
+                "idempotency_key": idempotency_key,
                 "input": input,
                 "job_id": job_id,
                 "model": model,

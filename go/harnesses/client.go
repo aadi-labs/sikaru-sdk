@@ -40,6 +40,114 @@ func NewClient(options *core.RequestOptions) *Client {
 
 // Example:
 //
+//	client.Harnesses.GetInvoiceBudget(
+//	    context.TODO(),
+//	    "project_id",
+//	    "harness_id",
+//	)
+func (c *Client) GetInvoiceBudget(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	opts ...option.RequestOption,
+) (*_go.InvoiceBudget, error) {
+	response, err := c.WithRawResponse.GetInvoiceBudget(
+		ctx,
+		projectID,
+		harnessID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Harnesses.GetSubscription(
+//	    context.TODO(),
+//	    "project_id",
+//	    "harness_id",
+//	)
+func (c *Client) GetSubscription(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	opts ...option.RequestOption,
+) (*_go.SubscriptionStatus, error) {
+	response, err := c.WithRawResponse.GetSubscription(
+		ctx,
+		projectID,
+		harnessID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	request := &_go.SubscriptionInput{
+//	    AcceptedRecurringTerms: true,
+//	    IdempotencyKey: "idempotency_key",
+//	    Plan: _go.SubscriptionInputPlanBuild,
+//	}
+//	client.Harnesses.Subscribe(
+//	    context.TODO(),
+//	    "project_id",
+//	    "harness_id",
+//	    request,
+//	)
+func (c *Client) Subscribe(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	request *_go.SubscriptionInput,
+	opts ...option.RequestOption,
+) (*_go.SubscriptionSetup, error) {
+	response, err := c.WithRawResponse.Subscribe(
+		ctx,
+		projectID,
+		harnessID,
+		request,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
+//	client.Harnesses.CancelSubscription(
+//	    context.TODO(),
+//	    "project_id",
+//	    "harness_id",
+//	)
+func (c *Client) CancelSubscription(
+	ctx context.Context,
+	projectID string,
+	harnessID string,
+	opts ...option.RequestOption,
+) (*_go.SubscriptionCancellation, error) {
+	response, err := c.WithRawResponse.CancelSubscription(
+		ctx,
+		projectID,
+		harnessID,
+		opts...,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return response.Body, nil
+}
+
+// Example:
+//
 //	client.Harnesses.ImprovementOptions(
 //	    context.TODO(),
 //	    "project_id",
