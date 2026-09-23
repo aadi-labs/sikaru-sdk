@@ -134,7 +134,7 @@ describe("ChangesetsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
-    test("approve_changeset (1)", async () => {
+    test("approve_changeset", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -153,25 +153,6 @@ describe("ChangesetsClient", () => {
                                 expect(response).toEqual(rawResponseBody);
                               
                     
-    });
-          
-    test("approve_changeset (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = null;
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/changesets/changeset_id/approve").jsonBody(rawRequestBody)
-                .respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.changesets.approveChangeset("project_id", "changeset_id", null)
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
     test("list_changeset_diffs (1)", async () => {
@@ -250,7 +231,7 @@ describe("ChangesetsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
-    test("promote_changeset (1)", async () => {
+    test("promote_changeset", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -271,26 +252,7 @@ describe("ChangesetsClient", () => {
                     
     });
           
-    test("promote_changeset (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = null;
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/changesets/changeset_id/promote").jsonBody(rawRequestBody)
-                .respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.changesets.promoteChangeset("project_id", "changeset_id", null)
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
-    });
-          
-    test("reject_changeset (1)", async () => {
+    test("reject_changeset", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -311,26 +273,7 @@ describe("ChangesetsClient", () => {
                     
     });
           
-    test("reject_changeset (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = null;
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/changesets/changeset_id/reject").jsonBody(rawRequestBody)
-                .respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.changesets.rejectChangeset("project_id", "changeset_id", null)
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
-    });
-          
-    test("rollback_changeset (1)", async () => {
+    test("rollback_changeset", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -351,26 +294,7 @@ describe("ChangesetsClient", () => {
                     
     });
           
-    test("rollback_changeset (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = null;
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/changesets/changeset_id/rollback").jsonBody(rawRequestBody)
-                .respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.changesets.rollbackChangeset("project_id", "changeset_id", null)
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
-    });
-          
-    test("stage_changeset (1)", async () => {
+    test("stage_changeset", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -389,25 +313,6 @@ describe("ChangesetsClient", () => {
                                 expect(response).toEqual(rawResponseBody);
                               
                     
-    });
-          
-    test("stage_changeset (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = null;
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/changesets/changeset_id/stage").jsonBody(rawRequestBody)
-                .respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.changesets.stageChangeset("project_id", "changeset_id", null)
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
 });

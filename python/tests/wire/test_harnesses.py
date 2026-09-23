@@ -14,44 +14,6 @@ def test_harnesses_get_invoice_budget() -> None:
     verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/budget/invoice", None, 1)
 
 
-def test_harnesses_get_subscription() -> None:
-    """Test get_subscription endpoint with WireMock"""
-    test_id = "harnesses.get_subscription.0"
-    client = get_client(test_id)
-    client.harnesses.get_subscription(
-        project_id="project_id",
-        harness_id="harness_id",
-    )
-    verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/budget/subscription", None, 1)
-
-
-def test_harnesses_subscribe() -> None:
-    """Test subscribe endpoint with WireMock"""
-    test_id = "harnesses.subscribe.0"
-    client = get_client(test_id)
-    client.harnesses.subscribe(
-        project_id="project_id",
-        harness_id="harness_id",
-        accepted_recurring_terms=True,
-        idempotency_key="idempotency_key",
-        plan="build",
-    )
-    verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/budget/subscription", None, 1)
-
-
-def test_harnesses_cancel_subscription() -> None:
-    """Test cancel_subscription endpoint with WireMock"""
-    test_id = "harnesses.cancel_subscription.0"
-    client = get_client(test_id)
-    client.harnesses.cancel_subscription(
-        project_id="project_id",
-        harness_id="harness_id",
-    )
-    verify_request_count(
-        test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/budget/subscription/cancel", None, 1
-    )
-
-
 def test_harnesses_improvement_options() -> None:
     """Test improvement_options endpoint with WireMock"""
     test_id = "harnesses.improvement_options.0"

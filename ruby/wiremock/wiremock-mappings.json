@@ -3736,123 +3736,6 @@
       }
     },
     {
-      "id": "7385e6ec-33a4-4ac8-98fd-fa8650160548",
-      "name": "Get Subscription - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription",
-        "method": "GET",
-        "headers": {
-          "Authorization": {
-            "matches": "Bearer .+"
-          }
-        },
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"cancel_at\": 1,\n  \"configured\": true,\n  \"mode\": \"prepaid\",\n  \"plan\": \"build\",\n  \"state\": \"state\",\n  \"trial\": {\n    \"ends_at\": 1,\n    \"remaining_usd\": \"remaining_usd\",\n    \"state\": \"available\"\n  }\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "7385e6ec-33a4-4ac8-98fd-fa8650160548",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "0c05f216-ab44-43d1-ad52-64f4621f6456",
-      "name": "Subscribe - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription",
-        "method": "POST",
-        "headers": {
-          "Authorization": {
-            "matches": "Bearer .+"
-          }
-        },
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"cancel_at\": 1,\n  \"configured\": true,\n  \"mode\": \"prepaid\",\n  \"plan\": \"build\",\n  \"state\": \"state\",\n  \"trial\": {\n    \"ends_at\": 1,\n    \"remaining_usd\": \"remaining_usd\",\n    \"state\": \"available\"\n  },\n  \"url\": \"url\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "0c05f216-ab44-43d1-ad52-64f4621f6456",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "05efb3fd-704f-4d4e-8530-041989eaf1b4",
-      "name": "Cancel Subscription - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/subscription/cancel",
-        "method": "POST",
-        "headers": {
-          "Authorization": {
-            "matches": "Bearer .+"
-          }
-        },
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"cancel_at\": 1,\n  \"state\": \"cancellation_pending\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "05efb3fd-704f-4d4e-8530-041989eaf1b4",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
       "id": "ef20e64d-d8de-4339-a8d6-e939363d1e0a",
       "name": "Improvement Options - default",
       "request": {
@@ -6902,6 +6785,6 @@
     }
   ],
   "meta": {
-    "total": 180
+    "total": 177
   }
 }

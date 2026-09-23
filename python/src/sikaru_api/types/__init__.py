@@ -80,14 +80,6 @@ if typing.TYPE_CHECKING:
     from .specialist_receipt import SpecialistReceipt
     from .specialist_thread import SpecialistThread
     from .specialist_threads import SpecialistThreads
-    from .subscription_cancellation import SubscriptionCancellation
-    from .subscription_cancellation_state import SubscriptionCancellationState
-    from .subscription_setup import SubscriptionSetup
-    from .subscription_setup_mode import SubscriptionSetupMode
-    from .subscription_setup_plan import SubscriptionSetupPlan
-    from .subscription_status import SubscriptionStatus
-    from .subscription_status_mode import SubscriptionStatusMode
-    from .subscription_status_plan import SubscriptionStatusPlan
     from .target_input import TargetInput
     from .tool_provider_ref_request import ToolProviderRefRequest
     from .tool_skill_source_request import ToolSkillSourceRequest
@@ -95,8 +87,6 @@ if typing.TYPE_CHECKING:
     from .trace_import_options_request import TraceImportOptionsRequest
     from .trace_import_scope_request import TraceImportScopeRequest
     from .trace_metadata import TraceMetadata
-    from .trial_status import TrialStatus
-    from .trial_status_state import TrialStatusState
     from .uncertain_operation import UncertainOperation
     from .validation_error import ValidationError
     from .validation_error_loc_item import ValidationErrorLocItem
@@ -180,14 +170,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SpecialistReceipt": ".specialist_receipt",
     "SpecialistThread": ".specialist_thread",
     "SpecialistThreads": ".specialist_threads",
-    "SubscriptionCancellation": ".subscription_cancellation",
-    "SubscriptionCancellationState": ".subscription_cancellation_state",
-    "SubscriptionSetup": ".subscription_setup",
-    "SubscriptionSetupMode": ".subscription_setup_mode",
-    "SubscriptionSetupPlan": ".subscription_setup_plan",
-    "SubscriptionStatus": ".subscription_status",
-    "SubscriptionStatusMode": ".subscription_status_mode",
-    "SubscriptionStatusPlan": ".subscription_status_plan",
     "TargetInput": ".target_input",
     "ToolProviderRefRequest": ".tool_provider_ref_request",
     "ToolSkillSourceRequest": ".tool_skill_source_request",
@@ -195,8 +177,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TraceImportOptionsRequest": ".trace_import_options_request",
     "TraceImportScopeRequest": ".trace_import_scope_request",
     "TraceMetadata": ".trace_metadata",
-    "TrialStatus": ".trial_status",
-    "TrialStatusState": ".trial_status_state",
     "UncertainOperation": ".uncertain_operation",
     "ValidationError": ".validation_error",
     "ValidationErrorLocItem": ".validation_error_loc_item",
@@ -304,14 +284,6 @@ __all__ = [
     "SpecialistReceipt",
     "SpecialistThread",
     "SpecialistThreads",
-    "SubscriptionCancellation",
-    "SubscriptionCancellationState",
-    "SubscriptionSetup",
-    "SubscriptionSetupMode",
-    "SubscriptionSetupPlan",
-    "SubscriptionStatus",
-    "SubscriptionStatusMode",
-    "SubscriptionStatusPlan",
     "TargetInput",
     "ToolProviderRefRequest",
     "ToolSkillSourceRequest",
@@ -319,8 +291,6 @@ __all__ = [
     "TraceImportOptionsRequest",
     "TraceImportScopeRequest",
     "TraceMetadata",
-    "TrialStatus",
-    "TrialStatusState",
     "UncertainOperation",
     "ValidationError",
     "ValidationErrorLocItem",

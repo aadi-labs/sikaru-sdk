@@ -210,7 +210,7 @@ describe("ExecutionObjectivesClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
-    test("resume (1)", async () => {
+    test("resume", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -229,25 +229,6 @@ describe("ExecutionObjectivesClient", () => {
                                 expect(response).toEqual(rawResponseBody);
                               
                     
-    });
-          
-    test("resume (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = null;
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/execution-objectives/objective_id/resume").jsonBody(rawRequestBody)
-                .respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.executionObjectives.resume("project_id", "objective_id", null)
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
 });
