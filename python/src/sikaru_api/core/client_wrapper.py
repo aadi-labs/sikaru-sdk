@@ -33,12 +33,12 @@ class BaseClientWrapper:
         import platform
 
         headers: typing.Dict[str, str] = {
-            "User-Agent": "sikaru_api/0.1.0",
+            "User-Agent": "sikaru_api/0.2.3",
             "X-Fern-Language": "Python",
             "X-Fern-Runtime": f"python/{platform.python_version()}",
             "X-Fern-Platform": f"{platform.system().lower()}/{platform.release()}",
             "X-Fern-SDK-Name": "sikaru_api",
-            "X-Fern-SDK-Version": "0.1.0",
+            "X-Fern-SDK-Version": "0.2.3",
             **(self.get_custom_headers() or {}),
         }
         headers["Authorization"] = f"Bearer {self._get_api_key()}"
