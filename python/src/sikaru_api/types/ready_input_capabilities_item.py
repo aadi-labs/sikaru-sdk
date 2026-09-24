@@ -2,4 +2,4 @@
 
 import typing
 
-ReadyInputCapabilitiesItem = typing.Union[typing.Literal["compute.execute"], typing.Any]
+ReadyInputCapabilitiesItem = typing.Union[typing.Literal["compute.execute", "bash.run"], typing.Any]

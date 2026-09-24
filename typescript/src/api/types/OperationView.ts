@@ -18,6 +18,7 @@ export namespace OperationView {
         } as const;
     export type CapabilityName = typeof CapabilityName[keyof typeof CapabilityName];
     export const Method = {
+            BashRun: "bash.run",
             BashStart: "bash.start",
             BashRead: "bash.read",
             BashWait: "bash.wait",

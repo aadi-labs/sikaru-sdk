@@ -15,7 +15,8 @@ export namespace ReadyInput {
 
     export namespace Capabilities {
         export const Item = {
-                ComputeExecute: "compute.execute"
+                ComputeExecute: "compute.execute",
+                BashRun: "bash.run"
             } as const;
         export type Item = typeof Item[keyof typeof Item];
     }
