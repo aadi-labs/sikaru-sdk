@@ -15,6 +15,8 @@ export interface SessionInput {
     environment?: SessionInput.Environment;
     final_output_schema?: Record<string, unknown> | null;
     idempotency_key?: string | null;
+    /** Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default. */
+    model?: string | null;
     reasoning_effort?: SessionInput.ReasoningEffort | null;
     tenant_id: string;
     user_id: string;

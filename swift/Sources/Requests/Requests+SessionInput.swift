@@ -9,6 +9,8 @@ extension Requests {
         public let environment: SessionInputEnvironment?
         public let finalOutputSchema: Nullable<[String: JSONValue]>?
         public let idempotencyKey: Nullable<String>?
+        /// Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+        public let model: Nullable<String>?
         public let reasoningEffort: Nullable<SessionInputReasoningEffort>?
         public let tenantId: String
         public let userId: String
@@ -21,6 +23,7 @@ extension Requests {
             environment: SessionInputEnvironment? = nil,
             finalOutputSchema: Nullable<[String: JSONValue]>? = nil,
             idempotencyKey: Nullable<String>? = nil,
+            model: Nullable<String>? = nil,
             reasoningEffort: Nullable<SessionInputReasoningEffort>? = nil,
             tenantId: String,
             userId: String,
@@ -31,6 +34,7 @@ extension Requests {
             self.environment = environment
             self.finalOutputSchema = finalOutputSchema
             self.idempotencyKey = idempotencyKey
+            self.model = model
             self.reasoningEffort = reasoningEffort
             self.tenantId = tenantId
             self.userId = userId
@@ -44,6 +48,7 @@ extension Requests {
             self.environment = try container.decodeIfPresent(SessionInputEnvironment.self, forKey: .environment)
             self.finalOutputSchema = try container.decodeNullableIfPresent([String: JSONValue].self, forKey: .finalOutputSchema)
             self.idempotencyKey = try container.decodeNullableIfPresent(String.self, forKey: .idempotencyKey)
+            self.model = try container.decodeNullableIfPresent(String.self, forKey: .model)
             self.reasoningEffort = try container.decodeNullableIfPresent(SessionInputReasoningEffort.self, forKey: .reasoningEffort)
             self.tenantId = try container.decode(String.self, forKey: .tenantId)
             self.userId = try container.decode(String.self, forKey: .userId)
@@ -58,6 +63,7 @@ extension Requests {
             try container.encodeIfPresent(self.environment, forKey: .environment)
             try container.encodeNullableIfPresent(self.finalOutputSchema, forKey: .finalOutputSchema)
             try container.encodeNullableIfPresent(self.idempotencyKey, forKey: .idempotencyKey)
+            try container.encodeNullableIfPresent(self.model, forKey: .model)
             try container.encodeNullableIfPresent(self.reasoningEffort, forKey: .reasoningEffort)
             try container.encode(self.tenantId, forKey: .tenantId)
             try container.encode(self.userId, forKey: .userId)
@@ -70,6 +76,7 @@ extension Requests {
             case environment
             case finalOutputSchema = "final_output_schema"
             case idempotencyKey = "idempotency_key"
+            case model
             case reasoningEffort = "reasoning_effort"
             case tenantId = "tenant_id"
             case userId = "user_id"

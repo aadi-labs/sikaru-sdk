@@ -519,7 +519,7 @@ func TestSettersMarkExplicitInvoiceBudget(t *testing.T) {
 func TestSettersResourceBudget(t *testing.T) {
 	t.Run("SetLimitUsd", func(t *testing.T) {
 		obj := &ResourceBudget{}
-		var fernTestValueLimitUsd string
+		var fernTestValueLimitUsd *string
 		obj.SetLimitUsd(fernTestValueLimitUsd)
 		assert.Equal(t, fernTestValueLimitUsd, obj.LimitUsd)
 		assert.NotNil(t, obj.explicitFields)
@@ -548,11 +548,21 @@ func TestGettersResourceBudget(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &ResourceBudget{}
-		var expected string
+		var expected *string
 		obj.LimitUsd = expected
 
 		// Act & Assert
 		assert.Equal(t, expected, obj.GetLimitUsd(), "getter should return the property value")
+	})
+
+	t.Run("GetLimitUsd_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &ResourceBudget{}
+		obj.LimitUsd = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetLimitUsd(), "getter should return nil when property is nil")
 	})
 
 	t.Run("GetLimitUsd_NilReceiver", func(t *testing.T) {
@@ -620,7 +630,7 @@ func TestSettersMarkExplicitResourceBudget(t *testing.T) {
 		t.Parallel()
 		// Arrange
 		obj := &ResourceBudget{}
-		var fernTestValueLimitUsd string
+		var fernTestValueLimitUsd *string
 
 		// Act
 		obj.SetLimitUsd(fernTestValueLimitUsd)

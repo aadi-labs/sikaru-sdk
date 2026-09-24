@@ -7,7 +7,11 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
 class ResourceBudget(UniversalBaseModel):
-    limit_usd: str
+    limit_usd: typing.Optional[str] = pydantic.Field(default=None)
+    """
+    Spending cap in USD; null means uncapped complimentary usage
+    """
+
     reserved_usd: str
     used_usd: str
 

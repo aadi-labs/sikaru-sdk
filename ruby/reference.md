@@ -6532,6 +6532,14 @@ client.execution_sessions.create(
 <dl>
 <dd>
 
+**model:** `String` — Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **reasoning_effort:** `Sikaru::ExecutionSessions::Types::SessionInputReasoningEffort` 
     
 </dd>

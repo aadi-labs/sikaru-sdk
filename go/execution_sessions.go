@@ -188,9 +188,10 @@ var (
 	sessionInputFieldEnvironment       = big.NewInt(1 << 2)
 	sessionInputFieldFinalOutputSchema = big.NewInt(1 << 3)
 	sessionInputFieldIdempotencyKey    = big.NewInt(1 << 4)
-	sessionInputFieldReasoningEffort   = big.NewInt(1 << 5)
-	sessionInputFieldTenantID          = big.NewInt(1 << 6)
-	sessionInputFieldUserID            = big.NewInt(1 << 7)
+	sessionInputFieldModel             = big.NewInt(1 << 5)
+	sessionInputFieldReasoningEffort   = big.NewInt(1 << 6)
+	sessionInputFieldTenantID          = big.NewInt(1 << 7)
+	sessionInputFieldUserID            = big.NewInt(1 << 8)
 )
 
 type SessionInput struct {
@@ -198,12 +199,14 @@ type SessionInput struct {
 	AutoImprove    *bool   `json:"auto_improve,omitempty" url:"-"`
 	ConversationID *string `json:"conversation_id,omitempty" url:"-"`
 	// Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
-	Environment       *SessionInputEnvironment     `json:"environment,omitempty" url:"-"`
-	FinalOutputSchema map[string]any               `json:"final_output_schema,omitempty" url:"-"`
-	IdempotencyKey    *string                      `json:"idempotency_key,omitempty" url:"-"`
-	ReasoningEffort   *SessionInputReasoningEffort `json:"reasoning_effort,omitempty" url:"-"`
-	TenantID          string                       `json:"tenant_id" url:"-"`
-	UserID            string                       `json:"user_id" url:"-"`
+	Environment       *SessionInputEnvironment `json:"environment,omitempty" url:"-"`
+	FinalOutputSchema map[string]any           `json:"final_output_schema,omitempty" url:"-"`
+	IdempotencyKey    *string                  `json:"idempotency_key,omitempty" url:"-"`
+	// Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+	Model           *string                      `json:"model,omitempty" url:"-"`
+	ReasoningEffort *SessionInputReasoningEffort `json:"reasoning_effort,omitempty" url:"-"`
+	TenantID        string                       `json:"tenant_id" url:"-"`
+	UserID          string                       `json:"user_id" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -249,6 +252,13 @@ func (s *SessionInput) SetFinalOutputSchema(finalOutputSchema map[string]any) {
 func (s *SessionInput) SetIdempotencyKey(idempotencyKey *string) {
 	s.IdempotencyKey = idempotencyKey
 	s.require(sessionInputFieldIdempotencyKey)
+}
+
+// SetModel sets the Model field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (s *SessionInput) SetModel(model *string) {
+	s.Model = model
+	s.require(sessionInputFieldModel)
 }
 
 // SetReasoningEffort sets the ReasoningEffort field and marks it as non-optional;

@@ -7043,6 +7043,7 @@ async fn main() {
                 environment: None,
                 final_output_schema: None,
                 idempotency_key: None,
+                model: None,
                 reasoning_effort: None,
             },
             None,
@@ -7112,6 +7113,14 @@ async fn main() {
 <dd>
 
 **idempotency_key:** `Option<Option<String>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**model:** `Option<Option<String>>` — Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
     
 </dd>
 </dl>

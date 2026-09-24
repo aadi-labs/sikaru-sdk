@@ -6104,6 +6104,14 @@ client.ExecutionSessions.Create(
 <dl>
 <dd>
 
+**model:** `*string` — Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **reasoningEffort:** `*_go.SessionInputReasoningEffort` 
     
 </dd>

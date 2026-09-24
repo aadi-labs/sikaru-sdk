@@ -33,14 +33,14 @@ import Sikaru
         )
         let expectedResponse = InvoiceBudget(
             learning: ResourceBudget(
-                limitUsd: "limit_usd",
+                limitUsd: Nullable<String>.value("limit_usd"),
                 reservedUsd: "reserved_usd",
                 usedUsd: "used_usd"
             ),
             periodEnd: 1,
             periodStart: 1,
             production: ResourceBudget(
-                limitUsd: "limit_usd",
+                limitUsd: Nullable<String>.value("limit_usd"),
                 reservedUsd: "reserved_usd",
                 usedUsd: "used_usd"
             ),
@@ -84,14 +84,14 @@ import Sikaru
         )
         let expectedResponse = InvoiceBudget(
             learning: ResourceBudget(
-                limitUsd: "limit_usd",
+                limitUsd: Nullable<String>.value("limit_usd"),
                 reservedUsd: "reserved_usd",
                 usedUsd: "used_usd"
             ),
             periodEnd: 1,
             periodStart: 1,
             production: ResourceBudget(
-                limitUsd: "limit_usd",
+                limitUsd: Nullable<String>.value("limit_usd"),
                 reservedUsd: "reserved_usd",
                 usedUsd: "used_usd"
             ),

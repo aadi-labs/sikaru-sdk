@@ -18,6 +18,8 @@ module Sikaru
 
         field :idempotency_key, -> { String }, optional: true, nullable: false
 
+        field :model, -> { String }, optional: true, nullable: false
+
         field :reasoning_effort, -> { Sikaru::ExecutionSessions::Types::SessionInputReasoningEffort }, optional: true, nullable: false
 
         field :tenant_id, -> { String }, optional: false, nullable: false

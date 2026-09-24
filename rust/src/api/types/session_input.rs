@@ -14,6 +14,9 @@ pub struct SessionInput {
     pub final_output_schema: Option<HashMap<String, serde_json::Value>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
+    /// Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub model: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reasoning_effort: Option<SessionInputReasoningEffort>,
     #[serde(default)]
@@ -36,6 +39,7 @@ pub struct SessionInputBuilder {
     environment: Option<SessionInputEnvironment>,
     final_output_schema: Option<HashMap<String, serde_json::Value>>,
     idempotency_key: Option<String>,
+    model: Option<String>,
     reasoning_effort: Option<SessionInputReasoningEffort>,
     tenant_id: Option<String>,
     user_id: Option<String>,
@@ -67,6 +71,11 @@ impl SessionInputBuilder {
         self
     }
 
+    pub fn model(mut self, value: impl Into<String>) -> Self {
+        self.model = Some(value.into());
+        self
+    }
+
     pub fn reasoning_effort(mut self, value: SessionInputReasoningEffort) -> Self {
         self.reasoning_effort = Some(value);
         self
@@ -93,6 +102,7 @@ impl SessionInputBuilder {
             environment: self.environment,
             final_output_schema: self.final_output_schema,
             idempotency_key: self.idempotency_key,
+            model: self.model,
             reasoning_effort: self.reasoning_effort,
             tenant_id: self
                 .tenant_id

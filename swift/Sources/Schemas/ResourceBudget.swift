@@ -1,14 +1,15 @@
 import Foundation
 
 public struct ResourceBudget: Codable, Hashable, Sendable {
-    public let limitUsd: String
+    /// Spending cap in USD; null means uncapped complimentary usage
+    public let limitUsd: Nullable<String>
     public let reservedUsd: String
     public let usedUsd: String
     /// Additional properties that are not explicitly defined in the schema
     public let additionalProperties: [String: JSONValue]
 
     public init(
-        limitUsd: String,
+        limitUsd: Nullable<String>,
         reservedUsd: String,
         usedUsd: String,
         additionalProperties: [String: JSONValue] = .init()
@@ -21,7 +22,7 @@ public struct ResourceBudget: Codable, Hashable, Sendable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.limitUsd = try container.decode(String.self, forKey: .limitUsd)
+        self.limitUsd = try container.decode(Nullable<String>.self, forKey: .limitUsd)
         self.reservedUsd = try container.decode(String.self, forKey: .reservedUsd)
         self.usedUsd = try container.decode(String.self, forKey: .usedUsd)
         self.additionalProperties = try decoder.decodeAdditionalProperties(using: CodingKeys.self)

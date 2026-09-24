@@ -253,9 +253,10 @@ var (
 )
 
 type ResourceBudget struct {
-	LimitUsd    string `json:"limit_usd" url:"limit_usd"`
-	ReservedUsd string `json:"reserved_usd" url:"reserved_usd"`
-	UsedUsd     string `json:"used_usd" url:"used_usd"`
+	// Spending cap in USD; null means uncapped complimentary usage
+	LimitUsd    *string `json:"limit_usd,omitempty" url:"limit_usd,omitempty"`
+	ReservedUsd string  `json:"reserved_usd" url:"reserved_usd"`
+	UsedUsd     string  `json:"used_usd" url:"used_usd"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -264,9 +265,9 @@ type ResourceBudget struct {
 	rawJSON         json.RawMessage
 }
 
-func (r *ResourceBudget) GetLimitUsd() string {
+func (r *ResourceBudget) GetLimitUsd() *string {
 	if r == nil {
-		return ""
+		return nil
 	}
 	return r.LimitUsd
 }
@@ -301,7 +302,7 @@ func (r *ResourceBudget) require(field *big.Int) {
 
 // SetLimitUsd sets the LimitUsd field and marks it as non-optional;
 // this prevents an empty or null value for this field from being omitted during serialization.
-func (r *ResourceBudget) SetLimitUsd(limitUsd string) {
+func (r *ResourceBudget) SetLimitUsd(limitUsd *string) {
 	r.LimitUsd = limitUsd
 	r.require(resourceBudgetFieldLimitUsd)
 }

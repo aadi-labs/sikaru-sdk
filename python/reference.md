@@ -7426,6 +7426,14 @@ client.execution_sessions.create(
 <dl>
 <dd>
 
+**model:** `typing.Optional[str]` — Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **reasoning_effort:** `typing.Optional[SessionInputReasoningEffort]` 
     
 </dd>

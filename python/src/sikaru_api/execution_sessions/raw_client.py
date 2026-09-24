@@ -694,6 +694,7 @@ class RawExecutionSessionsClient:
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
+        model: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Dict[str, typing.Any]]:
@@ -720,6 +721,9 @@ class RawExecutionSessionsClient:
 
         idempotency_key : typing.Optional[str]
 
+        model : typing.Optional[str]
+            Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
         request_options : typing.Optional[RequestOptions]
@@ -742,6 +746,7 @@ class RawExecutionSessionsClient:
                 "environment": environment,
                 "final_output_schema": final_output_schema,
                 "idempotency_key": idempotency_key,
+                "model": model,
                 "reasoning_effort": reasoning_effort,
                 "tenant_id": tenant_id,
                 "user_id": user_id,
@@ -1454,6 +1459,7 @@ class AsyncRawExecutionSessionsClient:
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
+        model: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
@@ -1480,6 +1486,9 @@ class AsyncRawExecutionSessionsClient:
 
         idempotency_key : typing.Optional[str]
 
+        model : typing.Optional[str]
+            Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
         request_options : typing.Optional[RequestOptions]
@@ -1502,6 +1511,7 @@ class AsyncRawExecutionSessionsClient:
                 "environment": environment,
                 "final_output_schema": final_output_schema,
                 "idempotency_key": idempotency_key,
+                "model": model,
                 "reasoning_effort": reasoning_effort,
                 "tenant_id": tenant_id,
                 "user_id": user_id,
