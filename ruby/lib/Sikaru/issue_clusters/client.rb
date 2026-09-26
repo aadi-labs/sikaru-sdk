@@ -20,6 +20,7 @@ module Sikaru
       # @option params [String] :project_id
       # @option params [String, nil] :status
       # @option params [String, nil] :severity
+      # @option params [String, nil] :agent_id
       #
       # @example
       #   client.issue_clusters.list_issue_clusters(project_id: "project_id")
@@ -30,6 +31,7 @@ module Sikaru
         query_params = {}
         query_params["status"] = params[:status] if params.key?(:status)
         query_params["severity"] = params[:severity] if params.key?(:severity)
+        query_params["agent_id"] = params[:agent_id] if params.key?(:agent_id)
 
         request = Sikaru::Internal::JSON::Request.new(
           base_url: request_options[:base_url],

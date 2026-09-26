@@ -16,6 +16,8 @@ module Sikaru
       field :operations, -> { Internal::Types::Array[Sikaru::Types::OperationView] }, optional: false, nullable: false
 
       field :poll_after_seconds, -> { Integer }, optional: true, nullable: false
+
+      field :workspace_checkpoint, -> { Sikaru::Types::WorkspaceCheckpointView }, optional: true, nullable: false
     end
   end
 end

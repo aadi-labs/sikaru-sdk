@@ -29,6 +29,7 @@ class RawEvalSeedsClient:
         issue_id: str,
         issue_title: str,
         trace_ids: typing.Sequence[str],
+        agent_id: typing.Optional[str] = OMIT,
         dataset_name: typing.Optional[str] = OMIT,
         evaluator_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -43,6 +44,8 @@ class RawEvalSeedsClient:
         issue_title : str
 
         trace_ids : typing.Sequence[str]
+
+        agent_id : typing.Optional[str]
 
         dataset_name : typing.Optional[str]
 
@@ -63,6 +66,7 @@ class RawEvalSeedsClient:
             f"v1/projects/{encode_path_param(project_id)}/eval-seeds",
             method="POST",
             json={
+                "agentId": agent_id,
                 "datasetName": dataset_name,
                 "evaluatorName": evaluator_name,
                 "issueId": issue_id,
@@ -117,6 +121,7 @@ class AsyncRawEvalSeedsClient:
         issue_id: str,
         issue_title: str,
         trace_ids: typing.Sequence[str],
+        agent_id: typing.Optional[str] = OMIT,
         dataset_name: typing.Optional[str] = OMIT,
         evaluator_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -131,6 +136,8 @@ class AsyncRawEvalSeedsClient:
         issue_title : str
 
         trace_ids : typing.Sequence[str]
+
+        agent_id : typing.Optional[str]
 
         dataset_name : typing.Optional[str]
 
@@ -151,6 +158,7 @@ class AsyncRawEvalSeedsClient:
             f"v1/projects/{encode_path_param(project_id)}/eval-seeds",
             method="POST",
             json={
+                "agentId": agent_id,
                 "datasetName": dataset_name,
                 "evaluatorName": evaluator_name,
                 "issueId": issue_id,

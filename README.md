@@ -30,12 +30,17 @@ install with `pip install ./client-extensions/authoring`, then import
 `compile_directory` from `sikaru_authoring` and pass its definition to the generated API.
 
 Self-hosted compute uses generated `compute_environments`, `compute_workers`,
-`compute_attachments`, `compute_credentials`, and `compute_operations` clients.
+`compute_attachments`, `compute_credentials`, `compute_operations`, and
+`compute_workspaces` clients.
 Create an execution session and bind an attachment before appending admitted
 turns with `compute.execute`. Controllers issue restricted worker/executor
 credentials; neither receives project-wide controller authority. The native CLI
 also provides `sikaru exec` and `sikaru compute serve/worker`. Managed orchestration
-remains hosted, and task files remain on customer compute unless exported.
+remains hosted. Executors supporting `filesystem-checkpoint-v1` upload a retained
+checkpoint of the selected task workspace before completion is acknowledged.
+This includes hidden regular files; keep credentials and executor state outside
+that workspace. Checkpoint publication retries retain the same capture and do not
+rerun task commands. Symlinks and unsupported filesystem entries are rejected.
 See [polling lifecycle examples](client-extensions/compute-contracts/README.md).
 
 Please report API issues and proposed changes through this repository. 

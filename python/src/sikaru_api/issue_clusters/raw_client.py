@@ -28,6 +28,7 @@ class RawIssueClustersClient:
         *,
         status: typing.Optional[str] = None,
         severity: typing.Optional[str] = None,
+        agent_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Dict[str, typing.Any]]:
         """
@@ -38,6 +39,8 @@ class RawIssueClustersClient:
         status : typing.Optional[str]
 
         severity : typing.Optional[str]
+
+        agent_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -53,6 +56,7 @@ class RawIssueClustersClient:
             params={
                 "status": status,
                 "severity": severity,
+                "agent_id": agent_id,
             },
             request_options=request_options,
         )
@@ -305,7 +309,13 @@ class RawIssueClustersClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def update_issue_cluster_status(
-        self, project_id: str, cluster_id: str, *, status: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        project_id: str,
+        cluster_id: str,
+        *,
+        status: str,
+        reason: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Dict[str, typing.Any]]:
         """
         Parameters
@@ -315,6 +325,8 @@ class RawIssueClustersClient:
         cluster_id : str
 
         status : str
+
+        reason : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -331,6 +343,7 @@ class RawIssueClustersClient:
             f"v1/projects/{encode_path_param(project_id)}/issue-clusters/{encode_path_param(cluster_id)}",
             method="PATCH",
             json={
+                "reason": reason,
                 "status": status,
             },
             headers={
@@ -436,6 +449,7 @@ class AsyncRawIssueClustersClient:
         *,
         status: typing.Optional[str] = None,
         severity: typing.Optional[str] = None,
+        agent_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
         """
@@ -446,6 +460,8 @@ class AsyncRawIssueClustersClient:
         status : typing.Optional[str]
 
         severity : typing.Optional[str]
+
+        agent_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -461,6 +477,7 @@ class AsyncRawIssueClustersClient:
             params={
                 "status": status,
                 "severity": severity,
+                "agent_id": agent_id,
             },
             request_options=request_options,
         )
@@ -713,7 +730,13 @@ class AsyncRawIssueClustersClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def update_issue_cluster_status(
-        self, project_id: str, cluster_id: str, *, status: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        project_id: str,
+        cluster_id: str,
+        *,
+        status: str,
+        reason: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
         """
         Parameters
@@ -723,6 +746,8 @@ class AsyncRawIssueClustersClient:
         cluster_id : str
 
         status : str
+
+        reason : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -739,6 +764,7 @@ class AsyncRawIssueClustersClient:
             f"v1/projects/{encode_path_param(project_id)}/issue-clusters/{encode_path_param(cluster_id)}",
             method="PATCH",
             json={
+                "reason": reason,
                 "status": status,
             },
             headers={

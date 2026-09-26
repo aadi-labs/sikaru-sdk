@@ -42,9 +42,10 @@ export class ChangesetsClient {
     }
 
     private async __listChangesets(project_id: string, request: Sikaru.ListChangesetsChangesetsRequest = {}, requestOptions?: ChangesetsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const { status } = request;
+        const { status, improvement } = request;
         const _queryParams: Record<string, unknown> = {
-            status: status !== undefined ? status : undefined
+            status: status !== undefined ? status : undefined,
+            improvement
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);

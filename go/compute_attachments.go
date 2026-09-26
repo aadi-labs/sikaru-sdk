@@ -789,13 +789,19 @@ func (r *ReadyInput) String() string {
 type ReadyInputCapabilitiesItem string
 
 const (
-	ReadyInputCapabilitiesItemComputeExecute ReadyInputCapabilitiesItem = "compute.execute"
+	ReadyInputCapabilitiesItemComputeExecute         ReadyInputCapabilitiesItem = "compute.execute"
+	ReadyInputCapabilitiesItemBashRun                ReadyInputCapabilitiesItem = "bash.run"
+	ReadyInputCapabilitiesItemFilesystemCheckpointV1 ReadyInputCapabilitiesItem = "filesystem-checkpoint-v1"
 )
 
 func NewReadyInputCapabilitiesItemFromString(s string) (ReadyInputCapabilitiesItem, error) {
 	switch s {
 	case "compute.execute":
 		return ReadyInputCapabilitiesItemComputeExecute, nil
+	case "bash.run":
+		return ReadyInputCapabilitiesItemBashRun, nil
+	case "filesystem-checkpoint-v1":
+		return ReadyInputCapabilitiesItemFilesystemCheckpointV1, nil
 	}
 	var t ReadyInputCapabilitiesItem
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

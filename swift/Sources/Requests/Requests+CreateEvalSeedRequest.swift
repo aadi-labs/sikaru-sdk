@@ -2,6 +2,7 @@ import Foundation
 
 extension Requests {
     public struct CreateEvalSeedRequest: Codable, Hashable, Sendable {
+        public let agentId: Nullable<String>?
         public let datasetName: Nullable<String>?
         public let evaluatorName: Nullable<String>?
         public let issueId: String
@@ -11,6 +12,7 @@ extension Requests {
         public let additionalProperties: [String: JSONValue]
 
         public init(
+            agentId: Nullable<String>? = nil,
             datasetName: Nullable<String>? = nil,
             evaluatorName: Nullable<String>? = nil,
             issueId: String,
@@ -18,6 +20,7 @@ extension Requests {
             traceIds: [String],
             additionalProperties: [String: JSONValue] = .init()
         ) {
+            self.agentId = agentId
             self.datasetName = datasetName
             self.evaluatorName = evaluatorName
             self.issueId = issueId
@@ -28,6 +31,7 @@ extension Requests {
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.agentId = try container.decodeNullableIfPresent(String.self, forKey: .agentId)
             self.datasetName = try container.decodeNullableIfPresent(String.self, forKey: .datasetName)
             self.evaluatorName = try container.decodeNullableIfPresent(String.self, forKey: .evaluatorName)
             self.issueId = try container.decode(String.self, forKey: .issueId)
@@ -39,6 +43,7 @@ extension Requests {
         public func encode(to encoder: Encoder) throws -> Void {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try encoder.encodeAdditionalProperties(self.additionalProperties)
+            try container.encodeNullableIfPresent(self.agentId, forKey: .agentId)
             try container.encodeNullableIfPresent(self.datasetName, forKey: .datasetName)
             try container.encodeNullableIfPresent(self.evaluatorName, forKey: .evaluatorName)
             try container.encode(self.issueId, forKey: .issueId)
@@ -48,6 +53,7 @@ extension Requests {
 
         /// Keys for encoding/decoding struct properties.
         enum CodingKeys: String, CodingKey, CaseIterable {
+            case agentId
             case datasetName
             case evaluatorName
             case issueId

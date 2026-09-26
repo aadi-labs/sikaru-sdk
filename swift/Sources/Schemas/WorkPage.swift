@@ -8,6 +8,7 @@ public struct WorkPage: Codable, Hashable, Sendable {
     public let liveHandles: [LiveHandle]
     public let operations: [OperationView]
     public let pollAfterSeconds: Int?
+    public let workspaceCheckpoint: Nullable<WorkspaceCheckpointView>?
     /// Additional properties that are not explicitly defined in the schema
     public let additionalProperties: [String: JSONValue]
 
@@ -19,6 +20,7 @@ public struct WorkPage: Codable, Hashable, Sendable {
         liveHandles: [LiveHandle],
         operations: [OperationView],
         pollAfterSeconds: Int? = nil,
+        workspaceCheckpoint: Nullable<WorkspaceCheckpointView>? = nil,
         additionalProperties: [String: JSONValue] = .init()
     ) {
         self.attachment = attachment
@@ -28,6 +30,7 @@ public struct WorkPage: Codable, Hashable, Sendable {
         self.liveHandles = liveHandles
         self.operations = operations
         self.pollAfterSeconds = pollAfterSeconds
+        self.workspaceCheckpoint = workspaceCheckpoint
         self.additionalProperties = additionalProperties
     }
 
@@ -40,6 +43,7 @@ public struct WorkPage: Codable, Hashable, Sendable {
         self.liveHandles = try container.decode([LiveHandle].self, forKey: .liveHandles)
         self.operations = try container.decode([OperationView].self, forKey: .operations)
         self.pollAfterSeconds = try container.decodeIfPresent(Int.self, forKey: .pollAfterSeconds)
+        self.workspaceCheckpoint = try container.decodeNullableIfPresent(WorkspaceCheckpointView.self, forKey: .workspaceCheckpoint)
         self.additionalProperties = try decoder.decodeAdditionalProperties(using: CodingKeys.self)
     }
 
@@ -53,6 +57,7 @@ public struct WorkPage: Codable, Hashable, Sendable {
         try container.encode(self.liveHandles, forKey: .liveHandles)
         try container.encode(self.operations, forKey: .operations)
         try container.encodeIfPresent(self.pollAfterSeconds, forKey: .pollAfterSeconds)
+        try container.encodeNullableIfPresent(self.workspaceCheckpoint, forKey: .workspaceCheckpoint)
     }
 
     /// Keys for encoding/decoding struct properties.
@@ -64,5 +69,6 @@ public struct WorkPage: Codable, Hashable, Sendable {
         case liveHandles = "live_handles"
         case operations
         case pollAfterSeconds = "poll_after_seconds"
+        case workspaceCheckpoint = "workspace_checkpoint"
     }
 }

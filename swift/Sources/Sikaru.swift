@@ -8,6 +8,7 @@ public final class Sikaru: Sendable {
     public let changesets: ChangesetsClient
     public let computeAttachments: ComputeAttachmentsClient
     public let computeOperations: ComputeOperationsClient
+    public let computeWorkspaces: ComputeWorkspacesClient
     public let computeCredentials: ComputeCredentialsClient
     public let computeEnvironments: ComputeEnvironmentsClient
     public let computeWorkers: ComputeWorkersClient
@@ -136,6 +137,7 @@ public final class Sikaru: Sendable {
         self.changesets = ChangesetsClient(config: config)
         self.computeAttachments = ComputeAttachmentsClient(config: config)
         self.computeOperations = ComputeOperationsClient(config: config)
+        self.computeWorkspaces = ComputeWorkspacesClient(config: config)
         self.computeCredentials = ComputeCredentialsClient(config: config)
         self.computeEnvironments = ComputeEnvironmentsClient(config: config)
         self.computeWorkers = ComputeWorkersClient(config: config)

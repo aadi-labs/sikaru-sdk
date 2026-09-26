@@ -10,6 +10,7 @@ export interface WorkPage {
     live_handles: Sikaru.LiveHandle[];
     operations: Sikaru.OperationView[];
     poll_after_seconds?: number | undefined;
+    workspace_checkpoint?: (Sikaru.WorkspaceCheckpointView | null) | undefined;
 }
 
 export namespace WorkPage {
@@ -17,6 +18,7 @@ export namespace WorkPage {
             Idle: "idle",
             Running: "running",
             WaitingApproval: "waiting_approval",
+            Checkpointing: "checkpointing",
             Terminal: "terminal"
         } as const;
     export type ExecutionPhase = typeof ExecutionPhase[keyof typeof ExecutionPhase];

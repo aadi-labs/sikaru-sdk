@@ -1890,6 +1890,198 @@ func (v *ValidationErrorLocItem) Accept(visitor ValidationErrorLocItemVisitor) e
 }
 
 var (
+	workspaceCheckpointViewFieldCheckpointID        = big.NewInt(1 << 0)
+	workspaceCheckpointViewFieldOwnerEpoch          = big.NewInt(1 << 1)
+	workspaceCheckpointViewFieldRunID               = big.NewInt(1 << 2)
+	workspaceCheckpointViewFieldStatus              = big.NewInt(1 << 3)
+	workspaceCheckpointViewFieldTreeID              = big.NewInt(1 << 4)
+	workspaceCheckpointViewFieldWorkspaceGeneration = big.NewInt(1 << 5)
+)
+
+type WorkspaceCheckpointView struct {
+	CheckpointID        string                        `json:"checkpoint_id" url:"checkpoint_id"`
+	OwnerEpoch          int                           `json:"owner_epoch" url:"owner_epoch"`
+	RunID               string                        `json:"run_id" url:"run_id"`
+	Status              WorkspaceCheckpointViewStatus `json:"status" url:"status"`
+	TreeID              *string                       `json:"tree_id,omitempty" url:"tree_id,omitempty"`
+	WorkspaceGeneration string                        `json:"workspace_generation" url:"workspace_generation"`
+
+	// Private bitmask of fields set to an explicit value and therefore not to be omitted
+	explicitFields *big.Int `json:"-" url:"-"`
+
+	extraProperties map[string]interface{}
+	rawJSON         json.RawMessage
+}
+
+func (w *WorkspaceCheckpointView) GetCheckpointID() string {
+	if w == nil {
+		return ""
+	}
+	return w.CheckpointID
+}
+
+func (w *WorkspaceCheckpointView) GetOwnerEpoch() int {
+	if w == nil {
+		return 0
+	}
+	return w.OwnerEpoch
+}
+
+func (w *WorkspaceCheckpointView) GetRunID() string {
+	if w == nil {
+		return ""
+	}
+	return w.RunID
+}
+
+func (w *WorkspaceCheckpointView) GetStatus() WorkspaceCheckpointViewStatus {
+	if w == nil {
+		return ""
+	}
+	return w.Status
+}
+
+func (w *WorkspaceCheckpointView) GetTreeID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.TreeID
+}
+
+func (w *WorkspaceCheckpointView) GetWorkspaceGeneration() string {
+	if w == nil {
+		return ""
+	}
+	return w.WorkspaceGeneration
+}
+
+func (w *WorkspaceCheckpointView) GetExtraProperties() map[string]interface{} {
+	if w == nil {
+		return nil
+	}
+	return w.extraProperties
+}
+
+func (w *WorkspaceCheckpointView) require(field *big.Int) {
+	if w.explicitFields == nil {
+		w.explicitFields = big.NewInt(0)
+	}
+	w.explicitFields.Or(w.explicitFields, field)
+}
+
+// SetCheckpointID sets the CheckpointID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceCheckpointView) SetCheckpointID(checkpointID string) {
+	w.CheckpointID = checkpointID
+	w.require(workspaceCheckpointViewFieldCheckpointID)
+}
+
+// SetOwnerEpoch sets the OwnerEpoch field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceCheckpointView) SetOwnerEpoch(ownerEpoch int) {
+	w.OwnerEpoch = ownerEpoch
+	w.require(workspaceCheckpointViewFieldOwnerEpoch)
+}
+
+// SetRunID sets the RunID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceCheckpointView) SetRunID(runID string) {
+	w.RunID = runID
+	w.require(workspaceCheckpointViewFieldRunID)
+}
+
+// SetStatus sets the Status field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceCheckpointView) SetStatus(status WorkspaceCheckpointViewStatus) {
+	w.Status = status
+	w.require(workspaceCheckpointViewFieldStatus)
+}
+
+// SetTreeID sets the TreeID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceCheckpointView) SetTreeID(treeID *string) {
+	w.TreeID = treeID
+	w.require(workspaceCheckpointViewFieldTreeID)
+}
+
+// SetWorkspaceGeneration sets the WorkspaceGeneration field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkspaceCheckpointView) SetWorkspaceGeneration(workspaceGeneration string) {
+	w.WorkspaceGeneration = workspaceGeneration
+	w.require(workspaceCheckpointViewFieldWorkspaceGeneration)
+}
+
+func (w *WorkspaceCheckpointView) UnmarshalJSON(data []byte) error {
+	type unmarshaler WorkspaceCheckpointView
+	var value unmarshaler
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+	*w = WorkspaceCheckpointView(value)
+	extraProperties, err := internal.ExtractExtraProperties(data, *w)
+	if err != nil {
+		return err
+	}
+	w.extraProperties = extraProperties
+	w.rawJSON = json.RawMessage(data)
+	return nil
+}
+
+func (w *WorkspaceCheckpointView) MarshalJSON() ([]byte, error) {
+	type embed WorkspaceCheckpointView
+	var marshaler = struct {
+		embed
+	}{
+		embed: embed(*w),
+	}
+	explicitMarshaler := internal.HandleExplicitFields(marshaler, w.explicitFields)
+	return json.Marshal(explicitMarshaler)
+}
+
+func (w *WorkspaceCheckpointView) String() string {
+	if w == nil {
+		return "<nil>"
+	}
+	if len(w.rawJSON) > 0 {
+		if value, err := internal.StringifyJSON(w.rawJSON); err == nil {
+			return value
+		}
+	}
+	if value, err := internal.StringifyJSON(w); err == nil {
+		return value
+	}
+	return fmt.Sprintf("%#v", w)
+}
+
+type WorkspaceCheckpointViewStatus string
+
+const (
+	WorkspaceCheckpointViewStatusRequested   WorkspaceCheckpointViewStatus = "requested"
+	WorkspaceCheckpointViewStatusUnsupported WorkspaceCheckpointViewStatus = "unsupported"
+	WorkspaceCheckpointViewStatusPublishing  WorkspaceCheckpointViewStatus = "publishing"
+	WorkspaceCheckpointViewStatusPublished   WorkspaceCheckpointViewStatus = "published"
+)
+
+func NewWorkspaceCheckpointViewStatusFromString(s string) (WorkspaceCheckpointViewStatus, error) {
+	switch s {
+	case "requested":
+		return WorkspaceCheckpointViewStatusRequested, nil
+	case "unsupported":
+		return WorkspaceCheckpointViewStatusUnsupported, nil
+	case "publishing":
+		return WorkspaceCheckpointViewStatusPublishing, nil
+	case "published":
+		return WorkspaceCheckpointViewStatusPublished, nil
+	}
+	var t WorkspaceCheckpointViewStatus
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WorkspaceCheckpointViewStatus) Ptr() *WorkspaceCheckpointViewStatus {
+	return &w
+}
+
+var (
 	workspaceProvenanceFieldIdentity = big.NewInt(1 << 0)
 	workspaceProvenanceFieldKind     = big.NewInt(1 << 1)
 )

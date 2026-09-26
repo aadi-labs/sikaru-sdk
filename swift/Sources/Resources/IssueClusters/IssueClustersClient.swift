@@ -21,13 +21,14 @@ public final class IssueClustersClient: Sendable {
     /// ```
     ///
     /// - Parameter requestOptions: Additional options for configuring the request, such as custom headers or timeout settings.
-    public func listIssueClusters(projectId: String, status: Nullable<String>? = nil, severity: Nullable<String>? = nil, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
+    public func listIssueClusters(projectId: String, status: Nullable<String>? = nil, severity: Nullable<String>? = nil, agentId: Nullable<String>? = nil, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
         return try await httpClient.performRequest(
             method: .get,
             path: "/v1/projects/\(projectId)/issue-clusters",
             queryParams: [
                 "status": status?.wrappedValue.map { .string($0) }, 
-                "severity": severity?.wrappedValue.map { .string($0) }
+                "severity": severity?.wrappedValue.map { .string($0) }, 
+                "agent_id": agentId?.wrappedValue.map { .string($0) }
             ],
             requestOptions: requestOptions,
             responseType: [String: JSONValue].self

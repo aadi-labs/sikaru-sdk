@@ -14,9 +14,9 @@ pub mod types;
 pub use resources::{
     ActivationClient, AgentBudgetsClient, AgentImportsClient, AgentsClient, ChangesetsClient,
     ComputeAttachmentsClient, ComputeCredentialsClient, ComputeEnvironmentsClient,
-    ComputeOperationsClient, ComputeWorkersClient, ConnectionsClient, ContextRegistryClient,
-    ConversationsClient, DeploymentsClient, EnvironmentsClient, EvalSeedsClient,
-    EvaluationComparisonsClient, EvaluationCriteriaClient, EvaluationJobsClient,
+    ComputeOperationsClient, ComputeWorkersClient, ComputeWorkspacesClient, ConnectionsClient,
+    ContextRegistryClient, ConversationsClient, DeploymentsClient, EnvironmentsClient,
+    EvalSeedsClient, EvaluationComparisonsClient, EvaluationCriteriaClient, EvaluationJobsClient,
     EvaluationResultsClient, EvaluatorRunsClient, ExecutionObjectivesClient,
     ExecutionSessionsClient, ExecutionsClient, FeedbackClient, HarnessVersionsClient,
     HarnessesClient, ImportSessionsClient, IssueClustersClient, JudgeAlignmentClient,

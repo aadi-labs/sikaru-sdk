@@ -48,6 +48,11 @@ module Sikaru
       @compute_operations ||= Sikaru::ComputeOperations::Client.new(client: @raw_client)
     end
 
+    # @return [Sikaru::ComputeWorkspaces::Client]
+    def compute_workspaces
+      @compute_workspaces ||= Sikaru::ComputeWorkspaces::Client.new(client: @raw_client)
+    end
+
     # @return [Sikaru::ComputeCredentials::Client]
     def compute_credentials
       @compute_credentials ||= Sikaru::ComputeCredentials::Client.new(client: @raw_client)

@@ -2,6 +2,8 @@ pub use crate::prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq, Hash)]
 pub struct UpdateIssueClusterStatusRequest {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub reason: Option<String>,
     #[serde(default)]
     pub status: String,
 }
@@ -15,10 +17,16 @@ impl UpdateIssueClusterStatusRequest {
 #[derive(Clone, PartialEq, Default, Debug)]
 #[non_exhaustive]
 pub struct UpdateIssueClusterStatusRequestBuilder {
+    reason: Option<String>,
     status: Option<String>,
 }
 
 impl UpdateIssueClusterStatusRequestBuilder {
+    pub fn reason(mut self, value: impl Into<String>) -> Self {
+        self.reason = Some(value.into());
+        self
+    }
+
     pub fn status(mut self, value: impl Into<String>) -> Self {
         self.status = Some(value.into());
         self
@@ -29,6 +37,7 @@ impl UpdateIssueClusterStatusRequestBuilder {
     /// - [`status`](UpdateIssueClusterStatusRequestBuilder::status)
     pub fn build(self) -> Result<UpdateIssueClusterStatusRequest, BuildError> {
         Ok(UpdateIssueClusterStatusRequest {
+            reason: self.reason,
             status: self
                 .status
                 .ok_or_else(|| BuildError::missing_field("status"))?,

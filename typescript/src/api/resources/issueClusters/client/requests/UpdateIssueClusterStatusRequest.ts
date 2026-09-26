@@ -7,5 +7,6 @@
  *     }
  */
 export interface UpdateIssueClusterStatusRequest {
+    reason?: string | null;
     status: string;
 }

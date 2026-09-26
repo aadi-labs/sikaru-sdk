@@ -3,6 +3,7 @@ pub use crate::prelude::*;
 #[non_exhaustive]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum OperationViewMethod {
+    BashRun,
     BashStart,
     BashRead,
     BashWait,
@@ -16,6 +17,7 @@ pub enum OperationViewMethod {
 impl Serialize for OperationViewMethod {
     fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
         match self {
+            Self::BashRun => serializer.serialize_str("bash.run"),
             Self::BashStart => serializer.serialize_str("bash.start"),
             Self::BashRead => serializer.serialize_str("bash.read"),
             Self::BashWait => serializer.serialize_str("bash.wait"),
@@ -30,6 +32,7 @@ impl<'de> Deserialize<'de> for OperationViewMethod {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let value = String::deserialize(deserializer)?;
         match value.as_str() {
+            "bash.run" => Ok(Self::BashRun),
             "bash.start" => Ok(Self::BashStart),
             "bash.read" => Ok(Self::BashRead),
             "bash.wait" => Ok(Self::BashWait),
@@ -43,6 +46,7 @@ impl<'de> Deserialize<'de> for OperationViewMethod {
 impl fmt::Display for OperationViewMethod {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Self::BashRun => write!(f, "bash.run"),
             Self::BashStart => write!(f, "bash.start"),
             Self::BashRead => write!(f, "bash.read"),
             Self::BashWait => write!(f, "bash.wait"),

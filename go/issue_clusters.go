@@ -11,11 +11,13 @@ import (
 var (
 	listIssueClustersIssueClustersRequestFieldStatus   = big.NewInt(1 << 0)
 	listIssueClustersIssueClustersRequestFieldSeverity = big.NewInt(1 << 1)
+	listIssueClustersIssueClustersRequestFieldAgentID  = big.NewInt(1 << 2)
 )
 
 type ListIssueClustersIssueClustersRequest struct {
 	Status   *string `json:"-" url:"status,omitempty"`
 	Severity *string `json:"-" url:"severity,omitempty"`
+	AgentID  *string `json:"-" url:"agent_id,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -40,6 +42,13 @@ func (l *ListIssueClustersIssueClustersRequest) SetStatus(status *string) {
 func (l *ListIssueClustersIssueClustersRequest) SetSeverity(severity *string) {
 	l.Severity = severity
 	l.require(listIssueClustersIssueClustersRequestFieldSeverity)
+}
+
+// SetAgentID sets the AgentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListIssueClustersIssueClustersRequest) SetAgentID(agentID *string) {
+	l.AgentID = agentID
+	l.require(listIssueClustersIssueClustersRequestFieldAgentID)
 }
 
 var (
@@ -77,11 +86,13 @@ func (m *MineProjectIssueClustersIssueClustersRequest) SetUntil(until *string) {
 }
 
 var (
-	updateIssueClusterStatusRequestFieldStatus = big.NewInt(1 << 0)
+	updateIssueClusterStatusRequestFieldReason = big.NewInt(1 << 0)
+	updateIssueClusterStatusRequestFieldStatus = big.NewInt(1 << 1)
 )
 
 type UpdateIssueClusterStatusRequest struct {
-	Status string `json:"status" url:"-"`
+	Reason *string `json:"reason,omitempty" url:"-"`
+	Status string  `json:"status" url:"-"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -92,6 +103,13 @@ func (u *UpdateIssueClusterStatusRequest) require(field *big.Int) {
 		u.explicitFields = big.NewInt(0)
 	}
 	u.explicitFields.Or(u.explicitFields, field)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (u *UpdateIssueClusterStatusRequest) SetReason(reason *string) {
+	u.Reason = reason
+	u.require(updateIssueClusterStatusRequestFieldReason)
 }
 
 // SetStatus sets the Status field and marks it as non-optional;

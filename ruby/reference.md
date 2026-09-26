@@ -339,6 +339,14 @@ client.changesets.list_changesets(project_id: "project_id")
 <dl>
 <dd>
 
+**improvement:** `Internal::Types::Boolean` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `Sikaru::Changesets::RequestOptions` 
     
 </dd>
@@ -2298,6 +2306,162 @@ client.compute_operations.poll(
 <dd>
 
 **request_options:** `Sikaru::ComputeOperations::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkspaces
+<details><summary><code>client.compute_workspaces.<a href="/lib/Sikaru/compute_workspaces/client.rb">get</a>(project_id:, attachment_id:, run_id:) -> Sikaru::Types::WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_workspaces.get(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  run_id: "run_id"
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeWorkspaces::RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_workspaces.<a href="/lib/Sikaru/compute_workspaces/client.rb">commit_tree</a>(project_id:, attachment_id:, run_id:, request) -> Sikaru::Types::WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```ruby
+client.compute_workspaces.commit_tree(
+  project_id: "project_id",
+  attachment_id: "attachment_id",
+  run_id: "run_id",
+  files: {
+    key: {
+      chunks: [{
+        sha256: "sha256",
+        size: 1
+      }],
+      mode: 1,
+      sha256: "sha256",
+      size: 1
+    }
+  }
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**files:** `Internal::Types::Hash[String, Sikaru::Types::WorkspaceFile]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `Sikaru::ComputeWorkspaces::RequestOptions` 
     
 </dd>
 </dl>
@@ -4292,6 +4456,14 @@ client.eval_seeds.create_eval_seed(
 <dd>
 
 **project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `String` 
     
 </dd>
 </dl>
@@ -9681,6 +9853,14 @@ client.issue_clusters.list_issue_clusters(project_id: "project_id")
 <dl>
 <dd>
 
+**agent_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **request_options:** `Sikaru::IssueClusters::RequestOptions` 
     
 </dd>
@@ -9984,6 +10164,14 @@ client.issue_clusters.update_issue_cluster_status(
 <dd>
 
 **cluster_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `String` 
     
 </dd>
 </dl>

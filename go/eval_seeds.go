@@ -9,14 +9,16 @@ import (
 )
 
 var (
-	createEvalSeedRequestFieldDatasetName   = big.NewInt(1 << 0)
-	createEvalSeedRequestFieldEvaluatorName = big.NewInt(1 << 1)
-	createEvalSeedRequestFieldIssueID       = big.NewInt(1 << 2)
-	createEvalSeedRequestFieldIssueTitle    = big.NewInt(1 << 3)
-	createEvalSeedRequestFieldTraceIDs      = big.NewInt(1 << 4)
+	createEvalSeedRequestFieldAgentID       = big.NewInt(1 << 0)
+	createEvalSeedRequestFieldDatasetName   = big.NewInt(1 << 1)
+	createEvalSeedRequestFieldEvaluatorName = big.NewInt(1 << 2)
+	createEvalSeedRequestFieldIssueID       = big.NewInt(1 << 3)
+	createEvalSeedRequestFieldIssueTitle    = big.NewInt(1 << 4)
+	createEvalSeedRequestFieldTraceIDs      = big.NewInt(1 << 5)
 )
 
 type CreateEvalSeedRequest struct {
+	AgentID       *string  `json:"agentId,omitempty" url:"-"`
 	DatasetName   *string  `json:"datasetName,omitempty" url:"-"`
 	EvaluatorName *string  `json:"evaluatorName,omitempty" url:"-"`
 	IssueID       string   `json:"issueId" url:"-"`
@@ -32,6 +34,13 @@ func (c *CreateEvalSeedRequest) require(field *big.Int) {
 		c.explicitFields = big.NewInt(0)
 	}
 	c.explicitFields.Or(c.explicitFields, field)
+}
+
+// SetAgentID sets the AgentID field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (c *CreateEvalSeedRequest) SetAgentID(agentID *string) {
+	c.AgentID = agentID
+	c.require(createEvalSeedRequestFieldAgentID)
 }
 
 // SetDatasetName sets the DatasetName field and marks it as non-optional;

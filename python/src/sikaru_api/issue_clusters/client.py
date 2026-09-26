@@ -31,6 +31,7 @@ class IssueClustersClient:
         *,
         status: typing.Optional[str] = None,
         severity: typing.Optional[str] = None,
+        agent_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
         """
@@ -41,6 +42,8 @@ class IssueClustersClient:
         status : typing.Optional[str]
 
         severity : typing.Optional[str]
+
+        agent_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -62,7 +65,7 @@ class IssueClustersClient:
         )
         """
         _response = self._raw_client.list_issue_clusters(
-            project_id, status=status, severity=severity, request_options=request_options
+            project_id, status=status, severity=severity, agent_id=agent_id, request_options=request_options
         )
         return _response.data
 
@@ -214,7 +217,13 @@ class IssueClustersClient:
         return _response.data
 
     def update_issue_cluster_status(
-        self, project_id: str, cluster_id: str, *, status: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        project_id: str,
+        cluster_id: str,
+        *,
+        status: str,
+        reason: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
         """
         Parameters
@@ -224,6 +233,8 @@ class IssueClustersClient:
         cluster_id : str
 
         status : str
+
+        reason : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -247,7 +258,7 @@ class IssueClustersClient:
         )
         """
         _response = self._raw_client.update_issue_cluster_status(
-            project_id, cluster_id, status=status, request_options=request_options
+            project_id, cluster_id, status=status, reason=reason, request_options=request_options
         )
         return _response.data
 
@@ -306,6 +317,7 @@ class AsyncIssueClustersClient:
         *,
         status: typing.Optional[str] = None,
         severity: typing.Optional[str] = None,
+        agent_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
         """
@@ -316,6 +328,8 @@ class AsyncIssueClustersClient:
         status : typing.Optional[str]
 
         severity : typing.Optional[str]
+
+        agent_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -345,7 +359,7 @@ class AsyncIssueClustersClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list_issue_clusters(
-            project_id, status=status, severity=severity, request_options=request_options
+            project_id, status=status, severity=severity, agent_id=agent_id, request_options=request_options
         )
         return _response.data
 
@@ -521,7 +535,13 @@ class AsyncIssueClustersClient:
         return _response.data
 
     async def update_issue_cluster_status(
-        self, project_id: str, cluster_id: str, *, status: str, request_options: typing.Optional[RequestOptions] = None
+        self,
+        project_id: str,
+        cluster_id: str,
+        *,
+        status: str,
+        reason: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
         """
         Parameters
@@ -531,6 +551,8 @@ class AsyncIssueClustersClient:
         cluster_id : str
 
         status : str
+
+        reason : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -562,7 +584,7 @@ class AsyncIssueClustersClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.update_issue_cluster_status(
-            project_id, cluster_id, status=status, request_options=request_options
+            project_id, cluster_id, status=status, reason=reason, request_options=request_options
         )
         return _response.data
 

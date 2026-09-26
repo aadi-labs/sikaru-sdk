@@ -10,6 +10,7 @@ import { ComputeCredentialsClient } from "./api/resources/computeCredentials/cli
 import { ComputeEnvironmentsClient } from "./api/resources/computeEnvironments/client/Client.js";
 import { ComputeOperationsClient } from "./api/resources/computeOperations/client/Client.js";
 import { ComputeWorkersClient } from "./api/resources/computeWorkers/client/Client.js";
+import { ComputeWorkspacesClient } from "./api/resources/computeWorkspaces/client/Client.js";
 import { ConnectionsClient } from "./api/resources/connections/client/Client.js";
 import { ContextRegistryClient } from "./api/resources/contextRegistry/client/Client.js";
 import { ConversationsClient } from "./api/resources/conversations/client/Client.js";
@@ -70,6 +71,7 @@ export class SikaruApi {
     protected _changesets: ChangesetsClient | undefined;
     protected _computeAttachments: ComputeAttachmentsClient | undefined;
     protected _computeOperations: ComputeOperationsClient | undefined;
+    protected _computeWorkspaces: ComputeWorkspacesClient | undefined;
     protected _computeCredentials: ComputeCredentialsClient | undefined;
     protected _computeEnvironments: ComputeEnvironmentsClient | undefined;
     protected _computeWorkers: ComputeWorkersClient | undefined;
@@ -142,6 +144,10 @@ export class SikaruApi {
 
     public get computeOperations(): ComputeOperationsClient {
         return (this._computeOperations ??= new ComputeOperationsClient(this._options));
+    }
+
+    public get computeWorkspaces(): ComputeWorkspacesClient {
+        return (this._computeWorkspaces ??= new ComputeWorkspacesClient(this._options));
     }
 
     public get computeCredentials(): ComputeCredentialsClient {

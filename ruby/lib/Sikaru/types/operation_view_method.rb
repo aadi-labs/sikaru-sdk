@@ -5,6 +5,7 @@ module Sikaru
     module OperationViewMethod
       extend Sikaru::Internal::Types::Enum
 
+      BASH_RUN = "bash.run"
       BASH_START = "bash.start"
       BASH_READ = "bash.read"
       BASH_WAIT = "bash.wait"

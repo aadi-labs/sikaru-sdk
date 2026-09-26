@@ -42,10 +42,11 @@ export class IssueClustersClient {
     }
 
     private async __listIssueClusters(project_id: string, request: Sikaru.ListIssueClustersIssueClustersRequest = {}, requestOptions?: IssueClustersClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const { status, severity } = request;
+        const { status, severity, "agent_id": agentId } = request;
         const _queryParams: Record<string, unknown> = {
             status,
-            severity
+            severity,
+            agent_id: agentId
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);

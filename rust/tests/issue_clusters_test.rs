@@ -161,6 +161,7 @@ async fn test_issue_clusters_update_issue_cluster_status_with_wiremock() {
             &"cluster_id".to_string(),
             &UpdateIssueClusterStatusRequest {
                 status: "status".to_string(),
+                reason: None,
             },
             None,
         )

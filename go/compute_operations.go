@@ -525,6 +525,7 @@ func (o OperationViewCapabilityName) Ptr() *OperationViewCapabilityName {
 type OperationViewMethod string
 
 const (
+	OperationViewMethodBashRun            OperationViewMethod = "bash.run"
 	OperationViewMethodBashStart          OperationViewMethod = "bash.start"
 	OperationViewMethodBashRead           OperationViewMethod = "bash.read"
 	OperationViewMethodBashWait           OperationViewMethod = "bash.wait"
@@ -534,6 +535,8 @@ const (
 
 func NewOperationViewMethodFromString(s string) (OperationViewMethod, error) {
 	switch s {
+	case "bash.run":
+		return OperationViewMethodBashRun, nil
 	case "bash.start":
 		return OperationViewMethodBashStart, nil
 	case "bash.read":
@@ -554,23 +557,25 @@ func (o OperationViewMethod) Ptr() *OperationViewMethod {
 }
 
 var (
-	workPageFieldAttachment       = big.NewInt(1 << 0)
-	workPageFieldExecution        = big.NewInt(1 << 1)
-	workPageFieldExecutionPhase   = big.NewInt(1 << 2)
-	workPageFieldIssuedOperations = big.NewInt(1 << 3)
-	workPageFieldLiveHandles      = big.NewInt(1 << 4)
-	workPageFieldOperations       = big.NewInt(1 << 5)
-	workPageFieldPollAfterSeconds = big.NewInt(1 << 6)
+	workPageFieldAttachment          = big.NewInt(1 << 0)
+	workPageFieldExecution           = big.NewInt(1 << 1)
+	workPageFieldExecutionPhase      = big.NewInt(1 << 2)
+	workPageFieldIssuedOperations    = big.NewInt(1 << 3)
+	workPageFieldLiveHandles         = big.NewInt(1 << 4)
+	workPageFieldOperations          = big.NewInt(1 << 5)
+	workPageFieldPollAfterSeconds    = big.NewInt(1 << 6)
+	workPageFieldWorkspaceCheckpoint = big.NewInt(1 << 7)
 )
 
 type WorkPage struct {
-	Attachment       *AttachmentView        `json:"attachment" url:"attachment"`
-	Execution        *ExecutionView         `json:"execution,omitempty" url:"execution,omitempty"`
-	ExecutionPhase   WorkPageExecutionPhase `json:"execution_phase" url:"execution_phase"`
-	IssuedOperations []*UncertainOperation  `json:"issued_operations" url:"issued_operations"`
-	LiveHandles      []*LiveHandle          `json:"live_handles" url:"live_handles"`
-	Operations       []*OperationView       `json:"operations" url:"operations"`
-	PollAfterSeconds *int                   `json:"poll_after_seconds,omitempty" url:"poll_after_seconds,omitempty"`
+	Attachment          *AttachmentView          `json:"attachment" url:"attachment"`
+	Execution           *ExecutionView           `json:"execution,omitempty" url:"execution,omitempty"`
+	ExecutionPhase      WorkPageExecutionPhase   `json:"execution_phase" url:"execution_phase"`
+	IssuedOperations    []*UncertainOperation    `json:"issued_operations" url:"issued_operations"`
+	LiveHandles         []*LiveHandle            `json:"live_handles" url:"live_handles"`
+	Operations          []*OperationView         `json:"operations" url:"operations"`
+	PollAfterSeconds    *int                     `json:"poll_after_seconds,omitempty" url:"poll_after_seconds,omitempty"`
+	WorkspaceCheckpoint *WorkspaceCheckpointView `json:"workspace_checkpoint,omitempty" url:"workspace_checkpoint,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -626,6 +631,13 @@ func (w *WorkPage) GetPollAfterSeconds() *int {
 		return nil
 	}
 	return w.PollAfterSeconds
+}
+
+func (w *WorkPage) GetWorkspaceCheckpoint() *WorkspaceCheckpointView {
+	if w == nil {
+		return nil
+	}
+	return w.WorkspaceCheckpoint
 }
 
 func (w *WorkPage) GetExtraProperties() map[string]interface{} {
@@ -691,6 +703,13 @@ func (w *WorkPage) SetPollAfterSeconds(pollAfterSeconds *int) {
 	w.require(workPageFieldPollAfterSeconds)
 }
 
+// SetWorkspaceCheckpoint sets the WorkspaceCheckpoint field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkPage) SetWorkspaceCheckpoint(workspaceCheckpoint *WorkspaceCheckpointView) {
+	w.WorkspaceCheckpoint = workspaceCheckpoint
+	w.require(workPageFieldWorkspaceCheckpoint)
+}
+
 func (w *WorkPage) UnmarshalJSON(data []byte) error {
 	type unmarshaler WorkPage
 	var value unmarshaler
@@ -739,6 +758,7 @@ const (
 	WorkPageExecutionPhaseIdle            WorkPageExecutionPhase = "idle"
 	WorkPageExecutionPhaseRunning         WorkPageExecutionPhase = "running"
 	WorkPageExecutionPhaseWaitingApproval WorkPageExecutionPhase = "waiting_approval"
+	WorkPageExecutionPhaseCheckpointing   WorkPageExecutionPhase = "checkpointing"
 	WorkPageExecutionPhaseTerminal        WorkPageExecutionPhase = "terminal"
 )
 
@@ -750,6 +770,8 @@ func NewWorkPageExecutionPhaseFromString(s string) (WorkPageExecutionPhase, erro
 		return WorkPageExecutionPhaseRunning, nil
 	case "waiting_approval":
 		return WorkPageExecutionPhaseWaitingApproval, nil
+	case "checkpointing":
+		return WorkPageExecutionPhaseCheckpointing, nil
 	case "terminal":
 		return WorkPageExecutionPhaseTerminal, nil
 	}

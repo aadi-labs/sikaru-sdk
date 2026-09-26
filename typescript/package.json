@@ -84,6 +84,17 @@
             },
             "default": "./dist/cjs/api/resources/computeOperations/exports.js"
         },
+        "./computeWorkspaces": {
+            "import": {
+                "types": "./dist/esm/api/resources/computeWorkspaces/exports.d.mts",
+                "default": "./dist/esm/api/resources/computeWorkspaces/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/computeWorkspaces/exports.d.ts",
+                "default": "./dist/cjs/api/resources/computeWorkspaces/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/computeWorkspaces/exports.js"
+        },
         "./computeCredentials": {
             "import": {
                 "types": "./dist/esm/api/resources/computeCredentials/exports.d.mts",

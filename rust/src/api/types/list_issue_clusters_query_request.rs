@@ -7,6 +7,8 @@ pub struct ListIssueClustersQueryRequest {
     pub status: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub severity: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub agent_id: Option<String>,
 }
 
 impl ListIssueClustersQueryRequest {
@@ -20,6 +22,7 @@ impl ListIssueClustersQueryRequest {
 pub struct ListIssueClustersQueryRequestBuilder {
     status: Option<String>,
     severity: Option<String>,
+    agent_id: Option<String>,
 }
 
 impl ListIssueClustersQueryRequestBuilder {
@@ -33,11 +36,17 @@ impl ListIssueClustersQueryRequestBuilder {
         self
     }
 
+    pub fn agent_id(mut self, value: impl Into<String>) -> Self {
+        self.agent_id = Some(value.into());
+        self
+    }
+
     /// Consumes the builder and constructs a [`ListIssueClustersQueryRequest`].
     pub fn build(self) -> Result<ListIssueClustersQueryRequest, BuildError> {
         Ok(ListIssueClustersQueryRequest {
             status: self.status,
             severity: self.severity,
+            agent_id: self.agent_id,
         })
     }
 }

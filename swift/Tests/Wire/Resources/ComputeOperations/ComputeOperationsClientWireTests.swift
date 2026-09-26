@@ -167,7 +167,7 @@ import Sikaru
                         "key": "value"
                       },
                       "capability_name": "compute.execute",
-                      "method": "bash.start",
+                      "method": "bash.run",
                       "owner_epoch": 1,
                       "request_digest": "request_digest",
                       "run_id": "run_id",
@@ -176,7 +176,15 @@ import Sikaru
                       "workspace_generation": "workspace_generation"
                     }
                   ],
-                  "poll_after_seconds": 1
+                  "poll_after_seconds": 1,
+                  "workspace_checkpoint": {
+                    "checkpoint_id": "checkpoint_id",
+                    "owner_epoch": 1,
+                    "run_id": "run_id",
+                    "status": "requested",
+                    "tree_id": "tree_id",
+                    "workspace_generation": "workspace_generation"
+                  }
                 }
                 """#.utf8
             )
@@ -259,7 +267,7 @@ import Sikaru
                         "key": JSONValue.string("value")
                     ],
                     capabilityName: OperationViewCapabilityName.computeExecute,
-                    method: OperationViewMethod.bashStart,
+                    method: OperationViewMethod.bashRun,
                     ownerEpoch: 1,
                     requestDigest: "request_digest",
                     runId: "run_id",
@@ -268,7 +276,15 @@ import Sikaru
                     workspaceGeneration: "workspace_generation"
                 )
             ],
-            pollAfterSeconds: Optional(1)
+            pollAfterSeconds: Optional(1),
+            workspaceCheckpoint: Optional(Nullable<WorkspaceCheckpointView>.value(WorkspaceCheckpointView(
+                checkpointId: "checkpoint_id",
+                ownerEpoch: 1,
+                runId: "run_id",
+                status: WorkspaceCheckpointViewStatus.requested,
+                treeId: Optional(Nullable<String>.value("tree_id")),
+                workspaceGeneration: "workspace_generation"
+            )))
         )
         let response = try await client.computeOperations.poll(
             projectId: "project_id",
@@ -385,7 +401,7 @@ import Sikaru
                         }
                       },
                       "capability_name": "compute.execute",
-                      "method": "bash.start",
+                      "method": "bash.run",
                       "owner_epoch": 1,
                       "request_digest": "request_digest",
                       "run_id": "run_id",
@@ -400,7 +416,7 @@ import Sikaru
                         }
                       },
                       "capability_name": "compute.execute",
-                      "method": "bash.start",
+                      "method": "bash.run",
                       "owner_epoch": 1,
                       "request_digest": "request_digest",
                       "run_id": "run_id",
@@ -409,7 +425,15 @@ import Sikaru
                       "workspace_generation": "workspace_generation"
                     }
                   ],
-                  "poll_after_seconds": 1
+                  "poll_after_seconds": 1,
+                  "workspace_checkpoint": {
+                    "checkpoint_id": "checkpoint_id",
+                    "owner_epoch": 1,
+                    "run_id": "run_id",
+                    "status": "requested",
+                    "tree_id": "tree_id",
+                    "workspace_generation": "workspace_generation"
+                  }
                 }
                 """#.utf8
             )
@@ -523,7 +547,7 @@ import Sikaru
                         )
                     ],
                     capabilityName: OperationViewCapabilityName.computeExecute,
-                    method: OperationViewMethod.bashStart,
+                    method: OperationViewMethod.bashRun,
                     ownerEpoch: 1,
                     requestDigest: "request_digest",
                     runId: "run_id",
@@ -540,7 +564,7 @@ import Sikaru
                         )
                     ],
                     capabilityName: OperationViewCapabilityName.computeExecute,
-                    method: OperationViewMethod.bashStart,
+                    method: OperationViewMethod.bashRun,
                     ownerEpoch: 1,
                     requestDigest: "request_digest",
                     runId: "run_id",
@@ -549,7 +573,15 @@ import Sikaru
                     workspaceGeneration: "workspace_generation"
                 )
             ],
-            pollAfterSeconds: Optional(1)
+            pollAfterSeconds: Optional(1),
+            workspaceCheckpoint: Optional(Nullable<WorkspaceCheckpointView>.value(WorkspaceCheckpointView(
+                checkpointId: "checkpoint_id",
+                ownerEpoch: 1,
+                runId: "run_id",
+                status: WorkspaceCheckpointViewStatus.requested,
+                treeId: Optional(Nullable<String>.value("tree_id")),
+                workspaceGeneration: "workspace_generation"
+            )))
         )
         let response = try await client.computeOperations.poll(
             projectId: "project_id",

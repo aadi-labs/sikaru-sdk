@@ -8,6 +8,7 @@ module Sikaru
       IDLE = "idle"
       RUNNING = "running"
       WAITING_APPROVAL = "waiting_approval"
+      CHECKPOINTING = "checkpointing"
       TERMINAL = "terminal"
     end
   end

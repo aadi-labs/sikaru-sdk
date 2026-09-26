@@ -23,6 +23,7 @@ async fn test_eval_seeds_create_eval_seed_with_wiremock() {
                 issue_id: "issueId".to_string(),
                 issue_title: "issueTitle".to_string(),
                 trace_ids: vec!["traceIds".to_string()],
+                agent_id: None,
                 dataset_name: None,
                 evaluator_name: None,
             },

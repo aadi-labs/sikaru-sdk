@@ -6,6 +6,8 @@ module Sikaru
       class CreateEvalSeedRequest < Internal::Types::Model
         field :project_id, -> { String }, optional: false, nullable: false
 
+        field :agent_id, -> { String }, optional: true, nullable: false, api_name: "agentId"
+
         field :dataset_name, -> { String }, optional: true, nullable: false, api_name: "datasetName"
 
         field :evaluator_name, -> { String }, optional: true, nullable: false, api_name: "evaluatorName"

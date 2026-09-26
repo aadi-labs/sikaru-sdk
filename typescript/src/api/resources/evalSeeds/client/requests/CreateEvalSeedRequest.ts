@@ -9,6 +9,7 @@
  *     }
  */
 export interface CreateEvalSeedRequest {
+    agentId?: string | null;
     datasetName?: string | null;
     evaluatorName?: string | null;
     issueId: string;

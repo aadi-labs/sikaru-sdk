@@ -15,6 +15,7 @@ import (
 	computeenvironments "github.com/aadi-labs/sikaru-sdk/go/computeenvironments"
 	computeoperations "github.com/aadi-labs/sikaru-sdk/go/computeoperations"
 	computeworkers "github.com/aadi-labs/sikaru-sdk/go/computeworkers"
+	computeworkspaces "github.com/aadi-labs/sikaru-sdk/go/computeworkspaces"
 	connections "github.com/aadi-labs/sikaru-sdk/go/connections"
 	contextregistry "github.com/aadi-labs/sikaru-sdk/go/contextregistry"
 	conversations "github.com/aadi-labs/sikaru-sdk/go/conversations"
@@ -67,6 +68,7 @@ type Sikaru struct {
 	Changesets             *changesets.Client
 	ComputeAttachments     *computeattachments.Client
 	ComputeOperations      *computeoperations.Client
+	ComputeWorkspaces      *computeworkspaces.Client
 	ComputeCredentials     *computecredentials.Client
 	ComputeEnvironments    *computeenvironments.Client
 	ComputeWorkers         *computeworkers.Client
@@ -129,6 +131,7 @@ func New(opts ...option.RequestOption) *Sikaru {
 		Changesets:             changesets.NewClient(options),
 		ComputeAttachments:     computeattachments.NewClient(options),
 		ComputeOperations:      computeoperations.NewClient(options),
+		ComputeWorkspaces:      computeworkspaces.NewClient(options),
 		ComputeCredentials:     computecredentials.NewClient(options),
 		ComputeEnvironments:    computeenvironments.NewClient(options),
 		ComputeWorkers:         computeworkers.NewClient(options),

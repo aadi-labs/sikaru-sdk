@@ -2,4 +2,6 @@
 
 import typing
 
-WorkPageExecutionPhase = typing.Union[typing.Literal["idle", "running", "waiting_approval", "terminal"], typing.Any]
+WorkPageExecutionPhase = typing.Union[
+    typing.Literal["idle", "running", "waiting_approval", "checkpointing", "terminal"], typing.Any
+]

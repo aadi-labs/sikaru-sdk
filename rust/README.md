@@ -27,7 +27,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-sikaru = "0.1.0"
+sikaru = "0.2.3"
 ```
 
 Or install via cargo:

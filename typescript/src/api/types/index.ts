@@ -67,4 +67,8 @@ export * from "./UncertainOperation.js";
 export * from "./ValidationError.js";
 export * from "./VersionedTraceImportAction.js";
 export * from "./WorkPage.js";
+export * from "./WorkspaceBlobView.js";
+export * from "./WorkspaceCheckpointView.js";
+export * from "./WorkspaceChunk.js";
+export * from "./WorkspaceFile.js";
 export * from "./WorkspaceProvenance.js";

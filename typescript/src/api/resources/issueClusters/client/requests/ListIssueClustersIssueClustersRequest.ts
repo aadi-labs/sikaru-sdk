@@ -7,4 +7,5 @@
 export interface ListIssueClustersIssueClustersRequest {
     status?: string | null;
     severity?: string | null;
+    agent_id?: string | null;
 }

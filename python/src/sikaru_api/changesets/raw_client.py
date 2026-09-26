@@ -32,6 +32,7 @@ class RawChangesetsClient:
         project_id: str,
         *,
         status: typing.Optional[ListChangesetsChangesetsRequestStatus] = None,
+        improvement: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[typing.Dict[str, typing.Any]]:
         """
@@ -40,6 +41,8 @@ class RawChangesetsClient:
         project_id : str
 
         status : typing.Optional[ListChangesetsChangesetsRequestStatus]
+
+        improvement : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -54,6 +57,7 @@ class RawChangesetsClient:
             method="GET",
             params={
                 "status": status,
+                "improvement": improvement,
             },
             request_options=request_options,
         )
@@ -690,6 +694,7 @@ class AsyncRawChangesetsClient:
         project_id: str,
         *,
         status: typing.Optional[ListChangesetsChangesetsRequestStatus] = None,
+        improvement: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
         """
@@ -698,6 +703,8 @@ class AsyncRawChangesetsClient:
         project_id : str
 
         status : typing.Optional[ListChangesetsChangesetsRequestStatus]
+
+        improvement : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -712,6 +719,7 @@ class AsyncRawChangesetsClient:
             method="GET",
             params={
                 "status": status,
+                "improvement": improvement,
             },
             request_options=request_options,
         )

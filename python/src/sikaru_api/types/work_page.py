@@ -10,6 +10,7 @@ from .live_handle import LiveHandle
 from .operation_view import OperationView
 from .uncertain_operation import UncertainOperation
 from .work_page_execution_phase import WorkPageExecutionPhase
+from .workspace_checkpoint_view import WorkspaceCheckpointView
 
 
 class WorkPage(UniversalBaseModel):
@@ -20,6 +21,7 @@ class WorkPage(UniversalBaseModel):
     live_handles: typing.List[LiveHandle]
     operations: typing.List[OperationView]
     poll_after_seconds: typing.Optional[int] = None
+    workspace_checkpoint: typing.Optional[WorkspaceCheckpointView] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -34,6 +34,7 @@ class ChangesetsClient:
         project_id: str,
         *,
         status: typing.Optional[ListChangesetsChangesetsRequestStatus] = None,
+        improvement: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
         """
@@ -42,6 +43,8 @@ class ChangesetsClient:
         project_id : str
 
         status : typing.Optional[ListChangesetsChangesetsRequestStatus]
+
+        improvement : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -62,7 +65,9 @@ class ChangesetsClient:
             project_id="project_id",
         )
         """
-        _response = self._raw_client.list_changesets(project_id, status=status, request_options=request_options)
+        _response = self._raw_client.list_changesets(
+            project_id, status=status, improvement=improvement, request_options=request_options
+        )
         return _response.data
 
     def create_changeset(
@@ -477,6 +482,7 @@ class AsyncChangesetsClient:
         project_id: str,
         *,
         status: typing.Optional[ListChangesetsChangesetsRequestStatus] = None,
+        improvement: typing.Optional[bool] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> typing.Dict[str, typing.Any]:
         """
@@ -485,6 +491,8 @@ class AsyncChangesetsClient:
         project_id : str
 
         status : typing.Optional[ListChangesetsChangesetsRequestStatus]
+
+        improvement : typing.Optional[bool]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -513,7 +521,9 @@ class AsyncChangesetsClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.list_changesets(project_id, status=status, request_options=request_options)
+        _response = await self._raw_client.list_changesets(
+            project_id, status=status, improvement=improvement, request_options=request_options
+        )
         return _response.data
 
     async def create_changeset(

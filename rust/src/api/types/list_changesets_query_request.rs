@@ -5,6 +5,8 @@ pub use crate::prelude::*;
 pub struct ListChangesetsQueryRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub status: Option<ListChangesetsChangesetsRequestStatus>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub improvement: Option<bool>,
 }
 
 impl ListChangesetsQueryRequest {
@@ -17,6 +19,7 @@ impl ListChangesetsQueryRequest {
 #[non_exhaustive]
 pub struct ListChangesetsQueryRequestBuilder {
     status: Option<ListChangesetsChangesetsRequestStatus>,
+    improvement: Option<bool>,
 }
 
 impl ListChangesetsQueryRequestBuilder {
@@ -25,10 +28,16 @@ impl ListChangesetsQueryRequestBuilder {
         self
     }
 
+    pub fn improvement(mut self, value: bool) -> Self {
+        self.improvement = Some(value);
+        self
+    }
+
     /// Consumes the builder and constructs a [`ListChangesetsQueryRequest`].
     pub fn build(self) -> Result<ListChangesetsQueryRequest, BuildError> {
         Ok(ListChangesetsQueryRequest {
             status: self.status,
+            improvement: self.improvement,
         })
     }
 }

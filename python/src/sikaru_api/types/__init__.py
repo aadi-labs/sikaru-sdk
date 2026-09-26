@@ -93,6 +93,11 @@ if typing.TYPE_CHECKING:
     from .versioned_trace_import_action import VersionedTraceImportAction
     from .work_page import WorkPage
     from .work_page_execution_phase import WorkPageExecutionPhase
+    from .workspace_blob_view import WorkspaceBlobView
+    from .workspace_checkpoint_view import WorkspaceCheckpointView
+    from .workspace_checkpoint_view_status import WorkspaceCheckpointViewStatus
+    from .workspace_chunk import WorkspaceChunk
+    from .workspace_file import WorkspaceFile
     from .workspace_provenance import WorkspaceProvenance
     from .workspace_provenance_kind import WorkspaceProvenanceKind
 _dynamic_imports: typing.Dict[str, str] = {
@@ -183,6 +188,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "VersionedTraceImportAction": ".versioned_trace_import_action",
     "WorkPage": ".work_page",
     "WorkPageExecutionPhase": ".work_page_execution_phase",
+    "WorkspaceBlobView": ".workspace_blob_view",
+    "WorkspaceCheckpointView": ".workspace_checkpoint_view",
+    "WorkspaceCheckpointViewStatus": ".workspace_checkpoint_view_status",
+    "WorkspaceChunk": ".workspace_chunk",
+    "WorkspaceFile": ".workspace_file",
     "WorkspaceProvenance": ".workspace_provenance",
     "WorkspaceProvenanceKind": ".workspace_provenance_kind",
 }
@@ -297,6 +307,11 @@ __all__ = [
     "VersionedTraceImportAction",
     "WorkPage",
     "WorkPageExecutionPhase",
+    "WorkspaceBlobView",
+    "WorkspaceCheckpointView",
+    "WorkspaceCheckpointViewStatus",
+    "WorkspaceChunk",
+    "WorkspaceFile",
     "WorkspaceProvenance",
     "WorkspaceProvenanceKind",
 ]

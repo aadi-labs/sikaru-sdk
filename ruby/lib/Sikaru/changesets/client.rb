@@ -19,6 +19,7 @@ module Sikaru
       # @option request_options [Integer] :timeout_in_seconds
       # @option params [String] :project_id
       # @option params [Sikaru::Changesets::Types::ListChangesetsChangesetsRequestStatus, nil] :status
+      # @option params [Boolean, nil] :improvement
       #
       # @example
       #   client.changesets.list_changesets(project_id: "project_id")
@@ -28,6 +29,7 @@ module Sikaru
         params = Sikaru::Internal::Types::Utils.normalize_keys(params)
         query_params = {}
         query_params["status"] = params[:status] if params.key?(:status)
+        query_params["improvement"] = params[:improvement] if params.key?(:improvement)
 
         request = Sikaru::Internal::JSON::Request.new(
           base_url: request_options[:base_url],

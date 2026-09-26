@@ -8,6 +8,8 @@ module Sikaru
 
         field :cluster_id, -> { String }, optional: false, nullable: false
 
+        field :reason, -> { String }, optional: true, nullable: false
+
         field :status, -> { String }, optional: false, nullable: false
       end
     end

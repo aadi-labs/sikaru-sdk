@@ -2020,6 +2020,157 @@ await client.computeOperations.poll("project_id", "attachment_id");
 </dl>
 </details>
 
+## ComputeWorkspaces
+<details><summary><code>client.computeWorkspaces.<a href="/src/api/resources/computeWorkspaces/client/Client.ts">get</a>(project_id, attachment_id, run_id) -> Sikaru.WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeWorkspaces.get("project_id", "attachment_id", "run_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeWorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeWorkspaces.<a href="/src/api/resources/computeWorkspaces/client/Client.ts">commitTree</a>(project_id, attachment_id, run_id, { ...params }) -> Sikaru.WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
+    files: {
+        "key": {
+            chunks: [{
+                    sha256: "sha256",
+                    size: 1
+                }],
+            mode: 1,
+            sha256: "sha256",
+            size: 1
+        }
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.WorkspaceTreeInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ComputeWorkspacesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## ComputeCredentials
 <details><summary><code>client.computeCredentials.<a href="/src/api/resources/computeCredentials/client/Client.ts">renew</a>(project_id) -> Sikaru.CredentialRenewed</code></summary>
 <dl>

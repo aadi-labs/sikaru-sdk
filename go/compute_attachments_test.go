@@ -1970,6 +1970,20 @@ func TestEnumReadyInputCapabilitiesItem(t *testing.T) {
 		assert.Equal(t, ReadyInputCapabilitiesItem("compute.execute"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_bash_run", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewReadyInputCapabilitiesItemFromString("bash.run")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ReadyInputCapabilitiesItem("bash.run"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_filesystem_checkpoint_v1", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewReadyInputCapabilitiesItemFromString("filesystem-checkpoint-v1")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, ReadyInputCapabilitiesItem("filesystem-checkpoint-v1"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewReadyInputCapabilitiesItemFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)

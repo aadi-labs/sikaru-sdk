@@ -322,6 +322,14 @@ client.Changesets.ListChangesets(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**improvement:** `*bool` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -2146,6 +2154,153 @@ client.ComputeOperations.Poll(
 <dd>
 
 **limit:** `*int` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkspaces
+<details><summary><code>client.ComputeWorkspaces.Get(ProjectID, AttachmentID, RunID) -> *_go.WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+client.ComputeWorkspaces.Get(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    "run_id",
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runID:** `string` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.ComputeWorkspaces.CommitTree(ProjectID, AttachmentID, RunID, request) -> *_go.WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```go
+request := &_go.WorkspaceTreeInput{
+    Files: map[string]*_go.WorkspaceFile{
+        "key": &_go.WorkspaceFile{
+            Chunks: []*_go.WorkspaceChunk{
+                &_go.WorkspaceChunk{
+                    Sha256: "sha256",
+                    Size: 1,
+                },
+            },
+            Mode: 1,
+            Sha256: "sha256",
+            Size: 1,
+        },
+    },
+}
+client.ComputeWorkspaces.CommitTree(
+    context.TODO(),
+    "project_id",
+    "attachment_id",
+    "run_id",
+    request,
+)
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**files:** `map[string]*_go.WorkspaceFile` 
     
 </dd>
 </dl>
@@ -4005,6 +4160,14 @@ client.EvalSeeds.CreateEvalSeed(
 <dd>
 
 **projectID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agentID:** `*string` 
     
 </dd>
 </dl>
@@ -9130,6 +9293,14 @@ client.IssueClusters.ListIssueClusters(
     
 </dd>
 </dl>
+
+<dl>
+<dd>
+
+**agentID:** `*string` 
+    
+</dd>
+</dl>
 </dd>
 </dl>
 
@@ -9421,6 +9592,14 @@ client.IssueClusters.UpdateIssueClusterStatus(
 <dd>
 
 **clusterID:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `*string` 
     
 </dd>
 </dl>

@@ -329,7 +329,7 @@ async fn main() {
 </details>
 
 ## Changesets
-<details><summary><code>client.changesets.<a href="/src/api/resources/changesets/client.rs">list_changesets</a>(project_id: String, status: Option&lt;Option&lt;Option&lt;ListChangesetsChangesetsRequestStatus&gt;&gt;&gt;) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
+<details><summary><code>client.changesets.<a href="/src/api/resources/changesets/client.rs">list_changesets</a>(project_id: String, status: Option&lt;Option&lt;Option&lt;ListChangesetsChangesetsRequestStatus&gt;&gt;&gt;, improvement: Option&lt;Option&lt;Option&lt;bool&gt;&gt;&gt;) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -385,6 +385,14 @@ async fn main() {
 <dd>
 
 **status:** `Option<Option<ListChangesetsChangesetsRequestStatus>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**improvement:** `Option<Option<bool>>` 
     
 </dd>
 </dl>
@@ -2459,6 +2467,179 @@ async fn main() {
 <dd>
 
 **limit:** `Option<i64>` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkspaces
+<details><summary><code>client.compute_workspaces.<a href="/src/api/resources/compute_workspaces/client.rs">get</a>(project_id: String, attachment_id: String, run_id: String) -> Result&lt;WorkspaceCheckpointView, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .compute_workspaces
+        .get(
+            &"project_id".to_string(),
+            &"attachment_id".to_string(),
+            &"run_id".to_string(),
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.compute_workspaces.<a href="/src/api/resources/compute_workspaces/client.rs">commit_tree</a>(project_id: String, attachment_id: String, run_id: String, request: WorkspaceTreeInput) -> Result&lt;WorkspaceCheckpointView, ApiError&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```rust
+use sikaru::prelude::*;
+
+#[tokio::main]
+async fn main() {
+    let config = ClientConfig {
+        token: Some("<token>".to_string()),
+        ..Default::default()
+    };
+    let client = Sikaru::new(config).expect("Failed to build client");
+    client
+        .compute_workspaces
+        .commit_tree(
+            &"project_id".to_string(),
+            &"attachment_id".to_string(),
+            &"run_id".to_string(),
+            &WorkspaceTreeInput {
+                files: HashMap::from([(
+                    "key".to_string(),
+                    WorkspaceFile {
+                        chunks: vec![WorkspaceChunk {
+                            sha256: "sha256".to_string(),
+                            size: 1,
+                            ..Default::default()
+                        }],
+                        mode: 1,
+                        sha256: "sha256".to_string(),
+                        size: 1,
+                        ..Default::default()
+                    },
+                )]),
+            },
+            None,
+        )
+        .await;
+}
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachment_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**files:** `std::collections::HashMap<String, WorkspaceFile>` 
     
 </dd>
 </dl>
@@ -4653,6 +4834,7 @@ async fn main() {
                 issue_id: "issueId".to_string(),
                 issue_title: "issueTitle".to_string(),
                 trace_ids: vec!["traceIds".to_string()],
+                agent_id: None,
                 dataset_name: None,
                 evaluator_name: None,
             },
@@ -4675,6 +4857,14 @@ async fn main() {
 <dd>
 
 **project_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `Option<Option<String>>` 
     
 </dd>
 </dl>
@@ -10525,7 +10715,7 @@ async fn main() {
 </details>
 
 ## IssueClusters
-<details><summary><code>client.issue_clusters.<a href="/src/api/resources/issue_clusters/client.rs">list_issue_clusters</a>(project_id: String, status: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;, severity: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
+<details><summary><code>client.issue_clusters.<a href="/src/api/resources/issue_clusters/client.rs">list_issue_clusters</a>(project_id: String, status: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;, severity: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;, agent_id: Option&lt;Option&lt;Option&lt;String&gt;&gt;&gt;) -> Result&lt;std::collections::HashMap&lt;String, serde_json::Value&gt;, ApiError&gt;</code></summary>
 <dl>
 <dd>
 
@@ -10589,6 +10779,14 @@ async fn main() {
 <dd>
 
 **severity:** `Option<Option<String>>` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `Option<Option<String>>` 
     
 </dd>
 </dl>
@@ -10905,6 +11103,7 @@ async fn main() {
             &"cluster_id".to_string(),
             &UpdateIssueClusterStatusRequest {
                 status: "status".to_string(),
+                reason: None,
             },
             None,
         )
@@ -10933,6 +11132,14 @@ async fn main() {
 <dd>
 
 **cluster_id:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reason:** `Option<Option<String>>` 
     
 </dd>
 </dl>

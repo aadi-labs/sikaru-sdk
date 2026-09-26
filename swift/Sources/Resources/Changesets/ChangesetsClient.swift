@@ -21,12 +21,13 @@ public final class ChangesetsClient: Sendable {
     /// ```
     ///
     /// - Parameter requestOptions: Additional options for configuring the request, such as custom headers or timeout settings.
-    public func listChangesets(projectId: String, status: Nullable<ListChangesetsChangesetsRequestStatus>? = nil, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
+    public func listChangesets(projectId: String, status: Nullable<ListChangesetsChangesetsRequestStatus>? = nil, improvement: Nullable<Bool>? = nil, requestOptions: RequestOptions? = nil) async throws -> [String: JSONValue] {
         return try await httpClient.performRequest(
             method: .get,
             path: "/v1/projects/\(projectId)/changesets",
             queryParams: [
-                "status": status?.wrappedValue.map { .string($0.rawValue) }
+                "status": status?.wrappedValue.map { .string($0.rawValue) }, 
+                "improvement": improvement?.wrappedValue.map { .bool($0) }
             ],
             requestOptions: requestOptions,
             responseType: [String: JSONValue].self

@@ -124,13 +124,13 @@ You can upload files using the client:
 ```typescript
 import { createReadStream } from "fs";
 
-await client.executionSessions.uploadFile(createReadStream("path/to/file"), ...);
-await client.executionSessions.uploadFile(new ReadableStream(), ...);
-await client.executionSessions.uploadFile(Buffer.from('binary data'), ...);
-await client.executionSessions.uploadFile(new Blob(['binary data'], { type: 'audio/mpeg' }), ...);
-await client.executionSessions.uploadFile(new File(['binary data'], 'file.mp3'), ...);
-await client.executionSessions.uploadFile(new ArrayBuffer(8), ...);
-await client.executionSessions.uploadFile(new Uint8Array([0, 1, 2]), ...);
+await client.computeWorkspaces.putBlob(createReadStream("path/to/file"), ...);
+await client.computeWorkspaces.putBlob(new ReadableStream(), ...);
+await client.computeWorkspaces.putBlob(Buffer.from('binary data'), ...);
+await client.computeWorkspaces.putBlob(new Blob(['binary data'], { type: 'audio/mpeg' }), ...);
+await client.computeWorkspaces.putBlob(new File(['binary data'], 'file.mp3'), ...);
+await client.computeWorkspaces.putBlob(new ArrayBuffer(8), ...);
+await client.computeWorkspaces.putBlob(new Uint8Array([0, 1, 2]), ...);
 ```
 The client accepts a variety of types for file upload parameters:
 * Stream types: `fs.ReadStream`, `stream.Readable`, and `ReadableStream`

@@ -9,6 +9,8 @@ module Sikaru
         field :status, -> { String }, optional: true, nullable: false
 
         field :severity, -> { String }, optional: true, nullable: false
+
+        field :agent_id, -> { String }, optional: true, nullable: false
       end
     end
   end

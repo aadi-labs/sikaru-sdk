@@ -1,6 +1,7 @@
 import Foundation
 
 public enum OperationViewMethod: String, Codable, Hashable, CaseIterable, Sendable {
+    case bashRun = "bash.run"
     case bashStart = "bash.start"
     case bashRead = "bash.read"
     case bashWait = "bash.wait"

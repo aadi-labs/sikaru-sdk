@@ -8,4 +8,5 @@ import * as Sikaru from "../../../../index.js";
  */
 export interface ListChangesetsChangesetsRequest {
     status?: Sikaru.ListChangesetsChangesetsRequestStatus | null;
+    improvement?: boolean | null;
 }

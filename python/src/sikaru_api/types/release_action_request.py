@@ -9,6 +9,18 @@ from ..core.serialization import FieldMetadata
 
 
 class ReleaseActionRequest(UniversalBaseModel):
+    acknowledge_missing_evidence: typing_extensions.Annotated[
+        typing.Optional[bool],
+        FieldMetadata(alias="acknowledgeMissingEvidence"),
+        pydantic.Field(
+            alias="acknowledgeMissingEvidence", description="Promote even though no check evidence is passing yet."
+        ),
+    ] = None
+    """
+    Promote even though no check evidence is passing yet.
+    """
+
+    reason: typing.Optional[str] = None
     release_target: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="releaseTarget"), pydantic.Field(alias="releaseTarget")
     ] = None

@@ -269,7 +269,7 @@ try await main()
 </details>
 
 ## Changesets
-<details><summary><code>client.changesets.<a href="/Sources/Resources/Changesets/ChangesetsClient.swift">listChangesets</a>(projectId: String, status: Nullable&lt;ListChangesetsChangesetsRequestStatus&gt;?, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
+<details><summary><code>client.changesets.<a href="/Sources/Resources/Changesets/ChangesetsClient.swift">listChangesets</a>(projectId: String, status: Nullable&lt;ListChangesetsChangesetsRequestStatus&gt;?, improvement: Nullable&lt;Bool&gt;?, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
 <dl>
 <dd>
 
@@ -315,6 +315,14 @@ try await main()
 <dd>
 
 **status:** `Nullable<ListChangesetsChangesetsRequestStatus>?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**improvement:** `Nullable<Bool>?` 
     
 </dd>
 </dl>
@@ -2354,6 +2362,182 @@ try await main()
 <dd>
 
 **limit:** `Int?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## ComputeWorkspaces
+<details><summary><code>client.computeWorkspaces.<a href="/Sources/Resources/ComputeWorkspaces/ComputeWorkspacesClient.swift">get</a>(projectId: String, attachmentId: String, runId: String, requestOptions: RequestOptions?) -> WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeWorkspaces.get(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        runId: "run_id"
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RequestOptions?` — Additional options for configuring the request, such as custom headers or timeout settings.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.computeWorkspaces.<a href="/Sources/Resources/ComputeWorkspaces/ComputeWorkspacesClient.swift">commitTree</a>(projectId: String, attachmentId: String, runId: String, request: Requests.WorkspaceTreeInput, requestOptions: RequestOptions?) -> WorkspaceCheckpointView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```swift
+import Foundation
+import Sikaru
+
+private func main() async throws {
+    let client = Sikaru(apiKey: "<token>")
+
+    _ = try await client.computeWorkspaces.commitTree(
+        projectId: "project_id",
+        attachmentId: "attachment_id",
+        runId: "run_id",
+        request: .init(files: [
+            "key": WorkspaceFile(
+                chunks: [
+                    WorkspaceChunk(
+                        sha256: "sha256",
+                        size: 1
+                    )
+                ],
+                mode: 1,
+                sha256: "sha256",
+                size: 1
+            )
+        ])
+    )
+}
+
+try await main()
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**projectId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**attachmentId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**runId:** `String` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Requests.WorkspaceTreeInput` 
     
 </dd>
 </dl>
@@ -9383,7 +9567,7 @@ try await main()
 </details>
 
 ## IssueClusters
-<details><summary><code>client.issueClusters.<a href="/Sources/Resources/IssueClusters/IssueClustersClient.swift">listIssueClusters</a>(projectId: String, status: Nullable&lt;String&gt;?, severity: Nullable&lt;String&gt;?, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
+<details><summary><code>client.issueClusters.<a href="/Sources/Resources/IssueClusters/IssueClustersClient.swift">listIssueClusters</a>(projectId: String, status: Nullable&lt;String&gt;?, severity: Nullable&lt;String&gt;?, agentId: Nullable&lt;String&gt;?, requestOptions: RequestOptions?) -> [String: JSONValue]</code></summary>
 <dl>
 <dd>
 
@@ -9437,6 +9621,14 @@ try await main()
 <dd>
 
 **severity:** `Nullable<String>?` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agentId:** `Nullable<String>?` 
     
 </dd>
 </dl>

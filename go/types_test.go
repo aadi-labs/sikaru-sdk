@@ -3809,6 +3809,397 @@ func TestGettersValidationErrorLocItem(t *testing.T) {
 
 }
 
+func TestSettersWorkspaceCheckpointView(t *testing.T) {
+	t.Run("SetCheckpointID", func(t *testing.T) {
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueCheckpointID string
+		obj.SetCheckpointID(fernTestValueCheckpointID)
+		assert.Equal(t, fernTestValueCheckpointID, obj.CheckpointID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetOwnerEpoch", func(t *testing.T) {
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueOwnerEpoch int
+		obj.SetOwnerEpoch(fernTestValueOwnerEpoch)
+		assert.Equal(t, fernTestValueOwnerEpoch, obj.OwnerEpoch)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetRunID", func(t *testing.T) {
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueRunID string
+		obj.SetRunID(fernTestValueRunID)
+		assert.Equal(t, fernTestValueRunID, obj.RunID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetStatus", func(t *testing.T) {
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueStatus WorkspaceCheckpointViewStatus
+		obj.SetStatus(fernTestValueStatus)
+		assert.Equal(t, fernTestValueStatus, obj.Status)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetTreeID", func(t *testing.T) {
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueTreeID *string
+		obj.SetTreeID(fernTestValueTreeID)
+		assert.Equal(t, fernTestValueTreeID, obj.TreeID)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+	t.Run("SetWorkspaceGeneration", func(t *testing.T) {
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueWorkspaceGeneration string
+		obj.SetWorkspaceGeneration(fernTestValueWorkspaceGeneration)
+		assert.Equal(t, fernTestValueWorkspaceGeneration, obj.WorkspaceGeneration)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
+}
+
+func TestGettersWorkspaceCheckpointView(t *testing.T) {
+	t.Run("GetCheckpointID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var expected string
+		obj.CheckpointID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetCheckpointID(), "getter should return the property value")
+	})
+
+	t.Run("GetCheckpointID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetCheckpointID() // Should return zero value
+	})
+
+	t.Run("GetOwnerEpoch", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var expected int
+		obj.OwnerEpoch = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetOwnerEpoch(), "getter should return the property value")
+	})
+
+	t.Run("GetOwnerEpoch_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetOwnerEpoch() // Should return zero value
+	})
+
+	t.Run("GetRunID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var expected string
+		obj.RunID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetRunID(), "getter should return the property value")
+	})
+
+	t.Run("GetRunID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetRunID() // Should return zero value
+	})
+
+	t.Run("GetStatus", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var expected WorkspaceCheckpointViewStatus
+		obj.Status = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetStatus(), "getter should return the property value")
+	})
+
+	t.Run("GetStatus_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetStatus() // Should return zero value
+	})
+
+	t.Run("GetTreeID", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var expected *string
+		obj.TreeID = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTreeID(), "getter should return the property value")
+	})
+
+	t.Run("GetTreeID_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		obj.TreeID = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTreeID(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTreeID_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTreeID() // Should return zero value
+	})
+
+	t.Run("GetWorkspaceGeneration", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var expected string
+		obj.WorkspaceGeneration = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetWorkspaceGeneration(), "getter should return the property value")
+	})
+
+	t.Run("GetWorkspaceGeneration_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetWorkspaceGeneration() // Should return zero value
+	})
+
+}
+
+func TestSettersMarkExplicitWorkspaceCheckpointView(t *testing.T) {
+	t.Run("SetCheckpointID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueCheckpointID string
+
+		// Act
+		obj.SetCheckpointID(fernTestValueCheckpointID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetOwnerEpoch_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueOwnerEpoch int
+
+		// Act
+		obj.SetOwnerEpoch(fernTestValueOwnerEpoch)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetRunID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueRunID string
+
+		// Act
+		obj.SetRunID(fernTestValueRunID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetStatus_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueStatus WorkspaceCheckpointViewStatus
+
+		// Act
+		obj.SetStatus(fernTestValueStatus)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTreeID_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueTreeID *string
+
+		// Act
+		obj.SetTreeID(fernTestValueTreeID)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetWorkspaceGeneration_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+		var fernTestValueWorkspaceGeneration string
+
+		// Act
+		obj.SetWorkspaceGeneration(fernTestValueWorkspaceGeneration)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+}
+
 func TestSettersWorkspaceProvenance(t *testing.T) {
 	t.Run("SetIdentity", func(t *testing.T) {
 		obj := &WorkspaceProvenance{}
@@ -4305,6 +4696,39 @@ func TestJSONMarshalingValidationError(t *testing.T) {
 	})
 }
 
+func TestJSONMarshalingWorkspaceCheckpointView(t *testing.T) {
+	t.Run("MarshalUnmarshal", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkspaceCheckpointView{}
+
+		// Act - Marshal to JSON
+		data, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed")
+		assert.NotNil(t, data, "marshaled data should not be nil")
+		assert.NotEmpty(t, data, "marshaled data should not be empty")
+
+		// Unmarshal back and verify round-trip
+		var unmarshaled WorkspaceCheckpointView
+		err = json.Unmarshal(data, &unmarshaled)
+		assert.NoError(t, err, "round-trip unmarshal should succeed")
+	})
+
+	t.Run("UnmarshalInvalidJSON", func(t *testing.T) {
+		t.Parallel()
+		var obj WorkspaceCheckpointView
+		err := json.Unmarshal([]byte(`{invalid json}`), &obj)
+		assert.Error(t, err, "unmarshaling invalid JSON should return an error")
+	})
+
+	t.Run("UnmarshalEmptyObject", func(t *testing.T) {
+		t.Parallel()
+		var obj WorkspaceCheckpointView
+		err := json.Unmarshal([]byte(`{}`), &obj)
+		assert.NoError(t, err, "unmarshaling empty object should succeed")
+	})
+}
+
 func TestJSONMarshalingWorkspaceProvenance(t *testing.T) {
 	t.Run("MarshalUnmarshal", func(t *testing.T) {
 		t.Parallel()
@@ -4509,6 +4933,22 @@ func TestStringValidationError(t *testing.T) {
 	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *ValidationError
+		result := obj.String()
+		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
+	})
+}
+
+func TestStringWorkspaceCheckpointView(t *testing.T) {
+	t.Run("StringMethod", func(t *testing.T) {
+		t.Parallel()
+		obj := &WorkspaceCheckpointView{}
+		result := obj.String()
+		assert.NotEmpty(t, result, "String() should return a non-empty representation")
+	})
+
+	t.Run("StringMethod_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
 		result := obj.String()
 		assert.Equal(t, "<nil>", result, "String() should return <nil> for nil receiver")
 	})
@@ -4768,6 +5208,49 @@ func TestEnumReceiptViewStatus(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewReceiptViewStatusFromString("accepted")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWorkspaceCheckpointViewStatus(t *testing.T) {
+	t.Run("NewFromString_requested", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWorkspaceCheckpointViewStatusFromString("requested")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WorkspaceCheckpointViewStatus("requested"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_unsupported", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWorkspaceCheckpointViewStatusFromString("unsupported")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WorkspaceCheckpointViewStatus("unsupported"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_publishing", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWorkspaceCheckpointViewStatusFromString("publishing")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WorkspaceCheckpointViewStatus("publishing"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_published", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWorkspaceCheckpointViewStatusFromString("published")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WorkspaceCheckpointViewStatus("published"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWorkspaceCheckpointViewStatusFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWorkspaceCheckpointViewStatusFromString("requested")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
@@ -5059,6 +5542,29 @@ func TestExtraPropertiesValidationError(t *testing.T) {
 	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
 		t.Parallel()
 		var obj *ValidationError
+		extraProps := obj.GetExtraProperties()
+		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
+	})
+}
+
+func TestExtraPropertiesWorkspaceCheckpointView(t *testing.T) {
+	t.Run("GetExtraProperties", func(t *testing.T) {
+		t.Parallel()
+		obj := &WorkspaceCheckpointView{}
+		// Should not panic when calling GetExtraProperties()
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("GetExtraProperties() panicked: %v", r)
+			}
+		}()
+		extraProps := obj.GetExtraProperties()
+		// Result can be nil or an empty/non-empty map
+		_ = extraProps
+	})
+
+	t.Run("GetExtraProperties_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkspaceCheckpointView
 		extraProps := obj.GetExtraProperties()
 		assert.Nil(t, extraProps, "nil receiver should return nil without panicking")
 	})

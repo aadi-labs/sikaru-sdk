@@ -17,6 +17,8 @@ export * as computeOperations from "./computeOperations/index.js";
 export * from "./computeOperations/client/requests/index.js";
 export * as computeWorkers from "./computeWorkers/index.js";
 export * from "./computeWorkers/client/requests/index.js";
+export * as computeWorkspaces from "./computeWorkspaces/index.js";
+export * from "./computeWorkspaces/client/requests/index.js";
 export * as connections from "./connections/index.js";
 export * from "./connections/client/requests/index.js";
 export * as contextRegistry from "./contextRegistry/index.js";

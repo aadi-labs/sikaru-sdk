@@ -128,11 +128,13 @@ func (c *CreateChangeSetRequest) MarshalJSON() ([]byte, error) {
 }
 
 var (
-	listChangesetsChangesetsRequestFieldStatus = big.NewInt(1 << 0)
+	listChangesetsChangesetsRequestFieldStatus      = big.NewInt(1 << 0)
+	listChangesetsChangesetsRequestFieldImprovement = big.NewInt(1 << 1)
 )
 
 type ListChangesetsChangesetsRequest struct {
-	Status *ListChangesetsChangesetsRequestStatus `json:"-" url:"status,omitempty"`
+	Status      *ListChangesetsChangesetsRequestStatus `json:"-" url:"status,omitempty"`
+	Improvement *bool                                  `json:"-" url:"improvement,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
@@ -152,18 +154,44 @@ func (l *ListChangesetsChangesetsRequest) SetStatus(status *ListChangesetsChange
 	l.require(listChangesetsChangesetsRequestFieldStatus)
 }
 
+// SetImprovement sets the Improvement field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (l *ListChangesetsChangesetsRequest) SetImprovement(improvement *bool) {
+	l.Improvement = improvement
+	l.require(listChangesetsChangesetsRequestFieldImprovement)
+}
+
 var (
-	releaseActionRequestFieldReleaseTarget = big.NewInt(1 << 0)
+	releaseActionRequestFieldAcknowledgeMissingEvidence = big.NewInt(1 << 0)
+	releaseActionRequestFieldReason                     = big.NewInt(1 << 1)
+	releaseActionRequestFieldReleaseTarget              = big.NewInt(1 << 2)
 )
 
 type ReleaseActionRequest struct {
-	ReleaseTarget *string `json:"releaseTarget,omitempty" url:"releaseTarget,omitempty"`
+	// Promote even though no check evidence is passing yet.
+	AcknowledgeMissingEvidence *bool   `json:"acknowledgeMissingEvidence,omitempty" url:"acknowledgeMissingEvidence,omitempty"`
+	Reason                     *string `json:"reason,omitempty" url:"reason,omitempty"`
+	ReleaseTarget              *string `json:"releaseTarget,omitempty" url:"releaseTarget,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
 	explicitFields *big.Int `json:"-" url:"-"`
 
 	extraProperties map[string]interface{}
 	rawJSON         json.RawMessage
+}
+
+func (r *ReleaseActionRequest) GetAcknowledgeMissingEvidence() *bool {
+	if r == nil {
+		return nil
+	}
+	return r.AcknowledgeMissingEvidence
+}
+
+func (r *ReleaseActionRequest) GetReason() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Reason
 }
 
 func (r *ReleaseActionRequest) GetReleaseTarget() *string {
@@ -185,6 +213,20 @@ func (r *ReleaseActionRequest) require(field *big.Int) {
 		r.explicitFields = big.NewInt(0)
 	}
 	r.explicitFields.Or(r.explicitFields, field)
+}
+
+// SetAcknowledgeMissingEvidence sets the AcknowledgeMissingEvidence field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReleaseActionRequest) SetAcknowledgeMissingEvidence(acknowledgeMissingEvidence *bool) {
+	r.AcknowledgeMissingEvidence = acknowledgeMissingEvidence
+	r.require(releaseActionRequestFieldAcknowledgeMissingEvidence)
+}
+
+// SetReason sets the Reason field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (r *ReleaseActionRequest) SetReason(reason *string) {
+	r.Reason = reason
+	r.require(releaseActionRequestFieldReason)
 }
 
 // SetReleaseTarget sets the ReleaseTarget field and marks it as non-optional;

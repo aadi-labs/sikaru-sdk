@@ -32,6 +32,7 @@ class EvalSeedsClient:
         issue_id: str,
         issue_title: str,
         trace_ids: typing.Sequence[str],
+        agent_id: typing.Optional[str] = OMIT,
         dataset_name: typing.Optional[str] = OMIT,
         evaluator_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -46,6 +47,8 @@ class EvalSeedsClient:
         issue_title : str
 
         trace_ids : typing.Sequence[str]
+
+        agent_id : typing.Optional[str]
 
         dataset_name : typing.Optional[str]
 
@@ -78,6 +81,7 @@ class EvalSeedsClient:
             issue_id=issue_id,
             issue_title=issue_title,
             trace_ids=trace_ids,
+            agent_id=agent_id,
             dataset_name=dataset_name,
             evaluator_name=evaluator_name,
             request_options=request_options,
@@ -107,6 +111,7 @@ class AsyncEvalSeedsClient:
         issue_id: str,
         issue_title: str,
         trace_ids: typing.Sequence[str],
+        agent_id: typing.Optional[str] = OMIT,
         dataset_name: typing.Optional[str] = OMIT,
         evaluator_name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -121,6 +126,8 @@ class AsyncEvalSeedsClient:
         issue_title : str
 
         trace_ids : typing.Sequence[str]
+
+        agent_id : typing.Optional[str]
 
         dataset_name : typing.Optional[str]
 
@@ -161,6 +168,7 @@ class AsyncEvalSeedsClient:
             issue_id=issue_id,
             issue_title=issue_title,
             trace_ids=trace_ids,
+            agent_id=agent_id,
             dataset_name=dataset_name,
             evaluator_name=evaluator_name,
             request_options=request_options,
