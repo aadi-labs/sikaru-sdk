@@ -3,6 +3,7 @@
 import * as Sikaru from "../index.js";
 
 export interface ReadyInput {
+    /** Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations. */
     capabilities: ReadyInput.Capabilities.Item[];
     executor_instance_id: string;
     journal_id: string;
@@ -17,7 +18,8 @@ export namespace ReadyInput {
         export const Item = {
                 ComputeExecute: "compute.execute",
                 BashRun: "bash.run",
-                FilesystemCheckpointV1: "filesystem-checkpoint-v1"
+                FilesystemCheckpointV1: "filesystem-checkpoint-v1",
+                ConditionWaitsV1: "condition-waits-v1"
             } as const;
         export type Item = typeof Item[keyof typeof Item];
     }

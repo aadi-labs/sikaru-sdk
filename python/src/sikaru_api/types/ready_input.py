@@ -10,7 +10,11 @@ from .workspace_provenance import WorkspaceProvenance
 
 
 class ReadyInput(UniversalBaseModel):
-    capabilities: typing.List[ReadyInputCapabilitiesItem]
+    capabilities: typing.List[ReadyInputCapabilitiesItem] = pydantic.Field()
+    """
+    Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
+    """
+
     executor_instance_id: str
     journal_id: str
     protocol_version: ReadyInputProtocolVersion

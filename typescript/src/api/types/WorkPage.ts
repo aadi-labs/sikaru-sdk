@@ -10,6 +10,8 @@ export interface WorkPage {
     live_handles: Sikaru.LiveHandle[];
     operations: Sikaru.OperationView[];
     poll_after_seconds?: number | undefined;
+    /** Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route. */
+    transport?: WorkPage.Transport | undefined;
     workspace_checkpoint?: (Sikaru.WorkspaceCheckpointView | null) | undefined;
 }
 
@@ -22,4 +24,10 @@ export namespace WorkPage {
             Terminal: "terminal"
         } as const;
     export type ExecutionPhase = typeof ExecutionPhase[keyof typeof ExecutionPhase];
+    /** Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route. */
+    export const Transport = {
+            Channel: "channel",
+            Poll: "poll"
+        } as const;
+    export type Transport = typeof Transport[keyof typeof Transport];
 }

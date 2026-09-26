@@ -23,7 +23,9 @@ export namespace OperationView {
             BashRead: "bash.read",
             BashWait: "bash.wait",
             BashCancel: "bash.cancel",
-            WorkspaceWriteText: "workspace.write_text"
+            WorkspaceWriteText: "workspace.write_text",
+            BashWaitFor: "bash.wait_for",
+            JobsNextCompleted: "jobs.next_completed"
         } as const;
     export type Method = typeof Method[keyof typeof Method];
 }

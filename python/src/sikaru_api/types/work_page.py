@@ -10,6 +10,7 @@ from .live_handle import LiveHandle
 from .operation_view import OperationView
 from .uncertain_operation import UncertainOperation
 from .work_page_execution_phase import WorkPageExecutionPhase
+from .work_page_transport import WorkPageTransport
 from .workspace_checkpoint_view import WorkspaceCheckpointView
 
 
@@ -21,6 +22,11 @@ class WorkPage(UniversalBaseModel):
     live_handles: typing.List[LiveHandle]
     operations: typing.List[OperationView]
     poll_after_seconds: typing.Optional[int] = None
+    transport: typing.Optional[WorkPageTransport] = pydantic.Field(default=None)
+    """
+    Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route.
+    """
+
     workspace_checkpoint: typing.Optional[WorkspaceCheckpointView] = None
 
     if IS_PYDANTIC_V2:

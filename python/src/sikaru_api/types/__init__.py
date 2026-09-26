@@ -93,6 +93,7 @@ if typing.TYPE_CHECKING:
     from .versioned_trace_import_action import VersionedTraceImportAction
     from .work_page import WorkPage
     from .work_page_execution_phase import WorkPageExecutionPhase
+    from .work_page_transport import WorkPageTransport
     from .workspace_blob_view import WorkspaceBlobView
     from .workspace_checkpoint_view import WorkspaceCheckpointView
     from .workspace_checkpoint_view_status import WorkspaceCheckpointViewStatus
@@ -188,6 +189,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "VersionedTraceImportAction": ".versioned_trace_import_action",
     "WorkPage": ".work_page",
     "WorkPageExecutionPhase": ".work_page_execution_phase",
+    "WorkPageTransport": ".work_page_transport",
     "WorkspaceBlobView": ".workspace_blob_view",
     "WorkspaceCheckpointView": ".workspace_checkpoint_view",
     "WorkspaceCheckpointViewStatus": ".workspace_checkpoint_view_status",
@@ -307,6 +309,7 @@ __all__ = [
     "VersionedTraceImportAction",
     "WorkPage",
     "WorkPageExecutionPhase",
+    "WorkPageTransport",
     "WorkspaceBlobView",
     "WorkspaceCheckpointView",
     "WorkspaceCheckpointViewStatus",

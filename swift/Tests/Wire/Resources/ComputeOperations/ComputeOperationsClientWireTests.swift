@@ -177,6 +177,7 @@ import Sikaru
                     }
                   ],
                   "poll_after_seconds": 1,
+                  "transport": "channel",
                   "workspace_checkpoint": {
                     "checkpoint_id": "checkpoint_id",
                     "owner_epoch": 1,
@@ -277,6 +278,7 @@ import Sikaru
                 )
             ],
             pollAfterSeconds: Optional(1),
+            transport: Optional(WorkPageTransport.channel),
             workspaceCheckpoint: Optional(Nullable<WorkspaceCheckpointView>.value(WorkspaceCheckpointView(
                 checkpointId: "checkpoint_id",
                 ownerEpoch: 1,
@@ -426,6 +428,7 @@ import Sikaru
                     }
                   ],
                   "poll_after_seconds": 1,
+                  "transport": "channel",
                   "workspace_checkpoint": {
                     "checkpoint_id": "checkpoint_id",
                     "owner_epoch": 1,
@@ -574,6 +577,7 @@ import Sikaru
                 )
             ],
             pollAfterSeconds: Optional(1),
+            transport: Optional(WorkPageTransport.channel),
             workspaceCheckpoint: Optional(Nullable<WorkspaceCheckpointView>.value(WorkspaceCheckpointView(
                 checkpointId: "checkpoint_id",
                 ownerEpoch: 1,

@@ -647,6 +647,7 @@ var (
 )
 
 type ReadyInput struct {
+	// Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
 	Capabilities        []ReadyInputCapabilitiesItem `json:"capabilities" url:"capabilities"`
 	ExecutorInstanceID  string                       `json:"executor_instance_id" url:"executor_instance_id"`
 	JournalID           string                       `json:"journal_id" url:"journal_id"`
@@ -792,6 +793,7 @@ const (
 	ReadyInputCapabilitiesItemComputeExecute         ReadyInputCapabilitiesItem = "compute.execute"
 	ReadyInputCapabilitiesItemBashRun                ReadyInputCapabilitiesItem = "bash.run"
 	ReadyInputCapabilitiesItemFilesystemCheckpointV1 ReadyInputCapabilitiesItem = "filesystem-checkpoint-v1"
+	ReadyInputCapabilitiesItemConditionWaitsV1       ReadyInputCapabilitiesItem = "condition-waits-v1"
 )
 
 func NewReadyInputCapabilitiesItemFromString(s string) (ReadyInputCapabilitiesItem, error) {
@@ -802,6 +804,8 @@ func NewReadyInputCapabilitiesItemFromString(s string) (ReadyInputCapabilitiesIt
 		return ReadyInputCapabilitiesItemBashRun, nil
 	case "filesystem-checkpoint-v1":
 		return ReadyInputCapabilitiesItemFilesystemCheckpointV1, nil
+	case "condition-waits-v1":
+		return ReadyInputCapabilitiesItemConditionWaitsV1, nil
 	}
 	var t ReadyInputCapabilitiesItem
 	return "", fmt.Errorf("%s is not a valid %T", s, t)

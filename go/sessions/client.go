@@ -119,72 +119,6 @@ func (c *Client) ListManagedSessionFiles(
 
 // Example:
 //
-//	request := &_go.CreateManagedInterpreterRequest{
-//	    Language: "language",
-//	}
-//	client.Sessions.CreateManagedInterpreter(
-//	    context.TODO(),
-//	    "project_id",
-//	    "session_id",
-//	    request,
-//	)
-func (c *Client) CreateManagedInterpreter(
-	ctx context.Context,
-	projectID string,
-	sessionID string,
-	request *_go.CreateManagedInterpreterRequest,
-	opts ...option.RequestOption,
-) (map[string]any, error) {
-	response, err := c.WithRawResponse.CreateManagedInterpreter(
-		ctx,
-		projectID,
-		sessionID,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Example:
-//
-//	request := &_go.ExecuteManagedInterpreterRequest{
-//	    Code: "code",
-//	    TimeoutSeconds: 1,
-//	}
-//	client.Sessions.ExecuteManagedInterpreter(
-//	    context.TODO(),
-//	    "project_id",
-//	    "session_id",
-//	    "interpreter_id",
-//	    request,
-//	)
-func (c *Client) ExecuteManagedInterpreter(
-	ctx context.Context,
-	projectID string,
-	sessionID string,
-	interpreterID string,
-	request *_go.ExecuteManagedInterpreterRequest,
-	opts ...option.RequestOption,
-) (map[string]any, error) {
-	response, err := c.WithRawResponse.ExecuteManagedInterpreter(
-		ctx,
-		projectID,
-		sessionID,
-		interpreterID,
-		request,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Example:
-//
 //	client.Sessions.ListManagedSessionPlan(
 //	    context.TODO(),
 //	    "project_id",
@@ -200,40 +134,6 @@ func (c *Client) ListManagedSessionPlan(
 		ctx,
 		projectID,
 		sessionID,
-		opts...,
-	)
-	if err != nil {
-		return nil, err
-	}
-	return response.Body, nil
-}
-
-// Example:
-//
-//	request := &_go.CreateSandboxExecutionRequest{
-//	    ContextPackageRef: "contextPackageRef",
-//	    IdempotencyKey: "idempotencyKey",
-//	    TimeoutSeconds: 1,
-//	    WorkflowRef: "workflowRef",
-//	}
-//	client.Sessions.StartManagedSandboxExecution(
-//	    context.TODO(),
-//	    "project_id",
-//	    "session_id",
-//	    request,
-//	)
-func (c *Client) StartManagedSandboxExecution(
-	ctx context.Context,
-	projectID string,
-	sessionID string,
-	request *_go.CreateSandboxExecutionRequest,
-	opts ...option.RequestOption,
-) (map[string]any, error) {
-	response, err := c.WithRawResponse.StartManagedSandboxExecution(
-		ctx,
-		projectID,
-		sessionID,
-		request,
 		opts...,
 	)
 	if err != nil {

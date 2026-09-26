@@ -531,6 +531,8 @@ const (
 	OperationViewMethodBashWait           OperationViewMethod = "bash.wait"
 	OperationViewMethodBashCancel         OperationViewMethod = "bash.cancel"
 	OperationViewMethodWorkspaceWriteText OperationViewMethod = "workspace.write_text"
+	OperationViewMethodBashWaitFor        OperationViewMethod = "bash.wait_for"
+	OperationViewMethodJobsNextCompleted  OperationViewMethod = "jobs.next_completed"
 )
 
 func NewOperationViewMethodFromString(s string) (OperationViewMethod, error) {
@@ -547,6 +549,10 @@ func NewOperationViewMethodFromString(s string) (OperationViewMethod, error) {
 		return OperationViewMethodBashCancel, nil
 	case "workspace.write_text":
 		return OperationViewMethodWorkspaceWriteText, nil
+	case "bash.wait_for":
+		return OperationViewMethodBashWaitFor, nil
+	case "jobs.next_completed":
+		return OperationViewMethodJobsNextCompleted, nil
 	}
 	var t OperationViewMethod
 	return "", fmt.Errorf("%s is not a valid %T", s, t)
@@ -564,17 +570,20 @@ var (
 	workPageFieldLiveHandles         = big.NewInt(1 << 4)
 	workPageFieldOperations          = big.NewInt(1 << 5)
 	workPageFieldPollAfterSeconds    = big.NewInt(1 << 6)
-	workPageFieldWorkspaceCheckpoint = big.NewInt(1 << 7)
+	workPageFieldTransport           = big.NewInt(1 << 7)
+	workPageFieldWorkspaceCheckpoint = big.NewInt(1 << 8)
 )
 
 type WorkPage struct {
-	Attachment          *AttachmentView          `json:"attachment" url:"attachment"`
-	Execution           *ExecutionView           `json:"execution,omitempty" url:"execution,omitempty"`
-	ExecutionPhase      WorkPageExecutionPhase   `json:"execution_phase" url:"execution_phase"`
-	IssuedOperations    []*UncertainOperation    `json:"issued_operations" url:"issued_operations"`
-	LiveHandles         []*LiveHandle            `json:"live_handles" url:"live_handles"`
-	Operations          []*OperationView         `json:"operations" url:"operations"`
-	PollAfterSeconds    *int                     `json:"poll_after_seconds,omitempty" url:"poll_after_seconds,omitempty"`
+	Attachment       *AttachmentView        `json:"attachment" url:"attachment"`
+	Execution        *ExecutionView         `json:"execution,omitempty" url:"execution,omitempty"`
+	ExecutionPhase   WorkPageExecutionPhase `json:"execution_phase" url:"execution_phase"`
+	IssuedOperations []*UncertainOperation  `json:"issued_operations" url:"issued_operations"`
+	LiveHandles      []*LiveHandle          `json:"live_handles" url:"live_handles"`
+	Operations       []*OperationView       `json:"operations" url:"operations"`
+	PollAfterSeconds *int                   `json:"poll_after_seconds,omitempty" url:"poll_after_seconds,omitempty"`
+	// Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route.
+	Transport           *WorkPageTransport       `json:"transport,omitempty" url:"transport,omitempty"`
 	WorkspaceCheckpoint *WorkspaceCheckpointView `json:"workspace_checkpoint,omitempty" url:"workspace_checkpoint,omitempty"`
 
 	// Private bitmask of fields set to an explicit value and therefore not to be omitted
@@ -631,6 +640,13 @@ func (w *WorkPage) GetPollAfterSeconds() *int {
 		return nil
 	}
 	return w.PollAfterSeconds
+}
+
+func (w *WorkPage) GetTransport() *WorkPageTransport {
+	if w == nil {
+		return nil
+	}
+	return w.Transport
 }
 
 func (w *WorkPage) GetWorkspaceCheckpoint() *WorkspaceCheckpointView {
@@ -701,6 +717,13 @@ func (w *WorkPage) SetOperations(operations []*OperationView) {
 func (w *WorkPage) SetPollAfterSeconds(pollAfterSeconds *int) {
 	w.PollAfterSeconds = pollAfterSeconds
 	w.require(workPageFieldPollAfterSeconds)
+}
+
+// SetTransport sets the Transport field and marks it as non-optional;
+// this prevents an empty or null value for this field from being omitted during serialization.
+func (w *WorkPage) SetTransport(transport *WorkPageTransport) {
+	w.Transport = transport
+	w.require(workPageFieldTransport)
 }
 
 // SetWorkspaceCheckpoint sets the WorkspaceCheckpoint field and marks it as non-optional;
@@ -780,5 +803,28 @@ func NewWorkPageExecutionPhaseFromString(s string) (WorkPageExecutionPhase, erro
 }
 
 func (w WorkPageExecutionPhase) Ptr() *WorkPageExecutionPhase {
+	return &w
+}
+
+// Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route.
+type WorkPageTransport string
+
+const (
+	WorkPageTransportChannel WorkPageTransport = "channel"
+	WorkPageTransportPoll    WorkPageTransport = "poll"
+)
+
+func NewWorkPageTransportFromString(s string) (WorkPageTransport, error) {
+	switch s {
+	case "channel":
+		return WorkPageTransportChannel, nil
+	case "poll":
+		return WorkPageTransportPoll, nil
+	}
+	var t WorkPageTransport
+	return "", fmt.Errorf("%s is not a valid %T", s, t)
+}
+
+func (w WorkPageTransport) Ptr() *WorkPageTransport {
 	return &w
 }

@@ -7,4 +7,6 @@ public enum OperationViewMethod: String, Codable, Hashable, CaseIterable, Sendab
     case bashWait = "bash.wait"
     case bashCancel = "bash.cancel"
     case workspaceWriteText = "workspace.write_text"
+    case bashWaitFor = "bash.wait_for"
+    case jobsNextCompleted = "jobs.next_completed"
 }

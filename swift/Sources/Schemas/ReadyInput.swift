@@ -1,6 +1,7 @@
 import Foundation
 
 public struct ReadyInput: Codable, Hashable, Sendable {
+    /// Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
     public let capabilities: [ReadyInputCapabilitiesItem]
     public let executorInstanceId: String
     public let journalId: String

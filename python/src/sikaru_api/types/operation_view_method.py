@@ -3,6 +3,15 @@
 import typing
 
 OperationViewMethod = typing.Union[
-    typing.Literal["bash.run", "bash.start", "bash.read", "bash.wait", "bash.cancel", "workspace.write_text"],
+    typing.Literal[
+        "bash.run",
+        "bash.start",
+        "bash.read",
+        "bash.wait",
+        "bash.cancel",
+        "workspace.write_text",
+        "bash.wait_for",
+        "jobs.next_completed",
+    ],
     typing.Any,
 ]

@@ -4,7 +4,6 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClie
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
 import * as core from "../../../../core/index.js";
 import { mergeHeaders } from "../../../../core/headers.js";
-import { mergeAdditionalBodyParameters } from "../../../../core/requestBody.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -178,116 +177,6 @@ export class SessionsClient {
     /**
      * @param {string} project_id
      * @param {string} session_id
-     * @param {Sikaru.CreateManagedInterpreterRequest} request
-     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Sikaru.UnprocessableEntityError}
-     * @throws {@link errors.SikaruError}
-     * @throws {@link errors.SikaruTimeoutError}
-     *
-     * @example
-     *     await client.sessions.createManagedInterpreter("project_id", "session_id", {
-     *         language: "language"
-     *     })
-     */
-    public createManagedInterpreter(project_id: string, session_id: string, request: Sikaru.CreateManagedInterpreterRequest, requestOptions?: SessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
-        return core.HttpResponsePromise.fromPromise(this.__createManagedInterpreter(project_id, session_id, request, requestOptions));
-    }
-
-    private async __createManagedInterpreter(project_id: string, session_id: string, request: Sikaru.CreateManagedInterpreterRequest, requestOptions?: SessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
-        const _response = await core.fetcher({
-            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/sessions/${core.url.encodePathParam(session_id)}/interpreters`),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: 0,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging
-        });
-        if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
-                default: throw new errors.SikaruError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.body,
-                    rawResponse: _response.rawResponse
-                });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/sessions/{session_id}/interpreters");
-    }
-
-    /**
-     * @param {string} project_id
-     * @param {string} session_id
-     * @param {string} interpreter_id
-     * @param {Sikaru.ExecuteManagedInterpreterRequest} request
-     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Sikaru.UnprocessableEntityError}
-     * @throws {@link errors.SikaruError}
-     * @throws {@link errors.SikaruTimeoutError}
-     *
-     * @example
-     *     await client.sessions.executeManagedInterpreter("project_id", "session_id", "interpreter_id", {
-     *         code: "code",
-     *         timeoutSeconds: 1
-     *     })
-     */
-    public executeManagedInterpreter(project_id: string, session_id: string, interpreter_id: string, request: Sikaru.ExecuteManagedInterpreterRequest, requestOptions?: SessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
-        return core.HttpResponsePromise.fromPromise(this.__executeManagedInterpreter(project_id, session_id, interpreter_id, request, requestOptions));
-    }
-
-    private async __executeManagedInterpreter(project_id: string, session_id: string, interpreter_id: string, request: Sikaru.ExecuteManagedInterpreterRequest, requestOptions?: SessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
-        const _response = await core.fetcher({
-            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/sessions/${core.url.encodePathParam(session_id)}/interpreters/${core.url.encodePathParam(interpreter_id)}/execute`),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: 0,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging
-        });
-        if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
-                default: throw new errors.SikaruError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.body,
-                    rawResponse: _response.rawResponse
-                });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/sessions/{session_id}/interpreters/{interpreter_id}/execute");
-    }
-
-    /**
-     * @param {string} project_id
-     * @param {string} session_id
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Sikaru.UnprocessableEntityError}
@@ -331,62 +220,5 @@ export class SessionsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/sessions/{session_id}/plan");
-    }
-
-    /**
-     * @param {string} project_id
-     * @param {string} session_id
-     * @param {Sikaru.CreateSandboxExecutionRequest} request
-     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Sikaru.UnprocessableEntityError}
-     * @throws {@link errors.SikaruError}
-     * @throws {@link errors.SikaruTimeoutError}
-     *
-     * @example
-     *     await client.sessions.startManagedSandboxExecution("project_id", "session_id", {
-     *         contextPackageRef: "contextPackageRef",
-     *         idempotencyKey: "idempotencyKey",
-     *         timeoutSeconds: 1,
-     *         workflowRef: "workflowRef"
-     *     })
-     */
-    public startManagedSandboxExecution(project_id: string, session_id: string, request: Sikaru.CreateSandboxExecutionRequest, requestOptions?: SessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
-        return core.HttpResponsePromise.fromPromise(this.__startManagedSandboxExecution(project_id, session_id, request, requestOptions));
-    }
-
-    private async __startManagedSandboxExecution(project_id: string, session_id: string, request: Sikaru.CreateSandboxExecutionRequest, requestOptions?: SessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
-        const _response = await core.fetcher({
-            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/sessions/${core.url.encodePathParam(session_id)}/sandbox-executions`),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: 0,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging
-        });
-        if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
-                default: throw new errors.SikaruError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.body,
-                    rawResponse: _response.rawResponse
-                });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/sessions/{session_id}/sandbox-executions");
     }
 }

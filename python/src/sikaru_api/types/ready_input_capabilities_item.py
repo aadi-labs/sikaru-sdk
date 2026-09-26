@@ -3,5 +3,5 @@
 import typing
 
 ReadyInputCapabilitiesItem = typing.Union[
-    typing.Literal["compute.execute", "bash.run", "filesystem-checkpoint-v1"], typing.Any
+    typing.Literal["compute.execute", "bash.run", "filesystem-checkpoint-v1", "condition-waits-v1"], typing.Any
 ]

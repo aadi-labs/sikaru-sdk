@@ -151,64 +151,6 @@ func TestSessionsListManagedSessionFilesWithWireMock(
 	VerifyRequestCount(t, "TestSessionsListManagedSessionFilesWithWireMock", "GET", "/v1/projects/project_id/sessions/session_id/files", nil, 1)
 }
 
-func TestSessionsCreateManagedInterpreterWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.New(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithAPIKey("test-token"),
-	)
-	request := &_go.CreateManagedInterpreterRequest{
-		Language: "language",
-	}
-	_, invocationErr := client.Sessions.CreateManagedInterpreter(
-		context.TODO(),
-		"project_id",
-		"session_id",
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSessionsCreateManagedInterpreterWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSessionsCreateManagedInterpreterWithWireMock", "POST", "/v1/projects/project_id/sessions/session_id/interpreters", nil, 1)
-}
-
-func TestSessionsExecuteManagedInterpreterWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.New(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithAPIKey("test-token"),
-	)
-	request := &_go.ExecuteManagedInterpreterRequest{
-		Code:           "code",
-		TimeoutSeconds: 1,
-	}
-	_, invocationErr := client.Sessions.ExecuteManagedInterpreter(
-		context.TODO(),
-		"project_id",
-		"session_id",
-		"interpreter_id",
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSessionsExecuteManagedInterpreterWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSessionsExecuteManagedInterpreterWithWireMock", "POST", "/v1/projects/project_id/sessions/session_id/interpreters/interpreter_id/execute", nil, 1)
-}
-
 func TestSessionsListManagedSessionPlanWithWireMock(
 	t *testing.T,
 ) {
@@ -231,35 +173,4 @@ func TestSessionsListManagedSessionPlanWithWireMock(
 
 	require.NoError(t, invocationErr, "Client method call should succeed")
 	VerifyRequestCount(t, "TestSessionsListManagedSessionPlanWithWireMock", "GET", "/v1/projects/project_id/sessions/session_id/plan", nil, 1)
-}
-
-func TestSessionsStartManagedSandboxExecutionWithWireMock(
-	t *testing.T,
-) {
-	WireMockBaseURL := os.Getenv("WIREMOCK_URL")
-	if WireMockBaseURL == "" {
-		WireMockBaseURL = "http://localhost:8080"
-	}
-	client := client.New(
-		option.WithBaseURL(WireMockBaseURL),
-		option.WithAPIKey("test-token"),
-	)
-	request := &_go.CreateSandboxExecutionRequest{
-		ContextPackageRef: "contextPackageRef",
-		IdempotencyKey:    "idempotencyKey",
-		TimeoutSeconds:    1,
-		WorkflowRef:       "workflowRef",
-	}
-	_, invocationErr := client.Sessions.StartManagedSandboxExecution(
-		context.TODO(),
-		"project_id",
-		"session_id",
-		request,
-		option.WithHTTPHeader(
-			http.Header{"X-Test-Id": []string{"TestSessionsStartManagedSandboxExecutionWithWireMock"}},
-		),
-	)
-
-	require.NoError(t, invocationErr, "Client method call should succeed")
-	VerifyRequestCount(t, "TestSessionsStartManagedSandboxExecutionWithWireMock", "POST", "/v1/projects/project_id/sessions/session_id/sandbox-executions", nil, 1)
 }

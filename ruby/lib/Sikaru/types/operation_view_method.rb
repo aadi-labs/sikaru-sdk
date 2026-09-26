@@ -11,6 +11,8 @@ module Sikaru
       BASH_WAIT = "bash.wait"
       BASH_CANCEL = "bash.cancel"
       WORKSPACE_WRITE_TEXT = "workspace.write_text"
+      BASH_WAIT_FOR = "bash.wait_for"
+      JOBS_NEXT_COMPLETED = "jobs.next_completed"
     end
   end
 end

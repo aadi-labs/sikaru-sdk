@@ -17,6 +17,8 @@ module Sikaru
 
       field :poll_after_seconds, -> { Integer }, optional: true, nullable: false
 
+      field :transport, -> { Sikaru::Types::WorkPageTransport }, optional: true, nullable: false
+
       field :workspace_checkpoint, -> { Sikaru::Types::WorkspaceCheckpointView }, optional: true, nullable: false
     end
   end

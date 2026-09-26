@@ -1179,6 +1179,14 @@ func TestSettersWorkPage(t *testing.T) {
 		assert.NotNil(t, obj.explicitFields)
 	})
 
+	t.Run("SetTransport", func(t *testing.T) {
+		obj := &WorkPage{}
+		var fernTestValueTransport *WorkPageTransport
+		obj.SetTransport(fernTestValueTransport)
+		assert.Equal(t, fernTestValueTransport, obj.Transport)
+		assert.NotNil(t, obj.explicitFields)
+	})
+
 	t.Run("SetWorkspaceCheckpoint", func(t *testing.T) {
 		obj := &WorkPage{}
 		var fernTestValueWorkspaceCheckpoint *WorkspaceCheckpointView
@@ -1411,6 +1419,39 @@ func TestGettersWorkPage(t *testing.T) {
 		_ = obj.GetPollAfterSeconds() // Should return zero value
 	})
 
+	t.Run("GetTransport", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkPage{}
+		var expected *WorkPageTransport
+		obj.Transport = expected
+
+		// Act & Assert
+		assert.Equal(t, expected, obj.GetTransport(), "getter should return the property value")
+	})
+
+	t.Run("GetTransport_NilValue", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkPage{}
+		obj.Transport = nil
+
+		// Act & Assert
+		assert.Nil(t, obj.GetTransport(), "getter should return nil when property is nil")
+	})
+
+	t.Run("GetTransport_NilReceiver", func(t *testing.T) {
+		t.Parallel()
+		var obj *WorkPage
+		// Should not panic - getters should handle nil receiver gracefully
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("Getter panicked on nil receiver: %v", r)
+			}
+		}()
+		_ = obj.GetTransport() // Should return zero value
+	})
+
 	t.Run("GetWorkspaceCheckpoint", func(t *testing.T) {
 		t.Parallel()
 		// Arrange
@@ -1641,6 +1682,37 @@ func TestSettersMarkExplicitWorkPage(t *testing.T) {
 
 		// Act
 		obj.SetPollAfterSeconds(fernTestValuePollAfterSeconds)
+
+		// Assert - object with explicitly set field can be marshaled/unmarshaled
+		bytes, err := json.Marshal(obj)
+		require.NoError(t, err, "marshaling should succeed for test setup")
+
+		// This test ensures JSON marshaling and unmarshaling succeed when the field has a zero/nil value
+		// Detect if marshaled JSON is an object or primitive to use correct unmarshal target
+		if len(bytes) > 0 && bytes[0] == '{' {
+			// JSON object - unmarshal into map
+			var unmarshaled map[string]interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		} else {
+			// JSON primitive (string, number, boolean, null) - unmarshal into interface{}
+			var unmarshaled interface{}
+			err = json.Unmarshal(bytes, &unmarshaled)
+			require.NoError(t, err, "unmarshaling should succeed for test verification")
+		}
+
+		// Note: This does not explicitly assert the presence of a specific JSON field
+		// It verifies that setting a field via setter allows successful JSON round-trip
+	})
+
+	t.Run("SetTransport_MarksExplicit", func(t *testing.T) {
+		t.Parallel()
+		// Arrange
+		obj := &WorkPage{}
+		var fernTestValueTransport *WorkPageTransport
+
+		// Act
+		obj.SetTransport(fernTestValueTransport)
 
 		// Assert - object with explicitly set field can be marshaled/unmarshaled
 		bytes, err := json.Marshal(obj)
@@ -1958,6 +2030,20 @@ func TestEnumOperationViewMethod(t *testing.T) {
 		assert.Equal(t, OperationViewMethod("workspace.write_text"), val, "enum value should match expected wire value")
 	})
 
+	t.Run("NewFromString_bash_wait_for", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewOperationViewMethodFromString("bash.wait_for")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, OperationViewMethod("bash.wait_for"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_jobs_next_completed", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewOperationViewMethodFromString("jobs.next_completed")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, OperationViewMethod("jobs.next_completed"), val, "enum value should match expected wire value")
+	})
+
 	t.Run("NewFromString_Invalid", func(t *testing.T) {
 		_, err := NewOperationViewMethodFromString("invalid_value_that_does_not_exist")
 		assert.Error(t, err)
@@ -2015,6 +2101,35 @@ func TestEnumWorkPageExecutionPhase(t *testing.T) {
 
 	t.Run("Ptr", func(t *testing.T) {
 		val, err := NewWorkPageExecutionPhaseFromString("idle")
+		assert.NoError(t, err)
+		ptr := val.Ptr()
+		assert.NotNil(t, ptr)
+		assert.Equal(t, val, *ptr)
+	})
+}
+
+func TestEnumWorkPageTransport(t *testing.T) {
+	t.Run("NewFromString_channel", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWorkPageTransportFromString("channel")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WorkPageTransport("channel"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_poll", func(t *testing.T) {
+		t.Parallel()
+		val, err := NewWorkPageTransportFromString("poll")
+		assert.NoError(t, err, "valid enum value should not return error")
+		assert.Equal(t, WorkPageTransport("poll"), val, "enum value should match expected wire value")
+	})
+
+	t.Run("NewFromString_Invalid", func(t *testing.T) {
+		_, err := NewWorkPageTransportFromString("invalid_value_that_does_not_exist")
+		assert.Error(t, err)
+	})
+
+	t.Run("Ptr", func(t *testing.T) {
+		val, err := NewWorkPageTransportFromString("channel")
 		assert.NoError(t, err)
 		ptr := val.Ptr()
 		assert.NotNil(t, ptr)
