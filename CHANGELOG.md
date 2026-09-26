@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.9
+
+- Python and TypeScript are the supported SDKs. The Go, Rust, Ruby, and Swift SDKs are no longer provided.
+
 ## 0.2.3
 
 - Align the Python, TypeScript, Go, Rust, Ruby, and Swift SDK release versions.

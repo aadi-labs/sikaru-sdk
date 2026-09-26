@@ -1,5 +1,2 @@
 __pycache__/
-rust/target/
-swift-contract/.build/
-swift-contract/.swiftpm/
 typescript_contract.js

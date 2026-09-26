@@ -15,24 +15,12 @@ concurrency:
 jobs:
   language:
     name: ${{ matrix.language }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - language: python
-            os: ubuntu-24.04
-          - language: typescript
-            os: ubuntu-24.04
-          - language: go
-            os: ubuntu-24.04
-          - language: rust
-            os: ubuntu-24.04
-          - language: ruby
-            os: ubuntu-24.04
-          - language: swift
-            os: macos-15
+        language: [python, typescript]
     defaults:
       run:
         working-directory: ${{ matrix.language }}
@@ -49,22 +37,6 @@ jobs:
         if: matrix.language == 'typescript'
         with:
           package_json_file: typescript/package.json
-      - uses: actions/setup-go@v5
-        if: matrix.language == 'go'
-        with:
-          go-version: '1.x'
-          cache-dependency-path: go/go.sum
-      - uses: dtolnay/rust-toolchain@1.98.1
-        if: matrix.language == 'rust'
-      - uses: ruby/setup-ruby@v1
-        if: matrix.language == 'ruby'
-        with:
-          ruby-version: '3.4'
-          working-directory: ruby
-          bundler-cache: true
-      - name: Verify runner Swift toolchain
-        if: matrix.language == 'swift'
-        run: xcrun swift --version
       - name: Build Python wheel and source distribution
         if: matrix.language == 'python'
         run: |
@@ -81,27 +53,6 @@ jobs:
           npm run build:cjs
           npm run build:esm
           node_modules/.bin/vitest run --project unit
-      - name: Build and test Go
-        if: matrix.language == 'go'
-        run: |
-          go build ./...
-          go test ./... -run '^$'
-          go test ./internal/...
-      - name: Build and test Rust
-        if: matrix.language == 'rust'
-        run: |
-          cargo build
-          cargo test --lib
-      - name: Build and test Ruby
-        if: matrix.language == 'ruby'
-        run: |
-          bundle exec ruby -Ilib -Itest -rminitest/autorun -e 'Dir["test/unit/**/test_*.rb"].sort.each { |path| require_relative path }'
-          gem build Sikaru.gemspec --output /tmp/sikaru.gem
-      - name: Build and test Swift
-        if: matrix.language == 'swift'
-        run: |
-          xcrun swift build
-          xcrun swift test
       - name: Python compute lifecycle wire contract
         if: matrix.language == 'python'
         run: python ../client-extensions/compute-contracts/wire.py python ../client-extensions/compute-contracts/python_contract.py
@@ -110,20 +61,3 @@ jobs:
         run: |
           node_modules/.bin/tsc --project ../client-extensions/compute-contracts/tsconfig.json
           python ../client-extensions/compute-contracts/wire.py node ../client-extensions/compute-contracts/typescript_contract.js
-      - name: Go compute lifecycle wire contract
-        if: matrix.language == 'go'
-        working-directory: client-extensions/compute-contracts/go
-        run: python ../wire.py go run .
-      - name: Rust compute lifecycle wire contract
-        if: matrix.language == 'rust'
-        env:
-          CARGO_BUILD_JOBS: 2
-          CARGO_PROFILE_DEV_DEBUG: 0
-          CARGO_INCREMENTAL: 0
-        run: python ../client-extensions/compute-contracts/wire.py cargo run --locked --manifest-path ../client-extensions/compute-contracts/rust/Cargo.toml
-      - name: Ruby compute lifecycle wire contract
-        if: matrix.language == 'ruby'
-        run: python ../client-extensions/compute-contracts/wire.py bundle exec ruby -Ilib ../client-extensions/compute-contracts/ruby_contract.rb
-      - name: Swift compute lifecycle wire contract
-        if: matrix.language == 'swift'
-        run: python ../client-extensions/compute-contracts/wire.py swift run --package-path ../client-extensions/compute-contracts/swift-contract ComputeContract

@@ -1,21 +1,15 @@
 # Sikaru SDKs
 
-Public API clients for Sikaru, for TypeScript, Python, Go,
-Rust, Ruby, and Swift. The API definition and generator configuration are
-maintained separately by the Sikaru service team. This repository contains
-client code and public examples only.
+Public API clients for Sikaru, for Python and TypeScript. The API definition and
+generator configuration are maintained separately by the Sikaru service team.
+This repository contains client code and public examples only.
 
 | Language | Source |
 | --- | --- |
 | Python | [python](python/) |
 | TypeScript | [typescript](typescript/) |
-| Go | [go](go/) |
-| Rust | [rust](rust/) |
-| Ruby | [ruby](ruby/) |
-| Swift | [swift](swift/) |
 
-Build/install from the language directory. Swift Package Manager can use this
-repository directly; the root `Package.swift` points to the generated Swift sources. Generated installation snippets may
+Build/install from the language directory. Generated installation snippets may
 name registry packages; these local artifacts have not been published by this
 change. Configure the API endpoint and a Sikaru API key. SDK mutations do not
 automatically retry, even when read retry options are enabled.
