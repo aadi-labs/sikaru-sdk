@@ -4,7 +4,11 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.agent_definition import AgentDefinition
 from ..types.create_managed_agent_source_request import CreateManagedAgentSourceRequest
+from ..types.created_managed_agent import CreatedManagedAgent
+from ..types.definition_revision_result import DefinitionRevisionResult
+from ..types.definition_revision_view import DefinitionRevisionView
 from .raw_client import AsyncRawManagedAgentsClient, RawManagedAgentsClient
 from .types.create_managed_agent_request_status import CreateManagedAgentRequestStatus
 
@@ -69,7 +73,7 @@ class ManagedAgentsClient:
         source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
         status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> CreatedManagedAgent:
         """
         Parameters
         ----------
@@ -94,7 +98,7 @@ class ManagedAgentsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        CreatedManagedAgent
             Successful Response
 
         Examples
@@ -119,6 +123,104 @@ class ManagedAgentsClient:
             source=source,
             status=status,
             request_options=request_options,
+        )
+        return _response.data
+
+    def create_definition_revision(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        content_digest: str,
+        definition: AgentDefinition,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DefinitionRevisionResult:
+        """
+        Stage a changed definition as a draft revision; the live definition is a no-op.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        content_digest : str
+
+        definition : AgentDefinition
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DefinitionRevisionResult
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import AgentDefinition, SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.create_definition_revision(
+            project_id="project_id",
+            agent_slug="agent_slug",
+            content_digest="contentDigest",
+            definition=AgentDefinition(
+                schema="sikaru.agent.contract.v1",
+            ),
+        )
+        """
+        _response = self._raw_client.create_definition_revision(
+            project_id,
+            agent_slug,
+            content_digest=content_digest,
+            definition=definition,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def get_definition_revision(
+        self,
+        project_id: str,
+        agent_slug: str,
+        changeset_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DefinitionRevisionView:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        changeset_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DefinitionRevisionView
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.get_definition_revision(
+            project_id="project_id",
+            agent_slug="agent_slug",
+            changeset_id="changeset_id",
+        )
+        """
+        _response = self._raw_client.get_definition_revision(
+            project_id, agent_slug, changeset_id, request_options=request_options
         )
         return _response.data
 
@@ -188,7 +290,7 @@ class AsyncManagedAgentsClient:
         source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
         status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> CreatedManagedAgent:
         """
         Parameters
         ----------
@@ -213,7 +315,7 @@ class AsyncManagedAgentsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        CreatedManagedAgent
             Successful Response
 
         Examples
@@ -246,5 +348,119 @@ class AsyncManagedAgentsClient:
             source=source,
             status=status,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def create_definition_revision(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        content_digest: str,
+        definition: AgentDefinition,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DefinitionRevisionResult:
+        """
+        Stage a changed definition as a draft revision; the live definition is a no-op.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        content_digest : str
+
+        definition : AgentDefinition
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DefinitionRevisionResult
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AgentDefinition, AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.create_definition_revision(
+                project_id="project_id",
+                agent_slug="agent_slug",
+                content_digest="contentDigest",
+                definition=AgentDefinition(
+                    schema="sikaru.agent.contract.v1",
+                ),
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.create_definition_revision(
+            project_id,
+            agent_slug,
+            content_digest=content_digest,
+            definition=definition,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def get_definition_revision(
+        self,
+        project_id: str,
+        agent_slug: str,
+        changeset_id: str,
+        *,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DefinitionRevisionView:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        changeset_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DefinitionRevisionView
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.get_definition_revision(
+                project_id="project_id",
+                agent_slug="agent_slug",
+                changeset_id="changeset_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_definition_revision(
+            project_id, agent_slug, changeset_id, request_options=request_options
         )
         return _response.data

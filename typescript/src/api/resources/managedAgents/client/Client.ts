@@ -86,11 +86,11 @@ export class ManagedAgentsClient {
      *         agentSlug: "agentSlug"
      *     })
      */
-    public createManagedAgent(project_id: string, request: Sikaru.CreateManagedAgentRequest, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public createManagedAgent(project_id: string, request: Sikaru.CreateManagedAgentRequest, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.CreatedManagedAgent> {
         return core.HttpResponsePromise.fromPromise(this.__createManagedAgent(project_id, request, requestOptions));
     }
 
-    private async __createManagedAgent(project_id: string, request: Sikaru.CreateManagedAgentRequest, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+    private async __createManagedAgent(project_id: string, request: Sikaru.CreateManagedAgentRequest, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.CreatedManagedAgent>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
@@ -108,7 +108,7 @@ export class ManagedAgentsClient {
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.CreatedManagedAgent, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -123,5 +123,113 @@ export class ManagedAgentsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/managed-agents");
+    }
+
+    /**
+     * Stage a changed definition as a draft revision; the live definition is a no-op.
+     *
+     * @param {string} project_id
+     * @param {string} agent_slug
+     * @param {Sikaru.DefinitionRevisionRequest} request
+     * @param {ManagedAgentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.managedAgents.createDefinitionRevision("project_id", "agent_slug", {
+     *         contentDigest: "contentDigest",
+     *         definition: {
+     *             schema: "sikaru.agent.contract.v1"
+     *         }
+     *     })
+     */
+    public createDefinitionRevision(project_id: string, agent_slug: string, request: Sikaru.DefinitionRevisionRequest, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.DefinitionRevisionResult> {
+        return core.HttpResponsePromise.fromPromise(this.__createDefinitionRevision(project_id, agent_slug, request, requestOptions));
+    }
+
+    private async __createDefinitionRevision(project_id: string, agent_slug: string, request: Sikaru.DefinitionRevisionRequest, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DefinitionRevisionResult>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/definition-revisions`),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.DefinitionRevisionResult, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/managed-agents/{agent_slug}/definition-revisions");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} agent_slug
+     * @param {string} changeset_id
+     * @param {ManagedAgentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.managedAgents.getDefinitionRevision("project_id", "agent_slug", "changeset_id")
+     */
+    public getDefinitionRevision(project_id: string, agent_slug: string, changeset_id: string, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.DefinitionRevisionView> {
+        return core.HttpResponsePromise.fromPromise(this.__getDefinitionRevision(project_id, agent_slug, changeset_id, requestOptions));
+    }
+
+    private async __getDefinitionRevision(project_id: string, agent_slug: string, changeset_id: string, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DefinitionRevisionView>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/definition-revisions/${core.url.encodePathParam(changeset_id)}`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.DefinitionRevisionView, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/managed-agents/{agent_slug}/definition-revisions/{changeset_id}");
     }
 }

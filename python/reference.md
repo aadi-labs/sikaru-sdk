@@ -334,6 +334,133 @@ client.agents.create_managed_session(
 </dl>
 </details>
 
+## CapabilityCeilings
+<details><summary><code>client.capability_ceilings.<a href="src/sikaru_api/capability_ceilings/client.py">get</a>(...) -> CapabilityCeilingsView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.capability_ceilings.get(
+    project_id="project_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.capability_ceilings.<a href="src/sikaru_api/capability_ceilings/client.py">update</a>(...) -> CapabilityCeilingsView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.capability_ceilings.update(
+    project_id="project_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `CapabilityCeilings` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Changesets
 <details><summary><code>client.changesets.<a href="src/sikaru_api/changesets/client.py">list_changesets</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
@@ -8284,6 +8411,278 @@ client.feedback.create_feedback(
 </dl>
 </details>
 
+## GitCredentials
+<details><summary><code>client.git_credentials.<a href="src/sikaru_api/git_credentials/client.py">list</a>(...) -> typing.List[GitCredential]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The project's git credentials and their grants, without values.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.git_credentials.list(
+    project_id="project_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.git_credentials.<a href="src/sikaru_api/git_credentials/client.py">create</a>(...) -> GitCredential</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Store a git credential for one host. The value is write-only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.git_credentials.create(
+    project_id="project_id",
+    host="host",
+    token="token",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**host:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**token:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**username:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.git_credentials.<a href="src/sikaru_api/git_credentials/client.py">grant</a>(...) -> GitCredential</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Let an agent use a git credential for its declared repos.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.git_credentials.grant(
+    project_id="project_id",
+    credential_id="credential_id",
+    agent_id="agentId",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## HarnessVersions
 <details><summary><code>client.harness_versions.<a href="src/sikaru_api/harness_versions/client.py">create_harness_version</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
@@ -11887,7 +12286,7 @@ client.managed_agents.list_managed_agents(
 </dl>
 </details>
 
-<details><summary><code>client.managed_agents.<a href="src/sikaru_api/managed_agents/client.py">create_managed_agent</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<details><summary><code>client.managed_agents.<a href="src/sikaru_api/managed_agents/client.py">create_managed_agent</a>(...) -> CreatedManagedAgent</code></summary>
 <dl>
 <dd>
 
@@ -11984,6 +12383,555 @@ client.managed_agents.create_managed_agent(
 <dd>
 
 **status:** `typing.Optional[CreateManagedAgentRequestStatus]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.managed_agents.<a href="src/sikaru_api/managed_agents/client.py">create_definition_revision</a>(...) -> DefinitionRevisionResult</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stage a changed definition as a draft revision; the live definition is a no-op.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, AgentDefinition
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.managed_agents.create_definition_revision(
+    project_id="project_id",
+    agent_slug="agent_slug",
+    content_digest="contentDigest",
+    definition=AgentDefinition(
+        schema="sikaru.agent.contract.v1",
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**content_digest:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**definition:** `AgentDefinition` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.managed_agents.<a href="src/sikaru_api/managed_agents/client.py">get_definition_revision</a>(...) -> DefinitionRevisionView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.managed_agents.get_definition_revision(
+    project_id="project_id",
+    agent_slug="agent_slug",
+    changeset_id="changeset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**changeset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Checks
+<details><summary><code>client.checks.<a href="src/sikaru_api/checks/client.py">list</a>(...) -> CheckList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.checks.list(
+    project_id="project_id",
+    agent_slug="agent_slug",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.checks.<a href="src/sikaru_api/checks/client.py">create</a>(...) -> CheckResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key and definition return the same check; a changed definition conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, CheckEnvironment, HarborTaskFiles
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.checks.create(
+    project_id="project_id",
+    agent_slug="agent_slug",
+    environment=CheckEnvironment(
+        kind="managed",
+    ),
+    idempotency_key="idempotency_key",
+    name="name",
+    task=HarborTaskFiles(
+        files={
+            "key": "value"
+        },
+    ),
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `CheckEnvironment` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**task:** `HarborTaskFiles` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.checks.<a href="src/sikaru_api/checks/client.py">list_results</a>(...) -> CheckResultList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.checks.list_results(
+    project_id="project_id",
+    agent_slug="agent_slug",
+    check_id="check_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**check_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.checks.<a href="src/sikaru_api/checks/client.py">run</a>(...) -> CheckResultResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start the check's task as a real run of the agent's active release; the result settles later.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.checks.run(
+    project_id="project_id",
+    agent_slug="agent_slug",
+    check_id="check_id",
+    idempotency_key="idempotency_key",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**check_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
     
 </dd>
 </dl>

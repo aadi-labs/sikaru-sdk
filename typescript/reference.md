@@ -231,6 +231,113 @@ await client.agents.createManagedSession("project_id", "agent_id", {
 </dl>
 </details>
 
+## CapabilityCeilings
+<details><summary><code>client.capabilityCeilings.<a href="/src/api/resources/capabilityCeilings/client/Client.ts">get</a>(project_id) -> Sikaru.CapabilityCeilingsView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.capabilityCeilings.get("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CapabilityCeilingsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.capabilityCeilings.<a href="/src/api/resources/capabilityCeilings/client/Client.ts">update</a>(project_id, { ...params }) -> Sikaru.CapabilityCeilingsView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.capabilityCeilings.update("project_id", {});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CapabilityCeilings` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CapabilityCeilingsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Changesets
 <details><summary><code>client.changesets.<a href="/src/api/resources/changesets/client/Client.ts">listChangesets</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
@@ -5948,6 +6055,225 @@ await client.feedback.createFeedback("project_id", {
 </dl>
 </details>
 
+## GitCredentials
+<details><summary><code>client.gitCredentials.<a href="/src/api/resources/gitCredentials/client/Client.ts">list</a>(project_id) -> Sikaru.GitCredential[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+The project's git credentials and their grants, without values.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.gitCredentials.list("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `GitCredentialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.gitCredentials.<a href="/src/api/resources/gitCredentials/client/Client.ts">create</a>(project_id, { ...params }) -> Sikaru.GitCredential</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Store a git credential for one host. The value is write-only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.gitCredentials.create("project_id", {
+    host: "host",
+    token: "token"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CreateGitCredential` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `GitCredentialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.gitCredentials.<a href="/src/api/resources/gitCredentials/client/Client.ts">grant</a>(project_id, credential_id, { ...params }) -> Sikaru.GitCredential</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Let an agent use a git credential for its declared repos.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.gitCredentials.grant("project_id", "credential_id", {
+    agentId: "agentId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**credential_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.GrantGitCredential` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `GitCredentialsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## HarnessVersions
 <details><summary><code>client.harnessVersions.<a href="/src/api/resources/harnessVersions/client/Client.ts">createHarnessVersion</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
@@ -8586,7 +8912,7 @@ await client.managedAgents.listManagedAgents("project_id");
 </dl>
 </details>
 
-<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">createManagedAgent</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">createManagedAgent</a>(project_id, { ...params }) -> Sikaru.CreatedManagedAgent</code></summary>
 <dl>
 <dd>
 
@@ -8634,6 +8960,457 @@ await client.managedAgents.createManagedAgent("project_id", {
 <dd>
 
 **requestOptions:** `ManagedAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">createDefinitionRevision</a>(project_id, agent_slug, { ...params }) -> Sikaru.DefinitionRevisionResult</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Stage a changed definition as a draft revision; the live definition is a no-op.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.managedAgents.createDefinitionRevision("project_id", "agent_slug", {
+    contentDigest: "contentDigest",
+    definition: {
+        schema: "sikaru.agent.contract.v1"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.DefinitionRevisionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ManagedAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">getDefinitionRevision</a>(project_id, agent_slug, changeset_id) -> Sikaru.DefinitionRevisionView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.managedAgents.getDefinitionRevision("project_id", "agent_slug", "changeset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**changeset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ManagedAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Checks
+<details><summary><code>client.checks.<a href="/src/api/resources/checks/client/Client.ts">list</a>(project_id, agent_slug) -> Sikaru.CheckList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.checks.list("project_id", "agent_slug");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChecksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.checks.<a href="/src/api/resources/checks/client/Client.ts">create</a>(project_id, agent_slug, { ...params }) -> Sikaru.CheckResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Same key and definition return the same check; a changed definition conflicts.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.checks.create("project_id", "agent_slug", {
+    environment: {
+        kind: "managed"
+    },
+    idempotency_key: "idempotency_key",
+    name: "name",
+    task: {
+        files: {
+            "key": "value"
+        }
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CreateCheck` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChecksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.checks.<a href="/src/api/resources/checks/client/Client.ts">listResults</a>(project_id, agent_slug, check_id) -> Sikaru.CheckResultList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.checks.listResults("project_id", "agent_slug", "check_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**check_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChecksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.checks.<a href="/src/api/resources/checks/client/Client.ts">run</a>(project_id, agent_slug, check_id, { ...params }) -> Sikaru.CheckResultResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start the check's task as a real run of the agent's active release; the result settles later.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.checks.run("project_id", "agent_slug", "check_id", {
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**check_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.RunCheck` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChecksClient.RequestOptions` 
     
 </dd>
 </dl>

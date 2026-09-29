@@ -7,17 +7,47 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .agent_budget import AgentBudget
+    from .agent_definition import AgentDefinition
+    from .agent_definition_schema import AgentDefinitionSchema
+    from .agent_definition_source import AgentDefinitionSource
+    from .agent_definition_source_encoding import AgentDefinitionSourceEncoding
+    from .agent_definition_source_kind import AgentDefinitionSourceKind
     from .agent_import_eval_suite_request import AgentImportEvalSuiteRequest
     from .agent_import_improve_request import AgentImportImproveRequest
     from .agent_import_model_capture_request import AgentImportModelCaptureRequest
     from .agent_import_runner_request import AgentImportRunnerRequest
     from .agent_import_source_ref_request import AgentImportSourceRefRequest
     from .agent_import_source_ref_request_export_policy import AgentImportSourceRefRequestExportPolicy
+    from .agent_setup import AgentSetup
+    from .agent_setup_packages import AgentSetupPackages
+    from .agent_setup_repo import AgentSetupRepo
+    from .agent_tool_capabilities import AgentToolCapabilities
+    from .agent_web_capabilities import AgentWebCapabilities
+    from .agent_web_capabilities_provider import AgentWebCapabilitiesProvider
+    from .agent_web_capabilities_provider_zero import AgentWebCapabilitiesProviderZero
     from .answer_ref import AnswerRef
     from .attachment_view import AttachmentView
     from .attachment_view_cleanup_status import AttachmentViewCleanupStatus
     from .attachment_view_status import AttachmentViewStatus
+    from .built_in_tool_setting import BuiltInToolSetting
+    from .built_in_tool_setting_policy import BuiltInToolSettingPolicy
+    from .capability_ceilings import CapabilityCeilings
+    from .capability_ceilings_disallowed_tools_item import CapabilityCeilingsDisallowedToolsItem
+    from .capability_ceilings_view import CapabilityCeilingsView
     from .case_input import CaseInput
+    from .check import Check
+    from .check_environment import CheckEnvironment
+    from .check_environment_kind import CheckEnvironmentKind
+    from .check_environment_view import CheckEnvironmentView
+    from .check_environment_view_kind import CheckEnvironmentViewKind
+    from .check_list import CheckList
+    from .check_response import CheckResponse
+    from .check_result import CheckResult
+    from .check_result_environment import CheckResultEnvironment
+    from .check_result_list import CheckResultList
+    from .check_result_response import CheckResultResponse
+    from .check_result_status import CheckResultStatus
+    from .check_verification import CheckVerification
     from .claim_view import ClaimView
     from .compute_error import ComputeError
     from .connection import Connection
@@ -28,19 +58,27 @@ if typing.TYPE_CHECKING:
     from .connection_event import ConnectionEvent
     from .connection_grant import ConnectionGrant
     from .connection_tool import ConnectionTool
+    from .connection_tool_ref import ConnectionToolRef
     from .create_managed_agent_source_request import CreateManagedAgentSourceRequest
     from .create_managed_agent_source_request_export_policy import CreateManagedAgentSourceRequestExportPolicy
     from .create_managed_agent_source_request_source_kind import CreateManagedAgentSourceRequestSourceKind
     from .create_parity_run_request import CreateParityRunRequest
+    from .created_managed_agent import CreatedManagedAgent
     from .credential_issued import CredentialIssued
     from .credential_renewed import CredentialRenewed
     from .credential_revoked import CredentialRevoked
+    from .definition_change import DefinitionChange
+    from .definition_revision import DefinitionRevision
+    from .definition_revision_result import DefinitionRevisionResult
+    from .definition_revision_view import DefinitionRevisionView
     from .environment_view import EnvironmentView
     from .environment_view_status import EnvironmentViewStatus
     from .event_delivery_request import EventDeliveryRequest
     from .execution_view import ExecutionView
     from .funding_receipt import FundingReceipt
     from .funding_status import FundingStatus
+    from .git_credential import GitCredential
+    from .harbor_task_files import HarborTaskFiles
     from .http_validation_error import HttpValidationError
     from .invoice_budget import InvoiceBudget
     from .judgment_context import JudgmentContext
@@ -80,6 +118,7 @@ if typing.TYPE_CHECKING:
     from .specialist_receipt import SpecialistReceipt
     from .specialist_thread import SpecialistThread
     from .specialist_threads import SpecialistThreads
+    from .staged_definition_revision import StagedDefinitionRevision
     from .target_input import TargetInput
     from .tool_provider_ref_request import ToolProviderRefRequest
     from .tool_skill_source_request import ToolSkillSourceRequest
@@ -103,17 +142,47 @@ if typing.TYPE_CHECKING:
     from .workspace_provenance_kind import WorkspaceProvenanceKind
 _dynamic_imports: typing.Dict[str, str] = {
     "AgentBudget": ".agent_budget",
+    "AgentDefinition": ".agent_definition",
+    "AgentDefinitionSchema": ".agent_definition_schema",
+    "AgentDefinitionSource": ".agent_definition_source",
+    "AgentDefinitionSourceEncoding": ".agent_definition_source_encoding",
+    "AgentDefinitionSourceKind": ".agent_definition_source_kind",
     "AgentImportEvalSuiteRequest": ".agent_import_eval_suite_request",
     "AgentImportImproveRequest": ".agent_import_improve_request",
     "AgentImportModelCaptureRequest": ".agent_import_model_capture_request",
     "AgentImportRunnerRequest": ".agent_import_runner_request",
     "AgentImportSourceRefRequest": ".agent_import_source_ref_request",
     "AgentImportSourceRefRequestExportPolicy": ".agent_import_source_ref_request_export_policy",
+    "AgentSetup": ".agent_setup",
+    "AgentSetupPackages": ".agent_setup_packages",
+    "AgentSetupRepo": ".agent_setup_repo",
+    "AgentToolCapabilities": ".agent_tool_capabilities",
+    "AgentWebCapabilities": ".agent_web_capabilities",
+    "AgentWebCapabilitiesProvider": ".agent_web_capabilities_provider",
+    "AgentWebCapabilitiesProviderZero": ".agent_web_capabilities_provider_zero",
     "AnswerRef": ".answer_ref",
     "AttachmentView": ".attachment_view",
     "AttachmentViewCleanupStatus": ".attachment_view_cleanup_status",
     "AttachmentViewStatus": ".attachment_view_status",
+    "BuiltInToolSetting": ".built_in_tool_setting",
+    "BuiltInToolSettingPolicy": ".built_in_tool_setting_policy",
+    "CapabilityCeilings": ".capability_ceilings",
+    "CapabilityCeilingsDisallowedToolsItem": ".capability_ceilings_disallowed_tools_item",
+    "CapabilityCeilingsView": ".capability_ceilings_view",
     "CaseInput": ".case_input",
+    "Check": ".check",
+    "CheckEnvironment": ".check_environment",
+    "CheckEnvironmentKind": ".check_environment_kind",
+    "CheckEnvironmentView": ".check_environment_view",
+    "CheckEnvironmentViewKind": ".check_environment_view_kind",
+    "CheckList": ".check_list",
+    "CheckResponse": ".check_response",
+    "CheckResult": ".check_result",
+    "CheckResultEnvironment": ".check_result_environment",
+    "CheckResultList": ".check_result_list",
+    "CheckResultResponse": ".check_result_response",
+    "CheckResultStatus": ".check_result_status",
+    "CheckVerification": ".check_verification",
     "ClaimView": ".claim_view",
     "ComputeError": ".compute_error",
     "Connection": ".connection",
@@ -124,19 +193,27 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectionEvent": ".connection_event",
     "ConnectionGrant": ".connection_grant",
     "ConnectionTool": ".connection_tool",
+    "ConnectionToolRef": ".connection_tool_ref",
     "CreateManagedAgentSourceRequest": ".create_managed_agent_source_request",
     "CreateManagedAgentSourceRequestExportPolicy": ".create_managed_agent_source_request_export_policy",
     "CreateManagedAgentSourceRequestSourceKind": ".create_managed_agent_source_request_source_kind",
     "CreateParityRunRequest": ".create_parity_run_request",
+    "CreatedManagedAgent": ".created_managed_agent",
     "CredentialIssued": ".credential_issued",
     "CredentialRenewed": ".credential_renewed",
     "CredentialRevoked": ".credential_revoked",
+    "DefinitionChange": ".definition_change",
+    "DefinitionRevision": ".definition_revision",
+    "DefinitionRevisionResult": ".definition_revision_result",
+    "DefinitionRevisionView": ".definition_revision_view",
     "EnvironmentView": ".environment_view",
     "EnvironmentViewStatus": ".environment_view_status",
     "EventDeliveryRequest": ".event_delivery_request",
     "ExecutionView": ".execution_view",
     "FundingReceipt": ".funding_receipt",
     "FundingStatus": ".funding_status",
+    "GitCredential": ".git_credential",
+    "HarborTaskFiles": ".harbor_task_files",
     "HttpValidationError": ".http_validation_error",
     "InvoiceBudget": ".invoice_budget",
     "JudgmentContext": ".judgment_context",
@@ -176,6 +253,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SpecialistReceipt": ".specialist_receipt",
     "SpecialistThread": ".specialist_thread",
     "SpecialistThreads": ".specialist_threads",
+    "StagedDefinitionRevision": ".staged_definition_revision",
     "TargetInput": ".target_input",
     "ToolProviderRefRequest": ".tool_provider_ref_request",
     "ToolSkillSourceRequest": ".tool_skill_source_request",
@@ -223,17 +301,47 @@ def __dir__():
 
 __all__ = [
     "AgentBudget",
+    "AgentDefinition",
+    "AgentDefinitionSchema",
+    "AgentDefinitionSource",
+    "AgentDefinitionSourceEncoding",
+    "AgentDefinitionSourceKind",
     "AgentImportEvalSuiteRequest",
     "AgentImportImproveRequest",
     "AgentImportModelCaptureRequest",
     "AgentImportRunnerRequest",
     "AgentImportSourceRefRequest",
     "AgentImportSourceRefRequestExportPolicy",
+    "AgentSetup",
+    "AgentSetupPackages",
+    "AgentSetupRepo",
+    "AgentToolCapabilities",
+    "AgentWebCapabilities",
+    "AgentWebCapabilitiesProvider",
+    "AgentWebCapabilitiesProviderZero",
     "AnswerRef",
     "AttachmentView",
     "AttachmentViewCleanupStatus",
     "AttachmentViewStatus",
+    "BuiltInToolSetting",
+    "BuiltInToolSettingPolicy",
+    "CapabilityCeilings",
+    "CapabilityCeilingsDisallowedToolsItem",
+    "CapabilityCeilingsView",
     "CaseInput",
+    "Check",
+    "CheckEnvironment",
+    "CheckEnvironmentKind",
+    "CheckEnvironmentView",
+    "CheckEnvironmentViewKind",
+    "CheckList",
+    "CheckResponse",
+    "CheckResult",
+    "CheckResultEnvironment",
+    "CheckResultList",
+    "CheckResultResponse",
+    "CheckResultStatus",
+    "CheckVerification",
     "ClaimView",
     "ComputeError",
     "Connection",
@@ -244,19 +352,27 @@ __all__ = [
     "ConnectionEvent",
     "ConnectionGrant",
     "ConnectionTool",
+    "ConnectionToolRef",
     "CreateManagedAgentSourceRequest",
     "CreateManagedAgentSourceRequestExportPolicy",
     "CreateManagedAgentSourceRequestSourceKind",
     "CreateParityRunRequest",
+    "CreatedManagedAgent",
     "CredentialIssued",
     "CredentialRenewed",
     "CredentialRevoked",
+    "DefinitionChange",
+    "DefinitionRevision",
+    "DefinitionRevisionResult",
+    "DefinitionRevisionView",
     "EnvironmentView",
     "EnvironmentViewStatus",
     "EventDeliveryRequest",
     "ExecutionView",
     "FundingReceipt",
     "FundingStatus",
+    "GitCredential",
+    "HarborTaskFiles",
     "HttpValidationError",
     "InvoiceBudget",
     "JudgmentContext",
@@ -296,6 +412,7 @@ __all__ = [
     "SpecialistReceipt",
     "SpecialistThread",
     "SpecialistThreads",
+    "StagedDefinitionRevision",
     "TargetInput",
     "ToolProviderRefRequest",
     "ToolSkillSourceRequest",

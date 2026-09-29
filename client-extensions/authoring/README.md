@@ -17,6 +17,10 @@ bundle = compile_directory("support-agent")
 # Pass bundle.definition and bundle.content_digest to the generated SDK.
 ```
 
+The manifest may also declare optional `web`, `tools` and `setup` sections. They
+are validated locally and included in the definition as written; unknown
+manifest keys are rejected.
+
 Only files named in `sikaru.json` are packaged. Symlinks, traversal, unsupported
 source kinds, and oversized bundles are rejected. The gateway validates the
 public source contract before publication.

@@ -148,6 +148,78 @@
       }
     },
     {
+      "id": "51fc6c07-eb58-4ec2-8e63-b46527771f71",
+      "name": "Get Capability Ceilings - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/capability-ceilings",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"canEdit\": true,\n  \"ceilings\": {\n    \"allowedGitHosts\": [\n      \"allowedGitHosts\"\n    ],\n    \"disallowedTools\": [\n      \"bash\"\n    ],\n    \"domainDenylist\": [\n      \"domainDenylist\"\n    ],\n    \"egressEnabled\": true\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "51fc6c07-eb58-4ec2-8e63-b46527771f71",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "f88fbc44-d1ec-4f25-87d1-f1f947e84b5d",
+      "name": "Update Capability Ceilings - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/capability-ceilings",
+        "method": "PUT",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"canEdit\": true,\n  \"ceilings\": {\n    \"allowedGitHosts\": [\n      \"allowedGitHosts\"\n    ],\n    \"disallowedTools\": [\n      \"bash\"\n    ],\n    \"domainDenylist\": [\n      \"domainDenylist\"\n    ],\n    \"egressEnabled\": true\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "f88fbc44-d1ec-4f25-87d1-f1f947e84b5d",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "99418e32-ca73-4f70-bd98-fe5e35444c28",
       "name": "List Changesets - default",
       "request": {
@@ -3589,6 +3661,117 @@
       }
     },
     {
+      "id": "e4aed3c3-f346-40c9-ba82-4972233cddab",
+      "name": "List Git Credentials - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/git-credentials",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "[\n  {\n    \"agentId\": \"agentId\",\n    \"createdAt\": 1.1,\n    \"grants\": [\n      \"grants\"\n    ],\n    \"host\": \"host\",\n    \"id\": \"id\"\n  }\n]",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e4aed3c3-f346-40c9-ba82-4972233cddab",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "4b4eb4b9-5b96-4e80-872c-95b2feb838fd",
+      "name": "Create Git Credential - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/git-credentials",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": "{\n  \"agentId\": \"agentId\",\n  \"createdAt\": 1.1,\n  \"grants\": [\n    \"grants\"\n  ],\n  \"host\": \"host\",\n  \"id\": \"id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "4b4eb4b9-5b96-4e80-872c-95b2feb838fd",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "8111dfbe-dc1d-4f0d-8a8d-d1eaa8a16853",
+      "name": "Grant Git Credential - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/git-credentials/{credential_id}/grants",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "credential_id": {
+            "equalTo": "credential_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"agentId\": \"agentId\",\n  \"createdAt\": 1.1,\n  \"grants\": [\n    \"grants\"\n  ],\n  \"host\": \"host\",\n  \"id\": \"id\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "8111dfbe-dc1d-4f0d-8a8d-d1eaa8a16853",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "7061944a-b9e9-4b9c-bdba-6fc56fbd02f6",
       "name": "Create Harness Version - default",
       "request": {
@@ -5199,12 +5382,255 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"key\": \"value\"\n}",
+        "body": "{\n  \"definitionRevision\": {\n    \"baseHarnessVersionId\": \"baseHarnessVersionId\",\n    \"candidateHarnessVersionId\": \"candidateHarnessVersionId\",\n    \"changeset\": {\n      \"key\": \"value\"\n    },\n    \"definitionDigest\": \"definitionDigest\"\n  },\n  \"harnessVersion\": {\n    \"key\": \"value\"\n  },\n  \"managedAgent\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "69f53454-209e-458d-8526-1451f5afd43c",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "773ca902-a89e-4e3b-8651-4e7560f463dd",
+      "name": "Create Definition Revision - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}/definition-revisions",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": "{\n  \"revision\": {\n    \"baseHarnessVersionId\": \"baseHarnessVersionId\",\n    \"candidateHarnessVersionId\": \"candidateHarnessVersionId\",\n    \"changes\": [\n      {\n        \"path\": \"path\"\n      }\n    ],\n    \"changeset\": {\n      \"key\": \"value\"\n    },\n    \"definitionDigest\": \"definitionDigest\"\n  },\n  \"unchanged\": true\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "773ca902-a89e-4e3b-8651-4e7560f463dd",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "d37ffbac-15ea-4b27-a610-66eba21d637d",
+      "name": "Get Definition Revision - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}/definition-revisions/{changeset_id}",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          },
+          "changeset_id": {
+            "equalTo": "changeset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"revision\": {\n    \"baseHarnessVersionId\": \"baseHarnessVersionId\",\n    \"candidateHarnessVersionId\": \"candidateHarnessVersionId\",\n    \"changes\": [\n      {\n        \"path\": \"path\"\n      }\n    ],\n    \"changeset\": {\n      \"key\": \"value\"\n    },\n    \"definitionDigest\": \"definitionDigest\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "d37ffbac-15ea-4b27-a610-66eba21d637d",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "76f10251-ad40-4d76-81ba-1610f83cae09",
+      "name": "List Checks - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}/checks",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"checks\": [\n    {\n      \"agentSlug\": \"agentSlug\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": {\n        \"computeEnvironmentId\": null,\n        \"kind\": \"managed\"\n      },\n      \"id\": \"id\",\n      \"instruction\": \"instruction\",\n      \"latestResult\": {\n        \"checkId\": \"checkId\",\n        \"createdAt\": \"createdAt\",\n        \"environment\": \"managed\",\n        \"finishedAt\": null,\n        \"id\": \"id\",\n        \"reason\": \"reason\",\n        \"reward\": null,\n        \"runId\": \"runId\",\n        \"sessionId\": \"sessionId\",\n        \"status\": \"running\",\n        \"traceId\": \"traceId\",\n        \"trajectoryUrl\": \"trajectoryUrl\"\n      },\n      \"name\": \"name\",\n      \"verification\": \"script\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "76f10251-ad40-4d76-81ba-1610f83cae09",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "377b130b-47be-471c-8a59-d146bc64aea1",
+      "name": "Create Check - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}/checks",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": "{\n  \"check\": {\n    \"agentSlug\": \"agentSlug\",\n    \"createdAt\": \"createdAt\",\n    \"environment\": {\n      \"computeEnvironmentId\": \"computeEnvironmentId\",\n      \"kind\": \"managed\"\n    },\n    \"id\": \"id\",\n    \"instruction\": \"instruction\",\n    \"latestResult\": {\n      \"checkId\": \"checkId\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": \"managed\",\n      \"finishedAt\": \"finishedAt\",\n      \"id\": \"id\",\n      \"reason\": \"reason\",\n      \"reward\": 1.1,\n      \"runId\": \"runId\",\n      \"sessionId\": \"sessionId\",\n      \"status\": \"running\",\n      \"traceId\": \"traceId\",\n      \"trajectoryUrl\": \"trajectoryUrl\"\n    },\n    \"name\": \"name\",\n    \"verification\": \"script\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "377b130b-47be-471c-8a59-d146bc64aea1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3d0175bc-57bc-40c3-aafc-5e021c02e7cf",
+      "name": "List Check Results - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}/checks/{check_id}/results",
+        "method": "GET",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          },
+          "check_id": {
+            "equalTo": "check_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"results\": [\n    {\n      \"checkId\": \"checkId\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": \"managed\",\n      \"finishedAt\": \"finishedAt\",\n      \"id\": \"id\",\n      \"reason\": \"reason\",\n      \"reward\": 1.1,\n      \"runId\": \"runId\",\n      \"sessionId\": \"sessionId\",\n      \"status\": \"running\",\n      \"traceId\": \"traceId\",\n      \"trajectoryUrl\": \"trajectoryUrl\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3d0175bc-57bc-40c3-aafc-5e021c02e7cf",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "884036c5-11df-4c75-98ff-84d6e1740a75",
+      "name": "Run Check - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}/checks/{check_id}/runs",
+        "method": "POST",
+        "headers": {
+          "Authorization": {
+            "matches": "Bearer .+"
+          }
+        },
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          },
+          "check_id": {
+            "equalTo": "check_id"
+          }
+        }
+      },
+      "response": {
+        "status": 202,
+        "body": "{\n  \"result\": {\n    \"checkId\": \"checkId\",\n    \"createdAt\": \"createdAt\",\n    \"environment\": \"managed\",\n    \"finishedAt\": \"finishedAt\",\n    \"id\": \"id\",\n    \"reason\": \"reason\",\n    \"reward\": 1.1,\n    \"runId\": \"runId\",\n    \"sessionId\": \"sessionId\",\n    \"status\": \"running\",\n    \"traceId\": \"traceId\",\n    \"trajectoryUrl\": \"trajectoryUrl\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "884036c5-11df-4c75-98ff-84d6e1740a75",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -6788,6 +7214,6 @@
     }
   ],
   "meta": {
-    "total": 177
+    "total": 188
   }
 }

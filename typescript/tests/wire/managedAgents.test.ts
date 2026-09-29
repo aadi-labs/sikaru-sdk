@@ -48,7 +48,7 @@ describe("ManagedAgentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agentSlug" : "agentSlug" };
-        const rawResponseBody = { "key" : "value" };
+        const rawResponseBody = { "definitionRevision" : { "baseHarnessVersionId" : "baseHarnessVersionId" , "candidateHarnessVersionId" : "candidateHarnessVersionId" , "changeset" : { "key" : "value" } , "definitionDigest" : "definitionDigest" } , "harnessVersion" : { "key" : "value" } , "managedAgent" : { "key" : "value" } };
         
         server
             .mockEndpoint()
@@ -85,6 +85,94 @@ describe("ManagedAgentsClient", () => {
                 return await client.managedAgents.createManagedAgent("project_id", {
     agentSlug: "agentSlug"
 })
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("create_definition_revision (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "contentDigest" : "contentDigest" , "definition" : { "schema" : "sikaru.agent.contract.v1" } };
+        const rawResponseBody = { "revision" : { "baseHarnessVersionId" : "baseHarnessVersionId" , "candidateHarnessVersionId" : "candidateHarnessVersionId" , "changes" : [ { "path" : "path" } ] , "changeset" : { "key" : "value" } , "definitionDigest" : "definitionDigest" } , "unchanged" : true };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/managed-agents/agent_slug/definition-revisions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.managedAgents.createDefinitionRevision("project_id", "agent_slug", {
+    contentDigest: "contentDigest",
+    definition: {
+        schema: "sikaru.agent.contract.v1"
+    }
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("create_definition_revision (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "contentDigest" : "contentDigest" , "definition" : { "schema" : "sikaru.agent.contract.v1" } };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/managed-agents/agent_slug/definition-revisions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.createDefinitionRevision("project_id", "agent_slug", {
+    contentDigest: "contentDigest",
+    definition: {
+        schema: "sikaru.agent.contract.v1"
+    }
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("get_definition_revision (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "revision" : { "baseHarnessVersionId" : "baseHarnessVersionId" , "candidateHarnessVersionId" : "candidateHarnessVersionId" , "changes" : [ { "path" : "path" } ] , "changeset" : { "key" : "value" } , "definitionDigest" : "definitionDigest" } };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug/definition-revisions/changeset_id").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.managedAgents.getDefinitionRevision("project_id", "agent_slug", "changeset_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_definition_revision (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug/definition-revisions/changeset_id").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.getDefinitionRevision("project_id", "agent_slug", "changeset_id")
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           

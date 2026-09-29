@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.10
+
+- Declare an agent's reach in typed `web`, `tools` and `setup` sections of its definition: web search provider and domain allow and block lists, built-in tool enablement and approval policies, and setup packages, commands and repositories.
+- Read and update project capability ceilings: sandbox egress, denied domains, disallowed built-in tools and allowed git hosts.
+- Create and read definition revisions. A changed definition is staged as a draft revision that is reviewed and released through changesets. Creating an existing agent with a changed definition now stages a draft revision instead of failing.
+- Store git credentials for a host, list them, and grant them to agents. Credential values are write-only and never returned.
+- Create, list and run task checks for an agent, and list their results. A check verifies a run with a test script or a rubric.
+- The Python authoring package's `compile_directory` accepts the `web`, `tools` and `setup` manifest sections, validates them locally, and produces the same definition and content digest as the CLI authoring companion.
+- Files an agent writes under `outputs/` in its workspace are published as session files.
+- These features require an updated managed service.
+
 ## 0.2.9
 
 - Python and TypeScript are the supported SDKs. The Go, Rust, Ruby, and Swift SDKs are no longer provided.

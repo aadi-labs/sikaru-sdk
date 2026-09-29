@@ -4,7 +4,9 @@ import { ActivationClient } from "./api/resources/activation/client/Client.js";
 import { AgentBudgetsClient } from "./api/resources/agentBudgets/client/Client.js";
 import { AgentImportsClient } from "./api/resources/agentImports/client/Client.js";
 import { AgentsClient } from "./api/resources/agents/client/Client.js";
+import { CapabilityCeilingsClient } from "./api/resources/capabilityCeilings/client/Client.js";
 import { ChangesetsClient } from "./api/resources/changesets/client/Client.js";
+import { ChecksClient } from "./api/resources/checks/client/Client.js";
 import { ComputeAttachmentsClient } from "./api/resources/computeAttachments/client/Client.js";
 import { ComputeCredentialsClient } from "./api/resources/computeCredentials/client/Client.js";
 import { ComputeEnvironmentsClient } from "./api/resources/computeEnvironments/client/Client.js";
@@ -26,6 +28,7 @@ import { ExecutionObjectivesClient } from "./api/resources/executionObjectives/c
 import { ExecutionsClient } from "./api/resources/executions/client/Client.js";
 import { ExecutionSessionsClient } from "./api/resources/executionSessions/client/Client.js";
 import { FeedbackClient } from "./api/resources/feedback/client/Client.js";
+import { GitCredentialsClient } from "./api/resources/gitCredentials/client/Client.js";
 import { HarnessesClient } from "./api/resources/harnesses/client/Client.js";
 import { HarnessVersionsClient } from "./api/resources/harnessVersions/client/Client.js";
 import { ImportSessionsClient } from "./api/resources/importSessions/client/Client.js";
@@ -68,6 +71,7 @@ export class SikaruApi {
     protected _activation: ActivationClient | undefined;
     protected _agentImports: AgentImportsClient | undefined;
     protected _agents: AgentsClient | undefined;
+    protected _capabilityCeilings: CapabilityCeilingsClient | undefined;
     protected _changesets: ChangesetsClient | undefined;
     protected _computeAttachments: ComputeAttachmentsClient | undefined;
     protected _computeOperations: ComputeOperationsClient | undefined;
@@ -91,6 +95,7 @@ export class SikaruApi {
     protected _specialists: SpecialistsClient | undefined;
     protected _executions: ExecutionsClient | undefined;
     protected _feedback: FeedbackClient | undefined;
+    protected _gitCredentials: GitCredentialsClient | undefined;
     protected _harnessVersions: HarnessVersionsClient | undefined;
     protected _agentBudgets: AgentBudgetsClient | undefined;
     protected _harnesses: HarnessesClient | undefined;
@@ -99,6 +104,7 @@ export class SikaruApi {
     protected _issueClusters: IssueClustersClient | undefined;
     protected _judgeAlignment: JudgeAlignmentClient | undefined;
     protected _managedAgents: ManagedAgentsClient | undefined;
+    protected _checks: ChecksClient | undefined;
     protected _memoryRegistry: MemoryRegistryClient | undefined;
     protected _modelGateway: ModelGatewayClient | undefined;
     protected _modelSettings: ModelSettingsClient | undefined;
@@ -132,6 +138,10 @@ export class SikaruApi {
 
     public get agents(): AgentsClient {
         return (this._agents ??= new AgentsClient(this._options));
+    }
+
+    public get capabilityCeilings(): CapabilityCeilingsClient {
+        return (this._capabilityCeilings ??= new CapabilityCeilingsClient(this._options));
     }
 
     public get changesets(): ChangesetsClient {
@@ -226,6 +236,10 @@ export class SikaruApi {
         return (this._feedback ??= new FeedbackClient(this._options));
     }
 
+    public get gitCredentials(): GitCredentialsClient {
+        return (this._gitCredentials ??= new GitCredentialsClient(this._options));
+    }
+
     public get harnessVersions(): HarnessVersionsClient {
         return (this._harnessVersions ??= new HarnessVersionsClient(this._options));
     }
@@ -256,6 +270,10 @@ export class SikaruApi {
 
     public get managedAgents(): ManagedAgentsClient {
         return (this._managedAgents ??= new ManagedAgentsClient(this._options));
+    }
+
+    public get checks(): ChecksClient {
+        return (this._checks ??= new ChecksClient(this._options));
     }
 
     public get memoryRegistry(): MemoryRegistryClient {

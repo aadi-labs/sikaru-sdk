@@ -16,7 +16,9 @@ if typing.TYPE_CHECKING:
     from .agent_budgets.client import AgentBudgetsClient, AsyncAgentBudgetsClient
     from .agent_imports.client import AgentImportsClient, AsyncAgentImportsClient
     from .agents.client import AgentsClient, AsyncAgentsClient
+    from .capability_ceilings.client import AsyncCapabilityCeilingsClient, CapabilityCeilingsClient
     from .changesets.client import AsyncChangesetsClient, ChangesetsClient
+    from .checks.client import AsyncChecksClient, ChecksClient
     from .compute_attachments.client import AsyncComputeAttachmentsClient, ComputeAttachmentsClient
     from .compute_credentials.client import AsyncComputeCredentialsClient, ComputeCredentialsClient
     from .compute_environments.client import AsyncComputeEnvironmentsClient, ComputeEnvironmentsClient
@@ -38,6 +40,7 @@ if typing.TYPE_CHECKING:
     from .execution_sessions.client import AsyncExecutionSessionsClient, ExecutionSessionsClient
     from .executions.client import AsyncExecutionsClient, ExecutionsClient
     from .feedback.client import AsyncFeedbackClient, FeedbackClient
+    from .git_credentials.client import AsyncGitCredentialsClient, GitCredentialsClient
     from .harness_versions.client import AsyncHarnessVersionsClient, HarnessVersionsClient
     from .harnesses.client import AsyncHarnessesClient, HarnessesClient
     from .import_sessions.client import AsyncImportSessionsClient, ImportSessionsClient
@@ -156,6 +159,7 @@ class SikaruApi:
         self._activation: typing.Optional[ActivationClient] = None
         self._agent_imports: typing.Optional[AgentImportsClient] = None
         self._agents: typing.Optional[AgentsClient] = None
+        self._capability_ceilings: typing.Optional[CapabilityCeilingsClient] = None
         self._changesets: typing.Optional[ChangesetsClient] = None
         self._compute_attachments: typing.Optional[ComputeAttachmentsClient] = None
         self._compute_operations: typing.Optional[ComputeOperationsClient] = None
@@ -179,6 +183,7 @@ class SikaruApi:
         self._specialists: typing.Optional[SpecialistsClient] = None
         self._executions: typing.Optional[ExecutionsClient] = None
         self._feedback: typing.Optional[FeedbackClient] = None
+        self._git_credentials: typing.Optional[GitCredentialsClient] = None
         self._harness_versions: typing.Optional[HarnessVersionsClient] = None
         self._agent_budgets: typing.Optional[AgentBudgetsClient] = None
         self._harnesses: typing.Optional[HarnessesClient] = None
@@ -187,6 +192,7 @@ class SikaruApi:
         self._issue_clusters: typing.Optional[IssueClustersClient] = None
         self._judge_alignment: typing.Optional[JudgeAlignmentClient] = None
         self._managed_agents: typing.Optional[ManagedAgentsClient] = None
+        self._checks: typing.Optional[ChecksClient] = None
         self._memory_registry: typing.Optional[MemoryRegistryClient] = None
         self._model_gateway: typing.Optional[ModelGatewayClient] = None
         self._model_settings: typing.Optional[ModelSettingsClient] = None
@@ -228,6 +234,14 @@ class SikaruApi:
 
             self._agents = AgentsClient(client_wrapper=self._client_wrapper)
         return self._agents
+
+    @property
+    def capability_ceilings(self):
+        if self._capability_ceilings is None:
+            from .capability_ceilings.client import CapabilityCeilingsClient  # noqa: E402
+
+            self._capability_ceilings = CapabilityCeilingsClient(client_wrapper=self._client_wrapper)
+        return self._capability_ceilings
 
     @property
     def changesets(self):
@@ -414,6 +428,14 @@ class SikaruApi:
         return self._feedback
 
     @property
+    def git_credentials(self):
+        if self._git_credentials is None:
+            from .git_credentials.client import GitCredentialsClient  # noqa: E402
+
+            self._git_credentials = GitCredentialsClient(client_wrapper=self._client_wrapper)
+        return self._git_credentials
+
+    @property
     def harness_versions(self):
         if self._harness_versions is None:
             from .harness_versions.client import HarnessVersionsClient  # noqa: E402
@@ -476,6 +498,14 @@ class SikaruApi:
 
             self._managed_agents = ManagedAgentsClient(client_wrapper=self._client_wrapper)
         return self._managed_agents
+
+    @property
+    def checks(self):
+        if self._checks is None:
+            from .checks.client import ChecksClient  # noqa: E402
+
+            self._checks = ChecksClient(client_wrapper=self._client_wrapper)
+        return self._checks
 
     @property
     def memory_registry(self):
@@ -726,6 +756,7 @@ class AsyncSikaruApi:
         self._activation: typing.Optional[AsyncActivationClient] = None
         self._agent_imports: typing.Optional[AsyncAgentImportsClient] = None
         self._agents: typing.Optional[AsyncAgentsClient] = None
+        self._capability_ceilings: typing.Optional[AsyncCapabilityCeilingsClient] = None
         self._changesets: typing.Optional[AsyncChangesetsClient] = None
         self._compute_attachments: typing.Optional[AsyncComputeAttachmentsClient] = None
         self._compute_operations: typing.Optional[AsyncComputeOperationsClient] = None
@@ -749,6 +780,7 @@ class AsyncSikaruApi:
         self._specialists: typing.Optional[AsyncSpecialistsClient] = None
         self._executions: typing.Optional[AsyncExecutionsClient] = None
         self._feedback: typing.Optional[AsyncFeedbackClient] = None
+        self._git_credentials: typing.Optional[AsyncGitCredentialsClient] = None
         self._harness_versions: typing.Optional[AsyncHarnessVersionsClient] = None
         self._agent_budgets: typing.Optional[AsyncAgentBudgetsClient] = None
         self._harnesses: typing.Optional[AsyncHarnessesClient] = None
@@ -757,6 +789,7 @@ class AsyncSikaruApi:
         self._issue_clusters: typing.Optional[AsyncIssueClustersClient] = None
         self._judge_alignment: typing.Optional[AsyncJudgeAlignmentClient] = None
         self._managed_agents: typing.Optional[AsyncManagedAgentsClient] = None
+        self._checks: typing.Optional[AsyncChecksClient] = None
         self._memory_registry: typing.Optional[AsyncMemoryRegistryClient] = None
         self._model_gateway: typing.Optional[AsyncModelGatewayClient] = None
         self._model_settings: typing.Optional[AsyncModelSettingsClient] = None
@@ -798,6 +831,14 @@ class AsyncSikaruApi:
 
             self._agents = AsyncAgentsClient(client_wrapper=self._client_wrapper)
         return self._agents
+
+    @property
+    def capability_ceilings(self):
+        if self._capability_ceilings is None:
+            from .capability_ceilings.client import AsyncCapabilityCeilingsClient  # noqa: E402
+
+            self._capability_ceilings = AsyncCapabilityCeilingsClient(client_wrapper=self._client_wrapper)
+        return self._capability_ceilings
 
     @property
     def changesets(self):
@@ -984,6 +1025,14 @@ class AsyncSikaruApi:
         return self._feedback
 
     @property
+    def git_credentials(self):
+        if self._git_credentials is None:
+            from .git_credentials.client import AsyncGitCredentialsClient  # noqa: E402
+
+            self._git_credentials = AsyncGitCredentialsClient(client_wrapper=self._client_wrapper)
+        return self._git_credentials
+
+    @property
     def harness_versions(self):
         if self._harness_versions is None:
             from .harness_versions.client import AsyncHarnessVersionsClient  # noqa: E402
@@ -1046,6 +1095,14 @@ class AsyncSikaruApi:
 
             self._managed_agents = AsyncManagedAgentsClient(client_wrapper=self._client_wrapper)
         return self._managed_agents
+
+    @property
+    def checks(self):
+        if self._checks is None:
+            from .checks.client import AsyncChecksClient  # noqa: E402
+
+            self._checks = AsyncChecksClient(client_wrapper=self._client_wrapper)
+        return self._checks
 
     @property
     def memory_registry(self):

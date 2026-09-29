@@ -1,6 +1,6 @@
 {
     "name": "@sikaru/sdk",
-    "version": "0.2.9",
+    "version": "0.2.10",
     "private": false,
     "type": "commonjs",
     "main": "./dist/cjs/index.js",
@@ -50,6 +50,17 @@
                 "default": "./dist/cjs/api/resources/agents/exports.js"
             },
             "default": "./dist/cjs/api/resources/agents/exports.js"
+        },
+        "./capabilityCeilings": {
+            "import": {
+                "types": "./dist/esm/api/resources/capabilityCeilings/exports.d.mts",
+                "default": "./dist/esm/api/resources/capabilityCeilings/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/capabilityCeilings/exports.d.ts",
+                "default": "./dist/cjs/api/resources/capabilityCeilings/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/capabilityCeilings/exports.js"
         },
         "./changesets": {
             "import": {
@@ -304,6 +315,17 @@
             },
             "default": "./dist/cjs/api/resources/feedback/exports.js"
         },
+        "./gitCredentials": {
+            "import": {
+                "types": "./dist/esm/api/resources/gitCredentials/exports.d.mts",
+                "default": "./dist/esm/api/resources/gitCredentials/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/gitCredentials/exports.d.ts",
+                "default": "./dist/cjs/api/resources/gitCredentials/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/gitCredentials/exports.js"
+        },
         "./harnessVersions": {
             "import": {
                 "types": "./dist/esm/api/resources/harnessVersions/exports.d.mts",
@@ -391,6 +413,17 @@
                 "default": "./dist/cjs/api/resources/managedAgents/exports.js"
             },
             "default": "./dist/cjs/api/resources/managedAgents/exports.js"
+        },
+        "./checks": {
+            "import": {
+                "types": "./dist/esm/api/resources/checks/exports.d.mts",
+                "default": "./dist/esm/api/resources/checks/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/checks/exports.d.ts",
+                "default": "./dist/cjs/api/resources/checks/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/checks/exports.js"
         },
         "./memoryRegistry": {
             "import": {
