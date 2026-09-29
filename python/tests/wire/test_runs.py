@@ -126,3 +126,26 @@ def test_runs_get_trajectory() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/trajectory", None, 1)
+
+
+def test_runs_get_transcript() -> None:
+    """Test get_transcript endpoint with WireMock"""
+    test_id = "runs.get_transcript.0"
+    client = get_client(test_id)
+    client.runs.get_transcript(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/transcript", None, 1)
+
+
+def test_runs_stream_transcript_events() -> None:
+    """Test stream_transcript_events endpoint with WireMock"""
+    test_id = "runs.stream_transcript_events.0"
+    client = get_client(test_id)
+    for _ in client.runs.stream_transcript_events(
+        project_id="project_id",
+        run_id="run_id",
+    ):
+        pass
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/transcript/events/stream", None, 1)

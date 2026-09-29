@@ -12,7 +12,9 @@ export interface Connection {
     owner: string;
     ownership: string;
     revocation: string;
+    slug: string;
     status: string;
     tools: Sikaru.ConnectionTool[];
+    used_by?: Sikaru.ConnectionUsage | undefined;
     version: number;
 }

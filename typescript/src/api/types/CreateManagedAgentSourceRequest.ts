@@ -4,8 +4,9 @@ import * as Sikaru from "../index.js";
 
 export interface CreateManagedAgentSourceRequest {
     analysisSummary?: Record<string, unknown> | undefined;
-    contentDigest: string;
+    contentDigest?: (string | null) | undefined;
     definition?: (Sikaru.AgentDefinition | null) | undefined;
+    document?: (string | null) | undefined;
     exportPolicy?: CreateManagedAgentSourceRequest.ExportPolicy | undefined;
     sourceKind?: CreateManagedAgentSourceRequest.SourceKind | undefined;
     storageRef?: (string | null) | undefined;
@@ -19,6 +20,7 @@ export namespace CreateManagedAgentSourceRequest {
         } as const;
     export type ExportPolicy = typeof ExportPolicy[keyof typeof ExportPolicy];
     export const SourceKind = {
+            AgentDocument: "agent_document",
             WorkflowJson: "workflow_json",
             Langgraph: "langgraph",
             N8NJson: "n8n_json",

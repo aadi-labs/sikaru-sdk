@@ -1,52 +1,29 @@
 from .conftest import get_client, verify_request_count
 
-from sikaru_api import WorkspaceChunk, WorkspaceFile
 
-
-def test_computeWorkspaces_get() -> None:
-    """Test get endpoint with WireMock"""
-    test_id = "compute_workspaces.get.0"
+def test_computeWorkspaces_record() -> None:
+    """Test record endpoint with WireMock"""
+    test_id = "compute_workspaces.record.0"
     client = get_client(test_id)
-    client.compute_workspaces.get(
+    client.compute_workspaces.record(
         project_id="project_id",
         attachment_id="attachment_id",
-        run_id="run_id",
+        commit_sha="commit_sha",
+        trigger="turn",
     )
     verify_request_count(
-        test_id,
-        "GET",
-        "/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id",
-        None,
-        1,
+        test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints", None, 1
     )
 
 
-def test_computeWorkspaces_commit_tree() -> None:
-    """Test commit_tree endpoint with WireMock"""
-    test_id = "compute_workspaces.commit_tree.0"
+def test_computeWorkspaces_remote() -> None:
+    """Test remote endpoint with WireMock"""
+    test_id = "compute_workspaces.remote.0"
     client = get_client(test_id)
-    client.compute_workspaces.commit_tree(
+    client.compute_workspaces.remote(
         project_id="project_id",
         attachment_id="attachment_id",
-        run_id="run_id",
-        files={
-            "key": WorkspaceFile(
-                chunks=[
-                    WorkspaceChunk(
-                        sha256="sha256",
-                        size=1,
-                    )
-                ],
-                mode=1,
-                sha256="sha256",
-                size=1,
-            )
-        },
     )
     verify_request_count(
-        test_id,
-        "POST",
-        "/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree",
-        None,
-        1,
+        test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote", None, 1
     )

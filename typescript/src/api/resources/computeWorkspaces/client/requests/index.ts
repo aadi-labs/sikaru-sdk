@@ -1,1 +1,2 @@
-export type { WorkspaceTreeInput } from "./WorkspaceTreeInput.js";
+export { WorkspaceCheckpointInput } from "./WorkspaceCheckpointInput.js";
+export type { WorkspaceRemoteInput } from "./WorkspaceRemoteInput.js";

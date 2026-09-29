@@ -10,7 +10,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = [ { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" } ] , "version" : 1 } ];
+        const rawResponseBody = [ { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 } ];
         
         server
             .mockEndpoint()
@@ -48,7 +48,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "config" : { } , "display_name" : "display_name" , "kind" : "mcp" };
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -92,11 +92,49 @@ describe("ConnectionsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("list_apps (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "categories" : [ { "id" : "id" , "name" : "name" } ] , "items" : [ { "auth_schemes" : [ "auth_schemes" ] , "categories" : [ { "id" : "id" , "name" : "name" } ] , "logo" : "logo" , "name" : "name" , "slug" : "slug" } ] , "next_cursor" : "next_cursor" , "stale" : true };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/connections/catalog/apps").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.connections.listApps("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("list_apps (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/connections/catalog/apps").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.connections.listApps("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("get_connection (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -127,6 +165,50 @@ describe("ConnectionsClient", () => {
         
             await expect(async () => {
                 return await client.connections.getConnection("project_id", "connection_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("update_connection (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expected_version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/connections/connection_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.connections.updateConnection("project_id", "connection_id", {
+    expected_version: 1
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("update_connection (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expected_version" : 1 };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/connections/connection_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.connections.updateConnection("project_id", "connection_id", {
+    expected_version: 1
+})
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
@@ -172,7 +254,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "state" : "state" };
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -216,7 +298,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "credentials" : { } };
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -260,7 +342,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -298,7 +380,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -336,7 +418,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -374,7 +456,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -450,7 +532,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agent_id" : "agent_id" , "tools" : [ "tools" ] };
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -496,7 +578,7 @@ describe("ConnectionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "config" : { "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "version" : 1 };
+        const rawResponseBody = { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "description" : "description" , "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" , "version" : "version" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 };
         
         server
             .mockEndpoint()
@@ -527,6 +609,82 @@ describe("ConnectionsClient", () => {
         
             await expect(async () => {
                 return await client.connections.revokeGrant("project_id", "connection_id", "grant_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("revoke (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "connection" : { "config" : { "allowed_hosts" : [ "allowed_hosts" ] , "auth" : "none" , "endpoint" : "endpoint" , "header_name" : "header_name" , "oauth_client_id" : "oauth_client_id" , "oauth_scopes" : [ "oauth_scopes" ] , "toolkit" : "toolkit" } , "display_name" : "display_name" , "expires_at" : 1.1 , "grants" : [ { "active" : true , "agent_id" : "agent_id" , "approval" : "approval" , "environment" : "environment" , "id" : "id" , "tools" : { "key" : "value" } } ] , "id" : "id" , "kind" : "kind" , "owner" : "owner" , "ownership" : "ownership" , "revocation" : "revocation" , "slug" : "slug" , "status" : "status" , "tools" : [ { "digest" : "digest" , "input_schema" : { "key" : "value" } , "name" : "name" } ] , "used_by" : { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] } , "version" : 1 } , "count" : 1 , "schedules" : [ "schedules" ] };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/connections/connection_id/revoke").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.connections.revoke("project_id", "connection_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("revoke (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/connections/connection_id/revoke").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.connections.revoke("project_id", "connection_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("usage (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "agents" : [ { "draft" : true , "draft_valid" : true , "id" : "id" , "live" : true , "name" : "name" , "slug" : "slug" } ] , "count" : 1 , "schedules" : [ "schedules" ] };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/connections/connection_id/usage").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.connections.usage("project_id", "connection_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("usage (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/connections/connection_id/usage").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.connections.usage("project_id", "connection_id")
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           

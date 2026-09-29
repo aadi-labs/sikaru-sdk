@@ -1,6 +1,6 @@
 {
     "name": "@sikaru/sdk",
-    "version": "0.2.10",
+    "version": "0.2.11",
     "private": false,
     "type": "commonjs",
     "main": "./dist/cjs/index.js",
@@ -28,6 +28,17 @@
                 "default": "./dist/cjs/api/resources/activation/exports.js"
             },
             "default": "./dist/cjs/api/resources/activation/exports.js"
+        },
+        "./agentDocuments": {
+            "import": {
+                "types": "./dist/esm/api/resources/agentDocuments/exports.d.mts",
+                "default": "./dist/esm/api/resources/agentDocuments/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/agentDocuments/exports.d.ts",
+                "default": "./dist/cjs/api/resources/agentDocuments/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/agentDocuments/exports.js"
         },
         "./agentImports": {
             "import": {

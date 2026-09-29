@@ -459,4 +459,86 @@ describe("RunsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("get_transcript (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "events" : [ { "createdAt" : "createdAt" , "id" : "id" , "label" : "label" , "sequence" : 1 } ] , "evidence" : "retained_snapshot" , "run" : { "accountId" : "accountId" , "completedAt" : "completedAt" , "conversationId" : "conversationId" , "environment" : "Draft" , "harnessVersionId" : "harnessVersionId" , "id" : "id" , "name" : "name" , "sessionId" : "sessionId" , "startedAt" : "startedAt" , "status" : "status" , "traceId" : "traceId" } , "trajectory" : { "agent" : { "key" : "value" } , "extra" : { "key" : "value" } , "final_metrics" : { "key" : 1 } , "schema_version" : "schema_version" , "session_id" : "session_id" , "steps" : [ { "message" : "message" , "results" : [ { } ] , "source" : "user" , "step_id" : 1 , "tool_calls" : [ { } ] } ] , "trajectory_id" : "trajectory_id" } };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/run_id/transcript").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runs.getTranscript("project_id", "run_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get_transcript (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/run_id/transcript").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.getTranscript("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("stream_transcript_events (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = "event: \ndata: {\"createdAt\":\"createdAt\",\"id\":\"id\",\"label\":\"label\",\"sequence\":1}\n\n";
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/run_id/transcript/events/stream").respondWith()
+            .statusCode(200).sseBody(rawResponseBody)
+                .build();
+
+        
+            const response = await client.runs.streamTranscriptEvents("project_id", "run_id");
+            const events: unknown[] = [];
+            for await (const event of response) {
+                events.push(event);
+            }
+            expect(events).toEqual([ {
+    createdAt: "createdAt",
+    id: "id",
+    label: "label",
+    sequence: 1
+} ]);
+    });
+          
+    test("stream_transcript_events (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/run_id/transcript/events/stream").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.streamTranscriptEvents("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
 });

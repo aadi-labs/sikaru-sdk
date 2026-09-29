@@ -15,6 +15,7 @@ export namespace AgentDefinitionSource {
         } as const;
     export type Encoding = typeof Encoding[keyof typeof Encoding];
     export const Kind = {
+            AgentDocument: "agent_document",
             AgentsMd: "agents_md",
             AgentMd: "agent_md",
             AgentSkill: "agent_skill",

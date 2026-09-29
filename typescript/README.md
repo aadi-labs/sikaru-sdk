@@ -47,13 +47,10 @@ Instantiate and use the client with the following:
 import { SikaruApi } from "@sikaru/sdk";
 
 const client = new SikaruApi({ apiKey: "YOUR_API_KEY" });
-await client.agentImports.createAgentImport("project_id", {
-    improve: {
-        mode: "mode",
-        objective: "objective",
-        promotionGate: "promotionGate"
-    },
-    name: "name"
+await client.agentDocuments.importFiles("project_id", {
+    files: {
+        "key": "value"
+    }
 });
 ```
 
@@ -77,7 +74,7 @@ following namespace:
 ```typescript
 import { Sikaru } from "@sikaru/sdk";
 
-const request: Sikaru.CreateAgentImportRequest = {
+const request: Sikaru.ImportDocumentFiles = {
     ...
 };
 ```
@@ -91,7 +88,7 @@ will be thrown.
 import { SikaruError } from "@sikaru/sdk";
 
 try {
-    await client.agentImports.createAgentImport(...);
+    await client.agentDocuments.importFiles(...);
 } catch (err) {
     if (err instanceof SikaruError) {
         console.log(err.statusCode);
@@ -124,13 +121,13 @@ You can upload files using the client:
 ```typescript
 import { createReadStream } from "fs";
 
-await client.computeWorkspaces.putBlob(createReadStream("path/to/file"), ...);
-await client.computeWorkspaces.putBlob(new ReadableStream(), ...);
-await client.computeWorkspaces.putBlob(Buffer.from('binary data'), ...);
-await client.computeWorkspaces.putBlob(new Blob(['binary data'], { type: 'audio/mpeg' }), ...);
-await client.computeWorkspaces.putBlob(new File(['binary data'], 'file.mp3'), ...);
-await client.computeWorkspaces.putBlob(new ArrayBuffer(8), ...);
-await client.computeWorkspaces.putBlob(new Uint8Array([0, 1, 2]), ...);
+await client.executionSessions.uploadFile(createReadStream("path/to/file"), ...);
+await client.executionSessions.uploadFile(new ReadableStream(), ...);
+await client.executionSessions.uploadFile(Buffer.from('binary data'), ...);
+await client.executionSessions.uploadFile(new Blob(['binary data'], { type: 'audio/mpeg' }), ...);
+await client.executionSessions.uploadFile(new File(['binary data'], 'file.mp3'), ...);
+await client.executionSessions.uploadFile(new ArrayBuffer(8), ...);
+await client.executionSessions.uploadFile(new Uint8Array([0, 1, 2]), ...);
 ```
 The client accepts a variety of types for file upload parameters:
 * Stream types: `fs.ReadStream`, `stream.Readable`, and `ReadableStream`
@@ -577,7 +574,7 @@ const client = new SikaruApi({
     }
 });
 
-const response = await client.agentImports.createAgentImport(..., {
+const response = await client.agentDocuments.importFiles(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -589,7 +586,7 @@ const response = await client.agentImports.createAgentImport(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.agentImports.createAgentImport(..., {
+const response = await client.agentDocuments.importFiles(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -619,7 +616,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.agentImports.createAgentImport(..., {
+const response = await client.agentDocuments.importFiles(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -629,7 +626,7 @@ const response = await client.agentImports.createAgentImport(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.agentImports.createAgentImport(..., {
+const response = await client.agentDocuments.importFiles(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -640,7 +637,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.agentImports.createAgentImport(..., {
+const response = await client.agentDocuments.importFiles(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -652,7 +649,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.agentImports.createAgentImport(...).withRawResponse();
+const { data, rawResponse } = await client.agentDocuments.importFiles(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

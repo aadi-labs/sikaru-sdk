@@ -3,4 +3,5 @@
 export interface ConnectionCredentials {
     oauth_client_secret?: (string | null) | undefined;
     token?: (string | null) | undefined;
+    value?: (string | null) | undefined;
 }

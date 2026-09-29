@@ -12,7 +12,6 @@ export interface WorkPage {
     poll_after_seconds?: number | undefined;
     /** Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route. */
     transport?: WorkPage.Transport | undefined;
-    workspace_checkpoint?: (Sikaru.WorkspaceCheckpointView | null) | undefined;
 }
 
 export namespace WorkPage {
@@ -20,7 +19,6 @@ export namespace WorkPage {
             Idle: "idle",
             Running: "running",
             WaitingApproval: "waiting_approval",
-            Checkpointing: "checkpointing",
             Terminal: "terminal"
         } as const;
     export type ExecutionPhase = typeof ExecutionPhase[keyof typeof ExecutionPhase];

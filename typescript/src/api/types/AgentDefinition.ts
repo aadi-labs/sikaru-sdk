@@ -6,7 +6,10 @@ import * as Sikaru from "../index.js";
  * The customer-authored `sikaru.agent.contract.v1` agent definition.
  */
 export interface AgentDefinition {
+    access?: Record<string, unknown> | undefined;
+    budget?: (Sikaru.AgentDocumentBudget | null) | undefined;
     instructions?: (string | null) | undefined;
+    model?: (string | null) | undefined;
     outcomes?: string[] | undefined;
     schema: AgentDefinition.Schema;
     setup?: Sikaru.AgentSetup | undefined;

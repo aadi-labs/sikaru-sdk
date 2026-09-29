@@ -14,6 +14,7 @@ from .environment import SikaruEnvironment
 if typing.TYPE_CHECKING:
     from .activation.client import ActivationClient, AsyncActivationClient
     from .agent_budgets.client import AgentBudgetsClient, AsyncAgentBudgetsClient
+    from .agent_documents.client import AgentDocumentsClient, AsyncAgentDocumentsClient
     from .agent_imports.client import AgentImportsClient, AsyncAgentImportsClient
     from .agents.client import AgentsClient, AsyncAgentsClient
     from .capability_ceilings.client import AsyncCapabilityCeilingsClient, CapabilityCeilingsClient
@@ -157,6 +158,7 @@ class SikaruApi:
             logging=logging,
         )
         self._activation: typing.Optional[ActivationClient] = None
+        self._agent_documents: typing.Optional[AgentDocumentsClient] = None
         self._agent_imports: typing.Optional[AgentImportsClient] = None
         self._agents: typing.Optional[AgentsClient] = None
         self._capability_ceilings: typing.Optional[CapabilityCeilingsClient] = None
@@ -218,6 +220,14 @@ class SikaruApi:
 
             self._activation = ActivationClient(client_wrapper=self._client_wrapper)
         return self._activation
+
+    @property
+    def agent_documents(self):
+        if self._agent_documents is None:
+            from .agent_documents.client import AgentDocumentsClient  # noqa: E402
+
+            self._agent_documents = AgentDocumentsClient(client_wrapper=self._client_wrapper)
+        return self._agent_documents
 
     @property
     def agent_imports(self):
@@ -754,6 +764,7 @@ class AsyncSikaruApi:
             logging=logging,
         )
         self._activation: typing.Optional[AsyncActivationClient] = None
+        self._agent_documents: typing.Optional[AsyncAgentDocumentsClient] = None
         self._agent_imports: typing.Optional[AsyncAgentImportsClient] = None
         self._agents: typing.Optional[AsyncAgentsClient] = None
         self._capability_ceilings: typing.Optional[AsyncCapabilityCeilingsClient] = None
@@ -815,6 +826,14 @@ class AsyncSikaruApi:
 
             self._activation = AsyncActivationClient(client_wrapper=self._client_wrapper)
         return self._activation
+
+    @property
+    def agent_documents(self):
+        if self._agent_documents is None:
+            from .agent_documents.client import AsyncAgentDocumentsClient  # noqa: E402
+
+            self._agent_documents = AsyncAgentDocumentsClient(client_wrapper=self._client_wrapper)
+        return self._agent_documents
 
     @property
     def agent_imports(self):

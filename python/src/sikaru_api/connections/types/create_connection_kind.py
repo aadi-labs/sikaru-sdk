@@ -2,4 +2,4 @@
 
 import typing
 
-CreateConnectionKind = typing.Union[typing.Literal["mcp", "composio"], typing.Any]
+CreateConnectionKind = typing.Union[typing.Literal["mcp", "composio", "secret"], typing.Any]

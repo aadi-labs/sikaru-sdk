@@ -2,4 +2,4 @@
 
 import typing
 
-CreateConnectionOwnership = typing.Union[typing.Literal["workspace", "personal"], typing.Any]
+CreateConnectionOwnership = typing.Union[typing.Literal["workspace", "shared", "personal"], typing.Any]

@@ -5,10 +5,13 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.connection import Connection
+from ..types.connection_apps import ConnectionApps
 from ..types.connection_authorization import ConnectionAuthorization
 from ..types.connection_config import ConnectionConfig
 from ..types.connection_credentials import ConnectionCredentials
 from ..types.connection_event import ConnectionEvent
+from ..types.connection_revocation import ConnectionRevocation
+from ..types.connection_usage import ConnectionUsage
 from .raw_client import AsyncRawConnectionsClient, RawConnectionsClient
 from .types.create_connection_kind import CreateConnectionKind
 from .types.create_connection_ownership import CreateConnectionOwnership
@@ -73,6 +76,7 @@ class ConnectionsClient:
         kind: CreateConnectionKind,
         credentials: typing.Optional[ConnectionCredentials] = OMIT,
         ownership: typing.Optional[CreateConnectionOwnership] = OMIT,
+        slug: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Connection:
         """
@@ -89,6 +93,8 @@ class ConnectionsClient:
         credentials : typing.Optional[ConnectionCredentials]
 
         ownership : typing.Optional[CreateConnectionOwnership]
+
+        slug : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -119,7 +125,55 @@ class ConnectionsClient:
             kind=kind,
             credentials=credentials,
             ownership=ownership,
+            slug=slug,
             request_options=request_options,
+        )
+        return _response.data
+
+    def list_apps(
+        self,
+        project_id: str,
+        *,
+        search: typing.Optional[str] = None,
+        category: typing.Optional[str] = None,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ConnectionApps:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        search : typing.Optional[str]
+
+        category : typing.Optional[str]
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ConnectionApps
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.connections.list_apps(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.list_apps(
+            project_id, search=search, category=category, cursor=cursor, limit=limit, request_options=request_options
         )
         return _response.data
 
@@ -154,6 +208,60 @@ class ConnectionsClient:
         )
         """
         _response = self._raw_client.get_connection(project_id, connection_id, request_options=request_options)
+        return _response.data
+
+    def update_connection(
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        expected_version: int,
+        allowed_hosts: typing.Optional[typing.Sequence[str]] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Connection:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        expected_version : int
+
+        allowed_hosts : typing.Optional[typing.Sequence[str]]
+
+        display_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Connection
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.connections.update_connection(
+            project_id="project_id",
+            connection_id="connection_id",
+            expected_version=1,
+        )
+        """
+        _response = self._raw_client.update_connection(
+            project_id,
+            connection_id,
+            expected_version=expected_version,
+            allowed_hosts=allowed_hosts,
+            display_name=display_name,
+            request_options=request_options,
+        )
         return _response.data
 
     def authorize(
@@ -543,6 +651,72 @@ class ConnectionsClient:
         _response = self._raw_client.revoke_grant(project_id, connection_id, grant_id, request_options=request_options)
         return _response.data
 
+    def revoke(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ConnectionRevocation:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ConnectionRevocation
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.connections.revoke(
+            project_id="project_id",
+            connection_id="connection_id",
+        )
+        """
+        _response = self._raw_client.revoke(project_id, connection_id, request_options=request_options)
+        return _response.data
+
+    def usage(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ConnectionUsage:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ConnectionUsage
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.connections.usage(
+            project_id="project_id",
+            connection_id="connection_id",
+        )
+        """
+        _response = self._raw_client.usage(project_id, connection_id, request_options=request_options)
+        return _response.data
+
 
 class AsyncConnectionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -606,6 +780,7 @@ class AsyncConnectionsClient:
         kind: CreateConnectionKind,
         credentials: typing.Optional[ConnectionCredentials] = OMIT,
         ownership: typing.Optional[CreateConnectionOwnership] = OMIT,
+        slug: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Connection:
         """
@@ -622,6 +797,8 @@ class AsyncConnectionsClient:
         credentials : typing.Optional[ConnectionCredentials]
 
         ownership : typing.Optional[CreateConnectionOwnership]
+
+        slug : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -660,7 +837,63 @@ class AsyncConnectionsClient:
             kind=kind,
             credentials=credentials,
             ownership=ownership,
+            slug=slug,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def list_apps(
+        self,
+        project_id: str,
+        *,
+        search: typing.Optional[str] = None,
+        category: typing.Optional[str] = None,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ConnectionApps:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        search : typing.Optional[str]
+
+        category : typing.Optional[str]
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ConnectionApps
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.connections.list_apps(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_apps(
+            project_id, search=search, category=category, cursor=cursor, limit=limit, request_options=request_options
         )
         return _response.data
 
@@ -703,6 +936,68 @@ class AsyncConnectionsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.get_connection(project_id, connection_id, request_options=request_options)
+        return _response.data
+
+    async def update_connection(
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        expected_version: int,
+        allowed_hosts: typing.Optional[typing.Sequence[str]] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Connection:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        expected_version : int
+
+        allowed_hosts : typing.Optional[typing.Sequence[str]]
+
+        display_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Connection
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.connections.update_connection(
+                project_id="project_id",
+                connection_id="connection_id",
+                expected_version=1,
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.update_connection(
+            project_id,
+            connection_id,
+            expected_version=expected_version,
+            allowed_hosts=allowed_hosts,
+            display_name=display_name,
+            request_options=request_options,
+        )
         return _response.data
 
     async def authorize(
@@ -1172,4 +1467,86 @@ class AsyncConnectionsClient:
         _response = await self._raw_client.revoke_grant(
             project_id, connection_id, grant_id, request_options=request_options
         )
+        return _response.data
+
+    async def revoke(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ConnectionRevocation:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ConnectionRevocation
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.connections.revoke(
+                project_id="project_id",
+                connection_id="connection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.revoke(project_id, connection_id, request_options=request_options)
+        return _response.data
+
+    async def usage(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ConnectionUsage:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ConnectionUsage
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.connections.usage(
+                project_id="project_id",
+                connection_id="connection_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.usage(project_id, connection_id, request_options=request_options)
         return _response.data

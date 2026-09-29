@@ -3,6 +3,8 @@
 import typing
 
 AgentDefinitionSourceKind = typing.Union[
-    typing.Literal["agents_md", "agent_md", "agent_skill", "skill_md", "skills_md", "skill_asset", "eval_md"],
+    typing.Literal[
+        "agent_document", "agents_md", "agent_md", "agent_skill", "skill_md", "skills_md", "skill_asset", "eval_md"
+    ],
     typing.Any,
 ]

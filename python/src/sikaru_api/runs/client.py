@@ -8,7 +8,9 @@ from ..types.event_delivery_request import EventDeliveryRequest
 from ..types.managed_run import ManagedRun
 from ..types.run_event import RunEvent
 from ..types.run_events import RunEvents
+from ..types.run_transcript import RunTranscript
 from ..types.tool_provider_ref_request import ToolProviderRefRequest
+from ..types.transcript_event import TranscriptEvent
 from ..types.workspace_provenance import WorkspaceProvenance
 from .raw_client import AsyncRawRunsClient, RawRunsClient
 from .types.approval_input_decision import ApprovalInputDecision
@@ -558,6 +560,86 @@ class RunsClient:
         """
         _response = self._raw_client.get_trajectory(project_id, run_id, request_options=request_options)
         return _response.data
+
+    def get_transcript(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> RunTranscript:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RunTranscript
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        client.runs.get_transcript(
+            project_id="project_id",
+            run_id="run_id",
+        )
+        """
+        _response = self._raw_client.get_transcript(project_id, run_id, request_options=request_options)
+        return _response.data
+
+    def stream_transcript_events(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        after: typing.Optional[int] = None,
+        last_event_id: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Iterator[TranscriptEvent]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        after : typing.Optional[int]
+
+        last_event_id : typing.Optional[int]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Yields
+        ------
+        typing.Iterator[TranscriptEvent]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+        response = client.runs.stream_transcript_events(
+            project_id="project_id",
+            run_id="run_id",
+        )
+        for chunk in response:
+            yield chunk
+        """
+        with self._raw_client.stream_transcript_events(
+            project_id, run_id, after=after, last_event_id=last_event_id, request_options=request_options
+        ) as r:
+            yield from r.data
 
 
 class AsyncRunsClient:
@@ -1180,3 +1262,100 @@ class AsyncRunsClient:
         """
         _response = await self._raw_client.get_trajectory(project_id, run_id, request_options=request_options)
         return _response.data
+
+    async def get_transcript(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> RunTranscript:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RunTranscript
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.runs.get_transcript(
+                project_id="project_id",
+                run_id="run_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get_transcript(project_id, run_id, request_options=request_options)
+        return _response.data
+
+    async def stream_transcript_events(
+        self,
+        project_id: str,
+        run_id: str,
+        *,
+        after: typing.Optional[int] = None,
+        last_event_id: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.AsyncIterator[TranscriptEvent]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        after : typing.Optional[int]
+
+        last_event_id : typing.Optional[int]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Yields
+        ------
+        typing.AsyncIterator[TranscriptEvent]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            response = client.runs.stream_transcript_events(
+                project_id="project_id",
+                run_id="run_id",
+            )
+            async for chunk in response:
+                yield chunk
+
+
+        asyncio.run(main())
+        """
+        async with self._raw_client.stream_transcript_events(
+            project_id, run_id, after=after, last_event_id=last_event_id, request_options=request_options
+        ) as r:
+            async for _chunk in r.data:
+                yield _chunk

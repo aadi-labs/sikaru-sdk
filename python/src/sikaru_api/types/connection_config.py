@@ -8,6 +8,7 @@ from .connection_config_auth import ConnectionConfigAuth
 
 
 class ConnectionConfig(UniversalBaseModel):
+    allowed_hosts: typing.Optional[typing.List[str]] = None
     auth: typing.Optional[ConnectionConfigAuth] = None
     endpoint: typing.Optional[str] = None
     header_name: typing.Optional[str] = None

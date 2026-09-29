@@ -4,14 +4,13 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .workspace_chunk import WorkspaceChunk
+from .connection_agent_usage import ConnectionAgentUsage
 
 
-class WorkspaceFile(UniversalBaseModel):
-    chunks: typing.List[WorkspaceChunk]
-    mode: int
-    sha256: str
-    size: int
+class ConnectionUsage(UniversalBaseModel):
+    agents: typing.List[ConnectionAgentUsage]
+    count: int
+    schedules: typing.List[str]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

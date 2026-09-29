@@ -563,4 +563,100 @@ export class RunsClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/runs/{run_id}/trajectory");
     }
+
+    /**
+     * @param {string} project_id
+     * @param {string} run_id
+     * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.runs.getTranscript("project_id", "run_id")
+     */
+    public getTranscript(project_id: string, run_id: string, requestOptions?: RunsClient.RequestOptions): core.HttpResponsePromise<Sikaru.RunTranscript> {
+        return core.HttpResponsePromise.fromPromise(this.__getTranscript(project_id, run_id, requestOptions));
+    }
+
+    private async __getTranscript(project_id: string, run_id: string, requestOptions?: RunsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.RunTranscript>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/runs/${core.url.encodePathParam(run_id)}/transcript`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.RunTranscript, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/runs/{run_id}/transcript");
+    }
+
+    public streamTranscriptEvents(project_id: string, run_id: string, request: Sikaru.StreamTranscriptEventsRunsRequest = {}, requestOptions?: RunsClient.RequestOptions): core.HttpResponsePromise<core.Stream<Sikaru.TranscriptEvent>> {
+        return core.HttpResponsePromise.fromPromise(this.__streamTranscriptEvents(project_id, run_id, request, requestOptions));
+    }
+
+    private async __streamTranscriptEvents(project_id: string, run_id: string, request: Sikaru.StreamTranscriptEventsRunsRequest = {}, requestOptions?: RunsClient.RequestOptions): Promise<core.WithRawResponse<core.Stream<Sikaru.TranscriptEvent>>> {
+        const { after, "Last-Event-ID": lastEventId } = request;
+        const _queryParams: Record<string, unknown> = {
+            after
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, mergeOnlyDefinedHeaders({ "Last-Event-ID": lastEventId ?? undefined }), requestOptions?.headers);
+        const _response = await core.fetcher<ReadableStream>({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/runs/${core.url.encodePathParam(run_id)}/transcript/events/stream`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
+            responseType: "sse",
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: new core.Stream({
+                    stream: _response.body,
+                    parse: data => data as any,
+                    signal: requestOptions?.abortSignal,
+                    eventShape: {
+                        type: "sse"
+                    }
+                }), rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/runs/{run_id}/transcript/events/stream");
+    }
 }

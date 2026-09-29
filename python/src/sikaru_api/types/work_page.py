@@ -11,7 +11,6 @@ from .operation_view import OperationView
 from .uncertain_operation import UncertainOperation
 from .work_page_execution_phase import WorkPageExecutionPhase
 from .work_page_transport import WorkPageTransport
-from .workspace_checkpoint_view import WorkspaceCheckpointView
 
 
 class WorkPage(UniversalBaseModel):
@@ -26,8 +25,6 @@ class WorkPage(UniversalBaseModel):
     """
     Transport the current blocking turn's harness selects for this attachment. Use the executor channel only while this is 'channel'; otherwise poll this route.
     """
-
-    workspace_checkpoint: typing.Optional[WorkspaceCheckpointView] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

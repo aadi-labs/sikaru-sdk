@@ -2,6 +2,7 @@
 
 import { ActivationClient } from "./api/resources/activation/client/Client.js";
 import { AgentBudgetsClient } from "./api/resources/agentBudgets/client/Client.js";
+import { AgentDocumentsClient } from "./api/resources/agentDocuments/client/Client.js";
 import { AgentImportsClient } from "./api/resources/agentImports/client/Client.js";
 import { AgentsClient } from "./api/resources/agents/client/Client.js";
 import { CapabilityCeilingsClient } from "./api/resources/capabilityCeilings/client/Client.js";
@@ -69,6 +70,7 @@ export declare namespace SikaruApi {
 export class SikaruApi {
     protected readonly _options: NormalizedClientOptionsWithAuth<SikaruApi.Options>;
     protected _activation: ActivationClient | undefined;
+    protected _agentDocuments: AgentDocumentsClient | undefined;
     protected _agentImports: AgentImportsClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _capabilityCeilings: CapabilityCeilingsClient | undefined;
@@ -130,6 +132,10 @@ export class SikaruApi {
 
     public get activation(): ActivationClient {
         return (this._activation ??= new ActivationClient(this._options));
+    }
+
+    public get agentDocuments(): AgentDocumentsClient {
+        return (this._agentDocuments ??= new AgentDocumentsClient(this._options));
     }
 
     public get agentImports(): AgentImportsClient {

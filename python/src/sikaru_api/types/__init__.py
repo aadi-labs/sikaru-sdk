@@ -12,6 +12,8 @@ if typing.TYPE_CHECKING:
     from .agent_definition_source import AgentDefinitionSource
     from .agent_definition_source_encoding import AgentDefinitionSourceEncoding
     from .agent_definition_source_kind import AgentDefinitionSourceKind
+    from .agent_document import AgentDocument
+    from .agent_document_budget import AgentDocumentBudget
     from .agent_import_eval_suite_request import AgentImportEvalSuiteRequest
     from .agent_import_improve_request import AgentImportImproveRequest
     from .agent_import_model_capture_request import AgentImportModelCaptureRequest
@@ -21,6 +23,7 @@ if typing.TYPE_CHECKING:
     from .agent_setup import AgentSetup
     from .agent_setup_packages import AgentSetupPackages
     from .agent_setup_repo import AgentSetupRepo
+    from .agent_snippets import AgentSnippets
     from .agent_tool_capabilities import AgentToolCapabilities
     from .agent_web_capabilities import AgentWebCapabilities
     from .agent_web_capabilities_provider import AgentWebCapabilitiesProvider
@@ -51,14 +54,19 @@ if typing.TYPE_CHECKING:
     from .claim_view import ClaimView
     from .compute_error import ComputeError
     from .connection import Connection
+    from .connection_agent_usage import ConnectionAgentUsage
+    from .connection_app import ConnectionApp
+    from .connection_apps import ConnectionApps
     from .connection_authorization import ConnectionAuthorization
     from .connection_config import ConnectionConfig
     from .connection_config_auth import ConnectionConfigAuth
     from .connection_credentials import ConnectionCredentials
     from .connection_event import ConnectionEvent
     from .connection_grant import ConnectionGrant
+    from .connection_revocation import ConnectionRevocation
     from .connection_tool import ConnectionTool
     from .connection_tool_ref import ConnectionToolRef
+    from .connection_usage import ConnectionUsage
     from .create_managed_agent_source_request import CreateManagedAgentSourceRequest
     from .create_managed_agent_source_request_export_policy import CreateManagedAgentSourceRequestExportPolicy
     from .create_managed_agent_source_request_source_kind import CreateManagedAgentSourceRequestSourceKind
@@ -71,6 +79,20 @@ if typing.TYPE_CHECKING:
     from .definition_revision import DefinitionRevision
     from .definition_revision_result import DefinitionRevisionResult
     from .definition_revision_view import DefinitionRevisionView
+    from .document_access_delta import DocumentAccessDelta
+    from .document_blocker import DocumentBlocker
+    from .document_comparison import DocumentComparison
+    from .document_issue import DocumentIssue
+    from .document_publication import DocumentPublication
+    from .document_resources import DocumentResources
+    from .document_revision import DocumentRevision
+    from .document_suggestion import DocumentSuggestion
+    from .document_suggestions import DocumentSuggestions
+    from .document_template import DocumentTemplate
+    from .document_templates import DocumentTemplates
+    from .document_validation_view import DocumentValidationView
+    from .document_versions import DocumentVersions
+    from .earlier_document_session import EarlierDocumentSession
     from .environment_view import EnvironmentView
     from .environment_view_status import EnvironmentViewStatus
     from .event_delivery_request import EventDeliveryRequest
@@ -80,12 +102,15 @@ if typing.TYPE_CHECKING:
     from .git_credential import GitCredential
     from .harbor_task_files import HarborTaskFiles
     from .http_validation_error import HttpValidationError
+    from .imported_document import ImportedDocument
     from .invoice_budget import InvoiceBudget
     from .judgment_context import JudgmentContext
     from .judgment_target import JudgmentTarget
     from .judgment_target_kind import JudgmentTargetKind
     from .live_handle import LiveHandle
     from .managed_run import ManagedRun
+    from .mention import Mention
+    from .mention_resource import MentionResource
     from .open_inference_span import OpenInferenceSpan
     from .operation_view import OperationView
     from .operation_view_capability_name import OperationViewCapabilityName
@@ -106,12 +131,15 @@ if typing.TYPE_CHECKING:
     from .recover_run_request import RecoverRunRequest
     from .release_action_request import ReleaseActionRequest
     from .reload_settings import ReloadSettings
+    from .resolved_mention import ResolvedMention
     from .resource_budget import ResourceBudget
     from .resume_improvement_input import ResumeImprovementInput
     from .resume_input import ResumeInput
     from .run_event import RunEvent
     from .run_events import RunEvents
     from .run_spend import RunSpend
+    from .run_transcript import RunTranscript
+    from .run_transcript_evidence import RunTranscriptEvidence
     from .scope_type import ScopeType
     from .session_spend import SessionSpend
     from .source_type import SourceType
@@ -122,10 +150,19 @@ if typing.TYPE_CHECKING:
     from .target_input import TargetInput
     from .tool_provider_ref_request import ToolProviderRefRequest
     from .tool_skill_source_request import ToolSkillSourceRequest
+    from .toolkit_category import ToolkitCategory
     from .trace_import_grouping_request import TraceImportGroupingRequest
     from .trace_import_options_request import TraceImportOptionsRequest
     from .trace_import_scope_request import TraceImportScopeRequest
     from .trace_metadata import TraceMetadata
+    from .transcript_event import TranscriptEvent
+    from .transcript_run import TranscriptRun
+    from .transcript_run_environment import TranscriptRunEnvironment
+    from .transcript_step import TranscriptStep
+    from .transcript_step_source import TranscriptStepSource
+    from .transcript_tool_call import TranscriptToolCall
+    from .transcript_tool_result import TranscriptToolResult
+    from .transcript_trajectory import TranscriptTrajectory
     from .uncertain_operation import UncertainOperation
     from .validation_error import ValidationError
     from .validation_error_loc_item import ValidationErrorLocItem
@@ -133,13 +170,11 @@ if typing.TYPE_CHECKING:
     from .work_page import WorkPage
     from .work_page_execution_phase import WorkPageExecutionPhase
     from .work_page_transport import WorkPageTransport
-    from .workspace_blob_view import WorkspaceBlobView
     from .workspace_checkpoint_view import WorkspaceCheckpointView
-    from .workspace_checkpoint_view_status import WorkspaceCheckpointViewStatus
-    from .workspace_chunk import WorkspaceChunk
-    from .workspace_file import WorkspaceFile
     from .workspace_provenance import WorkspaceProvenance
     from .workspace_provenance_kind import WorkspaceProvenanceKind
+    from .workspace_remote_view import WorkspaceRemoteView
+    from .workspace_remote_view_username import WorkspaceRemoteViewUsername
 _dynamic_imports: typing.Dict[str, str] = {
     "AgentBudget": ".agent_budget",
     "AgentDefinition": ".agent_definition",
@@ -147,6 +182,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AgentDefinitionSource": ".agent_definition_source",
     "AgentDefinitionSourceEncoding": ".agent_definition_source_encoding",
     "AgentDefinitionSourceKind": ".agent_definition_source_kind",
+    "AgentDocument": ".agent_document",
+    "AgentDocumentBudget": ".agent_document_budget",
     "AgentImportEvalSuiteRequest": ".agent_import_eval_suite_request",
     "AgentImportImproveRequest": ".agent_import_improve_request",
     "AgentImportModelCaptureRequest": ".agent_import_model_capture_request",
@@ -156,6 +193,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AgentSetup": ".agent_setup",
     "AgentSetupPackages": ".agent_setup_packages",
     "AgentSetupRepo": ".agent_setup_repo",
+    "AgentSnippets": ".agent_snippets",
     "AgentToolCapabilities": ".agent_tool_capabilities",
     "AgentWebCapabilities": ".agent_web_capabilities",
     "AgentWebCapabilitiesProvider": ".agent_web_capabilities_provider",
@@ -186,14 +224,19 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ClaimView": ".claim_view",
     "ComputeError": ".compute_error",
     "Connection": ".connection",
+    "ConnectionAgentUsage": ".connection_agent_usage",
+    "ConnectionApp": ".connection_app",
+    "ConnectionApps": ".connection_apps",
     "ConnectionAuthorization": ".connection_authorization",
     "ConnectionConfig": ".connection_config",
     "ConnectionConfigAuth": ".connection_config_auth",
     "ConnectionCredentials": ".connection_credentials",
     "ConnectionEvent": ".connection_event",
     "ConnectionGrant": ".connection_grant",
+    "ConnectionRevocation": ".connection_revocation",
     "ConnectionTool": ".connection_tool",
     "ConnectionToolRef": ".connection_tool_ref",
+    "ConnectionUsage": ".connection_usage",
     "CreateManagedAgentSourceRequest": ".create_managed_agent_source_request",
     "CreateManagedAgentSourceRequestExportPolicy": ".create_managed_agent_source_request_export_policy",
     "CreateManagedAgentSourceRequestSourceKind": ".create_managed_agent_source_request_source_kind",
@@ -206,6 +249,20 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DefinitionRevision": ".definition_revision",
     "DefinitionRevisionResult": ".definition_revision_result",
     "DefinitionRevisionView": ".definition_revision_view",
+    "DocumentAccessDelta": ".document_access_delta",
+    "DocumentBlocker": ".document_blocker",
+    "DocumentComparison": ".document_comparison",
+    "DocumentIssue": ".document_issue",
+    "DocumentPublication": ".document_publication",
+    "DocumentResources": ".document_resources",
+    "DocumentRevision": ".document_revision",
+    "DocumentSuggestion": ".document_suggestion",
+    "DocumentSuggestions": ".document_suggestions",
+    "DocumentTemplate": ".document_template",
+    "DocumentTemplates": ".document_templates",
+    "DocumentValidationView": ".document_validation_view",
+    "DocumentVersions": ".document_versions",
+    "EarlierDocumentSession": ".earlier_document_session",
     "EnvironmentView": ".environment_view",
     "EnvironmentViewStatus": ".environment_view_status",
     "EventDeliveryRequest": ".event_delivery_request",
@@ -215,12 +272,15 @@ _dynamic_imports: typing.Dict[str, str] = {
     "GitCredential": ".git_credential",
     "HarborTaskFiles": ".harbor_task_files",
     "HttpValidationError": ".http_validation_error",
+    "ImportedDocument": ".imported_document",
     "InvoiceBudget": ".invoice_budget",
     "JudgmentContext": ".judgment_context",
     "JudgmentTarget": ".judgment_target",
     "JudgmentTargetKind": ".judgment_target_kind",
     "LiveHandle": ".live_handle",
     "ManagedRun": ".managed_run",
+    "Mention": ".mention",
+    "MentionResource": ".mention_resource",
     "OpenInferenceSpan": ".open_inference_span",
     "OperationView": ".operation_view",
     "OperationViewCapabilityName": ".operation_view_capability_name",
@@ -241,12 +301,15 @@ _dynamic_imports: typing.Dict[str, str] = {
     "RecoverRunRequest": ".recover_run_request",
     "ReleaseActionRequest": ".release_action_request",
     "ReloadSettings": ".reload_settings",
+    "ResolvedMention": ".resolved_mention",
     "ResourceBudget": ".resource_budget",
     "ResumeImprovementInput": ".resume_improvement_input",
     "ResumeInput": ".resume_input",
     "RunEvent": ".run_event",
     "RunEvents": ".run_events",
     "RunSpend": ".run_spend",
+    "RunTranscript": ".run_transcript",
+    "RunTranscriptEvidence": ".run_transcript_evidence",
     "ScopeType": ".scope_type",
     "SessionSpend": ".session_spend",
     "SourceType": ".source_type",
@@ -257,10 +320,19 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TargetInput": ".target_input",
     "ToolProviderRefRequest": ".tool_provider_ref_request",
     "ToolSkillSourceRequest": ".tool_skill_source_request",
+    "ToolkitCategory": ".toolkit_category",
     "TraceImportGroupingRequest": ".trace_import_grouping_request",
     "TraceImportOptionsRequest": ".trace_import_options_request",
     "TraceImportScopeRequest": ".trace_import_scope_request",
     "TraceMetadata": ".trace_metadata",
+    "TranscriptEvent": ".transcript_event",
+    "TranscriptRun": ".transcript_run",
+    "TranscriptRunEnvironment": ".transcript_run_environment",
+    "TranscriptStep": ".transcript_step",
+    "TranscriptStepSource": ".transcript_step_source",
+    "TranscriptToolCall": ".transcript_tool_call",
+    "TranscriptToolResult": ".transcript_tool_result",
+    "TranscriptTrajectory": ".transcript_trajectory",
     "UncertainOperation": ".uncertain_operation",
     "ValidationError": ".validation_error",
     "ValidationErrorLocItem": ".validation_error_loc_item",
@@ -268,13 +340,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WorkPage": ".work_page",
     "WorkPageExecutionPhase": ".work_page_execution_phase",
     "WorkPageTransport": ".work_page_transport",
-    "WorkspaceBlobView": ".workspace_blob_view",
     "WorkspaceCheckpointView": ".workspace_checkpoint_view",
-    "WorkspaceCheckpointViewStatus": ".workspace_checkpoint_view_status",
-    "WorkspaceChunk": ".workspace_chunk",
-    "WorkspaceFile": ".workspace_file",
     "WorkspaceProvenance": ".workspace_provenance",
     "WorkspaceProvenanceKind": ".workspace_provenance_kind",
+    "WorkspaceRemoteView": ".workspace_remote_view",
+    "WorkspaceRemoteViewUsername": ".workspace_remote_view_username",
 }
 
 
@@ -306,6 +376,8 @@ __all__ = [
     "AgentDefinitionSource",
     "AgentDefinitionSourceEncoding",
     "AgentDefinitionSourceKind",
+    "AgentDocument",
+    "AgentDocumentBudget",
     "AgentImportEvalSuiteRequest",
     "AgentImportImproveRequest",
     "AgentImportModelCaptureRequest",
@@ -315,6 +387,7 @@ __all__ = [
     "AgentSetup",
     "AgentSetupPackages",
     "AgentSetupRepo",
+    "AgentSnippets",
     "AgentToolCapabilities",
     "AgentWebCapabilities",
     "AgentWebCapabilitiesProvider",
@@ -345,14 +418,19 @@ __all__ = [
     "ClaimView",
     "ComputeError",
     "Connection",
+    "ConnectionAgentUsage",
+    "ConnectionApp",
+    "ConnectionApps",
     "ConnectionAuthorization",
     "ConnectionConfig",
     "ConnectionConfigAuth",
     "ConnectionCredentials",
     "ConnectionEvent",
     "ConnectionGrant",
+    "ConnectionRevocation",
     "ConnectionTool",
     "ConnectionToolRef",
+    "ConnectionUsage",
     "CreateManagedAgentSourceRequest",
     "CreateManagedAgentSourceRequestExportPolicy",
     "CreateManagedAgentSourceRequestSourceKind",
@@ -365,6 +443,20 @@ __all__ = [
     "DefinitionRevision",
     "DefinitionRevisionResult",
     "DefinitionRevisionView",
+    "DocumentAccessDelta",
+    "DocumentBlocker",
+    "DocumentComparison",
+    "DocumentIssue",
+    "DocumentPublication",
+    "DocumentResources",
+    "DocumentRevision",
+    "DocumentSuggestion",
+    "DocumentSuggestions",
+    "DocumentTemplate",
+    "DocumentTemplates",
+    "DocumentValidationView",
+    "DocumentVersions",
+    "EarlierDocumentSession",
     "EnvironmentView",
     "EnvironmentViewStatus",
     "EventDeliveryRequest",
@@ -374,12 +466,15 @@ __all__ = [
     "GitCredential",
     "HarborTaskFiles",
     "HttpValidationError",
+    "ImportedDocument",
     "InvoiceBudget",
     "JudgmentContext",
     "JudgmentTarget",
     "JudgmentTargetKind",
     "LiveHandle",
     "ManagedRun",
+    "Mention",
+    "MentionResource",
     "OpenInferenceSpan",
     "OperationView",
     "OperationViewCapabilityName",
@@ -400,12 +495,15 @@ __all__ = [
     "RecoverRunRequest",
     "ReleaseActionRequest",
     "ReloadSettings",
+    "ResolvedMention",
     "ResourceBudget",
     "ResumeImprovementInput",
     "ResumeInput",
     "RunEvent",
     "RunEvents",
     "RunSpend",
+    "RunTranscript",
+    "RunTranscriptEvidence",
     "ScopeType",
     "SessionSpend",
     "SourceType",
@@ -416,10 +514,19 @@ __all__ = [
     "TargetInput",
     "ToolProviderRefRequest",
     "ToolSkillSourceRequest",
+    "ToolkitCategory",
     "TraceImportGroupingRequest",
     "TraceImportOptionsRequest",
     "TraceImportScopeRequest",
     "TraceMetadata",
+    "TranscriptEvent",
+    "TranscriptRun",
+    "TranscriptRunEnvironment",
+    "TranscriptStep",
+    "TranscriptStepSource",
+    "TranscriptToolCall",
+    "TranscriptToolResult",
+    "TranscriptTrajectory",
     "UncertainOperation",
     "ValidationError",
     "ValidationErrorLocItem",
@@ -427,11 +534,9 @@ __all__ = [
     "WorkPage",
     "WorkPageExecutionPhase",
     "WorkPageTransport",
-    "WorkspaceBlobView",
     "WorkspaceCheckpointView",
-    "WorkspaceCheckpointViewStatus",
-    "WorkspaceChunk",
-    "WorkspaceFile",
     "WorkspaceProvenance",
     "WorkspaceProvenanceKind",
+    "WorkspaceRemoteView",
+    "WorkspaceRemoteViewUsername",
 ]

@@ -4,6 +4,7 @@ import typing
 
 CreateManagedAgentSourceRequestSourceKind = typing.Union[
     typing.Literal[
+        "agent_document",
         "workflow_json",
         "langgraph",
         "n8n_json",

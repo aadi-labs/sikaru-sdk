@@ -129,6 +129,61 @@ export class ConnectionsClient {
 
     /**
      * @param {string} project_id
+     * @param {Sikaru.ListAppsConnectionsRequest} request
+     * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.connections.listApps("project_id")
+     */
+    public listApps(project_id: string, request: Sikaru.ListAppsConnectionsRequest = {}, requestOptions?: ConnectionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ConnectionApps> {
+        return core.HttpResponsePromise.fromPromise(this.__listApps(project_id, request, requestOptions));
+    }
+
+    private async __listApps(project_id: string, request: Sikaru.ListAppsConnectionsRequest = {}, requestOptions?: ConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ConnectionApps>> {
+        const { search, category, cursor, limit } = request;
+        const _queryParams: Record<string, unknown> = {
+            search,
+            category,
+            cursor,
+            limit
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/connections/catalog/apps`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ConnectionApps, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/connections/catalog/apps");
+    }
+
+    /**
+     * @param {string} project_id
      * @param {string} connection_id
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -173,6 +228,60 @@ export class ConnectionsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/connections/{connection_id}");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} connection_id
+     * @param {Sikaru.UpdateConnection} request
+     * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.connections.updateConnection("project_id", "connection_id", {
+     *         expected_version: 1
+     *     })
+     */
+    public updateConnection(project_id: string, connection_id: string, request: Sikaru.UpdateConnection, requestOptions?: ConnectionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.Connection> {
+        return core.HttpResponsePromise.fromPromise(this.__updateConnection(project_id, connection_id, request, requestOptions));
+    }
+
+    private async __updateConnection(project_id: string, connection_id: string, request: Sikaru.UpdateConnection, requestOptions?: ConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.Connection>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/connections/${core.url.encodePathParam(connection_id)}`),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.Connection, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/v1/projects/{project_id}/connections/{connection_id}");
     }
 
     /**
@@ -673,5 +782,101 @@ export class ConnectionsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/v1/projects/{project_id}/connections/{connection_id}/grants/{grant_id}");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} connection_id
+     * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.connections.revoke("project_id", "connection_id")
+     */
+    public revoke(project_id: string, connection_id: string, requestOptions?: ConnectionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ConnectionRevocation> {
+        return core.HttpResponsePromise.fromPromise(this.__revoke(project_id, connection_id, requestOptions));
+    }
+
+    private async __revoke(project_id: string, connection_id: string, requestOptions?: ConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ConnectionRevocation>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/connections/${core.url.encodePathParam(connection_id)}/revoke`),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ConnectionRevocation, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/connections/{connection_id}/revoke");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} connection_id
+     * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.connections.usage("project_id", "connection_id")
+     */
+    public usage(project_id: string, connection_id: string, requestOptions?: ConnectionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ConnectionUsage> {
+        return core.HttpResponsePromise.fromPromise(this.__usage(project_id, connection_id, requestOptions));
+    }
+
+    private async __usage(project_id: string, connection_id: string, requestOptions?: ConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ConnectionUsage>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/connections/${core.url.encodePathParam(connection_id)}/usage`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ConnectionUsage, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/connections/{connection_id}/usage");
     }
 }

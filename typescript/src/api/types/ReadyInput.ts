@@ -18,7 +18,6 @@ export namespace ReadyInput {
         export const Item = {
                 ComputeExecute: "compute.execute",
                 BashRun: "bash.run",
-                FilesystemCheckpointV1: "filesystem-checkpoint-v1",
                 ConditionWaitsV1: "condition-waits-v1"
             } as const;
         export type Item = typeof Item[keyof typeof Item];

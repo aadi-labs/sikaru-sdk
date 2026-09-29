@@ -13,10 +13,13 @@ from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.connection import Connection
+from ..types.connection_apps import ConnectionApps
 from ..types.connection_authorization import ConnectionAuthorization
 from ..types.connection_config import ConnectionConfig
 from ..types.connection_credentials import ConnectionCredentials
 from ..types.connection_event import ConnectionEvent
+from ..types.connection_revocation import ConnectionRevocation
+from ..types.connection_usage import ConnectionUsage
 from ..types.http_validation_error import HttpValidationError
 from .types.create_connection_kind import CreateConnectionKind
 from .types.create_connection_ownership import CreateConnectionOwnership
@@ -92,6 +95,7 @@ class RawConnectionsClient:
         kind: CreateConnectionKind,
         credentials: typing.Optional[ConnectionCredentials] = OMIT,
         ownership: typing.Optional[CreateConnectionOwnership] = OMIT,
+        slug: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[Connection]:
         """
@@ -108,6 +112,8 @@ class RawConnectionsClient:
         credentials : typing.Optional[ConnectionCredentials]
 
         ownership : typing.Optional[CreateConnectionOwnership]
+
+        slug : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -133,6 +139,7 @@ class RawConnectionsClient:
                 "display_name": display_name,
                 "kind": kind,
                 "ownership": ownership,
+                "slug": slug,
             },
             headers={
                 "content-type": "application/json",
@@ -146,6 +153,78 @@ class RawConnectionsClient:
                     Connection,
                     parse_obj_as(
                         type_=Connection,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def list_apps(
+        self,
+        project_id: str,
+        *,
+        search: typing.Optional[str] = None,
+        category: typing.Optional[str] = None,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ConnectionApps]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        search : typing.Optional[str]
+
+        category : typing.Optional[str]
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ConnectionApps]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/catalog/apps",
+            method="GET",
+            params={
+                "search": search,
+                "category": category,
+                "cursor": cursor,
+                "limit": limit,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConnectionApps,
+                    parse_obj_as(
+                        type_=ConnectionApps,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -192,6 +271,84 @@ class RawConnectionsClient:
             f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}",
             method="GET",
             request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    Connection,
+                    parse_obj_as(
+                        type_=Connection,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def update_connection(
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        expected_version: int,
+        allowed_hosts: typing.Optional[typing.Sequence[str]] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[Connection]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        expected_version : int
+
+        allowed_hosts : typing.Optional[typing.Sequence[str]]
+
+        display_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[Connection]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}",
+            method="PATCH",
+            json={
+                "allowed_hosts": allowed_hosts,
+                "display_name": display_name,
+                "expected_version": expected_version,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -847,6 +1004,115 @@ class RawConnectionsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def revoke(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ConnectionRevocation]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ConnectionRevocation]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}/revoke",
+            method="POST",
+            request_options=_request_options_with_retries_disabled,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConnectionRevocation,
+                    parse_obj_as(
+                        type_=ConnectionRevocation,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def usage(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ConnectionUsage]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ConnectionUsage]
+            Successful Response
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}/usage",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConnectionUsage,
+                    parse_obj_as(
+                        type_=ConnectionUsage,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
 
 class AsyncRawConnectionsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
@@ -912,6 +1178,7 @@ class AsyncRawConnectionsClient:
         kind: CreateConnectionKind,
         credentials: typing.Optional[ConnectionCredentials] = OMIT,
         ownership: typing.Optional[CreateConnectionOwnership] = OMIT,
+        slug: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[Connection]:
         """
@@ -928,6 +1195,8 @@ class AsyncRawConnectionsClient:
         credentials : typing.Optional[ConnectionCredentials]
 
         ownership : typing.Optional[CreateConnectionOwnership]
+
+        slug : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -953,6 +1222,7 @@ class AsyncRawConnectionsClient:
                 "display_name": display_name,
                 "kind": kind,
                 "ownership": ownership,
+                "slug": slug,
             },
             headers={
                 "content-type": "application/json",
@@ -966,6 +1236,78 @@ class AsyncRawConnectionsClient:
                     Connection,
                     parse_obj_as(
                         type_=Connection,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def list_apps(
+        self,
+        project_id: str,
+        *,
+        search: typing.Optional[str] = None,
+        category: typing.Optional[str] = None,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ConnectionApps]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        search : typing.Optional[str]
+
+        category : typing.Optional[str]
+
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ConnectionApps]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/catalog/apps",
+            method="GET",
+            params={
+                "search": search,
+                "category": category,
+                "cursor": cursor,
+                "limit": limit,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConnectionApps,
+                    parse_obj_as(
+                        type_=ConnectionApps,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1012,6 +1354,84 @@ class AsyncRawConnectionsClient:
             f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}",
             method="GET",
             request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    Connection,
+                    parse_obj_as(
+                        type_=Connection,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def update_connection(
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        expected_version: int,
+        allowed_hosts: typing.Optional[typing.Sequence[str]] = OMIT,
+        display_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[Connection]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        expected_version : int
+
+        allowed_hosts : typing.Optional[typing.Sequence[str]]
+
+        display_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[Connection]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}",
+            method="PATCH",
+            json={
+                "allowed_hosts": allowed_hosts,
+                "display_name": display_name,
+                "expected_version": expected_version,
+            },
+            headers={
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
@@ -1643,6 +2063,115 @@ class AsyncRawConnectionsClient:
                     Connection,
                     parse_obj_as(
                         type_=Connection,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def revoke(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ConnectionRevocation]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ConnectionRevocation]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}/revoke",
+            method="POST",
+            request_options=_request_options_with_retries_disabled,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConnectionRevocation,
+                    parse_obj_as(
+                        type_=ConnectionRevocation,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def usage(
+        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ConnectionUsage]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        connection_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ConnectionUsage]
+            Successful Response
+        """
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}/usage",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ConnectionUsage,
+                    parse_obj_as(
+                        type_=ConnectionUsage,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

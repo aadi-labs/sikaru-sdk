@@ -26,6 +26,16 @@ def test_connections_create_connection() -> None:
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections", None, 1)
 
 
+def test_connections_list_apps() -> None:
+    """Test list_apps endpoint with WireMock"""
+    test_id = "connections.list_apps.0"
+    client = get_client(test_id)
+    client.connections.list_apps(
+        project_id="project_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/catalog/apps", None, 1)
+
+
 def test_connections_get_connection() -> None:
     """Test get_connection endpoint with WireMock"""
     test_id = "connections.get_connection.0"
@@ -35,6 +45,18 @@ def test_connections_get_connection() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/connection_id", None, 1)
+
+
+def test_connections_update_connection() -> None:
+    """Test update_connection endpoint with WireMock"""
+    test_id = "connections.update_connection.0"
+    client = get_client(test_id)
+    client.connections.update_connection(
+        project_id="project_id",
+        connection_id="connection_id",
+        expected_version=1,
+    )
+    verify_request_count(test_id, "PATCH", "/v1/projects/project_id/connections/connection_id", None, 1)
 
 
 def test_connections_authorize() -> None:
@@ -152,3 +174,25 @@ def test_connections_revoke_grant() -> None:
     verify_request_count(
         test_id, "DELETE", "/v1/projects/project_id/connections/connection_id/grants/grant_id", None, 1
     )
+
+
+def test_connections_revoke() -> None:
+    """Test revoke endpoint with WireMock"""
+    test_id = "connections.revoke.0"
+    client = get_client(test_id)
+    client.connections.revoke(
+        project_id="project_id",
+        connection_id="connection_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/revoke", None, 1)
+
+
+def test_connections_usage() -> None:
+    """Test usage endpoint with WireMock"""
+    test_id = "connections.usage.0"
+    client = get_client(test_id)
+    client.connections.usage(
+        project_id="project_id",
+        connection_id="connection_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/connection_id/usage", None, 1)

@@ -8,6 +8,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 from .agent_definition_schema import AgentDefinitionSchema
 from .agent_definition_source import AgentDefinitionSource
+from .agent_document_budget import AgentDocumentBudget
 from .agent_setup import AgentSetup
 from .agent_tool_capabilities import AgentToolCapabilities
 from .agent_web_capabilities import AgentWebCapabilities
@@ -18,7 +19,10 @@ class AgentDefinition(UniversalBaseModel):
     The customer-authored `sikaru.agent.contract.v1` agent definition.
     """
 
+    access: typing.Optional[typing.Dict[str, typing.Any]] = None
+    budget: typing.Optional[AgentDocumentBudget] = None
     instructions: typing.Optional[str] = None
+    model: typing.Optional[str] = None
     outcomes: typing.Optional[typing.List[str]] = None
     schema_: typing_extensions.Annotated[
         AgentDefinitionSchema, FieldMetadata(alias="schema"), pydantic.Field(alias="schema")

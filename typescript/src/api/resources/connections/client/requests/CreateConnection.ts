@@ -16,16 +16,19 @@ export interface CreateConnection {
     display_name: string;
     kind: CreateConnection.Kind;
     ownership?: CreateConnection.Ownership;
+    slug?: string | null;
 }
 
 export namespace CreateConnection {
     export const Kind = {
             Mcp: "mcp",
-            Composio: "composio"
+            Composio: "composio",
+            Secret: "secret"
         } as const;
     export type Kind = typeof Kind[keyof typeof Kind];
     export const Ownership = {
             Workspace: "workspace",
+            Shared: "shared",
             Personal: "personal"
         } as const;
     export type Ownership = typeof Ownership[keyof typeof Ownership];

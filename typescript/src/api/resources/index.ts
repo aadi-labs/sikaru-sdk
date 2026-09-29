@@ -1,6 +1,8 @@
 export * as activation from "./activation/index.js";
 export * as agentBudgets from "./agentBudgets/index.js";
 export * from "./agentBudgets/client/requests/index.js";
+export * as agentDocuments from "./agentDocuments/index.js";
+export * from "./agentDocuments/client/requests/index.js";
 export * as agentImports from "./agentImports/index.js";
 export * from "./agentImports/client/requests/index.js";
 export * as agents from "./agents/index.js";

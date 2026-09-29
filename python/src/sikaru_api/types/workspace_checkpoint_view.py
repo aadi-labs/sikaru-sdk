@@ -4,16 +4,12 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .workspace_checkpoint_view_status import WorkspaceCheckpointViewStatus
 
 
 class WorkspaceCheckpointView(UniversalBaseModel):
-    checkpoint_id: str
-    owner_epoch: int
-    run_id: str
-    status: WorkspaceCheckpointViewStatus
-    tree_id: typing.Optional[str] = None
-    workspace_generation: str
+    branch: str
+    commit_sha: str
+    recorded_at: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

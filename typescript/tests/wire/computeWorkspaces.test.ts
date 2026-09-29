@@ -6,368 +6,294 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ComputeWorkspacesClient", () => {
     
-    test("get (1)", async () => {
+    test("record (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "checkpoint_id" : "checkpoint_id" , "owner_epoch" : 1 , "run_id" : "run_id" , "status" : "requested" , "tree_id" : "tree_id" , "workspace_generation" : "workspace_generation" };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawResponseBody = { "branch" : "branch" , "commit_sha" : "commit_sha" , "recorded_at" : "recorded_at" };
         
         server
             .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(200).jsonBody(rawResponseBody)
-                .build();
-
-        
-                        
-                                const response = await client.computeWorkspaces.get("project_id", "attachment_id", "run_id");
-                                expect(response).toEqual(rawResponseBody);
-                              
-                    
-    });
-          
-    test("get (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "detail" : "detail" };
-        
-        server
-            .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(401).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.computeWorkspaces.get("project_id", "attachment_id", "run_id")
-            }).rejects.toThrow(Sikaru.UnauthorizedError);
-    });
-          
-    test("get (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "detail" : "detail" };
-        
-        server
-            .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(403).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.computeWorkspaces.get("project_id", "attachment_id", "run_id")
-            }).rejects.toThrow(Sikaru.ForbiddenError);
-    });
-          
-    test("get (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "detail" : "detail" };
-        
-        server
-            .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(404).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.computeWorkspaces.get("project_id", "attachment_id", "run_id")
-            }).rejects.toThrow(Sikaru.NotFoundError);
-    });
-          
-    test("get (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "detail" : "detail" };
-        
-        server
-            .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(409).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.computeWorkspaces.get("project_id", "attachment_id", "run_id")
-            }).rejects.toThrow(Sikaru.ConflictError);
-    });
-          
-    test("get (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.computeWorkspaces.get("project_id", "attachment_id", "run_id")
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
-    });
-          
-    test("get (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "detail" : "detail" };
-        
-        server
-            .mockEndpoint()
-            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id").respondWith()
-            .statusCode(503).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.computeWorkspaces.get("project_id", "attachment_id", "run_id")
-            }).rejects.toThrow(Sikaru.ServiceUnavailableError);
-    });
-          
-    test("commit_tree (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "key" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1 } ] , "mode" : 1 , "sha256" : "sha256" , "size" : 1 } } };
-        const rawResponseBody = { "checkpoint_id" : "checkpoint_id" , "owner_epoch" : 1 , "run_id" : "run_id" , "status" : "requested" , "tree_id" : "tree_id" , "workspace_generation" : "workspace_generation" };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(200).jsonBody(rawResponseBody)
                 .build();
 
         
                         
-                                const response = await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "key": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1
-                }],
-            mode: 1,
-            sha256: "sha256",
-            size: 1
-        }
-    }
+                                const response = await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 });
                                 expect(response).toEqual(rawResponseBody);
                               
                     
     });
           
-    test("commit_tree (2)", async () => {
+    test("record (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "files" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1000000 } , { "sha256" : "sha256" , "size" : 1000000 } ] , "mode" : 511 , "sha256" : "sha256" , "size" : 1073741824 } } };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
         const rawResponseBody = { "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(401).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "files": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1000000
-                }, {
-                    sha256: "sha256",
-                    size: 1000000
-                }],
-            mode: 511,
-            sha256: "sha256",
-            size: 1073741824
-        }
-    }
+                return await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.UnauthorizedError);
     });
           
-    test("commit_tree (3)", async () => {
+    test("record (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "files" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1000000 } , { "sha256" : "sha256" , "size" : 1000000 } ] , "mode" : 511 , "sha256" : "sha256" , "size" : 1073741824 } } };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
         const rawResponseBody = { "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(403).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "files": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1000000
-                }, {
-                    sha256: "sha256",
-                    size: 1000000
-                }],
-            mode: 511,
-            sha256: "sha256",
-            size: 1073741824
-        }
-    }
+                return await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.ForbiddenError);
     });
           
-    test("commit_tree (4)", async () => {
+    test("record (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "files" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1000000 } , { "sha256" : "sha256" , "size" : 1000000 } ] , "mode" : 511 , "sha256" : "sha256" , "size" : 1073741824 } } };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
         const rawResponseBody = { "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(404).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "files": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1000000
-                }, {
-                    sha256: "sha256",
-                    size: 1000000
-                }],
-            mode: 511,
-            sha256: "sha256",
-            size: 1073741824
-        }
-    }
+                return await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.NotFoundError);
     });
           
-    test("commit_tree (5)", async () => {
+    test("record (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "files" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1000000 } , { "sha256" : "sha256" , "size" : 1000000 } ] , "mode" : 511 , "sha256" : "sha256" , "size" : 1073741824 } } };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
         const rawResponseBody = { "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(409).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "files": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1000000
-                }, {
-                    sha256: "sha256",
-                    size: 1000000
-                }],
-            mode: 511,
-            sha256: "sha256",
-            size: 1073741824
-        }
-    }
+                return await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.ConflictError);
     });
           
-    test("commit_tree (6)", async () => {
+    test("record (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "files" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1000000 } , { "sha256" : "sha256" , "size" : 1000000 } ] , "mode" : 511 , "sha256" : "sha256" , "size" : 1073741824 } } };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
         const rawResponseBody = { };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(422).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "files": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1000000
-                }, {
-                    sha256: "sha256",
-                    size: 1000000
-                }],
-            mode: 511,
-            sha256: "sha256",
-            size: 1073741824
-        }
-    }
+                return await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
-    test("commit_tree (7)", async () => {
+    test("record (7)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "files" : { "files" : { "chunks" : [ { "sha256" : "sha256" , "size" : 1000000 } , { "sha256" : "sha256" , "size" : 1000000 } ] , "mode" : 511 , "sha256" : "sha256" , "size" : 1073741824 } } };
+        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
         const rawResponseBody = { "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints/run_id/tree").jsonBody(rawRequestBody)
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints").jsonBody(rawRequestBody)
                 .respondWith()
             .statusCode(503).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.commitTree("project_id", "attachment_id", "run_id", {
-    files: {
-        "files": {
-            chunks: [{
-                    sha256: "sha256",
-                    size: 1000000
-                }, {
-                    sha256: "sha256",
-                    size: 1000000
-                }],
-            mode: 511,
-            sha256: "sha256",
-            size: 1073741824
-        }
-    }
+                return await client.computeWorkspaces.record("project_id", "attachment_id", {
+    commit_sha: "commit_sha",
+    trigger: "turn"
 })
+            }).rejects.toThrow(Sikaru.ServiceUnavailableError);
+    });
+          
+    test("remote (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "branch" : "branch" , "expires_at" : "expires_at" , "head_sha" : "head_sha" , "ignore_defaults" : [ "ignore_defaults" ] , "max_push_bytes" : 1 , "remote_url" : "remote_url" , "token" : "token" , "username" : "x-token" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.computeWorkspaces.remote("project_id", "attachment_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("remote (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("remote (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("remote (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("remote (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(409).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+            }).rejects.toThrow(Sikaru.ConflictError);
+    });
+          
+    test("remote (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("remote (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(503).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.computeWorkspaces.remote("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.ServiceUnavailableError);
     });
           

@@ -18,9 +18,10 @@ class CreateManagedAgentSourceRequest(UniversalBaseModel):
         pydantic.Field(alias="analysisSummary"),
     ] = None
     content_digest: typing_extensions.Annotated[
-        str, FieldMetadata(alias="contentDigest"), pydantic.Field(alias="contentDigest")
-    ]
+        typing.Optional[str], FieldMetadata(alias="contentDigest"), pydantic.Field(alias="contentDigest")
+    ] = None
     definition: typing.Optional[AgentDefinition] = None
+    document: typing.Optional[str] = None
     export_policy: typing_extensions.Annotated[
         typing.Optional[CreateManagedAgentSourceRequestExportPolicy],
         FieldMetadata(alias="exportPolicy"),

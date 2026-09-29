@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.12
+
+- Add agent document operations for draft editing, validation, access review, publication, version history, comparisons, and suggestions.
+- Add draft test sessions, typed session input receipts, and agent schedules with occurrence history.
+- Expand connection discovery and management, including personal account workflows.
+- Read managed conversation transcripts and stream transcript events, subject to session privacy.
+- These features require an updated managed service.
+
 ## 0.2.10
 
 - Declare an agent's reach in typed `web`, `tools` and `setup` sections of its definition: web search provider and domain allow and block lists, built-in tool enablement and approval policies, and setup packages, commands and repositories.

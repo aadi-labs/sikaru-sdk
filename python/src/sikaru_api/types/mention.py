@@ -6,9 +6,14 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class WorkspaceBlobView(UniversalBaseModel):
-    sha256: str
-    size: int
+class Mention(UniversalBaseModel):
+    column: int
+    end: int
+    kind: str
+    line: int
+    slug: str
+    start: int
+    text: str
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

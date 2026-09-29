@@ -4,10 +4,10 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.workspace_blob_view import WorkspaceBlobView
 from ..types.workspace_checkpoint_view import WorkspaceCheckpointView
-from ..types.workspace_file import WorkspaceFile
+from ..types.workspace_remote_view import WorkspaceRemoteView
 from .raw_client import AsyncRawComputeWorkspacesClient, RawComputeWorkspacesClient
+from .types.workspace_checkpoint_input_trigger import WorkspaceCheckpointInputTrigger
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -28,22 +28,30 @@ class ComputeWorkspacesClient:
         """
         return self._raw_client
 
-    def get(
+    def record(
         self,
         project_id: str,
         attachment_id: str,
-        run_id: str,
         *,
+        commit_sha: str,
+        trigger: WorkspaceCheckpointInputTrigger,
+        run_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkspaceCheckpointView:
         """
+        Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+
         Parameters
         ----------
         project_id : str
 
         attachment_id : str
 
-        run_id : str
+        commit_sha : str
+
+        trigger : WorkspaceCheckpointInputTrigger
+
+        run_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -60,108 +68,56 @@ class ComputeWorkspacesClient:
         client = SikaruApi(
             api_key="YOUR_API_KEY",
         )
-        client.compute_workspaces.get(
+        client.compute_workspaces.record(
             project_id="project_id",
             attachment_id="attachment_id",
-            run_id="run_id",
+            commit_sha="commit_sha",
+            trigger="turn",
         )
         """
-        _response = self._raw_client.get(project_id, attachment_id, run_id, request_options=request_options)
+        _response = self._raw_client.record(
+            project_id,
+            attachment_id,
+            commit_sha=commit_sha,
+            trigger=trigger,
+            run_id=run_id,
+            request_options=request_options,
+        )
         return _response.data
 
-    def put_blob(
-        self,
-        project_id: str,
-        attachment_id: str,
-        run_id: str,
-        sha256: str,
-        *,
-        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkspaceBlobView:
+    def remote(
+        self, project_id: str, attachment_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> WorkspaceRemoteView:
         """
+        Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+
         Parameters
         ----------
         project_id : str
 
         attachment_id : str
 
-        run_id : str
-
-        sha256 : str
-
-        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        WorkspaceBlobView
-            Successful Response
-        """
-        _response = self._raw_client.put_blob(
-            project_id, attachment_id, run_id, sha256, request=request, request_options=request_options
-        )
-        return _response.data
-
-    def commit_tree(
-        self,
-        project_id: str,
-        attachment_id: str,
-        run_id: str,
-        *,
-        files: typing.Dict[str, WorkspaceFile],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkspaceCheckpointView:
-        """
-        Parameters
-        ----------
-        project_id : str
-
-        attachment_id : str
-
-        run_id : str
-
-        files : typing.Dict[str, WorkspaceFile]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        WorkspaceCheckpointView
+        WorkspaceRemoteView
             Successful Response
 
         Examples
         --------
-        from sikaru_api import SikaruApi, WorkspaceChunk, WorkspaceFile
+        from sikaru_api import SikaruApi
 
         client = SikaruApi(
             api_key="YOUR_API_KEY",
         )
-        client.compute_workspaces.commit_tree(
+        client.compute_workspaces.remote(
             project_id="project_id",
             attachment_id="attachment_id",
-            run_id="run_id",
-            files={
-                "key": WorkspaceFile(
-                    chunks=[
-                        WorkspaceChunk(
-                            sha256="sha256",
-                            size=1,
-                        )
-                    ],
-                    mode=1,
-                    sha256="sha256",
-                    size=1,
-                )
-            },
         )
         """
-        _response = self._raw_client.commit_tree(
-            project_id, attachment_id, run_id, files=files, request_options=request_options
-        )
+        _response = self._raw_client.remote(project_id, attachment_id, request_options=request_options)
         return _response.data
 
 
@@ -180,22 +136,30 @@ class AsyncComputeWorkspacesClient:
         """
         return self._raw_client
 
-    async def get(
+    async def record(
         self,
         project_id: str,
         attachment_id: str,
-        run_id: str,
         *,
+        commit_sha: str,
+        trigger: WorkspaceCheckpointInputTrigger,
+        run_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkspaceCheckpointView:
         """
+        Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+
         Parameters
         ----------
         project_id : str
 
         attachment_id : str
 
-        run_id : str
+        commit_sha : str
+
+        trigger : WorkspaceCheckpointInputTrigger
+
+        run_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -217,87 +181,51 @@ class AsyncComputeWorkspacesClient:
 
 
         async def main() -> None:
-            await client.compute_workspaces.get(
+            await client.compute_workspaces.record(
                 project_id="project_id",
                 attachment_id="attachment_id",
-                run_id="run_id",
+                commit_sha="commit_sha",
+                trigger="turn",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get(project_id, attachment_id, run_id, request_options=request_options)
-        return _response.data
-
-    async def put_blob(
-        self,
-        project_id: str,
-        attachment_id: str,
-        run_id: str,
-        sha256: str,
-        *,
-        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkspaceBlobView:
-        """
-        Parameters
-        ----------
-        project_id : str
-
-        attachment_id : str
-
-        run_id : str
-
-        sha256 : str
-
-        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        WorkspaceBlobView
-            Successful Response
-        """
-        _response = await self._raw_client.put_blob(
-            project_id, attachment_id, run_id, sha256, request=request, request_options=request_options
+        _response = await self._raw_client.record(
+            project_id,
+            attachment_id,
+            commit_sha=commit_sha,
+            trigger=trigger,
+            run_id=run_id,
+            request_options=request_options,
         )
         return _response.data
 
-    async def commit_tree(
-        self,
-        project_id: str,
-        attachment_id: str,
-        run_id: str,
-        *,
-        files: typing.Dict[str, WorkspaceFile],
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> WorkspaceCheckpointView:
+    async def remote(
+        self, project_id: str, attachment_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> WorkspaceRemoteView:
         """
+        Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+
         Parameters
         ----------
         project_id : str
 
         attachment_id : str
 
-        run_id : str
-
-        files : typing.Dict[str, WorkspaceFile]
-
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        WorkspaceCheckpointView
+        WorkspaceRemoteView
             Successful Response
 
         Examples
         --------
         import asyncio
 
-        from sikaru_api import AsyncSikaruApi, WorkspaceChunk, WorkspaceFile
+        from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
             api_key="YOUR_API_KEY",
@@ -305,29 +233,13 @@ class AsyncComputeWorkspacesClient:
 
 
         async def main() -> None:
-            await client.compute_workspaces.commit_tree(
+            await client.compute_workspaces.remote(
                 project_id="project_id",
                 attachment_id="attachment_id",
-                run_id="run_id",
-                files={
-                    "key": WorkspaceFile(
-                        chunks=[
-                            WorkspaceChunk(
-                                sha256="sha256",
-                                size=1,
-                            )
-                        ],
-                        mode=1,
-                        sha256="sha256",
-                        size=1,
-                    )
-                },
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.commit_tree(
-            project_id, attachment_id, run_id, files=files, request_options=request_options
-        )
+        _response = await self._raw_client.remote(project_id, attachment_id, request_options=request_options)
         return _response.data
