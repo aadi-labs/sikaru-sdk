@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_gitCredentials_list_() -> None:
@@ -9,6 +9,7 @@ def test_gitCredentials_list_() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/git-credentials", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/git-credentials", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_gitCredentials_create() -> None:
@@ -21,6 +22,7 @@ def test_gitCredentials_create() -> None:
         token="token",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/git-credentials", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/git-credentials", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_gitCredentials_grant() -> None:
@@ -33,3 +35,10 @@ def test_gitCredentials_grant() -> None:
         agent_id="agentId",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/git-credentials/credential_id/grants", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/git-credentials/credential_id/grants",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

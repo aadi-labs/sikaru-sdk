@@ -3,9 +3,9 @@
 /**
  * @example
  *     {
- *         document: "document"
+ *         agent_id: "agent_id"
  *     }
  */
-export interface DocumentInput {
-    document: string;
+export interface BindingsChannelsRequest {
+    agent_id: string;
 }

@@ -3,16 +3,19 @@
 import * as Sikaru from "../index.js";
 
 export interface RunTranscript {
+    connections?: Sikaru.PersonalConnectionPrompt[] | undefined;
     events: Sikaru.TranscriptEvent[];
     evidence: RunTranscript.Evidence;
     run: Sikaru.TranscriptRun;
     trajectory: Sikaru.TranscriptTrajectory | null;
+    usage?: (Sikaru.TranscriptUsage | null) | undefined;
 }
 
 export namespace RunTranscript {
     export const Evidence = {
             RetainedSnapshot: "retained_snapshot",
-            Unavailable: "unavailable"
+            Unavailable: "unavailable",
+            Personal: "personal"
         } as const;
     export type Evidence = typeof Evidence[keyof typeof Evidence];
 }

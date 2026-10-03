@@ -3,6 +3,8 @@
 import * as Sikaru from "../index.js";
 
 export interface RunEvents {
+    contentVisible?: boolean | undefined;
     events: Sikaru.RunEvent[];
     nextAfter: number;
+    personal?: boolean | undefined;
 }

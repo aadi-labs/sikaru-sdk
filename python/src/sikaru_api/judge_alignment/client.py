@@ -58,6 +58,7 @@ class JudgeAlignmentClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.judge_alignment.get_judge_alignment(
@@ -122,6 +123,7 @@ class AsyncJudgeAlignmentClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

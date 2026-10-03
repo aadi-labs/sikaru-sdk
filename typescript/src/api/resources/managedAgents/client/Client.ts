@@ -41,7 +41,8 @@ export class ManagedAgentsClient {
     }
 
     private async __listManagedAgents(project_id: string, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents`),
@@ -51,6 +52,7 @@ export class ManagedAgentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -91,7 +93,8 @@ export class ManagedAgentsClient {
     }
 
     private async __createManagedAgent(project_id: string, request: Sikaru.CreateManagedAgentRequest, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.CreatedManagedAgent>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents`),
@@ -104,6 +107,7 @@ export class ManagedAgentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -123,6 +127,116 @@ export class ManagedAgentsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/managed-agents");
+    }
+
+    /**
+     * Delete an agent that has never gone live, with its drafts, checks and schedules.
+     *
+     * @param {string} project_id
+     * @param {string} agent_slug
+     * @param {ManagedAgentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.managedAgents.deleteManagedAgent("project_id", "agent_slug")
+     */
+    public deleteManagedAgent(project_id: string, agent_slug: string, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__deleteManagedAgent(project_id, agent_slug, requestOptions));
+    }
+
+    private async __deleteManagedAgent(project_id: string, agent_slug: string, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<void>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}`),
+            method: "DELETE",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: undefined, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/v1/projects/{project_id}/managed-agents/{agent_slug}");
+    }
+
+    /**
+     * Change the agent's display name. The slug and every reference to the agent stay the same.
+     *
+     * @param {string} project_id
+     * @param {string} agent_slug
+     * @param {Sikaru.RenameAgent} request
+     * @param {ManagedAgentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.managedAgents.renameManagedAgent("project_id", "agent_slug", {
+     *         displayName: "displayName"
+     *     })
+     */
+    public renameManagedAgent(project_id: string, agent_slug: string, request: Sikaru.RenameAgent, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.RenamedManagedAgent> {
+        return core.HttpResponsePromise.fromPromise(this.__renameManagedAgent(project_id, agent_slug, request, requestOptions));
+    }
+
+    private async __renameManagedAgent(project_id: string, agent_slug: string, request: Sikaru.RenameAgent, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.RenamedManagedAgent>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}`),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.RenamedManagedAgent, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/v1/projects/{project_id}/managed-agents/{agent_slug}");
     }
 
     /**
@@ -150,7 +264,8 @@ export class ManagedAgentsClient {
     }
 
     private async __createDefinitionRevision(project_id: string, agent_slug: string, request: Sikaru.DefinitionRevisionRequest, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DefinitionRevisionResult>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/definition-revisions`),
@@ -163,6 +278,7 @@ export class ManagedAgentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -202,7 +318,8 @@ export class ManagedAgentsClient {
     }
 
     private async __getDefinitionRevision(project_id: string, agent_slug: string, changeset_id: string, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DefinitionRevisionView>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/definition-revisions/${core.url.encodePathParam(changeset_id)}`),
@@ -212,6 +329,7 @@ export class ManagedAgentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });

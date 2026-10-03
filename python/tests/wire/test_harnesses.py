@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import ResumeImprovementInput
 
@@ -12,6 +12,13 @@ def test_harnesses_get_invoice_budget() -> None:
         harness_id="harness_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/budget/invoice", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/harnesses/harness_id/budget/invoice",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_harnesses_improvement_options() -> None:
@@ -23,6 +30,13 @@ def test_harnesses_improvement_options() -> None:
         harness_id="harness_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/improvement-options", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/harnesses/harness_id/improvement-options",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_harnesses_list_improvements() -> None:
@@ -34,6 +48,9 @@ def test_harnesses_list_improvements() -> None:
         harness_id="harness_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/improvements", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/improvements", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_harnesses_start_improvement() -> None:
@@ -46,6 +63,13 @@ def test_harnesses_start_improvement() -> None:
         idempotency_key="idempotency_key",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/improvements", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/improvements",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_harnesses_get_improvement() -> None:
@@ -58,6 +82,13 @@ def test_harnesses_get_improvement() -> None:
         job_id="job_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/improvements/job_id", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/harnesses/harness_id/improvements/job_id",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_harnesses_resume_improvement() -> None:
@@ -73,6 +104,13 @@ def test_harnesses_resume_improvement() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/improvements/job_id/resume", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/improvements/job_id/resume",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_harnesses_train_model_stub() -> None:
@@ -84,3 +122,6 @@ def test_harnesses_train_model_stub() -> None:
         harness_id="harness_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/training", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/training", {"Authorization": r"Bearer .+"}, []
+    )

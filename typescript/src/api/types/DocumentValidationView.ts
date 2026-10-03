@@ -3,6 +3,7 @@
 import * as Sikaru from "../index.js";
 
 export interface DocumentValidationView {
+    editor?: (Sikaru.DocumentEditorMetadata | null) | undefined;
     errors: Sikaru.DocumentIssue[];
     mentions: Sikaru.ResolvedMention[];
     publishable: boolean;

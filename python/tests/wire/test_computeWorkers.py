@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_computeWorkers_issue_credential() -> None:
@@ -12,6 +12,13 @@ def test_computeWorkers_issue_credential() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-environments/environment_id/credentials", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-environments/environment_id/credentials",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeWorkers_poll() -> None:
@@ -23,3 +30,10 @@ def test_computeWorkers_poll() -> None:
         environment_id="environment_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/compute-environments/environment_id/queue", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/compute-environments/environment_id/queue",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

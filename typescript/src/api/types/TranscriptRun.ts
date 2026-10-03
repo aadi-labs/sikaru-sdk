@@ -3,11 +3,13 @@
 export interface TranscriptRun {
     accountId: string;
     completedAt: string | null;
+    contentVisible?: boolean | undefined;
     conversationId: string | null;
     environment: TranscriptRun.Environment;
     harnessVersionId: string;
     id: string;
     name: string;
+    personal?: boolean | undefined;
     sessionId: string;
     startedAt: string;
     status: string;

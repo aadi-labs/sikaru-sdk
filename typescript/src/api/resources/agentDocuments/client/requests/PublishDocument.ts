@@ -9,6 +9,7 @@
 export interface PublishDocument {
     acknowledgeRemovals?: boolean;
     acknowledgeWidening?: boolean;
-    expectedLiveVersionId: string | null;
+    expectedAccessDigest?: string | null;
+    expectedLiveVersionId?: string | null;
     revision: number;
 }

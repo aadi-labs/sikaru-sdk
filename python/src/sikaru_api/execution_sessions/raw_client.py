@@ -12,6 +12,9 @@ from ..core.parse_error import ParsingError
 from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.execution_session_page import ExecutionSessionPage
+from ..types.execution_session_response import ExecutionSessionResponse
+from ..types.execution_turn_response import ExecutionTurnResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.session_spend import SessionSpend
 from .types.session_input_environment import SessionInputEnvironment
@@ -37,7 +40,7 @@ class RawExecutionSessionsClient:
         limit: typing.Optional[int] = None,
         agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ExecutionSessionPage]:
         """
         Parameters
         ----------
@@ -56,9 +59,10 @@ class RawExecutionSessionsClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ExecutionSessionPage]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions",
             method="GET",
@@ -68,14 +72,17 @@ class RawExecutionSessionsClient:
                 "limit": limit,
                 "agent_slug": agent_slug,
             },
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionSessionPage,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionSessionPage,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -102,7 +109,7 @@ class RawExecutionSessionsClient:
 
     def get(
         self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ExecutionSessionResponse]:
         """
         Parameters
         ----------
@@ -115,20 +122,24 @@ class RawExecutionSessionsClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ExecutionSessionResponse]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionSessionResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionSessionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -184,6 +195,7 @@ class RawExecutionSessionsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/branches",
             method="POST",
@@ -192,6 +204,7 @@ class RawExecutionSessionsClient:
                 "source_run_id": source_run_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -245,9 +258,13 @@ class RawExecutionSessionsClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -311,6 +328,7 @@ class RawExecutionSessionsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files",
             method="POST",
@@ -319,6 +337,7 @@ class RawExecutionSessionsClient:
             },
             content=request,
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/octet-stream",
             },
             request_options=_request_options_with_retries_disabled,
@@ -377,9 +396,13 @@ class RawExecutionSessionsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files/{encode_path_param(file_id)}",
             method="DELETE",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -433,9 +456,13 @@ class RawExecutionSessionsClient:
         typing.Iterator[HttpResponse[typing.Iterator[bytes]]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         with self._client_wrapper.httpx_client.stream(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files/{encode_path_param(file_id)}/content",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         ) as _response:
 
@@ -492,9 +519,13 @@ class RawExecutionSessionsClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/inputs",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -545,9 +576,13 @@ class RawExecutionSessionsClient:
         HttpResponse[SessionSpend]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/spend",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -595,7 +630,7 @@ class RawExecutionSessionsClient:
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
         tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ExecutionTurnResponse]:
         """
         Parameters
         ----------
@@ -626,12 +661,13 @@ class RawExecutionSessionsClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ExecutionTurnResponse]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/turns",
             method="POST",
@@ -647,6 +683,7 @@ class RawExecutionSessionsClient:
                 "tool_provider_refs": tool_provider_refs,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -655,9 +692,9 @@ class RawExecutionSessionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionTurnResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionTurnResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -687,17 +724,20 @@ class RawExecutionSessionsClient:
         project_id: str,
         harness_id: str,
         *,
-        tenant_id: str,
-        user_id: str,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
         auto_improve: typing.Optional[bool] = OMIT,
         conversation_id: typing.Optional[str] = OMIT,
+        draft_revision: typing.Optional[int] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
+        tenant_id: typing.Optional[str] = OMIT,
+        user_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ExecutionSessionResponse]:
         """
         Parameters
         ----------
@@ -705,17 +745,20 @@ class RawExecutionSessionsClient:
 
         harness_id : str
 
-        tenant_id : str
-
-        user_id : str
+        acknowledge_widening : typing.Optional[bool]
 
         auto_improve : typing.Optional[bool]
             Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
 
         conversation_id : typing.Optional[str]
 
+        draft_revision : typing.Optional[int]
+            Saved document revision to test. Required for document Draft sessions.
+
         environment : typing.Optional[SessionInputEnvironment]
             Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
+
+        expected_access_digest : typing.Optional[str]
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -726,24 +769,32 @@ class RawExecutionSessionsClient:
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
+        tenant_id : typing.Optional[str]
+
+        user_id : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ExecutionSessionResponse]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/execution-sessions",
             method="POST",
             json={
+                "acknowledge_widening": acknowledge_widening,
                 "auto_improve": auto_improve,
                 "conversation_id": conversation_id,
+                "draft_revision": draft_revision,
                 "environment": environment,
+                "expected_access_digest": expected_access_digest,
                 "final_output_schema": final_output_schema,
                 "idempotency_key": idempotency_key,
                 "model": model,
@@ -752,6 +803,7 @@ class RawExecutionSessionsClient:
                 "user_id": user_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -760,9 +812,9 @@ class RawExecutionSessionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionSessionResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionSessionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -801,7 +853,7 @@ class AsyncRawExecutionSessionsClient:
         limit: typing.Optional[int] = None,
         agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ExecutionSessionPage]:
         """
         Parameters
         ----------
@@ -820,9 +872,12 @@ class AsyncRawExecutionSessionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ExecutionSessionPage]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions",
             method="GET",
@@ -832,14 +887,17 @@ class AsyncRawExecutionSessionsClient:
                 "limit": limit,
                 "agent_slug": agent_slug,
             },
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionSessionPage,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionSessionPage,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -866,7 +924,7 @@ class AsyncRawExecutionSessionsClient:
 
     async def get(
         self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ExecutionSessionResponse]:
         """
         Parameters
         ----------
@@ -879,20 +937,26 @@ class AsyncRawExecutionSessionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ExecutionSessionResponse]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionSessionResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionSessionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -948,6 +1012,9 @@ class AsyncRawExecutionSessionsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/branches",
             method="POST",
@@ -956,6 +1023,7 @@ class AsyncRawExecutionSessionsClient:
                 "source_run_id": source_run_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1009,9 +1077,15 @@ class AsyncRawExecutionSessionsClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1075,6 +1149,9 @@ class AsyncRawExecutionSessionsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files",
             method="POST",
@@ -1083,6 +1160,7 @@ class AsyncRawExecutionSessionsClient:
             },
             content=request,
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/octet-stream",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1141,9 +1219,15 @@ class AsyncRawExecutionSessionsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files/{encode_path_param(file_id)}",
             method="DELETE",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -1197,9 +1281,15 @@ class AsyncRawExecutionSessionsClient:
         typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[bytes]]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         async with self._client_wrapper.httpx_client.stream(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/files/{encode_path_param(file_id)}/content",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         ) as _response:
 
@@ -1257,9 +1347,15 @@ class AsyncRawExecutionSessionsClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/inputs",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1310,9 +1406,15 @@ class AsyncRawExecutionSessionsClient:
         AsyncHttpResponse[SessionSpend]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/spend",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1360,7 +1462,7 @@ class AsyncRawExecutionSessionsClient:
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
         tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ExecutionTurnResponse]:
         """
         Parameters
         ----------
@@ -1391,11 +1493,14 @@ class AsyncRawExecutionSessionsClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ExecutionTurnResponse]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
         )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/turns",
@@ -1412,6 +1517,7 @@ class AsyncRawExecutionSessionsClient:
                 "tool_provider_refs": tool_provider_refs,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1420,9 +1526,9 @@ class AsyncRawExecutionSessionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionTurnResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionTurnResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1452,17 +1558,20 @@ class AsyncRawExecutionSessionsClient:
         project_id: str,
         harness_id: str,
         *,
-        tenant_id: str,
-        user_id: str,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
         auto_improve: typing.Optional[bool] = OMIT,
         conversation_id: typing.Optional[str] = OMIT,
+        draft_revision: typing.Optional[int] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
+        tenant_id: typing.Optional[str] = OMIT,
+        user_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ExecutionSessionResponse]:
         """
         Parameters
         ----------
@@ -1470,17 +1579,20 @@ class AsyncRawExecutionSessionsClient:
 
         harness_id : str
 
-        tenant_id : str
-
-        user_id : str
+        acknowledge_widening : typing.Optional[bool]
 
         auto_improve : typing.Optional[bool]
             Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
 
         conversation_id : typing.Optional[str]
 
+        draft_revision : typing.Optional[int]
+            Saved document revision to test. Required for document Draft sessions.
+
         environment : typing.Optional[SessionInputEnvironment]
             Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
+
+        expected_access_digest : typing.Optional[str]
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -1491,24 +1603,34 @@ class AsyncRawExecutionSessionsClient:
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
+        tenant_id : typing.Optional[str]
+
+        user_id : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ExecutionSessionResponse]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/execution-sessions",
             method="POST",
             json={
+                "acknowledge_widening": acknowledge_widening,
                 "auto_improve": auto_improve,
                 "conversation_id": conversation_id,
+                "draft_revision": draft_revision,
                 "environment": environment,
+                "expected_access_digest": expected_access_digest,
                 "final_output_schema": final_output_schema,
                 "idempotency_key": idempotency_key,
                 "model": model,
@@ -1517,6 +1639,7 @@ class AsyncRawExecutionSessionsClient:
                 "user_id": user_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1525,9 +1648,9 @@ class AsyncRawExecutionSessionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ExecutionSessionResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ExecutionSessionResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -55,6 +55,7 @@ class RawExecutionObjectivesClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives",
             method="GET",
@@ -63,6 +64,9 @@ class RawExecutionObjectivesClient:
                 "status": status,
                 "after": after,
                 "limit": limit,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
@@ -139,6 +143,7 @@ class RawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives",
             method="POST",
@@ -152,6 +157,7 @@ class RawExecutionObjectivesClient:
                 "session_id": session_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -205,9 +211,13 @@ class RawExecutionObjectivesClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -261,9 +271,13 @@ class RawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}/cancel",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -317,9 +331,13 @@ class RawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}/pause",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -380,12 +398,16 @@ class RawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}/resume",
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=typing.Optional[ResumeInput], direction="write"
             ),
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
             omit=OMIT,
         )
@@ -455,6 +477,9 @@ class AsyncRawExecutionObjectivesClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives",
             method="GET",
@@ -463,6 +488,9 @@ class AsyncRawExecutionObjectivesClient:
                 "status": status,
                 "after": after,
                 "limit": limit,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
@@ -539,6 +567,9 @@ class AsyncRawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives",
             method="POST",
@@ -552,6 +583,7 @@ class AsyncRawExecutionObjectivesClient:
                 "session_id": session_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -605,9 +637,15 @@ class AsyncRawExecutionObjectivesClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -661,9 +699,15 @@ class AsyncRawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}/cancel",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -717,9 +761,15 @@ class AsyncRawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}/pause",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -780,12 +830,18 @@ class AsyncRawExecutionObjectivesClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-objectives/{encode_path_param(objective_id)}/resume",
             method="POST",
             json=convert_and_respect_annotation_metadata(
                 object_=request, annotation=typing.Optional[ResumeInput], direction="write"
             ),
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
             omit=OMIT,
         )

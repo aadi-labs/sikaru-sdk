@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import ConnectionConfig, ConnectionCredentials
 
@@ -11,6 +11,7 @@ def test_connections_list_connections() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/connections", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/connections", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_connections_create_connection() -> None:
@@ -24,6 +25,7 @@ def test_connections_create_connection() -> None:
         kind="mcp",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/connections", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_connections_list_apps() -> None:
@@ -34,6 +36,9 @@ def test_connections_list_apps() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/catalog/apps", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/connections/catalog/apps", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_get_connection() -> None:
@@ -45,6 +50,9 @@ def test_connections_get_connection() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/connection_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/connections/connection_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_update_connection() -> None:
@@ -57,6 +65,9 @@ def test_connections_update_connection() -> None:
         expected_version=1,
     )
     verify_request_count(test_id, "PATCH", "/v1/projects/project_id/connections/connection_id", None, 1)
+    verify_auth_headers(
+        test_id, "PATCH", "/v1/projects/project_id/connections/connection_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_authorize() -> None:
@@ -68,6 +79,13 @@ def test_connections_authorize() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/authorize", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/connections/connection_id/authorize",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_complete() -> None:
@@ -80,6 +98,13 @@ def test_connections_complete() -> None:
         state="state",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/complete", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/connections/connection_id/complete",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_credentials() -> None:
@@ -92,6 +117,13 @@ def test_connections_credentials() -> None:
         credentials=ConnectionCredentials(),
     )
     verify_request_count(test_id, "PUT", "/v1/projects/project_id/connections/connection_id/credentials", None, 1)
+    verify_auth_headers(
+        test_id,
+        "PUT",
+        "/v1/projects/project_id/connections/connection_id/credentials",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_disable() -> None:
@@ -103,6 +135,13 @@ def test_connections_disable() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/disable", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/connections/connection_id/disable",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_disconnect() -> None:
@@ -114,6 +153,13 @@ def test_connections_disconnect() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/disconnect", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/connections/connection_id/disconnect",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_discover() -> None:
@@ -125,6 +171,13 @@ def test_connections_discover() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/discover", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/connections/connection_id/discover",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_enable() -> None:
@@ -136,6 +189,9 @@ def test_connections_enable() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/enable", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/connections/connection_id/enable", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_events() -> None:
@@ -147,6 +203,9 @@ def test_connections_events() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/connection_id/events", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/connections/connection_id/events", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_grant() -> None:
@@ -160,6 +219,9 @@ def test_connections_grant() -> None:
         tools=["tools"],
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/grants", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/connections/connection_id/grants", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_revoke_grant() -> None:
@@ -174,6 +236,13 @@ def test_connections_revoke_grant() -> None:
     verify_request_count(
         test_id, "DELETE", "/v1/projects/project_id/connections/connection_id/grants/grant_id", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "DELETE",
+        "/v1/projects/project_id/connections/connection_id/grants/grant_id",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_connections_revoke() -> None:
@@ -185,6 +254,9 @@ def test_connections_revoke() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/connections/connection_id/revoke", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/connections/connection_id/revoke", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_connections_usage() -> None:
@@ -196,3 +268,6 @@ def test_connections_usage() -> None:
         connection_id="connection_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/connections/connection_id/usage", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/connections/connection_id/usage", {"Authorization": r"Bearer .+"}, []
+    )

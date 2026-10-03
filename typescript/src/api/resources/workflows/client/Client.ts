@@ -46,7 +46,8 @@ export class WorkflowsClient {
     }
 
     private async __importWorkflow(project_id: string, request: Sikaru.ImportWorkflowRequest, requestOptions?: WorkflowsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/workflows/import`),
@@ -59,6 +60,7 @@ export class WorkflowsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -97,7 +99,8 @@ export class WorkflowsClient {
     }
 
     private async __exportProductWorkflow(project_id: string, workflow_id: string, requestOptions?: WorkflowsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/workflows/${core.url.encodePathParam(workflow_id)}/export`),
@@ -107,6 +110,7 @@ export class WorkflowsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -146,8 +150,9 @@ export class WorkflowsClient {
     }
 
     private async __startProjectWorkflowRun(project_id: string, workflow_id: string, request: Sikaru.StartWorkflowRunRequest = {}, requestOptions?: WorkflowsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { "Idempotency-Key": idempotencyKey, ..._body } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, mergeOnlyDefinedHeaders({ "Idempotency-Key": idempotencyKey ?? undefined }), requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/workflows/${core.url.encodePathParam(workflow_id)}/runs`),
@@ -160,6 +165,7 @@ export class WorkflowsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -199,7 +205,8 @@ export class WorkflowsClient {
     }
 
     private async __createProjectWorkflowVersion(project_id: string, workflow_id: string, request: Sikaru.CreateWorkflowVersionRequest = {}, requestOptions?: WorkflowsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/workflows/${core.url.encodePathParam(workflow_id)}/versions`),
@@ -212,6 +219,7 @@ export class WorkflowsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });

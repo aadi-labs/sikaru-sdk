@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_modelGateway_capture_model_gateway_chat_completion() -> None:
@@ -12,4 +12,11 @@ def test_modelGateway_capture_model_gateway_chat_completion() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/model-gateway/provider/chat/completions/capture", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/model-gateway/provider/chat/completions/capture",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

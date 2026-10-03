@@ -56,9 +56,13 @@ class RawComputeAttachmentsClient:
         HttpResponse[AttachmentView]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -176,6 +180,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/abandon",
             method="POST",
@@ -183,6 +188,7 @@ class RawComputeAttachmentsClient:
                 "evidence": evidence,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -296,9 +302,13 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/cancel",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -416,6 +426,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/claim",
             method="POST",
@@ -423,6 +434,7 @@ class RawComputeAttachmentsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -544,6 +556,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/cleanup",
             method="POST",
@@ -552,6 +565,7 @@ class RawComputeAttachmentsClient:
                 "evidence": evidence,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -685,6 +699,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/connect",
             method="POST",
@@ -698,6 +713,7 @@ class RawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -819,6 +835,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/credentials",
             method="POST",
@@ -827,6 +844,7 @@ class RawComputeAttachmentsClient:
                 "owner_id": owner_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -938,9 +956,13 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/heartbeat",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -1069,6 +1091,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/ready",
             method="POST",
@@ -1082,6 +1105,7 @@ class RawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1215,6 +1239,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/reconcile",
             method="POST",
@@ -1233,6 +1258,7 @@ class RawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1341,9 +1367,13 @@ class RawComputeAttachmentsClient:
         HttpResponse[AttachmentView]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/status",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1454,9 +1484,13 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/stop",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -1586,6 +1620,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/teardown",
             method="POST",
@@ -1597,6 +1632,7 @@ class RawComputeAttachmentsClient:
                 "workspace_generation": workspace_generation,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1726,6 +1762,7 @@ class RawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/compute-attachments",
             method="POST",
@@ -1738,6 +1775,7 @@ class RawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1851,9 +1889,15 @@ class AsyncRawComputeAttachmentsClient:
         AsyncHttpResponse[AttachmentView]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1971,6 +2015,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/abandon",
             method="POST",
@@ -1978,6 +2025,7 @@ class AsyncRawComputeAttachmentsClient:
                 "evidence": evidence,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -2091,9 +2139,15 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/cancel",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -2211,6 +2265,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/claim",
             method="POST",
@@ -2218,6 +2275,7 @@ class AsyncRawComputeAttachmentsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -2339,6 +2397,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/cleanup",
             method="POST",
@@ -2347,6 +2408,7 @@ class AsyncRawComputeAttachmentsClient:
                 "evidence": evidence,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -2480,6 +2542,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/connect",
             method="POST",
@@ -2493,6 +2558,7 @@ class AsyncRawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -2614,6 +2680,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/credentials",
             method="POST",
@@ -2622,6 +2691,7 @@ class AsyncRawComputeAttachmentsClient:
                 "owner_id": owner_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -2733,9 +2803,15 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/heartbeat",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -2864,6 +2940,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/ready",
             method="POST",
@@ -2877,6 +2956,7 @@ class AsyncRawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -3010,6 +3090,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/reconcile",
             method="POST",
@@ -3028,6 +3111,7 @@ class AsyncRawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -3136,9 +3220,15 @@ class AsyncRawComputeAttachmentsClient:
         AsyncHttpResponse[AttachmentView]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/status",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -3249,9 +3339,15 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/stop",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -3381,6 +3477,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/teardown",
             method="POST",
@@ -3392,6 +3491,7 @@ class AsyncRawComputeAttachmentsClient:
                 "workspace_generation": workspace_generation,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -3521,6 +3621,9 @@ class AsyncRawComputeAttachmentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/execution-sessions/{encode_path_param(session_id)}/compute-attachments",
             method="POST",
@@ -3533,6 +3636,7 @@ class AsyncRawComputeAttachmentsClient:
                 ),
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,

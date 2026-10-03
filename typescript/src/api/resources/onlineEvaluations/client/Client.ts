@@ -42,11 +42,12 @@ export class OnlineEvaluationsClient {
     }
 
     private async __listPolicies(project_id: string, request: Sikaru.ListPoliciesOnlineEvaluationsRequest = {}, requestOptions?: OnlineEvaluationsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { after } = request;
         const _queryParams: Record<string, unknown> = {
             after
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/online-evaluations`),
@@ -56,6 +57,7 @@ export class OnlineEvaluationsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -100,7 +102,8 @@ export class OnlineEvaluationsClient {
     }
 
     private async __createPolicy(project_id: string, request: Sikaru.PolicyInput, requestOptions?: OnlineEvaluationsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/online-evaluations`),
@@ -113,6 +116,7 @@ export class OnlineEvaluationsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -151,11 +155,12 @@ export class OnlineEvaluationsClient {
     }
 
     private async __previewPolicyEligibility(project_id: string, request: Sikaru.PreviewPolicyEligibilityOnlineEvaluationsRequest = {}, requestOptions?: OnlineEvaluationsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { environment } = request;
         const _queryParams: Record<string, unknown> = {
             environment: environment != null ? environment : undefined
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/online-evaluations/preview`),
@@ -165,6 +170,7 @@ export class OnlineEvaluationsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -206,7 +212,8 @@ export class OnlineEvaluationsClient {
     }
 
     private async __updatePolicy(project_id: string, policy_id: string, request: Sikaru.PolicyState, requestOptions?: OnlineEvaluationsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/online-evaluations/${core.url.encodePathParam(policy_id)}`),
@@ -219,6 +226,7 @@ export class OnlineEvaluationsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });

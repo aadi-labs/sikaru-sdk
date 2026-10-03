@@ -53,6 +53,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.list_trace_imports(
@@ -119,6 +120,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi, TraceImportScopeRequest
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.create_trace_import(
@@ -210,6 +212,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi, TraceImportScopeRequest
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.plan_trace_import(
@@ -265,6 +268,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.get_trace_import(
@@ -305,6 +309,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.cancel_trace_import(
@@ -341,6 +346,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.get_trace_import_receipt(
@@ -383,6 +389,7 @@ class TraceImportsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_imports.retry_trace_import(
@@ -435,6 +442,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -509,6 +517,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi, TraceImportScopeRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -608,6 +617,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi, TraceImportScopeRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -671,6 +681,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -721,6 +732,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -765,6 +777,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -815,6 +828,7 @@ class AsyncTraceImportsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

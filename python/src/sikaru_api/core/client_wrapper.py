@@ -11,7 +11,8 @@ class BaseClientWrapper:
     def __init__(
         self,
         *,
-        api_key: typing.Union[str, typing.Callable[[], str]],
+        channel_credential: typing.Optional[str] = None,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         base_url: str,
         timeout: typing.Optional[float] = None,
@@ -20,6 +21,7 @@ class BaseClientWrapper:
         max_stream_reconnection_attempts: typing.Optional[int] = None,
         logging: typing.Optional[typing.Union[LogConfig, Logger]] = None,
     ):
+        self.channel_credential = channel_credential
         self._api_key = api_key
         self._headers = headers
         self._base_url = base_url
@@ -33,19 +35,44 @@ class BaseClientWrapper:
         import platform
 
         headers: typing.Dict[str, str] = {
-            "User-Agent": "sikaru_api/0.2.11",
+            "User-Agent": "sikaru_api/0.2.13",
             "X-Fern-Language": "Python",
             "X-Fern-Runtime": f"python/{platform.python_version()}",
             "X-Fern-Platform": f"{platform.system().lower()}/{platform.release()}",
             "X-Fern-SDK-Name": "sikaru_api",
-            "X-Fern-SDK-Version": "0.2.11",
+            "X-Fern-SDK-Version": "0.2.13",
             **(self.get_custom_headers() or {}),
         }
-        headers["Authorization"] = f"Bearer {self._get_api_key()}"
         return headers
 
-    def _get_api_key(self) -> str:
-        if isinstance(self._api_key, str):
+    def get_auth_headers_for_endpoint(
+        self, *, security: typing.Optional[typing.List[typing.Dict[str, typing.List[str]]]] = None
+    ) -> typing.Dict[str, str]:
+        if not security:
+            return {}
+        available_auth_headers: typing.Dict[str, typing.Dict[str, str]] = {}
+        _token = self._get_api_key()
+        if _token is not None:
+            available_auth_headers["BearerAuth"] = {"Authorization": f"Bearer {_token}"}
+        if self.channel_credential is not None:
+            available_auth_headers["BindingBearerAuth"] = {"Authorization": f"Bearer {self.channel_credential}"}
+        for requirement in security:
+            if all(scheme_key in available_auth_headers for scheme_key in requirement):
+                combined_headers: typing.Dict[str, str] = {}
+                for scheme_key in requirement:
+                    combined_headers.update(available_auth_headers[scheme_key])
+                return combined_headers
+        _missing_hints = " OR ".join(
+            " AND ".join(scheme_key for scheme_key in requirement if scheme_key not in available_auth_headers)
+            for requirement in security
+        )
+        raise ValueError(
+            "No authentication credentials provided that satisfy the endpoint's security requirements. "
+            "Please provide credentials for: " + _missing_hints
+        )
+
+    def _get_api_key(self) -> typing.Optional[str]:
+        if isinstance(self._api_key, str) or self._api_key is None:
             return self._api_key
         else:
             return self._api_key()
@@ -73,7 +100,8 @@ class SyncClientWrapper(BaseClientWrapper):
     def __init__(
         self,
         *,
-        api_key: typing.Union[str, typing.Callable[[], str]],
+        channel_credential: typing.Optional[str] = None,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         base_url: str,
         timeout: typing.Optional[float] = None,
@@ -84,6 +112,7 @@ class SyncClientWrapper(BaseClientWrapper):
         httpx_client: httpx.Client,
     ):
         super().__init__(
+            channel_credential=channel_credential,
             api_key=api_key,
             headers=headers,
             base_url=base_url,
@@ -107,7 +136,8 @@ class AsyncClientWrapper(BaseClientWrapper):
     def __init__(
         self,
         *,
-        api_key: typing.Union[str, typing.Callable[[], str]],
+        channel_credential: typing.Optional[str] = None,
+        api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = None,
         headers: typing.Optional[typing.Dict[str, str]] = None,
         base_url: str,
         timeout: typing.Optional[float] = None,
@@ -119,6 +149,7 @@ class AsyncClientWrapper(BaseClientWrapper):
         httpx_client: httpx.AsyncClient,
     ):
         super().__init__(
+            channel_credential=channel_credential,
             api_key=api_key,
             headers=headers,
             base_url=base_url,
@@ -141,7 +172,34 @@ class AsyncClientWrapper(BaseClientWrapper):
 
     async def async_get_headers(self) -> typing.Dict[str, str]:
         headers = self.get_headers()
-        if self._async_token is not None:
-            token = await self._async_token()
-            headers["Authorization"] = f"Bearer {token}"
         return headers
+
+    async def async_get_auth_headers_for_endpoint(
+        self, *, security: typing.Optional[typing.List[typing.Dict[str, typing.List[str]]]] = None
+    ) -> typing.Dict[str, str]:
+        if not security:
+            return {}
+        available_auth_headers: typing.Dict[str, typing.Dict[str, str]] = {}
+        _token: typing.Optional[str]
+        if self._async_token is not None:
+            _token = await self._async_token()
+        else:
+            _token = self._get_api_key()
+        if _token is not None:
+            available_auth_headers["BearerAuth"] = {"Authorization": f"Bearer {_token}"}
+        if self.channel_credential is not None:
+            available_auth_headers["BindingBearerAuth"] = {"Authorization": f"Bearer {self.channel_credential}"}
+        for requirement in security:
+            if all(scheme_key in available_auth_headers for scheme_key in requirement):
+                combined_headers: typing.Dict[str, str] = {}
+                for scheme_key in requirement:
+                    combined_headers.update(available_auth_headers[scheme_key])
+                return combined_headers
+        _missing_hints = " OR ".join(
+            " AND ".join(scheme_key for scheme_key in requirement if scheme_key not in available_auth_headers)
+            for requirement in security
+        )
+        raise ValueError(
+            "No authentication credentials provided that satisfy the endpoint's security requirements. "
+            "Please provide credentials for: " + _missing_hints
+        )

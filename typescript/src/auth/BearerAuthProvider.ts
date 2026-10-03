@@ -22,7 +22,7 @@ export class BearerAuthProvider implements core.AuthProvider {
         } = {}): Promise<core.AuthRequest> {
 
                 const apiKey = 
-                    (await core.Supplier.get(this.options[TOKEN_PARAM])) ??
+                    (await core.EndpointSupplier.get(this.options[TOKEN_PARAM], { endpointMetadata })) ??
                     process.env?.[ENV_TOKEN];
                 if (apiKey == null) {
                     throw new errors.SikaruError({
@@ -41,7 +41,7 @@ export namespace BearerAuthProvider {
     export const AUTH_SCHEME = "BearerAuth" as const;
     export const AUTH_CONFIG_ERROR_MESSAGE: string = `Please provide '${TOKEN_PARAM}' when initializing the client, or set the '${ENV_TOKEN}' environment variable` as const;
     export type Options = AuthOptions;
-    export type AuthOptions = { [TOKEN_PARAM]?: core.Supplier<core.BearerToken> | undefined };
+    export type AuthOptions = { [TOKEN_PARAM]?: core.EndpointSupplier<core.BearerToken> | undefined };
 
     export function createInstance(options: Options): core.AuthProvider {
         return new BearerAuthProvider(options);

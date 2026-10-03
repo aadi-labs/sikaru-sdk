@@ -4,11 +4,13 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .document_editor_metadata import DocumentEditorMetadata
 from .document_issue import DocumentIssue
 from .resolved_mention import ResolvedMention
 
 
 class DocumentValidationView(UniversalBaseModel):
+    editor: typing.Optional[DocumentEditorMetadata] = None
     errors: typing.List[DocumentIssue]
     mentions: typing.List[ResolvedMention]
     publishable: bool

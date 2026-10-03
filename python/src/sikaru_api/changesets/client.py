@@ -59,6 +59,7 @@ class ChangesetsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.list_changesets(
@@ -121,6 +122,7 @@ class ChangesetsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.create_changeset(
@@ -170,6 +172,7 @@ class ChangesetsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.get_changeset(
@@ -210,6 +213,7 @@ class ChangesetsClient:
         from sikaru_api import ReleaseActionRequest, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.approve_changeset(
@@ -246,6 +250,7 @@ class ChangesetsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.list_changeset_diffs(
@@ -279,6 +284,7 @@ class ChangesetsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.list_changeset_evidence(
@@ -319,6 +325,7 @@ class ChangesetsClient:
         from sikaru_api import ReleaseActionRequest, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.promote_changeset(
@@ -362,6 +369,7 @@ class ChangesetsClient:
         from sikaru_api import ReleaseActionRequest, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.reject_changeset(
@@ -405,6 +413,7 @@ class ChangesetsClient:
         from sikaru_api import ReleaseActionRequest, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.rollback_changeset(
@@ -448,6 +457,7 @@ class ChangesetsClient:
         from sikaru_api import ReleaseActionRequest, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.changesets.stage_changeset(
@@ -509,6 +519,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -579,6 +590,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -636,6 +648,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -684,6 +697,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi, ReleaseActionRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -728,6 +742,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -771,6 +786,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -821,6 +837,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi, ReleaseActionRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -872,6 +889,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi, ReleaseActionRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -923,6 +941,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi, ReleaseActionRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -974,6 +993,7 @@ class AsyncChangesetsClient:
         from sikaru_api import AsyncSikaruApi, ReleaseActionRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

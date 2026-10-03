@@ -38,9 +38,13 @@ class RawRunWebhooksClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-webhooks",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -104,6 +108,7 @@ class RawRunWebhooksClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-webhooks",
             method="POST",
@@ -113,6 +118,7 @@ class RawRunWebhooksClient:
                 "url": url,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -169,9 +175,13 @@ class RawRunWebhooksClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-webhooks/{encode_path_param(webhook_id)}",
             method="DELETE",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -225,9 +235,15 @@ class AsyncRawRunWebhooksClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-webhooks",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -291,6 +307,9 @@ class AsyncRawRunWebhooksClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-webhooks",
             method="POST",
@@ -300,6 +319,7 @@ class AsyncRawRunWebhooksClient:
                 "url": url,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -356,9 +376,15 @@ class AsyncRawRunWebhooksClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-webhooks/{encode_path_param(webhook_id)}",
             method="DELETE",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:

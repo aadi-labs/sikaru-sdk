@@ -1,6 +1,6 @@
 import datetime
 
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_conversations_list_messages() -> None:
@@ -18,6 +18,13 @@ def test_conversations_list_messages() -> None:
         "/v1/projects/project_id/conversations/conversation_id/messages",
         {"account_id": "account_id"},
         1,
+    )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/conversations/conversation_id/messages",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -41,4 +48,11 @@ def test_conversations_record_message() -> None:
         "/v1/projects/project_id/conversations/conversation_id/messages",
         {"account_id": "account_id"},
         1,
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/conversations/conversation_id/messages",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

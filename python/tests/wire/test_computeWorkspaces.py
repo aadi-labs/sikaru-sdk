@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_computeWorkspaces_record() -> None:
@@ -14,6 +14,13 @@ def test_computeWorkspaces_record() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/workspace-checkpoints",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeWorkspaces_remote() -> None:
@@ -26,4 +33,11 @@ def test_computeWorkspaces_remote() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

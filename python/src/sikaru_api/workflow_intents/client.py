@@ -48,6 +48,7 @@ class WorkflowIntentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.workflow_intents.create_project_workflow_intent(
@@ -83,6 +84,7 @@ class WorkflowIntentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.workflow_intents.compile_project_workflow_intent(
@@ -136,6 +138,7 @@ class AsyncWorkflowIntentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -179,6 +182,7 @@ class AsyncWorkflowIntentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

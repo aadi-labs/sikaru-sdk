@@ -14,6 +14,9 @@ class TranscriptRun(UniversalBaseModel):
     completed_at: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="completedAt"), pydantic.Field(alias="completedAt")
     ] = None
+    content_visible: typing_extensions.Annotated[
+        typing.Optional[bool], FieldMetadata(alias="contentVisible"), pydantic.Field(alias="contentVisible")
+    ] = None
     conversation_id: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="conversationId"), pydantic.Field(alias="conversationId")
     ] = None
@@ -23,6 +26,7 @@ class TranscriptRun(UniversalBaseModel):
     ]
     id: str
     name: str
+    personal: typing.Optional[bool] = None
     session_id: typing_extensions.Annotated[str, FieldMetadata(alias="sessionId"), pydantic.Field(alias="sessionId")]
     started_at: typing_extensions.Annotated[str, FieldMetadata(alias="startedAt"), pydantic.Field(alias="startedAt")]
     status: str

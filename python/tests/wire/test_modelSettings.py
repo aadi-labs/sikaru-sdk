@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_modelSettings_get_model_settings() -> None:
@@ -9,6 +9,7 @@ def test_modelSettings_get_model_settings() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/model-settings", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/model-settings", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_modelSettings_update_model_settings() -> None:
@@ -20,3 +21,4 @@ def test_modelSettings_update_model_settings() -> None:
         selected_model_id="selectedModelId",
     )
     verify_request_count(test_id, "PUT", "/v1/projects/project_id/model-settings", None, 1)
+    verify_auth_headers(test_id, "PUT", "/v1/projects/project_id/model-settings", {"Authorization": r"Bearer .+"}, [])

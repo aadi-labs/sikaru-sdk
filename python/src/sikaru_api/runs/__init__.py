@@ -6,9 +6,8 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .types import ApprovalInputDecision, StartHarnessRunRequestRunMode, SubmitToolResultRequestStatus
+    from .types import StartHarnessRunRequestRunMode, SubmitToolResultRequestStatus
 _dynamic_imports: typing.Dict[str, str] = {
-    "ApprovalInputDecision": ".types",
     "StartHarnessRunRequestRunMode": ".types",
     "SubmitToolResultRequestStatus": ".types",
 }
@@ -35,4 +34,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["ApprovalInputDecision", "StartHarnessRunRequestRunMode", "SubmitToolResultRequestStatus"]
+__all__ = ["StartHarnessRunRequestRunMode", "SubmitToolResultRequestStatus"]

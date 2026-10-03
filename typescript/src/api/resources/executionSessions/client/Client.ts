@@ -37,11 +37,12 @@ export class ExecutionSessionsClient {
      * @example
      *     await client.executionSessions.list("project_id")
      */
-    public list(project_id: string, request: Sikaru.ListExecutionSessionsRequest = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public list(project_id: string, request: Sikaru.ListExecutionSessionsRequest = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ExecutionSessionPage> {
         return core.HttpResponsePromise.fromPromise(this.__list(project_id, request, requestOptions));
     }
 
-    private async __list(project_id: string, request: Sikaru.ListExecutionSessionsRequest = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+    private async __list(project_id: string, request: Sikaru.ListExecutionSessionsRequest = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ExecutionSessionPage>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { "harness_id": harnessId, after, limit, "agent_slug": agentSlug } = request;
         const _queryParams: Record<string, unknown> = {
             harness_id: harnessId,
@@ -49,7 +50,7 @@ export class ExecutionSessionsClient {
             limit,
             agent_slug: agentSlug
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions`),
@@ -59,11 +60,12 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ExecutionSessionPage, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -92,12 +94,13 @@ export class ExecutionSessionsClient {
      * @example
      *     await client.executionSessions.get("project_id", "session_id")
      */
-    public get(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public get(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ExecutionSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(project_id, session_id, requestOptions));
     }
 
-    private async __get(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+    private async __get(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ExecutionSessionResponse>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}`),
@@ -107,11 +110,12 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ExecutionSessionResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -149,7 +153,8 @@ export class ExecutionSessionsClient {
     }
 
     private async __branch(project_id: string, session_id: string, request: Sikaru.BranchInput, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/branches`),
@@ -162,6 +167,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -200,7 +206,8 @@ export class ExecutionSessionsClient {
     }
 
     private async __listFiles(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/files`),
@@ -210,6 +217,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -247,11 +255,12 @@ export class ExecutionSessionsClient {
     }
 
     private async __uploadFile(uploadable: core.file.Uploadable, project_id: string, session_id: string, request: Sikaru.UploadFileExecutionSessionsRequest, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const _queryParams: Record<string, unknown> = {
             filename: request.filename
         };
         const _binaryUploadRequest = await core.file.toBinaryUploadRequest(uploadable);
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, _binaryUploadRequest.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/files`),
@@ -265,6 +274,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -304,7 +314,8 @@ export class ExecutionSessionsClient {
     }
 
     private async __deleteFile(project_id: string, session_id: string, file_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/files/${core.url.encodePathParam(file_id)}`),
@@ -314,6 +325,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -345,7 +357,8 @@ export class ExecutionSessionsClient {
     }
 
     private async __downloadFile(project_id: string, session_id: string, file_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<core.BinaryResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher<core.BinaryResponse>({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/files/${core.url.encodePathParam(file_id)}/content`),
@@ -356,6 +369,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -394,7 +408,8 @@ export class ExecutionSessionsClient {
     }
 
     private async __listSessionInputs(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/inputs`),
@@ -404,6 +419,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -442,7 +458,8 @@ export class ExecutionSessionsClient {
     }
 
     private async __spend(project_id: string, session_id: string, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.SessionSpend>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/spend`),
@@ -452,6 +469,7 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -491,12 +509,13 @@ export class ExecutionSessionsClient {
      *         }
      *     })
      */
-    public appendTurn(project_id: string, session_id: string, request: Sikaru.TurnInput, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public appendTurn(project_id: string, session_id: string, request: Sikaru.TurnInput, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ExecutionTurnResponse> {
         return core.HttpResponsePromise.fromPromise(this.__appendTurn(project_id, session_id, request, requestOptions));
     }
 
-    private async __appendTurn(project_id: string, session_id: string, request: Sikaru.TurnInput, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+    private async __appendTurn(project_id: string, session_id: string, request: Sikaru.TurnInput, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ExecutionTurnResponse>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/execution-sessions/${core.url.encodePathParam(session_id)}/turns`),
@@ -509,11 +528,12 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ExecutionTurnResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -541,17 +561,15 @@ export class ExecutionSessionsClient {
      * @throws {@link errors.SikaruTimeoutError}
      *
      * @example
-     *     await client.executionSessions.create("project_id", "harness_id", {
-     *         tenant_id: "tenant_id",
-     *         user_id: "user_id"
-     *     })
+     *     await client.executionSessions.create("project_id", "harness_id")
      */
-    public create(project_id: string, harness_id: string, request: Sikaru.SessionInput, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public create(project_id: string, harness_id: string, request: Sikaru.SessionInput = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ExecutionSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(project_id, harness_id, request, requestOptions));
     }
 
-    private async __create(project_id: string, harness_id: string, request: Sikaru.SessionInput, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+    private async __create(project_id: string, harness_id: string, request: Sikaru.SessionInput = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ExecutionSessionResponse>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/harnesses/${core.url.encodePathParam(harness_id)}/execution-sessions`),
@@ -564,11 +582,12 @@ export class ExecutionSessionsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ExecutionSessionResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

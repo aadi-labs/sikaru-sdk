@@ -54,6 +54,7 @@ class EvaluationJobsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_jobs.list_jobs(
@@ -105,6 +106,7 @@ class EvaluationJobsClient:
         from sikaru_api import JudgmentTarget, SikaruApi, TargetInput
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_jobs.create_job(
@@ -159,6 +161,7 @@ class EvaluationJobsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_jobs.get_job(
@@ -192,6 +195,7 @@ class EvaluationJobsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_jobs.cancel_job(
@@ -247,6 +251,7 @@ class AsyncEvaluationJobsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -306,6 +311,7 @@ class AsyncEvaluationJobsClient:
         from sikaru_api import AsyncSikaruApi, JudgmentTarget, TargetInput
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -368,6 +374,7 @@ class AsyncEvaluationJobsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -409,6 +416,7 @@ class AsyncEvaluationJobsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

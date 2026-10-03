@@ -43,9 +43,13 @@ class RawAgentBudgetsClient:
         HttpResponse[AgentBudget]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -112,6 +116,7 @@ class RawAgentBudgetsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/auto-reload",
             method="PUT",
@@ -121,6 +126,7 @@ class RawAgentBudgetsClient:
                 "threshold_usd": threshold_usd,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -187,6 +193,7 @@ class RawAgentBudgetsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/funding",
             method="POST",
@@ -195,6 +202,7 @@ class RawAgentBudgetsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -258,6 +266,7 @@ class RawAgentBudgetsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/payment-method",
             method="POST",
@@ -265,6 +274,7 @@ class RawAgentBudgetsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -323,9 +333,15 @@ class AsyncRawAgentBudgetsClient:
         AsyncHttpResponse[AgentBudget]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -392,6 +408,9 @@ class AsyncRawAgentBudgetsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/auto-reload",
             method="PUT",
@@ -401,6 +420,7 @@ class AsyncRawAgentBudgetsClient:
                 "threshold_usd": threshold_usd,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -467,6 +487,9 @@ class AsyncRawAgentBudgetsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/funding",
             method="POST",
@@ -475,6 +498,7 @@ class AsyncRawAgentBudgetsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -538,6 +562,9 @@ class AsyncRawAgentBudgetsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/budget/payment-method",
             method="POST",
@@ -545,6 +572,7 @@ class AsyncRawAgentBudgetsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,

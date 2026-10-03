@@ -53,6 +53,7 @@ class EvaluationComparisonsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_comparisons.list_comparisons(
@@ -101,6 +102,7 @@ class EvaluationComparisonsClient:
         from sikaru_api import AnswerRef, CaseInput, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_comparisons.create_comparison(
@@ -160,6 +162,7 @@ class EvaluationComparisonsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_comparisons.get_comparison(
@@ -193,6 +196,7 @@ class EvaluationComparisonsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.evaluation_comparisons.cancel_comparison(
@@ -248,6 +252,7 @@ class AsyncEvaluationComparisonsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -304,6 +309,7 @@ class AsyncEvaluationComparisonsClient:
         from sikaru_api import AnswerRef, AsyncSikaruApi, CaseInput
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -371,6 +377,7 @@ class AsyncEvaluationComparisonsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -412,6 +419,7 @@ class AsyncEvaluationComparisonsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

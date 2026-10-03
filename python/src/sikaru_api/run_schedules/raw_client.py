@@ -12,6 +12,13 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.http_validation_error import HttpValidationError
+from ..types.schedule_deleted import ScheduleDeleted
+from ..types.schedule_history import ScheduleHistory
+from ..types.schedule_list import ScheduleList
+from ..types.schedule_notices import ScheduleNotices
+from ..types.schedule_paused import SchedulePaused
+from ..types.schedule_response import ScheduleResponse
+from .types.schedule_input_environment import ScheduleInputEnvironment
 from .types.schedule_input_session_mode import ScheduleInputSessionMode
 from pydantic import ValidationError
 
@@ -28,8 +35,9 @@ class RawRunSchedulesClient:
         project_id: str,
         *,
         session_id: typing.Optional[str] = None,
+        agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ScheduleList]:
         """
         Parameters
         ----------
@@ -37,28 +45,35 @@ class RawRunSchedulesClient:
 
         session_id : typing.Optional[str]
 
+        agent_slug : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ScheduleList]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules",
             method="GET",
             params={
                 "session_id": session_id,
+                "agent_slug": agent_slug,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleList,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -88,14 +103,16 @@ class RawRunSchedulesClient:
         project_id: str,
         *,
         input: typing.Dict[str, typing.Any],
-        session_id: str,
+        agent_slug: typing.Optional[str] = OMIT,
         cron: typing.Optional[str] = OMIT,
+        environment: typing.Optional[ScheduleInputEnvironment] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         interval_seconds: typing.Optional[int] = OMIT,
+        session_id: typing.Optional[str] = OMIT,
         session_mode: typing.Optional[ScheduleInputSessionMode] = OMIT,
         timezone: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ScheduleResponse]:
         """
         Parameters
         ----------
@@ -103,13 +120,17 @@ class RawRunSchedulesClient:
 
         input : typing.Dict[str, typing.Any]
 
-        session_id : str
+        agent_slug : typing.Optional[str]
 
         cron : typing.Optional[str]
+
+        environment : typing.Optional[ScheduleInputEnvironment]
 
         idempotency_key : typing.Optional[str]
 
         interval_seconds : typing.Optional[int]
+
+        session_id : typing.Optional[str]
 
         session_mode : typing.Optional[ScheduleInputSessionMode]
 
@@ -120,17 +141,20 @@ class RawRunSchedulesClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ScheduleResponse]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules",
             method="POST",
             json={
+                "agent_slug": agent_slug,
                 "cron": cron,
+                "environment": environment,
                 "idempotency_key": idempotency_key,
                 "input": input,
                 "interval_seconds": interval_seconds,
@@ -139,6 +163,7 @@ class RawRunSchedulesClient:
                 "timezone": timezone,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -147,9 +172,9 @@ class RawRunSchedulesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -176,7 +201,7 @@ class RawRunSchedulesClient:
 
     def delete_schedule(
         self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ScheduleDeleted]:
         """
         Parameters
         ----------
@@ -189,23 +214,27 @@ class RawRunSchedulesClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ScheduleDeleted]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}",
             method="DELETE",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleDeleted,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleDeleted,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -237,7 +266,7 @@ class RawRunSchedulesClient:
         *,
         paused: bool,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[SchedulePaused]:
         """
         Parameters
         ----------
@@ -252,12 +281,13 @@ class RawRunSchedulesClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[SchedulePaused]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}",
             method="PATCH",
@@ -265,6 +295,7 @@ class RawRunSchedulesClient:
                 "paused": paused,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -273,9 +304,66 @@ class RawRunSchedulesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    SchedulePaused,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=SchedulePaused,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def schedule_notices(
+        self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ScheduleNotices]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ScheduleNotices]
+            Successful Response
+        """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}/notices",
+            method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ScheduleNotices,
+                    parse_obj_as(
+                        type_=ScheduleNotices,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -308,7 +396,7 @@ class RawRunSchedulesClient:
         before: typing.Optional[float] = None,
         limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> HttpResponse[ScheduleHistory]:
         """
         Parameters
         ----------
@@ -325,9 +413,10 @@ class RawRunSchedulesClient:
 
         Returns
         -------
-        HttpResponse[typing.Dict[str, typing.Any]]
+        HttpResponse[ScheduleHistory]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}/occurrences",
             method="GET",
@@ -335,14 +424,17 @@ class RawRunSchedulesClient:
                 "before": before,
                 "limit": limit,
             },
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleHistory,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleHistory,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -377,8 +469,9 @@ class AsyncRawRunSchedulesClient:
         project_id: str,
         *,
         session_id: typing.Optional[str] = None,
+        agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ScheduleList]:
         """
         Parameters
         ----------
@@ -386,28 +479,37 @@ class AsyncRawRunSchedulesClient:
 
         session_id : typing.Optional[str]
 
+        agent_slug : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ScheduleList]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules",
             method="GET",
             params={
                 "session_id": session_id,
+                "agent_slug": agent_slug,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleList,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleList,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -437,14 +539,16 @@ class AsyncRawRunSchedulesClient:
         project_id: str,
         *,
         input: typing.Dict[str, typing.Any],
-        session_id: str,
+        agent_slug: typing.Optional[str] = OMIT,
         cron: typing.Optional[str] = OMIT,
+        environment: typing.Optional[ScheduleInputEnvironment] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         interval_seconds: typing.Optional[int] = OMIT,
+        session_id: typing.Optional[str] = OMIT,
         session_mode: typing.Optional[ScheduleInputSessionMode] = OMIT,
         timezone: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ScheduleResponse]:
         """
         Parameters
         ----------
@@ -452,13 +556,17 @@ class AsyncRawRunSchedulesClient:
 
         input : typing.Dict[str, typing.Any]
 
-        session_id : str
+        agent_slug : typing.Optional[str]
 
         cron : typing.Optional[str]
+
+        environment : typing.Optional[ScheduleInputEnvironment]
 
         idempotency_key : typing.Optional[str]
 
         interval_seconds : typing.Optional[int]
+
+        session_id : typing.Optional[str]
 
         session_mode : typing.Optional[ScheduleInputSessionMode]
 
@@ -469,17 +577,22 @@ class AsyncRawRunSchedulesClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ScheduleResponse]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules",
             method="POST",
             json={
+                "agent_slug": agent_slug,
                 "cron": cron,
+                "environment": environment,
                 "idempotency_key": idempotency_key,
                 "input": input,
                 "interval_seconds": interval_seconds,
@@ -488,6 +601,7 @@ class AsyncRawRunSchedulesClient:
                 "timezone": timezone,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -496,9 +610,9 @@ class AsyncRawRunSchedulesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleResponse,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -525,7 +639,7 @@ class AsyncRawRunSchedulesClient:
 
     async def delete_schedule(
         self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ScheduleDeleted]:
         """
         Parameters
         ----------
@@ -538,23 +652,29 @@ class AsyncRawRunSchedulesClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ScheduleDeleted]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}",
             method="DELETE",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleDeleted,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleDeleted,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -586,7 +706,7 @@ class AsyncRawRunSchedulesClient:
         *,
         paused: bool,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[SchedulePaused]:
         """
         Parameters
         ----------
@@ -601,11 +721,14 @@ class AsyncRawRunSchedulesClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[SchedulePaused]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
         )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}",
@@ -614,6 +737,7 @@ class AsyncRawRunSchedulesClient:
                 "paused": paused,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -622,9 +746,68 @@ class AsyncRawRunSchedulesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    SchedulePaused,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=SchedulePaused,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def schedule_notices(
+        self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ScheduleNotices]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ScheduleNotices]
+            Successful Response
+        """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}/notices",
+            method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ScheduleNotices,
+                    parse_obj_as(
+                        type_=ScheduleNotices,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -657,7 +840,7 @@ class AsyncRawRunSchedulesClient:
         before: typing.Optional[float] = None,
         limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+    ) -> AsyncHttpResponse[ScheduleHistory]:
         """
         Parameters
         ----------
@@ -674,9 +857,12 @@ class AsyncRawRunSchedulesClient:
 
         Returns
         -------
-        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+        AsyncHttpResponse[ScheduleHistory]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/run-schedules/{encode_path_param(schedule_id)}/occurrences",
             method="GET",
@@ -684,14 +870,17 @@ class AsyncRawRunSchedulesClient:
                 "before": before,
                 "limit": limit,
             },
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.Dict[str, typing.Any],
+                    ScheduleHistory,
                     parse_obj_as(
-                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        type_=ScheduleHistory,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

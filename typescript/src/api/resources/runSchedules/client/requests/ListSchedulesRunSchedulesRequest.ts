@@ -6,4 +6,5 @@
  */
 export interface ListSchedulesRunSchedulesRequest {
     session_id?: string | null;
+    agent_slug?: string | null;
 }

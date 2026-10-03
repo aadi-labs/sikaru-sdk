@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_agentBudgets_get() -> None:
@@ -10,6 +10,9 @@ def test_agentBudgets_get() -> None:
         harness_id="harness_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/budget", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/budget", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_agentBudgets_configure_auto_reload() -> None:
@@ -24,6 +27,13 @@ def test_agentBudgets_configure_auto_reload() -> None:
         threshold_usd="threshold_usd",
     )
     verify_request_count(test_id, "PUT", "/v1/projects/project_id/harnesses/harness_id/budget/auto-reload", None, 1)
+    verify_auth_headers(
+        test_id,
+        "PUT",
+        "/v1/projects/project_id/harnesses/harness_id/budget/auto-reload",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentBudgets_add() -> None:
@@ -37,6 +47,13 @@ def test_agentBudgets_add() -> None:
         idempotency_key="idempotency_key",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/budget/funding", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/budget/funding",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentBudgets_setup_payment_method() -> None:
@@ -49,3 +66,10 @@ def test_agentBudgets_setup_payment_method() -> None:
         idempotency_key="idempotency_key",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/budget/payment-method", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/budget/payment-method",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_evaluatorRuns_create_evaluator_run() -> None:
@@ -10,3 +10,4 @@ def test_evaluatorRuns_create_evaluator_run() -> None:
         trace_ids=["traceIds"],
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/evaluator-runs", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/evaluator-runs", {"Authorization": r"Bearer .+"}, [])

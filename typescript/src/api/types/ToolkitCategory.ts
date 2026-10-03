@@ -2,5 +2,5 @@
 
 export interface ToolkitCategory {
     id: string;
-    name: string;
+    name?: (string | null) | undefined;
 }

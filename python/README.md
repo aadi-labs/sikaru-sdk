@@ -42,11 +42,11 @@ client = SikaruApi(
     api_key="<token>",
 )
 
-client.agent_documents.import_files(
-    project_id="project_id",
-    files={
-        "key": "value"
-    },
+client.http_channels.invoke(
+    binding_id="binding_id",
+    content="content",
+    conversation_id="conversation_id",
+    message_id="message_id",
 )
 ```
 
@@ -78,11 +78,11 @@ client = AsyncSikaruApi(
 
 
 async def main() -> None:
-    await client.agent_documents.import_files(
-        project_id="project_id",
-        files={
-            "key": "value"
-        },
+    await client.http_channels.invoke(
+        binding_id="binding_id",
+        content="content",
+        conversation_id="conversation_id",
+        message_id="message_id",
     )
 
 
@@ -98,7 +98,7 @@ will be thrown.
 from sikaru_api.core.api_error import ApiError
 
 try:
-    client.agent_documents.import_files(...)
+    client.http_channels.invoke(...)
 except ApiError as e:
     print(e.status_code)
     print(e.body)
@@ -132,7 +132,7 @@ The `.with_raw_response` property returns a "raw" client that can be used to acc
 from sikaru_api import SikaruApi
 
 client = SikaruApi(...)
-response = client.agent_documents.with_raw_response.import_files(...)
+response = client.http_channels.with_raw_response.invoke(...)
 print(response.headers)  # access the response headers
 print(response.status_code)  # access the response status code
 print(response.data)  # access the underlying object
@@ -163,7 +163,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `max_retries` request option to configure this behavior.
 
 ```python
-client.agent_documents.import_files(..., request_options={
+client.http_channels.invoke(..., request_options={
     "max_retries": 1
 })
 ```
@@ -178,7 +178,7 @@ from sikaru_api import SikaruApi
 client = SikaruApi(..., timeout=20.0)
 
 # Override timeout for a specific method
-client.agent_documents.import_files(..., request_options={
+client.http_channels.invoke(..., request_options={
     "timeout": 1
 })
 ```

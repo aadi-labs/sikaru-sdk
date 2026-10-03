@@ -4,7 +4,14 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.schedule_deleted import ScheduleDeleted
+from ..types.schedule_history import ScheduleHistory
+from ..types.schedule_list import ScheduleList
+from ..types.schedule_notices import ScheduleNotices
+from ..types.schedule_paused import SchedulePaused
+from ..types.schedule_response import ScheduleResponse
 from .raw_client import AsyncRawRunSchedulesClient, RawRunSchedulesClient
+from .types.schedule_input_environment import ScheduleInputEnvironment
 from .types.schedule_input_session_mode import ScheduleInputSessionMode
 
 # this is used as the default value for optional parameters
@@ -31,8 +38,9 @@ class RunSchedulesClient:
         project_id: str,
         *,
         session_id: typing.Optional[str] = None,
+        agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleList:
         """
         Parameters
         ----------
@@ -40,12 +48,14 @@ class RunSchedulesClient:
 
         session_id : typing.Optional[str]
 
+        agent_slug : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleList
             Successful Response
 
         Examples
@@ -53,13 +63,16 @@ class RunSchedulesClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.run_schedules.list_schedules(
             project_id="project_id",
         )
         """
-        _response = self._raw_client.list_schedules(project_id, session_id=session_id, request_options=request_options)
+        _response = self._raw_client.list_schedules(
+            project_id, session_id=session_id, agent_slug=agent_slug, request_options=request_options
+        )
         return _response.data
 
     def create_schedule(
@@ -67,14 +80,16 @@ class RunSchedulesClient:
         project_id: str,
         *,
         input: typing.Dict[str, typing.Any],
-        session_id: str,
+        agent_slug: typing.Optional[str] = OMIT,
         cron: typing.Optional[str] = OMIT,
+        environment: typing.Optional[ScheduleInputEnvironment] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         interval_seconds: typing.Optional[int] = OMIT,
+        session_id: typing.Optional[str] = OMIT,
         session_mode: typing.Optional[ScheduleInputSessionMode] = OMIT,
         timezone: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleResponse:
         """
         Parameters
         ----------
@@ -82,13 +97,17 @@ class RunSchedulesClient:
 
         input : typing.Dict[str, typing.Any]
 
-        session_id : str
+        agent_slug : typing.Optional[str]
 
         cron : typing.Optional[str]
+
+        environment : typing.Optional[ScheduleInputEnvironment]
 
         idempotency_key : typing.Optional[str]
 
         interval_seconds : typing.Optional[int]
+
+        session_id : typing.Optional[str]
 
         session_mode : typing.Optional[ScheduleInputSessionMode]
 
@@ -99,7 +118,7 @@ class RunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleResponse
             Successful Response
 
         Examples
@@ -107,21 +126,23 @@ class RunSchedulesClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.run_schedules.create_schedule(
             project_id="project_id",
             input={"key": "value"},
-            session_id="session_id",
         )
         """
         _response = self._raw_client.create_schedule(
             project_id,
             input=input,
-            session_id=session_id,
+            agent_slug=agent_slug,
             cron=cron,
+            environment=environment,
             idempotency_key=idempotency_key,
             interval_seconds=interval_seconds,
+            session_id=session_id,
             session_mode=session_mode,
             timezone=timezone,
             request_options=request_options,
@@ -130,7 +151,7 @@ class RunSchedulesClient:
 
     def delete_schedule(
         self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleDeleted:
         """
         Parameters
         ----------
@@ -143,7 +164,7 @@ class RunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleDeleted
             Successful Response
 
         Examples
@@ -151,6 +172,7 @@ class RunSchedulesClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.run_schedules.delete_schedule(
@@ -168,7 +190,7 @@ class RunSchedulesClient:
         *,
         paused: bool,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> SchedulePaused:
         """
         Parameters
         ----------
@@ -183,7 +205,7 @@ class RunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        SchedulePaused
             Successful Response
 
         Examples
@@ -191,6 +213,7 @@ class RunSchedulesClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.run_schedules.pause_schedule(
@@ -204,6 +227,40 @@ class RunSchedulesClient:
         )
         return _response.data
 
+    def schedule_notices(
+        self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ScheduleNotices:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ScheduleNotices
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.run_schedules.schedule_notices(
+            project_id="project_id",
+            schedule_id="schedule_id",
+        )
+        """
+        _response = self._raw_client.schedule_notices(project_id, schedule_id, request_options=request_options)
+        return _response.data
+
     def schedule_history(
         self,
         project_id: str,
@@ -212,7 +269,7 @@ class RunSchedulesClient:
         before: typing.Optional[float] = None,
         limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleHistory:
         """
         Parameters
         ----------
@@ -229,7 +286,7 @@ class RunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleHistory
             Successful Response
 
         Examples
@@ -237,6 +294,7 @@ class RunSchedulesClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.run_schedules.schedule_history(
@@ -270,8 +328,9 @@ class AsyncRunSchedulesClient:
         project_id: str,
         *,
         session_id: typing.Optional[str] = None,
+        agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleList:
         """
         Parameters
         ----------
@@ -279,12 +338,14 @@ class AsyncRunSchedulesClient:
 
         session_id : typing.Optional[str]
 
+        agent_slug : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleList
             Successful Response
 
         Examples
@@ -294,6 +355,7 @@ class AsyncRunSchedulesClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -307,7 +369,7 @@ class AsyncRunSchedulesClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list_schedules(
-            project_id, session_id=session_id, request_options=request_options
+            project_id, session_id=session_id, agent_slug=agent_slug, request_options=request_options
         )
         return _response.data
 
@@ -316,14 +378,16 @@ class AsyncRunSchedulesClient:
         project_id: str,
         *,
         input: typing.Dict[str, typing.Any],
-        session_id: str,
+        agent_slug: typing.Optional[str] = OMIT,
         cron: typing.Optional[str] = OMIT,
+        environment: typing.Optional[ScheduleInputEnvironment] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         interval_seconds: typing.Optional[int] = OMIT,
+        session_id: typing.Optional[str] = OMIT,
         session_mode: typing.Optional[ScheduleInputSessionMode] = OMIT,
         timezone: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleResponse:
         """
         Parameters
         ----------
@@ -331,13 +395,17 @@ class AsyncRunSchedulesClient:
 
         input : typing.Dict[str, typing.Any]
 
-        session_id : str
+        agent_slug : typing.Optional[str]
 
         cron : typing.Optional[str]
+
+        environment : typing.Optional[ScheduleInputEnvironment]
 
         idempotency_key : typing.Optional[str]
 
         interval_seconds : typing.Optional[int]
+
+        session_id : typing.Optional[str]
 
         session_mode : typing.Optional[ScheduleInputSessionMode]
 
@@ -348,7 +416,7 @@ class AsyncRunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleResponse
             Successful Response
 
         Examples
@@ -358,6 +426,7 @@ class AsyncRunSchedulesClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -366,7 +435,6 @@ class AsyncRunSchedulesClient:
             await client.run_schedules.create_schedule(
                 project_id="project_id",
                 input={"key": "value"},
-                session_id="session_id",
             )
 
 
@@ -375,10 +443,12 @@ class AsyncRunSchedulesClient:
         _response = await self._raw_client.create_schedule(
             project_id,
             input=input,
-            session_id=session_id,
+            agent_slug=agent_slug,
             cron=cron,
+            environment=environment,
             idempotency_key=idempotency_key,
             interval_seconds=interval_seconds,
+            session_id=session_id,
             session_mode=session_mode,
             timezone=timezone,
             request_options=request_options,
@@ -387,7 +457,7 @@ class AsyncRunSchedulesClient:
 
     async def delete_schedule(
         self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleDeleted:
         """
         Parameters
         ----------
@@ -400,7 +470,7 @@ class AsyncRunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleDeleted
             Successful Response
 
         Examples
@@ -410,6 +480,7 @@ class AsyncRunSchedulesClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -433,7 +504,7 @@ class AsyncRunSchedulesClient:
         *,
         paused: bool,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> SchedulePaused:
         """
         Parameters
         ----------
@@ -448,7 +519,7 @@ class AsyncRunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        SchedulePaused
             Successful Response
 
         Examples
@@ -458,6 +529,7 @@ class AsyncRunSchedulesClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -477,6 +549,48 @@ class AsyncRunSchedulesClient:
         )
         return _response.data
 
+    async def schedule_notices(
+        self, project_id: str, schedule_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ScheduleNotices:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        schedule_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ScheduleNotices
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.run_schedules.schedule_notices(
+                project_id="project_id",
+                schedule_id="schedule_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.schedule_notices(project_id, schedule_id, request_options=request_options)
+        return _response.data
+
     async def schedule_history(
         self,
         project_id: str,
@@ -485,7 +599,7 @@ class AsyncRunSchedulesClient:
         before: typing.Optional[float] = None,
         limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ScheduleHistory:
         """
         Parameters
         ----------
@@ -502,7 +616,7 @@ class AsyncRunSchedulesClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ScheduleHistory
             Successful Response
 
         Examples
@@ -512,6 +626,7 @@ class AsyncRunSchedulesClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

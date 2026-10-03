@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_traceImportConnections_list_trace_import_connections() -> None:
@@ -9,3 +9,6 @@ def test_traceImportConnections_list_trace_import_connections() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/trace-import-connections", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/trace-import-connections", {"Authorization": r"Bearer .+"}, []
+    )

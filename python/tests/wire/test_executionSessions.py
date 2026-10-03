@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_executionSessions_list_() -> None:
@@ -9,6 +9,9 @@ def test_executionSessions_list_() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/execution-sessions", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_executionSessions_get() -> None:
@@ -20,6 +23,9 @@ def test_executionSessions_get() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_executionSessions_branch() -> None:
@@ -33,6 +39,13 @@ def test_executionSessions_branch() -> None:
         source_run_id="source_run_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/execution-sessions/session_id/branches", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-sessions/session_id/branches",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionSessions_list_files() -> None:
@@ -44,6 +57,13 @@ def test_executionSessions_list_files() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/files", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/files",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionSessions_delete_file() -> None:
@@ -57,6 +77,13 @@ def test_executionSessions_delete_file() -> None:
     )
     verify_request_count(
         test_id, "DELETE", "/v1/projects/project_id/execution-sessions/session_id/files/file_id", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "DELETE",
+        "/v1/projects/project_id/execution-sessions/session_id/files/file_id",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -73,6 +100,13 @@ def test_executionSessions_download_file() -> None:
     verify_request_count(
         test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/files/file_id/content", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/files/file_id/content",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionSessions_list_session_inputs() -> None:
@@ -84,6 +118,13 @@ def test_executionSessions_list_session_inputs() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/inputs", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/inputs",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionSessions_spend() -> None:
@@ -95,6 +136,13 @@ def test_executionSessions_spend() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/spend", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/spend",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionSessions_append_turn() -> None:
@@ -108,6 +156,13 @@ def test_executionSessions_append_turn() -> None:
         input={"key": "value"},
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/execution-sessions/session_id/turns", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-sessions/session_id/turns",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionSessions_create() -> None:
@@ -117,7 +172,12 @@ def test_executionSessions_create() -> None:
     client.execution_sessions.create(
         project_id="project_id",
         harness_id="harness_id",
-        tenant_id="tenant_id",
-        user_id="user_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/execution-sessions", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/harnesses/harness_id/execution-sessions",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

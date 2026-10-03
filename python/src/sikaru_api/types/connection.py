@@ -11,6 +11,7 @@ from .connection_usage import ConnectionUsage
 
 
 class Connection(UniversalBaseModel):
+    account_status: typing.Optional[str] = None
     config: ConnectionConfig
     display_name: str
     expires_at: typing.Optional[float] = None

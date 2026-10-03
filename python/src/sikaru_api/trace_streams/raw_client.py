@@ -71,6 +71,7 @@ class RawTraceStreamsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             "v1/trace-streams",
             method="POST",
@@ -88,6 +89,7 @@ class RawTraceStreamsClient:
                 "trajectory": trajectory,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
                 "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
                 "X-Sikaru-Client-Id": str(sikaru_client_id) if sikaru_client_id is not None else None,
@@ -176,6 +178,9 @@ class AsyncRawTraceStreamsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             "v1/trace-streams",
             method="POST",
@@ -193,6 +198,7 @@ class AsyncRawTraceStreamsClient:
                 "trajectory": trajectory,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
                 "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
                 "X-Sikaru-Client-Id": str(sikaru_client_id) if sikaru_client_id is not None else None,

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_computeOperations_submit_receipt() -> None:
@@ -17,6 +17,13 @@ def test_computeOperations_submit_receipt() -> None:
         tool_provider_id="tool_provider_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/receipts", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/receipts",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeOperations_poll() -> None:
@@ -28,3 +35,10 @@ def test_computeOperations_poll() -> None:
         attachment_id="attachment_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/compute-attachments/attachment_id/work", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/compute-attachments/attachment_id/work",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

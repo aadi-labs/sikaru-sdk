@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_specialists_list_() -> None:
@@ -10,6 +10,13 @@ def test_specialists_list_() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/specialists", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/specialists",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_specialists_get() -> None:
@@ -23,6 +30,13 @@ def test_specialists_get() -> None:
     )
     verify_request_count(
         test_id, "GET", "/v1/projects/project_id/execution-sessions/session_id/specialists/thread_id", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/execution-sessions/session_id/specialists/thread_id",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -39,6 +53,13 @@ def test_specialists_cancel() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/execution-sessions/session_id/specialists/thread_id/cancel", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-sessions/session_id/specialists/thread_id/cancel",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_specialists_message() -> None:
@@ -54,4 +75,11 @@ def test_specialists_message() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/execution-sessions/session_id/specialists/thread_id/messages", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-sessions/session_id/specialists/thread_id/messages",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import TraceImportScopeRequest
 
@@ -11,6 +11,7 @@ def test_traceImports_list_trace_imports() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/trace-imports", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/trace-imports", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_traceImports_create_trace_import() -> None:
@@ -29,6 +30,7 @@ def test_traceImports_create_trace_import() -> None:
         source_instance="sourceInstance",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/trace-imports", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/trace-imports", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_traceImports_plan_trace_import() -> None:
@@ -47,6 +49,9 @@ def test_traceImports_plan_trace_import() -> None:
         source_instance="sourceInstance",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/trace-imports/plan", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/trace-imports/plan", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_traceImports_get_trace_import() -> None:
@@ -58,6 +63,9 @@ def test_traceImports_get_trace_import() -> None:
         trace_import_id="trace_import_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/trace-imports/trace_import_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/trace-imports/trace_import_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_traceImports_cancel_trace_import() -> None:
@@ -70,6 +78,13 @@ def test_traceImports_cancel_trace_import() -> None:
         expected_version=1,
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/trace-imports/trace_import_id/cancel", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/trace-imports/trace_import_id/cancel",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_traceImports_get_trace_import_receipt() -> None:
@@ -81,6 +96,13 @@ def test_traceImports_get_trace_import_receipt() -> None:
         trace_import_id="trace_import_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/trace-imports/trace_import_id/receipt", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/trace-imports/trace_import_id/receipt",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_traceImports_retry_trace_import() -> None:
@@ -93,3 +115,10 @@ def test_traceImports_retry_trace_import() -> None:
         expected_version=1,
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/trace-imports/trace_import_id/retry", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/trace-imports/trace_import_id/retry",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.13
+
+- Add HTTP and Slack channel bindings, initial channel selection during agent creation, and delivery status operations.
+- Add HTTP channel invocation and receipt polling with a dedicated channel credential, separately from the project API key.
+- Add personal channel connections, approvals, files, and Slack identity linking operations.
+- Add individual agent document setting edits, access review, and managed agent renaming.
+- Expand typed session, schedule, and transcript responses, including transcript usage and memory policy settings.
+- Compatibility: session and schedule operations now return typed response models in place of open objects. Update callers that index these responses as dictionaries to use model attributes in Python.
+- These features require an updated managed service.
+
 ## 0.2.12
 
 - Add agent document operations for draft editing, validation, access review, publication, version history, comparisons, and suggestions.

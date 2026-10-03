@@ -45,13 +45,14 @@ export class ConversationsClient {
     }
 
     private async __listMessages(project_id: string, conversation_id: string, request: Sikaru.ListMessagesConversationsRequest, requestOptions?: ConversationsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { "account_id": accountId, limit, cursor } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
             limit,
             cursor
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/conversations/${core.url.encodePathParam(conversation_id)}/messages`),
@@ -61,6 +62,7 @@ export class ConversationsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -107,11 +109,12 @@ export class ConversationsClient {
     }
 
     private async __recordMessage(project_id: string, conversation_id: string, request: Sikaru.DeliveredMessage, requestOptions?: ConversationsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { "account_id": accountId, ..._body } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/conversations/${core.url.encodePathParam(conversation_id)}/messages`),
@@ -124,6 +127,7 @@ export class ConversationsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });

@@ -8,7 +8,7 @@ describe("FeedbackClient", () => {
     
     test("create_feedback (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "kind" : "thumbs_up" , "target" : "trace" , "targetId" : "targetId" };
         const rawResponseBody = { "key" : "value" };
         
@@ -33,7 +33,7 @@ describe("FeedbackClient", () => {
           
     test("create_feedback (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "kind" : "thumbs_up" , "target" : "trace" , "targetId" : "x" };
         const rawResponseBody = { };
         

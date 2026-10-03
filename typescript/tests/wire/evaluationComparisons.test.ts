@@ -8,7 +8,7 @@ describe("EvaluationComparisonsClient", () => {
     
     test("list_comparisons (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -28,7 +28,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("list_comparisons (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("create_comparison (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "cases" : [ { "baseline" : { "accountId" : "accountId" , "conversationId" : "conversationId" , "messageId" : "messageId" } , "candidate" : { "accountId" : "accountId" , "conversationId" : "conversationId" , "messageId" : "messageId" } , "caseId" : "caseId" } ] , "evaluator" : "evaluator" , "id" : "id" , "revision" : "revision" , "rubric" : "rubric" };
         const rawResponseBody = { "key" : "value" };
         
@@ -85,7 +85,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("create_comparison (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "cases" : [ { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } , { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } ] , "evaluator" : "x" , "id" : "x" , "revision" : "x" , "rubric" : "x" };
         const rawResponseBody = { };
         
@@ -134,7 +134,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("get_comparison (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -154,7 +154,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("get_comparison (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -172,7 +172,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("cancel_comparison (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -192,7 +192,7 @@ describe("EvaluationComparisonsClient", () => {
           
     test("cancel_comparison (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         

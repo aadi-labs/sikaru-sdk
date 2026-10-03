@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
+from .personal_connection_prompt import PersonalConnectionPrompt
 
 
 class ManagedRun(UniversalBaseModel):
@@ -16,6 +17,10 @@ class ManagedRun(UniversalBaseModel):
     ] = None
     completed_at: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="completedAt"), pydantic.Field(alias="completedAt")
+    ] = None
+    connections: typing.Optional[typing.List[PersonalConnectionPrompt]] = None
+    content_visible: typing_extensions.Annotated[
+        typing.Optional[bool], FieldMetadata(alias="contentVisible"), pydantic.Field(alias="contentVisible")
     ] = None
     cost_summary: typing_extensions.Annotated[
         typing.Optional[typing.Dict[str, typing.Any]],
@@ -30,6 +35,7 @@ class ManagedRun(UniversalBaseModel):
     latency_ms: typing_extensions.Annotated[
         typing.Optional[float], FieldMetadata(alias="latencyMs"), pydantic.Field(alias="latencyMs")
     ] = None
+    personal: typing.Optional[bool] = None
     run_id: typing_extensions.Annotated[str, FieldMetadata(alias="runId"), pydantic.Field(alias="runId")]
     status: str
     usage_summary: typing_extensions.Annotated[

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import ReleaseActionRequest
 
@@ -11,6 +11,7 @@ def test_changesets_list_changesets() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/changesets", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/changesets", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_changesets_create_changeset() -> None:
@@ -26,6 +27,7 @@ def test_changesets_create_changeset() -> None:
         source_type="import",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/changesets", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/changesets", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_changesets_get_changeset() -> None:
@@ -37,6 +39,9 @@ def test_changesets_get_changeset() -> None:
         changeset_id="changeset_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/changesets/changeset_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/changesets/changeset_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_approve_changeset() -> None:
@@ -49,6 +54,9 @@ def test_changesets_approve_changeset() -> None:
         request=ReleaseActionRequest(),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/approve", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/approve", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_list_changeset_diffs() -> None:
@@ -60,6 +68,9 @@ def test_changesets_list_changeset_diffs() -> None:
         changeset_id="changeset_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/changesets/changeset_id/diffs", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/changesets/changeset_id/diffs", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_list_changeset_evidence() -> None:
@@ -71,6 +82,9 @@ def test_changesets_list_changeset_evidence() -> None:
         changeset_id="changeset_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/changesets/changeset_id/evidence", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/changesets/changeset_id/evidence", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_promote_changeset() -> None:
@@ -83,6 +97,9 @@ def test_changesets_promote_changeset() -> None:
         request=ReleaseActionRequest(),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/promote", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/promote", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_reject_changeset() -> None:
@@ -95,6 +112,9 @@ def test_changesets_reject_changeset() -> None:
         request=ReleaseActionRequest(),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/reject", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/reject", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_rollback_changeset() -> None:
@@ -107,6 +127,9 @@ def test_changesets_rollback_changeset() -> None:
         request=ReleaseActionRequest(),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/rollback", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/rollback", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_changesets_stage_changeset() -> None:
@@ -119,3 +142,6 @@ def test_changesets_stage_changeset() -> None:
         request=ReleaseActionRequest(),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/stage", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/changesets/changeset_id/stage", {"Authorization": r"Bearer .+"}, []
+    )

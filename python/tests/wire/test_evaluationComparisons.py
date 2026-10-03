@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import AnswerRef, CaseInput
 
@@ -11,6 +11,9 @@ def test_evaluationComparisons_list_comparisons() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/evaluation-comparisons", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/evaluation-comparisons", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_evaluationComparisons_create_comparison() -> None:
@@ -40,6 +43,9 @@ def test_evaluationComparisons_create_comparison() -> None:
         rubric="rubric",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/evaluation-comparisons", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/evaluation-comparisons", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_evaluationComparisons_get_comparison() -> None:
@@ -51,6 +57,13 @@ def test_evaluationComparisons_get_comparison() -> None:
         comparison_id="comparison_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/evaluation-comparisons/comparison_id", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/evaluation-comparisons/comparison_id",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_evaluationComparisons_cancel_comparison() -> None:
@@ -63,4 +76,11 @@ def test_evaluationComparisons_cancel_comparison() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/evaluation-comparisons/comparison_id/cancel", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/evaluation-comparisons/comparison_id/cancel",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_workflowRuns_project_workflow_run_events() -> None:
@@ -10,6 +10,9 @@ def test_workflowRuns_project_workflow_run_events() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/workflow-runs/run_id/events", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/workflow-runs/run_id/events", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_workflowRuns_recover_project_workflow_run() -> None:
@@ -21,3 +24,6 @@ def test_workflowRuns_recover_project_workflow_run() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/workflow-runs/run_id/recover", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/workflow-runs/run_id/recover", {"Authorization": r"Bearer .+"}, []
+    )

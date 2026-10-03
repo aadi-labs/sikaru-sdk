@@ -5,12 +5,13 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .built_in_tool_setting import BuiltInToolSetting
+from .memory_tool_setting import MemoryToolSetting
 
 
 class AgentToolCapabilities(UniversalBaseModel):
     agents: typing.Optional[BuiltInToolSetting] = None
     bash: typing.Optional[BuiltInToolSetting] = None
-    memory: typing.Optional[BuiltInToolSetting] = None
+    memory: typing.Optional[MemoryToolSetting] = None
     web_fetch: typing.Optional[BuiltInToolSetting] = None
     web_search: typing.Optional[BuiltInToolSetting] = None
     workspace: typing.Optional[BuiltInToolSetting] = None

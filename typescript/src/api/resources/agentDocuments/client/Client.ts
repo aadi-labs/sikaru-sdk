@@ -26,6 +26,61 @@ export class AgentDocumentsClient {
     }
 
     /**
+     * Draft a first agent document, starter checks and suggested apps from a description or past conversations.
+     *
+     * @param {string} project_id
+     * @param {Sikaru.DraftDocumentInput} request
+     * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.agentDocuments.draft("project_id")
+     */
+    public draft(project_id: string, request: Sikaru.DraftDocumentInput = {}, requestOptions?: AgentDocumentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.AgentDocumentDraft> {
+        return core.HttpResponsePromise.fromPromise(this.__draft(project_id, request, requestOptions));
+    }
+
+    private async __draft(project_id: string, request: Sikaru.DraftDocumentInput = {}, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.AgentDocumentDraft>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/agent-documents/draft`),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.AgentDocumentDraft, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/agent-documents/draft");
+    }
+
+    /**
      * @param {string} project_id
      * @param {Sikaru.ImportDocumentFiles} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -46,7 +101,8 @@ export class AgentDocumentsClient {
     }
 
     private async __importFiles(project_id: string, request: Sikaru.ImportDocumentFiles, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ImportedDocument>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/agent-documents/import`),
@@ -59,6 +115,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -96,7 +153,8 @@ export class AgentDocumentsClient {
     }
 
     private async __listResources(project_id: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentResources>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/agent-documents/resources`),
@@ -106,6 +164,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -128,6 +187,64 @@ export class AgentDocumentsClient {
     }
 
     /**
+     * Set or remove one setting without rewriting the rest of the document.
+     *
+     * @param {string} project_id
+     * @param {Sikaru.EditDocumentSetting} request
+     * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.agentDocuments.editSetting("project_id", {
+     *         document: "document",
+     *         path: ["path"]
+     *     })
+     */
+    public editSetting(project_id: string, request: Sikaru.EditDocumentSetting, requestOptions?: AgentDocumentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ImportedDocument> {
+        return core.HttpResponsePromise.fromPromise(this.__editSetting(project_id, request, requestOptions));
+    }
+
+    private async __editSetting(project_id: string, request: Sikaru.EditDocumentSetting, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ImportedDocument>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/agent-documents/settings`),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ImportedDocument, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/agent-documents/settings");
+    }
+
+    /**
      * @param {string} project_id
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -143,7 +260,8 @@ export class AgentDocumentsClient {
     }
 
     private async __listTemplates(project_id: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentTemplates>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/agent-documents/templates`),
@@ -153,6 +271,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -176,6 +295,61 @@ export class AgentDocumentsClient {
 
     /**
      * @param {string} project_id
+     * @param {Sikaru.DocumentInput} request
+     * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.agentDocuments.validateText("project_id", {
+     *         document: "document"
+     *     })
+     */
+    public validateText(project_id: string, request: Sikaru.DocumentInput, requestOptions?: AgentDocumentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.DocumentValidationView> {
+        return core.HttpResponsePromise.fromPromise(this.__validateText(project_id, request, requestOptions));
+    }
+
+    private async __validateText(project_id: string, request: Sikaru.DocumentInput, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentValidationView>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/agent-documents/validate`),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.DocumentValidationView, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/agent-documents/validate");
+    }
+
+    /**
+     * @param {string} project_id
      * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -191,7 +365,8 @@ export class AgentDocumentsClient {
     }
 
     private async __get(project_id: string, agent_slug: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.AgentDocument>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document`),
@@ -201,6 +376,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -243,7 +419,8 @@ export class AgentDocumentsClient {
     }
 
     private async __save(project_id: string, agent_slug: string, request: Sikaru.SaveDocument, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.AgentDocument>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document`),
@@ -256,6 +433,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -294,7 +472,8 @@ export class AgentDocumentsClient {
     }
 
     private async __compare(project_id: string, agent_slug: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentComparison>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/compare`),
@@ -304,6 +483,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -345,7 +525,8 @@ export class AgentDocumentsClient {
     }
 
     private async __discard(project_id: string, agent_slug: string, request: Sikaru.DiscardDocument, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.AgentDocument>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/discard`),
@@ -358,6 +539,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -399,7 +581,8 @@ export class AgentDocumentsClient {
     }
 
     private async __publish(project_id: string, agent_slug: string, request: Sikaru.PublishDocument, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentPublication>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/publish`),
@@ -412,6 +595,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -454,7 +638,8 @@ export class AgentDocumentsClient {
     }
 
     private async __revert(project_id: string, agent_slug: string, request: Sikaru.RevertDocument, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentPublication>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/revert`),
@@ -467,6 +652,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -491,6 +677,62 @@ export class AgentDocumentsClient {
     /**
      * @param {string} project_id
      * @param {string} agent_slug
+     * @param {Sikaru.ReviewDocument} request
+     * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.agentDocuments.review("project_id", "agent_slug", {
+     *         revision: 1
+     *     })
+     */
+    public review(project_id: string, agent_slug: string, request: Sikaru.ReviewDocument, requestOptions?: AgentDocumentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.DocumentReview> {
+        return core.HttpResponsePromise.fromPromise(this.__review(project_id, agent_slug, request, requestOptions));
+    }
+
+    private async __review(project_id: string, agent_slug: string, request: Sikaru.ReviewDocument, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentReview>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/review`),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.DocumentReview, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/managed-agents/{agent_slug}/document/review");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Sikaru.UnprocessableEntityError}
@@ -505,7 +747,8 @@ export class AgentDocumentsClient {
     }
 
     private async __snippets(project_id: string, agent_slug: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.AgentSnippets>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/snippets`),
@@ -515,6 +758,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -553,7 +797,8 @@ export class AgentDocumentsClient {
     }
 
     private async __listSuggestions(project_id: string, agent_slug: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentSuggestions>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/suggestions`),
@@ -563,6 +808,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -605,7 +851,8 @@ export class AgentDocumentsClient {
     }
 
     private async __adoptSuggestion(project_id: string, agent_slug: string, suggestion_id: string, request: Sikaru.AdoptSuggestion, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.AgentDocument>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/suggestions/${core.url.encodePathParam(suggestion_id)}/adopt`),
@@ -618,6 +865,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -657,7 +905,8 @@ export class AgentDocumentsClient {
     }
 
     private async __dismissSuggestion(project_id: string, agent_slug: string, suggestion_id: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentSuggestion>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/suggestions/${core.url.encodePathParam(suggestion_id)}/dismiss`),
@@ -667,6 +916,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -708,7 +958,8 @@ export class AgentDocumentsClient {
     }
 
     private async __validate(project_id: string, agent_slug: string, request: Sikaru.DocumentInput, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentValidationView>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/validate`),
@@ -721,6 +972,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
@@ -759,7 +1011,8 @@ export class AgentDocumentsClient {
     }
 
     private async __listVersions(project_id: string, agent_slug: string, requestOptions?: AgentDocumentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.DocumentVersions>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}/document/versions`),
@@ -769,6 +1022,7 @@ export class AgentDocumentsClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });

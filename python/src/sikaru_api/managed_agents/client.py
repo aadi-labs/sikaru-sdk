@@ -9,7 +9,9 @@ from ..types.create_managed_agent_source_request import CreateManagedAgentSource
 from ..types.created_managed_agent import CreatedManagedAgent
 from ..types.definition_revision_result import DefinitionRevisionResult
 from ..types.definition_revision_view import DefinitionRevisionView
+from ..types.renamed_managed_agent import RenamedManagedAgent
 from .raw_client import AsyncRawManagedAgentsClient, RawManagedAgentsClient
+from .types.create_managed_agent_request_initial_channel import CreateManagedAgentRequestInitialChannel
 from .types.create_managed_agent_request_status import CreateManagedAgentRequestStatus
 
 # this is used as the default value for optional parameters
@@ -52,6 +54,7 @@ class ManagedAgentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.managed_agents.list_managed_agents(
@@ -70,6 +73,7 @@ class ManagedAgentsClient:
         compatibility_profile_id: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         harness_id: typing.Optional[str] = OMIT,
+        initial_channel: typing.Optional[CreateManagedAgentRequestInitialChannel] = OMIT,
         source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
         status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -89,6 +93,8 @@ class ManagedAgentsClient:
 
         harness_id : typing.Optional[str]
 
+        initial_channel : typing.Optional[CreateManagedAgentRequestInitialChannel]
+
         source : typing.Optional[CreateManagedAgentSourceRequest]
 
         status : typing.Optional[CreateManagedAgentRequestStatus]
@@ -106,6 +112,7 @@ class ManagedAgentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.managed_agents.create_managed_agent(
@@ -120,9 +127,91 @@ class ManagedAgentsClient:
             compatibility_profile_id=compatibility_profile_id,
             display_name=display_name,
             harness_id=harness_id,
+            initial_channel=initial_channel,
             source=source,
             status=status,
             request_options=request_options,
+        )
+        return _response.data
+
+    def delete_managed_agent(
+        self, project_id: str, agent_slug: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Delete an agent that has never gone live, with its drafts, checks and schedules.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.delete_managed_agent(
+            project_id="project_id",
+            agent_slug="agent_slug",
+        )
+        """
+        _response = self._raw_client.delete_managed_agent(project_id, agent_slug, request_options=request_options)
+        return _response.data
+
+    def rename_managed_agent(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        display_name: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> RenamedManagedAgent:
+        """
+        Change the agent's display name. The slug and every reference to the agent stay the same.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        display_name : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RenamedManagedAgent
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.rename_managed_agent(
+            project_id="project_id",
+            agent_slug="agent_slug",
+            display_name="displayName",
+        )
+        """
+        _response = self._raw_client.rename_managed_agent(
+            project_id, agent_slug, display_name=display_name, request_options=request_options
         )
         return _response.data
 
@@ -161,6 +250,7 @@ class ManagedAgentsClient:
         from sikaru_api import AgentDefinition, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.managed_agents.create_definition_revision(
@@ -211,6 +301,7 @@ class ManagedAgentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.managed_agents.get_definition_revision(
@@ -263,6 +354,7 @@ class AsyncManagedAgentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -287,6 +379,7 @@ class AsyncManagedAgentsClient:
         compatibility_profile_id: typing.Optional[str] = OMIT,
         display_name: typing.Optional[str] = OMIT,
         harness_id: typing.Optional[str] = OMIT,
+        initial_channel: typing.Optional[CreateManagedAgentRequestInitialChannel] = OMIT,
         source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
         status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -305,6 +398,8 @@ class AsyncManagedAgentsClient:
         display_name : typing.Optional[str]
 
         harness_id : typing.Optional[str]
+
+        initial_channel : typing.Optional[CreateManagedAgentRequestInitialChannel]
 
         source : typing.Optional[CreateManagedAgentSourceRequest]
 
@@ -325,6 +420,7 @@ class AsyncManagedAgentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -345,9 +441,107 @@ class AsyncManagedAgentsClient:
             compatibility_profile_id=compatibility_profile_id,
             display_name=display_name,
             harness_id=harness_id,
+            initial_channel=initial_channel,
             source=source,
             status=status,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def delete_managed_agent(
+        self, project_id: str, agent_slug: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Delete an agent that has never gone live, with its drafts, checks and schedules.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.delete_managed_agent(
+                project_id="project_id",
+                agent_slug="agent_slug",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.delete_managed_agent(project_id, agent_slug, request_options=request_options)
+        return _response.data
+
+    async def rename_managed_agent(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        display_name: str,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> RenamedManagedAgent:
+        """
+        Change the agent's display name. The slug and every reference to the agent stay the same.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        display_name : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        RenamedManagedAgent
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.rename_managed_agent(
+                project_id="project_id",
+                agent_slug="agent_slug",
+                display_name="displayName",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.rename_managed_agent(
+            project_id, agent_slug, display_name=display_name, request_options=request_options
         )
         return _response.data
 
@@ -388,6 +582,7 @@ class AsyncManagedAgentsClient:
         from sikaru_api import AgentDefinition, AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -446,6 +641,7 @@ class AsyncManagedAgentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

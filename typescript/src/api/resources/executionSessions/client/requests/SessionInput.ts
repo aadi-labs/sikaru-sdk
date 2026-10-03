@@ -2,24 +2,25 @@
 
 /**
  * @example
- *     {
- *         tenant_id: "tenant_id",
- *         user_id: "user_id"
- *     }
+ *     {}
  */
 export interface SessionInput {
+    acknowledge_widening?: boolean;
     /** Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy. */
     auto_improve?: boolean;
     conversation_id?: string | null;
+    /** Saved document revision to test. Required for document Draft sessions. */
+    draft_revision?: number | null;
     /** Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write. */
     environment?: SessionInput.Environment;
+    expected_access_digest?: string | null;
     final_output_schema?: Record<string, unknown> | null;
     idempotency_key?: string | null;
     /** Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default. */
     model?: string | null;
     reasoning_effort?: SessionInput.ReasoningEffort | null;
-    tenant_id: string;
-    user_id: string;
+    tenant_id?: string | null;
+    user_id?: string | null;
 }
 
 export namespace SessionInput {

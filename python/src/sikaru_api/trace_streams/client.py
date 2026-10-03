@@ -76,6 +76,7 @@ class TraceStreamsClient:
         from sikaru_api import SikaruApi, TraceMetadata
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.trace_streams.stream_openinference_spans(
@@ -167,6 +168,7 @@ class AsyncTraceStreamsClient:
         from sikaru_api import AsyncSikaruApi, TraceMetadata
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

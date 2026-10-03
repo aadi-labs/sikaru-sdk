@@ -6,7 +6,6 @@ import os
 import typing
 
 import httpx
-from .core.api_error import ApiError
 from .core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from .core.logging import LogConfig, Logger
 from .environment import SikaruEnvironment
@@ -17,8 +16,10 @@ if typing.TYPE_CHECKING:
     from .agent_documents.client import AgentDocumentsClient, AsyncAgentDocumentsClient
     from .agent_imports.client import AgentImportsClient, AsyncAgentImportsClient
     from .agents.client import AgentsClient, AsyncAgentsClient
+    from .auth.client import AsyncAuthClient, AuthClient
     from .capability_ceilings.client import AsyncCapabilityCeilingsClient, CapabilityCeilingsClient
     from .changesets.client import AsyncChangesetsClient, ChangesetsClient
+    from .channels.client import AsyncChannelsClient, ChannelsClient
     from .checks.client import AsyncChecksClient, ChecksClient
     from .compute_attachments.client import AsyncComputeAttachmentsClient, ComputeAttachmentsClient
     from .compute_credentials.client import AsyncComputeCredentialsClient, ComputeCredentialsClient
@@ -44,6 +45,7 @@ if typing.TYPE_CHECKING:
     from .git_credentials.client import AsyncGitCredentialsClient, GitCredentialsClient
     from .harness_versions.client import AsyncHarnessVersionsClient, HarnessVersionsClient
     from .harnesses.client import AsyncHarnessesClient, HarnessesClient
+    from .http_channels.client import AsyncHttpChannelsClient, HttpChannelsClient
     from .import_sessions.client import AsyncImportSessionsClient, ImportSessionsClient
     from .issue_clusters.client import AsyncIssueClustersClient, IssueClustersClient
     from .judge_alignment.client import AsyncJudgeAlignmentClient, JudgeAlignmentClient
@@ -52,6 +54,7 @@ if typing.TYPE_CHECKING:
     from .model_gateway.client import AsyncModelGatewayClient, ModelGatewayClient
     from .model_settings.client import AsyncModelSettingsClient, ModelSettingsClient
     from .online_evaluations.client import AsyncOnlineEvaluationsClient, OnlineEvaluationsClient
+    from .personal_channels.client import AsyncPersonalChannelsClient, PersonalChannelsClient
     from .release_watches.client import AsyncReleaseWatchesClient, ReleaseWatchesClient
     from .retention_policies.client import AsyncRetentionPoliciesClient, RetentionPoliciesClient
     from .review_queue.client import AsyncReviewQueueClient, ReviewQueueClient
@@ -87,6 +90,7 @@ class SikaruApi:
 
 
 
+    channel_credential : typing.Optional[str]
     api_key : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
     headers : typing.Optional[typing.Dict[str, str]]
         Additional headers to send with every request.
@@ -117,6 +121,7 @@ class SikaruApi:
     from sikaru_api import SikaruApi
 
     client = SikaruApi(
+        channel_credential="YOUR_CHANNEL_CREDENTIAL",
         api_key="YOUR_API_KEY",
     )
     """
@@ -126,6 +131,7 @@ class SikaruApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: SikaruEnvironment = SikaruEnvironment.DEFAULT,
+        channel_credential: typing.Optional[str] = os.getenv("SIKARU_CHANNEL_CREDENTIAL"),
         api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = os.getenv("SIKARU_API_KEY"),
         headers: typing.Optional[typing.Dict[str, str]] = None,
         timeout: typing.Optional[float] = None,
@@ -138,12 +144,9 @@ class SikaruApi:
     ):
         _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         _defaulted_max_retries = max_retries if max_retries is not None else 2
-        if api_key is None:
-            raise ApiError(
-                body="The client must be instantiated be either passing in api_key or setting SIKARU_API_KEY"
-            )
         self._client_wrapper = SyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
+            channel_credential=channel_credential,
             api_key=api_key,
             headers=headers,
             httpx_client=httpx_client
@@ -157,12 +160,16 @@ class SikaruApi:
             max_stream_reconnection_attempts=max_stream_reconnection_attempts,
             logging=logging,
         )
+        self._auth: typing.Optional[AuthClient] = None
+        self._http_channels: typing.Optional[HttpChannelsClient] = None
+        self._personal_channels: typing.Optional[PersonalChannelsClient] = None
         self._activation: typing.Optional[ActivationClient] = None
         self._agent_documents: typing.Optional[AgentDocumentsClient] = None
         self._agent_imports: typing.Optional[AgentImportsClient] = None
         self._agents: typing.Optional[AgentsClient] = None
         self._capability_ceilings: typing.Optional[CapabilityCeilingsClient] = None
         self._changesets: typing.Optional[ChangesetsClient] = None
+        self._channels: typing.Optional[ChannelsClient] = None
         self._compute_attachments: typing.Optional[ComputeAttachmentsClient] = None
         self._compute_operations: typing.Optional[ComputeOperationsClient] = None
         self._compute_workspaces: typing.Optional[ComputeWorkspacesClient] = None
@@ -214,6 +221,30 @@ class SikaruApi:
         self._trace_streams: typing.Optional[TraceStreamsClient] = None
 
     @property
+    def auth(self):
+        if self._auth is None:
+            from .auth.client import AuthClient  # noqa: E402
+
+            self._auth = AuthClient(client_wrapper=self._client_wrapper)
+        return self._auth
+
+    @property
+    def http_channels(self):
+        if self._http_channels is None:
+            from .http_channels.client import HttpChannelsClient  # noqa: E402
+
+            self._http_channels = HttpChannelsClient(client_wrapper=self._client_wrapper)
+        return self._http_channels
+
+    @property
+    def personal_channels(self):
+        if self._personal_channels is None:
+            from .personal_channels.client import PersonalChannelsClient  # noqa: E402
+
+            self._personal_channels = PersonalChannelsClient(client_wrapper=self._client_wrapper)
+        return self._personal_channels
+
+    @property
     def activation(self):
         if self._activation is None:
             from .activation.client import ActivationClient  # noqa: E402
@@ -260,6 +291,14 @@ class SikaruApi:
 
             self._changesets = ChangesetsClient(client_wrapper=self._client_wrapper)
         return self._changesets
+
+    @property
+    def channels(self):
+        if self._channels is None:
+            from .channels.client import ChannelsClient  # noqa: E402
+
+            self._channels = ChannelsClient(client_wrapper=self._client_wrapper)
+        return self._channels
 
     @property
     def compute_attachments(self):
@@ -690,6 +729,7 @@ class AsyncSikaruApi:
 
 
 
+    channel_credential : typing.Optional[str]
     api_key : typing.Optional[typing.Union[str, typing.Callable[[], str]]]
     headers : typing.Optional[typing.Dict[str, str]]
         Additional headers to send with every request.
@@ -723,6 +763,7 @@ class AsyncSikaruApi:
     from sikaru_api import AsyncSikaruApi
 
     client = AsyncSikaruApi(
+        channel_credential="YOUR_CHANNEL_CREDENTIAL",
         api_key="YOUR_API_KEY",
     )
     """
@@ -732,6 +773,7 @@ class AsyncSikaruApi:
         *,
         base_url: typing.Optional[str] = None,
         environment: SikaruEnvironment = SikaruEnvironment.DEFAULT,
+        channel_credential: typing.Optional[str] = os.getenv("SIKARU_CHANNEL_CREDENTIAL"),
         api_key: typing.Optional[typing.Union[str, typing.Callable[[], str]]] = os.getenv("SIKARU_API_KEY"),
         headers: typing.Optional[typing.Dict[str, str]] = None,
         async_token: typing.Optional[typing.Callable[[], typing.Awaitable[str]]] = None,
@@ -745,12 +787,9 @@ class AsyncSikaruApi:
     ):
         _defaulted_timeout = timeout if timeout is not None else 60 if httpx_client is None else None
         _defaulted_max_retries = max_retries if max_retries is not None else 2
-        if api_key is None:
-            raise ApiError(
-                body="The client must be instantiated be either passing in api_key or setting SIKARU_API_KEY"
-            )
         self._client_wrapper = AsyncClientWrapper(
             base_url=_get_base_url(base_url=base_url, environment=environment),
+            channel_credential=channel_credential,
             api_key=api_key,
             headers=headers,
             async_token=async_token,
@@ -763,12 +802,16 @@ class AsyncSikaruApi:
             max_stream_reconnection_attempts=max_stream_reconnection_attempts,
             logging=logging,
         )
+        self._auth: typing.Optional[AsyncAuthClient] = None
+        self._http_channels: typing.Optional[AsyncHttpChannelsClient] = None
+        self._personal_channels: typing.Optional[AsyncPersonalChannelsClient] = None
         self._activation: typing.Optional[AsyncActivationClient] = None
         self._agent_documents: typing.Optional[AsyncAgentDocumentsClient] = None
         self._agent_imports: typing.Optional[AsyncAgentImportsClient] = None
         self._agents: typing.Optional[AsyncAgentsClient] = None
         self._capability_ceilings: typing.Optional[AsyncCapabilityCeilingsClient] = None
         self._changesets: typing.Optional[AsyncChangesetsClient] = None
+        self._channels: typing.Optional[AsyncChannelsClient] = None
         self._compute_attachments: typing.Optional[AsyncComputeAttachmentsClient] = None
         self._compute_operations: typing.Optional[AsyncComputeOperationsClient] = None
         self._compute_workspaces: typing.Optional[AsyncComputeWorkspacesClient] = None
@@ -820,6 +863,30 @@ class AsyncSikaruApi:
         self._trace_streams: typing.Optional[AsyncTraceStreamsClient] = None
 
     @property
+    def auth(self):
+        if self._auth is None:
+            from .auth.client import AsyncAuthClient  # noqa: E402
+
+            self._auth = AsyncAuthClient(client_wrapper=self._client_wrapper)
+        return self._auth
+
+    @property
+    def http_channels(self):
+        if self._http_channels is None:
+            from .http_channels.client import AsyncHttpChannelsClient  # noqa: E402
+
+            self._http_channels = AsyncHttpChannelsClient(client_wrapper=self._client_wrapper)
+        return self._http_channels
+
+    @property
+    def personal_channels(self):
+        if self._personal_channels is None:
+            from .personal_channels.client import AsyncPersonalChannelsClient  # noqa: E402
+
+            self._personal_channels = AsyncPersonalChannelsClient(client_wrapper=self._client_wrapper)
+        return self._personal_channels
+
+    @property
     def activation(self):
         if self._activation is None:
             from .activation.client import AsyncActivationClient  # noqa: E402
@@ -866,6 +933,14 @@ class AsyncSikaruApi:
 
             self._changesets = AsyncChangesetsClient(client_wrapper=self._client_wrapper)
         return self._changesets
+
+    @property
+    def channels(self):
+        if self._channels is None:
+            from .channels.client import AsyncChannelsClient  # noqa: E402
+
+            self._channels = AsyncChannelsClient(client_wrapper=self._client_wrapper)
+        return self._channels
 
     @property
     def compute_attachments(self):

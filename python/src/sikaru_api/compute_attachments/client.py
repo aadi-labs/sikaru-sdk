@@ -57,6 +57,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.get(
@@ -99,6 +100,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.abandon(
@@ -137,6 +139,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.cancel(
@@ -179,6 +182,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.claim(
@@ -225,6 +229,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.cleanup(
@@ -288,6 +293,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi, WorkspaceProvenance
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.connect(
@@ -348,6 +354,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.issue_credential(
@@ -385,6 +392,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.heartbeat(
@@ -438,6 +446,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi, WorkspaceProvenance
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.ready(
@@ -510,6 +519,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi, WorkspaceProvenance
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.reconcile(
@@ -559,6 +569,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.status(
@@ -594,6 +605,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.stop(
@@ -648,6 +660,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.teardown(
@@ -713,6 +726,7 @@ class ComputeAttachmentsClient:
         from sikaru_api import SikaruApi, WorkspaceProvenance
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.compute_attachments.create(
@@ -778,6 +792,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -828,6 +843,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -874,6 +890,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -924,6 +941,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -978,6 +996,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1049,6 +1068,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi, WorkspaceProvenance
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1117,6 +1137,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1162,6 +1183,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1223,6 +1245,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi, WorkspaceProvenance
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1303,6 +1326,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi, WorkspaceProvenance
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1360,6 +1384,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1403,6 +1428,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1465,6 +1491,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1538,6 +1565,7 @@ class AsyncComputeAttachmentsClient:
         from sikaru_api import AsyncSikaruApi, WorkspaceProvenance
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

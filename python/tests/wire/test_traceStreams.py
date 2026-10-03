@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import TraceMetadata
 
@@ -16,3 +16,4 @@ def test_traceStreams_stream_openinference_spans() -> None:
         ),
     )
     verify_request_count(test_id, "POST", "/v1/trace-streams", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/trace-streams", {"Authorization": r"Bearer .+"}, [])

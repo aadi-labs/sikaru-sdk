@@ -55,6 +55,7 @@ class RawWorkflowsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/import",
             method="POST",
@@ -64,6 +65,7 @@ class RawWorkflowsClient:
                 "workflowId": workflow_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -117,9 +119,13 @@ class RawWorkflowsClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/{encode_path_param(workflow_id)}/export",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -186,6 +192,7 @@ class RawWorkflowsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/{encode_path_param(workflow_id)}/runs",
             method="POST",
@@ -194,6 +201,7 @@ class RawWorkflowsClient:
                 "workflowVersionId": workflow_version_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
                 "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
             },
@@ -261,6 +269,7 @@ class RawWorkflowsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/{encode_path_param(workflow_id)}/versions",
             method="POST",
@@ -269,6 +278,7 @@ class RawWorkflowsClient:
                 "status": status,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -340,6 +350,9 @@ class AsyncRawWorkflowsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/import",
             method="POST",
@@ -349,6 +362,7 @@ class AsyncRawWorkflowsClient:
                 "workflowId": workflow_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -402,9 +416,15 @@ class AsyncRawWorkflowsClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/{encode_path_param(workflow_id)}/export",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -471,6 +491,9 @@ class AsyncRawWorkflowsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/{encode_path_param(workflow_id)}/runs",
             method="POST",
@@ -479,6 +502,7 @@ class AsyncRawWorkflowsClient:
                 "workflowVersionId": workflow_version_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
                 "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
             },
@@ -546,6 +570,9 @@ class AsyncRawWorkflowsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/workflows/{encode_path_param(workflow_id)}/versions",
             method="POST",
@@ -554,6 +581,7 @@ class AsyncRawWorkflowsClient:
                 "status": status,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,

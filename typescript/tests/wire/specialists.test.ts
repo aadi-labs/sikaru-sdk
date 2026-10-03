@@ -8,7 +8,7 @@ describe("SpecialistsClient", () => {
     
     test("list (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "items" : [ { "finalText" : "finalText" , "id" : "id" , "name" : "name" , "parentThreadId" : "parentThreadId" , "runId" : "runId" , "status" : "status" } ] };
         
@@ -28,7 +28,7 @@ describe("SpecialistsClient", () => {
           
     test("list (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("SpecialistsClient", () => {
           
     test("get (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "finalText" : "finalText" , "id" : "id" , "name" : "name" , "parentThreadId" : "parentThreadId" , "runId" : "runId" , "status" : "status" };
         
@@ -66,7 +66,7 @@ describe("SpecialistsClient", () => {
           
     test("get (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -84,7 +84,7 @@ describe("SpecialistsClient", () => {
           
     test("cancel (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "idempotency_key" };
         const rawResponseBody = { "id" : "id" , "reason" : "reason" , "status" : "status" , "threadId" : "threadId" };
         
@@ -107,7 +107,7 @@ describe("SpecialistsClient", () => {
           
     test("cancel (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "x" };
         const rawResponseBody = { };
         
@@ -128,7 +128,7 @@ describe("SpecialistsClient", () => {
           
     test("message (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "idempotency_key" , "input" : { "key" : "value" } };
         const rawResponseBody = { "id" : "id" , "reason" : "reason" , "status" : "status" , "threadId" : "threadId" };
         
@@ -154,7 +154,7 @@ describe("SpecialistsClient", () => {
           
     test("message (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "x" , "input" : { "input" : { "key" : "value" } } };
         const rawResponseBody = { };
         

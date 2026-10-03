@@ -12,10 +12,12 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.agent_document import AgentDocument
+from ..types.agent_document_draft import AgentDocumentDraft
 from ..types.agent_snippets import AgentSnippets
 from ..types.document_comparison import DocumentComparison
 from ..types.document_publication import DocumentPublication
 from ..types.document_resources import DocumentResources
+from ..types.document_review import DocumentReview
 from ..types.document_suggestion import DocumentSuggestion
 from ..types.document_suggestions import DocumentSuggestions
 from ..types.document_templates import DocumentTemplates
@@ -23,6 +25,7 @@ from ..types.document_validation_view import DocumentValidationView
 from ..types.document_versions import DocumentVersions
 from ..types.http_validation_error import HttpValidationError
 from ..types.imported_document import ImportedDocument
+from .types.edit_document_setting_op import EditDocumentSettingOp
 from pydantic import ValidationError
 
 # this is used as the default value for optional parameters
@@ -32,6 +35,93 @@ OMIT = typing.cast(typing.Any, ...)
 class RawAgentDocumentsClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
+
+    def draft(
+        self,
+        project_id: str,
+        *,
+        description: typing.Optional[str] = OMIT,
+        note: typing.Optional[str] = OMIT,
+        run_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        template_id: typing.Optional[str] = OMIT,
+        trace_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[AgentDocumentDraft]:
+        """
+        Draft a first agent document, starter checks and suggested apps from a description or past conversations.
+
+        Parameters
+        ----------
+        project_id : str
+
+        description : typing.Optional[str]
+
+        note : typing.Optional[str]
+
+        run_ids : typing.Optional[typing.Sequence[str]]
+
+        template_id : typing.Optional[str]
+
+        trace_ids : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[AgentDocumentDraft]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/agent-documents/draft",
+            method="POST",
+            json={
+                "description": description,
+                "note": note,
+                "runIds": run_ids,
+                "templateId": template_id,
+                "traceIds": trace_ids,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    AgentDocumentDraft,
+                    parse_obj_as(
+                        type_=AgentDocumentDraft,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def import_files(
         self, project_id: str, *, files: typing.Dict[str, str], request_options: typing.Optional[RequestOptions] = None
@@ -54,6 +144,7 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/agent-documents/import",
             method="POST",
@@ -61,6 +152,7 @@ class RawAgentDocumentsClient:
                 "files": files,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -112,9 +204,13 @@ class RawAgentDocumentsClient:
         HttpResponse[DocumentResources]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/agent-documents/resources",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -123,6 +219,89 @@ class RawAgentDocumentsClient:
                     DocumentResources,
                     parse_obj_as(
                         type_=DocumentResources,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def edit_setting(
+        self,
+        project_id: str,
+        *,
+        document: str,
+        path: typing.Sequence[str],
+        op: typing.Optional[EditDocumentSettingOp] = OMIT,
+        value: typing.Optional[typing.Any] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ImportedDocument]:
+        """
+        Set or remove one setting without rewriting the rest of the document.
+
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        path : typing.Sequence[str]
+
+        op : typing.Optional[EditDocumentSettingOp]
+
+        value : typing.Optional[typing.Any]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ImportedDocument]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/agent-documents/settings",
+            method="POST",
+            json={
+                "document": document,
+                "op": op,
+                "path": path,
+                "value": value,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ImportedDocument,
+                    parse_obj_as(
+                        type_=ImportedDocument,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -163,9 +342,13 @@ class RawAgentDocumentsClient:
         HttpResponse[DocumentTemplates]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/agent-documents/templates",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -174,6 +357,71 @@ class RawAgentDocumentsClient:
                     DocumentTemplates,
                     parse_obj_as(
                         type_=DocumentTemplates,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def validate_text(
+        self, project_id: str, *, document: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[DocumentValidationView]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DocumentValidationView]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/agent-documents/validate",
+            method="POST",
+            json={
+                "document": document,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DocumentValidationView,
+                    parse_obj_as(
+                        type_=DocumentValidationView,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -216,9 +464,13 @@ class RawAgentDocumentsClient:
         HttpResponse[AgentDocument]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -282,6 +534,7 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document",
             method="PUT",
@@ -290,6 +543,7 @@ class RawAgentDocumentsClient:
                 "expectedRevision": expected_revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -343,9 +597,13 @@ class RawAgentDocumentsClient:
         HttpResponse[DocumentComparison]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/compare",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -409,6 +667,7 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/discard",
             method="POST",
@@ -417,6 +676,7 @@ class RawAgentDocumentsClient:
                 "expectedRevision": expected_revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -460,6 +720,7 @@ class RawAgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentPublication]:
@@ -476,6 +737,8 @@ class RawAgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -489,16 +752,19 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/publish",
             method="POST",
             json={
                 "acknowledgeRemovals": acknowledge_removals,
                 "acknowledgeWidening": acknowledge_widening,
+                "expectedAccessDigest": expected_access_digest,
                 "expectedLiveVersionId": expected_live_version_id,
                 "revision": revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -543,6 +809,7 @@ class RawAgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DocumentPublication]:
@@ -561,6 +828,8 @@ class RawAgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -574,17 +843,20 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/revert",
             method="POST",
             json={
                 "acknowledgeRemovals": acknowledge_removals,
                 "acknowledgeWidening": acknowledge_widening,
+                "expectedAccessDigest": expected_access_digest,
                 "expectedLiveVersionId": expected_live_version_id,
                 "harnessVersionId": harness_version_id,
                 "revision": revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -596,6 +868,98 @@ class RawAgentDocumentsClient:
                     DocumentPublication,
                     parse_obj_as(
                         type_=DocumentPublication,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def review(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        revision: int,
+        acknowledge_removals: typing.Optional[bool] = OMIT,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
+        expected_live_version_id: typing.Optional[str] = OMIT,
+        harness_version_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[DocumentReview]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        revision : int
+
+        acknowledge_removals : typing.Optional[bool]
+
+        acknowledge_widening : typing.Optional[bool]
+
+        expected_access_digest : typing.Optional[str]
+
+        expected_live_version_id : typing.Optional[str]
+
+        harness_version_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[DocumentReview]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/review",
+            method="POST",
+            json={
+                "acknowledgeRemovals": acknowledge_removals,
+                "acknowledgeWidening": acknowledge_widening,
+                "expectedAccessDigest": expected_access_digest,
+                "expectedLiveVersionId": expected_live_version_id,
+                "harnessVersionId": harness_version_id,
+                "revision": revision,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DocumentReview,
+                    parse_obj_as(
+                        type_=DocumentReview,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -638,9 +1002,13 @@ class RawAgentDocumentsClient:
         HttpResponse[AgentSnippets]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/snippets",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -691,9 +1059,13 @@ class RawAgentDocumentsClient:
         HttpResponse[DocumentSuggestions]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/suggestions",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -757,6 +1129,7 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/suggestions/{encode_path_param(suggestion_id)}/adopt",
             method="POST",
@@ -764,6 +1137,7 @@ class RawAgentDocumentsClient:
                 "expectedRevision": expected_revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -827,9 +1201,13 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/suggestions/{encode_path_param(suggestion_id)}/dismiss",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -890,6 +1268,7 @@ class RawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/validate",
             method="POST",
@@ -897,6 +1276,7 @@ class RawAgentDocumentsClient:
                 "document": document,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -950,9 +1330,13 @@ class RawAgentDocumentsClient:
         HttpResponse[DocumentVersions]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/versions",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -990,6 +1374,95 @@ class AsyncRawAgentDocumentsClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
+    async def draft(
+        self,
+        project_id: str,
+        *,
+        description: typing.Optional[str] = OMIT,
+        note: typing.Optional[str] = OMIT,
+        run_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        template_id: typing.Optional[str] = OMIT,
+        trace_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[AgentDocumentDraft]:
+        """
+        Draft a first agent document, starter checks and suggested apps from a description or past conversations.
+
+        Parameters
+        ----------
+        project_id : str
+
+        description : typing.Optional[str]
+
+        note : typing.Optional[str]
+
+        run_ids : typing.Optional[typing.Sequence[str]]
+
+        template_id : typing.Optional[str]
+
+        trace_ids : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[AgentDocumentDraft]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/agent-documents/draft",
+            method="POST",
+            json={
+                "description": description,
+                "note": note,
+                "runIds": run_ids,
+                "templateId": template_id,
+                "traceIds": trace_ids,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    AgentDocumentDraft,
+                    parse_obj_as(
+                        type_=AgentDocumentDraft,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     async def import_files(
         self, project_id: str, *, files: typing.Dict[str, str], request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[ImportedDocument]:
@@ -1011,6 +1484,9 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/agent-documents/import",
             method="POST",
@@ -1018,6 +1494,7 @@ class AsyncRawAgentDocumentsClient:
                 "files": files,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1069,9 +1546,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[DocumentResources]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/agent-documents/resources",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1080,6 +1563,91 @@ class AsyncRawAgentDocumentsClient:
                     DocumentResources,
                     parse_obj_as(
                         type_=DocumentResources,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def edit_setting(
+        self,
+        project_id: str,
+        *,
+        document: str,
+        path: typing.Sequence[str],
+        op: typing.Optional[EditDocumentSettingOp] = OMIT,
+        value: typing.Optional[typing.Any] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ImportedDocument]:
+        """
+        Set or remove one setting without rewriting the rest of the document.
+
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        path : typing.Sequence[str]
+
+        op : typing.Optional[EditDocumentSettingOp]
+
+        value : typing.Optional[typing.Any]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ImportedDocument]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/agent-documents/settings",
+            method="POST",
+            json={
+                "document": document,
+                "op": op,
+                "path": path,
+                "value": value,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ImportedDocument,
+                    parse_obj_as(
+                        type_=ImportedDocument,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1120,9 +1688,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[DocumentTemplates]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/agent-documents/templates",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1131,6 +1705,73 @@ class AsyncRawAgentDocumentsClient:
                     DocumentTemplates,
                     parse_obj_as(
                         type_=DocumentTemplates,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def validate_text(
+        self, project_id: str, *, document: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[DocumentValidationView]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DocumentValidationView]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/agent-documents/validate",
+            method="POST",
+            json={
+                "document": document,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DocumentValidationView,
+                    parse_obj_as(
+                        type_=DocumentValidationView,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1173,9 +1814,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[AgentDocument]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1239,6 +1886,9 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document",
             method="PUT",
@@ -1247,6 +1897,7 @@ class AsyncRawAgentDocumentsClient:
                 "expectedRevision": expected_revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1300,9 +1951,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[DocumentComparison]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/compare",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1366,6 +2023,9 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/discard",
             method="POST",
@@ -1374,6 +2034,7 @@ class AsyncRawAgentDocumentsClient:
                 "expectedRevision": expected_revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1417,6 +2078,7 @@ class AsyncRawAgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentPublication]:
@@ -1433,6 +2095,8 @@ class AsyncRawAgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -1446,16 +2110,21 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/publish",
             method="POST",
             json={
                 "acknowledgeRemovals": acknowledge_removals,
                 "acknowledgeWidening": acknowledge_widening,
+                "expectedAccessDigest": expected_access_digest,
                 "expectedLiveVersionId": expected_live_version_id,
                 "revision": revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1500,6 +2169,7 @@ class AsyncRawAgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DocumentPublication]:
@@ -1518,6 +2188,8 @@ class AsyncRawAgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -1531,17 +2203,22 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/revert",
             method="POST",
             json={
                 "acknowledgeRemovals": acknowledge_removals,
                 "acknowledgeWidening": acknowledge_widening,
+                "expectedAccessDigest": expected_access_digest,
                 "expectedLiveVersionId": expected_live_version_id,
                 "harnessVersionId": harness_version_id,
                 "revision": revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1553,6 +2230,100 @@ class AsyncRawAgentDocumentsClient:
                     DocumentPublication,
                     parse_obj_as(
                         type_=DocumentPublication,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def review(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        revision: int,
+        acknowledge_removals: typing.Optional[bool] = OMIT,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
+        expected_live_version_id: typing.Optional[str] = OMIT,
+        harness_version_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[DocumentReview]:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        revision : int
+
+        acknowledge_removals : typing.Optional[bool]
+
+        acknowledge_widening : typing.Optional[bool]
+
+        expected_access_digest : typing.Optional[str]
+
+        expected_live_version_id : typing.Optional[str]
+
+        harness_version_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[DocumentReview]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/review",
+            method="POST",
+            json={
+                "acknowledgeRemovals": acknowledge_removals,
+                "acknowledgeWidening": acknowledge_widening,
+                "expectedAccessDigest": expected_access_digest,
+                "expectedLiveVersionId": expected_live_version_id,
+                "harnessVersionId": harness_version_id,
+                "revision": revision,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    DocumentReview,
+                    parse_obj_as(
+                        type_=DocumentReview,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1595,9 +2366,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[AgentSnippets]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/snippets",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1648,9 +2425,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[DocumentSuggestions]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/suggestions",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1714,6 +2497,9 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/suggestions/{encode_path_param(suggestion_id)}/adopt",
             method="POST",
@@ -1721,6 +2507,7 @@ class AsyncRawAgentDocumentsClient:
                 "expectedRevision": expected_revision,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1784,9 +2571,15 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/suggestions/{encode_path_param(suggestion_id)}/dismiss",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -1847,6 +2640,9 @@ class AsyncRawAgentDocumentsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/validate",
             method="POST",
@@ -1854,6 +2650,7 @@ class AsyncRawAgentDocumentsClient:
                 "document": document,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1907,9 +2704,15 @@ class AsyncRawAgentDocumentsClient:
         AsyncHttpResponse[DocumentVersions]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}/document/versions",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:

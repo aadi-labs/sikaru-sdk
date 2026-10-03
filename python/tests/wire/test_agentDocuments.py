@@ -1,4 +1,17 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
+
+
+def test_agentDocuments_draft() -> None:
+    """Test draft endpoint with WireMock"""
+    test_id = "agent_documents.draft.0"
+    client = get_client(test_id)
+    client.agent_documents.draft(
+        project_id="project_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/agent-documents/draft", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/agent-documents/draft", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_agentDocuments_import_files() -> None:
@@ -10,6 +23,9 @@ def test_agentDocuments_import_files() -> None:
         files={"key": "value"},
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/agent-documents/import", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/agent-documents/import", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_agentDocuments_list_resources() -> None:
@@ -20,6 +36,24 @@ def test_agentDocuments_list_resources() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/agent-documents/resources", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/agent-documents/resources", {"Authorization": r"Bearer .+"}, []
+    )
+
+
+def test_agentDocuments_edit_setting() -> None:
+    """Test edit_setting endpoint with WireMock"""
+    test_id = "agent_documents.edit_setting.0"
+    client = get_client(test_id)
+    client.agent_documents.edit_setting(
+        project_id="project_id",
+        document="document",
+        path=["path"],
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/agent-documents/settings", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/agent-documents/settings", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_agentDocuments_list_templates() -> None:
@@ -30,6 +64,23 @@ def test_agentDocuments_list_templates() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/agent-documents/templates", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/agent-documents/templates", {"Authorization": r"Bearer .+"}, []
+    )
+
+
+def test_agentDocuments_validate_text() -> None:
+    """Test validate_text endpoint with WireMock"""
+    test_id = "agent_documents.validate_text.0"
+    client = get_client(test_id)
+    client.agent_documents.validate_text(
+        project_id="project_id",
+        document="document",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/agent-documents/validate", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/agent-documents/validate", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_agentDocuments_get() -> None:
@@ -41,6 +92,13 @@ def test_agentDocuments_get() -> None:
         agent_slug="agent_slug",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/document", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/managed-agents/agent_slug/document",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_save() -> None:
@@ -54,6 +112,13 @@ def test_agentDocuments_save() -> None:
         expected_revision=1,
     )
     verify_request_count(test_id, "PUT", "/v1/projects/project_id/managed-agents/agent_slug/document", None, 1)
+    verify_auth_headers(
+        test_id,
+        "PUT",
+        "/v1/projects/project_id/managed-agents/agent_slug/document",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_compare() -> None:
@@ -65,6 +130,13 @@ def test_agentDocuments_compare() -> None:
         agent_slug="agent_slug",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/document/compare", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/compare",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_discard() -> None:
@@ -77,6 +149,13 @@ def test_agentDocuments_discard() -> None:
         expected_revision=1,
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/document/discard", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/discard",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_publish() -> None:
@@ -89,6 +168,13 @@ def test_agentDocuments_publish() -> None:
         revision=1,
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/document/publish", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/publish",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_revert() -> None:
@@ -102,6 +188,32 @@ def test_agentDocuments_revert() -> None:
         revision=1,
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/document/revert", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/revert",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
+
+
+def test_agentDocuments_review() -> None:
+    """Test review endpoint with WireMock"""
+    test_id = "agent_documents.review.0"
+    client = get_client(test_id)
+    client.agent_documents.review(
+        project_id="project_id",
+        agent_slug="agent_slug",
+        revision=1,
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/document/review", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/review",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_snippets() -> None:
@@ -113,6 +225,13 @@ def test_agentDocuments_snippets() -> None:
         agent_slug="agent_slug",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/document/snippets", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/snippets",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_list_suggestions() -> None:
@@ -125,6 +244,13 @@ def test_agentDocuments_list_suggestions() -> None:
     )
     verify_request_count(
         test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/document/suggestions", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/suggestions",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -145,6 +271,13 @@ def test_agentDocuments_adopt_suggestion() -> None:
         None,
         1,
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/suggestions/suggestion_id/adopt",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_dismiss_suggestion() -> None:
@@ -163,6 +296,13 @@ def test_agentDocuments_dismiss_suggestion() -> None:
         None,
         1,
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/suggestions/suggestion_id/dismiss",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_validate() -> None:
@@ -177,6 +317,13 @@ def test_agentDocuments_validate() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/document/validate", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/validate",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_agentDocuments_list_versions() -> None:
@@ -188,3 +335,10 @@ def test_agentDocuments_list_versions() -> None:
         agent_slug="agent_slug",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/document/versions", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/managed-agents/agent_slug/document/versions",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

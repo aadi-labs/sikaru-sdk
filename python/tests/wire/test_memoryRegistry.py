@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_memoryRegistry_create_memory_registry_change() -> None:
@@ -13,3 +13,4 @@ def test_memoryRegistry_create_memory_registry_change() -> None:
         scope="scope",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/memory-registry", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/memory-registry", {"Authorization": r"Bearer .+"}, [])

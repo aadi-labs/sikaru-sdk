@@ -5,7 +5,7 @@ import * as Sikaru from "../index.js";
 export interface AgentToolCapabilities {
     agents?: Sikaru.BuiltInToolSetting | undefined;
     bash?: Sikaru.BuiltInToolSetting | undefined;
-    memory?: Sikaru.BuiltInToolSetting | undefined;
+    memory?: Sikaru.MemoryToolSetting | undefined;
     web_fetch?: Sikaru.BuiltInToolSetting | undefined;
     web_search?: Sikaru.BuiltInToolSetting | undefined;
     workspace?: Sikaru.BuiltInToolSetting | undefined;

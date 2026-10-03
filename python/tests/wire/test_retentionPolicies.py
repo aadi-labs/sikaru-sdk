@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_retentionPolicies_create_retention_policy_update() -> None:
@@ -10,3 +10,6 @@ def test_retentionPolicies_create_retention_policy_update() -> None:
         trace_ids=["traceIds"],
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/retention-policies", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/retention-policies", {"Authorization": r"Bearer .+"}, []
+    )

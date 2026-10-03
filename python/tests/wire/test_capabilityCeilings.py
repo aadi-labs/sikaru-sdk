@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_capabilityCeilings_get() -> None:
@@ -9,6 +9,9 @@ def test_capabilityCeilings_get() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/capability-ceilings", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/capability-ceilings", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_capabilityCeilings_update() -> None:
@@ -19,3 +22,6 @@ def test_capabilityCeilings_update() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "PUT", "/v1/projects/project_id/capability-ceilings", None, 1)
+    verify_auth_headers(
+        test_id, "PUT", "/v1/projects/project_id/capability-ceilings", {"Authorization": r"Bearer .+"}, []
+    )

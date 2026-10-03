@@ -8,7 +8,7 @@ describe("TraceStreamsClient", () => {
     
     test("stream_openinference_spans (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "format" : "openinference.v1" , "metadata" : { "account_id" : "account_id" , "project_id" : "project_id" , "source" : "source" } };
         const rawResponseBody = { "key" : "value" };
         
@@ -36,7 +36,7 @@ describe("TraceStreamsClient", () => {
           
     test("stream_openinference_spans (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "format" : "openinference.v1" , "metadata" : { "account_id" : "account_id" , "project_id" : "project_id" , "source" : "source" } };
         const rawResponseBody = { };
         

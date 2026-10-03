@@ -6,16 +6,20 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update_forward_refs
+from .personal_connection_prompt import PersonalConnectionPrompt
 from .run_transcript_evidence import RunTranscriptEvidence
 from .transcript_event import TranscriptEvent
 from .transcript_run import TranscriptRun
+from .transcript_usage import TranscriptUsage
 
 
 class RunTranscript(UniversalBaseModel):
+    connections: typing.Optional[typing.List[PersonalConnectionPrompt]] = None
     events: typing.List[TranscriptEvent]
     evidence: RunTranscriptEvidence
     run: TranscriptRun
     trajectory: typing.Optional["TranscriptTrajectory"] = None
+    usage: typing.Optional[TranscriptUsage] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

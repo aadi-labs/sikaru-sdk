@@ -11,7 +11,8 @@ per test run, even when using pytest-xdist.
 
 import inspect
 import os
-from typing import Any, Dict, Optional
+import re
+from typing import Any, Dict, List, Optional
 
 import httpx
 
@@ -46,13 +47,15 @@ def get_client(test_id: str) -> SikaruApi:
         return SikaruApi(
             base_url=base_url,
             headers=test_headers,
-            api_key="test_token",
+            token=lambda: "test_token",
+            channel_credential="test_channel_credential",
         )
 
     return SikaruApi(
         base_url=base_url,
         httpx_client=httpx.Client(headers=test_headers),
-        api_key="test_token",
+        token=lambda: "test_token",
+        channel_credential="test_channel_credential",
     )
 
 
@@ -83,3 +86,59 @@ def verify_request_count(
     result = response.json()
     requests_found = len(result.get("requests", []))
     assert requests_found == expected, f"Expected {expected} requests, found {requests_found}"
+
+
+def verify_auth_headers(
+    test_id: str,
+    method: str,
+    url_path: str,
+    present_headers: Dict[str, str],
+    absent_headers: List[str],
+) -> None:
+    """Verifies the auth headers on the recorded request(s) for endpoint-security routing.
+
+    'present_headers' maps a header name to a regex the header value must fully
+    match; 'absent_headers' lists header names that must NOT be present. Header
+    names are compared case-insensitively per HTTP semantics.
+
+    This proves per-endpoint auth routing on the wire: only the scheme(s) declared
+    for the endpoint send a header, and no other scheme's header leaks through.
+    """
+    wiremock_admin_url = f"{_get_wiremock_base_url()}/__admin"
+    request_body: Dict[str, Any] = {
+        "method": method,
+        "urlPath": url_path,
+        "headers": {"X-Test-Id": {"equalTo": test_id}},
+    }
+    response = httpx.post(f"{wiremock_admin_url}/requests/find", json=request_body)
+    assert response.status_code == 200, "Failed to query WireMock requests"
+    result = response.json()
+    requests = result.get("requests", [])
+    assert len(requests) >= 1, f"Expected at least one recorded request for test_id={test_id}"
+
+    for recorded in requests:
+        raw_headers = recorded.get("headers", {}) or {}
+        # WireMock may serialize a header value as a string or a list of strings;
+        # normalize to a single string and index case-insensitively.
+        normalized: Dict[str, str] = {}
+        for name, value in raw_headers.items():
+            if isinstance(value, list):
+                value = value[0] if value else ""
+            normalized[name.lower()] = str(value)
+
+        for name, pattern in present_headers.items():
+            actual = normalized.get(name.lower())
+            assert actual is not None, (
+                f"Expected auth header '{name}' to be present for test_id={test_id}, "
+                f"but it was missing. Present headers: {sorted(normalized)}"
+            )
+            assert re.fullmatch(pattern, actual) is not None, (
+                f"Auth header '{name}'='{actual}' did not match expected pattern '{pattern}' for test_id={test_id}"
+            )
+
+        for name in absent_headers:
+            assert name.lower() not in normalized, (
+                f"Expected auth header '{name}' to be ABSENT for test_id={test_id} "
+                f"(endpoint-security routing must not leak other schemes), "
+                f"but found '{normalized.get(name.lower())}'"
+            )

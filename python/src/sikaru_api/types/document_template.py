@@ -4,9 +4,16 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .starter_check import StarterCheck
 
 
 class DocumentTemplate(UniversalBaseModel):
+    checks: typing.Optional[typing.List[StarterCheck]] = None
+    connectors: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
+    """
+    Toolkit slugs this template works best with.
+    """
+
     description: str
     document: str
     id: str

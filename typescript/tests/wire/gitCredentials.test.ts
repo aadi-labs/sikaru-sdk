@@ -8,7 +8,7 @@ describe("GitCredentialsClient", () => {
     
     test("list (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = [ { "agentId" : "agentId" , "createdAt" : 1.1 , "grants" : [ "grants" ] , "host" : "host" , "id" : "id" } ];
         
@@ -28,7 +28,7 @@ describe("GitCredentialsClient", () => {
           
     test("list (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("GitCredentialsClient", () => {
           
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "host" : "host" , "token" : "token" };
         const rawResponseBody = { "agentId" : "agentId" , "createdAt" : 1.1 , "grants" : [ "grants" ] , "host" : "host" , "id" : "id" };
         
@@ -70,7 +70,7 @@ describe("GitCredentialsClient", () => {
           
     test("create (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "host" : "host" , "token" : "x" };
         const rawResponseBody = { };
         
@@ -92,7 +92,7 @@ describe("GitCredentialsClient", () => {
           
     test("grant (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "agentId" : "agentId" };
         const rawResponseBody = { "agentId" : "agentId" , "createdAt" : 1.1 , "grants" : [ "grants" ] , "host" : "host" , "id" : "id" };
         
@@ -115,7 +115,7 @@ describe("GitCredentialsClient", () => {
           
     test("grant (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "agentId" : "agentId" };
         const rawResponseBody = { };
         

@@ -5,8 +5,10 @@ import { AgentBudgetsClient } from "./api/resources/agentBudgets/client/Client.j
 import { AgentDocumentsClient } from "./api/resources/agentDocuments/client/Client.js";
 import { AgentImportsClient } from "./api/resources/agentImports/client/Client.js";
 import { AgentsClient } from "./api/resources/agents/client/Client.js";
+import { AuthClient } from "./api/resources/auth/client/Client.js";
 import { CapabilityCeilingsClient } from "./api/resources/capabilityCeilings/client/Client.js";
 import { ChangesetsClient } from "./api/resources/changesets/client/Client.js";
+import { ChannelsClient } from "./api/resources/channels/client/Client.js";
 import { ChecksClient } from "./api/resources/checks/client/Client.js";
 import { ComputeAttachmentsClient } from "./api/resources/computeAttachments/client/Client.js";
 import { ComputeCredentialsClient } from "./api/resources/computeCredentials/client/Client.js";
@@ -32,6 +34,7 @@ import { FeedbackClient } from "./api/resources/feedback/client/Client.js";
 import { GitCredentialsClient } from "./api/resources/gitCredentials/client/Client.js";
 import { HarnessesClient } from "./api/resources/harnesses/client/Client.js";
 import { HarnessVersionsClient } from "./api/resources/harnessVersions/client/Client.js";
+import { HttpChannelsClient } from "./api/resources/httpChannels/client/Client.js";
 import { ImportSessionsClient } from "./api/resources/importSessions/client/Client.js";
 import { IssueClustersClient } from "./api/resources/issueClusters/client/Client.js";
 import { JudgeAlignmentClient } from "./api/resources/judgeAlignment/client/Client.js";
@@ -40,6 +43,7 @@ import { MemoryRegistryClient } from "./api/resources/memoryRegistry/client/Clie
 import { ModelGatewayClient } from "./api/resources/modelGateway/client/Client.js";
 import { ModelSettingsClient } from "./api/resources/modelSettings/client/Client.js";
 import { OnlineEvaluationsClient } from "./api/resources/onlineEvaluations/client/Client.js";
+import { PersonalChannelsClient } from "./api/resources/personalChannels/client/Client.js";
 import { ReleaseWatchesClient } from "./api/resources/releaseWatches/client/Client.js";
 import { RetentionPoliciesClient } from "./api/resources/retentionPolicies/client/Client.js";
 import { ReviewQueueClient } from "./api/resources/reviewQueue/client/Client.js";
@@ -69,12 +73,16 @@ export declare namespace SikaruApi {
 
 export class SikaruApi {
     protected readonly _options: NormalizedClientOptionsWithAuth<SikaruApi.Options>;
+    protected _auth: AuthClient | undefined;
+    protected _httpChannels: HttpChannelsClient | undefined;
+    protected _personalChannels: PersonalChannelsClient | undefined;
     protected _activation: ActivationClient | undefined;
     protected _agentDocuments: AgentDocumentsClient | undefined;
     protected _agentImports: AgentImportsClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _capabilityCeilings: CapabilityCeilingsClient | undefined;
     protected _changesets: ChangesetsClient | undefined;
+    protected _channels: ChannelsClient | undefined;
     protected _computeAttachments: ComputeAttachmentsClient | undefined;
     protected _computeOperations: ComputeOperationsClient | undefined;
     protected _computeWorkspaces: ComputeWorkspacesClient | undefined;
@@ -130,6 +138,18 @@ export class SikaruApi {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
+    public get auth(): AuthClient {
+        return (this._auth ??= new AuthClient(this._options));
+    }
+
+    public get httpChannels(): HttpChannelsClient {
+        return (this._httpChannels ??= new HttpChannelsClient(this._options));
+    }
+
+    public get personalChannels(): PersonalChannelsClient {
+        return (this._personalChannels ??= new PersonalChannelsClient(this._options));
+    }
+
     public get activation(): ActivationClient {
         return (this._activation ??= new ActivationClient(this._options));
     }
@@ -152,6 +172,10 @@ export class SikaruApi {
 
     public get changesets(): ChangesetsClient {
         return (this._changesets ??= new ChangesetsClient(this._options));
+    }
+
+    public get channels(): ChannelsClient {
+        return (this._channels ??= new ChannelsClient(this._options));
     }
 
     public get computeAttachments(): ComputeAttachmentsClient {

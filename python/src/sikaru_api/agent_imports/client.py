@@ -51,6 +51,7 @@ class AgentImportsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_imports.list_agent_imports(
@@ -102,6 +103,7 @@ class AgentImportsClient:
         from sikaru_api import AgentImportImproveRequest, SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_imports.create_agent_import(
@@ -165,6 +167,7 @@ class AsyncAgentImportsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -224,6 +227,7 @@ class AsyncAgentImportsClient:
         from sikaru_api import AgentImportImproveRequest, AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

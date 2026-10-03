@@ -14,11 +14,16 @@ export interface CreateManagedAgentRequest {
     compatibilityProfileId?: string | null;
     displayName?: string | null;
     harnessId?: string | null;
+    initialChannel?: CreateManagedAgentRequest.InitialChannel;
     source?: Sikaru.CreateManagedAgentSourceRequest | null;
     status?: CreateManagedAgentRequest.Status;
 }
 
 export namespace CreateManagedAgentRequest {
+    export type InitialChannel = 
+        | Sikaru.InitialHttpChannel
+        | Sikaru.InitialSlackRoom
+        | Sikaru.InitialSlackDm;
     export const Status = {
             Active: "active",
             Inactive: "inactive"

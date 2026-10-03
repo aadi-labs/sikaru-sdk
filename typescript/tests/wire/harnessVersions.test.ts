@@ -8,7 +8,7 @@ describe("HarnessVersionsClient", () => {
     
     test("create_harness_version (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "baseHarnessProfileId" : "baseHarnessProfileId" , "compatibilityProfileId" : "compatibilityProfileId" , "displayName" : "displayName" , "harnessId" : "harnessId" , "sourceArtifactId" : "sourceArtifactId" };
         const rawResponseBody = { "key" : "value" };
         
@@ -35,7 +35,7 @@ describe("HarnessVersionsClient", () => {
           
     test("create_harness_version (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "baseHarnessProfileId" : "baseHarnessProfileId" , "compatibilityProfileId" : "compatibilityProfileId" , "displayName" : "displayName" , "harnessId" : "harnessId" , "sourceArtifactId" : "sourceArtifactId" };
         const rawResponseBody = { };
         

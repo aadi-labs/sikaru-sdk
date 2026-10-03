@@ -37,16 +37,18 @@ export class RunSchedulesClient {
      * @example
      *     await client.runSchedules.listSchedules("project_id")
      */
-    public listSchedules(project_id: string, request: Sikaru.ListSchedulesRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public listSchedules(project_id: string, request: Sikaru.ListSchedulesRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Sikaru.ScheduleList> {
         return core.HttpResponsePromise.fromPromise(this.__listSchedules(project_id, request, requestOptions));
     }
 
-    private async __listSchedules(project_id: string, request: Sikaru.ListSchedulesRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const { "session_id": sessionId } = request;
+    private async __listSchedules(project_id: string, request: Sikaru.ListSchedulesRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ScheduleList>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const { "session_id": sessionId, "agent_slug": agentSlug } = request;
         const _queryParams: Record<string, unknown> = {
-            session_id: sessionId
+            session_id: sessionId,
+            agent_slug: agentSlug
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/run-schedules`),
@@ -56,11 +58,12 @@ export class RunSchedulesClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ScheduleList, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -90,16 +93,16 @@ export class RunSchedulesClient {
      *     await client.runSchedules.createSchedule("project_id", {
      *         input: {
      *             "key": "value"
-     *         },
-     *         session_id: "session_id"
+     *         }
      *     })
      */
-    public createSchedule(project_id: string, request: Sikaru.ScheduleInput, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public createSchedule(project_id: string, request: Sikaru.ScheduleInput, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Sikaru.ScheduleResponse> {
         return core.HttpResponsePromise.fromPromise(this.__createSchedule(project_id, request, requestOptions));
     }
 
-    private async __createSchedule(project_id: string, request: Sikaru.ScheduleInput, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+    private async __createSchedule(project_id: string, request: Sikaru.ScheduleInput, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ScheduleResponse>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/run-schedules`),
@@ -112,11 +115,12 @@ export class RunSchedulesClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ScheduleResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -145,12 +149,13 @@ export class RunSchedulesClient {
      * @example
      *     await client.runSchedules.deleteSchedule("project_id", "schedule_id")
      */
-    public deleteSchedule(project_id: string, schedule_id: string, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public deleteSchedule(project_id: string, schedule_id: string, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Sikaru.ScheduleDeleted> {
         return core.HttpResponsePromise.fromPromise(this.__deleteSchedule(project_id, schedule_id, requestOptions));
     }
 
-    private async __deleteSchedule(project_id: string, schedule_id: string, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+    private async __deleteSchedule(project_id: string, schedule_id: string, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ScheduleDeleted>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/run-schedules/${core.url.encodePathParam(schedule_id)}`),
@@ -160,11 +165,12 @@ export class RunSchedulesClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ScheduleDeleted, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -196,12 +202,13 @@ export class RunSchedulesClient {
      *         paused: true
      *     })
      */
-    public pauseSchedule(project_id: string, schedule_id: string, request: Sikaru.PauseInput, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public pauseSchedule(project_id: string, schedule_id: string, request: Sikaru.PauseInput, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Sikaru.SchedulePaused> {
         return core.HttpResponsePromise.fromPromise(this.__pauseSchedule(project_id, schedule_id, request, requestOptions));
     }
 
-    private async __pauseSchedule(project_id: string, schedule_id: string, request: Sikaru.PauseInput, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+    private async __pauseSchedule(project_id: string, schedule_id: string, request: Sikaru.PauseInput, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.SchedulePaused>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/run-schedules/${core.url.encodePathParam(schedule_id)}`),
@@ -214,11 +221,12 @@ export class RunSchedulesClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.SchedulePaused, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -238,6 +246,56 @@ export class RunSchedulesClient {
     /**
      * @param {string} project_id
      * @param {string} schedule_id
+     * @param {RunSchedulesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.runSchedules.scheduleNotices("project_id", "schedule_id")
+     */
+    public scheduleNotices(project_id: string, schedule_id: string, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Sikaru.ScheduleNotices> {
+        return core.HttpResponsePromise.fromPromise(this.__scheduleNotices(project_id, schedule_id, requestOptions));
+    }
+
+    private async __scheduleNotices(project_id: string, schedule_id: string, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ScheduleNotices>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/run-schedules/${core.url.encodePathParam(schedule_id)}/notices`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ScheduleNotices, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/run-schedules/{schedule_id}/notices");
+    }
+
+    /**
+     * @param {string} project_id
+     * @param {string} schedule_id
      * @param {Sikaru.ScheduleHistoryRunSchedulesRequest} request
      * @param {RunSchedulesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -248,17 +306,18 @@ export class RunSchedulesClient {
      * @example
      *     await client.runSchedules.scheduleHistory("project_id", "schedule_id")
      */
-    public scheduleHistory(project_id: string, schedule_id: string, request: Sikaru.ScheduleHistoryRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public scheduleHistory(project_id: string, schedule_id: string, request: Sikaru.ScheduleHistoryRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): core.HttpResponsePromise<Sikaru.ScheduleHistory> {
         return core.HttpResponsePromise.fromPromise(this.__scheduleHistory(project_id, schedule_id, request, requestOptions));
     }
 
-    private async __scheduleHistory(project_id: string, schedule_id: string, request: Sikaru.ScheduleHistoryRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+    private async __scheduleHistory(project_id: string, schedule_id: string, request: Sikaru.ScheduleHistoryRunSchedulesRequest = {}, requestOptions?: RunSchedulesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ScheduleHistory>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const { before, limit } = request;
         const _queryParams: Record<string, unknown> = {
             before,
             limit
         };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/run-schedules/${core.url.encodePathParam(schedule_id)}/occurrences`),
@@ -268,11 +327,12 @@ export class RunSchedulesClient {
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
             fetchFn: this._options?.fetch,
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ScheduleHistory, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

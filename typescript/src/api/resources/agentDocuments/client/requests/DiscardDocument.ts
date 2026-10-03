@@ -7,6 +7,6 @@
  *     }
  */
 export interface DiscardDocument {
-    expectedLiveVersionId: string | null;
+    expectedLiveVersionId?: string | null;
     expectedRevision: number;
 }

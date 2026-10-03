@@ -6,11 +6,51 @@ import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("AgentDocumentsClient", () => {
     
+    test("draft (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "checks" : [ { "instruction" : "instruction" , "name" : "name" , "rubric" : "rubric" } ] , "document" : "document" , "name" : "name" , "notes" : [ "notes" ] , "tools" : [ "tools" ] };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agent-documents/draft").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.agentDocuments.draft("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("draft (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agent-documents/draft").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agentDocuments.draft("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("import_files (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "files" : { "key" : "value" } };
-        const rawResponseBody = { "document" : "document" , "validation" : { "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        const rawResponseBody = { "document" : "document" , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
         
         server
             .mockEndpoint()
@@ -33,7 +73,7 @@ describe("AgentDocumentsClient", () => {
           
     test("import_files (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "files" : { "files" : "files" } };
         const rawResponseBody = { };
         
@@ -56,7 +96,7 @@ describe("AgentDocumentsClient", () => {
           
     test("list_resources (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "resources" : [ { "aliases" : [ "aliases" ] , "allowed_hosts" : [ "allowed_hosts" ] , "blocked_reason" : "blocked_reason" , "broken_reason" : "broken_reason" , "connected" : true , "kind" : "kind" , "ownership" : "ownership" , "resource_id" : "resource_id" , "slug" : "slug" , "tool_digests" : { "key" : "value" } } ] };
         
@@ -76,7 +116,7 @@ describe("AgentDocumentsClient", () => {
           
     test("list_resources (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -92,11 +132,57 @@ describe("AgentDocumentsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("edit_setting (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "document" : "document" , "path" : [ "path" ] };
+        const rawResponseBody = { "document" : "document" , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agent-documents/settings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.agentDocuments.editSetting("project_id", {
+    document: "document",
+    path: ["path"]
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("edit_setting (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "document" : "document" , "path" : [ "path" , "path" ] };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agent-documents/settings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agentDocuments.editSetting("project_id", {
+    document: "document",
+    path: ["path", "path"]
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("list_templates (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "templates" : [ { "description" : "description" , "document" : "document" , "id" : "id" , "name" : "name" } ] };
+        const rawResponseBody = { "templates" : [ { "checks" : [ { "instruction" : "instruction" , "name" : "name" , "rubric" : "rubric" } ] , "connectors" : [ "connectors" ] , "description" : "description" , "document" : "document" , "id" : "id" , "name" : "name" } ] };
         
         server
             .mockEndpoint()
@@ -114,7 +200,7 @@ describe("AgentDocumentsClient", () => {
           
     test("list_templates (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -130,11 +216,55 @@ describe("AgentDocumentsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("validate_text (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "document" : "document" };
+        const rawResponseBody = { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "column" : 1 , "line" : 1 , "message" : "message" } ] , "mentions" : [ { "allowed_hosts" : [ "allowed_hosts" ] , "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "reason" : "reason" , "resource_id" : "resource_id" , "state" : "state" , "tool_digests" : { "key" : "value" } , "warning" : "warning" } ] , "publishable" : true };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agent-documents/validate").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.agentDocuments.validateText("project_id", {
+    document: "document"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("validate_text (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "document" : "document" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agent-documents/validate").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agentDocuments.validateText("project_id", {
+    document: "document"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("get (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
         
         server
             .mockEndpoint()
@@ -152,7 +282,7 @@ describe("AgentDocumentsClient", () => {
           
     test("get (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -170,9 +300,9 @@ describe("AgentDocumentsClient", () => {
           
     test("save (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "document" : "document" , "expectedRevision" : 1 };
-        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
         
         server
             .mockEndpoint()
@@ -194,7 +324,7 @@ describe("AgentDocumentsClient", () => {
           
     test("save (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "document" : "document" , "expectedRevision" : 1 };
         const rawResponseBody = { };
         
@@ -216,7 +346,7 @@ describe("AgentDocumentsClient", () => {
           
     test("compare (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "diff" : "diff" , "draft" : { "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 } , "liveDocument" : "liveDocument" , "liveVersionId" : "liveVersionId" };
         
@@ -236,7 +366,7 @@ describe("AgentDocumentsClient", () => {
           
     test("compare (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -254,9 +384,9 @@ describe("AgentDocumentsClient", () => {
           
     test("discard (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedRevision" : 1 };
-        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
         
         server
             .mockEndpoint()
@@ -277,7 +407,7 @@ describe("AgentDocumentsClient", () => {
           
     test("discard (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedRevision" : 1 };
         const rawResponseBody = { };
         
@@ -298,7 +428,7 @@ describe("AgentDocumentsClient", () => {
           
     test("publish (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "revision" : 1 };
         const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "activatedAt" : "activatedAt" , "activationId" : "activationId" , "actor" : "actor" , "affectedSchedules" : [ { "key" : "value" } ] , "blockers" : [ { "mention" : "mention" , "reason" : "reason" , "state" : "state" } ] , "ceilingViolations" : [ { "column" : 1 , "line" : 1 , "message" : "message" } ] , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "earlierSessions" : [ { "harnessVersionId" : "harnessVersionId" , "sessionId" : "sessionId" } ] , "harnessVersionId" : "harnessVersionId" , "priorVersionId" : "priorVersionId" , "revision" : 1 , "unchanged" : true };
         
@@ -321,7 +451,7 @@ describe("AgentDocumentsClient", () => {
           
     test("publish (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "revision" : 1 };
         const rawResponseBody = { };
         
@@ -342,7 +472,7 @@ describe("AgentDocumentsClient", () => {
           
     test("revert (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "harnessVersionId" : "harnessVersionId" , "revision" : 1 };
         const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "activatedAt" : "activatedAt" , "activationId" : "activationId" , "actor" : "actor" , "affectedSchedules" : [ { "key" : "value" } ] , "blockers" : [ { "mention" : "mention" , "reason" : "reason" , "state" : "state" } ] , "ceilingViolations" : [ { "column" : 1 , "line" : 1 , "message" : "message" } ] , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "earlierSessions" : [ { "harnessVersionId" : "harnessVersionId" , "sessionId" : "sessionId" } ] , "harnessVersionId" : "harnessVersionId" , "priorVersionId" : "priorVersionId" , "revision" : 1 , "unchanged" : true };
         
@@ -366,7 +496,7 @@ describe("AgentDocumentsClient", () => {
           
     test("revert (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "harnessVersionId" : "harnessVersionId" , "revision" : 1 };
         const rawResponseBody = { };
         
@@ -386,9 +516,53 @@ describe("AgentDocumentsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("review (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "revision" : 1 };
+        const rawResponseBody = { "accessAfter" : { "key" : { "allowed_hosts" : [ "allowed_hosts" ] , "ownership" : "ownership" , "policy" : "policy" , "resource_id" : "resource_id" , "tools" : { "key" : "value" } } } , "accessBefore" : { "key" : { "allowed_hosts" : [ "allowed_hosts" ] , "ownership" : "ownership" , "policy" : "policy" , "resource_id" : "resource_id" , "tools" : { "key" : "value" } } } , "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "accessDigest" : "accessDigest" , "affectedSchedules" : [ { "key" : "value" } ] , "blockers" : [ { "mention" : "mention" , "reason" : "reason" , "state" : "state" } ] , "ceilingViolations" : [ { "column" : 1 , "line" : 1 , "message" : "message" } ] , "diff" : "diff" , "document" : "document" , "earlierSessions" : [ { "harnessVersionId" : "harnessVersionId" , "sessionId" : "sessionId" } ] , "harnessVersionId" : "harnessVersionId" , "liveVersionId" : "liveVersionId" , "revision" : 1 , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/managed-agents/agent_slug/document/review").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.agentDocuments.review("project_id", "agent_slug", {
+    revision: 1
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("review (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "revision" : 1 };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/managed-agents/agent_slug/document/review").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agentDocuments.review("project_id", "agent_slug", {
+    revision: 1
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("snippets (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "cli" : "cli" , "curl" : "curl" , "python" : "python" , "typescript" : "typescript" };
         
@@ -408,7 +582,7 @@ describe("AgentDocumentsClient", () => {
           
     test("snippets (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -426,9 +600,9 @@ describe("AgentDocumentsClient", () => {
           
     test("list_suggestions (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "suggestions" : [ { "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "candidateVersionId" : "candidateVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "diff" : "diff" , "document" : "document" , "id" : "id" , "status" : "status" } ] };
+        const rawResponseBody = { "suggestions" : [ { "actor" : "actor" , "affectedRuns" : 1 , "affectedShare" : 1.1 , "baseLiveVersionId" : "baseLiveVersionId" , "candidateVersionId" : "candidateVersionId" , "citedRunIds" : [ "citedRunIds" ] , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "diff" : "diff" , "document" : "document" , "id" : "id" , "rationale" : "rationale" , "signalId" : "signalId" , "status" : "status" , "title" : "title" } ] };
         
         server
             .mockEndpoint()
@@ -446,7 +620,7 @@ describe("AgentDocumentsClient", () => {
           
     test("list_suggestions (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -464,9 +638,9 @@ describe("AgentDocumentsClient", () => {
           
     test("adopt_suggestion (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedRevision" : 1 };
-        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
+        const rawResponseBody = { "accessDelta" : { "added" : [ "added" ] , "capabilities" : [ { "key" : "value" } ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "document" : "document" , "revision" : 1 , "validation" : { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "message" : "message" } ] , "mentions" : [ { "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "state" : "state" } ] , "publishable" : true } };
         
         server
             .mockEndpoint()
@@ -487,7 +661,7 @@ describe("AgentDocumentsClient", () => {
           
     test("adopt_suggestion (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedRevision" : 1 };
         const rawResponseBody = { };
         
@@ -508,9 +682,9 @@ describe("AgentDocumentsClient", () => {
           
     test("dismiss_suggestion (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "actor" : "actor" , "baseLiveVersionId" : "baseLiveVersionId" , "candidateVersionId" : "candidateVersionId" , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "diff" : "diff" , "document" : "document" , "id" : "id" , "status" : "status" };
+        const rawResponseBody = { "actor" : "actor" , "affectedRuns" : 1 , "affectedShare" : 1.1 , "baseLiveVersionId" : "baseLiveVersionId" , "candidateVersionId" : "candidateVersionId" , "citedRunIds" : [ "citedRunIds" ] , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "diff" : "diff" , "document" : "document" , "id" : "id" , "rationale" : "rationale" , "signalId" : "signalId" , "status" : "status" , "title" : "title" };
         
         server
             .mockEndpoint()
@@ -528,7 +702,7 @@ describe("AgentDocumentsClient", () => {
           
     test("dismiss_suggestion (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -546,9 +720,9 @@ describe("AgentDocumentsClient", () => {
           
     test("validate (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "document" : "document" };
-        const rawResponseBody = { "errors" : [ { "column" : 1 , "line" : 1 , "message" : "message" } ] , "mentions" : [ { "allowed_hosts" : [ "allowed_hosts" ] , "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "reason" : "reason" , "resource_id" : "resource_id" , "state" : "state" , "tool_digests" : { "key" : "value" } , "warning" : "warning" } ] , "publishable" : true };
+        const rawResponseBody = { "editor" : { "bodyOffset" : 1 , "ceilings" : { "key" : "value" } , "settings" : { "key" : "value" } } , "errors" : [ { "column" : 1 , "line" : 1 , "message" : "message" } ] , "mentions" : [ { "allowed_hosts" : [ "allowed_hosts" ] , "mention" : { "column" : 1 , "end" : 1 , "kind" : "kind" , "line" : 1 , "slug" : "slug" , "start" : 1 , "text" : "text" } , "reason" : "reason" , "resource_id" : "resource_id" , "state" : "state" , "tool_digests" : { "key" : "value" } , "warning" : "warning" } ] , "publishable" : true };
         
         server
             .mockEndpoint()
@@ -569,7 +743,7 @@ describe("AgentDocumentsClient", () => {
           
     test("validate (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "document" : "document" };
         const rawResponseBody = { };
         
@@ -590,7 +764,7 @@ describe("AgentDocumentsClient", () => {
           
     test("list_versions (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "versions" : [ { "accessDelta" : { "added" : [ "added" ] , "changed" : [ "changed" ] , "removed" : [ "removed" ] } , "activatedAt" : "activatedAt" , "activationId" : "activationId" , "actor" : "actor" , "affectedSchedules" : [ { "key" : "value" } ] , "blockers" : [ { } ] , "ceilingViolations" : [ { "message" : "message" } ] , "contentOrigin" : "contentOrigin" , "createdAt" : "createdAt" , "earlierSessions" : [ { "harnessVersionId" : "harnessVersionId" , "sessionId" : "sessionId" } ] , "harnessVersionId" : "harnessVersionId" , "priorVersionId" : "priorVersionId" , "revision" : 1 , "unchanged" : true } ] };
         
@@ -610,7 +784,7 @@ describe("AgentDocumentsClient", () => {
           
     test("list_versions (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         

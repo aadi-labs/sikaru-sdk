@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_workflows_import_workflow() -> None:
@@ -10,6 +10,9 @@ def test_workflows_import_workflow() -> None:
         payload={"key": "value"},
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/workflows/import", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/workflows/import", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_workflows_export_product_workflow() -> None:
@@ -21,6 +24,9 @@ def test_workflows_export_product_workflow() -> None:
         workflow_id="workflow_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/workflows/workflow_id/export", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/workflows/workflow_id/export", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_workflows_start_project_workflow_run() -> None:
@@ -32,6 +38,9 @@ def test_workflows_start_project_workflow_run() -> None:
         workflow_id="workflow_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/workflows/workflow_id/runs", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/workflows/workflow_id/runs", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_workflows_create_project_workflow_version() -> None:
@@ -43,3 +52,6 @@ def test_workflows_create_project_workflow_version() -> None:
         workflow_id="workflow_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/workflows/workflow_id/versions", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/workflows/workflow_id/versions", {"Authorization": r"Bearer .+"}, []
+    )

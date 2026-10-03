@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import ToolSkillSourceRequest
 
@@ -16,6 +16,7 @@ def test_toolProviders_register_tool_provider() -> None:
         tool_catalog_ref="tool_catalog_ref",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/tool-providers", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/tool-providers", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_toolProviders_attach_source_tool_skill() -> None:
@@ -32,3 +33,10 @@ def test_toolProviders_attach_source_tool_skill() -> None:
         ),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/tool-providers/tool_provider_id/skills", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/tool-providers/tool_provider_id/skills",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

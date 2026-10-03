@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import CheckEnvironment, HarborTaskFiles
 
@@ -12,6 +12,9 @@ def test_checks_list_() -> None:
         agent_slug="agent_slug",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/checks", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/checks", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_checks_create() -> None:
@@ -31,6 +34,9 @@ def test_checks_create() -> None:
         ),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/checks", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/checks", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_checks_list_results() -> None:
@@ -44,6 +50,13 @@ def test_checks_list_results() -> None:
     )
     verify_request_count(
         test_id, "GET", "/v1/projects/project_id/managed-agents/agent_slug/checks/check_id/results", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/managed-agents/agent_slug/checks/check_id/results",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -59,4 +72,11 @@ def test_checks_run() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/managed-agents/agent_slug/checks/check_id/runs", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/managed-agents/agent_slug/checks/check_id/runs",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_computeEnvironments_create() -> None:
@@ -11,6 +11,9 @@ def test_computeEnvironments_create() -> None:
         idempotency_key="idempotency_key",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-environments", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/compute-environments", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_computeEnvironments_get() -> None:
@@ -22,6 +25,13 @@ def test_computeEnvironments_get() -> None:
         environment_id="environment_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/compute-environments/environment_id", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/compute-environments/environment_id",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeEnvironments_disable() -> None:
@@ -34,4 +44,11 @@ def test_computeEnvironments_disable() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-environments/environment_id/disable", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-environments/environment_id/disable",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import JudgmentTarget, TargetInput
 
@@ -11,6 +11,7 @@ def test_evaluationJobs_list_jobs() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/evaluation-jobs", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/evaluation-jobs", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_evaluationJobs_create_job() -> None:
@@ -34,6 +35,7 @@ def test_evaluationJobs_create_job() -> None:
         ],
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/evaluation-jobs", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/evaluation-jobs", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_evaluationJobs_get_job() -> None:
@@ -45,6 +47,9 @@ def test_evaluationJobs_get_job() -> None:
         job_id="job_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/evaluation-jobs/job_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/evaluation-jobs/job_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_evaluationJobs_cancel_job() -> None:
@@ -56,3 +61,6 @@ def test_evaluationJobs_cancel_job() -> None:
         job_id="job_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/evaluation-jobs/job_id/cancel", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/evaluation-jobs/job_id/cancel", {"Authorization": r"Bearer .+"}, []
+    )

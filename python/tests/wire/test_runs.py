@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_runs_start() -> None:
@@ -15,6 +15,9 @@ def test_runs_start() -> None:
         user_id="user_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/runs", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/harnesses/harness_id/runs", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_get() -> None:
@@ -26,6 +29,7 @@ def test_runs_get() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/runs/run_id", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_runs_pending_actions() -> None:
@@ -37,6 +41,9 @@ def test_runs_pending_actions() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/actions", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/runs/run_id/actions", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_cancel() -> None:
@@ -48,6 +55,9 @@ def test_runs_cancel() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/cancel", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/runs/run_id/cancel", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_events() -> None:
@@ -59,6 +69,9 @@ def test_runs_events() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/events", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/runs/run_id/events", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_stream_events() -> None:
@@ -71,6 +84,9 @@ def test_runs_stream_events() -> None:
     ):
         pass
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/events/stream", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/runs/run_id/events/stream", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_recover() -> None:
@@ -82,6 +98,9 @@ def test_runs_recover() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/recover", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/runs/run_id/recover", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_decide_approval() -> None:
@@ -97,6 +116,13 @@ def test_runs_decide_approval() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/runs/run_id/tool-calls/tool_call_id/approval", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/runs/run_id/tool-calls/tool_call_id/approval",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -115,6 +141,9 @@ def test_runs_submit_tool_result() -> None:
         tool_provider_id="tool_provider_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/tool-results", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/runs/run_id/tool-results", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_get_trajectory() -> None:
@@ -126,6 +155,9 @@ def test_runs_get_trajectory() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/trajectory", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/runs/run_id/trajectory", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_get_transcript() -> None:
@@ -137,6 +169,9 @@ def test_runs_get_transcript() -> None:
         run_id="run_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/transcript", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/runs/run_id/transcript", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_runs_stream_transcript_events() -> None:
@@ -149,3 +184,10 @@ def test_runs_stream_transcript_events() -> None:
     ):
         pass
     verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/run_id/transcript/events/stream", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/runs/run_id/transcript/events/stream",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

@@ -5,21 +5,26 @@
  *     {
  *         input: {
  *             "key": "value"
- *         },
- *         session_id: "session_id"
+ *         }
  *     }
  */
 export interface ScheduleInput {
+    agent_slug?: string | null;
     cron?: string | null;
+    environment?: ScheduleInput.Environment;
     idempotency_key?: string | null;
     input: Record<string, unknown>;
     interval_seconds?: number | null;
-    session_id: string;
-    session_mode?: ScheduleInput.SessionMode;
+    session_id?: string | null;
+    session_mode?: ScheduleInput.SessionMode | null;
     timezone?: string;
 }
 
 export namespace ScheduleInput {
+    export const Environment = {
+            Production: "production"
+        } as const;
+    export type Environment = typeof Environment[keyof typeof Environment];
     export const SessionMode = {
             Persistent: "persistent",
             Fresh: "fresh"

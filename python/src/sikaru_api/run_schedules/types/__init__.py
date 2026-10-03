@@ -6,8 +6,12 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .schedule_input_environment import ScheduleInputEnvironment
     from .schedule_input_session_mode import ScheduleInputSessionMode
-_dynamic_imports: typing.Dict[str, str] = {"ScheduleInputSessionMode": ".schedule_input_session_mode"}
+_dynamic_imports: typing.Dict[str, str] = {
+    "ScheduleInputEnvironment": ".schedule_input_environment",
+    "ScheduleInputSessionMode": ".schedule_input_session_mode",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +35,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["ScheduleInputSessionMode"]
+__all__ = ["ScheduleInputEnvironment", "ScheduleInputSessionMode"]

@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_onlineEvaluations_list_policies() -> None:
@@ -9,6 +9,9 @@ def test_onlineEvaluations_list_policies() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/online-evaluations", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/online-evaluations", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_onlineEvaluations_create_policy() -> None:
@@ -24,6 +27,9 @@ def test_onlineEvaluations_create_policy() -> None:
         sample_percent=1,
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/online-evaluations", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/online-evaluations", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_onlineEvaluations_preview_policy_eligibility() -> None:
@@ -34,6 +40,9 @@ def test_onlineEvaluations_preview_policy_eligibility() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/online-evaluations/preview", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/online-evaluations/preview", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_onlineEvaluations_update_policy() -> None:
@@ -46,3 +55,6 @@ def test_onlineEvaluations_update_policy() -> None:
         enabled=True,
     )
     verify_request_count(test_id, "PATCH", "/v1/projects/project_id/online-evaluations/policy_id", None, 1)
+    verify_auth_headers(
+        test_id, "PATCH", "/v1/projects/project_id/online-evaluations/policy_id", {"Authorization": r"Bearer .+"}, []
+    )

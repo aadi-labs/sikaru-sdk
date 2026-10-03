@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_sessions_get_managed_session() -> None:
@@ -10,6 +10,9 @@ def test_sessions_get_managed_session() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/sessions/session_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/sessions/session_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_sessions_list_managed_session_events() -> None:
@@ -21,6 +24,9 @@ def test_sessions_list_managed_session_events() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/sessions/session_id/events", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/sessions/session_id/events", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_sessions_list_managed_session_files() -> None:
@@ -32,6 +38,9 @@ def test_sessions_list_managed_session_files() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/sessions/session_id/files", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/sessions/session_id/files", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_sessions_list_managed_session_plan() -> None:
@@ -43,3 +52,6 @@ def test_sessions_list_managed_session_plan() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/sessions/session_id/plan", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/sessions/session_id/plan", {"Authorization": r"Bearer .+"}, []
+    )

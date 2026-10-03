@@ -5,10 +5,12 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.agent_document import AgentDocument
+from ..types.agent_document_draft import AgentDocumentDraft
 from ..types.agent_snippets import AgentSnippets
 from ..types.document_comparison import DocumentComparison
 from ..types.document_publication import DocumentPublication
 from ..types.document_resources import DocumentResources
+from ..types.document_review import DocumentReview
 from ..types.document_suggestion import DocumentSuggestion
 from ..types.document_suggestions import DocumentSuggestions
 from ..types.document_templates import DocumentTemplates
@@ -16,6 +18,7 @@ from ..types.document_validation_view import DocumentValidationView
 from ..types.document_versions import DocumentVersions
 from ..types.imported_document import ImportedDocument
 from .raw_client import AsyncRawAgentDocumentsClient, RawAgentDocumentsClient
+from .types.edit_document_setting_op import EditDocumentSettingOp
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -35,6 +38,65 @@ class AgentDocumentsClient:
         RawAgentDocumentsClient
         """
         return self._raw_client
+
+    def draft(
+        self,
+        project_id: str,
+        *,
+        description: typing.Optional[str] = OMIT,
+        note: typing.Optional[str] = OMIT,
+        run_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        template_id: typing.Optional[str] = OMIT,
+        trace_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AgentDocumentDraft:
+        """
+        Draft a first agent document, starter checks and suggested apps from a description or past conversations.
+
+        Parameters
+        ----------
+        project_id : str
+
+        description : typing.Optional[str]
+
+        note : typing.Optional[str]
+
+        run_ids : typing.Optional[typing.Sequence[str]]
+
+        template_id : typing.Optional[str]
+
+        trace_ids : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AgentDocumentDraft
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.agent_documents.draft(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.draft(
+            project_id,
+            description=description,
+            note=note,
+            run_ids=run_ids,
+            template_id=template_id,
+            trace_ids=trace_ids,
+            request_options=request_options,
+        )
+        return _response.data
 
     def import_files(
         self, project_id: str, *, files: typing.Dict[str, str], request_options: typing.Optional[RequestOptions] = None
@@ -59,6 +121,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.import_files(
@@ -90,6 +153,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.list_resources(
@@ -97,6 +161,58 @@ class AgentDocumentsClient:
         )
         """
         _response = self._raw_client.list_resources(project_id, request_options=request_options)
+        return _response.data
+
+    def edit_setting(
+        self,
+        project_id: str,
+        *,
+        document: str,
+        path: typing.Sequence[str],
+        op: typing.Optional[EditDocumentSettingOp] = OMIT,
+        value: typing.Optional[typing.Any] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ImportedDocument:
+        """
+        Set or remove one setting without rewriting the rest of the document.
+
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        path : typing.Sequence[str]
+
+        op : typing.Optional[EditDocumentSettingOp]
+
+        value : typing.Optional[typing.Any]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ImportedDocument
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.agent_documents.edit_setting(
+            project_id="project_id",
+            document="document",
+            path=["path"],
+        )
+        """
+        _response = self._raw_client.edit_setting(
+            project_id, document=document, path=path, op=op, value=value, request_options=request_options
+        )
         return _response.data
 
     def list_templates(
@@ -120,6 +236,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.list_templates(
@@ -127,6 +244,40 @@ class AgentDocumentsClient:
         )
         """
         _response = self._raw_client.list_templates(project_id, request_options=request_options)
+        return _response.data
+
+    def validate_text(
+        self, project_id: str, *, document: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> DocumentValidationView:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DocumentValidationView
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.agent_documents.validate_text(
+            project_id="project_id",
+            document="document",
+        )
+        """
+        _response = self._raw_client.validate_text(project_id, document=document, request_options=request_options)
         return _response.data
 
     def get(
@@ -152,6 +303,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.get(
@@ -195,6 +347,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.save(
@@ -236,6 +389,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.compare(
@@ -279,6 +433,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.discard(
@@ -304,6 +459,7 @@ class AgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentPublication:
@@ -320,6 +476,8 @@ class AgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -335,6 +493,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.publish(
@@ -349,6 +508,7 @@ class AgentDocumentsClient:
             revision=revision,
             acknowledge_removals=acknowledge_removals,
             acknowledge_widening=acknowledge_widening,
+            expected_access_digest=expected_access_digest,
             expected_live_version_id=expected_live_version_id,
             request_options=request_options,
         )
@@ -363,6 +523,7 @@ class AgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentPublication:
@@ -381,6 +542,8 @@ class AgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -396,6 +559,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.revert(
@@ -412,7 +576,75 @@ class AgentDocumentsClient:
             revision=revision,
             acknowledge_removals=acknowledge_removals,
             acknowledge_widening=acknowledge_widening,
+            expected_access_digest=expected_access_digest,
             expected_live_version_id=expected_live_version_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    def review(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        revision: int,
+        acknowledge_removals: typing.Optional[bool] = OMIT,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
+        expected_live_version_id: typing.Optional[str] = OMIT,
+        harness_version_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DocumentReview:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        revision : int
+
+        acknowledge_removals : typing.Optional[bool]
+
+        acknowledge_widening : typing.Optional[bool]
+
+        expected_access_digest : typing.Optional[str]
+
+        expected_live_version_id : typing.Optional[str]
+
+        harness_version_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DocumentReview
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.agent_documents.review(
+            project_id="project_id",
+            agent_slug="agent_slug",
+            revision=1,
+        )
+        """
+        _response = self._raw_client.review(
+            project_id,
+            agent_slug,
+            revision=revision,
+            acknowledge_removals=acknowledge_removals,
+            acknowledge_widening=acknowledge_widening,
+            expected_access_digest=expected_access_digest,
+            expected_live_version_id=expected_live_version_id,
+            harness_version_id=harness_version_id,
             request_options=request_options,
         )
         return _response.data
@@ -440,6 +672,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.snippets(
@@ -473,6 +706,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.list_suggestions(
@@ -516,6 +750,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.adopt_suggestion(
@@ -560,6 +795,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.dismiss_suggestion(
@@ -603,6 +839,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.validate(
@@ -639,6 +876,7 @@ class AgentDocumentsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.agent_documents.list_versions(
@@ -665,6 +903,73 @@ class AsyncAgentDocumentsClient:
         """
         return self._raw_client
 
+    async def draft(
+        self,
+        project_id: str,
+        *,
+        description: typing.Optional[str] = OMIT,
+        note: typing.Optional[str] = OMIT,
+        run_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        template_id: typing.Optional[str] = OMIT,
+        trace_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AgentDocumentDraft:
+        """
+        Draft a first agent document, starter checks and suggested apps from a description or past conversations.
+
+        Parameters
+        ----------
+        project_id : str
+
+        description : typing.Optional[str]
+
+        note : typing.Optional[str]
+
+        run_ids : typing.Optional[typing.Sequence[str]]
+
+        template_id : typing.Optional[str]
+
+        trace_ids : typing.Optional[typing.Sequence[str]]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AgentDocumentDraft
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agent_documents.draft(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.draft(
+            project_id,
+            description=description,
+            note=note,
+            run_ids=run_ids,
+            template_id=template_id,
+            trace_ids=trace_ids,
+            request_options=request_options,
+        )
+        return _response.data
+
     async def import_files(
         self, project_id: str, *, files: typing.Dict[str, str], request_options: typing.Optional[RequestOptions] = None
     ) -> ImportedDocument:
@@ -690,6 +995,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -729,6 +1035,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -742,6 +1049,66 @@ class AsyncAgentDocumentsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list_resources(project_id, request_options=request_options)
+        return _response.data
+
+    async def edit_setting(
+        self,
+        project_id: str,
+        *,
+        document: str,
+        path: typing.Sequence[str],
+        op: typing.Optional[EditDocumentSettingOp] = OMIT,
+        value: typing.Optional[typing.Any] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ImportedDocument:
+        """
+        Set or remove one setting without rewriting the rest of the document.
+
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        path : typing.Sequence[str]
+
+        op : typing.Optional[EditDocumentSettingOp]
+
+        value : typing.Optional[typing.Any]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ImportedDocument
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agent_documents.edit_setting(
+                project_id="project_id",
+                document="document",
+                path=["path"],
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.edit_setting(
+            project_id, document=document, path=path, op=op, value=value, request_options=request_options
+        )
         return _response.data
 
     async def list_templates(
@@ -767,6 +1134,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -780,6 +1148,48 @@ class AsyncAgentDocumentsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.list_templates(project_id, request_options=request_options)
+        return _response.data
+
+    async def validate_text(
+        self, project_id: str, *, document: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> DocumentValidationView:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        document : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DocumentValidationView
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agent_documents.validate_text(
+                project_id="project_id",
+                document="document",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.validate_text(project_id, document=document, request_options=request_options)
         return _response.data
 
     async def get(
@@ -807,6 +1217,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -858,6 +1269,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -907,6 +1319,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -958,6 +1371,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -989,6 +1403,7 @@ class AsyncAgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentPublication:
@@ -1004,6 +1419,8 @@ class AsyncAgentDocumentsClient:
         acknowledge_removals : typing.Optional[bool]
 
         acknowledge_widening : typing.Optional[bool]
+
+        expected_access_digest : typing.Optional[str]
 
         expected_live_version_id : typing.Optional[str]
 
@@ -1022,6 +1439,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1042,6 +1460,7 @@ class AsyncAgentDocumentsClient:
             revision=revision,
             acknowledge_removals=acknowledge_removals,
             acknowledge_widening=acknowledge_widening,
+            expected_access_digest=expected_access_digest,
             expected_live_version_id=expected_live_version_id,
             request_options=request_options,
         )
@@ -1056,6 +1475,7 @@ class AsyncAgentDocumentsClient:
         revision: int,
         acknowledge_removals: typing.Optional[bool] = OMIT,
         acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         expected_live_version_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DocumentPublication:
@@ -1074,6 +1494,8 @@ class AsyncAgentDocumentsClient:
 
         acknowledge_widening : typing.Optional[bool]
 
+        expected_access_digest : typing.Optional[str]
+
         expected_live_version_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
@@ -1091,6 +1513,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1113,7 +1536,83 @@ class AsyncAgentDocumentsClient:
             revision=revision,
             acknowledge_removals=acknowledge_removals,
             acknowledge_widening=acknowledge_widening,
+            expected_access_digest=expected_access_digest,
             expected_live_version_id=expected_live_version_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def review(
+        self,
+        project_id: str,
+        agent_slug: str,
+        *,
+        revision: int,
+        acknowledge_removals: typing.Optional[bool] = OMIT,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
+        expected_live_version_id: typing.Optional[str] = OMIT,
+        harness_version_id: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> DocumentReview:
+        """
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        revision : int
+
+        acknowledge_removals : typing.Optional[bool]
+
+        acknowledge_widening : typing.Optional[bool]
+
+        expected_access_digest : typing.Optional[str]
+
+        expected_live_version_id : typing.Optional[str]
+
+        harness_version_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        DocumentReview
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.agent_documents.review(
+                project_id="project_id",
+                agent_slug="agent_slug",
+                revision=1,
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.review(
+            project_id,
+            agent_slug,
+            revision=revision,
+            acknowledge_removals=acknowledge_removals,
+            acknowledge_widening=acknowledge_widening,
+            expected_access_digest=expected_access_digest,
+            expected_live_version_id=expected_live_version_id,
+            harness_version_id=harness_version_id,
             request_options=request_options,
         )
         return _response.data
@@ -1143,6 +1642,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1184,6 +1684,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1235,6 +1736,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1287,6 +1789,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1338,6 +1841,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1382,6 +1886,7 @@ class AsyncAgentDocumentsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

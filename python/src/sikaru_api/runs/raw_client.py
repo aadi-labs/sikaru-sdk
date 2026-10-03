@@ -15,6 +15,7 @@ from ..core.pydantic_utilities import parse_obj_as, parse_sse_obj
 from ..core.request_options import RequestOptions
 from ..core.serialization import convert_and_respect_annotation_metadata
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
+from ..types.approval_input_decision import ApprovalInputDecision
 from ..types.event_delivery_request import EventDeliveryRequest
 from ..types.http_validation_error import HttpValidationError
 from ..types.managed_run import ManagedRun
@@ -24,7 +25,6 @@ from ..types.run_transcript import RunTranscript
 from ..types.tool_provider_ref_request import ToolProviderRefRequest
 from ..types.transcript_event import TranscriptEvent
 from ..types.workspace_provenance import WorkspaceProvenance
-from .types.approval_input_decision import ApprovalInputDecision
 from .types.start_harness_run_request_run_mode import StartHarnessRunRequestRunMode
 from .types.submit_tool_result_request_status import SubmitToolResultRequestStatus
 from pydantic import ValidationError
@@ -118,6 +118,7 @@ class RawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/runs",
             method="POST",
@@ -150,6 +151,7 @@ class RawRunsClient:
                 "user_id": user_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -203,9 +205,13 @@ class RawRunsClient:
         HttpResponse[ManagedRun]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -256,9 +262,13 @@ class RawRunsClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/actions",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -312,9 +322,13 @@ class RawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/cancel",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -378,6 +392,7 @@ class RawRunsClient:
         HttpResponse[RunEvents]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/events",
             method="GET",
@@ -386,6 +401,7 @@ class RawRunsClient:
                 "limit": limit,
             },
             headers={
+                **_endpoint_auth_headers,
                 "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
@@ -454,6 +470,7 @@ class RawRunsClient:
         typing.Iterator[HttpResponse[typing.Iterator[RunEvent]]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         with self._client_wrapper.httpx_client.stream(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/events/stream",
             method="GET",
@@ -461,6 +478,7 @@ class RawRunsClient:
                 "after": after,
             },
             headers={
+                **_endpoint_auth_headers,
                 "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
@@ -554,6 +572,7 @@ class RawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/recover",
             method="POST",
@@ -561,6 +580,7 @@ class RawRunsClient:
                 "reason": reason,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -630,6 +650,7 @@ class RawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-calls/{encode_path_param(tool_call_id)}/approval",
             method="POST",
@@ -638,6 +659,7 @@ class RawRunsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -716,6 +738,7 @@ class RawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-results",
             method="POST",
@@ -728,6 +751,7 @@ class RawRunsClient:
                 "tool_provider_id": tool_provider_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -787,9 +811,13 @@ class RawRunsClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/trajectory",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -840,9 +868,13 @@ class RawRunsClient:
         HttpResponse[RunTranscript]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/transcript",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -904,6 +936,7 @@ class RawRunsClient:
         typing.Iterator[HttpResponse[typing.Iterator[TranscriptEvent]]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         with self._client_wrapper.httpx_client.stream(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/transcript/events/stream",
             method="GET",
@@ -911,6 +944,7 @@ class RawRunsClient:
                 "after": after,
             },
             headers={
+                **_endpoint_auth_headers,
                 "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
@@ -1062,6 +1096,9 @@ class AsyncRawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/harnesses/{encode_path_param(harness_id)}/runs",
             method="POST",
@@ -1094,6 +1131,7 @@ class AsyncRawRunsClient:
                 "user_id": user_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1147,9 +1185,15 @@ class AsyncRawRunsClient:
         AsyncHttpResponse[ManagedRun]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1200,9 +1244,15 @@ class AsyncRawRunsClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/actions",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1256,9 +1306,15 @@ class AsyncRawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/cancel",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -1322,6 +1378,9 @@ class AsyncRawRunsClient:
         AsyncHttpResponse[RunEvents]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/events",
             method="GET",
@@ -1330,6 +1389,7 @@ class AsyncRawRunsClient:
                 "limit": limit,
             },
             headers={
+                **_endpoint_auth_headers,
                 "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
@@ -1398,6 +1458,9 @@ class AsyncRawRunsClient:
         typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[RunEvent]]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         async with self._client_wrapper.httpx_client.stream(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/events/stream",
             method="GET",
@@ -1405,6 +1468,7 @@ class AsyncRawRunsClient:
                 "after": after,
             },
             headers={
+                **_endpoint_auth_headers,
                 "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
@@ -1498,6 +1562,9 @@ class AsyncRawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/recover",
             method="POST",
@@ -1505,6 +1572,7 @@ class AsyncRawRunsClient:
                 "reason": reason,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1574,6 +1642,9 @@ class AsyncRawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-calls/{encode_path_param(tool_call_id)}/approval",
             method="POST",
@@ -1582,6 +1653,7 @@ class AsyncRawRunsClient:
                 "idempotency_key": idempotency_key,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1660,6 +1732,9 @@ class AsyncRawRunsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/tool-results",
             method="POST",
@@ -1672,6 +1747,7 @@ class AsyncRawRunsClient:
                 "tool_provider_id": tool_provider_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -1731,9 +1807,15 @@ class AsyncRawRunsClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/trajectory",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1784,9 +1866,15 @@ class AsyncRawRunsClient:
         AsyncHttpResponse[RunTranscript]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/transcript",
             method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=request_options,
         )
         try:
@@ -1848,6 +1936,9 @@ class AsyncRawRunsClient:
         typing.AsyncIterator[AsyncHttpResponse[typing.AsyncIterator[TranscriptEvent]]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         async with self._client_wrapper.httpx_client.stream(
             f"v1/projects/{encode_path_param(project_id)}/runs/{encode_path_param(run_id)}/transcript/events/stream",
             method="GET",
@@ -1855,6 +1946,7 @@ class AsyncRawRunsClient:
                 "after": after,
             },
             headers={
+                **_endpoint_auth_headers,
                 "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,

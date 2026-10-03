@@ -50,6 +50,7 @@ class RawJudgeAlignmentClient:
         HttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/judge-alignment",
             method="GET",
@@ -57,6 +58,9 @@ class RawJudgeAlignmentClient:
                 "evaluator": evaluator,
                 "revision": revision,
                 "environment": environment,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
@@ -123,6 +127,9 @@ class AsyncRawJudgeAlignmentClient:
         AsyncHttpResponse[typing.Dict[str, typing.Any]]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/judge-alignment",
             method="GET",
@@ -130,6 +137,9 @@ class AsyncRawJudgeAlignmentClient:
                 "evaluator": evaluator,
                 "revision": revision,
                 "environment": environment,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )

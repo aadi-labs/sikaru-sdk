@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_deployments_list_console_deployments() -> None:
@@ -9,3 +9,4 @@ def test_deployments_list_console_deployments() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/deployments", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/deployments", {"Authorization": r"Bearer .+"}, [])

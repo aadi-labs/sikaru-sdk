@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_workflowIntents_create_project_workflow_intent() -> None:
@@ -10,6 +10,9 @@ def test_workflowIntents_create_project_workflow_intent() -> None:
         description="description",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/workflow-intents", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/workflow-intents", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_workflowIntents_compile_project_workflow_intent() -> None:
@@ -21,3 +24,10 @@ def test_workflowIntents_compile_project_workflow_intent() -> None:
         intent_id="intent_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/workflow-intents/intent_id/compile", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/workflow-intents/intent_id/compile",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

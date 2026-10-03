@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import WorkspaceProvenance
 
@@ -12,6 +12,9 @@ def test_computeAttachments_get() -> None:
         attachment_id="attachment_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/compute-attachments/attachment_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/compute-attachments/attachment_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_computeAttachments_abandon() -> None:
@@ -24,6 +27,13 @@ def test_computeAttachments_abandon() -> None:
         evidence="evidence",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/abandon", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/abandon",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_cancel() -> None:
@@ -35,6 +45,13 @@ def test_computeAttachments_cancel() -> None:
         attachment_id="attachment_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/cancel", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/cancel",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_claim() -> None:
@@ -47,6 +64,13 @@ def test_computeAttachments_claim() -> None:
         idempotency_key="idempotency_key",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/claim", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/claim",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_cleanup() -> None:
@@ -60,6 +84,13 @@ def test_computeAttachments_cleanup() -> None:
         evidence="evidence",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/cleanup", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/cleanup",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_connect() -> None:
@@ -79,6 +110,13 @@ def test_computeAttachments_connect() -> None:
         ),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/connect", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/connect",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_issue_credential() -> None:
@@ -94,6 +132,13 @@ def test_computeAttachments_issue_credential() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/credentials", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/credentials",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_heartbeat() -> None:
@@ -106,6 +151,13 @@ def test_computeAttachments_heartbeat() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/heartbeat", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/heartbeat",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -126,6 +178,13 @@ def test_computeAttachments_ready() -> None:
         ),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/ready", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/ready",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_reconcile() -> None:
@@ -145,6 +204,13 @@ def test_computeAttachments_reconcile() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/reconcile", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/reconcile",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_status() -> None:
@@ -156,6 +222,13 @@ def test_computeAttachments_status() -> None:
         attachment_id="attachment_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/compute-attachments/attachment_id/status", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/compute-attachments/attachment_id/status",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_stop() -> None:
@@ -167,6 +240,13 @@ def test_computeAttachments_stop() -> None:
         attachment_id="attachment_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/stop", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/stop",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_teardown() -> None:
@@ -183,6 +263,13 @@ def test_computeAttachments_teardown() -> None:
         workspace_generation="workspace_generation",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-attachments/attachment_id/teardown", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-attachments/attachment_id/teardown",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_computeAttachments_create() -> None:
@@ -201,4 +288,11 @@ def test_computeAttachments_create() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/execution-sessions/session_id/compute-attachments", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-sessions/session_id/compute-attachments",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

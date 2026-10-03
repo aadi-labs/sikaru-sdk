@@ -83,6 +83,7 @@ class RawComputeOperationsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/receipts",
             method="POST",
@@ -97,6 +98,7 @@ class RawComputeOperationsClient:
                 "tool_provider_id": tool_provider_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -215,12 +217,16 @@ class RawComputeOperationsClient:
         HttpResponse[WorkPage]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/work",
             method="GET",
             params={
                 "wait_seconds": wait_seconds,
                 "limit": limit,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
@@ -365,6 +371,9 @@ class AsyncRawComputeOperationsClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/receipts",
             method="POST",
@@ -379,6 +388,7 @@ class AsyncRawComputeOperationsClient:
                 "tool_provider_id": tool_provider_id,
             },
             headers={
+                **_endpoint_auth_headers,
                 "content-type": "application/json",
             },
             request_options=_request_options_with_retries_disabled,
@@ -497,12 +507,18 @@ class AsyncRawComputeOperationsClient:
         AsyncHttpResponse[WorkPage]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/work",
             method="GET",
             params={
                 "wait_seconds": wait_seconds,
                 "limit": limit,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )

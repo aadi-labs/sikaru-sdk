@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_evalSeeds_create_eval_seed() -> None:
@@ -12,3 +12,4 @@ def test_evalSeeds_create_eval_seed() -> None:
         trace_ids=["traceIds"],
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/eval-seeds", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/eval-seeds", {"Authorization": r"Bearer .+"}, [])

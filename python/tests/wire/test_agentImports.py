@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import AgentImportImproveRequest
 
@@ -11,6 +11,7 @@ def test_agentImports_list_agent_imports() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/agent-imports", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/agent-imports", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_agentImports_create_agent_import() -> None:
@@ -27,3 +28,4 @@ def test_agentImports_create_agent_import() -> None:
         name="name",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/agent-imports", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/agent-imports", {"Authorization": r"Bearer .+"}, [])

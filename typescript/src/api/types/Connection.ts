@@ -3,6 +3,7 @@
 import * as Sikaru from "../index.js";
 
 export interface Connection {
+    account_status?: (string | null) | undefined;
     config: Sikaru.ConnectionConfig;
     display_name: string;
     expires_at?: (number | null) | undefined;

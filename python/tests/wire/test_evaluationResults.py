@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_evaluationResults_list_results() -> None:
@@ -9,6 +9,9 @@ def test_evaluationResults_list_results() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/evaluation-results", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/evaluation-results", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_evaluationResults_record_result() -> None:
@@ -27,3 +30,6 @@ def test_evaluationResults_record_result() -> None:
         verdict="pass",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/evaluation-results", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/evaluation-results", {"Authorization": r"Bearer .+"}, []
+    )

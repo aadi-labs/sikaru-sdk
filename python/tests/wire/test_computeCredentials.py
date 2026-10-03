@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_computeCredentials_renew() -> None:
@@ -9,6 +9,9 @@ def test_computeCredentials_renew() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-credentials/renew", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/compute-credentials/renew", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_computeCredentials_revoke() -> None:
@@ -20,3 +23,10 @@ def test_computeCredentials_revoke() -> None:
         credential_id="credential_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/compute-credentials/credential_id/revoke", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/compute-credentials/credential_id/revoke",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

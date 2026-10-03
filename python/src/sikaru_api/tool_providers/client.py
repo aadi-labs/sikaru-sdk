@@ -71,6 +71,7 @@ class ToolProvidersClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.tool_providers.register_tool_provider(
@@ -131,6 +132,7 @@ class ToolProvidersClient:
         from sikaru_api import SikaruApi, ToolSkillSourceRequest
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.tool_providers.attach_source_tool_skill(
@@ -216,6 +218,7 @@ class AsyncToolProvidersClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -284,6 +287,7 @@ class AsyncToolProvidersClient:
         from sikaru_api import AsyncSikaruApi, ToolSkillSourceRequest
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 

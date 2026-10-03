@@ -6,8 +6,12 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .create_managed_agent_request_initial_channel import CreateManagedAgentRequestInitialChannel
     from .create_managed_agent_request_status import CreateManagedAgentRequestStatus
-_dynamic_imports: typing.Dict[str, str] = {"CreateManagedAgentRequestStatus": ".create_managed_agent_request_status"}
+_dynamic_imports: typing.Dict[str, str] = {
+    "CreateManagedAgentRequestInitialChannel": ".create_managed_agent_request_initial_channel",
+    "CreateManagedAgentRequestStatus": ".create_managed_agent_request_status",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -31,4 +35,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["CreateManagedAgentRequestStatus"]
+__all__ = ["CreateManagedAgentRequestInitialChannel", "CreateManagedAgentRequestStatus"]

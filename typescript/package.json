@@ -1,6 +1,6 @@
 {
     "name": "@sikaru/sdk",
-    "version": "0.2.11",
+    "version": "0.2.13",
     "private": false,
     "type": "commonjs",
     "main": "./dist/cjs/index.js",
@@ -17,6 +17,39 @@
                 "default": "./dist/cjs/index.js"
             },
             "default": "./dist/cjs/index.js"
+        },
+        "./auth": {
+            "import": {
+                "types": "./dist/esm/api/resources/auth/exports.d.mts",
+                "default": "./dist/esm/api/resources/auth/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/auth/exports.d.ts",
+                "default": "./dist/cjs/api/resources/auth/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/auth/exports.js"
+        },
+        "./httpChannels": {
+            "import": {
+                "types": "./dist/esm/api/resources/httpChannels/exports.d.mts",
+                "default": "./dist/esm/api/resources/httpChannels/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/httpChannels/exports.d.ts",
+                "default": "./dist/cjs/api/resources/httpChannels/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/httpChannels/exports.js"
+        },
+        "./personalChannels": {
+            "import": {
+                "types": "./dist/esm/api/resources/personalChannels/exports.d.mts",
+                "default": "./dist/esm/api/resources/personalChannels/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/personalChannels/exports.d.ts",
+                "default": "./dist/cjs/api/resources/personalChannels/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/personalChannels/exports.js"
         },
         "./activation": {
             "import": {
@@ -83,6 +116,17 @@
                 "default": "./dist/cjs/api/resources/changesets/exports.js"
             },
             "default": "./dist/cjs/api/resources/changesets/exports.js"
+        },
+        "./channels": {
+            "import": {
+                "types": "./dist/esm/api/resources/channels/exports.d.mts",
+                "default": "./dist/esm/api/resources/channels/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/channels/exports.d.ts",
+                "default": "./dist/cjs/api/resources/channels/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/channels/exports.js"
         },
         "./computeAttachments": {
             "import": {

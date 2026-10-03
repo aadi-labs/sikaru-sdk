@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_issueClusters_list_issue_clusters() -> None:
@@ -9,6 +9,7 @@ def test_issueClusters_list_issue_clusters() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/issue-clusters", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/issue-clusters", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_issueClusters_upsert_issue_cluster() -> None:
@@ -21,6 +22,7 @@ def test_issueClusters_upsert_issue_cluster() -> None:
         trace_ids=["traceIds"],
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/issue-clusters", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/issue-clusters", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_issueClusters_mine_project_issue_clusters() -> None:
@@ -31,6 +33,9 @@ def test_issueClusters_mine_project_issue_clusters() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/issue-clusters/mine", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/issue-clusters/mine", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_issueClusters_get_issue_cluster() -> None:
@@ -42,6 +47,9 @@ def test_issueClusters_get_issue_cluster() -> None:
         cluster_id="cluster_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/issue-clusters/cluster_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/issue-clusters/cluster_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_issueClusters_update_issue_cluster_status() -> None:
@@ -54,6 +62,9 @@ def test_issueClusters_update_issue_cluster_status() -> None:
         status="status",
     )
     verify_request_count(test_id, "PATCH", "/v1/projects/project_id/issue-clusters/cluster_id", None, 1)
+    verify_auth_headers(
+        test_id, "PATCH", "/v1/projects/project_id/issue-clusters/cluster_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_issueClusters_propose_issue_cluster_fix() -> None:
@@ -65,3 +76,10 @@ def test_issueClusters_propose_issue_cluster_fix() -> None:
         cluster_id="cluster_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/issue-clusters/cluster_id/propose-fix", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/issue-clusters/cluster_id/propose-fix",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

@@ -1,4 +1,999 @@
 # Reference
+## Auth
+<details><summary><code>client.auth.<a href="/src/api/resources/auth/client/Client.ts">getDeviceConfiguration</a>() -> Sikaru.DeviceConfiguration</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.auth.getDeviceConfiguration();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AuthClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## HttpChannels
+<details><summary><code>client.httpChannels.<a href="/src/api/resources/httpChannels/client/Client.ts">invoke</a>(binding_id, { ...params }) -> Sikaru.HttpReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.httpChannels.invoke("binding_id", {
+    content: "content",
+    conversation_id: "conversation_id",
+    message_id: "message_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.HttpMessage` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HttpChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.httpChannels.<a href="/src/api/resources/httpChannels/client/Client.ts">poll</a>(binding_id, receipt_id, { ...params }) -> Sikaru.HttpReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.httpChannels.poll("binding_id", "receipt_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.PollHttpChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HttpChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.httpChannels.<a href="/src/api/resources/httpChannels/client/Client.ts">startSlackLink</a>(binding_id, { ...params }) -> Sikaru.PersonalSlackChallenge</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.httpChannels.startSlackLink("binding_id", {
+    body: {
+        installation_id: "installation_id"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.StartSlackLinkHttpChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HttpChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.httpChannels.<a href="/src/api/resources/httpChannels/client/Client.ts">unlinkSlackIdentity</a>(binding_id, installation_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.httpChannels.unlinkSlackIdentity("binding_id", "installation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**installation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.UnlinkSlackIdentityHttpChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `HttpChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## PersonalChannels
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">getMessage</a>(binding_id, receipt_id, { ...params }) -> Sikaru.PersonalChannelReceipt</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.getMessage("binding_id", "receipt_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.GetMessagePersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">authorizeConnection</a>(binding_id, receipt_id, connection_id, { ...params }) -> Sikaru.ConnectionAuthorization</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.authorizeConnection("binding_id", "receipt_id", "connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.AuthorizeConnectionPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">completeConnection</a>(binding_id, receipt_id, connection_id, { ...params }) -> Sikaru.PersonalChannelConnection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.completeConnection("binding_id", "receipt_id", "connection_id", {
+    body: {
+        state: "state"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CompleteConnectionPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">replaceConnectionCredentials</a>(binding_id, receipt_id, connection_id, { ...params }) -> Sikaru.PersonalChannelConnection</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.replaceConnectionCredentials("binding_id", "receipt_id", "connection_id", {
+    body: {
+        credentials: {}
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReplaceConnectionCredentialsPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">listFiles</a>(binding_id, receipt_id, { ...params }) -> Sikaru.PersonalChannelFiles</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.listFiles("binding_id", "receipt_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ListFilesPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">downloadFile</a>(binding_id, receipt_id, file_id, { ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.downloadFile("binding_id", "receipt_id", "file_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**file_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.DownloadFilePersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">decideApproval</a>(binding_id, receipt_id, tool_call_id, { ...params }) -> Sikaru.PersonalChannelApproval</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.decideApproval("binding_id", "receipt_id", "tool_call_id", {
+    body: {
+        decision: "approved",
+        idempotency_key: "idempotency_key"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**receipt_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tool_call_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.DecideApprovalPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">getSlackLink</a>(binding_id, verification_id, { ...params }) -> Sikaru.PersonalSlackStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.getSlackLink("binding_id", "verification_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**verification_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.GetSlackLinkPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">startSlackLink</a>(binding_id, { ...params }) -> Sikaru.PersonalSlackChallenge</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.startSlackLink("binding_id", {
+    body: {
+        installation_id: "installation_id"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.StartSlackLinkPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">unlinkSlackIdentity</a>(binding_id, installation_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.personalChannels.unlinkSlackIdentity("binding_id", "installation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**installation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.UnlinkSlackIdentityPersonalChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PersonalChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Activation
 <details><summary><code>client.activation.<a href="/src/api/resources/activation/client/Client.ts">projectActivationStatus</a>(project_id) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
@@ -50,6 +1045,77 @@ await client.activation.projectActivationStatus("project_id");
 </details>
 
 ## AgentDocuments
+<details><summary><code>client.agentDocuments.<a href="/src/api/resources/agentDocuments/client/Client.ts">draft</a>(project_id, { ...params }) -> Sikaru.AgentDocumentDraft</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Draft a first agent document, starter checks and suggested apps from a description or past conversations.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentDocuments.draft("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.DraftDocumentInput` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentDocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.agentDocuments.<a href="/src/api/resources/agentDocuments/client/Client.ts">importFiles</a>(project_id, { ...params }) -> Sikaru.ImportedDocument</code></summary>
 <dl>
 <dd>
@@ -160,6 +1226,80 @@ await client.agentDocuments.listResources("project_id");
 </dl>
 </details>
 
+<details><summary><code>client.agentDocuments.<a href="/src/api/resources/agentDocuments/client/Client.ts">editSetting</a>(project_id, { ...params }) -> Sikaru.ImportedDocument</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Set or remove one setting without rewriting the rest of the document.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentDocuments.editSetting("project_id", {
+    document: "document",
+    path: ["path"]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.EditDocumentSetting` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentDocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.agentDocuments.<a href="/src/api/resources/agentDocuments/client/Client.ts">listTemplates</a>(project_id) -> Sikaru.DocumentTemplates</code></summary>
 <dl>
 <dd>
@@ -190,6 +1330,65 @@ await client.agentDocuments.listTemplates("project_id");
 <dd>
 
 **project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentDocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentDocuments.<a href="/src/api/resources/agentDocuments/client/Client.ts">validateText</a>(project_id, { ...params }) -> Sikaru.DocumentValidationView</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentDocuments.validateText("project_id", {
+    document: "document"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.DocumentInput` 
     
 </dd>
 </dl>
@@ -574,6 +1773,73 @@ await client.agentDocuments.revert("project_id", "agent_slug", {
 <dd>
 
 **request:** `Sikaru.RevertDocument` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentDocumentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agentDocuments.<a href="/src/api/resources/agentDocuments/client/Client.ts">review</a>(project_id, agent_slug, { ...params }) -> Sikaru.DocumentReview</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agentDocuments.review("project_id", "agent_slug", {
+    revision: 1
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ReviewDocument` 
     
 </dd>
 </dl>
@@ -1866,6 +3132,1741 @@ await client.changesets.stageChangeset("project_id", "changeset_id", {});
 <dd>
 
 **requestOptions:** `ChangesetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Channels
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">availability</a>(project_id) -> Sikaru.Availability</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.availability("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">bindings</a>(project_id, { ...params }) -> Sikaru.Binding[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.bindings("project_id", {
+    agent_id: "agent_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.BindingsChannelsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">createBinding</a>(project_id, { ...params }) -> Sikaru.Binding</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.createBinding("project_id", {
+    agent_id: "agent_id",
+    transport: "http"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CreateBinding` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">deleteHttpBinding</a>(project_id, binding_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.deleteHttpBinding("project_id", "binding_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">status</a>(project_id, binding_id, { ...params }) -> Sikaru.Binding</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.status("project_id", "binding_id", {
+    status: "active"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.BindingStatus` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">configureHttpBinding</a>(project_id, binding_id, { ...params }) -> Sikaru.Binding</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.configureHttpBinding("project_id", "binding_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.HttpConfiguration` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">issueHttpCredential</a>(project_id, binding_id) -> Sikaru.HttpCredential</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.issueHttpCredential("project_id", "binding_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">configurePersonalAccess</a>(project_id, binding_id, { ...params }) -> Sikaru.PersonalAccessConfiguration</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.configurePersonalAccess("project_id", "binding_id", {
+    enabled: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.PersonalAccess` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">recentReceipts</a>(project_id, binding_id) -> Sikaru.ReceiptSummary[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.recentReceipts("project_id", "binding_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">getMemberSlackLink</a>(project_id, binding_id, verification_id) -> Sikaru.PersonalSlackStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.getMemberSlackLink("project_id", "binding_id", "verification_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**verification_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">startMemberSlackLink</a>(project_id, binding_id, { ...params }) -> Sikaru.PersonalSlackChallenge</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.startMemberSlackLink("project_id", "binding_id", {
+    installation_id: "installation_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.SlackLink` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">unlinkMemberSlackIdentity</a>(project_id, binding_id, installation_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.unlinkMemberSlackIdentity("project_id", "binding_id", "installation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**binding_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**installation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">saveCreationResume</a>(project_id, { ...params }) -> Sikaru.CreationResumeId</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.saveCreationResume("project_id", {
+    payload: {
+        "key": "value"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CreationResume` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">getCreationResume</a>(project_id, resume_id) -> Sikaru.CreationResume</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.getCreationResume("project_id", "resume_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**resume_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">listIdentityApps</a>(project_id) -> Sikaru.ChannelIdentityApp[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.listIdentityApps("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">createIdentityApp</a>(project_id, { ...params }) -> Sikaru.ChannelIdentityAppId</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.createIdentityApp("project_id", {
+    audience: "audience",
+    issuer: "issuer",
+    public_jwk: {
+        "key": "value"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.IdentityApp` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">revokeIdentityApp</a>(project_id, app_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.revokeIdentityApp("project_id", "app_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**app_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">updateIdentityAppUrls</a>(project_id, app_id, { ...params }) -> Sikaru.ChannelIdentityAppUrLs</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.updateIdentityAppUrls("project_id", "app_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**app_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ApplicationUrLs` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">revokeSubject</a>(project_id, app_id, { ...params }) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.revokeSubject("project_id", "app_id", {
+    subject: "subject",
+    tenant_id: "tenant_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**app_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.Subject` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">createPersonalSlackBinding</a>(project_id, { ...params }) -> Sikaru.Binding</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.createPersonalSlackBinding("project_id", {
+    agent_id: "agent_id",
+    identity_app_id: "identity_app_id",
+    installation_id: "installation_id",
+    verification_id: "verification_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CustomerDm` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">delivery</a>(project_id, run_id) -> Sikaru.Delivery | null</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.delivery("project_id", "run_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">resendDelivery</a>(project_id, run_id, { ...params }) -> Sikaru.Delivery</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.resendDelivery("project_id", "run_id", {
+    acknowledge_possible_duplicate: true
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ResendDelivery` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">dmStatus</a>(project_id, verification_id) -> Sikaru.DmStatus</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.dmStatus("project_id", "verification_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**verification_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">installations</a>(project_id) -> Sikaru.Installation[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.installations("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">disconnect</a>(project_id, installation_id) -> Sikaru.Installation</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.disconnect("project_id", "installation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**installation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">startDm</a>(project_id, installation_id) -> Sikaru.DmChallenge</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.startDm("project_id", "installation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**installation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">rooms</a>(project_id, installation_id) -> Sikaru.Room[]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.rooms("project_id", "installation_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**installation_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">complete</a>(project_id, { ...params }) -> Sikaru.OAuthResult</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.complete("project_id", {
+    state: "state"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CompleteOAuth` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.channels.<a href="/src/api/resources/channels/client/Client.ts">start</a>(project_id, { ...params }) -> Sikaru.Authorization</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.channels.start("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.StartOAuth` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ChannelsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6199,7 +9200,7 @@ await client.executionObjectives.resume("project_id", "objective_id", {});
 </details>
 
 ## ExecutionSessions
-<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">list</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">list</a>(project_id, { ...params }) -> Sikaru.ExecutionSessionPage</code></summary>
 <dl>
 <dd>
 
@@ -6256,7 +9257,7 @@ await client.executionSessions.list("project_id");
 </dl>
 </details>
 
-<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">get</a>(project_id, session_id) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">get</a>(project_id, session_id) -> Sikaru.ExecutionSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -6682,7 +9683,7 @@ await client.executionSessions.spend("project_id", "session_id");
 </dl>
 </details>
 
-<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">appendTurn</a>(project_id, session_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">appendTurn</a>(project_id, session_id, { ...params }) -> Sikaru.ExecutionTurnResponse</code></summary>
 <dl>
 <dd>
 
@@ -6752,7 +9753,7 @@ await client.executionSessions.appendTurn("project_id", "session_id", {
 </dl>
 </details>
 
-<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">create</a>(project_id, harness_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">create</a>(project_id, harness_id, { ...params }) -> Sikaru.ExecutionSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -6765,10 +9766,7 @@ await client.executionSessions.appendTurn("project_id", "session_id", {
 <dd>
 
 ```typescript
-await client.executionSessions.create("project_id", "harness_id", {
-    tenant_id: "tenant_id",
-    user_id: "user_id"
-});
+await client.executionSessions.create("project_id", "harness_id");
 
 ```
 </dd>
@@ -10267,6 +13265,158 @@ await client.managedAgents.createManagedAgent("project_id", {
 </dl>
 </details>
 
+<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">deleteManagedAgent</a>(project_id, agent_slug) -> void</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete an agent that has never gone live, with its drafts, checks and schedules.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.managedAgents.deleteManagedAgent("project_id", "agent_slug");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ManagedAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">renameManagedAgent</a>(project_id, agent_slug, { ...params }) -> Sikaru.RenamedManagedAgent</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Change the agent's display name. The slug and every reference to the agent stay the same.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.managedAgents.renameManagedAgent("project_id", "agent_slug", {
+    displayName: "displayName"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.RenameAgent` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ManagedAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">createDefinitionRevision</a>(project_id, agent_slug, { ...params }) -> Sikaru.DefinitionRevisionResult</code></summary>
 <dl>
 <dd>
@@ -11386,7 +14536,7 @@ await client.reviewQueue.createReviewQueueItem("project_id", {
 </details>
 
 ## RunSchedules
-<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">listSchedules</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">listSchedules</a>(project_id, { ...params }) -> Sikaru.ScheduleList</code></summary>
 <dl>
 <dd>
 
@@ -11443,7 +14593,7 @@ await client.runSchedules.listSchedules("project_id");
 </dl>
 </details>
 
-<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">createSchedule</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">createSchedule</a>(project_id, { ...params }) -> Sikaru.ScheduleResponse</code></summary>
 <dl>
 <dd>
 
@@ -11459,8 +14609,7 @@ await client.runSchedules.listSchedules("project_id");
 await client.runSchedules.createSchedule("project_id", {
     input: {
         "key": "value"
-    },
-    session_id: "session_id"
+    }
 });
 
 ```
@@ -11505,7 +14654,7 @@ await client.runSchedules.createSchedule("project_id", {
 </dl>
 </details>
 
-<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">deleteSchedule</a>(project_id, schedule_id) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">deleteSchedule</a>(project_id, schedule_id) -> Sikaru.ScheduleDeleted</code></summary>
 <dl>
 <dd>
 
@@ -11562,7 +14711,7 @@ await client.runSchedules.deleteSchedule("project_id", "schedule_id");
 </dl>
 </details>
 
-<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">pauseSchedule</a>(project_id, schedule_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">pauseSchedule</a>(project_id, schedule_id, { ...params }) -> Sikaru.SchedulePaused</code></summary>
 <dl>
 <dd>
 
@@ -11629,7 +14778,64 @@ await client.runSchedules.pauseSchedule("project_id", "schedule_id", {
 </dl>
 </details>
 
-<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">scheduleHistory</a>(project_id, schedule_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">scheduleNotices</a>(project_id, schedule_id) -> Sikaru.ScheduleNotices</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runSchedules.scheduleNotices("project_id", "schedule_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**schedule_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunSchedulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runSchedules.<a href="/src/api/resources/runSchedules/client/Client.ts">scheduleHistory</a>(project_id, schedule_id, { ...params }) -> Sikaru.ScheduleHistory</code></summary>
 <dl>
 <dd>
 

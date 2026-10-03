@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 from sikaru_api import ResumeInput
 
@@ -11,6 +11,9 @@ def test_executionObjectives_list_objectives() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-objectives", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/execution-objectives", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_executionObjectives_create() -> None:
@@ -26,6 +29,9 @@ def test_executionObjectives_create() -> None:
         session_id="session_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/execution-objectives", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/execution-objectives", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_executionObjectives_get() -> None:
@@ -37,6 +43,9 @@ def test_executionObjectives_get() -> None:
         objective_id="objective_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/execution-objectives/objective_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/execution-objectives/objective_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_executionObjectives_cancel() -> None:
@@ -48,6 +57,13 @@ def test_executionObjectives_cancel() -> None:
         objective_id="objective_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/execution-objectives/objective_id/cancel", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-objectives/objective_id/cancel",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionObjectives_pause() -> None:
@@ -59,6 +75,13 @@ def test_executionObjectives_pause() -> None:
         objective_id="objective_id",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/execution-objectives/objective_id/pause", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-objectives/objective_id/pause",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_executionObjectives_resume() -> None:
@@ -71,3 +94,10 @@ def test_executionObjectives_resume() -> None:
         request=ResumeInput(),
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/execution-objectives/objective_id/resume", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/execution-objectives/objective_id/resume",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )

@@ -10,8 +10,12 @@ from .run_event import RunEvent
 
 
 class RunEvents(UniversalBaseModel):
+    content_visible: typing_extensions.Annotated[
+        typing.Optional[bool], FieldMetadata(alias="contentVisible"), pydantic.Field(alias="contentVisible")
+    ] = None
     events: typing.List[RunEvent]
     next_after: typing_extensions.Annotated[int, FieldMetadata(alias="nextAfter"), pydantic.Field(alias="nextAfter")]
+    personal: typing.Optional[bool] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

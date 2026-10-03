@@ -8,7 +8,7 @@ describe("TraceImportsClient", () => {
     
     test("list_trace_imports (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -28,7 +28,7 @@ describe("TraceImportsClient", () => {
           
     test("list_trace_imports (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("TraceImportsClient", () => {
           
     test("create_trace_import (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "connectionId" : "connectionId" , "converterVersion" : "converterVersion" , "dataset" : "dataset" , "externalProjectId" : "externalProjectId" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "sourceInstance" };
         const rawResponseBody = { "key" : "value" };
         
@@ -76,7 +76,7 @@ describe("TraceImportsClient", () => {
           
     test("create_trace_import (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
         const rawResponseBody = { };
         
@@ -104,7 +104,7 @@ describe("TraceImportsClient", () => {
           
     test("plan_trace_import (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "connectionId" : "connectionId" , "converterVersion" : "converterVersion" , "dataset" : "dataset" , "externalProjectId" : "externalProjectId" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "sourceInstance" };
         const rawResponseBody = { "key" : "value" };
         
@@ -134,7 +134,7 @@ describe("TraceImportsClient", () => {
           
     test("plan_trace_import (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
         const rawResponseBody = { };
         
@@ -162,7 +162,7 @@ describe("TraceImportsClient", () => {
           
     test("get_trace_import (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -182,7 +182,7 @@ describe("TraceImportsClient", () => {
           
     test("get_trace_import (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -200,7 +200,7 @@ describe("TraceImportsClient", () => {
           
     test("cancel_trace_import (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedVersion" : 1 };
         const rawResponseBody = { "key" : "value" };
         
@@ -223,7 +223,7 @@ describe("TraceImportsClient", () => {
           
     test("cancel_trace_import (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedVersion" : 1 };
         const rawResponseBody = { };
         
@@ -244,7 +244,7 @@ describe("TraceImportsClient", () => {
           
     test("get_trace_import_receipt (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -264,7 +264,7 @@ describe("TraceImportsClient", () => {
           
     test("get_trace_import_receipt (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -282,7 +282,7 @@ describe("TraceImportsClient", () => {
           
     test("retry_trace_import (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedVersion" : 1 };
         const rawResponseBody = { "key" : "value" };
         
@@ -305,7 +305,7 @@ describe("TraceImportsClient", () => {
           
     test("retry_trace_import (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedVersion" : 1 };
         const rawResponseBody = { };
         

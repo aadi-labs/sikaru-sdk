@@ -50,9 +50,13 @@ class RawComputeWorkersClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-environments/{encode_path_param(environment_id)}/credentials",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -170,12 +174,16 @@ class RawComputeWorkersClient:
         HttpResponse[QueuePage]
             Successful Response
         """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-environments/{encode_path_param(environment_id)}/queue",
             method="GET",
             params={
                 "wait_seconds": wait_seconds,
                 "limit": limit,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )
@@ -292,9 +300,15 @@ class AsyncRawComputeWorkersClient:
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
             {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
         )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-environments/{encode_path_param(environment_id)}/credentials",
             method="POST",
+            headers={
+                **_endpoint_auth_headers,
+            },
             request_options=_request_options_with_retries_disabled,
         )
         try:
@@ -412,12 +426,18 @@ class AsyncRawComputeWorkersClient:
         AsyncHttpResponse[QueuePage]
             Successful Response
         """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/compute-environments/{encode_path_param(environment_id)}/queue",
             method="GET",
             params={
                 "wait_seconds": wait_seconds,
                 "limit": limit,
+            },
+            headers={
+                **_endpoint_auth_headers,
             },
             request_options=request_options,
         )

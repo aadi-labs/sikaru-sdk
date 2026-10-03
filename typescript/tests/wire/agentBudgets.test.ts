@@ -8,7 +8,7 @@ describe("AgentBudgetsClient", () => {
     
     test("get (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "auto_reload" : { "amount_usd" : "amount_usd" , "enabled" : true , "threshold_usd" : "threshold_usd" } , "funded_usd" : "funded_usd" , "funding" : { "amount_usd" : "amount_usd" , "id" : "id" , "status" : "status" } , "payment_method_saved" : true , "remaining_usd" : "remaining_usd" , "reserved_usd" : "reserved_usd" , "used_usd" : "used_usd" };
         
@@ -28,7 +28,7 @@ describe("AgentBudgetsClient", () => {
           
     test("get (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("AgentBudgetsClient", () => {
           
     test("configure_auto_reload (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "amount_usd" : "amount_usd" , "enabled" : true , "threshold_usd" : "threshold_usd" };
         const rawResponseBody = { "auto_reload" : { "amount_usd" : "amount_usd" , "enabled" : true , "threshold_usd" : "threshold_usd" } , "funded_usd" : "funded_usd" , "funding" : { "amount_usd" : "amount_usd" , "id" : "id" , "status" : "status" } , "payment_method_saved" : true , "remaining_usd" : "remaining_usd" , "reserved_usd" : "reserved_usd" , "used_usd" : "used_usd" };
         
@@ -71,7 +71,7 @@ describe("AgentBudgetsClient", () => {
           
     test("configure_auto_reload (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "amount_usd" : "amount_usd" , "enabled" : true , "threshold_usd" : "threshold_usd" };
         const rawResponseBody = { };
         
@@ -94,7 +94,7 @@ describe("AgentBudgetsClient", () => {
           
     test("add (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "amount_usd" : "amount_usd" , "idempotency_key" : "idempotency_key" };
         const rawResponseBody = { "id" : "id" , "status" : "status" };
         
@@ -118,7 +118,7 @@ describe("AgentBudgetsClient", () => {
           
     test("add (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "amount_usd" : "amount_usd" , "idempotency_key" : "x" };
         const rawResponseBody = { };
         
@@ -140,7 +140,7 @@ describe("AgentBudgetsClient", () => {
           
     test("setup_payment_method (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "idempotency_key" };
         const rawResponseBody = { "url" : "url" };
         
@@ -163,7 +163,7 @@ describe("AgentBudgetsClient", () => {
           
     test("setup_payment_method (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "x" };
         const rawResponseBody = { };
         

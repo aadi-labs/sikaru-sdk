@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_environments_list_managed_environments() -> None:
@@ -9,6 +9,7 @@ def test_environments_list_managed_environments() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/environments", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/environments", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_environments_create_managed_environment() -> None:
@@ -22,3 +23,4 @@ def test_environments_create_managed_environment() -> None:
         runtime_provider="runtimeProvider",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/environments", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/environments", {"Authorization": r"Bearer .+"}, [])

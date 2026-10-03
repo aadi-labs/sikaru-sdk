@@ -1,4 +1,4 @@
-from .conftest import get_client, verify_request_count
+from .conftest import get_client, verify_auth_headers, verify_request_count
 
 
 def test_importSessions_list_import_sessions() -> None:
@@ -9,6 +9,7 @@ def test_importSessions_list_import_sessions() -> None:
         project_id="project_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/import-sessions", None, 1)
+    verify_auth_headers(test_id, "GET", "/v1/projects/project_id/import-sessions", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_importSessions_create_import_session() -> None:
@@ -21,6 +22,7 @@ def test_importSessions_create_import_session() -> None:
         mode="workflow",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/import-sessions", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/import-sessions", {"Authorization": r"Bearer .+"}, [])
 
 
 def test_importSessions_get_import_session() -> None:
@@ -32,6 +34,9 @@ def test_importSessions_get_import_session() -> None:
         import_session_id="import_session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/import-sessions/import_session_id", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/import-sessions/import_session_id", {"Authorization": r"Bearer .+"}, []
+    )
 
 
 def test_importSessions_create_compatibility_profile() -> None:
@@ -47,6 +52,13 @@ def test_importSessions_create_compatibility_profile() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/import-sessions/import_session_id/compatibility-profile", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/import-sessions/import_session_id/compatibility-profile",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_importSessions_list_import_session_diffs() -> None:
@@ -58,6 +70,13 @@ def test_importSessions_list_import_session_diffs() -> None:
         import_session_id="import_session_id",
     )
     verify_request_count(test_id, "GET", "/v1/projects/project_id/import-sessions/import_session_id/diffs", None, 1)
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/import-sessions/import_session_id/diffs",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_importSessions_get_parity_report() -> None:
@@ -70,6 +89,13 @@ def test_importSessions_get_parity_report() -> None:
     )
     verify_request_count(
         test_id, "GET", "/v1/projects/project_id/import-sessions/import_session_id/parity-report", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/import-sessions/import_session_id/parity-report",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -87,6 +113,13 @@ def test_importSessions_promote_import_session() -> None:
         harness_id="harnessId",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/import-sessions/import_session_id/promote", None, 1)
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/import-sessions/import_session_id/promote",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_importSessions_create_replay_run() -> None:
@@ -101,6 +134,13 @@ def test_importSessions_create_replay_run() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/import-sessions/import_session_id/replay-runs", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/import-sessions/import_session_id/replay-runs",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_importSessions_list_source_artifacts() -> None:
@@ -113,6 +153,13 @@ def test_importSessions_list_source_artifacts() -> None:
     )
     verify_request_count(
         test_id, "GET", "/v1/projects/project_id/import-sessions/import_session_id/source-artifacts", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "GET",
+        "/v1/projects/project_id/import-sessions/import_session_id/source-artifacts",
+        {"Authorization": r"Bearer .+"},
+        [],
     )
 
 
@@ -131,6 +178,13 @@ def test_importSessions_create_source_artifact() -> None:
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/import-sessions/import_session_id/source-artifacts", None, 1
     )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/import-sessions/import_session_id/source-artifacts",
+        {"Authorization": r"Bearer .+"},
+        [],
+    )
 
 
 def test_importSessions_create_staging_run() -> None:
@@ -144,4 +198,11 @@ def test_importSessions_create_staging_run() -> None:
     )
     verify_request_count(
         test_id, "POST", "/v1/projects/project_id/import-sessions/import_session_id/staging-runs", None, 1
+    )
+    verify_auth_headers(
+        test_id,
+        "POST",
+        "/v1/projects/project_id/import-sessions/import_session_id/staging-runs",
+        {"Authorization": r"Bearer .+"},
+        [],
     )

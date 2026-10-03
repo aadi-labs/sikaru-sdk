@@ -4,6 +4,9 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.execution_session_page import ExecutionSessionPage
+from ..types.execution_session_response import ExecutionSessionResponse
+from ..types.execution_turn_response import ExecutionTurnResponse
 from ..types.session_spend import SessionSpend
 from .raw_client import AsyncRawExecutionSessionsClient, RawExecutionSessionsClient
 from .types.session_input_environment import SessionInputEnvironment
@@ -39,7 +42,7 @@ class ExecutionSessionsClient:
         limit: typing.Optional[int] = None,
         agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionSessionPage:
         """
         Parameters
         ----------
@@ -58,7 +61,7 @@ class ExecutionSessionsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionSessionPage
             Successful Response
 
         Examples
@@ -66,6 +69,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.list(
@@ -84,7 +88,7 @@ class ExecutionSessionsClient:
 
     def get(
         self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionSessionResponse:
         """
         Parameters
         ----------
@@ -97,7 +101,7 @@ class ExecutionSessionsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionSessionResponse
             Successful Response
 
         Examples
@@ -105,6 +109,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.get(
@@ -148,6 +153,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.branch(
@@ -189,6 +195,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.list_files(
@@ -257,6 +264,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.delete_file(
@@ -293,6 +301,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.download_file(
@@ -327,6 +336,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.list_session_inputs(
@@ -360,6 +370,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.spend(
@@ -385,7 +396,7 @@ class ExecutionSessionsClient:
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
         tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionTurnResponse:
         """
         Parameters
         ----------
@@ -416,7 +427,7 @@ class ExecutionSessionsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionTurnResponse
             Successful Response
 
         Examples
@@ -424,6 +435,7 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.append_turn(
@@ -454,17 +466,20 @@ class ExecutionSessionsClient:
         project_id: str,
         harness_id: str,
         *,
-        tenant_id: str,
-        user_id: str,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
         auto_improve: typing.Optional[bool] = OMIT,
         conversation_id: typing.Optional[str] = OMIT,
+        draft_revision: typing.Optional[int] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
+        tenant_id: typing.Optional[str] = OMIT,
+        user_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionSessionResponse:
         """
         Parameters
         ----------
@@ -472,17 +487,20 @@ class ExecutionSessionsClient:
 
         harness_id : str
 
-        tenant_id : str
-
-        user_id : str
+        acknowledge_widening : typing.Optional[bool]
 
         auto_improve : typing.Optional[bool]
             Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
 
         conversation_id : typing.Optional[str]
 
+        draft_revision : typing.Optional[int]
+            Saved document revision to test. Required for document Draft sessions.
+
         environment : typing.Optional[SessionInputEnvironment]
             Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
+
+        expected_access_digest : typing.Optional[str]
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -493,12 +511,16 @@ class ExecutionSessionsClient:
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
+        tenant_id : typing.Optional[str]
+
+        user_id : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionSessionResponse
             Successful Response
 
         Examples
@@ -506,27 +528,29 @@ class ExecutionSessionsClient:
         from sikaru_api import SikaruApi
 
         client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
         client.execution_sessions.create(
             project_id="project_id",
             harness_id="harness_id",
-            tenant_id="tenant_id",
-            user_id="user_id",
         )
         """
         _response = self._raw_client.create(
             project_id,
             harness_id,
-            tenant_id=tenant_id,
-            user_id=user_id,
+            acknowledge_widening=acknowledge_widening,
             auto_improve=auto_improve,
             conversation_id=conversation_id,
+            draft_revision=draft_revision,
             environment=environment,
+            expected_access_digest=expected_access_digest,
             final_output_schema=final_output_schema,
             idempotency_key=idempotency_key,
             model=model,
             reasoning_effort=reasoning_effort,
+            tenant_id=tenant_id,
+            user_id=user_id,
             request_options=request_options,
         )
         return _response.data
@@ -556,7 +580,7 @@ class AsyncExecutionSessionsClient:
         limit: typing.Optional[int] = None,
         agent_slug: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionSessionPage:
         """
         Parameters
         ----------
@@ -575,7 +599,7 @@ class AsyncExecutionSessionsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionSessionPage
             Successful Response
 
         Examples
@@ -585,6 +609,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -609,7 +634,7 @@ class AsyncExecutionSessionsClient:
 
     async def get(
         self, project_id: str, session_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionSessionResponse:
         """
         Parameters
         ----------
@@ -622,7 +647,7 @@ class AsyncExecutionSessionsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionSessionResponse
             Successful Response
 
         Examples
@@ -632,6 +657,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -683,6 +709,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -732,6 +759,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -808,6 +836,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -852,6 +881,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -897,6 +927,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -938,6 +969,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -969,7 +1001,7 @@ class AsyncExecutionSessionsClient:
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
         tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionTurnResponse:
         """
         Parameters
         ----------
@@ -1000,7 +1032,7 @@ class AsyncExecutionSessionsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionTurnResponse
             Successful Response
 
         Examples
@@ -1010,6 +1042,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1046,17 +1079,20 @@ class AsyncExecutionSessionsClient:
         project_id: str,
         harness_id: str,
         *,
-        tenant_id: str,
-        user_id: str,
+        acknowledge_widening: typing.Optional[bool] = OMIT,
         auto_improve: typing.Optional[bool] = OMIT,
         conversation_id: typing.Optional[str] = OMIT,
+        draft_revision: typing.Optional[int] = OMIT,
         environment: typing.Optional[SessionInputEnvironment] = OMIT,
+        expected_access_digest: typing.Optional[str] = OMIT,
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
+        tenant_id: typing.Optional[str] = OMIT,
+        user_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ExecutionSessionResponse:
         """
         Parameters
         ----------
@@ -1064,17 +1100,20 @@ class AsyncExecutionSessionsClient:
 
         harness_id : str
 
-        tenant_id : str
-
-        user_id : str
+        acknowledge_widening : typing.Optional[bool]
 
         auto_improve : typing.Optional[bool]
             Automatically request evaluated harness improvements after completed turns. Requires harness:write and configured improvement policy.
 
         conversation_id : typing.Optional[str]
 
+        draft_revision : typing.Optional[int]
+            Saved document revision to test. Required for document Draft sessions.
+
         environment : typing.Optional[SessionInputEnvironment]
             Draft sessions test the pinned agent definition without activation. Creating or appending draft sessions also requires harness:write.
+
+        expected_access_digest : typing.Optional[str]
 
         final_output_schema : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -1085,12 +1124,16 @@ class AsyncExecutionSessionsClient:
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
+        tenant_id : typing.Optional[str]
+
+        user_id : typing.Optional[str]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ExecutionSessionResponse
             Successful Response
 
         Examples
@@ -1100,6 +1143,7 @@ class AsyncExecutionSessionsClient:
         from sikaru_api import AsyncSikaruApi
 
         client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
 
@@ -1108,8 +1152,6 @@ class AsyncExecutionSessionsClient:
             await client.execution_sessions.create(
                 project_id="project_id",
                 harness_id="harness_id",
-                tenant_id="tenant_id",
-                user_id="user_id",
             )
 
 
@@ -1118,15 +1160,18 @@ class AsyncExecutionSessionsClient:
         _response = await self._raw_client.create(
             project_id,
             harness_id,
-            tenant_id=tenant_id,
-            user_id=user_id,
+            acknowledge_widening=acknowledge_widening,
             auto_improve=auto_improve,
             conversation_id=conversation_id,
+            draft_revision=draft_revision,
             environment=environment,
+            expected_access_digest=expected_access_digest,
             final_output_schema=final_output_schema,
             idempotency_key=idempotency_key,
             model=model,
             reasoning_effort=reasoning_effort,
+            tenant_id=tenant_id,
+            user_id=user_id,
             request_options=request_options,
         )
         return _response.data

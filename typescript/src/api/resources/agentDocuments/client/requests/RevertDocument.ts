@@ -10,7 +10,8 @@
 export interface RevertDocument {
     acknowledgeRemovals?: boolean;
     acknowledgeWidening?: boolean;
-    expectedLiveVersionId: string | null;
+    expectedAccessDigest?: string | null;
+    expectedLiveVersionId?: string | null;
     harnessVersionId: string;
     revision: number;
 }

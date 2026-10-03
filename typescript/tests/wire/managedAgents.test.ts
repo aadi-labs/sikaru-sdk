@@ -8,7 +8,7 @@ describe("ManagedAgentsClient", () => {
     
     test("list_managed_agents (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -28,7 +28,7 @@ describe("ManagedAgentsClient", () => {
           
     test("list_managed_agents (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("ManagedAgentsClient", () => {
           
     test("create_managed_agent (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "agentSlug" : "agentSlug" };
         const rawResponseBody = { "definitionRevision" : { "baseHarnessVersionId" : "baseHarnessVersionId" , "candidateHarnessVersionId" : "candidateHarnessVersionId" , "changeset" : { "key" : "value" } , "definitionDigest" : "definitionDigest" } , "harnessVersion" : { "key" : "value" } , "managedAgent" : { "key" : "value" } };
         
@@ -69,7 +69,7 @@ describe("ManagedAgentsClient", () => {
           
     test("create_managed_agent (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "agentSlug" : "agentSlug" };
         const rawResponseBody = { };
         
@@ -88,9 +88,90 @@ describe("ManagedAgentsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("delete_managed_agent (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        
+        
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(200).build();
+
+        
+                        
+                                const response = await client.managedAgents.deleteManagedAgent("project_id", "agent_slug");
+                                expect(response).toEqual(undefined);
+                              
+                    
+    });
+          
+    test("delete_managed_agent (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.deleteManagedAgent("project_id", "agent_slug")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("rename_managed_agent (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "displayName" : "displayName" };
+        const rawResponseBody = { "managedAgent" : { "activeHarnessVersionId" : "activeHarnessVersionId" , "agentSlug" : "agentSlug" , "compatibilityProfileId" : "compatibilityProfileId" , "displayName" : "displayName" , "harnessId" : "harnessId" , "id" : "id" , "organizationId" : "organizationId" , "projectId" : "projectId" , "status" : "status" } };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/managed-agents/agent_slug").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.managedAgents.renameManagedAgent("project_id", "agent_slug", {
+    displayName: "displayName"
+});
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("rename_managed_agent (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const rawRequestBody = { "displayName" : "displayName" };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/managed-agents/agent_slug").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.renameManagedAgent("project_id", "agent_slug", {
+    displayName: "displayName"
+})
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("create_definition_revision (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "contentDigest" : "contentDigest" , "definition" : { "schema" : "sikaru.agent.contract.v1" } };
         const rawResponseBody = { "revision" : { "baseHarnessVersionId" : "baseHarnessVersionId" , "candidateHarnessVersionId" : "candidateHarnessVersionId" , "changes" : [ { "path" : "path" } ] , "changeset" : { "key" : "value" } , "definitionDigest" : "definitionDigest" } , "unchanged" : true };
         
@@ -116,7 +197,7 @@ describe("ManagedAgentsClient", () => {
           
     test("create_definition_revision (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         const rawRequestBody = { "contentDigest" : "contentDigest" , "definition" : { "schema" : "sikaru.agent.contract.v1" } };
         const rawResponseBody = { };
         
@@ -140,7 +221,7 @@ describe("ManagedAgentsClient", () => {
           
     test("get_definition_revision (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { "revision" : { "baseHarnessVersionId" : "baseHarnessVersionId" , "candidateHarnessVersionId" : "candidateHarnessVersionId" , "changes" : [ { "path" : "path" } ] , "changeset" : { "key" : "value" } , "definitionDigest" : "definitionDigest" } };
         
@@ -160,7 +241,7 @@ describe("ManagedAgentsClient", () => {
           
     test("get_definition_revision (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
