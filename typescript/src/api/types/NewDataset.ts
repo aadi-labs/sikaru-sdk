@@ -2,7 +2,7 @@
 
 export interface NewDataset {
     name: string;
-    purpose: NewDataset.Purpose;
+    purpose?: (NewDataset.Purpose | null) | undefined;
 }
 
 export namespace NewDataset {

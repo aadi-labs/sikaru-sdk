@@ -20,6 +20,19 @@ def test_runs_start() -> None:
     )
 
 
+def test_runs_record() -> None:
+    """Test record endpoint with WireMock"""
+    test_id = "runs.record.0"
+    client = get_client(test_id)
+    client.runs.record(
+        project_id="project_id",
+        input="input",
+        output="output",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/record", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/runs/record", {"Authorization": r"Bearer .+"}, [])
+
+
 def test_runs_get() -> None:
     """Test get endpoint with WireMock"""
     test_id = "runs.get.0"

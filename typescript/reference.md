@@ -7983,8 +7983,7 @@ await client.datasets.listDatasets("project_id");
 
 ```typescript
 await client.datasets.createDataset("project_id", {
-    name: "name",
-    purpose: "eval"
+    name: "name"
 });
 
 ```
@@ -8058,8 +8057,7 @@ Creates the named dataset and adds the runs to it; a retry of the key reuses bot
 ```typescript
 await client.datasets.captureIntoNewDataset("project_id", {
     dataset: {
-        name: "name",
-        purpose: "eval"
+        name: "name"
     },
     idempotency_key: "idempotency_key",
     items: [{
@@ -12032,6 +12030,83 @@ await client.runs.start("project_id", "harness_id", {
 <dd>
 
 **request:** `Sikaru.StartHarnessRunRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">record</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record input and output, optionally deduplicating retries with Idempotency-Key.
+
+Reusing a key with different content returns 409. No execution timing is
+inferred; the run is ordered by when Sikaru receives it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runs.record("project_id", {
+    input: "input",
+    output: "output"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.RecordRunRequest` 
     
 </dd>
 </dl>

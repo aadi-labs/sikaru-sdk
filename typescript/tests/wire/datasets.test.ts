@@ -47,7 +47,7 @@ describe("DatasetsClient", () => {
     test("create_dataset (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "name" : "name" , "purpose" : "eval" };
+        const rawRequestBody = { "name" : "name" };
         const rawResponseBody = { "dataset" : { "createdAt" : "createdAt" , "createdBy" : "createdBy" , "description" : "description" , "exampleCount" : 1 , "id" : "id" , "name" : "name" , "purpose" : "eval" , "updatedAt" : "updatedAt" , "usedBy" : { "agents" : [ "agents" ] , "checks" : 1 } , "version" : 1 } };
         
         server
@@ -60,8 +60,7 @@ describe("DatasetsClient", () => {
         
                         
                                 const response = await client.datasets.createDataset("project_id", {
-    name: "name",
-    purpose: "eval"
+    name: "name"
 });
                                 expect(response).toEqual(rawResponseBody);
                               
@@ -71,7 +70,7 @@ describe("DatasetsClient", () => {
     test("create_dataset (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "name" : "x" , "purpose" : "eval" };
+        const rawRequestBody = { "name" : "x" };
         const rawResponseBody = { };
         
         server
@@ -84,8 +83,7 @@ describe("DatasetsClient", () => {
         
             await expect(async () => {
                 return await client.datasets.createDataset("project_id", {
-    name: "x",
-    purpose: "eval"
+    name: "x"
 })
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
@@ -93,7 +91,7 @@ describe("DatasetsClient", () => {
     test("capture_into_new_dataset (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "dataset" : { "name" : "name" , "purpose" : "eval" } , "idempotency_key" : "idempotency_key" , "items" : [ { "run_id" : "run_id" } ] };
+        const rawRequestBody = { "dataset" : { "name" : "name" } , "idempotency_key" : "idempotency_key" , "items" : [ { "run_id" : "run_id" } ] };
         const rawResponseBody = { "counts" : { "added" : 1 , "duplicate" : 1 , "skipped" : 1 } , "dataset" : { "createdAt" : "createdAt" , "createdBy" : "createdBy" , "description" : "description" , "exampleCount" : 1 , "id" : "id" , "name" : "name" , "purpose" : "eval" , "updatedAt" : "updatedAt" , "usedBy" : { "agents" : [ "agents" ] , "checks" : 1 } , "version" : 1 } , "items" : [ { "exampleId" : "exampleId" , "outcome" : "added" , "reason" : "reason" , "row" : 1 , "runId" : "runId" , "seqTo" : 1 } ] , "version" : { "createdAt" : "createdAt" , "createdBy" : "createdBy" , "exampleCount" : 1 , "note" : "note" , "number" : 1 } };
         
         server
@@ -107,8 +105,7 @@ describe("DatasetsClient", () => {
                         
                                 const response = await client.datasets.captureIntoNewDataset("project_id", {
     dataset: {
-        name: "name",
-        purpose: "eval"
+        name: "name"
     },
     idempotency_key: "idempotency_key",
     items: [{
@@ -123,7 +120,7 @@ describe("DatasetsClient", () => {
     test("capture_into_new_dataset (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "dataset" : { "name" : "x" , "purpose" : "eval" } , "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawRequestBody = { "dataset" : { "name" : "x" } , "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
         const rawResponseBody = { };
         
         server
@@ -137,8 +134,7 @@ describe("DatasetsClient", () => {
             await expect(async () => {
                 return await client.datasets.captureIntoNewDataset("project_id", {
     dataset: {
-        name: "x",
-        purpose: "eval"
+        name: "x"
     },
     idempotency_key: "x",
     items: [{

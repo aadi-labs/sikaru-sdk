@@ -9,7 +9,7 @@ export interface Dataset {
     exampleCount: number;
     id: string;
     name: string;
-    purpose: Dataset.Purpose;
+    purpose?: (Dataset.Purpose | null) | undefined;
     updatedAt: string;
     usedBy?: (Sikaru.DatasetUsage | null) | undefined;
     version: number;

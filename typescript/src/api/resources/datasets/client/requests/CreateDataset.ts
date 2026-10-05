@@ -3,15 +3,14 @@
 /**
  * @example
  *     {
- *         name: "name",
- *         purpose: "eval"
+ *         name: "name"
  *     }
  */
 export interface CreateDataset {
     description?: string;
     idempotency_key?: string | null;
     name: string;
-    purpose: CreateDataset.Purpose;
+    purpose?: CreateDataset.Purpose | null;
 }
 
 export namespace CreateDataset {

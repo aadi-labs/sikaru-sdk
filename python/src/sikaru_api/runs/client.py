@@ -157,6 +157,70 @@ class RunsClient:
         )
         return _response.data
 
+    def record(
+        self,
+        project_id: str,
+        *,
+        input: str,
+        output: str,
+        idempotency_key: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = OMIT,
+        agent_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Record input and output, optionally deduplicating retries with Idempotency-Key.
+
+        Reusing a key with different content returns 409. No execution timing is
+        inferred; the run is ordered by when Sikaru receives it.
+
+        Parameters
+        ----------
+        project_id : str
+
+        input : str
+
+        output : str
+
+        idempotency_key : typing.Optional[str]
+
+        account_id : typing.Optional[str]
+
+        agent_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.runs.record(
+            project_id="project_id",
+            input="input",
+            output="output",
+        )
+        """
+        _response = self._raw_client.record(
+            project_id,
+            input=input,
+            output=output,
+            idempotency_key=idempotency_key,
+            account_id=account_id,
+            agent_name=agent_name,
+            request_options=request_options,
+        )
+        return _response.data
+
     def get(
         self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> ManagedRun:
@@ -791,6 +855,78 @@ class AsyncRunsClient:
             run_mode=run_mode,
             tool_provider_refs=tool_provider_refs,
             trace_id=trace_id,
+            request_options=request_options,
+        )
+        return _response.data
+
+    async def record(
+        self,
+        project_id: str,
+        *,
+        input: str,
+        output: str,
+        idempotency_key: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = OMIT,
+        agent_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        Record input and output, optionally deduplicating retries with Idempotency-Key.
+
+        Reusing a key with different content returns 409. No execution timing is
+        inferred; the run is ordered by when Sikaru receives it.
+
+        Parameters
+        ----------
+        project_id : str
+
+        input : str
+
+        output : str
+
+        idempotency_key : typing.Optional[str]
+
+        account_id : typing.Optional[str]
+
+        agent_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        typing.Dict[str, typing.Any]
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.runs.record(
+                project_id="project_id",
+                input="input",
+                output="output",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.record(
+            project_id,
+            input=input,
+            output=output,
+            idempotency_key=idempotency_key,
+            account_id=account_id,
+            agent_name=agent_name,
             request_options=request_options,
         )
         return _response.data

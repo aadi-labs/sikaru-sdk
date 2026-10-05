@@ -15,6 +15,7 @@ export interface Connection {
     revocation: string;
     slug: string;
     status: string;
+    tool_count?: number | undefined;
     tool_load?: (Sikaru.ConnectionToolLoad | null) | undefined;
     tools: Sikaru.ConnectionTool[];
     used_by?: Sikaru.ConnectionUsage | undefined;

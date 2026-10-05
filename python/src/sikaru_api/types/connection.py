@@ -24,6 +24,7 @@ class Connection(UniversalBaseModel):
     revocation: str
     slug: str
     status: str
+    tool_count: typing.Optional[int] = None
     tool_load: typing.Optional[ConnectionToolLoad] = None
     tools: typing.List[ConnectionTool]
     used_by: typing.Optional[ConnectionUsage] = None

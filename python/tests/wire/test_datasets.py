@@ -21,7 +21,6 @@ def test_datasets_create_dataset() -> None:
     client.datasets.create_dataset(
         project_id="project_id",
         name="name",
-        purpose="eval",
     )
     verify_request_count(test_id, "POST", "/v1/projects/project_id/datasets", None, 1)
     verify_auth_headers(test_id, "POST", "/v1/projects/project_id/datasets", {"Authorization": r"Bearer .+"}, [])
@@ -35,7 +34,6 @@ def test_datasets_capture_into_new_dataset() -> None:
         project_id="project_id",
         dataset=NewDataset(
             name="name",
-            purpose="eval",
         ),
         idempotency_key="idempotency_key",
         items=[

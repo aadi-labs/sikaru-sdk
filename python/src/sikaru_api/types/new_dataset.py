@@ -9,7 +9,7 @@ from .new_dataset_purpose import NewDatasetPurpose
 
 class NewDataset(UniversalBaseModel):
     name: str
-    purpose: NewDatasetPurpose
+    purpose: typing.Optional[NewDatasetPurpose] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

@@ -6,8 +6,7 @@ import * as Sikaru from "../../../../index.js";
  * @example
  *     {
  *         dataset: {
- *             name: "name",
- *             purpose: "eval"
+ *             name: "name"
  *         },
  *         idempotency_key: "idempotency_key",
  *         items: [{

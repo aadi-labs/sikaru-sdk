@@ -10528,7 +10528,6 @@ client = SikaruApi(
 client.datasets.create_dataset(
     project_id="project_id",
     name="name",
-    purpose="eval",
 )
 
 ```
@@ -10561,14 +10560,6 @@ client.datasets.create_dataset(
 <dl>
 <dd>
 
-**purpose:** `CreateDatasetPurpose` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **description:** `typing.Optional[str]` 
     
 </dd>
@@ -10578,6 +10569,14 @@ client.datasets.create_dataset(
 <dd>
 
 **idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purpose:** `typing.Optional[CreateDatasetPurpose]` 
     
 </dd>
 </dl>
@@ -10636,7 +10635,6 @@ client.datasets.capture_into_new_dataset(
     project_id="project_id",
     dataset=NewDataset(
         name="name",
-        purpose="eval",
     ),
     idempotency_key="idempotency_key",
     items=[
@@ -16257,6 +16255,124 @@ client.runs.start(
 <dd>
 
 **trace_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="src/sikaru_api/runs/client.py">record</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Record input and output, optionally deduplicating retries with Idempotency-Key.
+
+Reusing a key with different content returns 409. No execution timing is
+inferred; the run is ordered by when Sikaru receives it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.runs.record(
+    project_id="project_id",
+    input="input",
+    output="output",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**input:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**output:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**account_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_name:** `typing.Optional[str]` 
     
 </dd>
 </dl>

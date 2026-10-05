@@ -90,8 +90,7 @@ export class DatasetsClient {
      *
      * @example
      *     await client.datasets.createDataset("project_id", {
-     *         name: "name",
-     *         purpose: "eval"
+     *         name: "name"
      *     })
      */
     public createDataset(project_id: string, request: Sikaru.CreateDataset, requestOptions?: DatasetsClient.RequestOptions): core.HttpResponsePromise<Sikaru.DatasetResponse> {
@@ -149,8 +148,7 @@ export class DatasetsClient {
      * @example
      *     await client.datasets.captureIntoNewDataset("project_id", {
      *         dataset: {
-     *             name: "name",
-     *             purpose: "eval"
+     *             name: "name"
      *         },
      *         idempotency_key: "idempotency_key",
      *         items: [{

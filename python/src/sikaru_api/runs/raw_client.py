@@ -187,6 +187,96 @@ class RawRunsClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
+    def record(
+        self,
+        project_id: str,
+        *,
+        input: str,
+        output: str,
+        idempotency_key: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = OMIT,
+        agent_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Record input and output, optionally deduplicating retries with Idempotency-Key.
+
+        Reusing a key with different content returns 409. No execution timing is
+        inferred; the run is ordered by when Sikaru receives it.
+
+        Parameters
+        ----------
+        project_id : str
+
+        input : str
+
+        output : str
+
+        idempotency_key : typing.Optional[str]
+
+        account_id : typing.Optional[str]
+
+        agent_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/record",
+            method="POST",
+            json={
+                "account_id": account_id,
+                "agent_name": agent_name,
+                "input": input,
+                "output": output,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+                "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
     def get(
         self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[ManagedRun]:
@@ -1139,6 +1229,98 @@ class AsyncRawRunsClient:
                     ManagedRun,
                     parse_obj_as(
                         type_=ManagedRun,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def record(
+        self,
+        project_id: str,
+        *,
+        input: str,
+        output: str,
+        idempotency_key: typing.Optional[str] = None,
+        account_id: typing.Optional[str] = OMIT,
+        agent_name: typing.Optional[str] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[typing.Dict[str, typing.Any]]:
+        """
+        Record input and output, optionally deduplicating retries with Idempotency-Key.
+
+        Reusing a key with different content returns 409. No execution timing is
+        inferred; the run is ordered by when Sikaru receives it.
+
+        Parameters
+        ----------
+        project_id : str
+
+        input : str
+
+        output : str
+
+        idempotency_key : typing.Optional[str]
+
+        account_id : typing.Optional[str]
+
+        agent_name : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[typing.Dict[str, typing.Any]]
+            Successful Response
+        """
+        _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
+            {**request_options, "max_retries": 0} if request_options is not None else {"max_retries": 0}
+        )
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/runs/record",
+            method="POST",
+            json={
+                "account_id": account_id,
+                "agent_name": agent_name,
+                "input": input,
+                "output": output,
+            },
+            headers={
+                **_endpoint_auth_headers,
+                "content-type": "application/json",
+                "Idempotency-Key": str(idempotency_key) if idempotency_key is not None else None,
+            },
+            request_options=_request_options_with_retries_disabled,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    typing.Dict[str, typing.Any],
+                    parse_obj_as(
+                        type_=typing.Dict[str, typing.Any],  # type: ignore
                         object_=_response.json(),
                     ),
                 )

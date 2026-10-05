@@ -84,9 +84,9 @@ class DatasetsClient:
         project_id: str,
         *,
         name: str,
-        purpose: CreateDatasetPurpose,
         description: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
+        purpose: typing.Optional[CreateDatasetPurpose] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DatasetResponse:
         """
@@ -96,11 +96,11 @@ class DatasetsClient:
 
         name : str
 
-        purpose : CreateDatasetPurpose
-
         description : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
+
+        purpose : typing.Optional[CreateDatasetPurpose]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -121,15 +121,14 @@ class DatasetsClient:
         client.datasets.create_dataset(
             project_id="project_id",
             name="name",
-            purpose="eval",
         )
         """
         _response = self._raw_client.create_dataset(
             project_id,
             name=name,
-            purpose=purpose,
             description=description,
             idempotency_key=idempotency_key,
+            purpose=purpose,
             request_options=request_options,
         )
         return _response.data
@@ -176,7 +175,6 @@ class DatasetsClient:
             project_id="project_id",
             dataset=NewDataset(
                 name="name",
-                purpose="eval",
             ),
             idempotency_key="idempotency_key",
             items=[
@@ -867,9 +865,9 @@ class AsyncDatasetsClient:
         project_id: str,
         *,
         name: str,
-        purpose: CreateDatasetPurpose,
         description: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
+        purpose: typing.Optional[CreateDatasetPurpose] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> DatasetResponse:
         """
@@ -879,11 +877,11 @@ class AsyncDatasetsClient:
 
         name : str
 
-        purpose : CreateDatasetPurpose
-
         description : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
+
+        purpose : typing.Optional[CreateDatasetPurpose]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -909,7 +907,6 @@ class AsyncDatasetsClient:
             await client.datasets.create_dataset(
                 project_id="project_id",
                 name="name",
-                purpose="eval",
             )
 
 
@@ -918,9 +915,9 @@ class AsyncDatasetsClient:
         _response = await self._raw_client.create_dataset(
             project_id,
             name=name,
-            purpose=purpose,
             description=description,
             idempotency_key=idempotency_key,
+            purpose=purpose,
             request_options=request_options,
         )
         return _response.data
@@ -972,7 +969,6 @@ class AsyncDatasetsClient:
                 project_id="project_id",
                 dataset=NewDataset(
                     name="name",
-                    purpose="eval",
                 ),
                 idempotency_key="idempotency_key",
                 items=[

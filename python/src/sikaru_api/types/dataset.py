@@ -19,7 +19,7 @@ class Dataset(UniversalBaseModel):
     ]
     id: str
     name: str
-    purpose: DatasetPurpose
+    purpose: typing.Optional[DatasetPurpose] = None
     updated_at: typing_extensions.Annotated[str, FieldMetadata(alias="updatedAt"), pydantic.Field(alias="updatedAt")]
     used_by: typing_extensions.Annotated[
         typing.Optional[DatasetUsage], FieldMetadata(alias="usedBy"), pydantic.Field(alias="usedBy")

@@ -110,9 +110,9 @@ class RawDatasetsClient:
         project_id: str,
         *,
         name: str,
-        purpose: CreateDatasetPurpose,
         description: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
+        purpose: typing.Optional[CreateDatasetPurpose] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[DatasetResponse]:
         """
@@ -122,11 +122,11 @@ class RawDatasetsClient:
 
         name : str
 
-        purpose : CreateDatasetPurpose
-
         description : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
+
+        purpose : typing.Optional[CreateDatasetPurpose]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1286,9 +1286,9 @@ class AsyncRawDatasetsClient:
         project_id: str,
         *,
         name: str,
-        purpose: CreateDatasetPurpose,
         description: typing.Optional[str] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
+        purpose: typing.Optional[CreateDatasetPurpose] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[DatasetResponse]:
         """
@@ -1298,11 +1298,11 @@ class AsyncRawDatasetsClient:
 
         name : str
 
-        purpose : CreateDatasetPurpose
-
         description : typing.Optional[str]
 
         idempotency_key : typing.Optional[str]
+
+        purpose : typing.Optional[CreateDatasetPurpose]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
