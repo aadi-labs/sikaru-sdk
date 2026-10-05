@@ -7,6 +7,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .connection_config import ConnectionConfig
 from .connection_grant import ConnectionGrant
 from .connection_tool import ConnectionTool
+from .connection_tool_load import ConnectionToolLoad
 from .connection_usage import ConnectionUsage
 
 
@@ -23,6 +24,7 @@ class Connection(UniversalBaseModel):
     revocation: str
     slug: str
     status: str
+    tool_load: typing.Optional[ConnectionToolLoad] = None
     tools: typing.List[ConnectionTool]
     used_by: typing.Optional[ConnectionUsage] = None
     version: int

@@ -8,7 +8,7 @@ describe("OnlineEvaluationsClient", () => {
     
     test("list_policies (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -28,7 +28,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("list_policies (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("create_policy (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "evaluator" : "evaluator" , "id" : "id" , "revision" : "revision" , "rubric" : "rubric" , "samplePercent" : 1 };
         const rawResponseBody = { "key" : "value" };
         
@@ -73,7 +73,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("create_policy (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "evaluator" : "x" , "id" : "x" , "revision" : "x" , "rubric" : "x" , "samplePercent" : 100 };
         const rawResponseBody = { };
         
@@ -98,7 +98,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("preview_policy_eligibility (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -118,7 +118,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("preview_policy_eligibility (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -136,7 +136,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("update_policy (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "enabled" : true };
         const rawResponseBody = { "key" : "value" };
         
@@ -159,7 +159,7 @@ describe("OnlineEvaluationsClient", () => {
           
     test("update_policy (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "enabled" : true };
         const rawResponseBody = { };
         

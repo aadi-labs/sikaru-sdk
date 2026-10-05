@@ -8,7 +8,7 @@ describe("ChangesetsClient", () => {
     
     test("list_changesets (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -28,7 +28,7 @@ describe("ChangesetsClient", () => {
           
     test("list_changesets (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("ChangesetsClient", () => {
           
     test("create_changeset (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "publicSummary" : "publicSummary" , "publicTitle" : "publicTitle" , "scopeRef" : "scopeRef" , "scopeType" : "global" , "sourceType" : "import" };
         const rawResponseBody = { "key" : "value" };
         
@@ -73,7 +73,7 @@ describe("ChangesetsClient", () => {
           
     test("create_changeset (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "publicSummary" : "publicSummary" , "publicTitle" : "publicTitle" , "scopeRef" : "scopeRef" , "scopeType" : "global" , "sourceType" : "import" };
         const rawResponseBody = { };
         
@@ -98,7 +98,7 @@ describe("ChangesetsClient", () => {
           
     test("get_changeset (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -118,7 +118,7 @@ describe("ChangesetsClient", () => {
           
     test("get_changeset (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -136,7 +136,7 @@ describe("ChangesetsClient", () => {
           
     test("approve_changeset", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { "key" : "value" };
         
@@ -157,7 +157,7 @@ describe("ChangesetsClient", () => {
           
     test("list_changeset_diffs (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -177,7 +177,7 @@ describe("ChangesetsClient", () => {
           
     test("list_changeset_diffs (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -195,7 +195,7 @@ describe("ChangesetsClient", () => {
           
     test("list_changeset_evidence (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -215,7 +215,7 @@ describe("ChangesetsClient", () => {
           
     test("list_changeset_evidence (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -233,7 +233,7 @@ describe("ChangesetsClient", () => {
           
     test("promote_changeset", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { "key" : "value" };
         
@@ -254,7 +254,7 @@ describe("ChangesetsClient", () => {
           
     test("reject_changeset", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { "key" : "value" };
         
@@ -275,7 +275,7 @@ describe("ChangesetsClient", () => {
           
     test("rollback_changeset", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { "key" : "value" };
         
@@ -296,7 +296,7 @@ describe("ChangesetsClient", () => {
           
     test("stage_changeset", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { "key" : "value" };
         

@@ -260,13 +260,13 @@ export class RunsClient {
 
     private async __events(project_id: string, run_id: string, request: Sikaru.EventsRunsRequest = {}, requestOptions?: RunsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.RunEvents>> {
         const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
-        const { after, limit, "Last-Event-ID": lastEventId } = request;
+        const { after, limit } = request;
         const _queryParams: Record<string, unknown> = {
             after,
             limit
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, mergeOnlyDefinedHeaders({ "Last-Event-ID": lastEventId ?? undefined }), requestOptions?.headers);
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/runs/${core.url.encodePathParam(run_id)}/events`),
             method: "GET",

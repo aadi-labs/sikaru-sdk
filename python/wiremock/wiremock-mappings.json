@@ -3491,7 +3491,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"account_status\": \"account_status\",\n    \"config\": {\n      \"allowed_hosts\": [\n        \"allowed_hosts\"\n      ],\n      \"auth\": \"none\",\n      \"endpoint\": \"endpoint\",\n      \"header_name\": \"header_name\",\n      \"oauth_client_id\": \"oauth_client_id\",\n      \"oauth_scopes\": [\n        \"oauth_scopes\"\n      ],\n      \"toolkit\": \"toolkit\"\n    },\n    \"display_name\": \"display_name\",\n    \"expires_at\": 1.1,\n    \"grants\": [\n      {\n        \"active\": true,\n        \"agent_id\": \"agent_id\",\n        \"approval\": \"approval\",\n        \"environment\": \"environment\",\n        \"id\": \"id\",\n        \"tools\": {\n          \"key\": \"value\"\n        }\n      }\n    ],\n    \"id\": \"id\",\n    \"kind\": \"kind\",\n    \"owner\": \"owner\",\n    \"ownership\": \"ownership\",\n    \"revocation\": \"revocation\",\n    \"slug\": \"slug\",\n    \"status\": \"status\",\n    \"tools\": [\n      {\n        \"digest\": \"digest\",\n        \"input_schema\": {\n          \"key\": \"value\"\n        },\n        \"name\": \"name\"\n      }\n    ],\n    \"used_by\": {\n      \"agents\": [\n        {\n          \"draft\": true,\n          \"draft_valid\": true,\n          \"id\": \"id\",\n          \"live\": true,\n          \"name\": \"name\",\n          \"slug\": \"slug\"\n        }\n      ],\n      \"count\": 1,\n      \"schedules\": [\n        \"schedules\"\n      ]\n    },\n    \"version\": 1\n  }\n]",
+        "body": "[\n  {\n    \"account_status\": \"account_status\",\n    \"config\": {\n      \"allowed_hosts\": [\n        \"allowed_hosts\"\n      ],\n      \"auth\": \"none\",\n      \"endpoint\": \"endpoint\",\n      \"header_name\": \"header_name\",\n      \"oauth_client_id\": \"oauth_client_id\",\n      \"oauth_scopes\": [\n        \"oauth_scopes\"\n      ],\n      \"toolkit\": \"toolkit\"\n    },\n    \"display_name\": \"display_name\",\n    \"expires_at\": 1.1,\n    \"grants\": [\n      {\n        \"active\": true,\n        \"agent_id\": \"agent_id\",\n        \"approval\": \"approval\",\n        \"environment\": \"environment\",\n        \"id\": \"id\",\n        \"tools\": {\n          \"key\": \"value\"\n        }\n      }\n    ],\n    \"id\": \"id\",\n    \"kind\": \"kind\",\n    \"owner\": \"owner\",\n    \"ownership\": \"ownership\",\n    \"revocation\": \"revocation\",\n    \"slug\": \"slug\",\n    \"status\": \"status\",\n    \"tool_load\": {\n      \"at\": 1.1,\n      \"removed\": [\n        \"removed\"\n      ],\n      \"removed_used_by\": [\n        \"removed_used_by\"\n      ],\n      \"status\": \"loaded\",\n      \"tool_count\": 1\n    },\n    \"tools\": [\n      {\n        \"digest\": \"digest\",\n        \"input_schema\": {\n          \"key\": \"value\"\n        },\n        \"name\": \"name\"\n      }\n    ],\n    \"used_by\": {\n      \"agents\": [\n        {\n          \"draft\": true,\n          \"draft_valid\": true,\n          \"id\": \"id\",\n          \"live\": true,\n          \"name\": \"name\",\n          \"slug\": \"slug\"\n        }\n      ],\n      \"count\": 1,\n      \"schedules\": [\n        \"schedules\"\n      ]\n    },\n    \"version\": 1\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3522,7 +3522,7 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3587,7 +3587,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3621,7 +3621,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3689,7 +3689,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3723,7 +3723,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3757,7 +3757,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3791,7 +3791,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3825,7 +3825,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3859,7 +3859,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3893,7 +3893,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"action\": \"action\",\n    \"actor\": \"actor\",\n    \"created_at\": 1.1,\n    \"id\": \"id\"\n  }\n]",
+        "body": "{\n  \"items\": [\n    {\n      \"action\": \"action\",\n      \"actor\": \"actor\",\n      \"created_at\": 1.1,\n      \"id\": \"id\"\n    }\n  ],\n  \"next_cursor\": \"next_cursor\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3927,7 +3927,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3964,7 +3964,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
+        "body": "{\n  \"account_status\": \"account_status\",\n  \"config\": {\n    \"allowed_hosts\": [\n      \"allowed_hosts\"\n    ],\n    \"auth\": \"none\",\n    \"endpoint\": \"endpoint\",\n    \"header_name\": \"header_name\",\n    \"oauth_client_id\": \"oauth_client_id\",\n    \"oauth_scopes\": [\n      \"oauth_scopes\"\n    ],\n    \"toolkit\": \"toolkit\"\n  },\n  \"display_name\": \"display_name\",\n  \"expires_at\": 1.1,\n  \"grants\": [\n    {\n      \"active\": true,\n      \"agent_id\": \"agent_id\",\n      \"approval\": \"approval\",\n      \"environment\": \"environment\",\n      \"id\": \"id\",\n      \"tools\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"id\": \"id\",\n  \"kind\": \"kind\",\n  \"owner\": \"owner\",\n  \"ownership\": \"ownership\",\n  \"revocation\": \"revocation\",\n  \"slug\": \"slug\",\n  \"status\": \"status\",\n  \"tool_load\": {\n    \"at\": 1.1,\n    \"removed\": [\n      \"removed\"\n    ],\n    \"removed_used_by\": [\n      \"removed_used_by\"\n    ],\n    \"status\": \"loaded\",\n    \"tool_count\": 1\n  },\n  \"tools\": [\n    {\n      \"description\": \"description\",\n      \"digest\": \"digest\",\n      \"input_schema\": {\n        \"key\": \"value\"\n      },\n      \"name\": \"name\",\n      \"version\": \"version\"\n    }\n  ],\n  \"used_by\": {\n    \"agents\": [\n      {\n        \"draft\": true,\n        \"draft_valid\": true,\n        \"id\": \"id\",\n        \"live\": true,\n        \"name\": \"name\",\n        \"slug\": \"slug\"\n      }\n    ],\n    \"count\": 1,\n    \"schedules\": [\n      \"schedules\"\n    ]\n  },\n  \"version\": 1\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -3998,7 +3998,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"agents\": [\n    {\n      \"draft\": true,\n      \"draft_valid\": true,\n      \"id\": \"id\",\n      \"live\": true,\n      \"name\": \"name\",\n      \"slug\": \"slug\"\n    }\n  ],\n  \"connection\": {\n    \"account_status\": \"account_status\",\n    \"config\": {\n      \"allowed_hosts\": [\n        \"allowed_hosts\"\n      ],\n      \"auth\": \"none\",\n      \"endpoint\": \"endpoint\",\n      \"header_name\": \"header_name\",\n      \"oauth_client_id\": \"oauth_client_id\",\n      \"oauth_scopes\": [\n        \"oauth_scopes\"\n      ],\n      \"toolkit\": \"toolkit\"\n    },\n    \"display_name\": \"display_name\",\n    \"expires_at\": 1.1,\n    \"grants\": [\n      {\n        \"active\": true,\n        \"agent_id\": \"agent_id\",\n        \"approval\": \"approval\",\n        \"environment\": \"environment\",\n        \"id\": \"id\",\n        \"tools\": {\n          \"key\": \"value\"\n        }\n      }\n    ],\n    \"id\": \"id\",\n    \"kind\": \"kind\",\n    \"owner\": \"owner\",\n    \"ownership\": \"ownership\",\n    \"revocation\": \"revocation\",\n    \"slug\": \"slug\",\n    \"status\": \"status\",\n    \"tools\": [\n      {\n        \"digest\": \"digest\",\n        \"input_schema\": {\n          \"key\": \"value\"\n        },\n        \"name\": \"name\"\n      }\n    ],\n    \"used_by\": {\n      \"agents\": [\n        {\n          \"draft\": true,\n          \"draft_valid\": true,\n          \"id\": \"id\",\n          \"live\": true,\n          \"name\": \"name\",\n          \"slug\": \"slug\"\n        }\n      ],\n      \"count\": 1,\n      \"schedules\": [\n        \"schedules\"\n      ]\n    },\n    \"version\": 1\n  },\n  \"count\": 1,\n  \"schedules\": [\n    \"schedules\"\n  ]\n}",
+        "body": "{\n  \"agents\": [\n    {\n      \"draft\": true,\n      \"draft_valid\": true,\n      \"id\": \"id\",\n      \"live\": true,\n      \"name\": \"name\",\n      \"slug\": \"slug\"\n    }\n  ],\n  \"connection\": {\n    \"account_status\": \"account_status\",\n    \"config\": {\n      \"allowed_hosts\": [\n        \"allowed_hosts\"\n      ],\n      \"auth\": \"none\",\n      \"endpoint\": \"endpoint\",\n      \"header_name\": \"header_name\",\n      \"oauth_client_id\": \"oauth_client_id\",\n      \"oauth_scopes\": [\n        \"oauth_scopes\"\n      ],\n      \"toolkit\": \"toolkit\"\n    },\n    \"display_name\": \"display_name\",\n    \"expires_at\": 1.1,\n    \"grants\": [\n      {\n        \"active\": true,\n        \"agent_id\": \"agent_id\",\n        \"approval\": \"approval\",\n        \"environment\": \"environment\",\n        \"id\": \"id\",\n        \"tools\": {\n          \"key\": \"value\"\n        }\n      }\n    ],\n    \"id\": \"id\",\n    \"kind\": \"kind\",\n    \"owner\": \"owner\",\n    \"ownership\": \"ownership\",\n    \"revocation\": \"revocation\",\n    \"slug\": \"slug\",\n    \"status\": \"status\",\n    \"tool_load\": {\n      \"at\": 1.1,\n      \"removed\": [\n        \"removed\"\n      ],\n      \"removed_used_by\": [\n        \"removed_used_by\"\n      ],\n      \"status\": \"loaded\",\n      \"tool_count\": 1\n    },\n    \"tools\": [\n      {\n        \"digest\": \"digest\",\n        \"input_schema\": {\n          \"key\": \"value\"\n        },\n        \"name\": \"name\"\n      }\n    ],\n    \"used_by\": {\n      \"agents\": [\n        {\n          \"draft\": true,\n          \"draft_valid\": true,\n          \"id\": \"id\",\n          \"live\": true,\n          \"name\": \"name\",\n          \"slug\": \"slug\"\n        }\n      ],\n      \"count\": 1,\n      \"schedules\": [\n        \"schedules\"\n      ]\n    },\n    \"version\": 1\n  },\n  \"count\": 1,\n  \"schedules\": [\n    \"schedules\"\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4159,6 +4159,547 @@
       }
     },
     {
+      "id": "276f48c6-03e4-42b7-9a45-41a2a9408e47",
+      "name": "List Datasets - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"datasets\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"createdBy\": \"createdBy\",\n      \"description\": \"description\",\n      \"exampleCount\": 1,\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"purpose\": \"eval\",\n      \"updatedAt\": \"updatedAt\",\n      \"usedBy\": {\n        \"agents\": [\n          \"agents\"\n        ],\n        \"checks\": 1\n      },\n      \"version\": 1\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "276f48c6-03e4-42b7-9a45-41a2a9408e47",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "674a94b7-956a-476d-903e-18e4d184504d",
+      "name": "Create Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": "{\n  \"dataset\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"description\": \"description\",\n    \"exampleCount\": 1,\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"purpose\": \"eval\",\n    \"updatedAt\": \"updatedAt\",\n    \"usedBy\": {\n      \"agents\": [\n        \"agents\"\n      ],\n      \"checks\": 1\n    },\n    \"version\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "674a94b7-956a-476d-903e-18e4d184504d",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "86a8277e-955d-49e5-a59a-d07212f091ee",
+      "name": "Capture Into New Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/capture",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"counts\": {\n    \"added\": 1,\n    \"duplicate\": 1,\n    \"skipped\": 1\n  },\n  \"dataset\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"description\": \"description\",\n    \"exampleCount\": 1,\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"purpose\": \"eval\",\n    \"updatedAt\": \"updatedAt\",\n    \"usedBy\": {\n      \"agents\": [\n        \"agents\"\n      ],\n      \"checks\": 1\n    },\n    \"version\": 1\n  },\n  \"items\": [\n    {\n      \"exampleId\": \"exampleId\",\n      \"outcome\": \"added\",\n      \"reason\": \"reason\",\n      \"row\": 1,\n      \"runId\": \"runId\",\n      \"seqTo\": 1\n    }\n  ],\n  \"version\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"exampleCount\": 1,\n    \"note\": \"note\",\n    \"number\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "86a8277e-955d-49e5-a59a-d07212f091ee",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "f302b927-45d9-4020-942b-1dbc3952306f",
+      "name": "Get Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"dataset\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"description\": \"description\",\n    \"exampleCount\": 1,\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"purpose\": \"eval\",\n    \"updatedAt\": \"updatedAt\",\n    \"usedBy\": {\n      \"agents\": [\n        \"agents\"\n      ],\n      \"checks\": 1\n    },\n    \"version\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "f302b927-45d9-4020-942b-1dbc3952306f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "76866dcf-5716-4635-b6df-400682687dd1",
+      "name": "Delete Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}",
+        "method": "DELETE",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "\"\"",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "76866dcf-5716-4635-b6df-400682687dd1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ab34d0bb-1ca6-4441-9028-cc50a0c4a08e",
+      "name": "Update Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}",
+        "method": "PATCH",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"dataset\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"description\": \"description\",\n    \"exampleCount\": 1,\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"purpose\": \"eval\",\n    \"updatedAt\": \"updatedAt\",\n    \"usedBy\": {\n      \"agents\": [\n        \"agents\"\n      ],\n      \"checks\": 1\n    },\n    \"version\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ab34d0bb-1ca6-4441-9028-cc50a0c4a08e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "7fa641d8-662e-44c7-8e6c-cde500bdba6e",
+      "name": "Capture Into Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/capture",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"counts\": {\n    \"added\": 1,\n    \"duplicate\": 1,\n    \"skipped\": 1\n  },\n  \"dataset\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"description\": \"description\",\n    \"exampleCount\": 1,\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"purpose\": \"eval\",\n    \"updatedAt\": \"updatedAt\",\n    \"usedBy\": {\n      \"agents\": [\n        \"agents\"\n      ],\n      \"checks\": 1\n    },\n    \"version\": 1\n  },\n  \"items\": [\n    {\n      \"exampleId\": \"exampleId\",\n      \"outcome\": \"added\",\n      \"reason\": \"reason\",\n      \"row\": 1,\n      \"runId\": \"runId\",\n      \"seqTo\": 1\n    }\n  ],\n  \"version\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"exampleCount\": 1,\n    \"note\": \"note\",\n    \"number\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "7fa641d8-662e-44c7-8e6c-cde500bdba6e",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "67bc95f1-0515-4b07-bcc0-db60d06354dd",
+      "name": "Start Dataset Checks - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/checks",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 202,
+        "body": "{\n  \"agentVersion\": \"agentVersion\",\n  \"checks\": [\n    {\n      \"checkId\": \"checkId\",\n      \"exampleId\": \"exampleId\",\n      \"outcome\": \"started\",\n      \"reason\": \"reason\",\n      \"resultId\": \"resultId\",\n      \"runId\": \"runId\"\n    }\n  ],\n  \"datasetVersion\": 1,\n  \"notEligible\": {\n    \"key\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "67bc95f1-0515-4b07-bcc0-db60d06354dd",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "e0d2ef23-7d90-4acc-865c-df3594c96f0f",
+      "name": "Preview Dataset Checks - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/checks/preview",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"agents\": [\n    {\n      \"name\": \"name\",\n      \"slug\": \"slug\",\n      \"versionId\": \"versionId\"\n    }\n  ],\n  \"averageRunCostUsd\": 1.1,\n  \"datasetVersion\": 1,\n  \"eligible\": 1,\n  \"estimatedCostUsd\": 1.1,\n  \"notEligible\": {\n    \"key\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "e0d2ef23-7d90-4acc-865c-df3594c96f0f",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "53b34c0e-cd27-407f-8563-0a2f7f0731f4",
+      "name": "List Dataset Check Results - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/checks/results",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"results\": [\n    {\n      \"agentSlug\": \"agentSlug\",\n      \"agentVersion\": \"agentVersion\",\n      \"datasetVersion\": 1,\n      \"failed\": 1,\n      \"failures\": [\n        {\n          \"checkId\": \"checkId\",\n          \"checkName\": \"checkName\",\n          \"exampleId\": \"exampleId\",\n          \"reason\": \"reason\",\n          \"runId\": \"runId\"\n        }\n      ],\n      \"notStarted\": 1,\n      \"passRate\": 1.1,\n      \"passed\": 1,\n      \"running\": 1,\n      \"total\": 1\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "53b34c0e-cd27-407f-8563-0a2f7f0731f4",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ac42939a-efc0-48be-847f-e78f8803842a",
+      "name": "List Examples - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/examples",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"examples\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"createdBy\": \"createdBy\",\n      \"expected\": {\n        \"key\": \"value\"\n      },\n      \"id\": \"id\",\n      \"input\": [\n        {\n          \"key\": \"value\"\n        }\n      ],\n      \"metadata\": {\n        \"key\": \"value\"\n      },\n      \"provenance\": {\n        \"key\": \"customer\"\n      },\n      \"source\": {\n        \"kind\": \"run\",\n        \"runId\": null,\n        \"seqFrom\": null,\n        \"seqTo\": null\n      },\n      \"tags\": [\n        \"tags\"\n      ],\n      \"tagsKeptInSikaru\": 1,\n      \"version\": 1\n    }\n  ],\n  \"latest\": 1,\n  \"total\": 1,\n  \"version\": 1\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ac42939a-efc0-48be-847f-e78f8803842a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "585a6b23-d636-46d4-875a-19b309dafe7b",
+      "name": "Delete Example - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/examples/{example_id}",
+        "method": "DELETE",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          },
+          "example_id": {
+            "equalTo": "example_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"version\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"exampleCount\": 1,\n    \"note\": \"note\",\n    \"number\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "585a6b23-d636-46d4-875a-19b309dafe7b",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "a29d9232-9b47-4d44-a996-47da4fdf299a",
+      "name": "Update Example - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/examples/{example_id}",
+        "method": "PATCH",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          },
+          "example_id": {
+            "equalTo": "example_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"example\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"expected\": {\n      \"key\": \"value\"\n    },\n    \"id\": \"id\",\n    \"input\": [\n      {\n        \"key\": \"value\"\n      }\n    ],\n    \"metadata\": {\n      \"key\": \"value\"\n    },\n    \"provenance\": {\n      \"key\": \"customer\"\n    },\n    \"source\": {\n      \"kind\": \"run\",\n      \"runId\": \"runId\",\n      \"seqFrom\": 1,\n      \"seqTo\": 1\n    },\n    \"tags\": [\n      \"tags\"\n    ],\n    \"tagsKeptInSikaru\": 1,\n    \"version\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "a29d9232-9b47-4d44-a996-47da4fdf299a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "37f79086-3cba-4a67-88b5-f9e2bf47a061",
+      "name": "Export Dataset - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/export",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "37f79086-3cba-4a67-88b5-f9e2bf47a061",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "55efcdd2-8402-4fc4-b5eb-5f267b8d9499",
+      "name": "Upload Examples - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/uploads",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"counts\": {\n    \"added\": 1,\n    \"duplicate\": 1,\n    \"skipped\": 1\n  },\n  \"dataset\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"description\": \"description\",\n    \"exampleCount\": 1,\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"purpose\": \"eval\",\n    \"updatedAt\": \"updatedAt\",\n    \"usedBy\": {\n      \"agents\": [\n        \"agents\"\n      ],\n      \"checks\": 1\n    },\n    \"version\": 1\n  },\n  \"items\": [\n    {\n      \"exampleId\": \"exampleId\",\n      \"outcome\": \"added\",\n      \"reason\": \"reason\",\n      \"row\": 1,\n      \"runId\": \"runId\",\n      \"seqTo\": 1\n    }\n  ],\n  \"version\": {\n    \"createdAt\": \"createdAt\",\n    \"createdBy\": \"createdBy\",\n    \"exampleCount\": 1,\n    \"note\": \"note\",\n    \"number\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "55efcdd2-8402-4fc4-b5eb-5f267b8d9499",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ed742591-5839-453d-89f7-e43080b1fc77",
+      "name": "List Versions - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/datasets/{dataset_id}/versions",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "dataset_id": {
+            "equalTo": "dataset_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"versions\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"createdBy\": \"createdBy\",\n      \"exampleCount\": 1,\n      \"note\": \"note\",\n      \"number\": 1\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ed742591-5839-453d-89f7-e43080b1fc77",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "00f564bc-6b18-45d9-9ccd-25536b83b8b3",
       "name": "List Console Deployments - default",
       "request": {
@@ -4240,37 +4781,6 @@
         }
       },
       "uuid": "dbce976c-c292-4acb-a5d0-6082fe26fddb",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "6ab7f4f5-42d9-46b1-975a-b75a6fdd85da",
-      "name": "Create Eval Seed - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/eval-seeds",
-        "method": "POST",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          }
-        }
-      },
-      "response": {
-        "status": 201,
-        "body": "{\n  \"key\": \"value\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "6ab7f4f5-42d9-46b1-975a-b75a6fdd85da",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -5519,173 +6029,6 @@
       }
     },
     {
-      "id": "7061944a-b9e9-4b9c-bdba-6fc56fbd02f6",
-      "name": "Create Harness Version - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harness-versions",
-        "method": "POST",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          }
-        }
-      },
-      "response": {
-        "status": 201,
-        "body": "{\n  \"key\": \"value\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "7061944a-b9e9-4b9c-bdba-6fc56fbd02f6",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "b6872000-19c4-4847-907e-fc77c67df9cf",
-      "name": "Get Budget - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget",
-        "method": "GET",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"auto_reload\": {\n    \"amount_usd\": \"amount_usd\",\n    \"enabled\": true,\n    \"threshold_usd\": \"threshold_usd\"\n  },\n  \"funded_usd\": \"funded_usd\",\n  \"funding\": {\n    \"amount_usd\": \"amount_usd\",\n    \"id\": \"id\",\n    \"status\": \"status\"\n  },\n  \"payment_method_saved\": true,\n  \"remaining_usd\": \"remaining_usd\",\n  \"reserved_usd\": \"reserved_usd\",\n  \"used_usd\": \"used_usd\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "b6872000-19c4-4847-907e-fc77c67df9cf",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "00004501-cb81-4b3c-aff4-5f9bd85c05d4",
-      "name": "Configure Reload - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/auto-reload",
-        "method": "PUT",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"auto_reload\": {\n    \"amount_usd\": \"amount_usd\",\n    \"enabled\": true,\n    \"threshold_usd\": \"threshold_usd\"\n  },\n  \"funded_usd\": \"funded_usd\",\n  \"funding\": {\n    \"amount_usd\": \"amount_usd\",\n    \"id\": \"id\",\n    \"status\": \"status\"\n  },\n  \"payment_method_saved\": true,\n  \"remaining_usd\": \"remaining_usd\",\n  \"reserved_usd\": \"reserved_usd\",\n  \"used_usd\": \"used_usd\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "00004501-cb81-4b3c-aff4-5f9bd85c05d4",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "cca11b04-69cf-40a2-998b-ddc43fd591f1",
-      "name": "Add Budget - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/funding",
-        "method": "POST",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 202,
-        "body": "{\n  \"id\": \"id\",\n  \"status\": \"status\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "cca11b04-69cf-40a2-998b-ddc43fd591f1",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "7e833345-99d0-4944-a11f-2fe738beb99f",
-      "name": "Setup Payment - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/budget/payment-method",
-        "method": "POST",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "harness_id": {
-            "equalTo": "harness_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"url\": \"url\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "7e833345-99d0-4944-a11f-2fe738beb99f",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
       "id": "7a474fe2-5879-4270-afe5-03a80ff459de",
       "name": "Get Invoice Budget - default",
       "request": {
@@ -6771,37 +7114,6 @@
       }
     },
     {
-      "id": "54774812-eb8f-4529-876c-17712de1320a",
-      "name": "Mine Project Issue Clusters - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/issue-clusters/mine",
-        "method": "POST",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"key\": \"value\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "54774812-eb8f-4529-876c-17712de1320a",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
       "id": "d89ea9fc-f61b-457e-b5b1-8c0a6a0bd398",
       "name": "Get Issue Cluster - default",
       "request": {
@@ -7160,7 +7472,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"checks\": [\n    {\n      \"agentSlug\": \"agentSlug\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": {\n        \"computeEnvironmentId\": null,\n        \"kind\": \"managed\"\n      },\n      \"id\": \"id\",\n      \"instruction\": \"instruction\",\n      \"latestResult\": {\n        \"checkId\": \"checkId\",\n        \"createdAt\": \"createdAt\",\n        \"environment\": \"managed\",\n        \"finishedAt\": null,\n        \"id\": \"id\",\n        \"reason\": \"reason\",\n        \"reward\": null,\n        \"runId\": \"runId\",\n        \"sessionId\": \"sessionId\",\n        \"status\": \"running\",\n        \"traceId\": \"traceId\",\n        \"trajectoryUrl\": \"trajectoryUrl\"\n      },\n      \"name\": \"name\",\n      \"verification\": \"script\"\n    }\n  ]\n}",
+        "body": "{\n  \"checks\": [\n    {\n      \"agentSlug\": \"agentSlug\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": {\n        \"computeEnvironmentId\": null,\n        \"kind\": \"managed\"\n      },\n      \"id\": \"id\",\n      \"instruction\": \"instruction\",\n      \"latestResult\": {\n        \"checkId\": \"checkId\",\n        \"createdAt\": \"createdAt\",\n        \"environment\": \"managed\",\n        \"finishedAt\": null,\n        \"id\": \"id\",\n        \"reason\": \"reason\",\n        \"reward\": null,\n        \"runId\": \"runId\",\n        \"sessionId\": \"sessionId\",\n        \"status\": \"running\",\n        \"traceId\": \"traceId\",\n        \"trajectoryUrl\": \"trajectoryUrl\"\n      },\n      \"name\": \"name\",\n      \"source\": {\n        \"datasetId\": \"datasetId\",\n        \"datasetVersion\": 1,\n        \"exampleId\": \"exampleId\"\n      },\n      \"verification\": \"script\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -7194,7 +7506,7 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"check\": {\n    \"agentSlug\": \"agentSlug\",\n    \"createdAt\": \"createdAt\",\n    \"environment\": {\n      \"computeEnvironmentId\": \"computeEnvironmentId\",\n      \"kind\": \"managed\"\n    },\n    \"id\": \"id\",\n    \"instruction\": \"instruction\",\n    \"latestResult\": {\n      \"checkId\": \"checkId\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": \"managed\",\n      \"finishedAt\": \"finishedAt\",\n      \"id\": \"id\",\n      \"reason\": \"reason\",\n      \"reward\": 1.1,\n      \"runId\": \"runId\",\n      \"sessionId\": \"sessionId\",\n      \"status\": \"running\",\n      \"traceId\": \"traceId\",\n      \"trajectoryUrl\": \"trajectoryUrl\"\n    },\n    \"name\": \"name\",\n    \"verification\": \"script\"\n  }\n}",
+        "body": "{\n  \"check\": {\n    \"agentSlug\": \"agentSlug\",\n    \"createdAt\": \"createdAt\",\n    \"environment\": {\n      \"computeEnvironmentId\": \"computeEnvironmentId\",\n      \"kind\": \"managed\"\n    },\n    \"id\": \"id\",\n    \"instruction\": \"instruction\",\n    \"latestResult\": {\n      \"checkId\": \"checkId\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": \"managed\",\n      \"finishedAt\": \"finishedAt\",\n      \"id\": \"id\",\n      \"reason\": \"reason\",\n      \"reward\": 1.1,\n      \"runId\": \"runId\",\n      \"sessionId\": \"sessionId\",\n      \"status\": \"running\",\n      \"traceId\": \"traceId\",\n      \"trajectoryUrl\": \"trajectoryUrl\"\n    },\n    \"name\": \"name\",\n    \"source\": {\n      \"agentVersion\": \"agentVersion\",\n      \"datasetId\": \"datasetId\",\n      \"datasetName\": \"datasetName\",\n      \"datasetVersion\": 1,\n      \"exampleId\": \"exampleId\"\n    },\n    \"verification\": \"script\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -7621,6 +7933,40 @@
         }
       },
       "uuid": "9c195351-f55d-4fc1-b6eb-81a1f5c88843",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "317dc814-84f5-4326-988b-fcad7ebd0eef",
+      "name": "Resolve Run Reference - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/run-references/{reference}",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "reference": {
+            "equalTo": "reference"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"key\": \"value\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "317dc814-84f5-4326-988b-fcad7ebd0eef",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -8681,6 +9027,6 @@
     }
   ],
   "meta": {
-    "total": 260
+    "total": 270
   }
 }

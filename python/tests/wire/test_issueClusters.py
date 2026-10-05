@@ -25,19 +25,6 @@ def test_issueClusters_upsert_issue_cluster() -> None:
     verify_auth_headers(test_id, "POST", "/v1/projects/project_id/issue-clusters", {"Authorization": r"Bearer .+"}, [])
 
 
-def test_issueClusters_mine_project_issue_clusters() -> None:
-    """Test mine_project_issue_clusters endpoint with WireMock"""
-    test_id = "issue_clusters.mine_project_issue_clusters.0"
-    client = get_client(test_id)
-    client.issue_clusters.mine_project_issue_clusters(
-        project_id="project_id",
-    )
-    verify_request_count(test_id, "POST", "/v1/projects/project_id/issue-clusters/mine", None, 1)
-    verify_auth_headers(
-        test_id, "POST", "/v1/projects/project_id/issue-clusters/mine", {"Authorization": r"Bearer .+"}, []
-    )
-
-
 def test_issueClusters_get_issue_cluster() -> None:
     """Test get_issue_cluster endpoint with WireMock"""
     test_id = "issue_clusters.get_issue_cluster.0"

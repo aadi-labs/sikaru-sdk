@@ -2,6 +2,9 @@
 
 ## 0.2.13
 
+- Create and version datasets, capture permitted run content, upload examples, and export examples as NDJSON.
+- Preview dataset checks, run eligible examples against an agent, and read check results.
+- Compatibility: remove the former agent-budget operations; manage credits and spending caps in the dashboard.
 - Add HTTP and Slack channel bindings, initial channel selection during agent creation, and delivery status operations.
 - Add HTTP channel invocation and receipt polling with a dedicated channel credential, separately from the project API key.
 - Add personal channel connections, approvals, files, and Slack identity linking operations.

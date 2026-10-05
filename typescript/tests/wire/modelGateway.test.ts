@@ -8,7 +8,7 @@ describe("ModelGatewayClient", () => {
     
     test("capture_model_gateway_chat_completion (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "request" : { "key" : "value" } };
         const rawResponseBody = { "key" : "value" };
         
@@ -33,7 +33,7 @@ describe("ModelGatewayClient", () => {
           
     test("capture_model_gateway_chat_completion (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "request" : { "request" : { "key" : "value" } } };
         const rawResponseBody = { };
         

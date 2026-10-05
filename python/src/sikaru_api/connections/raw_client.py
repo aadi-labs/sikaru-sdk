@@ -17,7 +17,7 @@ from ..types.connection_apps import ConnectionApps
 from ..types.connection_authorization import ConnectionAuthorization
 from ..types.connection_config import ConnectionConfig
 from ..types.connection_credentials import ConnectionCredentials
-from ..types.connection_event import ConnectionEvent
+from ..types.connection_event_page import ConnectionEventPage
 from ..types.connection_revocation import ConnectionRevocation
 from ..types.connection_usage import ConnectionUsage
 from ..types.http_validation_error import HttpValidationError
@@ -730,6 +730,8 @@ class RawConnectionsClient:
         self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> HttpResponse[Connection]:
         """
+        Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+
         Parameters
         ----------
         project_id : str
@@ -847,8 +849,14 @@ class RawConnectionsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     def events(
-        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[typing.List[ConnectionEvent]]:
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[ConnectionEventPage]:
         """
         Parameters
         ----------
@@ -856,18 +864,26 @@ class RawConnectionsClient:
 
         connection_id : str
 
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[typing.List[ConnectionEvent]]
+        HttpResponse[ConnectionEventPage]
             Successful Response
         """
         _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}/events",
             method="GET",
+            params={
+                "cursor": cursor,
+                "limit": limit,
+            },
             headers={
                 **_endpoint_auth_headers,
             },
@@ -876,9 +892,9 @@ class RawConnectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.List[ConnectionEvent],
+                    ConnectionEventPage,
                     parse_obj_as(
-                        type_=typing.List[ConnectionEvent],  # type: ignore
+                        type_=ConnectionEventPage,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -1891,6 +1907,8 @@ class AsyncRawConnectionsClient:
         self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> AsyncHttpResponse[Connection]:
         """
+        Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+
         Parameters
         ----------
         project_id : str
@@ -2012,8 +2030,14 @@ class AsyncRawConnectionsClient:
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
     async def events(
-        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[typing.List[ConnectionEvent]]:
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[ConnectionEventPage]:
         """
         Parameters
         ----------
@@ -2021,12 +2045,16 @@ class AsyncRawConnectionsClient:
 
         connection_id : str
 
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[typing.List[ConnectionEvent]]
+        AsyncHttpResponse[ConnectionEventPage]
             Successful Response
         """
         _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
@@ -2035,6 +2063,10 @@ class AsyncRawConnectionsClient:
         _response = await self._client_wrapper.httpx_client.request(
             f"v1/projects/{encode_path_param(project_id)}/connections/{encode_path_param(connection_id)}/events",
             method="GET",
+            params={
+                "cursor": cursor,
+                "limit": limit,
+            },
             headers={
                 **_endpoint_auth_headers,
             },
@@ -2043,9 +2075,9 @@ class AsyncRawConnectionsClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    typing.List[ConnectionEvent],
+                    ConnectionEventPage,
                     parse_obj_as(
-                        type_=typing.List[ConnectionEvent],  # type: ignore
+                        type_=ConnectionEventPage,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -8,7 +8,7 @@ describe("CapabilityCeilingsClient", () => {
     
     test("get (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "canEdit" : true , "ceilings" : { "allowedGitHosts" : [ "allowedGitHosts" ] , "disallowedTools" : [ "bash" ] , "domainDenylist" : [ "domainDenylist" ] , "egressEnabled" : true } };
         
@@ -28,7 +28,7 @@ describe("CapabilityCeilingsClient", () => {
           
     test("get (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("CapabilityCeilingsClient", () => {
           
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { "canEdit" : true , "ceilings" : { "allowedGitHosts" : [ "allowedGitHosts" ] , "disallowedTools" : [ "bash" ] , "domainDenylist" : [ "domainDenylist" ] , "egressEnabled" : true } };
         
@@ -67,7 +67,7 @@ describe("CapabilityCeilingsClient", () => {
           
     test("update (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
         const rawResponseBody = { };
         

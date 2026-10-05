@@ -12,7 +12,6 @@ from .environment import SikaruEnvironment
 
 if typing.TYPE_CHECKING:
     from .activation.client import ActivationClient, AsyncActivationClient
-    from .agent_budgets.client import AgentBudgetsClient, AsyncAgentBudgetsClient
     from .agent_documents.client import AgentDocumentsClient, AsyncAgentDocumentsClient
     from .agent_imports.client import AgentImportsClient, AsyncAgentImportsClient
     from .agents.client import AgentsClient, AsyncAgentsClient
@@ -30,9 +29,9 @@ if typing.TYPE_CHECKING:
     from .connections.client import AsyncConnectionsClient, ConnectionsClient
     from .context_registry.client import AsyncContextRegistryClient, ContextRegistryClient
     from .conversations.client import AsyncConversationsClient, ConversationsClient
+    from .datasets.client import AsyncDatasetsClient, DatasetsClient
     from .deployments.client import AsyncDeploymentsClient, DeploymentsClient
     from .environments.client import AsyncEnvironmentsClient, EnvironmentsClient
-    from .eval_seeds.client import AsyncEvalSeedsClient, EvalSeedsClient
     from .evaluation_comparisons.client import AsyncEvaluationComparisonsClient, EvaluationComparisonsClient
     from .evaluation_criteria.client import AsyncEvaluationCriteriaClient, EvaluationCriteriaClient
     from .evaluation_jobs.client import AsyncEvaluationJobsClient, EvaluationJobsClient
@@ -43,7 +42,6 @@ if typing.TYPE_CHECKING:
     from .executions.client import AsyncExecutionsClient, ExecutionsClient
     from .feedback.client import AsyncFeedbackClient, FeedbackClient
     from .git_credentials.client import AsyncGitCredentialsClient, GitCredentialsClient
-    from .harness_versions.client import AsyncHarnessVersionsClient, HarnessVersionsClient
     from .harnesses.client import AsyncHarnessesClient, HarnessesClient
     from .http_channels.client import AsyncHttpChannelsClient, HttpChannelsClient
     from .import_sessions.client import AsyncImportSessionsClient, ImportSessionsClient
@@ -58,6 +56,7 @@ if typing.TYPE_CHECKING:
     from .release_watches.client import AsyncReleaseWatchesClient, ReleaseWatchesClient
     from .retention_policies.client import AsyncRetentionPoliciesClient, RetentionPoliciesClient
     from .review_queue.client import AsyncReviewQueueClient, ReviewQueueClient
+    from .run_references.client import AsyncRunReferencesClient, RunReferencesClient
     from .run_schedules.client import AsyncRunSchedulesClient, RunSchedulesClient
     from .run_webhooks.client import AsyncRunWebhooksClient, RunWebhooksClient
     from .runs.client import AsyncRunsClient, RunsClient
@@ -179,9 +178,9 @@ class SikaruApi:
         self._connections: typing.Optional[ConnectionsClient] = None
         self._context_registry: typing.Optional[ContextRegistryClient] = None
         self._conversations: typing.Optional[ConversationsClient] = None
+        self._datasets: typing.Optional[DatasetsClient] = None
         self._deployments: typing.Optional[DeploymentsClient] = None
         self._environments: typing.Optional[EnvironmentsClient] = None
-        self._eval_seeds: typing.Optional[EvalSeedsClient] = None
         self._evaluation_comparisons: typing.Optional[EvaluationComparisonsClient] = None
         self._evaluation_criteria: typing.Optional[EvaluationCriteriaClient] = None
         self._evaluation_jobs: typing.Optional[EvaluationJobsClient] = None
@@ -193,8 +192,6 @@ class SikaruApi:
         self._executions: typing.Optional[ExecutionsClient] = None
         self._feedback: typing.Optional[FeedbackClient] = None
         self._git_credentials: typing.Optional[GitCredentialsClient] = None
-        self._harness_versions: typing.Optional[HarnessVersionsClient] = None
-        self._agent_budgets: typing.Optional[AgentBudgetsClient] = None
         self._harnesses: typing.Optional[HarnessesClient] = None
         self._runs: typing.Optional[RunsClient] = None
         self._import_sessions: typing.Optional[ImportSessionsClient] = None
@@ -209,6 +206,7 @@ class SikaruApi:
         self._release_watches: typing.Optional[ReleaseWatchesClient] = None
         self._retention_policies: typing.Optional[RetentionPoliciesClient] = None
         self._review_queue: typing.Optional[ReviewQueueClient] = None
+        self._run_references: typing.Optional[RunReferencesClient] = None
         self._run_schedules: typing.Optional[RunSchedulesClient] = None
         self._run_webhooks: typing.Optional[RunWebhooksClient] = None
         self._sessions: typing.Optional[SessionsClient] = None
@@ -373,6 +371,14 @@ class SikaruApi:
         return self._conversations
 
     @property
+    def datasets(self):
+        if self._datasets is None:
+            from .datasets.client import DatasetsClient  # noqa: E402
+
+            self._datasets = DatasetsClient(client_wrapper=self._client_wrapper)
+        return self._datasets
+
+    @property
     def deployments(self):
         if self._deployments is None:
             from .deployments.client import DeploymentsClient  # noqa: E402
@@ -387,14 +393,6 @@ class SikaruApi:
 
             self._environments = EnvironmentsClient(client_wrapper=self._client_wrapper)
         return self._environments
-
-    @property
-    def eval_seeds(self):
-        if self._eval_seeds is None:
-            from .eval_seeds.client import EvalSeedsClient  # noqa: E402
-
-            self._eval_seeds = EvalSeedsClient(client_wrapper=self._client_wrapper)
-        return self._eval_seeds
 
     @property
     def evaluation_comparisons(self):
@@ -483,22 +481,6 @@ class SikaruApi:
 
             self._git_credentials = GitCredentialsClient(client_wrapper=self._client_wrapper)
         return self._git_credentials
-
-    @property
-    def harness_versions(self):
-        if self._harness_versions is None:
-            from .harness_versions.client import HarnessVersionsClient  # noqa: E402
-
-            self._harness_versions = HarnessVersionsClient(client_wrapper=self._client_wrapper)
-        return self._harness_versions
-
-    @property
-    def agent_budgets(self):
-        if self._agent_budgets is None:
-            from .agent_budgets.client import AgentBudgetsClient  # noqa: E402
-
-            self._agent_budgets = AgentBudgetsClient(client_wrapper=self._client_wrapper)
-        return self._agent_budgets
 
     @property
     def harnesses(self):
@@ -611,6 +593,14 @@ class SikaruApi:
 
             self._review_queue = ReviewQueueClient(client_wrapper=self._client_wrapper)
         return self._review_queue
+
+    @property
+    def run_references(self):
+        if self._run_references is None:
+            from .run_references.client import RunReferencesClient  # noqa: E402
+
+            self._run_references = RunReferencesClient(client_wrapper=self._client_wrapper)
+        return self._run_references
 
     @property
     def run_schedules(self):
@@ -821,9 +811,9 @@ class AsyncSikaruApi:
         self._connections: typing.Optional[AsyncConnectionsClient] = None
         self._context_registry: typing.Optional[AsyncContextRegistryClient] = None
         self._conversations: typing.Optional[AsyncConversationsClient] = None
+        self._datasets: typing.Optional[AsyncDatasetsClient] = None
         self._deployments: typing.Optional[AsyncDeploymentsClient] = None
         self._environments: typing.Optional[AsyncEnvironmentsClient] = None
-        self._eval_seeds: typing.Optional[AsyncEvalSeedsClient] = None
         self._evaluation_comparisons: typing.Optional[AsyncEvaluationComparisonsClient] = None
         self._evaluation_criteria: typing.Optional[AsyncEvaluationCriteriaClient] = None
         self._evaluation_jobs: typing.Optional[AsyncEvaluationJobsClient] = None
@@ -835,8 +825,6 @@ class AsyncSikaruApi:
         self._executions: typing.Optional[AsyncExecutionsClient] = None
         self._feedback: typing.Optional[AsyncFeedbackClient] = None
         self._git_credentials: typing.Optional[AsyncGitCredentialsClient] = None
-        self._harness_versions: typing.Optional[AsyncHarnessVersionsClient] = None
-        self._agent_budgets: typing.Optional[AsyncAgentBudgetsClient] = None
         self._harnesses: typing.Optional[AsyncHarnessesClient] = None
         self._runs: typing.Optional[AsyncRunsClient] = None
         self._import_sessions: typing.Optional[AsyncImportSessionsClient] = None
@@ -851,6 +839,7 @@ class AsyncSikaruApi:
         self._release_watches: typing.Optional[AsyncReleaseWatchesClient] = None
         self._retention_policies: typing.Optional[AsyncRetentionPoliciesClient] = None
         self._review_queue: typing.Optional[AsyncReviewQueueClient] = None
+        self._run_references: typing.Optional[AsyncRunReferencesClient] = None
         self._run_schedules: typing.Optional[AsyncRunSchedulesClient] = None
         self._run_webhooks: typing.Optional[AsyncRunWebhooksClient] = None
         self._sessions: typing.Optional[AsyncSessionsClient] = None
@@ -1015,6 +1004,14 @@ class AsyncSikaruApi:
         return self._conversations
 
     @property
+    def datasets(self):
+        if self._datasets is None:
+            from .datasets.client import AsyncDatasetsClient  # noqa: E402
+
+            self._datasets = AsyncDatasetsClient(client_wrapper=self._client_wrapper)
+        return self._datasets
+
+    @property
     def deployments(self):
         if self._deployments is None:
             from .deployments.client import AsyncDeploymentsClient  # noqa: E402
@@ -1029,14 +1026,6 @@ class AsyncSikaruApi:
 
             self._environments = AsyncEnvironmentsClient(client_wrapper=self._client_wrapper)
         return self._environments
-
-    @property
-    def eval_seeds(self):
-        if self._eval_seeds is None:
-            from .eval_seeds.client import AsyncEvalSeedsClient  # noqa: E402
-
-            self._eval_seeds = AsyncEvalSeedsClient(client_wrapper=self._client_wrapper)
-        return self._eval_seeds
 
     @property
     def evaluation_comparisons(self):
@@ -1125,22 +1114,6 @@ class AsyncSikaruApi:
 
             self._git_credentials = AsyncGitCredentialsClient(client_wrapper=self._client_wrapper)
         return self._git_credentials
-
-    @property
-    def harness_versions(self):
-        if self._harness_versions is None:
-            from .harness_versions.client import AsyncHarnessVersionsClient  # noqa: E402
-
-            self._harness_versions = AsyncHarnessVersionsClient(client_wrapper=self._client_wrapper)
-        return self._harness_versions
-
-    @property
-    def agent_budgets(self):
-        if self._agent_budgets is None:
-            from .agent_budgets.client import AsyncAgentBudgetsClient  # noqa: E402
-
-            self._agent_budgets = AsyncAgentBudgetsClient(client_wrapper=self._client_wrapper)
-        return self._agent_budgets
 
     @property
     def harnesses(self):
@@ -1253,6 +1226,14 @@ class AsyncSikaruApi:
 
             self._review_queue = AsyncReviewQueueClient(client_wrapper=self._client_wrapper)
         return self._review_queue
+
+    @property
+    def run_references(self):
+        if self._run_references is None:
+            from .run_references.client import AsyncRunReferencesClient  # noqa: E402
+
+            self._run_references = AsyncRunReferencesClient(client_wrapper=self._client_wrapper)
+        return self._run_references
 
     @property
     def run_schedules(self):

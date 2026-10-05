@@ -10,6 +10,7 @@ export interface Check {
     instruction: string;
     latestResult: Sikaru.CheckResult | null;
     name: string;
+    source?: (Sikaru.CheckSource | null) | undefined;
     verification: Check.Verification;
 }
 

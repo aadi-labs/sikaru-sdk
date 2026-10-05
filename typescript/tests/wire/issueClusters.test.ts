@@ -8,7 +8,7 @@ describe("IssueClustersClient", () => {
     
     test("list_issue_clusters (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -28,7 +28,7 @@ describe("IssueClustersClient", () => {
           
     test("list_issue_clusters (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -46,7 +46,7 @@ describe("IssueClustersClient", () => {
           
     test("upsert_issue_cluster (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "label" : "label" , "traceIds" : [ "traceIds" ] };
         const rawResponseBody = { "key" : "value" };
         
@@ -70,7 +70,7 @@ describe("IssueClustersClient", () => {
           
     test("upsert_issue_cluster (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "label" : "x" , "traceIds" : [ "traceIds" , "traceIds" ] };
         const rawResponseBody = { };
         
@@ -90,47 +90,9 @@ describe("IssueClustersClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
-    test("mine_project_issue_clusters (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { "key" : "value" };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/issue-clusters/mine").respondWith()
-            .statusCode(200).jsonBody(rawResponseBody)
-                .build();
-
-        
-                        
-                                const response = await client.issueClusters.mineProjectIssueClusters("project_id");
-                                expect(response).toEqual(rawResponseBody);
-                              
-                    
-    });
-          
-    test("mine_project_issue_clusters (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
-        
-        const rawResponseBody = { };
-        
-        server
-            .mockEndpoint()
-            .post("/v1/projects/project_id/issue-clusters/mine").respondWith()
-            .statusCode(422).jsonBody(rawResponseBody)
-                .build();
-
-        
-            await expect(async () => {
-                return await client.issueClusters.mineProjectIssueClusters("project_id")
-            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
-    });
-          
     test("get_issue_cluster (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -150,7 +112,7 @@ describe("IssueClustersClient", () => {
           
     test("get_issue_cluster (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -168,7 +130,7 @@ describe("IssueClustersClient", () => {
           
     test("update_issue_cluster_status (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "status" : "status" };
         const rawResponseBody = { "key" : "value" };
         
@@ -191,7 +153,7 @@ describe("IssueClustersClient", () => {
           
     test("update_issue_cluster_status (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "status" : "x" };
         const rawResponseBody = { };
         
@@ -212,7 +174,7 @@ describe("IssueClustersClient", () => {
           
     test("propose_issue_cluster_fix (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "key" : "value" };
         
@@ -232,7 +194,7 @@ describe("IssueClustersClient", () => {
           
     test("propose_issue_cluster_fix (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         

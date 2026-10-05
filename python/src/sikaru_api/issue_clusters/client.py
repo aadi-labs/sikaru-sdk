@@ -137,55 +137,6 @@ class IssueClustersClient:
         )
         return _response.data
 
-    def mine_project_issue_clusters(
-        self,
-        project_id: str,
-        *,
-        since: typing.Optional[str] = None,
-        until: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
-        """
-        Run one failure-analysis agent pass over the project's recent traces.
-
-        This is a model-latency operation on a request path: the endpoint is sync so
-        the harness runs in the threadpool, and a project may only have one pass in
-        flight. A background job queue is the long-term home for this work; the
-        in-flight guard below is the interim bound.
-
-        Parameters
-        ----------
-        project_id : str
-
-        since : typing.Optional[str]
-
-        until : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Dict[str, typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        from sikaru_api import SikaruApi
-
-        client = SikaruApi(
-            channel_credential="YOUR_CHANNEL_CREDENTIAL",
-            api_key="YOUR_API_KEY",
-        )
-        client.issue_clusters.mine_project_issue_clusters(
-            project_id="project_id",
-        )
-        """
-        _response = self._raw_client.mine_project_issue_clusters(
-            project_id, since=since, until=until, request_options=request_options
-        )
-        return _response.data
-
     def get_issue_cluster(
         self, project_id: str, cluster_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.Dict[str, typing.Any]:
@@ -442,63 +393,6 @@ class AsyncIssueClustersClient:
             issue_title=issue_title,
             signal_tags=signal_tags,
             request_options=request_options,
-        )
-        return _response.data
-
-    async def mine_project_issue_clusters(
-        self,
-        project_id: str,
-        *,
-        since: typing.Optional[str] = None,
-        until: typing.Optional[str] = None,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
-        """
-        Run one failure-analysis agent pass over the project's recent traces.
-
-        This is a model-latency operation on a request path: the endpoint is sync so
-        the harness runs in the threadpool, and a project may only have one pass in
-        flight. A background job queue is the long-term home for this work; the
-        in-flight guard below is the interim bound.
-
-        Parameters
-        ----------
-        project_id : str
-
-        since : typing.Optional[str]
-
-        until : typing.Optional[str]
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.Dict[str, typing.Any]
-            Successful Response
-
-        Examples
-        --------
-        import asyncio
-
-        from sikaru_api import AsyncSikaruApi
-
-        client = AsyncSikaruApi(
-            channel_credential="YOUR_CHANNEL_CREDENTIAL",
-            api_key="YOUR_API_KEY",
-        )
-
-
-        async def main() -> None:
-            await client.issue_clusters.mine_project_issue_clusters(
-                project_id="project_id",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.mine_project_issue_clusters(
-            project_id, since=since, until=until, request_options=request_options
         )
         return _response.data
 

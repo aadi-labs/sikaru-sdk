@@ -9,7 +9,7 @@ from ..types.connection_apps import ConnectionApps
 from ..types.connection_authorization import ConnectionAuthorization
 from ..types.connection_config import ConnectionConfig
 from ..types.connection_credentials import ConnectionCredentials
-from ..types.connection_event import ConnectionEvent
+from ..types.connection_event_page import ConnectionEventPage
 from ..types.connection_revocation import ConnectionRevocation
 from ..types.connection_usage import ConnectionUsage
 from .raw_client import AsyncRawConnectionsClient, RawConnectionsClient
@@ -466,6 +466,8 @@ class ConnectionsClient:
         self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> Connection:
         """
+        Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+
         Parameters
         ----------
         project_id : str
@@ -531,8 +533,14 @@ class ConnectionsClient:
         return _response.data
 
     def events(
-        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.List[ConnectionEvent]:
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ConnectionEventPage:
         """
         Parameters
         ----------
@@ -540,12 +548,16 @@ class ConnectionsClient:
 
         connection_id : str
 
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.List[ConnectionEvent]
+        ConnectionEventPage
             Successful Response
 
         Examples
@@ -561,7 +573,9 @@ class ConnectionsClient:
             connection_id="connection_id",
         )
         """
-        _response = self._raw_client.events(project_id, connection_id, request_options=request_options)
+        _response = self._raw_client.events(
+            project_id, connection_id, cursor=cursor, limit=limit, request_options=request_options
+        )
         return _response.data
 
     def grant(
@@ -1259,6 +1273,8 @@ class AsyncConnectionsClient:
         self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> Connection:
         """
+        Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+
         Parameters
         ----------
         project_id : str
@@ -1340,8 +1356,14 @@ class AsyncConnectionsClient:
         return _response.data
 
     async def events(
-        self, project_id: str, connection_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> typing.List[ConnectionEvent]:
+        self,
+        project_id: str,
+        connection_id: str,
+        *,
+        cursor: typing.Optional[str] = None,
+        limit: typing.Optional[int] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ConnectionEventPage:
         """
         Parameters
         ----------
@@ -1349,12 +1371,16 @@ class AsyncConnectionsClient:
 
         connection_id : str
 
+        cursor : typing.Optional[str]
+
+        limit : typing.Optional[int]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        typing.List[ConnectionEvent]
+        ConnectionEventPage
             Successful Response
 
         Examples
@@ -1378,7 +1404,9 @@ class AsyncConnectionsClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.events(project_id, connection_id, request_options=request_options)
+        _response = await self._raw_client.events(
+            project_id, connection_id, cursor=cursor, limit=limit, request_options=request_options
+        )
         return _response.data
 
     async def grant(

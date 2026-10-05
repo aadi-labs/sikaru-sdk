@@ -8,6 +8,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 from .check_environment_view import CheckEnvironmentView
 from .check_result import CheckResult
+from .check_source import CheckSource
 from .check_verification import CheckVerification
 
 
@@ -21,6 +22,7 @@ class Check(UniversalBaseModel):
         typing.Optional[CheckResult], FieldMetadata(alias="latestResult"), pydantic.Field(alias="latestResult")
     ] = None
     name: str
+    source: typing.Optional[CheckSource] = None
     verification: CheckVerification
 
     if IS_PYDANTIC_V2:

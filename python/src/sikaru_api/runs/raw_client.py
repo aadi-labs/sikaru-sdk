@@ -368,7 +368,6 @@ class RawRunsClient:
         *,
         after: typing.Optional[str] = None,
         limit: typing.Optional[str] = None,
-        last_event_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[RunEvents]:
         """
@@ -381,8 +380,6 @@ class RawRunsClient:
         after : typing.Optional[str]
 
         limit : typing.Optional[str]
-
-        last_event_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -402,7 +399,6 @@ class RawRunsClient:
             },
             headers={
                 **_endpoint_auth_headers,
-                "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
         )
@@ -1354,7 +1350,6 @@ class AsyncRawRunsClient:
         *,
         after: typing.Optional[str] = None,
         limit: typing.Optional[str] = None,
-        last_event_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[RunEvents]:
         """
@@ -1367,8 +1362,6 @@ class AsyncRawRunsClient:
         after : typing.Optional[str]
 
         limit : typing.Optional[str]
-
-        last_event_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1390,7 +1383,6 @@ class AsyncRawRunsClient:
             },
             headers={
                 **_endpoint_auth_headers,
-                "Last-Event-ID": str(last_event_id) if last_event_id is not None else None,
             },
             request_options=request_options,
         )

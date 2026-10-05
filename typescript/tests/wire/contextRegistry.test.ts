@@ -8,7 +8,7 @@ describe("ContextRegistryClient", () => {
     
     test("create_context_registry_change (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "name" : "name" , "repoId" : "repoId" };
         const rawResponseBody = { "key" : "value" };
         
@@ -32,7 +32,7 @@ describe("ContextRegistryClient", () => {
           
     test("create_context_registry_change (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "name" : "x" , "repoId" : "x" };
         const rawResponseBody = { };
         

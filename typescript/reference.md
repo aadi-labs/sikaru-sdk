@@ -7274,6 +7274,20 @@ await client.connections.disconnect("project_id", "connection_id");
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -7384,7 +7398,7 @@ await client.connections.enable("project_id", "connection_id");
 </dl>
 </details>
 
-<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">events</a>(project_id, connection_id) -> Sikaru.ConnectionEvent[]</code></summary>
+<details><summary><code>client.connections.<a href="/src/api/resources/connections/client/Client.ts">events</a>(project_id, connection_id, { ...params }) -> Sikaru.ConnectionEventPage</code></summary>
 <dl>
 <dd>
 
@@ -7422,6 +7436,14 @@ await client.connections.events("project_id", "connection_id");
 <dd>
 
 **connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.EventsConnectionsRequest` 
     
 </dd>
 </dl>
@@ -7889,6 +7911,1120 @@ await client.conversations.recordMessage("project_id", "conversation_id", {
 </dl>
 </details>
 
+## Datasets
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">listDatasets</a>(project_id, { ...params }) -> Sikaru.DatasetList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.listDatasets("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ListDatasetsDatasetsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">createDataset</a>(project_id, { ...params }) -> Sikaru.DatasetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.createDataset("project_id", {
+    name: "name",
+    purpose: "eval"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CreateDataset` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">captureIntoNewDataset</a>(project_id, { ...params }) -> Sikaru.BatchResult</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates the named dataset and adds the runs to it; a retry of the key reuses both.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.captureIntoNewDataset("project_id", {
+    dataset: {
+        name: "name",
+        purpose: "eval"
+    },
+    idempotency_key: "idempotency_key",
+    items: [{
+            run_id: "run_id"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CaptureIntoNewRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">getDataset</a>(project_id, dataset_id) -> Sikaru.DatasetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.getDataset("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">deleteDataset</a>(project_id, dataset_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.deleteDataset("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">updateDataset</a>(project_id, dataset_id, { ...params }) -> Sikaru.DatasetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.updateDataset("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.UpdateDataset` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">captureIntoDataset</a>(project_id, dataset_id, { ...params }) -> Sikaru.BatchResult</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.captureIntoDataset("project_id", "dataset_id", {
+    idempotency_key: "idempotency_key",
+    items: [{
+            run_id: "run_id"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CaptureRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">startDatasetChecks</a>(project_id, dataset_id, { ...params }) -> Sikaru.DatasetChecksStarted</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+One Check per eligible example, each started as a production run of the agent's live version.
+
+Credits are admitted before anything is created. A retry of the same key
+returns the same checks and starts only what did not start before.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.startDatasetChecks("project_id", "dataset_id", {
+    agent_slug: "agent_slug",
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.StartDatasetChecks` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">previewDatasetChecks</a>(project_id, dataset_id, { ...params }) -> Sikaru.DatasetChecksPreview</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+How many examples can run as Checks, why the rest cannot, and the estimated model cost on ``agent``.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.previewDatasetChecks("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.PreviewDatasetChecksDatasetsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">listDatasetCheckResults</a>(project_id, dataset_id, { ...params }) -> Sikaru.DatasetCheckResults</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pass rate per agent version for each dataset version run as Checks; failures name their example and run.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.listDatasetCheckResults("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ListDatasetCheckResultsDatasetsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">listExamples</a>(project_id, dataset_id, { ...params }) -> Sikaru.DatasetExamplePage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.listExamples("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ListExamplesDatasetsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">deleteExample</a>(project_id, dataset_id, example_id) -> Sikaru.DatasetVersionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Permanently removes every copy of the example, including from older versions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.deleteExample("project_id", "dataset_id", "example_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**example_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">updateExample</a>(project_id, dataset_id, example_id, { ...params }) -> Sikaru.DatasetExampleResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Editing the expected answer or tags creates a version; edited fields are human-written.
+
+Sikaru's own tags survive a tag edit unless it comes from the signed-in dashboard, which shows them.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.updateExample("project_id", "dataset_id", "example_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**example_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.UpdateExample` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">exportDataset</a>(project_id, dataset_id, { ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.exportDataset("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ExportDatasetDatasetsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">uploadExamples</a>(project_id, dataset_id, { ...params }) -> Sikaru.BatchResult</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.uploadExamples("project_id", "dataset_id", {
+    content: "content",
+    format: "csv",
+    idempotency_key: "idempotency_key"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.UploadRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="/src/api/resources/datasets/client/Client.ts">listVersions</a>(project_id, dataset_id) -> Sikaru.DatasetVersionList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.datasets.listVersions("project_id", "dataset_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DatasetsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Deployments
 <details><summary><code>client.deployments.<a href="/src/api/resources/deployments/client/Client.ts">listConsoleDeployments</a>(project_id) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
@@ -8039,68 +9175,6 @@ await client.environments.createManagedEnvironment("project_id", {
 <dd>
 
 **requestOptions:** `EnvironmentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## EvalSeeds
-<details><summary><code>client.evalSeeds.<a href="/src/api/resources/evalSeeds/client/Client.ts">createEvalSeed</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.evalSeeds.createEvalSeed("project_id", {
-    issueId: "issueId",
-    issueTitle: "issueTitle",
-    traceIds: ["traceIds"]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.CreateEvalSeedRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EvalSeedsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -10443,332 +11517,6 @@ await client.gitCredentials.grant("project_id", "credential_id", {
 </dl>
 </details>
 
-## HarnessVersions
-<details><summary><code>client.harnessVersions.<a href="/src/api/resources/harnessVersions/client/Client.ts">createHarnessVersion</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.harnessVersions.createHarnessVersion("project_id", {
-    baseHarnessProfileId: "baseHarnessProfileId",
-    compatibilityProfileId: "compatibilityProfileId",
-    displayName: "displayName",
-    harnessId: "harnessId",
-    sourceArtifactId: "sourceArtifactId"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.CreateHarnessVersionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `HarnessVersionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## AgentBudgets
-<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">get</a>(project_id, harness_id) -> Sikaru.AgentBudget</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.agentBudgets.get("project_id", "harness_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentBudgetsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">configureAutoReload</a>(project_id, harness_id, { ...params }) -> Sikaru.AgentBudget</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.agentBudgets.configureAutoReload("project_id", "harness_id", {
-    amount_usd: "amount_usd",
-    enabled: true,
-    threshold_usd: "threshold_usd"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.ReloadInput` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentBudgetsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">add</a>(project_id, harness_id, { ...params }) -> Sikaru.FundingReceipt</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.agentBudgets.add("project_id", "harness_id", {
-    amount_usd: "amount_usd",
-    idempotency_key: "idempotency_key"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.FundingInput` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentBudgetsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agentBudgets.<a href="/src/api/resources/agentBudgets/client/Client.ts">setupPaymentMethod</a>(project_id, harness_id, { ...params }) -> Sikaru.PaymentSetupLink</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.agentBudgets.setupPaymentMethod("project_id", "harness_id", {
-    idempotency_key: "idempotency_key"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.SetupInput` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentBudgetsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Harnesses
 <details><summary><code>client.harnesses.<a href="/src/api/resources/harnesses/client/Client.ts">getInvoiceBudget</a>(project_id, harness_id) -> Sikaru.InvoiceBudget</code></summary>
 <dl>
@@ -12838,82 +13586,6 @@ await client.issueClusters.upsertIssueCluster("project_id", {
 </dl>
 </details>
 
-<details><summary><code>client.issueClusters.<a href="/src/api/resources/issueClusters/client/Client.ts">mineProjectIssueClusters</a>(project_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Run one failure-analysis agent pass over the project's recent traces.
-
-This is a model-latency operation on a request path: the endpoint is sync so
-the harness runs in the threadpool, and a project may only have one pass in
-flight. A background job queue is the long-term home for this work; the
-in-flight guard below is the interim bound.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.issueClusters.mineProjectIssueClusters("project_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.MineProjectIssueClustersIssueClustersRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `IssueClustersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.issueClusters.<a href="/src/api/resources/issueClusters/client/Client.ts">getIssueCluster</a>(project_id, cluster_id) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
 <dd>
@@ -14524,6 +15196,72 @@ await client.reviewQueue.createReviewQueueItem("project_id", {
 <dd>
 
 **requestOptions:** `ReviewQueueClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## RunReferences
+<details><summary><code>client.runReferences.<a href="/src/api/resources/runReferences/client/Client.ts">resolveRunReference</a>(project_id, reference, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runReferences.resolveRunReference("project_id", "reference");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reference:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ResolveRunReferenceRunReferencesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunReferencesClient.RequestOptions` 
     
 </dd>
 </dl>

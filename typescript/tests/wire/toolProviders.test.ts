@@ -8,7 +8,7 @@ describe("ToolProvidersClient", () => {
     
     test("register_tool_provider (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "broker_endpoint_ref" : "broker_endpoint_ref" , "capability_prefix" : "capability_prefix" , "display_name" : "display_name" , "provider_type" : "provider_type" , "tool_catalog_ref" : "tool_catalog_ref" };
         const rawResponseBody = { "key" : "value" };
         
@@ -35,7 +35,7 @@ describe("ToolProvidersClient", () => {
           
     test("register_tool_provider (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "broker_endpoint_ref" : "broker_endpoint_ref" , "capability_prefix" : "capability_prefix" , "display_name" : "display_name" , "provider_type" : "provider_type" , "tool_catalog_ref" : "tool_catalog_ref" };
         const rawResponseBody = { };
         
@@ -60,7 +60,7 @@ describe("ToolProvidersClient", () => {
           
     test("attach_source_tool_skill (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "capability_refs" : [ "capability_refs" ] , "description" : "description" , "source" : { "kind" : "kind" } };
         const rawResponseBody = { "key" : "value" };
         
@@ -87,7 +87,7 @@ describe("ToolProvidersClient", () => {
           
     test("attach_source_tool_skill (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "capability_refs" : [ "capability_refs" , "capability_refs" ] , "description" : "description" , "source" : { "kind" : "kind" } };
         const rawResponseBody = { };
         

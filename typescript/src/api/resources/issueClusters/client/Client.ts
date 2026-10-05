@@ -138,68 +138,6 @@ export class IssueClustersClient {
     }
 
     /**
-     * Run one failure-analysis agent pass over the project's recent traces.
-     *
-     * This is a model-latency operation on a request path: the endpoint is sync so
-     * the harness runs in the threadpool, and a project may only have one pass in
-     * flight. A background job queue is the long-term home for this work; the
-     * in-flight guard below is the interim bound.
-     *
-     * @param {string} project_id
-     * @param {Sikaru.MineProjectIssueClustersIssueClustersRequest} request
-     * @param {IssueClustersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Sikaru.UnprocessableEntityError}
-     * @throws {@link errors.SikaruError}
-     * @throws {@link errors.SikaruTimeoutError}
-     *
-     * @example
-     *     await client.issueClusters.mineProjectIssueClusters("project_id")
-     */
-    public mineProjectIssueClusters(project_id: string, request: Sikaru.MineProjectIssueClustersIssueClustersRequest = {}, requestOptions?: IssueClustersClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
-        return core.HttpResponsePromise.fromPromise(this.__mineProjectIssueClusters(project_id, request, requestOptions));
-    }
-
-    private async __mineProjectIssueClusters(project_id: string, request: Sikaru.MineProjectIssueClustersIssueClustersRequest = {}, requestOptions?: IssueClustersClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
-        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
-        const { since, until } = request;
-        const _queryParams: Record<string, unknown> = {
-            since,
-            until
-        };
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
-        const _response = await core.fetcher({
-            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/issue-clusters/mine`),
-            method: "POST",
-            headers: _headers,
-            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: 0,
-            abortSignal: requestOptions?.abortSignal,
-            endpointMetadata: _metadata,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging
-        });
-        if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
-                default: throw new errors.SikaruError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.body,
-                    rawResponse: _response.rawResponse
-                });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/issue-clusters/mine");
-    }
-
-    /**
      * @param {string} project_id
      * @param {string} cluster_id
      * @param {IssueClustersClient.RequestOptions} requestOptions - Request-specific configuration.

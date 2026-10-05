@@ -8,7 +8,7 @@ describe("MemoryRegistryClient", () => {
     
     test("create_memory_registry_change (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "memoryId" : "memoryId" , "memoryType" : "memoryType" , "name" : "name" , "scope" : "scope" };
         const rawResponseBody = { "key" : "value" };
         
@@ -34,7 +34,7 @@ describe("MemoryRegistryClient", () => {
           
     test("create_memory_registry_change (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "memoryId" : "x" , "memoryType" : "x" , "name" : "x" , "scope" : "x" };
         const rawResponseBody = { };
         

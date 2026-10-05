@@ -557,6 +557,8 @@ export class ConnectionsClient {
     }
 
     /**
+     * Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+     *
      * @param {string} project_id
      * @param {string} connection_id
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -659,6 +661,7 @@ export class ConnectionsClient {
     /**
      * @param {string} project_id
      * @param {string} connection_id
+     * @param {Sikaru.EventsConnectionsRequest} request
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Sikaru.UnprocessableEntityError}
@@ -668,19 +671,24 @@ export class ConnectionsClient {
      * @example
      *     await client.connections.events("project_id", "connection_id")
      */
-    public events(project_id: string, connection_id: string, requestOptions?: ConnectionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ConnectionEvent[]> {
-        return core.HttpResponsePromise.fromPromise(this.__events(project_id, connection_id, requestOptions));
+    public events(project_id: string, connection_id: string, request: Sikaru.EventsConnectionsRequest = {}, requestOptions?: ConnectionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ConnectionEventPage> {
+        return core.HttpResponsePromise.fromPromise(this.__events(project_id, connection_id, request, requestOptions));
     }
 
-    private async __events(project_id: string, connection_id: string, requestOptions?: ConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ConnectionEvent[]>> {
+    private async __events(project_id: string, connection_id: string, request: Sikaru.EventsConnectionsRequest = {}, requestOptions?: ConnectionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ConnectionEventPage>> {
         const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const { cursor, limit } = request;
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            limit
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
         const _response = await core.fetcher({
             url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/connections/${core.url.encodePathParam(connection_id)}/events`),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -689,7 +697,7 @@ export class ConnectionsClient {
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Sikaru.ConnectionEvent[], rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ConnectionEventPage, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

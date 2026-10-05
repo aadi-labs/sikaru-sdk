@@ -7,5 +7,4 @@
 export interface EventsRunsRequest {
     after?: string;
     limit?: string;
-    "Last-Event-ID"?: string | null;
 }

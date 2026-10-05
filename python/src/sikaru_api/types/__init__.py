@@ -6,7 +6,6 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .agent_budget import AgentBudget
     from .agent_definition import AgentDefinition
     from .agent_definition_schema import AgentDefinitionSchema
     from .agent_definition_source import AgentDefinitionSource
@@ -37,6 +36,10 @@ if typing.TYPE_CHECKING:
     from .attachment_view_status import AttachmentViewStatus
     from .authorization import Authorization
     from .availability import Availability
+    from .batch_counts import BatchCounts
+    from .batch_item import BatchItem
+    from .batch_item_outcome import BatchItemOutcome
+    from .batch_result import BatchResult
     from .binding import Binding
     from .binding_transport import BindingTransport
     from .built_in_tool_setting import BuiltInToolSetting
@@ -44,11 +47,13 @@ if typing.TYPE_CHECKING:
     from .capability_ceilings import CapabilityCeilings
     from .capability_ceilings_disallowed_tools_item import CapabilityCeilingsDisallowedToolsItem
     from .capability_ceilings_view import CapabilityCeilingsView
+    from .capture_item import CaptureItem
     from .case_input import CaseInput
     from .channel_identity_app import ChannelIdentityApp
     from .channel_identity_app_id import ChannelIdentityAppId
     from .channel_identity_app_ur_ls import ChannelIdentityAppUrLs
     from .check import Check
+    from .check_agent import CheckAgent
     from .check_environment import CheckEnvironment
     from .check_environment_kind import CheckEnvironmentKind
     from .check_environment_view import CheckEnvironmentView
@@ -60,6 +65,7 @@ if typing.TYPE_CHECKING:
     from .check_result_list import CheckResultList
     from .check_result_response import CheckResultResponse
     from .check_result_status import CheckResultStatus
+    from .check_source import CheckSource
     from .check_verification import CheckVerification
     from .claim_view import ClaimView
     from .complete_authorization import CompleteAuthorization
@@ -73,9 +79,12 @@ if typing.TYPE_CHECKING:
     from .connection_config_auth import ConnectionConfigAuth
     from .connection_credentials import ConnectionCredentials
     from .connection_event import ConnectionEvent
+    from .connection_event_page import ConnectionEventPage
     from .connection_grant import ConnectionGrant
     from .connection_revocation import ConnectionRevocation
     from .connection_tool import ConnectionTool
+    from .connection_tool_load import ConnectionToolLoad
+    from .connection_tool_load_status import ConnectionToolLoadStatus
     from .connection_tool_ref import ConnectionToolRef
     from .connection_usage import ConnectionUsage
     from .create_managed_agent_source_request import CreateManagedAgentSourceRequest
@@ -88,6 +97,23 @@ if typing.TYPE_CHECKING:
     from .credential_issued import CredentialIssued
     from .credential_renewed import CredentialRenewed
     from .credential_revoked import CredentialRevoked
+    from .dataset import Dataset
+    from .dataset_check_failure import DatasetCheckFailure
+    from .dataset_check_group import DatasetCheckGroup
+    from .dataset_check_results import DatasetCheckResults
+    from .dataset_checks_preview import DatasetChecksPreview
+    from .dataset_checks_started import DatasetChecksStarted
+    from .dataset_example import DatasetExample
+    from .dataset_example_page import DatasetExamplePage
+    from .dataset_example_provenance_value import DatasetExampleProvenanceValue
+    from .dataset_example_response import DatasetExampleResponse
+    from .dataset_list import DatasetList
+    from .dataset_purpose import DatasetPurpose
+    from .dataset_response import DatasetResponse
+    from .dataset_usage import DatasetUsage
+    from .dataset_version import DatasetVersion
+    from .dataset_version_list import DatasetVersionList
+    from .dataset_version_response import DatasetVersionResponse
     from .definition_change import DefinitionChange
     from .definition_revision import DefinitionRevision
     from .definition_revision_result import DefinitionRevisionResult
@@ -118,6 +144,8 @@ if typing.TYPE_CHECKING:
     from .environment_view import EnvironmentView
     from .environment_view_status import EnvironmentViewStatus
     from .event_delivery_request import EventDeliveryRequest
+    from .example_source import ExampleSource
+    from .example_source_kind import ExampleSourceKind
     from .execution_input_receipt import ExecutionInputReceipt
     from .execution_session_page import ExecutionSessionPage
     from .execution_session_record import ExecutionSessionRecord
@@ -127,8 +155,6 @@ if typing.TYPE_CHECKING:
     from .execution_turn_response import ExecutionTurnResponse
     from .execution_turn_run import ExecutionTurnRun
     from .execution_view import ExecutionView
-    from .funding_receipt import FundingReceipt
-    from .funding_status import FundingStatus
     from .git_credential import GitCredential
     from .harbor_task_files import HarborTaskFiles
     from .http_credential import HttpCredential
@@ -157,13 +183,14 @@ if typing.TYPE_CHECKING:
     from .memory_tool_setting_policy import MemoryToolSettingPolicy
     from .mention import Mention
     from .mention_resource import MentionResource
+    from .new_dataset import NewDataset
+    from .new_dataset_purpose import NewDatasetPurpose
     from .o_auth_result import OAuthResult
     from .o_auth_result_status import OAuthResultStatus
     from .open_inference_span import OpenInferenceSpan
     from .operation_view import OperationView
     from .operation_view_capability_name import OperationViewCapabilityName
     from .operation_view_method import OperationViewMethod
-    from .payment_setup_link import PaymentSetupLink
     from .personal_access_configuration import PersonalAccessConfiguration
     from .personal_channel_action import PersonalChannelAction
     from .personal_channel_approval import PersonalChannelApproval
@@ -193,7 +220,6 @@ if typing.TYPE_CHECKING:
     from .reconcile_view import ReconcileView
     from .recover_run_request import RecoverRunRequest
     from .release_action_request import ReleaseActionRequest
-    from .reload_settings import ReloadSettings
     from .renamed_managed_agent import RenamedManagedAgent
     from .replace_credentials import ReplaceCredentials
     from .resolved_mention import ResolvedMention
@@ -226,6 +252,8 @@ if typing.TYPE_CHECKING:
     from .specialist_thread import SpecialistThread
     from .specialist_threads import SpecialistThreads
     from .staged_definition_revision import StagedDefinitionRevision
+    from .started_check import StartedCheck
+    from .started_check_outcome import StartedCheckOutcome
     from .starter_check import StarterCheck
     from .target_input import TargetInput
     from .tool_provider_ref_request import ToolProviderRefRequest
@@ -257,7 +285,6 @@ if typing.TYPE_CHECKING:
     from .workspace_remote_view import WorkspaceRemoteView
     from .workspace_remote_view_username import WorkspaceRemoteViewUsername
 _dynamic_imports: typing.Dict[str, str] = {
-    "AgentBudget": ".agent_budget",
     "AgentDefinition": ".agent_definition",
     "AgentDefinitionSchema": ".agent_definition_schema",
     "AgentDefinitionSource": ".agent_definition_source",
@@ -288,6 +315,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "AttachmentViewStatus": ".attachment_view_status",
     "Authorization": ".authorization",
     "Availability": ".availability",
+    "BatchCounts": ".batch_counts",
+    "BatchItem": ".batch_item",
+    "BatchItemOutcome": ".batch_item_outcome",
+    "BatchResult": ".batch_result",
     "Binding": ".binding",
     "BindingTransport": ".binding_transport",
     "BuiltInToolSetting": ".built_in_tool_setting",
@@ -295,11 +326,13 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CapabilityCeilings": ".capability_ceilings",
     "CapabilityCeilingsDisallowedToolsItem": ".capability_ceilings_disallowed_tools_item",
     "CapabilityCeilingsView": ".capability_ceilings_view",
+    "CaptureItem": ".capture_item",
     "CaseInput": ".case_input",
     "ChannelIdentityApp": ".channel_identity_app",
     "ChannelIdentityAppId": ".channel_identity_app_id",
     "ChannelIdentityAppUrLs": ".channel_identity_app_ur_ls",
     "Check": ".check",
+    "CheckAgent": ".check_agent",
     "CheckEnvironment": ".check_environment",
     "CheckEnvironmentKind": ".check_environment_kind",
     "CheckEnvironmentView": ".check_environment_view",
@@ -311,6 +344,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CheckResultList": ".check_result_list",
     "CheckResultResponse": ".check_result_response",
     "CheckResultStatus": ".check_result_status",
+    "CheckSource": ".check_source",
     "CheckVerification": ".check_verification",
     "ClaimView": ".claim_view",
     "CompleteAuthorization": ".complete_authorization",
@@ -324,9 +358,12 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ConnectionConfigAuth": ".connection_config_auth",
     "ConnectionCredentials": ".connection_credentials",
     "ConnectionEvent": ".connection_event",
+    "ConnectionEventPage": ".connection_event_page",
     "ConnectionGrant": ".connection_grant",
     "ConnectionRevocation": ".connection_revocation",
     "ConnectionTool": ".connection_tool",
+    "ConnectionToolLoad": ".connection_tool_load",
+    "ConnectionToolLoadStatus": ".connection_tool_load_status",
     "ConnectionToolRef": ".connection_tool_ref",
     "ConnectionUsage": ".connection_usage",
     "CreateManagedAgentSourceRequest": ".create_managed_agent_source_request",
@@ -339,6 +376,23 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CredentialIssued": ".credential_issued",
     "CredentialRenewed": ".credential_renewed",
     "CredentialRevoked": ".credential_revoked",
+    "Dataset": ".dataset",
+    "DatasetCheckFailure": ".dataset_check_failure",
+    "DatasetCheckGroup": ".dataset_check_group",
+    "DatasetCheckResults": ".dataset_check_results",
+    "DatasetChecksPreview": ".dataset_checks_preview",
+    "DatasetChecksStarted": ".dataset_checks_started",
+    "DatasetExample": ".dataset_example",
+    "DatasetExamplePage": ".dataset_example_page",
+    "DatasetExampleProvenanceValue": ".dataset_example_provenance_value",
+    "DatasetExampleResponse": ".dataset_example_response",
+    "DatasetList": ".dataset_list",
+    "DatasetPurpose": ".dataset_purpose",
+    "DatasetResponse": ".dataset_response",
+    "DatasetUsage": ".dataset_usage",
+    "DatasetVersion": ".dataset_version",
+    "DatasetVersionList": ".dataset_version_list",
+    "DatasetVersionResponse": ".dataset_version_response",
     "DefinitionChange": ".definition_change",
     "DefinitionRevision": ".definition_revision",
     "DefinitionRevisionResult": ".definition_revision_result",
@@ -369,6 +423,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "EnvironmentView": ".environment_view",
     "EnvironmentViewStatus": ".environment_view_status",
     "EventDeliveryRequest": ".event_delivery_request",
+    "ExampleSource": ".example_source",
+    "ExampleSourceKind": ".example_source_kind",
     "ExecutionInputReceipt": ".execution_input_receipt",
     "ExecutionSessionPage": ".execution_session_page",
     "ExecutionSessionRecord": ".execution_session_record",
@@ -378,8 +434,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ExecutionTurnResponse": ".execution_turn_response",
     "ExecutionTurnRun": ".execution_turn_run",
     "ExecutionView": ".execution_view",
-    "FundingReceipt": ".funding_receipt",
-    "FundingStatus": ".funding_status",
     "GitCredential": ".git_credential",
     "HarborTaskFiles": ".harbor_task_files",
     "HttpCredential": ".http_credential",
@@ -408,13 +462,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MemoryToolSettingPolicy": ".memory_tool_setting_policy",
     "Mention": ".mention",
     "MentionResource": ".mention_resource",
+    "NewDataset": ".new_dataset",
+    "NewDatasetPurpose": ".new_dataset_purpose",
     "OAuthResult": ".o_auth_result",
     "OAuthResultStatus": ".o_auth_result_status",
     "OpenInferenceSpan": ".open_inference_span",
     "OperationView": ".operation_view",
     "OperationViewCapabilityName": ".operation_view_capability_name",
     "OperationViewMethod": ".operation_view_method",
-    "PaymentSetupLink": ".payment_setup_link",
     "PersonalAccessConfiguration": ".personal_access_configuration",
     "PersonalChannelAction": ".personal_channel_action",
     "PersonalChannelApproval": ".personal_channel_approval",
@@ -444,7 +499,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ReconcileView": ".reconcile_view",
     "RecoverRunRequest": ".recover_run_request",
     "ReleaseActionRequest": ".release_action_request",
-    "ReloadSettings": ".reload_settings",
     "RenamedManagedAgent": ".renamed_managed_agent",
     "ReplaceCredentials": ".replace_credentials",
     "ResolvedMention": ".resolved_mention",
@@ -477,6 +531,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "SpecialistThread": ".specialist_thread",
     "SpecialistThreads": ".specialist_threads",
     "StagedDefinitionRevision": ".staged_definition_revision",
+    "StartedCheck": ".started_check",
+    "StartedCheckOutcome": ".started_check_outcome",
     "StarterCheck": ".starter_check",
     "TargetInput": ".target_input",
     "ToolProviderRefRequest": ".tool_provider_ref_request",
@@ -532,7 +588,6 @@ def __dir__():
 
 
 __all__ = [
-    "AgentBudget",
     "AgentDefinition",
     "AgentDefinitionSchema",
     "AgentDefinitionSource",
@@ -563,6 +618,10 @@ __all__ = [
     "AttachmentViewStatus",
     "Authorization",
     "Availability",
+    "BatchCounts",
+    "BatchItem",
+    "BatchItemOutcome",
+    "BatchResult",
     "Binding",
     "BindingTransport",
     "BuiltInToolSetting",
@@ -570,11 +629,13 @@ __all__ = [
     "CapabilityCeilings",
     "CapabilityCeilingsDisallowedToolsItem",
     "CapabilityCeilingsView",
+    "CaptureItem",
     "CaseInput",
     "ChannelIdentityApp",
     "ChannelIdentityAppId",
     "ChannelIdentityAppUrLs",
     "Check",
+    "CheckAgent",
     "CheckEnvironment",
     "CheckEnvironmentKind",
     "CheckEnvironmentView",
@@ -586,6 +647,7 @@ __all__ = [
     "CheckResultList",
     "CheckResultResponse",
     "CheckResultStatus",
+    "CheckSource",
     "CheckVerification",
     "ClaimView",
     "CompleteAuthorization",
@@ -599,9 +661,12 @@ __all__ = [
     "ConnectionConfigAuth",
     "ConnectionCredentials",
     "ConnectionEvent",
+    "ConnectionEventPage",
     "ConnectionGrant",
     "ConnectionRevocation",
     "ConnectionTool",
+    "ConnectionToolLoad",
+    "ConnectionToolLoadStatus",
     "ConnectionToolRef",
     "ConnectionUsage",
     "CreateManagedAgentSourceRequest",
@@ -614,6 +679,23 @@ __all__ = [
     "CredentialIssued",
     "CredentialRenewed",
     "CredentialRevoked",
+    "Dataset",
+    "DatasetCheckFailure",
+    "DatasetCheckGroup",
+    "DatasetCheckResults",
+    "DatasetChecksPreview",
+    "DatasetChecksStarted",
+    "DatasetExample",
+    "DatasetExamplePage",
+    "DatasetExampleProvenanceValue",
+    "DatasetExampleResponse",
+    "DatasetList",
+    "DatasetPurpose",
+    "DatasetResponse",
+    "DatasetUsage",
+    "DatasetVersion",
+    "DatasetVersionList",
+    "DatasetVersionResponse",
     "DefinitionChange",
     "DefinitionRevision",
     "DefinitionRevisionResult",
@@ -644,6 +726,8 @@ __all__ = [
     "EnvironmentView",
     "EnvironmentViewStatus",
     "EventDeliveryRequest",
+    "ExampleSource",
+    "ExampleSourceKind",
     "ExecutionInputReceipt",
     "ExecutionSessionPage",
     "ExecutionSessionRecord",
@@ -653,8 +737,6 @@ __all__ = [
     "ExecutionTurnResponse",
     "ExecutionTurnRun",
     "ExecutionView",
-    "FundingReceipt",
-    "FundingStatus",
     "GitCredential",
     "HarborTaskFiles",
     "HttpCredential",
@@ -683,13 +765,14 @@ __all__ = [
     "MemoryToolSettingPolicy",
     "Mention",
     "MentionResource",
+    "NewDataset",
+    "NewDatasetPurpose",
     "OAuthResult",
     "OAuthResultStatus",
     "OpenInferenceSpan",
     "OperationView",
     "OperationViewCapabilityName",
     "OperationViewMethod",
-    "PaymentSetupLink",
     "PersonalAccessConfiguration",
     "PersonalChannelAction",
     "PersonalChannelApproval",
@@ -719,7 +802,6 @@ __all__ = [
     "ReconcileView",
     "RecoverRunRequest",
     "ReleaseActionRequest",
-    "ReloadSettings",
     "RenamedManagedAgent",
     "ReplaceCredentials",
     "ResolvedMention",
@@ -752,6 +834,8 @@ __all__ = [
     "SpecialistThread",
     "SpecialistThreads",
     "StagedDefinitionRevision",
+    "StartedCheck",
+    "StartedCheckOutcome",
     "StarterCheck",
     "TargetInput",
     "ToolProviderRefRequest",

@@ -227,6 +227,17 @@
             },
             "default": "./dist/cjs/api/resources/conversations/exports.js"
         },
+        "./datasets": {
+            "import": {
+                "types": "./dist/esm/api/resources/datasets/exports.d.mts",
+                "default": "./dist/esm/api/resources/datasets/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/datasets/exports.d.ts",
+                "default": "./dist/cjs/api/resources/datasets/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/datasets/exports.js"
+        },
         "./deployments": {
             "import": {
                 "types": "./dist/esm/api/resources/deployments/exports.d.mts",
@@ -248,17 +259,6 @@
                 "default": "./dist/cjs/api/resources/environments/exports.js"
             },
             "default": "./dist/cjs/api/resources/environments/exports.js"
-        },
-        "./evalSeeds": {
-            "import": {
-                "types": "./dist/esm/api/resources/evalSeeds/exports.d.mts",
-                "default": "./dist/esm/api/resources/evalSeeds/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/evalSeeds/exports.d.ts",
-                "default": "./dist/cjs/api/resources/evalSeeds/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/evalSeeds/exports.js"
         },
         "./evaluationComparisons": {
             "import": {
@@ -380,28 +380,6 @@
                 "default": "./dist/cjs/api/resources/gitCredentials/exports.js"
             },
             "default": "./dist/cjs/api/resources/gitCredentials/exports.js"
-        },
-        "./harnessVersions": {
-            "import": {
-                "types": "./dist/esm/api/resources/harnessVersions/exports.d.mts",
-                "default": "./dist/esm/api/resources/harnessVersions/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/harnessVersions/exports.d.ts",
-                "default": "./dist/cjs/api/resources/harnessVersions/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/harnessVersions/exports.js"
-        },
-        "./agentBudgets": {
-            "import": {
-                "types": "./dist/esm/api/resources/agentBudgets/exports.d.mts",
-                "default": "./dist/esm/api/resources/agentBudgets/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/agentBudgets/exports.d.ts",
-                "default": "./dist/cjs/api/resources/agentBudgets/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/agentBudgets/exports.js"
         },
         "./harnesses": {
             "import": {
@@ -556,6 +534,17 @@
                 "default": "./dist/cjs/api/resources/reviewQueue/exports.js"
             },
             "default": "./dist/cjs/api/resources/reviewQueue/exports.js"
+        },
+        "./runReferences": {
+            "import": {
+                "types": "./dist/esm/api/resources/runReferences/exports.d.mts",
+                "default": "./dist/esm/api/resources/runReferences/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/runReferences/exports.d.ts",
+                "default": "./dist/cjs/api/resources/runReferences/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/runReferences/exports.js"
         },
         "./runSchedules": {
             "import": {

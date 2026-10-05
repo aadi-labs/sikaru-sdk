@@ -8,7 +8,7 @@ describe("HttpChannelsClient", () => {
     
     test("invoke (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "content" : "content" , "conversation_id" : "conversation_id" , "message_id" : "message_id" };
         const rawResponseBody = { "id" : "id" , "operator_url" : "operator_url" , "output" : { "content" : "content" } , "run_id" : "run_id" , "session_id" : "session_id" , "status" : "accepted" , "status_url" : "status_url" };
         
@@ -33,7 +33,7 @@ describe("HttpChannelsClient", () => {
           
     test("invoke (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "content" : "x" , "conversation_id" : "x" , "message_id" : "x" };
         const rawResponseBody = { };
         
@@ -56,7 +56,7 @@ describe("HttpChannelsClient", () => {
           
     test("poll (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { "id" : "id" , "operator_url" : "operator_url" , "output" : { "content" : "content" } , "run_id" : "run_id" , "session_id" : "session_id" , "status" : "accepted" , "status_url" : "status_url" };
         
@@ -76,7 +76,7 @@ describe("HttpChannelsClient", () => {
           
     test("poll (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         
@@ -94,7 +94,7 @@ describe("HttpChannelsClient", () => {
           
     test("start_slack_link (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "installation_id" : "installation_id" };
         const rawResponseBody = { "challenge" : "challenge" , "verification_id" : "verification_id" };
         
@@ -119,7 +119,7 @@ describe("HttpChannelsClient", () => {
           
     test("start_slack_link (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "installation_id" : "x" };
         const rawResponseBody = { };
         
@@ -142,7 +142,7 @@ describe("HttpChannelsClient", () => {
           
     test("unlink_slack_identity (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         
         
@@ -161,7 +161,7 @@ describe("HttpChannelsClient", () => {
           
     test("unlink_slack_identity (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new SikaruApi({ "maxRetries" : 0 , "bearerAuth" : { "apiKey" : "test" } , "bindingBearerAuth" : { "channelCredential" : "test" } , "environment" : server.baseUrl });
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
         const rawResponseBody = { };
         

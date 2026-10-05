@@ -266,7 +266,6 @@ class RunsClient:
         *,
         after: typing.Optional[str] = None,
         limit: typing.Optional[str] = None,
-        last_event_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> RunEvents:
         """
@@ -279,8 +278,6 @@ class RunsClient:
         after : typing.Optional[str]
 
         limit : typing.Optional[str]
-
-        last_event_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -304,7 +301,7 @@ class RunsClient:
         )
         """
         _response = self._raw_client.events(
-            project_id, run_id, after=after, limit=limit, last_event_id=last_event_id, request_options=request_options
+            project_id, run_id, after=after, limit=limit, request_options=request_options
         )
         return _response.data
 
@@ -931,7 +928,6 @@ class AsyncRunsClient:
         *,
         after: typing.Optional[str] = None,
         limit: typing.Optional[str] = None,
-        last_event_id: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> RunEvents:
         """
@@ -944,8 +940,6 @@ class AsyncRunsClient:
         after : typing.Optional[str]
 
         limit : typing.Optional[str]
-
-        last_event_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -977,7 +971,7 @@ class AsyncRunsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.events(
-            project_id, run_id, after=after, limit=limit, last_event_id=last_event_id, request_options=request_options
+            project_id, run_id, after=after, limit=limit, request_options=request_options
         )
         return _response.data
 

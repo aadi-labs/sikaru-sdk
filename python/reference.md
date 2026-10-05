@@ -9466,6 +9466,20 @@ client.connections.disconnect(
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retry loading tools. Tools load automatically after sign-in and on creation; the outcome is recorded in `tool_load`.
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -9598,7 +9612,7 @@ client.connections.enable(
 </dl>
 </details>
 
-<details><summary><code>client.connections.<a href="src/sikaru_api/connections/client.py">events</a>(...) -> typing.List[ConnectionEvent]</code></summary>
+<details><summary><code>client.connections.<a href="src/sikaru_api/connections/client.py">events</a>(...) -> ConnectionEventPage</code></summary>
 <dl>
 <dd>
 
@@ -9647,6 +9661,22 @@ client.connections.events(
 <dd>
 
 **connection_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**cursor:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` 
     
 </dd>
 </dl>
@@ -10406,6 +10436,1430 @@ client.conversations.record_message(
 </dl>
 </details>
 
+## Datasets
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">list_datasets</a>(...) -> DatasetList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.list_datasets(
+    project_id="project_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purpose:** `typing.Optional[ListDatasetsDatasetsRequestPurpose]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">create_dataset</a>(...) -> DatasetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.create_dataset(
+    project_id="project_id",
+    name="name",
+    purpose="eval",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purpose:** `CreateDatasetPurpose` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">capture_into_new_dataset</a>(...) -> BatchResult</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates the named dataset and adds the runs to it; a retry of the key reuses both.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, NewDataset, CaptureItem
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.capture_into_new_dataset(
+    project_id="project_id",
+    dataset=NewDataset(
+        name="name",
+        purpose="eval",
+    ),
+    idempotency_key="idempotency_key",
+    items=[
+        CaptureItem(
+            run_id="run_id",
+        )
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset:** `NewDataset` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**items:** `typing.List[CaptureItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">get_dataset</a>(...) -> DatasetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.get_dataset(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">delete_dataset</a>(...)</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.delete_dataset(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">update_dataset</a>(...) -> DatasetResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.update_dataset(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**description:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**name:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**purpose:** `typing.Optional[UpdateDatasetPurpose]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">capture_into_dataset</a>(...) -> BatchResult</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi, CaptureItem
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.capture_into_dataset(
+    project_id="project_id",
+    dataset_id="dataset_id",
+    idempotency_key="idempotency_key",
+    items=[
+        CaptureItem(
+            run_id="run_id",
+        )
+    ],
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**items:** `typing.List[CaptureItem]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">start_dataset_checks</a>(...) -> DatasetChecksStarted</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+One Check per eligible example, each started as a production run of the agent's live version.
+
+Credits are admitted before anything is created. A retry of the same key
+returns the same checks and starts only what did not start before.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.start_dataset_checks(
+    project_id="project_id",
+    dataset_id="dataset_id",
+    agent_slug="agent_slug",
+    idempotency_key="idempotency_key",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_version:** `typing.Optional[int]` — Omit for the latest dataset version.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[str]` — The agent version to check; Checks run on the agent's live version.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">preview_dataset_checks</a>(...) -> DatasetChecksPreview</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+How many examples can run as Checks, why the rest cannot, and the estimated model cost on ``agent``.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.preview_dataset_checks(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">list_dataset_check_results</a>(...) -> DatasetCheckResults</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Pass rate per agent version for each dataset version run as Checks; failures name their example and run.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.list_dataset_check_results(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">list_examples</a>(...) -> DatasetExamplePage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.list_examples(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**limit:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**offset:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">delete_example</a>(...) -> DatasetVersionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Permanently removes every copy of the example, including from older versions.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.delete_example(
+    project_id="project_id",
+    dataset_id="dataset_id",
+    example_id="example_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**example_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">update_example</a>(...) -> DatasetExampleResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Editing the expected answer or tags creates a version; edited fields are human-written.
+
+Sikaru's own tags survive a tag edit unless it comes from the signed-in dashboard, which shows them.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.update_example(
+    project_id="project_id",
+    dataset_id="dataset_id",
+    example_id="example_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**example_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**expected:** `typing.Optional[UpdateExampleExpected]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tags:** `typing.Optional[typing.List[str]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">export_dataset</a>(...) -> typing.Iterator[bytes]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.export_dataset(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**version:** `typing.Optional[int]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">upload_examples</a>(...) -> BatchResult</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.upload_examples(
+    project_id="project_id",
+    dataset_id="dataset_id",
+    content="content",
+    format="csv",
+    idempotency_key="idempotency_key",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**content:** `str` — CSV with input, expected and tags columns, or JSONL in the export shape.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**format:** `UploadRequestFormat` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**idempotency_key:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.datasets.<a href="src/sikaru_api/datasets/client.py">list_versions</a>(...) -> DatasetVersionList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.datasets.list_versions(
+    project_id="project_id",
+    dataset_id="dataset_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**dataset_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Deployments
 <details><summary><code>client.deployments.<a href="src/sikaru_api/deployments/client.py">list_console_deployments</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
 <dl>
@@ -10609,119 +12063,6 @@ client.environments.create_managed_environment(
 <dd>
 
 **status:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## EvalSeeds
-<details><summary><code>client.eval_seeds.<a href="src/sikaru_api/eval_seeds/client.py">create_eval_seed</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.eval_seeds.create_eval_seed(
-    project_id="project_id",
-    issue_id="issueId",
-    issue_title="issueTitle",
-    trace_ids=[
-        "traceIds"
-    ],
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**issue_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**issue_title:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**trace_ids:** `typing.List[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**agent_id:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**dataset_name:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**evaluator_name:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -14160,454 +15501,6 @@ client.git_credentials.grant(
 </dl>
 </details>
 
-## HarnessVersions
-<details><summary><code>client.harness_versions.<a href="src/sikaru_api/harness_versions/client.py">create_harness_version</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.harness_versions.create_harness_version(
-    project_id="project_id",
-    base_harness_profile_id="baseHarnessProfileId",
-    compatibility_profile_id="compatibilityProfileId",
-    display_name="displayName",
-    harness_id="harnessId",
-    source_artifact_id="sourceArtifactId",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**base_harness_profile_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**compatibility_profile_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**display_name:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**source_artifact_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**base_harness_version_id:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**status:** `typing.Optional[CreateHarnessVersionRequestStatus]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## AgentBudgets
-<details><summary><code>client.agent_budgets.<a href="src/sikaru_api/agent_budgets/client.py">get</a>(...) -> AgentBudget</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.agent_budgets.get(
-    project_id="project_id",
-    harness_id="harness_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agent_budgets.<a href="src/sikaru_api/agent_budgets/client.py">configure_auto_reload</a>(...) -> AgentBudget</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.agent_budgets.configure_auto_reload(
-    project_id="project_id",
-    harness_id="harness_id",
-    amount_usd="amount_usd",
-    enabled=True,
-    threshold_usd="threshold_usd",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**amount_usd:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**enabled:** `bool` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**threshold_usd:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agent_budgets.<a href="src/sikaru_api/agent_budgets/client.py">add</a>(...) -> FundingReceipt</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.agent_budgets.add(
-    project_id="project_id",
-    harness_id="harness_id",
-    amount_usd="amount_usd",
-    idempotency_key="idempotency_key",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**amount_usd:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.agent_budgets.<a href="src/sikaru_api/agent_budgets/client.py">setup_payment_method</a>(...) -> PaymentSetupLink</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.agent_budgets.setup_payment_method(
-    project_id="project_id",
-    harness_id="harness_id",
-    idempotency_key="idempotency_key",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**harness_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**idempotency_key:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Harnesses
 <details><summary><code>client.harnesses.<a href="src/sikaru_api/harnesses/client.py">get_invoice_budget</a>(...) -> InvoiceBudget</code></summary>
 <dl>
@@ -15652,14 +16545,6 @@ client.runs.events(
 <dd>
 
 **limit:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**last_event_id:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -17427,100 +18312,6 @@ client.issue_clusters.upsert_issue_cluster(
 <dd>
 
 **signal_tags:** `typing.Optional[typing.List[str]]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.issue_clusters.<a href="src/sikaru_api/issue_clusters/client.py">mine_project_issue_clusters</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Run one failure-analysis agent pass over the project's recent traces.
-
-This is a model-latency operation on a request path: the endpoint is sync so
-the harness runs in the threadpool, and a project may only have one pass in
-flight. A background job queue is the long-term home for this work; the
-in-flight guard below is the interim bound.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```python
-from sikaru_api import SikaruApi
-from sikaru_api.environment import SikaruApiEnvironment
-
-client = SikaruApi(
-    api_key="<token>",
-    environment=SikaruApiEnvironment.DEFAULT,
-)
-
-client.issue_clusters.mine_project_issue_clusters(
-    project_id="project_id",
-)
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `str` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**since:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**until:** `typing.Optional[str]` 
     
 </dd>
 </dl>
@@ -19927,6 +20718,83 @@ client.review_queue.create_review_queue_item(
 <dd>
 
 **target:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## RunReferences
+<details><summary><code>client.run_references.<a href="src/sikaru_api/run_references/client.py">resolve_run_reference</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.run_references.resolve_run_reference(
+    project_id="project_id",
+    reference="reference",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**reference:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**as_of:** `typing.Optional[datetime.datetime]` 
     
 </dd>
 </dl>
