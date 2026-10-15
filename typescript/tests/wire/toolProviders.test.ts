@@ -37,6 +37,81 @@ describe("ToolProvidersClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "broker_endpoint_ref" : "broker_endpoint_ref" , "capability_prefix" : "capability_prefix" , "display_name" : "display_name" , "provider_type" : "provider_type" , "tool_catalog_ref" : "tool_catalog_ref" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/tool-providers").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.toolProviders.registerToolProvider("project_id", {
+    broker_endpoint_ref: "broker_endpoint_ref",
+    capability_prefix: "capability_prefix",
+    display_name: "display_name",
+    provider_type: "provider_type",
+    tool_catalog_ref: "tool_catalog_ref"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("register_tool_provider (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "broker_endpoint_ref" : "broker_endpoint_ref" , "capability_prefix" : "capability_prefix" , "display_name" : "display_name" , "provider_type" : "provider_type" , "tool_catalog_ref" : "tool_catalog_ref" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/tool-providers").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.toolProviders.registerToolProvider("project_id", {
+    broker_endpoint_ref: "broker_endpoint_ref",
+    capability_prefix: "capability_prefix",
+    display_name: "display_name",
+    provider_type: "provider_type",
+    tool_catalog_ref: "tool_catalog_ref"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("register_tool_provider (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "broker_endpoint_ref" : "broker_endpoint_ref" , "capability_prefix" : "capability_prefix" , "display_name" : "display_name" , "provider_type" : "provider_type" , "tool_catalog_ref" : "tool_catalog_ref" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/tool-providers").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.toolProviders.registerToolProvider("project_id", {
+    broker_endpoint_ref: "broker_endpoint_ref",
+    capability_prefix: "capability_prefix",
+    display_name: "display_name",
+    provider_type: "provider_type",
+    tool_catalog_ref: "tool_catalog_ref"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("register_tool_provider (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "broker_endpoint_ref" : "broker_endpoint_ref" , "capability_prefix" : "capability_prefix" , "display_name" : "display_name" , "provider_type" : "provider_type" , "tool_catalog_ref" : "tool_catalog_ref" };
         const rawResponseBody = { };
         
         server
@@ -86,6 +161,81 @@ describe("ToolProvidersClient", () => {
     });
           
     test("attach_source_tool_skill (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "capability_refs" : [ "capability_refs" , "capability_refs" ] , "description" : "description" , "source" : { "kind" : "kind" } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/tool-providers/tool_provider_id/skills").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.toolProviders.attachSourceToolSkill("project_id", "tool_provider_id", {
+    capability_refs: ["capability_refs", "capability_refs"],
+    description: "description",
+    source: {
+        kind: "kind"
+    }
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("attach_source_tool_skill (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "capability_refs" : [ "capability_refs" , "capability_refs" ] , "description" : "description" , "source" : { "kind" : "kind" } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/tool-providers/tool_provider_id/skills").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.toolProviders.attachSourceToolSkill("project_id", "tool_provider_id", {
+    capability_refs: ["capability_refs", "capability_refs"],
+    description: "description",
+    source: {
+        kind: "kind"
+    }
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("attach_source_tool_skill (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "capability_refs" : [ "capability_refs" , "capability_refs" ] , "description" : "description" , "source" : { "kind" : "kind" } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/tool-providers/tool_provider_id/skills").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.toolProviders.attachSourceToolSkill("project_id", "tool_provider_id", {
+    capability_refs: ["capability_refs", "capability_refs"],
+    description: "description",
+    source: {
+        kind: "kind"
+    }
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("attach_source_tool_skill (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "capability_refs" : [ "capability_refs" , "capability_refs" ] , "description" : "description" , "source" : { "kind" : "kind" } };

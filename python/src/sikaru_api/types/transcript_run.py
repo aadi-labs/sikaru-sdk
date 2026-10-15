@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
+from .run_error import RunError
 from .transcript_run_environment import TranscriptRunEnvironment
 
 
@@ -21,6 +22,7 @@ class TranscriptRun(UniversalBaseModel):
         typing.Optional[str], FieldMetadata(alias="conversationId"), pydantic.Field(alias="conversationId")
     ] = None
     environment: TranscriptRunEnvironment
+    error: typing.Optional[RunError] = None
     harness_version_id: typing_extensions.Annotated[
         str, FieldMetadata(alias="harnessVersionId"), pydantic.Field(alias="harnessVersionId")
     ]

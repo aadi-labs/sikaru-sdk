@@ -9,6 +9,5 @@ export interface PersonalChannelFile {
     path: string;
     sha256: string;
     size: number;
-    snapshotDigest: string | null;
     sourceRunId: string | null;
 }

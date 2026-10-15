@@ -14,7 +14,6 @@ export interface Binding {
     per_minute?: number | undefined;
     personal_access?: boolean | undefined;
     recipient_id: string | null;
-    shared_tenant_id?: (string | null) | undefined;
     status: string;
     transport: Binding.Transport;
 }

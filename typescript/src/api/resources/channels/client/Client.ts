@@ -29,6 +29,9 @@ export class ChannelsClient {
      * @param {string} project_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -62,6 +65,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -79,6 +85,9 @@ export class ChannelsClient {
      * @param {Sikaru.BindingsChannelsRequest} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -118,6 +127,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -135,6 +147,9 @@ export class ChannelsClient {
      * @param {Sikaru.CreateBinding} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -174,6 +189,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -191,6 +209,9 @@ export class ChannelsClient {
      * @param {string} binding_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -224,6 +245,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -242,6 +266,9 @@ export class ChannelsClient {
      * @param {Sikaru.BindingStatus} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -280,6 +307,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -298,6 +328,9 @@ export class ChannelsClient {
      * @param {Sikaru.HttpConfiguration} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -334,6 +367,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -351,6 +387,9 @@ export class ChannelsClient {
      * @param {string} binding_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -384,6 +423,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -402,6 +444,9 @@ export class ChannelsClient {
      * @param {Sikaru.PersonalAccess} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -440,6 +485,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -457,6 +505,9 @@ export class ChannelsClient {
      * @param {string} binding_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -490,6 +541,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -508,6 +562,9 @@ export class ChannelsClient {
      * @param {string} verification_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -541,6 +598,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -559,6 +619,9 @@ export class ChannelsClient {
      * @param {Sikaru.SlackLink} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -597,6 +660,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -615,6 +681,9 @@ export class ChannelsClient {
      * @param {string} installation_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -648,6 +717,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -665,6 +737,9 @@ export class ChannelsClient {
      * @param {Sikaru.CreationResume} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -705,6 +780,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -722,6 +800,9 @@ export class ChannelsClient {
      * @param {string} resume_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -755,6 +836,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -771,6 +855,9 @@ export class ChannelsClient {
      * @param {string} project_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -804,6 +891,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -821,6 +911,9 @@ export class ChannelsClient {
      * @param {Sikaru.IdentityApp} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -863,6 +956,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -880,6 +976,9 @@ export class ChannelsClient {
      * @param {string} app_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -913,6 +1012,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -931,6 +1033,9 @@ export class ChannelsClient {
      * @param {Sikaru.ApplicationUrLs} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -967,6 +1072,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -985,6 +1093,9 @@ export class ChannelsClient {
      * @param {Sikaru.Subject} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1024,6 +1135,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1041,6 +1155,9 @@ export class ChannelsClient {
      * @param {Sikaru.CustomerDm} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1082,6 +1199,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1099,6 +1219,9 @@ export class ChannelsClient {
      * @param {string} run_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1132,6 +1255,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1150,6 +1276,9 @@ export class ChannelsClient {
      * @param {Sikaru.ResendDelivery} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1188,6 +1317,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1205,6 +1337,9 @@ export class ChannelsClient {
      * @param {string} verification_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1238,6 +1373,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1254,6 +1392,9 @@ export class ChannelsClient {
      * @param {string} project_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1287,6 +1428,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1304,6 +1448,9 @@ export class ChannelsClient {
      * @param {string} installation_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1337,6 +1484,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1354,6 +1504,9 @@ export class ChannelsClient {
      * @param {string} installation_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1387,6 +1540,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1404,6 +1560,9 @@ export class ChannelsClient {
      * @param {string} installation_id
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1437,6 +1596,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1454,6 +1616,9 @@ export class ChannelsClient {
      * @param {Sikaru.CompleteOAuth} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1492,6 +1657,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -1509,6 +1677,9 @@ export class ChannelsClient {
      * @param {Sikaru.StartOAuth} request
      * @param {ChannelsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1545,6 +1716,9 @@ export class ChannelsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,

@@ -6,11 +6,15 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
+    from .list_eligible_releases_execution_sessions_request_environment import (
+        ListEligibleReleasesExecutionSessionsRequestEnvironment,
+    )
     from .session_input_environment import SessionInputEnvironment
     from .session_input_reasoning_effort import SessionInputReasoningEffort
     from .turn_input_delivery_mode import TurnInputDeliveryMode
     from .turn_input_run_mode import TurnInputRunMode
 _dynamic_imports: typing.Dict[str, str] = {
+    "ListEligibleReleasesExecutionSessionsRequestEnvironment": ".list_eligible_releases_execution_sessions_request_environment",
     "SessionInputEnvironment": ".session_input_environment",
     "SessionInputReasoningEffort": ".session_input_reasoning_effort",
     "TurnInputDeliveryMode": ".turn_input_delivery_mode",
@@ -39,4 +43,10 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["SessionInputEnvironment", "SessionInputReasoningEffort", "TurnInputDeliveryMode", "TurnInputRunMode"]
+__all__ = [
+    "ListEligibleReleasesExecutionSessionsRequestEnvironment",
+    "SessionInputEnvironment",
+    "SessionInputReasoningEffort",
+    "TurnInputDeliveryMode",
+    "TurnInputRunMode",
+]

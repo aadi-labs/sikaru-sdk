@@ -9,6 +9,7 @@ from ..core.serialization import FieldMetadata
 from .document_access_delta import DocumentAccessDelta
 from .document_blocker import DocumentBlocker
 from .document_issue import DocumentIssue
+from .document_publication_publication_status import DocumentPublicationPublicationStatus
 from .earlier_document_session import EarlierDocumentSession
 
 
@@ -48,6 +49,11 @@ class DocumentPublication(UniversalBaseModel):
     ]
     prior_version_id: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="priorVersionId"), pydantic.Field(alias="priorVersionId")
+    ] = None
+    publication_status: typing_extensions.Annotated[
+        typing.Optional[DocumentPublicationPublicationStatus],
+        FieldMetadata(alias="publicationStatus"),
+        pydantic.Field(alias="publicationStatus"),
     ] = None
     revision: typing.Optional[int] = None
     unchanged: typing.Optional[bool] = None

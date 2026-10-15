@@ -5,9 +5,9 @@ import * as errors from "../../errors/index.js";
 import * as Sikaru from "../index.js";
 
 export class ServiceUnavailableError extends errors.SikaruError {
-    declare public readonly body: Sikaru.ComputeError;
+    declare public readonly body: Sikaru.ErrorResponse;
 
-    constructor(body: Sikaru.ComputeError, rawResponse?: core.RawResponse) {
+    constructor(body: Sikaru.ErrorResponse, rawResponse?: core.RawResponse) {
         super({
             message: "ServiceUnavailableError",
             statusCode: 503,

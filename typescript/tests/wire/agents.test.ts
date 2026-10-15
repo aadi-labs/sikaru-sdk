@@ -33,6 +33,69 @@ describe("AgentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "environmentId" : "environmentId" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agents/agent_id/sessions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agents.createManagedSession("project_id", "agent_id", {
+    environmentId: "environmentId"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_managed_session (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "environmentId" : "environmentId" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agents/agent_id/sessions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agents.createManagedSession("project_id", "agent_id", {
+    environmentId: "environmentId"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_managed_session (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "environmentId" : "environmentId" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/agents/agent_id/sessions").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.agents.createManagedSession("project_id", "agent_id", {
+    environmentId: "environmentId"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_managed_session (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "environmentId" : "environmentId" };
         const rawResponseBody = { };
         
         server

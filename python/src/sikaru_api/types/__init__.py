@@ -69,7 +69,6 @@ if typing.TYPE_CHECKING:
     from .check_verification import CheckVerification
     from .claim_view import ClaimView
     from .complete_authorization import CompleteAuthorization
-    from .compute_error import ComputeError
     from .connection import Connection
     from .connection_agent_usage import ConnectionAgentUsage
     from .connection_app import ConnectionApp
@@ -131,6 +130,7 @@ if typing.TYPE_CHECKING:
     from .document_input import DocumentInput
     from .document_issue import DocumentIssue
     from .document_publication import DocumentPublication
+    from .document_publication_publication_status import DocumentPublicationPublicationStatus
     from .document_resources import DocumentResources
     from .document_review import DocumentReview
     from .document_revision import DocumentRevision
@@ -141,8 +141,11 @@ if typing.TYPE_CHECKING:
     from .document_validation_view import DocumentValidationView
     from .document_versions import DocumentVersions
     from .earlier_document_session import EarlierDocumentSession
+    from .eligible_release import EligibleRelease
+    from .eligible_releases import EligibleReleases
     from .environment_view import EnvironmentView
     from .environment_view_status import EnvironmentViewStatus
+    from .error_response import ErrorResponse
     from .event_delivery_request import EventDeliveryRequest
     from .example_source import ExampleSource
     from .example_source_kind import ExampleSourceKind
@@ -228,6 +231,7 @@ if typing.TYPE_CHECKING:
     from .resume_input import ResumeInput
     from .reviewed_access import ReviewedAccess
     from .room import Room
+    from .run_error import RunError
     from .run_event import RunEvent
     from .run_events import RunEvents
     from .run_spend import RunSpend
@@ -348,7 +352,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CheckVerification": ".check_verification",
     "ClaimView": ".claim_view",
     "CompleteAuthorization": ".complete_authorization",
-    "ComputeError": ".compute_error",
     "Connection": ".connection",
     "ConnectionAgentUsage": ".connection_agent_usage",
     "ConnectionApp": ".connection_app",
@@ -410,6 +413,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentInput": ".document_input",
     "DocumentIssue": ".document_issue",
     "DocumentPublication": ".document_publication",
+    "DocumentPublicationPublicationStatus": ".document_publication_publication_status",
     "DocumentResources": ".document_resources",
     "DocumentReview": ".document_review",
     "DocumentRevision": ".document_revision",
@@ -420,8 +424,11 @@ _dynamic_imports: typing.Dict[str, str] = {
     "DocumentValidationView": ".document_validation_view",
     "DocumentVersions": ".document_versions",
     "EarlierDocumentSession": ".earlier_document_session",
+    "EligibleRelease": ".eligible_release",
+    "EligibleReleases": ".eligible_releases",
     "EnvironmentView": ".environment_view",
     "EnvironmentViewStatus": ".environment_view_status",
+    "ErrorResponse": ".error_response",
     "EventDeliveryRequest": ".event_delivery_request",
     "ExampleSource": ".example_source",
     "ExampleSourceKind": ".example_source_kind",
@@ -507,6 +514,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ResumeInput": ".resume_input",
     "ReviewedAccess": ".reviewed_access",
     "Room": ".room",
+    "RunError": ".run_error",
     "RunEvent": ".run_event",
     "RunEvents": ".run_events",
     "RunSpend": ".run_spend",
@@ -651,7 +659,6 @@ __all__ = [
     "CheckVerification",
     "ClaimView",
     "CompleteAuthorization",
-    "ComputeError",
     "Connection",
     "ConnectionAgentUsage",
     "ConnectionApp",
@@ -713,6 +720,7 @@ __all__ = [
     "DocumentInput",
     "DocumentIssue",
     "DocumentPublication",
+    "DocumentPublicationPublicationStatus",
     "DocumentResources",
     "DocumentReview",
     "DocumentRevision",
@@ -723,8 +731,11 @@ __all__ = [
     "DocumentValidationView",
     "DocumentVersions",
     "EarlierDocumentSession",
+    "EligibleRelease",
+    "EligibleReleases",
     "EnvironmentView",
     "EnvironmentViewStatus",
+    "ErrorResponse",
     "EventDeliveryRequest",
     "ExampleSource",
     "ExampleSourceKind",
@@ -810,6 +821,7 @@ __all__ = [
     "ResumeInput",
     "ReviewedAccess",
     "Room",
+    "RunError",
     "RunEvent",
     "RunEvents",
     "RunSpend",

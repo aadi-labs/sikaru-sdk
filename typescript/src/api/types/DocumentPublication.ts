@@ -15,6 +15,15 @@ export interface DocumentPublication {
     earlierSessions: Sikaru.EarlierDocumentSession[];
     harnessVersionId: string;
     priorVersionId?: (string | null) | undefined;
+    publicationStatus?: DocumentPublication.PublicationStatus | undefined;
     revision?: (number | null) | undefined;
     unchanged?: boolean | undefined;
+}
+
+export namespace DocumentPublication {
+    export const PublicationStatus = {
+            Pending: "pending",
+            Completed: "completed"
+        } as const;
+    export type PublicationStatus = typeof PublicationStatus[keyof typeof PublicationStatus];
 }

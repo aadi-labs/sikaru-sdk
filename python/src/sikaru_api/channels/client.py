@@ -347,7 +347,6 @@ class ChannelsClient:
         *,
         enabled: bool,
         identity_app_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        shared_tenant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PersonalAccessConfiguration:
         """
@@ -360,8 +359,6 @@ class ChannelsClient:
         enabled : bool
 
         identity_app_ids : typing.Optional[typing.Sequence[str]]
-
-        shared_tenant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -386,12 +383,7 @@ class ChannelsClient:
         )
         """
         _response = self._raw_client.configure_personal_access(
-            project_id,
-            binding_id,
-            enabled=enabled,
-            identity_app_ids=identity_app_ids,
-            shared_tenant_id=shared_tenant_id,
-            request_options=request_options,
+            project_id, binding_id, enabled=enabled, identity_app_ids=identity_app_ids, request_options=request_options
         )
         return _response.data
 
@@ -1624,7 +1616,6 @@ class AsyncChannelsClient:
         *,
         enabled: bool,
         identity_app_ids: typing.Optional[typing.Sequence[str]] = OMIT,
-        shared_tenant_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> PersonalAccessConfiguration:
         """
@@ -1637,8 +1628,6 @@ class AsyncChannelsClient:
         enabled : bool
 
         identity_app_ids : typing.Optional[typing.Sequence[str]]
-
-        shared_tenant_id : typing.Optional[str]
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
@@ -1671,12 +1660,7 @@ class AsyncChannelsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.configure_personal_access(
-            project_id,
-            binding_id,
-            enabled=enabled,
-            identity_app_ids=identity_app_ids,
-            shared_tenant_id=shared_tenant_id,
-            request_options=request_options,
+            project_id, binding_id, enabled=enabled, identity_app_ids=identity_app_ids, request_options=request_options
         )
         return _response.data
 

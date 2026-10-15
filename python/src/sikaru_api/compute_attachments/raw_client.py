@@ -19,8 +19,8 @@ from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.attachment_view import AttachmentView
 from ..types.claim_view import ClaimView
-from ..types.compute_error import ComputeError
 from ..types.credential_issued import CredentialIssued
+from ..types.error_response import ErrorResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.process_observation import ProcessObservation
 from ..types.ready_input_capabilities_item import ReadyInputCapabilitiesItem
@@ -79,9 +79,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -90,9 +90,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -101,9 +101,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -112,9 +112,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -134,9 +134,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -208,9 +208,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -219,9 +219,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -230,9 +230,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -241,9 +241,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -263,9 +263,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -325,9 +325,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -336,9 +336,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -347,9 +347,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -358,9 +358,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -380,9 +380,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -454,9 +454,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -465,9 +465,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -476,9 +476,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -487,9 +487,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -509,9 +509,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -585,9 +585,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -596,9 +596,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -607,9 +607,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -618,9 +618,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -640,9 +640,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -733,9 +733,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -744,9 +744,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -755,9 +755,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -766,9 +766,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -788,9 +788,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -864,9 +864,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -875,9 +875,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -886,9 +886,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -897,9 +897,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -919,9 +919,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -979,9 +979,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -990,9 +990,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1001,9 +1001,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1012,9 +1012,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1034,9 +1034,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1125,9 +1125,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1136,9 +1136,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1147,9 +1147,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1158,9 +1158,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1180,9 +1180,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1278,9 +1278,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1289,9 +1289,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1300,9 +1300,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1311,9 +1311,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1333,9 +1333,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1390,9 +1390,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1401,9 +1401,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1412,9 +1412,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1423,9 +1423,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1445,9 +1445,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1507,9 +1507,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1518,9 +1518,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1529,9 +1529,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1540,9 +1540,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1562,9 +1562,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1652,9 +1652,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1663,9 +1663,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1674,9 +1674,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1685,9 +1685,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1707,9 +1707,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1795,9 +1795,9 @@ class RawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1806,9 +1806,9 @@ class RawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1817,9 +1817,9 @@ class RawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1828,9 +1828,9 @@ class RawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1850,9 +1850,9 @@ class RawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1914,9 +1914,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1925,9 +1925,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1936,9 +1936,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1947,9 +1947,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -1969,9 +1969,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2045,9 +2045,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2056,9 +2056,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2067,9 +2067,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2078,9 +2078,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2100,9 +2100,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2164,9 +2164,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2175,9 +2175,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2186,9 +2186,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2197,9 +2197,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2219,9 +2219,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2295,9 +2295,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2306,9 +2306,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2317,9 +2317,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2328,9 +2328,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2350,9 +2350,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2428,9 +2428,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2439,9 +2439,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2450,9 +2450,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2461,9 +2461,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2483,9 +2483,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2578,9 +2578,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2589,9 +2589,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2600,9 +2600,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2611,9 +2611,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2633,9 +2633,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2711,9 +2711,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2722,9 +2722,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2733,9 +2733,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2744,9 +2744,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2766,9 +2766,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2828,9 +2828,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2839,9 +2839,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2850,9 +2850,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2861,9 +2861,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2883,9 +2883,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2976,9 +2976,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2987,9 +2987,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -2998,9 +2998,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3009,9 +3009,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3031,9 +3031,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3131,9 +3131,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3142,9 +3142,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3153,9 +3153,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3164,9 +3164,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3186,9 +3186,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3245,9 +3245,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3256,9 +3256,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3267,9 +3267,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3278,9 +3278,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3300,9 +3300,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3364,9 +3364,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3375,9 +3375,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3386,9 +3386,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3397,9 +3397,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3419,9 +3419,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3511,9 +3511,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3522,9 +3522,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3533,9 +3533,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3544,9 +3544,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3566,9 +3566,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3656,9 +3656,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3667,9 +3667,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3678,9 +3678,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3689,9 +3689,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -3711,9 +3711,9 @@ class AsyncRawComputeAttachmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

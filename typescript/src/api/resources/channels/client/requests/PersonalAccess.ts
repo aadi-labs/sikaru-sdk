@@ -9,5 +9,4 @@
 export interface PersonalAccess {
     enabled: boolean;
     identity_app_ids?: string[];
-    shared_tenant_id?: string | null;
 }

@@ -30,6 +30,60 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listDatasets("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_datasets (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listDatasets("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_datasets (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listDatasets("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_datasets (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -68,6 +122,69 @@ describe("DatasetsClient", () => {
     });
           
     test("create_dataset (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "name" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.createDataset("project_id", {
+    name: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_dataset (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "name" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.createDataset("project_id", {
+    name: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_dataset (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "name" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.createDataset("project_id", {
+    name: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_dataset (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "name" : "x" };
@@ -121,6 +238,93 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "dataset" : { "name" : "x" } , "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/capture").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.captureIntoNewDataset("project_id", {
+    dataset: {
+        name: "x"
+    },
+    idempotency_key: "x",
+    items: [{
+            run_id: "x"
+        }, {
+            run_id: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("capture_into_new_dataset (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "dataset" : { "name" : "x" } , "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/capture").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.captureIntoNewDataset("project_id", {
+    dataset: {
+        name: "x"
+    },
+    idempotency_key: "x",
+    items: [{
+            run_id: "x"
+        }, {
+            run_id: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("capture_into_new_dataset (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "dataset" : { "name" : "x" } , "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/capture").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.captureIntoNewDataset("project_id", {
+    dataset: {
+        name: "x"
+    },
+    idempotency_key: "x",
+    items: [{
+            run_id: "x"
+        }, {
+            run_id: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("capture_into_new_dataset (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "dataset" : { "name" : "x" } , "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
         const rawResponseBody = { };
         
         server
@@ -170,6 +374,60 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.getDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_dataset (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.getDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_dataset (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.getDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_dataset (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -204,6 +462,60 @@ describe("DatasetsClient", () => {
     });
           
     test("delete_dataset (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/datasets/dataset_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.deleteDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("delete_dataset (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/datasets/dataset_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.deleteDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("delete_dataset (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/datasets/dataset_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.deleteDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("delete_dataset (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -243,6 +555,63 @@ describe("DatasetsClient", () => {
     });
           
     test("update_dataset (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/datasets/dataset_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.updateDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("update_dataset (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/datasets/dataset_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.updateDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("update_dataset (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/datasets/dataset_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.updateDataset("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("update_dataset (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -288,6 +657,84 @@ describe("DatasetsClient", () => {
     });
           
     test("capture_into_dataset (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/capture").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.captureIntoDataset("project_id", "dataset_id", {
+    idempotency_key: "x",
+    items: [{
+            run_id: "x"
+        }, {
+            run_id: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("capture_into_dataset (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/capture").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.captureIntoDataset("project_id", "dataset_id", {
+    idempotency_key: "x",
+    items: [{
+            run_id: "x"
+        }, {
+            run_id: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("capture_into_dataset (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/capture").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.captureIntoDataset("project_id", "dataset_id", {
+    idempotency_key: "x",
+    items: [{
+            run_id: "x"
+        }, {
+            run_id: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("capture_into_dataset (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "idempotency_key" : "x" , "items" : [ { "run_id" : "x" } , { "run_id" : "x" } ] };
@@ -341,6 +788,72 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agent_slug" : "x" , "idempotency_key" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/checks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.startDatasetChecks("project_id", "dataset_id", {
+    agent_slug: "x",
+    idempotency_key: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("start_dataset_checks (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_slug" : "x" , "idempotency_key" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/checks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.startDatasetChecks("project_id", "dataset_id", {
+    agent_slug: "x",
+    idempotency_key: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("start_dataset_checks (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_slug" : "x" , "idempotency_key" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/checks").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.startDatasetChecks("project_id", "dataset_id", {
+    agent_slug: "x",
+    idempotency_key: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("start_dataset_checks (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_slug" : "x" , "idempotency_key" : "x" };
         const rawResponseBody = { };
         
         server
@@ -383,6 +896,60 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/checks/preview").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.previewDatasetChecks("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("preview_dataset_checks (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/checks/preview").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.previewDatasetChecks("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("preview_dataset_checks (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/checks/preview").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.previewDatasetChecks("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("preview_dataset_checks (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -418,6 +985,60 @@ describe("DatasetsClient", () => {
     });
           
     test("list_dataset_check_results (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/checks/results").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listDatasetCheckResults("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_dataset_check_results (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/checks/results").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listDatasetCheckResults("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_dataset_check_results (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/checks/results").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listDatasetCheckResults("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_dataset_check_results (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -459,6 +1080,60 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/examples").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listExamples("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_examples (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/examples").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listExamples("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_examples (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/examples").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listExamples("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_examples (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -494,6 +1169,60 @@ describe("DatasetsClient", () => {
     });
           
     test("delete_example (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/datasets/dataset_id/examples/example_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.deleteExample("project_id", "dataset_id", "example_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("delete_example (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/datasets/dataset_id/examples/example_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.deleteExample("project_id", "dataset_id", "example_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("delete_example (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/datasets/dataset_id/examples/example_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.deleteExample("project_id", "dataset_id", "example_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("delete_example (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -533,6 +1262,63 @@ describe("DatasetsClient", () => {
     });
           
     test("update_example (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/datasets/dataset_id/examples/example_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.updateExample("project_id", "dataset_id", "example_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("update_example (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/datasets/dataset_id/examples/example_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.updateExample("project_id", "dataset_id", "example_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("update_example (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/datasets/dataset_id/examples/example_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.updateExample("project_id", "dataset_id", "example_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("update_example (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -580,6 +1366,75 @@ describe("DatasetsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "content" : "x" , "format" : "csv" , "idempotency_key" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/uploads").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.uploadExamples("project_id", "dataset_id", {
+    content: "x",
+    format: "csv",
+    idempotency_key: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("upload_examples (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "content" : "x" , "format" : "csv" , "idempotency_key" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/uploads").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.uploadExamples("project_id", "dataset_id", {
+    content: "x",
+    format: "csv",
+    idempotency_key: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("upload_examples (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "content" : "x" , "format" : "csv" , "idempotency_key" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/datasets/dataset_id/uploads").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.uploadExamples("project_id", "dataset_id", {
+    content: "x",
+    format: "csv",
+    idempotency_key: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("upload_examples (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "content" : "x" , "format" : "csv" , "idempotency_key" : "x" };
         const rawResponseBody = { };
         
         server
@@ -620,6 +1475,60 @@ describe("DatasetsClient", () => {
     });
           
     test("list_versions (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/versions").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listVersions("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_versions (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/versions").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listVersions("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_versions (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/datasets/dataset_id/versions").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.datasets.listVersions("project_id", "dataset_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_versions (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         

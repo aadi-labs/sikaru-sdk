@@ -3,11 +3,18 @@
 import typing
 
 import pydantic
+import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from ..core.serialization import FieldMetadata
 
 
-class ComputeError(UniversalBaseModel):
-    detail: str
+class EligibleRelease(UniversalBaseModel):
+    generation_id: typing_extensions.Annotated[
+        str, FieldMetadata(alias="generationId"), pydantic.Field(alias="generationId")
+    ]
+    harness_version_id: typing_extensions.Annotated[
+        str, FieldMetadata(alias="harnessVersionId"), pydantic.Field(alias="harnessVersionId")
+    ]
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

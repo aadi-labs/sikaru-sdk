@@ -30,6 +30,60 @@ describe("EvaluationJobsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-jobs").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.listJobs("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_jobs (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-jobs").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.listJobs("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_jobs (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-jobs").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.listJobs("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_jobs (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -78,6 +132,117 @@ describe("EvaluationJobsClient", () => {
     });
           
     test("create_job (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "evaluator" : "x" , "requestId" : "x" , "revision" : "x" , "rubric" : "x" , "targets" : [ { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } , { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-jobs").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.createJob("project_id", {
+    evaluator: "x",
+    requestId: "x",
+    revision: "x",
+    rubric: "x",
+    targets: [{
+            target: {
+                accountId: "x",
+                kind: "message"
+            },
+            traceId: "x"
+        }, {
+            target: {
+                accountId: "x",
+                kind: "message"
+            },
+            traceId: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_job (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "evaluator" : "x" , "requestId" : "x" , "revision" : "x" , "rubric" : "x" , "targets" : [ { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } , { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-jobs").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.createJob("project_id", {
+    evaluator: "x",
+    requestId: "x",
+    revision: "x",
+    rubric: "x",
+    targets: [{
+            target: {
+                accountId: "x",
+                kind: "message"
+            },
+            traceId: "x"
+        }, {
+            target: {
+                accountId: "x",
+                kind: "message"
+            },
+            traceId: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_job (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "evaluator" : "x" , "requestId" : "x" , "revision" : "x" , "rubric" : "x" , "targets" : [ { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } , { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } ] };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-jobs").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.createJob("project_id", {
+    evaluator: "x",
+    requestId: "x",
+    revision: "x",
+    rubric: "x",
+    targets: [{
+            target: {
+                accountId: "x",
+                kind: "message"
+            },
+            traceId: "x"
+        }, {
+            target: {
+                accountId: "x",
+                kind: "message"
+            },
+            traceId: "x"
+        }]
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_job (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "evaluator" : "x" , "requestId" : "x" , "revision" : "x" , "rubric" : "x" , "targets" : [ { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } , { "target" : { "accountId" : "x" , "kind" : "message" } , "traceId" : "x" } ] };
@@ -138,6 +303,60 @@ describe("EvaluationJobsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-jobs/job_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.getJob("project_id", "job_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_job (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-jobs/job_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.getJob("project_id", "job_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_job (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-jobs/job_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.getJob("project_id", "job_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_job (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -173,6 +392,60 @@ describe("EvaluationJobsClient", () => {
     });
           
     test("cancel_job (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-jobs/job_id/cancel").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.cancelJob("project_id", "job_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("cancel_job (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-jobs/job_id/cancel").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.cancelJob("project_id", "job_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("cancel_job (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-jobs/job_id/cancel").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationJobs.cancelJob("project_id", "job_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("cancel_job (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         

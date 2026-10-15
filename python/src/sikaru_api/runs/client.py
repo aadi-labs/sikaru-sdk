@@ -6,6 +6,7 @@ from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.approval_input_decision import ApprovalInputDecision
 from ..types.event_delivery_request import EventDeliveryRequest
+from ..types.execution_turn_response import ExecutionTurnResponse
 from ..types.managed_run import ManagedRun
 from ..types.run_event import RunEvent
 from ..types.run_events import RunEvents
@@ -429,7 +430,7 @@ class RunsClient:
         *,
         reason: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ManagedRun:
         """
         Parameters
         ----------
@@ -444,7 +445,7 @@ class RunsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ManagedRun
             Successful Response
 
         Examples
@@ -461,6 +462,46 @@ class RunsClient:
         )
         """
         _response = self._raw_client.recover(project_id, run_id, reason=reason, request_options=request_options)
+        return _response.data
+
+    def retry(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ExecutionTurnResponse:
+        """
+        Retry a failed turn as a new turn with its own run ID; the failed run stays failed. The retry
+        starts from the session's last completed turn, and external effects the failed turn already
+        completed are not repeated. Repeating the request returns the same retry. A run that did not
+        fail, whose `error.recoverable` is false, or that failed too long ago is refused with 409
+        `not_retryable`.
+
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ExecutionTurnResponse
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.runs.retry(
+            project_id="project_id",
+            run_id="run_id",
+        )
+        """
+        _response = self._raw_client.retry(project_id, run_id, request_options=request_options)
         return _response.data
 
     def decide_approval(
@@ -1180,7 +1221,7 @@ class AsyncRunsClient:
         *,
         reason: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> typing.Dict[str, typing.Any]:
+    ) -> ManagedRun:
         """
         Parameters
         ----------
@@ -1195,7 +1236,7 @@ class AsyncRunsClient:
 
         Returns
         -------
-        typing.Dict[str, typing.Any]
+        ManagedRun
             Successful Response
 
         Examples
@@ -1220,6 +1261,54 @@ class AsyncRunsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.recover(project_id, run_id, reason=reason, request_options=request_options)
+        return _response.data
+
+    async def retry(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ExecutionTurnResponse:
+        """
+        Retry a failed turn as a new turn with its own run ID; the failed run stays failed. The retry
+        starts from the session's last completed turn, and external effects the failed turn already
+        completed are not repeated. Repeating the request returns the same retry. A run that did not
+        fail, whose `error.recoverable` is false, or that failed too long ago is refused with 409
+        `not_retryable`.
+
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ExecutionTurnResponse
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.runs.retry(
+                project_id="project_id",
+                run_id="run_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.retry(project_id, run_id, request_options=request_options)
         return _response.data
 
     async def decide_approval(

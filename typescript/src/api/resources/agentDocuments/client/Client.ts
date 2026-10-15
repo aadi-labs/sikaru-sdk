@@ -32,6 +32,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.DraftDocumentInput} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -68,6 +71,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -85,6 +91,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.ImportDocumentFiles} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -125,6 +134,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -141,6 +153,9 @@ export class AgentDocumentsClient {
      * @param {string} project_id
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -174,6 +189,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -193,6 +211,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.EditDocumentSetting} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -232,6 +253,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -248,6 +272,9 @@ export class AgentDocumentsClient {
      * @param {string} project_id
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -281,6 +308,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -298,6 +328,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.DocumentInput} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -336,6 +369,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -353,6 +389,9 @@ export class AgentDocumentsClient {
      * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -386,6 +425,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -404,6 +446,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.SaveDocument} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -443,6 +488,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -460,6 +508,9 @@ export class AgentDocumentsClient {
      * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -493,6 +544,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -511,6 +565,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.DiscardDocument} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -549,6 +606,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -567,6 +627,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.PublishDocument} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -605,6 +668,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -623,6 +689,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.RevertDocument} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -662,6 +731,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -680,6 +752,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.ReviewDocument} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -718,6 +793,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -735,6 +813,9 @@ export class AgentDocumentsClient {
      * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -768,6 +849,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -785,6 +869,9 @@ export class AgentDocumentsClient {
      * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -818,6 +905,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -837,6 +927,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.AdoptSuggestion} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -875,6 +968,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -893,6 +989,9 @@ export class AgentDocumentsClient {
      * @param {string} suggestion_id
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -926,6 +1025,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -944,6 +1046,9 @@ export class AgentDocumentsClient {
      * @param {Sikaru.DocumentInput} request
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -982,6 +1087,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -999,6 +1107,9 @@ export class AgentDocumentsClient {
      * @param {string} agent_slug
      * @param {AgentDocumentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -1032,6 +1143,9 @@ export class AgentDocumentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,

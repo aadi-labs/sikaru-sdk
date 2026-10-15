@@ -181,3 +181,17 @@ def test_executionSessions_create() -> None:
         {"Authorization": r"Bearer .+"},
         [],
     )
+
+
+def test_executionSessions_list_eligible_releases() -> None:
+    """Test list_eligible_releases endpoint with WireMock"""
+    test_id = "execution_sessions.list_eligible_releases.0"
+    client = get_client(test_id)
+    client.execution_sessions.list_eligible_releases(
+        project_id="project_id",
+        harness_id="harness_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/releases", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/harnesses/harness_id/releases", {"Authorization": r"Bearer .+"}, []
+    )

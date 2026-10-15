@@ -18,6 +18,8 @@ export interface SessionInput {
     idempotency_key?: string | null;
     /** Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default. */
     model?: string | null;
+    /** Optional previously serving release generation. Omit to follow promotions. */
+    pinned_generation_id?: string | null;
     reasoning_effort?: SessionInput.ReasoningEffort | null;
     tenant_id?: string | null;
     user_id?: string | null;

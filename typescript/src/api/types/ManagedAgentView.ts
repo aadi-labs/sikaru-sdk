@@ -8,6 +8,7 @@ export interface ManagedAgentView {
     harnessId: string;
     id: string;
     organizationId: string;
+    personal: boolean;
     projectId: string;
     status: string;
 }

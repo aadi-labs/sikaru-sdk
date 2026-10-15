@@ -4874,14 +4874,6 @@ client.channels.configure_personal_access(
 <dl>
 <dd>
 
-**shared_tenant_id:** `typing.Optional[str]` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
 **request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
     
 </dd>
@@ -14469,6 +14461,14 @@ client.execution_sessions.append_turn(
 <dl>
 <dd>
 
+**pinned_generation_id:** `typing.Optional[str]` — Set a release pin for new turns; explicit null resumes following promotions. Omit to preserve policy.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **product_context:** `typing.Optional[typing.Dict[str, typing.Any]]` 
     
 </dd>
@@ -14633,6 +14633,14 @@ client.execution_sessions.create(
 <dl>
 <dd>
 
+**pinned_generation_id:** `typing.Optional[str]` — Optional previously serving release generation. Omit to follow promotions.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **reasoning_effort:** `typing.Optional[SessionInputReasoningEffort]` 
     
 </dd>
@@ -14650,6 +14658,96 @@ client.execution_sessions.create(
 <dd>
 
 **user_id:** `typing.Optional[str]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.execution_sessions.<a href="src/sikaru_api/execution_sessions/client.py">list_eligible_releases</a>(...) -> EligibleReleases</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List release identities eligible for an optional session pin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.execution_sessions.list_eligible_releases(
+    project_id="project_id",
+    harness_id="harness_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**environment:** `typing.Optional[ListEligibleReleasesExecutionSessionsRequestEnvironment]` 
     
 </dd>
 </dl>
@@ -16781,7 +16879,7 @@ client.runs.stream_events(
 </dl>
 </details>
 
-<details><summary><code>client.runs.<a href="src/sikaru_api/runs/client.py">recover</a>(...) -> typing.Dict[str, typing.Any]</code></summary>
+<details><summary><code>client.runs.<a href="src/sikaru_api/runs/client.py">recover</a>(...) -> ManagedRun</code></summary>
 <dl>
 <dd>
 
@@ -16838,6 +16936,92 @@ client.runs.recover(
 <dd>
 
 **request:** `RecoverRunRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request_options:** `typing.Optional[RequestOptions]` — Request-specific configuration.
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="src/sikaru_api/runs/client.py">retry</a>(...) -> ExecutionTurnResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retry a failed turn as a new turn with its own run ID; the failed run stays failed. The retry
+starts from the session's last completed turn, and external effects the failed turn already
+completed are not repeated. Repeating the request returns the same retry. A run that did not
+fail, whose `error.recoverable` is false, or that failed too long ago is refused with 409
+`not_retryable`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```python
+from sikaru_api import SikaruApi
+from sikaru_api.environment import SikaruApiEnvironment
+
+client = SikaruApi(
+    api_key="<token>",
+    environment=SikaruApiEnvironment.DEFAULT,
+)
+
+client.runs.retry(
+    project_id="project_id",
+    run_id="run_id",
+)
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `str` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `str` 
     
 </dd>
 </dl>
@@ -18903,6 +19087,14 @@ client.managed_agents.create_managed_agent(
 <dd>
 
 **initial_channel:** `typing.Optional[CreateManagedAgentRequestInitialChannel]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**personal:** `typing.Optional[bool]` — Fixed at creation; new agents are shared unless set. A personal agent's conversations stay private to the person who runs them. Omit it to keep an existing agent's choice.
     
 </dd>
 </dl>

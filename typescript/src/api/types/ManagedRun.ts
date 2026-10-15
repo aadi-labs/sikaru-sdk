@@ -8,6 +8,8 @@ export interface ManagedRun {
     connections?: Sikaru.PersonalConnectionPrompt[] | undefined;
     contentVisible?: boolean | undefined;
     costSummary?: (Record<string, unknown> | null) | undefined;
+    /** Why the run failed; set when `status` is `failed`, otherwise null. Omitted when `contentVisible` is false. */
+    error?: (Sikaru.RunError | null) | undefined;
     eventsUrl: string;
     harnessId: string;
     harnessVersionId: string;

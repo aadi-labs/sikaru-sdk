@@ -4,6 +4,7 @@ export interface RunEvent {
     createdAt: string;
     eventType: string;
     id: string;
+    /** Fields specific to `eventType`; open by design. Documented shapes: `run.failed` carries `error`, a RunError (`code`, `message`, `recoverable`). `run.tool_call.failed` may carry `error` with `code` and `message`, where `code` is one of `effect_unconfirmed`, `approval_denied`, `access_changed`; the action did not run, or its outcome could not be confirmed and it was not repeated. `run.paused` carries `reason`: `credits_required` (credits or the agent spending cap ran out; the run resumes once funded) or `admission_deferred` (the run is waiting to be admitted and resumes on its own). */
     payload: Record<string, unknown>;
     sequence: number;
 }

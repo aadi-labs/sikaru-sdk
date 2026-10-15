@@ -30,7 +30,11 @@ export class ExecutionSessionsClient {
      * @param {Sikaru.ListExecutionSessionsRequest} request
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -70,7 +74,11 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -87,7 +95,11 @@ export class ExecutionSessionsClient {
      * @param {string} session_id
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -120,7 +132,11 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -138,7 +154,12 @@ export class ExecutionSessionsClient {
      * @param {Sikaru.BranchInput} request
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -177,7 +198,12 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -194,7 +220,11 @@ export class ExecutionSessionsClient {
      * @param {string} session_id
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -227,7 +257,11 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -246,7 +280,13 @@ export class ExecutionSessionsClient {
      * @param {Sikaru.UploadFileExecutionSessionsRequest} request
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.PaymentRequiredError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      */
@@ -284,7 +324,13 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 402: throw new Sikaru.PaymentRequiredError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -302,7 +348,11 @@ export class ExecutionSessionsClient {
      * @param {string} file_id
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -335,7 +385,11 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -348,7 +402,11 @@ export class ExecutionSessionsClient {
     }
 
     /**
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      */
@@ -379,7 +437,11 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -396,7 +458,11 @@ export class ExecutionSessionsClient {
      * @param {string} session_id
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -429,7 +495,11 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -446,6 +516,9 @@ export class ExecutionSessionsClient {
      * @param {string} session_id
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -479,6 +552,9 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -497,7 +573,14 @@ export class ExecutionSessionsClient {
      * @param {Sikaru.TurnInput} request
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.PaymentRequiredError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.TooManyRequestsError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -538,7 +621,14 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 402: throw new Sikaru.PaymentRequiredError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 429: throw new Sikaru.TooManyRequestsError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -556,7 +646,12 @@ export class ExecutionSessionsClient {
      * @param {Sikaru.SessionInput} request
      * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -592,7 +687,12 @@ export class ExecutionSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -602,5 +702,68 @@ export class ExecutionSessionsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/harnesses/{harness_id}/execution-sessions");
+    }
+
+    /**
+     * List release identities eligible for an optional session pin.
+     *
+     * @param {string} project_id
+     * @param {string} harness_id
+     * @param {Sikaru.ListEligibleReleasesExecutionSessionsRequest} request
+     * @param {ExecutionSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.executionSessions.listEligibleReleases("project_id", "harness_id")
+     */
+    public listEligibleReleases(project_id: string, harness_id: string, request: Sikaru.ListEligibleReleasesExecutionSessionsRequest = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): core.HttpResponsePromise<Sikaru.EligibleReleases> {
+        return core.HttpResponsePromise.fromPromise(this.__listEligibleReleases(project_id, harness_id, request, requestOptions));
+    }
+
+    private async __listEligibleReleases(project_id: string, harness_id: string, request: Sikaru.ListEligibleReleasesExecutionSessionsRequest = {}, requestOptions?: ExecutionSessionsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.EligibleReleases>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const { environment } = request;
+        const _queryParams: Record<string, unknown> = {
+            environment: environment != null ? environment : undefined
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/harnesses/${core.url.encodePathParam(harness_id)}/releases`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.EligibleReleases, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/harnesses/{harness_id}/releases");
     }
 }

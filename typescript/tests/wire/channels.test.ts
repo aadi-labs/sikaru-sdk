@@ -30,6 +30,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/availability").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.availability("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("availability (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/availability").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.availability("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("availability (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/availability").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.availability("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("availability (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -48,7 +102,7 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = [ { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "shared_tenant_id" : "shared_tenant_id" , "status" : "status" , "transport" : "http" } ];
+        const rawResponseBody = [ { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "status" : "status" , "transport" : "http" } ];
         
         server
             .mockEndpoint()
@@ -67,6 +121,66 @@ describe("ChannelsClient", () => {
     });
           
     test("bindings (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.bindings("project_id", {
+    agent_id: "agent_id"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("bindings (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.bindings("project_id", {
+    agent_id: "agent_id"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("bindings (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.bindings("project_id", {
+    agent_id: "agent_id"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("bindings (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -90,7 +204,7 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agent_id" : "agent_id" , "transport" : "http" };
-        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "shared_tenant_id" : "shared_tenant_id" , "status" : "status" , "transport" : "http" };
+        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "status" : "status" , "transport" : "http" };
         
         server
             .mockEndpoint()
@@ -111,6 +225,72 @@ describe("ChannelsClient", () => {
     });
           
     test("create_binding (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_id" : "agent_id" , "transport" : "http" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createBinding("project_id", {
+    agent_id: "agent_id",
+    transport: "http"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_binding (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_id" : "agent_id" , "transport" : "http" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createBinding("project_id", {
+    agent_id: "agent_id",
+    transport: "http"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_binding (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_id" : "agent_id" , "transport" : "http" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createBinding("project_id", {
+    agent_id: "agent_id",
+    transport: "http"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_binding (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agent_id" : "agent_id" , "transport" : "http" };
@@ -155,6 +335,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/bindings/binding_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.deleteHttpBinding("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("delete_http_binding (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/bindings/binding_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.deleteHttpBinding("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("delete_http_binding (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/bindings/binding_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.deleteHttpBinding("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("delete_http_binding (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -173,7 +407,7 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "status" : "active" };
-        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "shared_tenant_id" : "shared_tenant_id" , "status" : "status" , "transport" : "http" };
+        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "status" : "status" , "transport" : "http" };
         
         server
             .mockEndpoint()
@@ -193,6 +427,69 @@ describe("ChannelsClient", () => {
     });
           
     test("status (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "status" : "active" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/bindings/binding_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.status("project_id", "binding_id", {
+    status: "active"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("status (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "status" : "active" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/bindings/binding_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.status("project_id", "binding_id", {
+    status: "active"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("status (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "status" : "active" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/bindings/binding_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.status("project_id", "binding_id", {
+    status: "active"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("status (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "status" : "active" };
@@ -217,7 +514,7 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
-        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "shared_tenant_id" : "shared_tenant_id" , "status" : "status" , "transport" : "http" };
+        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "status" : "status" , "transport" : "http" };
         
         server
             .mockEndpoint()
@@ -235,6 +532,63 @@ describe("ChannelsClient", () => {
     });
           
     test("configure_http_binding (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/bindings/binding_id/configuration").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.configureHttpBinding("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("configure_http_binding (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/bindings/binding_id/configuration").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.configureHttpBinding("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("configure_http_binding (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/bindings/binding_id/configuration").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.configureHttpBinding("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("configure_http_binding (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -277,6 +631,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings/binding_id/credential").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.issueHttpCredential("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("issue_http_credential (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings/binding_id/credential").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.issueHttpCredential("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("issue_http_credential (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings/binding_id/credential").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.issueHttpCredential("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("issue_http_credential (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -295,7 +703,7 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "enabled" : true };
-        const rawResponseBody = { "enabled" : true , "identity_app_ids" : [ "identity_app_ids" ] , "shared_tenant_id" : "shared_tenant_id" };
+        const rawResponseBody = { "enabled" : true , "identity_app_ids" : [ "identity_app_ids" ] };
         
         server
             .mockEndpoint()
@@ -315,6 +723,69 @@ describe("ChannelsClient", () => {
     });
           
     test("configure_personal_access (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "enabled" : true };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .put("/v1/projects/project_id/channels/bindings/binding_id/personal-access").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.configurePersonalAccess("project_id", "binding_id", {
+    enabled: true
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("configure_personal_access (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "enabled" : true };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .put("/v1/projects/project_id/channels/bindings/binding_id/personal-access").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.configurePersonalAccess("project_id", "binding_id", {
+    enabled: true
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("configure_personal_access (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "enabled" : true };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .put("/v1/projects/project_id/channels/bindings/binding_id/personal-access").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.configurePersonalAccess("project_id", "binding_id", {
+    enabled: true
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("configure_personal_access (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "enabled" : true };
@@ -359,6 +830,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings/binding_id/receipts").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.recentReceipts("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("recent_receipts (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings/binding_id/receipts").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.recentReceipts("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("recent_receipts (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings/binding_id/receipts").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.recentReceipts("project_id", "binding_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("recent_receipts (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -394,6 +919,60 @@ describe("ChannelsClient", () => {
     });
           
     test("get_member_slack_link (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings/binding_id/slack-link-verifications/verification_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.getMemberSlackLink("project_id", "binding_id", "verification_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_member_slack_link (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings/binding_id/slack-link-verifications/verification_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.getMemberSlackLink("project_id", "binding_id", "verification_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_member_slack_link (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/bindings/binding_id/slack-link-verifications/verification_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.getMemberSlackLink("project_id", "binding_id", "verification_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_member_slack_link (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -438,6 +1017,69 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "installation_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings/binding_id/slack-links").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.startMemberSlackLink("project_id", "binding_id", {
+    installation_id: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("start_member_slack_link (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "installation_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings/binding_id/slack-links").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.startMemberSlackLink("project_id", "binding_id", {
+    installation_id: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("start_member_slack_link (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "installation_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/bindings/binding_id/slack-links").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.startMemberSlackLink("project_id", "binding_id", {
+    installation_id: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("start_member_slack_link (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "installation_id" : "x" };
         const rawResponseBody = { };
         
         server
@@ -475,6 +1117,60 @@ describe("ChannelsClient", () => {
     });
           
     test("unlink_member_slack_identity (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/bindings/binding_id/slack-links/installation_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.unlinkMemberSlackIdentity("project_id", "binding_id", "installation_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("unlink_member_slack_identity (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/bindings/binding_id/slack-links/installation_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.unlinkMemberSlackIdentity("project_id", "binding_id", "installation_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("unlink_member_slack_identity (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/bindings/binding_id/slack-links/installation_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.unlinkMemberSlackIdentity("project_id", "binding_id", "installation_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("unlink_member_slack_identity (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -518,6 +1214,81 @@ describe("ChannelsClient", () => {
     });
           
     test("save_creation_resume (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "payload" : { "payload" : { "key" : "value" } } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/creation-resumes").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.saveCreationResume("project_id", {
+    payload: {
+        "payload": {
+            "key": "value"
+        }
+    }
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("save_creation_resume (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "payload" : { "payload" : { "key" : "value" } } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/creation-resumes").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.saveCreationResume("project_id", {
+    payload: {
+        "payload": {
+            "key": "value"
+        }
+    }
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("save_creation_resume (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "payload" : { "payload" : { "key" : "value" } } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/creation-resumes").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.saveCreationResume("project_id", {
+    payload: {
+        "payload": {
+            "key": "value"
+        }
+    }
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("save_creation_resume (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "payload" : { "payload" : { "key" : "value" } } };
@@ -566,6 +1337,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/creation-resumes/resume_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.getCreationResume("project_id", "resume_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_creation_resume (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/creation-resumes/resume_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.getCreationResume("project_id", "resume_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_creation_resume (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/creation-resumes/resume_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.getCreationResume("project_id", "resume_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_creation_resume (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -601,6 +1426,60 @@ describe("ChannelsClient", () => {
     });
           
     test("list_identity_apps (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/identity-apps").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.listIdentityApps("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_identity_apps (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/identity-apps").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.listIdentityApps("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_identity_apps (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/identity-apps").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.listIdentityApps("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_identity_apps (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -646,6 +1525,87 @@ describe("ChannelsClient", () => {
     });
           
     test("create_identity_app (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "audience" : "x" , "issuer" : "x" , "public_jwk" : { "public_jwk" : { "key" : "value" } } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/identity-apps").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createIdentityApp("project_id", {
+    audience: "x",
+    issuer: "x",
+    public_jwk: {
+        "public_jwk": {
+            "key": "value"
+        }
+    }
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_identity_app (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "audience" : "x" , "issuer" : "x" , "public_jwk" : { "public_jwk" : { "key" : "value" } } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/identity-apps").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createIdentityApp("project_id", {
+    audience: "x",
+    issuer: "x",
+    public_jwk: {
+        "public_jwk": {
+            "key": "value"
+        }
+    }
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_identity_app (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "audience" : "x" , "issuer" : "x" , "public_jwk" : { "public_jwk" : { "key" : "value" } } };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/identity-apps").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createIdentityApp("project_id", {
+    audience: "x",
+    issuer: "x",
+    public_jwk: {
+        "public_jwk": {
+            "key": "value"
+        }
+    }
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_identity_app (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "audience" : "x" , "issuer" : "x" , "public_jwk" : { "public_jwk" : { "key" : "value" } } };
@@ -695,6 +1655,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/identity-apps/app_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.revokeIdentityApp("project_id", "app_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("revoke_identity_app (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/identity-apps/app_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.revokeIdentityApp("project_id", "app_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("revoke_identity_app (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .delete("/v1/projects/project_id/channels/identity-apps/app_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.revokeIdentityApp("project_id", "app_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("revoke_identity_app (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -731,6 +1745,63 @@ describe("ChannelsClient", () => {
     });
           
     test("update_identity_app_urls (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/identity-apps/app_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.updateIdentityAppUrls("project_id", "app_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("update_identity_app_urls (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/identity-apps/app_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.updateIdentityAppUrls("project_id", "app_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("update_identity_app_urls (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .patch("/v1/projects/project_id/channels/identity-apps/app_id").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.updateIdentityAppUrls("project_id", "app_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("update_identity_app_urls (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
@@ -776,6 +1847,72 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "subject" : "x" , "tenant_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/identity-apps/app_id/subjects/revoke").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.revokeSubject("project_id", "app_id", {
+    subject: "x",
+    tenant_id: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("revoke_subject (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "subject" : "x" , "tenant_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/identity-apps/app_id/subjects/revoke").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.revokeSubject("project_id", "app_id", {
+    subject: "x",
+    tenant_id: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("revoke_subject (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "subject" : "x" , "tenant_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/identity-apps/app_id/subjects/revoke").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.revokeSubject("project_id", "app_id", {
+    subject: "x",
+    tenant_id: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("revoke_subject (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "subject" : "x" , "tenant_id" : "x" };
         const rawResponseBody = { };
         
         server
@@ -798,7 +1935,7 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agent_id" : "agent_id" , "identity_app_id" : "identity_app_id" , "installation_id" : "installation_id" , "verification_id" : "verification_id" };
-        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "shared_tenant_id" : "shared_tenant_id" , "status" : "status" , "transport" : "http" };
+        const rawResponseBody = { "agent_id" : "agent_id" , "destination_id" : "destination_id" , "destination_kind" : "destination_kind" , "generation" : 1 , "id" : "id" , "identity_app_ids" : [ "identity_app_ids" ] , "installation_generation" : 1 , "installation_id" : "installation_id" , "name" : "name" , "pending_cap" : 1 , "per_minute" : 1 , "personal_access" : true , "recipient_id" : "recipient_id" , "status" : "status" , "transport" : "http" };
         
         server
             .mockEndpoint()
@@ -821,6 +1958,78 @@ describe("ChannelsClient", () => {
     });
           
     test("create_personal_slack_binding (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_id" : "x" , "identity_app_id" : "x" , "installation_id" : "x" , "verification_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/personal-slack-bindings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createPersonalSlackBinding("project_id", {
+    agent_id: "x",
+    identity_app_id: "x",
+    installation_id: "x",
+    verification_id: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_personal_slack_binding (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_id" : "x" , "identity_app_id" : "x" , "installation_id" : "x" , "verification_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/personal-slack-bindings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createPersonalSlackBinding("project_id", {
+    agent_id: "x",
+    identity_app_id: "x",
+    installation_id: "x",
+    verification_id: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_personal_slack_binding (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "agent_id" : "x" , "identity_app_id" : "x" , "installation_id" : "x" , "verification_id" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/personal-slack-bindings").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.createPersonalSlackBinding("project_id", {
+    agent_id: "x",
+    identity_app_id: "x",
+    installation_id: "x",
+    verification_id: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_personal_slack_binding (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "agent_id" : "x" , "identity_app_id" : "x" , "installation_id" : "x" , "verification_id" : "x" };
@@ -868,6 +2077,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/runs/run_id/delivery").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.delivery("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("delivery (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/runs/run_id/delivery").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.delivery("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("delivery (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/runs/run_id/delivery").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.delivery("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("delivery (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -906,6 +2169,69 @@ describe("ChannelsClient", () => {
     });
           
     test("resend_delivery (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "acknowledge_possible_duplicate" : true };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/runs/run_id/delivery/resend").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.resendDelivery("project_id", "run_id", {
+    acknowledge_possible_duplicate: true
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("resend_delivery (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "acknowledge_possible_duplicate" : true };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/runs/run_id/delivery/resend").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.resendDelivery("project_id", "run_id", {
+    acknowledge_possible_duplicate: true
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("resend_delivery (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "acknowledge_possible_duplicate" : true };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/runs/run_id/delivery/resend").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.resendDelivery("project_id", "run_id", {
+    acknowledge_possible_duplicate: true
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("resend_delivery (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "acknowledge_possible_duplicate" : true };
@@ -950,6 +2276,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/dm-verifications/verification_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.dmStatus("project_id", "verification_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("dm_status (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/dm-verifications/verification_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.dmStatus("project_id", "verification_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("dm_status (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/dm-verifications/verification_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.dmStatus("project_id", "verification_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("dm_status (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -985,6 +2365,60 @@ describe("ChannelsClient", () => {
     });
           
     test("installations (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/installations").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.installations("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("installations (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/installations").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.installations("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("installations (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/installations").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.installations("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("installations (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -1026,6 +2460,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/installations/installation_id/disconnect").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.disconnect("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("disconnect (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/installations/installation_id/disconnect").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.disconnect("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("disconnect (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/installations/installation_id/disconnect").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.disconnect("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("disconnect (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -1064,6 +2552,60 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/installations/installation_id/dm-verifications").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.startDm("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("start_dm (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/installations/installation_id/dm-verifications").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.startDm("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("start_dm (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/installations/installation_id/dm-verifications").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.startDm("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("start_dm (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -1099,6 +2641,60 @@ describe("ChannelsClient", () => {
     });
           
     test("rooms (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/installations/installation_id/rooms").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.rooms("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("rooms (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/installations/installation_id/rooms").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.rooms("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("rooms (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/channels/slack/installations/installation_id/rooms").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.rooms("project_id", "installation_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("rooms (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
@@ -1143,6 +2739,69 @@ describe("ChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "state" : "state" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/oauth/complete").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.complete("project_id", {
+    state: "state"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("complete (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "state" : "state" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/oauth/complete").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.complete("project_id", {
+    state: "state"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("complete (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "state" : "state" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/oauth/complete").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.complete("project_id", {
+    state: "state"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("complete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "state" : "state" };
         const rawResponseBody = { };
         
         server
@@ -1182,6 +2841,63 @@ describe("ChannelsClient", () => {
     });
           
     test("start (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/oauth/start").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.start("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("start (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/oauth/start").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.start("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("start (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/channels/slack/oauth/start").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.channels.start("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("start (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };

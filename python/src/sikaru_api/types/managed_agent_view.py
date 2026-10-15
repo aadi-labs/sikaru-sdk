@@ -26,6 +26,7 @@ class ManagedAgentView(UniversalBaseModel):
     organization_id: typing_extensions.Annotated[
         str, FieldMetadata(alias="organizationId"), pydantic.Field(alias="organizationId")
     ]
+    personal: bool
     project_id: typing_extensions.Annotated[str, FieldMetadata(alias="projectId"), pydantic.Field(alias="projectId")]
     status: str
 

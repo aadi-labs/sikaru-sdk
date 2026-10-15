@@ -182,7 +182,7 @@ describe("PersonalChannelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "files" : [ { "contentType" : "contentType" , "createdAt" : 1.1 , "direction" : "direction" , "filename" : "filename" , "id" : "id" , "path" : "path" , "sha256" : "sha256" , "size" : 1 , "snapshotDigest" : "snapshotDigest" , "sourceRunId" : "sourceRunId" } ] };
+        const rawResponseBody = { "files" : [ { "contentType" : "contentType" , "createdAt" : 1.1 , "direction" : "direction" , "filename" : "filename" , "id" : "id" , "path" : "path" , "sha256" : "sha256" , "size" : 1 , "sourceRunId" : "sourceRunId" } ] };
         
         server
             .mockEndpoint()

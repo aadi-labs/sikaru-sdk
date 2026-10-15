@@ -16,6 +16,7 @@ export interface ExecutionSessionRecord {
     modelId?: (string | null) | undefined;
     nextTurn: number;
     personal?: boolean | undefined;
+    pinnedGenerationId?: (string | null) | undefined;
     preview?: (string | null) | undefined;
     projectId: string;
     reasoningEffort?: (string | null) | undefined;

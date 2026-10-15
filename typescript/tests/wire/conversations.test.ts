@@ -32,6 +32,66 @@ describe("ConversationsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/conversations/conversation_id/messages").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.conversations.listMessages("project_id", "conversation_id", {
+    account_id: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_messages (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/conversations/conversation_id/messages").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.conversations.listMessages("project_id", "conversation_id", {
+    account_id: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_messages (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/conversations/conversation_id/messages").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.conversations.listMessages("project_id", "conversation_id", {
+    account_id: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_messages (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -77,6 +137,84 @@ describe("ConversationsClient", () => {
     });
           
     test("record_message (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "content" : "content" , "deliveredAt" : "2024-01-15T09:30:00Z" , "messageId" : "x" , "position" : 1 , "role" : "user" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/conversations/conversation_id/messages").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.conversations.recordMessage("project_id", "conversation_id", {
+    account_id: "x",
+    content: "content",
+    deliveredAt: "2024-01-15T09:30:00Z",
+    messageId: "x",
+    position: 1,
+    role: "user"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("record_message (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "content" : "content" , "deliveredAt" : "2024-01-15T09:30:00Z" , "messageId" : "x" , "position" : 1 , "role" : "user" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/conversations/conversation_id/messages").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.conversations.recordMessage("project_id", "conversation_id", {
+    account_id: "x",
+    content: "content",
+    deliveredAt: "2024-01-15T09:30:00Z",
+    messageId: "x",
+    position: 1,
+    role: "user"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("record_message (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "content" : "content" , "deliveredAt" : "2024-01-15T09:30:00Z" , "messageId" : "x" , "position" : 1 , "role" : "user" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/conversations/conversation_id/messages").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.conversations.recordMessage("project_id", "conversation_id", {
+    account_id: "x",
+    content: "content",
+    deliveredAt: "2024-01-15T09:30:00Z",
+    messageId: "x",
+    position: 1,
+    role: "user"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("record_message (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "content" : "content" , "deliveredAt" : "2024-01-15T09:30:00Z" , "messageId" : "x" , "position" : 1 , "role" : "user" };

@@ -29,6 +29,9 @@ export class ImportSessionsClient {
      * @param {string} project_id
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -62,6 +65,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -79,6 +85,9 @@ export class ImportSessionsClient {
      * @param {Sikaru.CreateImportSessionRequest} request
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -118,6 +127,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -135,6 +147,9 @@ export class ImportSessionsClient {
      * @param {string} import_session_id
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -168,6 +183,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -186,6 +204,9 @@ export class ImportSessionsClient {
      * @param {Sikaru.CreateCompatibilityProfileRequest} request
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -225,6 +246,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -242,6 +266,9 @@ export class ImportSessionsClient {
      * @param {string} import_session_id
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -275,6 +302,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -292,6 +322,9 @@ export class ImportSessionsClient {
      * @param {string} import_session_id
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -325,6 +358,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -343,6 +379,9 @@ export class ImportSessionsClient {
      * @param {Sikaru.PromoteImportSessionRequest} request
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -385,6 +424,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -403,6 +445,9 @@ export class ImportSessionsClient {
      * @param {Sikaru.CreateParityRunRequest} request
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -441,6 +486,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -458,6 +506,9 @@ export class ImportSessionsClient {
      * @param {string} import_session_id
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -491,6 +542,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -509,6 +563,9 @@ export class ImportSessionsClient {
      * @param {Sikaru.CreateSourceArtifactRequest} request
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -550,6 +607,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -568,6 +628,9 @@ export class ImportSessionsClient {
      * @param {Sikaru.CreateParityRunRequest} request
      * @param {ImportSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -606,6 +669,9 @@ export class ImportSessionsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,

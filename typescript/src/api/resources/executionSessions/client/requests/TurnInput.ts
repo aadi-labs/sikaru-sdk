@@ -16,6 +16,8 @@ export interface TurnInput {
     file_ids?: string[];
     idempotency_key: string;
     input: Record<string, unknown>;
+    /** Set a release pin for new turns; explicit null resumes following promotions. Omit to preserve policy. */
+    pinned_generation_id?: string | null;
     product_context?: Record<string, unknown>;
     run_mode?: TurnInput.RunMode;
     tool_provider_refs?: Record<string, unknown>[];

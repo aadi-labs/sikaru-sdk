@@ -10890,6 +10890,85 @@ await client.executionSessions.create("project_id", "harness_id");
 </dl>
 </details>
 
+<details><summary><code>client.executionSessions.<a href="/src/api/resources/executionSessions/client/Client.ts">listEligibleReleases</a>(project_id, harness_id, { ...params }) -> Sikaru.EligibleReleases</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List release identities eligible for an optional session pin.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.executionSessions.listEligibleReleases("project_id", "harness_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**harness_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ListEligibleReleasesExecutionSessionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ExecutionSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Specialists
 <details><summary><code>client.specialists.<a href="/src/api/resources/specialists/client/Client.ts">list</a>(project_id, session_id) -> Sikaru.SpecialistThreads</code></summary>
 <dl>
@@ -12447,7 +12526,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">recover</a>(project_id, run_id, { ...params }) -> Record&lt;string, unknown&gt;</code></summary>
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">recover</a>(project_id, run_id, { ...params }) -> Sikaru.ManagedRun</code></summary>
 <dl>
 <dd>
 
@@ -12493,6 +12572,81 @@ await client.runs.recover("project_id", "run_id", {});
 <dd>
 
 **request:** `Sikaru.RecoverRunRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">retry</a>(project_id, run_id) -> Sikaru.ExecutionTurnResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retry a failed turn as a new turn with its own run ID; the failed run stays failed. The retry
+starts from the session's last completed turn, and external effects the failed turn already
+completed are not repeated. Repeating the request returns the same retry. A run that did not
+fail, whose `error.recoverable` is false, or that failed too long ago is refused with 409
+`not_retryable`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runs.retry("project_id", "run_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
     
 </dd>
 </dl>

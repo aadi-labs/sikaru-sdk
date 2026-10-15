@@ -30,6 +30,9 @@ export class WorkflowsClient {
      * @param {Sikaru.ImportWorkflowRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -70,6 +73,9 @@ export class WorkflowsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -87,6 +93,9 @@ export class WorkflowsClient {
      * @param {string} workflow_id
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -120,6 +129,9 @@ export class WorkflowsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -138,6 +150,9 @@ export class WorkflowsClient {
      * @param {Sikaru.StartWorkflowRunRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -175,6 +190,9 @@ export class WorkflowsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -193,6 +211,9 @@ export class WorkflowsClient {
      * @param {Sikaru.CreateWorkflowVersionRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -229,6 +250,9 @@ export class WorkflowsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,

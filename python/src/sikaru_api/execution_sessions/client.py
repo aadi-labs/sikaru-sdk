@@ -4,11 +4,15 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.eligible_releases import EligibleReleases
 from ..types.execution_session_page import ExecutionSessionPage
 from ..types.execution_session_response import ExecutionSessionResponse
 from ..types.execution_turn_response import ExecutionTurnResponse
 from ..types.session_spend import SessionSpend
 from .raw_client import AsyncRawExecutionSessionsClient, RawExecutionSessionsClient
+from .types.list_eligible_releases_execution_sessions_request_environment import (
+    ListEligibleReleasesExecutionSessionsRequestEnvironment,
+)
 from .types.session_input_environment import SessionInputEnvironment
 from .types.session_input_reasoning_effort import SessionInputReasoningEffort
 from .types.turn_input_delivery_mode import TurnInputDeliveryMode
@@ -392,6 +396,7 @@ class ExecutionSessionsClient:
         compute_attachment_id: typing.Optional[str] = OMIT,
         delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
         file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        pinned_generation_id: typing.Optional[str] = OMIT,
         product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
         tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
@@ -415,6 +420,9 @@ class ExecutionSessionsClient:
         delivery_mode : typing.Optional[TurnInputDeliveryMode]
 
         file_ids : typing.Optional[typing.Sequence[str]]
+
+        pinned_generation_id : typing.Optional[str]
+            Set a release pin for new turns; explicit null resumes following promotions. Omit to preserve policy.
 
         product_context : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -454,6 +462,7 @@ class ExecutionSessionsClient:
             compute_attachment_id=compute_attachment_id,
             delivery_mode=delivery_mode,
             file_ids=file_ids,
+            pinned_generation_id=pinned_generation_id,
             product_context=product_context,
             run_mode=run_mode,
             tool_provider_refs=tool_provider_refs,
@@ -475,6 +484,7 @@ class ExecutionSessionsClient:
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
+        pinned_generation_id: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         tenant_id: typing.Optional[str] = OMIT,
         user_id: typing.Optional[str] = OMIT,
@@ -508,6 +518,9 @@ class ExecutionSessionsClient:
 
         model : typing.Optional[str]
             Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+
+        pinned_generation_id : typing.Optional[str]
+            Optional previously serving release generation. Omit to follow promotions.
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
@@ -548,10 +561,56 @@ class ExecutionSessionsClient:
             final_output_schema=final_output_schema,
             idempotency_key=idempotency_key,
             model=model,
+            pinned_generation_id=pinned_generation_id,
             reasoning_effort=reasoning_effort,
             tenant_id=tenant_id,
             user_id=user_id,
             request_options=request_options,
+        )
+        return _response.data
+
+    def list_eligible_releases(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        environment: typing.Optional[ListEligibleReleasesExecutionSessionsRequestEnvironment] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> EligibleReleases:
+        """
+        List release identities eligible for an optional session pin.
+
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        environment : typing.Optional[ListEligibleReleasesExecutionSessionsRequestEnvironment]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        EligibleReleases
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.execution_sessions.list_eligible_releases(
+            project_id="project_id",
+            harness_id="harness_id",
+        )
+        """
+        _response = self._raw_client.list_eligible_releases(
+            project_id, harness_id, environment=environment, request_options=request_options
         )
         return _response.data
 
@@ -997,6 +1056,7 @@ class AsyncExecutionSessionsClient:
         compute_attachment_id: typing.Optional[str] = OMIT,
         delivery_mode: typing.Optional[TurnInputDeliveryMode] = OMIT,
         file_ids: typing.Optional[typing.Sequence[str]] = OMIT,
+        pinned_generation_id: typing.Optional[str] = OMIT,
         product_context: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         run_mode: typing.Optional[TurnInputRunMode] = OMIT,
         tool_provider_refs: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
@@ -1020,6 +1080,9 @@ class AsyncExecutionSessionsClient:
         delivery_mode : typing.Optional[TurnInputDeliveryMode]
 
         file_ids : typing.Optional[typing.Sequence[str]]
+
+        pinned_generation_id : typing.Optional[str]
+            Set a release pin for new turns; explicit null resumes following promotions. Omit to preserve policy.
 
         product_context : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -1067,6 +1130,7 @@ class AsyncExecutionSessionsClient:
             compute_attachment_id=compute_attachment_id,
             delivery_mode=delivery_mode,
             file_ids=file_ids,
+            pinned_generation_id=pinned_generation_id,
             product_context=product_context,
             run_mode=run_mode,
             tool_provider_refs=tool_provider_refs,
@@ -1088,6 +1152,7 @@ class AsyncExecutionSessionsClient:
         final_output_schema: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         idempotency_key: typing.Optional[str] = OMIT,
         model: typing.Optional[str] = OMIT,
+        pinned_generation_id: typing.Optional[str] = OMIT,
         reasoning_effort: typing.Optional[SessionInputReasoningEffort] = OMIT,
         tenant_id: typing.Optional[str] = OMIT,
         user_id: typing.Optional[str] = OMIT,
@@ -1121,6 +1186,9 @@ class AsyncExecutionSessionsClient:
 
         model : typing.Optional[str]
             Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+
+        pinned_generation_id : typing.Optional[str]
+            Optional previously serving release generation. Omit to follow promotions.
 
         reasoning_effort : typing.Optional[SessionInputReasoningEffort]
 
@@ -1169,9 +1237,63 @@ class AsyncExecutionSessionsClient:
             final_output_schema=final_output_schema,
             idempotency_key=idempotency_key,
             model=model,
+            pinned_generation_id=pinned_generation_id,
             reasoning_effort=reasoning_effort,
             tenant_id=tenant_id,
             user_id=user_id,
             request_options=request_options,
+        )
+        return _response.data
+
+    async def list_eligible_releases(
+        self,
+        project_id: str,
+        harness_id: str,
+        *,
+        environment: typing.Optional[ListEligibleReleasesExecutionSessionsRequestEnvironment] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> EligibleReleases:
+        """
+        List release identities eligible for an optional session pin.
+
+        Parameters
+        ----------
+        project_id : str
+
+        harness_id : str
+
+        environment : typing.Optional[ListEligibleReleasesExecutionSessionsRequestEnvironment]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        EligibleReleases
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.execution_sessions.list_eligible_releases(
+                project_id="project_id",
+                harness_id="harness_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.list_eligible_releases(
+            project_id, harness_id, environment=environment, request_options=request_options
         )
         return _response.data

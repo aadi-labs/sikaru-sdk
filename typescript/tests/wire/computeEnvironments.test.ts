@@ -34,7 +34,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "environment_slug" : "x" , "idempotency_key" : "x" };
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -56,7 +56,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "environment_slug" : "x" , "idempotency_key" : "x" };
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -78,7 +78,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "environment_slug" : "x" , "idempotency_key" : "x" };
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -100,7 +100,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "environment_slug" : "x" , "idempotency_key" : "x" };
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -144,7 +144,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "environment_slug" : "x" , "idempotency_key" : "x" };
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -186,7 +186,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -204,7 +204,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -222,7 +222,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -240,7 +240,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -276,7 +276,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -314,7 +314,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -332,7 +332,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -350,7 +350,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -368,7 +368,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
@@ -404,7 +404,7 @@ describe("ComputeEnvironmentsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "detail" : "detail" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()

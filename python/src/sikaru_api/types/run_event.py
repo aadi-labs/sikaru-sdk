@@ -12,7 +12,11 @@ class RunEvent(UniversalBaseModel):
     created_at: typing_extensions.Annotated[str, FieldMetadata(alias="createdAt"), pydantic.Field(alias="createdAt")]
     event_type: typing_extensions.Annotated[str, FieldMetadata(alias="eventType"), pydantic.Field(alias="eventType")]
     id: str
-    payload: typing.Dict[str, typing.Any]
+    payload: typing.Dict[str, typing.Any] = pydantic.Field()
+    """
+    Fields specific to `eventType`; open by design. Documented shapes: `run.failed` carries `error`, a RunError (`code`, `message`, `recoverable`). `run.tool_call.failed` may carry `error` with `code` and `message`, where `code` is one of `effect_unconfirmed`, `approval_denied`, `access_changed`; the action did not run, or its outcome could not be confirmed and it was not repeated. `run.paused` carries `reason`: `credits_required` (credits or the agent spending cap ran out; the run resumes once funded) or `admission_deferred` (the run is waiting to be admitted and resumes on its own).
+    """
+
     sequence: int
 
     if IS_PYDANTIC_V2:

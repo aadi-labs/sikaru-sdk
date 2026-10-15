@@ -30,6 +30,60 @@ describe("EvaluationComparisonsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-comparisons").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.listComparisons("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_comparisons (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-comparisons").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.listComparisons("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_comparisons (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-comparisons").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.listComparisons("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_comparisons (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -84,6 +138,153 @@ describe("EvaluationComparisonsClient", () => {
     });
           
     test("create_comparison (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "cases" : [ { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } , { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } ] , "evaluator" : "x" , "id" : "x" , "revision" : "x" , "rubric" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-comparisons").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.createComparison("project_id", {
+    cases: [{
+            baseline: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            candidate: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            caseId: "x"
+        }, {
+            baseline: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            candidate: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            caseId: "x"
+        }],
+    evaluator: "x",
+    id: "x",
+    revision: "x",
+    rubric: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_comparison (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "cases" : [ { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } , { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } ] , "evaluator" : "x" , "id" : "x" , "revision" : "x" , "rubric" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-comparisons").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.createComparison("project_id", {
+    cases: [{
+            baseline: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            candidate: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            caseId: "x"
+        }, {
+            baseline: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            candidate: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            caseId: "x"
+        }],
+    evaluator: "x",
+    id: "x",
+    revision: "x",
+    rubric: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_comparison (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "cases" : [ { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } , { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } ] , "evaluator" : "x" , "id" : "x" , "revision" : "x" , "rubric" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-comparisons").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.createComparison("project_id", {
+    cases: [{
+            baseline: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            candidate: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            caseId: "x"
+        }, {
+            baseline: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            candidate: {
+                accountId: "x",
+                conversationId: "x",
+                messageId: "x"
+            },
+            caseId: "x"
+        }],
+    evaluator: "x",
+    id: "x",
+    revision: "x",
+    rubric: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_comparison (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "cases" : [ { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } , { "baseline" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "candidate" : { "accountId" : "x" , "conversationId" : "x" , "messageId" : "x" } , "caseId" : "x" } ] , "evaluator" : "x" , "id" : "x" , "revision" : "x" , "rubric" : "x" };
@@ -156,6 +357,60 @@ describe("EvaluationComparisonsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-comparisons/comparison_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.getComparison("project_id", "comparison_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_comparison (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-comparisons/comparison_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.getComparison("project_id", "comparison_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_comparison (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/evaluation-comparisons/comparison_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.getComparison("project_id", "comparison_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_comparison (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -191,6 +446,60 @@ describe("EvaluationComparisonsClient", () => {
     });
           
     test("cancel_comparison (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-comparisons/comparison_id/cancel").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.cancelComparison("project_id", "comparison_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("cancel_comparison (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-comparisons/comparison_id/cancel").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.cancelComparison("project_id", "comparison_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("cancel_comparison (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/evaluation-comparisons/comparison_id/cancel").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.evaluationComparisons.cancelComparison("project_id", "comparison_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("cancel_comparison (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         

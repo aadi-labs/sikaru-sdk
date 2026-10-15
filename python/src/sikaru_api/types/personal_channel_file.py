@@ -19,9 +19,6 @@ class PersonalChannelFile(UniversalBaseModel):
     path: str
     sha256: str
     size: int
-    snapshot_digest: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="snapshotDigest"), pydantic.Field(alias="snapshotDigest")
-    ] = None
     source_run_id: typing_extensions.Annotated[
         typing.Optional[str], FieldMetadata(alias="sourceRunId"), pydantic.Field(alias="sourceRunId")
     ] = None

@@ -3,5 +3,4 @@
 export interface PersonalAccessConfiguration {
     enabled: boolean;
     identity_app_ids: string[];
-    shared_tenant_id: string | null;
 }

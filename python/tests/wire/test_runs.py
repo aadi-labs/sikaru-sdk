@@ -116,6 +116,20 @@ def test_runs_recover() -> None:
     )
 
 
+def test_runs_retry() -> None:
+    """Test retry endpoint with WireMock"""
+    test_id = "runs.retry.0"
+    client = get_client(test_id)
+    client.runs.retry(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/retry", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/runs/run_id/retry", {"Authorization": r"Bearer .+"}, []
+    )
+
+
 def test_runs_decide_approval() -> None:
     """Test decide_approval endpoint with WireMock"""
     test_id = "runs.decide_approval.0"

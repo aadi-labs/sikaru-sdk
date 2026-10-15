@@ -31,7 +31,14 @@ export class RunsClient {
      * @param {Sikaru.StartHarnessRunRequest} request
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.PaymentRequiredError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.TooManyRequestsError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -79,7 +86,14 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 402: throw new Sikaru.PaymentRequiredError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 429: throw new Sikaru.TooManyRequestsError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -101,6 +115,10 @@ export class RunsClient {
      * @param {Sikaru.RecordRunRequest} request
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -141,6 +159,10 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -158,6 +180,9 @@ export class RunsClient {
      * @param {string} run_id
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -191,6 +216,9 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -208,6 +236,9 @@ export class RunsClient {
      * @param {string} run_id
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -241,6 +272,9 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -258,7 +292,11 @@ export class RunsClient {
      * @param {string} run_id
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -291,7 +329,11 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -309,6 +351,9 @@ export class RunsClient {
      * @param {Sikaru.EventsRunsRequest} request
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -347,6 +392,9 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -403,6 +451,9 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -421,6 +472,10 @@ export class RunsClient {
      * @param {Sikaru.RecoverRunRequest} request
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -428,11 +483,11 @@ export class RunsClient {
      * @example
      *     await client.runs.recover("project_id", "run_id", {})
      */
-    public recover(project_id: string, run_id: string, request: Sikaru.RecoverRunRequest, requestOptions?: RunsClient.RequestOptions): core.HttpResponsePromise<Record<string, unknown>> {
+    public recover(project_id: string, run_id: string, request: Sikaru.RecoverRunRequest, requestOptions?: RunsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ManagedRun> {
         return core.HttpResponsePromise.fromPromise(this.__recover(project_id, run_id, request, requestOptions));
     }
 
-    private async __recover(project_id: string, run_id: string, request: Sikaru.RecoverRunRequest, requestOptions?: RunsClient.RequestOptions): Promise<core.WithRawResponse<Record<string, unknown>>> {
+    private async __recover(project_id: string, run_id: string, request: Sikaru.RecoverRunRequest, requestOptions?: RunsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ManagedRun>> {
         const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
@@ -452,11 +507,15 @@ export class RunsClient {
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Record<string, unknown>, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.ManagedRun, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -470,12 +529,86 @@ export class RunsClient {
     }
 
     /**
+     * Retry a failed turn as a new turn with its own run ID; the failed run stays failed. The retry
+     * starts from the session's last completed turn, and external effects the failed turn already
+     * completed are not repeated. Repeating the request returns the same retry. A run that did not
+     * fail, whose `error.recoverable` is false, or that failed too long ago is refused with 409
+     * `not_retryable`.
+     *
+     * @param {string} project_id
+     * @param {string} run_id
+     * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.PaymentRequiredError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.TooManyRequestsError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.runs.retry("project_id", "run_id")
+     */
+    public retry(project_id: string, run_id: string, requestOptions?: RunsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ExecutionTurnResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__retry(project_id, run_id, requestOptions));
+    }
+
+    private async __retry(project_id: string, run_id: string, requestOptions?: RunsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ExecutionTurnResponse>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/runs/${core.url.encodePathParam(run_id)}/retry`),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: 0,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ExecutionTurnResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 402: throw new Sikaru.PaymentRequiredError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 429: throw new Sikaru.TooManyRequestsError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/runs/{run_id}/retry");
+    }
+
+    /**
      * @param {string} project_id
      * @param {string} run_id
      * @param {string} tool_call_id
      * @param {Sikaru.ApprovalInput} request
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -515,6 +648,10 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -533,6 +670,10 @@ export class RunsClient {
      * @param {Sikaru.SubmitToolResultRequest} request
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
@@ -578,6 +719,10 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
@@ -601,7 +746,12 @@ export class RunsClient {
      * @param {string} run_id
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -634,7 +784,12 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -651,7 +806,12 @@ export class RunsClient {
      * @param {string} run_id
      * @param {RunsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
      * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
      *
@@ -684,7 +844,12 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,
                     body: _response.error.body,
@@ -734,6 +899,9 @@ export class RunsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
                 case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
                 default: throw new errors.SikaruError({
                     statusCode: _response.error.statusCode,

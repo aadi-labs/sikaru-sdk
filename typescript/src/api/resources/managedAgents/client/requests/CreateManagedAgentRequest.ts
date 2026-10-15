@@ -15,6 +15,8 @@ export interface CreateManagedAgentRequest {
     displayName?: string | null;
     harnessId?: string | null;
     initialChannel?: CreateManagedAgentRequest.InitialChannel;
+    /** Fixed at creation; new agents are shared unless set. A personal agent's conversations stay private to the person who runs them. Omit it to keep an existing agent's choice. */
+    personal?: boolean | null;
     source?: Sikaru.CreateManagedAgentSourceRequest | null;
     status?: CreateManagedAgentRequest.Status;
 }

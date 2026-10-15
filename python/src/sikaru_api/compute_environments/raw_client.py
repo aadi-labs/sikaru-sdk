@@ -16,8 +16,8 @@ from ..errors.not_found_error import NotFoundError
 from ..errors.service_unavailable_error import ServiceUnavailableError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.compute_error import ComputeError
 from ..types.environment_view import EnvironmentView
+from ..types.error_response import ErrorResponse
 from ..types.http_validation_error import HttpValidationError
 from pydantic import ValidationError
 
@@ -96,9 +96,9 @@ class RawComputeEnvironmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -107,9 +107,9 @@ class RawComputeEnvironmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -118,9 +118,9 @@ class RawComputeEnvironmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -129,9 +129,9 @@ class RawComputeEnvironmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -151,9 +151,9 @@ class RawComputeEnvironmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -208,9 +208,9 @@ class RawComputeEnvironmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -219,9 +219,9 @@ class RawComputeEnvironmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -230,9 +230,9 @@ class RawComputeEnvironmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -241,9 +241,9 @@ class RawComputeEnvironmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -263,9 +263,9 @@ class RawComputeEnvironmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -325,9 +325,9 @@ class RawComputeEnvironmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -336,9 +336,9 @@ class RawComputeEnvironmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -347,9 +347,9 @@ class RawComputeEnvironmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -358,9 +358,9 @@ class RawComputeEnvironmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -380,9 +380,9 @@ class RawComputeEnvironmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -470,9 +470,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -481,9 +481,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -492,9 +492,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -503,9 +503,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -525,9 +525,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -584,9 +584,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -595,9 +595,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -606,9 +606,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -617,9 +617,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -639,9 +639,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -703,9 +703,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -714,9 +714,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -725,9 +725,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -736,9 +736,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -758,9 +758,9 @@ class AsyncRawComputeEnvironmentsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

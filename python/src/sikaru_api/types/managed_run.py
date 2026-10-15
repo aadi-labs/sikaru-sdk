@@ -7,6 +7,7 @@ import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
 from .personal_connection_prompt import PersonalConnectionPrompt
+from .run_error import RunError
 
 
 class ManagedRun(UniversalBaseModel):
@@ -27,6 +28,11 @@ class ManagedRun(UniversalBaseModel):
         FieldMetadata(alias="costSummary"),
         pydantic.Field(alias="costSummary"),
     ] = None
+    error: typing.Optional[RunError] = pydantic.Field(default=None)
+    """
+    Why the run failed; set when `status` is `failed`, otherwise null. Omitted when `contentVisible` is false.
+    """
+
     events_url: typing_extensions.Annotated[str, FieldMetadata(alias="eventsUrl"), pydantic.Field(alias="eventsUrl")]
     harness_id: typing_extensions.Annotated[str, FieldMetadata(alias="harnessId"), pydantic.Field(alias="harnessId")]
     harness_version_id: typing_extensions.Annotated[

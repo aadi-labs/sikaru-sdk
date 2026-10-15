@@ -48,6 +48,9 @@ class ExecutionSessionRecord(UniversalBaseModel):
     ] = None
     next_turn: typing_extensions.Annotated[int, FieldMetadata(alias="nextTurn"), pydantic.Field(alias="nextTurn")]
     personal: typing.Optional[bool] = None
+    pinned_generation_id: typing_extensions.Annotated[
+        typing.Optional[str], FieldMetadata(alias="pinnedGenerationId"), pydantic.Field(alias="pinnedGenerationId")
+    ] = None
     preview: typing.Optional[str] = None
     project_id: typing_extensions.Annotated[str, FieldMetadata(alias="projectId"), pydantic.Field(alias="projectId")]
     reasoning_effort: typing_extensions.Annotated[

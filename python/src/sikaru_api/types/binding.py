@@ -21,7 +21,6 @@ class Binding(UniversalBaseModel):
     per_minute: typing.Optional[int] = None
     personal_access: typing.Optional[bool] = None
     recipient_id: typing.Optional[str] = None
-    shared_tenant_id: typing.Optional[str] = None
     status: str
     transport: BindingTransport
 

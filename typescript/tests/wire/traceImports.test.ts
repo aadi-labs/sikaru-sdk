@@ -30,6 +30,60 @@ describe("TraceImportsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.listTraceImports("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("list_trace_imports (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.listTraceImports("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("list_trace_imports (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.listTraceImports("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("list_trace_imports (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -75,6 +129,90 @@ describe("TraceImportsClient", () => {
     });
           
     test("create_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.createTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("create_trace_import (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.createTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("create_trace_import (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.createTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("create_trace_import (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
@@ -136,6 +274,90 @@ describe("TraceImportsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/plan").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.planTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("plan_trace_import (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/plan").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.planTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("plan_trace_import (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/plan").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.planTraceImport("project_id", {
+    connectionId: "x",
+    converterVersion: "x",
+    dataset: "x",
+    externalProjectId: "x",
+    mode: "historical",
+    provider: "langsmith",
+    scope: {},
+    sourceInstance: "x"
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("plan_trace_import (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "connectionId" : "x" , "converterVersion" : "x" , "dataset" : "x" , "externalProjectId" : "x" , "mode" : "historical" , "provider" : "langsmith" , "scope" : { } , "sourceInstance" : "x" };
         const rawResponseBody = { };
         
         server
@@ -184,6 +406,60 @@ describe("TraceImportsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImport("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_trace_import (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImport("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_trace_import (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImport("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_trace_import (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -222,6 +498,69 @@ describe("TraceImportsClient", () => {
     });
           
     test("cancel_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.cancelTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("cancel_trace_import (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.cancelTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("cancel_trace_import (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/cancel").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.cancelTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("cancel_trace_import (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedVersion" : 1 };
@@ -266,6 +605,60 @@ describe("TraceImportsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id/receipt").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImportReceipt("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get_trace_import_receipt (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id/receipt").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImportReceipt("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get_trace_import_receipt (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/trace-imports/trace_import_id/receipt").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.getTraceImportReceipt("project_id", "trace_import_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get_trace_import_receipt (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
         const rawResponseBody = { };
         
         server
@@ -304,6 +697,69 @@ describe("TraceImportsClient", () => {
     });
           
     test("retry_trace_import (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/retry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.retryTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("retry_trace_import (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/retry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.retryTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("retry_trace_import (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "expectedVersion" : 1 };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/trace-imports/trace_import_id/retry").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.traceImports.retryTraceImport("project_id", "trace_import_id", {
+    expectedVersion: 1
+})
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("retry_trace_import (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "expectedVersion" : 1 };

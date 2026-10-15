@@ -74,6 +74,7 @@ class ManagedAgentsClient:
         display_name: typing.Optional[str] = OMIT,
         harness_id: typing.Optional[str] = OMIT,
         initial_channel: typing.Optional[CreateManagedAgentRequestInitialChannel] = OMIT,
+        personal: typing.Optional[bool] = OMIT,
         source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
         status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -94,6 +95,9 @@ class ManagedAgentsClient:
         harness_id : typing.Optional[str]
 
         initial_channel : typing.Optional[CreateManagedAgentRequestInitialChannel]
+
+        personal : typing.Optional[bool]
+            Fixed at creation; new agents are shared unless set. A personal agent's conversations stay private to the person who runs them. Omit it to keep an existing agent's choice.
 
         source : typing.Optional[CreateManagedAgentSourceRequest]
 
@@ -128,6 +132,7 @@ class ManagedAgentsClient:
             display_name=display_name,
             harness_id=harness_id,
             initial_channel=initial_channel,
+            personal=personal,
             source=source,
             status=status,
             request_options=request_options,
@@ -380,6 +385,7 @@ class AsyncManagedAgentsClient:
         display_name: typing.Optional[str] = OMIT,
         harness_id: typing.Optional[str] = OMIT,
         initial_channel: typing.Optional[CreateManagedAgentRequestInitialChannel] = OMIT,
+        personal: typing.Optional[bool] = OMIT,
         source: typing.Optional[CreateManagedAgentSourceRequest] = OMIT,
         status: typing.Optional[CreateManagedAgentRequestStatus] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -400,6 +406,9 @@ class AsyncManagedAgentsClient:
         harness_id : typing.Optional[str]
 
         initial_channel : typing.Optional[CreateManagedAgentRequestInitialChannel]
+
+        personal : typing.Optional[bool]
+            Fixed at creation; new agents are shared unless set. A personal agent's conversations stay private to the person who runs them. Omit it to keep an existing agent's choice.
 
         source : typing.Optional[CreateManagedAgentSourceRequest]
 
@@ -442,6 +451,7 @@ class AsyncManagedAgentsClient:
             display_name=display_name,
             harness_id=harness_id,
             initial_channel=initial_channel,
+            personal=personal,
             source=source,
             status=status,
             request_options=request_options,

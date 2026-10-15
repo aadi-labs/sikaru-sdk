@@ -16,9 +16,9 @@ from ..errors.not_found_error import NotFoundError
 from ..errors.service_unavailable_error import ServiceUnavailableError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
-from ..types.compute_error import ComputeError
 from ..types.credential_renewed import CredentialRenewed
 from ..types.credential_revoked import CredentialRevoked
+from ..types.error_response import ErrorResponse
 from ..types.http_validation_error import HttpValidationError
 from pydantic import ValidationError
 
@@ -69,9 +69,9 @@ class RawComputeCredentialsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -80,9 +80,9 @@ class RawComputeCredentialsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -91,9 +91,9 @@ class RawComputeCredentialsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -102,9 +102,9 @@ class RawComputeCredentialsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -124,9 +124,9 @@ class RawComputeCredentialsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -184,9 +184,9 @@ class RawComputeCredentialsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -195,9 +195,9 @@ class RawComputeCredentialsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -206,9 +206,9 @@ class RawComputeCredentialsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -217,9 +217,9 @@ class RawComputeCredentialsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -239,9 +239,9 @@ class RawComputeCredentialsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -304,9 +304,9 @@ class AsyncRawComputeCredentialsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -315,9 +315,9 @@ class AsyncRawComputeCredentialsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -326,9 +326,9 @@ class AsyncRawComputeCredentialsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -337,9 +337,9 @@ class AsyncRawComputeCredentialsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -359,9 +359,9 @@ class AsyncRawComputeCredentialsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -421,9 +421,9 @@ class AsyncRawComputeCredentialsClient:
                 raise UnauthorizedError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -432,9 +432,9 @@ class AsyncRawComputeCredentialsClient:
                 raise ForbiddenError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -443,9 +443,9 @@ class AsyncRawComputeCredentialsClient:
                 raise NotFoundError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -454,9 +454,9 @@ class AsyncRawComputeCredentialsClient:
                 raise ConflictError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),
@@ -476,9 +476,9 @@ class AsyncRawComputeCredentialsClient:
                 raise ServiceUnavailableError(
                     headers=dict(_response.headers),
                     body=typing.cast(
-                        ComputeError,
+                        ErrorResponse,
                         parse_obj_as(
-                            type_=ComputeError,  # type: ignore
+                            type_=ErrorResponse,  # type: ignore
                             object_=_response.json(),
                         ),
                     ),

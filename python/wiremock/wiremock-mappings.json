@@ -319,7 +319,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"files\": [\n    {\n      \"contentType\": \"contentType\",\n      \"createdAt\": 1.1,\n      \"direction\": \"direction\",\n      \"filename\": \"filename\",\n      \"id\": \"id\",\n      \"path\": \"path\",\n      \"sha256\": \"sha256\",\n      \"size\": 1,\n      \"snapshotDigest\": \"snapshotDigest\",\n      \"sourceRunId\": \"sourceRunId\"\n    }\n  ]\n}",
+        "body": "{\n  \"files\": [\n    {\n      \"contentType\": \"contentType\",\n      \"createdAt\": 1.1,\n      \"direction\": \"direction\",\n      \"filename\": \"filename\",\n      \"id\": \"id\",\n      \"path\": \"path\",\n      \"sha256\": \"sha256\",\n      \"size\": 1,\n      \"sourceRunId\": \"sourceRunId\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -879,7 +879,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"accessDelta\": {\n    \"added\": [\n      \"added\"\n    ],\n    \"capabilities\": [\n      {\n        \"key\": \"value\"\n      }\n    ],\n    \"changed\": [\n      \"changed\"\n    ],\n    \"removed\": [\n      \"removed\"\n    ]\n  },\n  \"activatedAt\": \"activatedAt\",\n  \"activationId\": \"activationId\",\n  \"actor\": \"actor\",\n  \"affectedSchedules\": [\n    {\n      \"key\": \"value\"\n    }\n  ],\n  \"blockers\": [\n    {\n      \"mention\": \"mention\",\n      \"reason\": \"reason\",\n      \"state\": \"state\"\n    }\n  ],\n  \"ceilingViolations\": [\n    {\n      \"column\": 1,\n      \"line\": 1,\n      \"message\": \"message\"\n    }\n  ],\n  \"contentOrigin\": \"contentOrigin\",\n  \"createdAt\": \"createdAt\",\n  \"earlierSessions\": [\n    {\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"sessionId\": \"sessionId\"\n    }\n  ],\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"priorVersionId\": \"priorVersionId\",\n  \"revision\": 1,\n  \"unchanged\": true\n}",
+        "body": "{\n  \"accessDelta\": {\n    \"added\": [\n      \"added\"\n    ],\n    \"capabilities\": [\n      {\n        \"key\": \"value\"\n      }\n    ],\n    \"changed\": [\n      \"changed\"\n    ],\n    \"removed\": [\n      \"removed\"\n    ]\n  },\n  \"activatedAt\": \"activatedAt\",\n  \"activationId\": \"activationId\",\n  \"actor\": \"actor\",\n  \"affectedSchedules\": [\n    {\n      \"key\": \"value\"\n    }\n  ],\n  \"blockers\": [\n    {\n      \"mention\": \"mention\",\n      \"reason\": \"reason\",\n      \"state\": \"state\"\n    }\n  ],\n  \"ceilingViolations\": [\n    {\n      \"column\": 1,\n      \"line\": 1,\n      \"message\": \"message\"\n    }\n  ],\n  \"contentOrigin\": \"contentOrigin\",\n  \"createdAt\": \"createdAt\",\n  \"earlierSessions\": [\n    {\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"sessionId\": \"sessionId\"\n    }\n  ],\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"priorVersionId\": \"priorVersionId\",\n  \"publicationStatus\": \"pending\",\n  \"revision\": 1,\n  \"unchanged\": true\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -913,7 +913,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"accessDelta\": {\n    \"added\": [\n      \"added\"\n    ],\n    \"capabilities\": [\n      {\n        \"key\": \"value\"\n      }\n    ],\n    \"changed\": [\n      \"changed\"\n    ],\n    \"removed\": [\n      \"removed\"\n    ]\n  },\n  \"activatedAt\": \"activatedAt\",\n  \"activationId\": \"activationId\",\n  \"actor\": \"actor\",\n  \"affectedSchedules\": [\n    {\n      \"key\": \"value\"\n    }\n  ],\n  \"blockers\": [\n    {\n      \"mention\": \"mention\",\n      \"reason\": \"reason\",\n      \"state\": \"state\"\n    }\n  ],\n  \"ceilingViolations\": [\n    {\n      \"column\": 1,\n      \"line\": 1,\n      \"message\": \"message\"\n    }\n  ],\n  \"contentOrigin\": \"contentOrigin\",\n  \"createdAt\": \"createdAt\",\n  \"earlierSessions\": [\n    {\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"sessionId\": \"sessionId\"\n    }\n  ],\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"priorVersionId\": \"priorVersionId\",\n  \"revision\": 1,\n  \"unchanged\": true\n}",
+        "body": "{\n  \"accessDelta\": {\n    \"added\": [\n      \"added\"\n    ],\n    \"capabilities\": [\n      {\n        \"key\": \"value\"\n      }\n    ],\n    \"changed\": [\n      \"changed\"\n    ],\n    \"removed\": [\n      \"removed\"\n    ]\n  },\n  \"activatedAt\": \"activatedAt\",\n  \"activationId\": \"activationId\",\n  \"actor\": \"actor\",\n  \"affectedSchedules\": [\n    {\n      \"key\": \"value\"\n    }\n  ],\n  \"blockers\": [\n    {\n      \"mention\": \"mention\",\n      \"reason\": \"reason\",\n      \"state\": \"state\"\n    }\n  ],\n  \"ceilingViolations\": [\n    {\n      \"column\": 1,\n      \"line\": 1,\n      \"message\": \"message\"\n    }\n  ],\n  \"contentOrigin\": \"contentOrigin\",\n  \"createdAt\": \"createdAt\",\n  \"earlierSessions\": [\n    {\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"sessionId\": \"sessionId\"\n    }\n  ],\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"priorVersionId\": \"priorVersionId\",\n  \"publicationStatus\": \"pending\",\n  \"revision\": 1,\n  \"unchanged\": true\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1157,7 +1157,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"versions\": [\n    {\n      \"accessDelta\": {\n        \"added\": [\n          \"added\"\n        ],\n        \"changed\": [\n          \"changed\"\n        ],\n        \"removed\": [\n          \"removed\"\n        ]\n      },\n      \"activatedAt\": \"activatedAt\",\n      \"activationId\": \"activationId\",\n      \"actor\": \"actor\",\n      \"affectedSchedules\": [\n        {\n          \"key\": \"value\"\n        }\n      ],\n      \"blockers\": [\n        {}\n      ],\n      \"ceilingViolations\": [\n        {\n          \"message\": \"message\"\n        }\n      ],\n      \"contentOrigin\": \"contentOrigin\",\n      \"createdAt\": \"createdAt\",\n      \"earlierSessions\": [\n        {\n          \"harnessVersionId\": \"harnessVersionId\",\n          \"sessionId\": \"sessionId\"\n        }\n      ],\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"priorVersionId\": \"priorVersionId\",\n      \"revision\": 1,\n      \"unchanged\": true\n    }\n  ]\n}",
+        "body": "{\n  \"versions\": [\n    {\n      \"accessDelta\": {\n        \"added\": [\n          \"added\"\n        ],\n        \"changed\": [\n          \"changed\"\n        ],\n        \"removed\": [\n          \"removed\"\n        ]\n      },\n      \"activatedAt\": \"activatedAt\",\n      \"activationId\": \"activationId\",\n      \"actor\": \"actor\",\n      \"affectedSchedules\": [\n        {\n          \"key\": \"value\"\n        }\n      ],\n      \"blockers\": [\n        {}\n      ],\n      \"ceilingViolations\": [\n        {\n          \"message\": \"message\"\n        }\n      ],\n      \"contentOrigin\": \"contentOrigin\",\n      \"createdAt\": \"createdAt\",\n      \"earlierSessions\": [\n        {\n          \"harnessVersionId\": \"harnessVersionId\",\n          \"sessionId\": \"sessionId\"\n        }\n      ],\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"priorVersionId\": \"priorVersionId\",\n      \"publicationStatus\": \"pending\",\n      \"revision\": 1,\n      \"unchanged\": true\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1716,7 +1716,7 @@
       },
       "response": {
         "status": 200,
-        "body": "[\n  {\n    \"agent_id\": \"agent_id\",\n    \"destination_id\": \"destination_id\",\n    \"destination_kind\": \"destination_kind\",\n    \"generation\": 1,\n    \"id\": \"id\",\n    \"identity_app_ids\": [\n      \"identity_app_ids\"\n    ],\n    \"installation_generation\": 1,\n    \"installation_id\": \"installation_id\",\n    \"name\": \"name\",\n    \"pending_cap\": 1,\n    \"per_minute\": 1,\n    \"personal_access\": true,\n    \"recipient_id\": \"recipient_id\",\n    \"shared_tenant_id\": \"shared_tenant_id\",\n    \"status\": \"status\",\n    \"transport\": \"http\"\n  }\n]",
+        "body": "[\n  {\n    \"agent_id\": \"agent_id\",\n    \"destination_id\": \"destination_id\",\n    \"destination_kind\": \"destination_kind\",\n    \"generation\": 1,\n    \"id\": \"id\",\n    \"identity_app_ids\": [\n      \"identity_app_ids\"\n    ],\n    \"installation_generation\": 1,\n    \"installation_id\": \"installation_id\",\n    \"name\": \"name\",\n    \"pending_cap\": 1,\n    \"per_minute\": 1,\n    \"personal_access\": true,\n    \"recipient_id\": \"recipient_id\",\n    \"status\": \"status\",\n    \"transport\": \"http\"\n  }\n]",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1747,7 +1747,7 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"shared_tenant_id\": \"shared_tenant_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
+        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1815,7 +1815,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"shared_tenant_id\": \"shared_tenant_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
+        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1849,7 +1849,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"shared_tenant_id\": \"shared_tenant_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
+        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -1917,7 +1917,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"enabled\": true,\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"shared_tenant_id\": \"shared_tenant_id\"\n}",
+        "body": "{\n  \"enabled\": true,\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -2319,7 +2319,7 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"shared_tenant_id\": \"shared_tenant_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
+        "body": "{\n  \"agent_id\": \"agent_id\",\n  \"destination_id\": \"destination_id\",\n  \"destination_kind\": \"destination_kind\",\n  \"generation\": 1,\n  \"id\": \"id\",\n  \"identity_app_ids\": [\n    \"identity_app_ids\"\n  ],\n  \"installation_generation\": 1,\n  \"installation_id\": \"installation_id\",\n  \"name\": \"name\",\n  \"pending_cap\": 1,\n  \"per_minute\": 1,\n  \"personal_access\": true,\n  \"recipient_id\": \"recipient_id\",\n  \"status\": \"status\",\n  \"transport\": \"http\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -4614,7 +4614,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"code\": \"code\",\n  \"detail\": \"detail\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5388,7 +5388,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"items\": [\n    {\n      \"activeRunId\": \"activeRunId\",\n      \"agentSlug\": \"agentSlug\",\n      \"autoImprove\": true,\n      \"channelOrigin\": \"http\",\n      \"contentVisible\": true,\n      \"createdAt\": \"createdAt\",\n      \"draftRevision\": 1,\n      \"environment\": \"production\",\n      \"finalOutputSchema\": {\n        \"key\": \"value\"\n      },\n      \"harnessId\": \"harnessId\",\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"id\": \"id\",\n      \"modelId\": \"modelId\",\n      \"nextTurn\": 1,\n      \"personal\": true,\n      \"preview\": \"preview\",\n      \"projectId\": \"projectId\",\n      \"reasoningEffort\": \"reasoningEffort\"\n    }\n  ],\n  \"nextCursor\": \"nextCursor\"\n}",
+        "body": "{\n  \"items\": [\n    {\n      \"activeRunId\": \"activeRunId\",\n      \"agentSlug\": \"agentSlug\",\n      \"autoImprove\": true,\n      \"channelOrigin\": \"http\",\n      \"contentVisible\": true,\n      \"createdAt\": \"createdAt\",\n      \"draftRevision\": 1,\n      \"environment\": \"production\",\n      \"finalOutputSchema\": {\n        \"key\": \"value\"\n      },\n      \"harnessId\": \"harnessId\",\n      \"harnessVersionId\": \"harnessVersionId\",\n      \"id\": \"id\",\n      \"modelId\": \"modelId\",\n      \"nextTurn\": 1,\n      \"personal\": true,\n      \"pinnedGenerationId\": \"pinnedGenerationId\",\n      \"preview\": \"preview\",\n      \"projectId\": \"projectId\",\n      \"reasoningEffort\": \"reasoningEffort\"\n    }\n  ],\n  \"nextCursor\": \"nextCursor\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5422,7 +5422,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"session\": {\n    \"activeRunId\": \"activeRunId\",\n    \"agentSlug\": \"agentSlug\",\n    \"autoImprove\": true,\n    \"channelOrigin\": \"http\",\n    \"contentVisible\": true,\n    \"createdAt\": \"createdAt\",\n    \"draftRevision\": 1,\n    \"environment\": \"production\",\n    \"finalOutputSchema\": {\n      \"key\": \"value\"\n    },\n    \"harnessId\": \"harnessId\",\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"modelId\": \"modelId\",\n    \"nextTurn\": 1,\n    \"personal\": true,\n    \"preview\": \"preview\",\n    \"projectId\": \"projectId\",\n    \"reasoningEffort\": \"reasoningEffort\"\n  }\n}",
+        "body": "{\n  \"session\": {\n    \"activeRunId\": \"activeRunId\",\n    \"agentSlug\": \"agentSlug\",\n    \"autoImprove\": true,\n    \"channelOrigin\": \"http\",\n    \"contentVisible\": true,\n    \"createdAt\": \"createdAt\",\n    \"draftRevision\": 1,\n    \"environment\": \"production\",\n    \"finalOutputSchema\": {\n      \"key\": \"value\"\n    },\n    \"harnessId\": \"harnessId\",\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"modelId\": \"modelId\",\n    \"nextTurn\": 1,\n    \"personal\": true,\n    \"pinnedGenerationId\": \"pinnedGenerationId\",\n    \"preview\": \"preview\",\n    \"projectId\": \"projectId\",\n    \"reasoningEffort\": \"reasoningEffort\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5564,7 +5564,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{}",
+        "body": "{\n  \"code\": \"code\",\n  \"detail\": \"detail\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -5700,12 +5700,46 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"session\": {\n    \"activeRunId\": \"activeRunId\",\n    \"agentSlug\": \"agentSlug\",\n    \"autoImprove\": true,\n    \"channelOrigin\": \"http\",\n    \"contentVisible\": true,\n    \"createdAt\": \"createdAt\",\n    \"draftRevision\": 1,\n    \"environment\": \"production\",\n    \"finalOutputSchema\": {\n      \"key\": \"value\"\n    },\n    \"harnessId\": \"harnessId\",\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"modelId\": \"modelId\",\n    \"nextTurn\": 1,\n    \"personal\": true,\n    \"preview\": \"preview\",\n    \"projectId\": \"projectId\",\n    \"reasoningEffort\": \"reasoningEffort\"\n  }\n}",
+        "body": "{\n  \"session\": {\n    \"activeRunId\": \"activeRunId\",\n    \"agentSlug\": \"agentSlug\",\n    \"autoImprove\": true,\n    \"channelOrigin\": \"http\",\n    \"contentVisible\": true,\n    \"createdAt\": \"createdAt\",\n    \"draftRevision\": 1,\n    \"environment\": \"production\",\n    \"finalOutputSchema\": {\n      \"key\": \"value\"\n    },\n    \"harnessId\": \"harnessId\",\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"modelId\": \"modelId\",\n    \"nextTurn\": 1,\n    \"personal\": true,\n    \"pinnedGenerationId\": \"pinnedGenerationId\",\n    \"preview\": \"preview\",\n    \"projectId\": \"projectId\",\n    \"reasoningEffort\": \"reasoningEffort\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "ceca4145-6850-4fc0-8b10-6fe723ee1c1a",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "3a8e1d8e-c1af-4af4-8a63-b1238776c59b",
+      "name": "List Eligible Releases - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/harnesses/{harness_id}/releases",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "harness_id": {
+            "equalTo": "harness_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"releases\": [\n    {\n      \"generationId\": \"generationId\",\n      \"harnessVersionId\": \"harnessVersionId\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "3a8e1d8e-c1af-4af4-8a63-b1238776c59b",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -6289,7 +6323,7 @@
       },
       "response": {
         "status": 202,
-        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -6354,7 +6388,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -6524,12 +6558,46 @@
       },
       "response": {
         "status": 202,
-        "body": "{\n  \"key\": \"value\"\n}",
+        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "20d71a70-4bd6-440a-a2aa-ae108537d9db",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "c4b6b805-177f-4c56-8429-194107c46307",
+      "name": "Retry Run - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/runs/{run_id}/retry",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "run_id": {
+            "equalTo": "run_id"
+          }
+        }
+      },
+      "response": {
+        "status": 202,
+        "body": "{\n  \"input\": {\n    \"id\": \"id\",\n    \"idempotencyKey\": \"idempotencyKey\",\n    \"mode\": \"mode\",\n    \"runId\": \"runId\",\n    \"status\": \"status\"\n  },\n  \"run\": {\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"inputId\": \"inputId\",\n    \"sessionId\": \"sessionId\",\n    \"status\": \"status\",\n    \"traceId\": \"traceId\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "c4b6b805-177f-4c56-8429-194107c46307",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -6663,7 +6731,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"events\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"id\": \"id\",\n      \"label\": \"label\",\n      \"sequence\": 1\n    }\n  ],\n  \"evidence\": \"retained_snapshot\",\n  \"run\": {\n    \"accountId\": \"accountId\",\n    \"completedAt\": \"completedAt\",\n    \"contentVisible\": true,\n    \"conversationId\": \"conversationId\",\n    \"environment\": \"Draft\",\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"personal\": true,\n    \"sessionId\": \"sessionId\",\n    \"startedAt\": \"startedAt\",\n    \"status\": \"status\",\n    \"traceId\": \"traceId\"\n  },\n  \"trajectory\": {\n    \"agent\": {\n      \"key\": \"value\"\n    },\n    \"extra\": {\n      \"key\": \"value\"\n    },\n    \"final_metrics\": {\n      \"key\": 1\n    },\n    \"schema_version\": \"schema_version\",\n    \"session_id\": \"session_id\",\n    \"steps\": [\n      {\n        \"message\": \"message\",\n        \"results\": [\n          {}\n        ],\n        \"source\": \"user\",\n        \"step_id\": 1,\n        \"tool_calls\": [\n          {}\n        ]\n      }\n    ],\n    \"trajectory_id\": \"trajectory_id\"\n  },\n  \"usage\": {\n    \"cachedTokens\": 1,\n    \"inputTokens\": 1,\n    \"outputTokens\": 1\n  }\n}",
+        "body": "{\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"events\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"id\": \"id\",\n      \"label\": \"label\",\n      \"sequence\": 1\n    }\n  ],\n  \"evidence\": \"retained_snapshot\",\n  \"run\": {\n    \"accountId\": \"accountId\",\n    \"completedAt\": \"completedAt\",\n    \"contentVisible\": true,\n    \"conversationId\": \"conversationId\",\n    \"environment\": \"Draft\",\n    \"error\": {\n      \"code\": \"code\",\n      \"message\": \"message\",\n      \"recoverable\": true\n    },\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"personal\": true,\n    \"sessionId\": \"sessionId\",\n    \"startedAt\": \"startedAt\",\n    \"status\": \"status\",\n    \"traceId\": \"traceId\"\n  },\n  \"trajectory\": {\n    \"agent\": {\n      \"key\": \"value\"\n    },\n    \"extra\": {\n      \"key\": \"value\"\n    },\n    \"final_metrics\": {\n      \"key\": 1\n    },\n    \"schema_version\": \"schema_version\",\n    \"session_id\": \"session_id\",\n    \"steps\": [\n      {\n        \"message\": \"message\",\n        \"results\": [\n          {}\n        ],\n        \"source\": \"user\",\n        \"step_id\": 1,\n        \"tool_calls\": [\n          {}\n        ]\n      }\n    ],\n    \"trajectory_id\": \"trajectory_id\"\n  },\n  \"usage\": {\n    \"cachedTokens\": 1,\n    \"inputTokens\": 1,\n    \"outputTokens\": 1\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -7398,7 +7466,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"managedAgent\": {\n    \"activeHarnessVersionId\": \"activeHarnessVersionId\",\n    \"agentSlug\": \"agentSlug\",\n    \"compatibilityProfileId\": \"compatibilityProfileId\",\n    \"displayName\": \"displayName\",\n    \"harnessId\": \"harnessId\",\n    \"id\": \"id\",\n    \"organizationId\": \"organizationId\",\n    \"projectId\": \"projectId\",\n    \"status\": \"status\"\n  }\n}",
+        "body": "{\n  \"managedAgent\": {\n    \"activeHarnessVersionId\": \"activeHarnessVersionId\",\n    \"agentSlug\": \"agentSlug\",\n    \"compatibilityProfileId\": \"compatibilityProfileId\",\n    \"displayName\": \"displayName\",\n    \"harnessId\": \"harnessId\",\n    \"id\": \"id\",\n    \"organizationId\": \"organizationId\",\n    \"personal\": true,\n    \"projectId\": \"projectId\",\n    \"status\": \"status\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9058,6 +9126,6 @@
     }
   ],
   "meta": {
-    "total": 271
+    "total": 273
   }
 }

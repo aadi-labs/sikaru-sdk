@@ -54,6 +54,7 @@ export * as executions from "./executions/index.js";
 export * from "./executions/client/requests/index.js";
 export * as executionSessions from "./executionSessions/index.js";
 export * from "./executionSessions/client/requests/index.js";
+export * from "./executionSessions/types/index.js";
 export * as feedback from "./feedback/index.js";
 export * from "./feedback/client/requests/index.js";
 export * as gitCredentials from "./gitCredentials/index.js";
