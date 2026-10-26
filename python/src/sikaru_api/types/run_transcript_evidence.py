@@ -2,4 +2,6 @@
 
 import typing
 
-RunTranscriptEvidence = typing.Union[typing.Literal["retained_snapshot", "unavailable", "personal"], typing.Any]
+RunTranscriptEvidence = typing.Union[
+    typing.Literal["retained_snapshot", "retained_progress", "unavailable", "personal"], typing.Any
+]

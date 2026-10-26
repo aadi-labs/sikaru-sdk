@@ -6,6 +6,7 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
+from .funding_wait import FundingWait
 
 
 class TranscriptEvent(UniversalBaseModel):
@@ -13,6 +14,7 @@ class TranscriptEvent(UniversalBaseModel):
     id: str
     label: str
     sequence: int
+    waiting: typing.Optional[FundingWait] = None
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

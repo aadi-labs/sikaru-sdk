@@ -8,6 +8,9 @@ from ..types.approval_input_decision import ApprovalInputDecision
 from ..types.event_delivery_request import EventDeliveryRequest
 from ..types.execution_turn_response import ExecutionTurnResponse
 from ..types.managed_run import ManagedRun
+from ..types.resume_counts import ResumeCounts
+from ..types.resume_result import ResumeResult
+from ..types.resume_results import ResumeResults
 from ..types.run_event import RunEvent
 from ..types.run_events import RunEvents
 from ..types.run_transcript import RunTranscript
@@ -15,6 +18,7 @@ from ..types.tool_provider_ref_request import ToolProviderRefRequest
 from ..types.transcript_event import TranscriptEvent
 from ..types.workspace_provenance import WorkspaceProvenance
 from .raw_client import AsyncRawRunsClient, RawRunsClient
+from .types.resume_filter_reason import ResumeFilterReason
 from .types.start_harness_run_request_run_mode import StartHarnessRunRequestRunMode
 from .types.submit_tool_result_request_status import SubmitToolResultRequestStatus
 
@@ -220,6 +224,76 @@ class RunsClient:
             agent_name=agent_name,
             request_options=request_options,
         )
+        return _response.data
+
+    def resume_all(
+        self,
+        project_id: str,
+        *,
+        reason: typing.Optional[ResumeFilterReason] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ResumeResults:
+        """
+        Recheck up to 100 authorized needs-action runs and jobs; only cleared stops resume.
+
+        Parameters
+        ----------
+        project_id : str
+
+        reason : typing.Optional[ResumeFilterReason]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ResumeResults
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.runs.resume_all(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.resume_all(project_id, reason=reason, request_options=request_options)
+        return _response.data
+
+    def resume_count(self, project_id: str, *, request_options: typing.Optional[RequestOptions] = None) -> ResumeCounts:
+        """
+        Count needs-action work the caller can control, grouped by funding reason.
+
+        Parameters
+        ----------
+        project_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ResumeCounts
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.runs.resume_count(
+            project_id="project_id",
+        )
+        """
+        _response = self._raw_client.resume_count(project_id, request_options=request_options)
         return _response.data
 
     def get(
@@ -462,6 +536,42 @@ class RunsClient:
         )
         """
         _response = self._raw_client.recover(project_id, run_id, reason=reason, request_options=request_options)
+        return _response.data
+
+    def resume(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ResumeResult:
+        """
+        Resume the same retained turn. A refused request does not change its state.
+
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ResumeResult
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.runs.resume(
+            project_id="project_id",
+            run_id="run_id",
+        )
+        """
+        _response = self._raw_client.resume(project_id, run_id, request_options=request_options)
         return _response.data
 
     def retry(
@@ -972,6 +1082,94 @@ class AsyncRunsClient:
         )
         return _response.data
 
+    async def resume_all(
+        self,
+        project_id: str,
+        *,
+        reason: typing.Optional[ResumeFilterReason] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> ResumeResults:
+        """
+        Recheck up to 100 authorized needs-action runs and jobs; only cleared stops resume.
+
+        Parameters
+        ----------
+        project_id : str
+
+        reason : typing.Optional[ResumeFilterReason]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ResumeResults
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.runs.resume_all(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.resume_all(project_id, reason=reason, request_options=request_options)
+        return _response.data
+
+    async def resume_count(
+        self, project_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ResumeCounts:
+        """
+        Count needs-action work the caller can control, grouped by funding reason.
+
+        Parameters
+        ----------
+        project_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ResumeCounts
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.runs.resume_count(
+                project_id="project_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.resume_count(project_id, request_options=request_options)
+        return _response.data
+
     async def get(
         self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
     ) -> ManagedRun:
@@ -1261,6 +1459,50 @@ class AsyncRunsClient:
         asyncio.run(main())
         """
         _response = await self._raw_client.recover(project_id, run_id, reason=reason, request_options=request_options)
+        return _response.data
+
+    async def resume(
+        self, project_id: str, run_id: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ResumeResult:
+        """
+        Resume the same retained turn. A refused request does not change its state.
+
+        Parameters
+        ----------
+        project_id : str
+
+        run_id : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ResumeResult
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.runs.resume(
+                project_id="project_id",
+                run_id="run_id",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.resume(project_id, run_id, request_options=request_options)
         return _response.data
 
     async def retry(

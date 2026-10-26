@@ -5,23 +5,12 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .check_environment_kind import CheckEnvironmentKind
-from .workspace_provenance import WorkspaceProvenance
 
 
 class CheckEnvironment(UniversalBaseModel):
-    compute_environment_id: typing.Optional[str] = pydantic.Field(default=None)
-    """
-    Required for local: the compute environment the run executes on.
-    """
-
     kind: CheckEnvironmentKind = pydantic.Field()
     """
-    managed runs in the Sikaru sandbox; local runs on a named compute environment.
-    """
-
-    workspace_provenance: typing.Optional[WorkspaceProvenance] = pydantic.Field(default=None)
-    """
-    Required for local: the workspace the environment provides.
+    managed runs in the Sikaru sandbox.
     """
 
     if IS_PYDANTIC_V2:

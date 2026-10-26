@@ -1,6 +1,6 @@
 {
     "name": "@sikaru/sdk",
-    "version": "0.2.15",
+    "version": "0.3.0",
     "private": false,
     "type": "commonjs",
     "main": "./dist/cjs/index.js",
@@ -39,6 +39,28 @@
                 "default": "./dist/cjs/api/resources/httpChannels/exports.js"
             },
             "default": "./dist/cjs/api/resources/httpChannels/exports.js"
+        },
+        "./completions": {
+            "import": {
+                "types": "./dist/esm/api/resources/completions/exports.d.mts",
+                "default": "./dist/esm/api/resources/completions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/completions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/completions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/completions/exports.js"
+        },
+        "./models": {
+            "import": {
+                "types": "./dist/esm/api/resources/models/exports.d.mts",
+                "default": "./dist/esm/api/resources/models/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/models/exports.d.ts",
+                "default": "./dist/cjs/api/resources/models/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/models/exports.js"
         },
         "./personalChannels": {
             "import": {
@@ -182,17 +204,6 @@
                 "default": "./dist/cjs/api/resources/computeEnvironments/exports.js"
             },
             "default": "./dist/cjs/api/resources/computeEnvironments/exports.js"
-        },
-        "./computeWorkers": {
-            "import": {
-                "types": "./dist/esm/api/resources/computeWorkers/exports.d.mts",
-                "default": "./dist/esm/api/resources/computeWorkers/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/computeWorkers/exports.d.ts",
-                "default": "./dist/cjs/api/resources/computeWorkers/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/computeWorkers/exports.js"
         },
         "./connections": {
             "import": {
@@ -645,6 +656,17 @@
             },
             "default": "./dist/cjs/api/resources/workflows/exports.js"
         },
+        "./responses": {
+            "import": {
+                "types": "./dist/esm/api/resources/responses/exports.d.mts",
+                "default": "./dist/esm/api/resources/responses/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/responses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/responses/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/responses/exports.js"
+        },
         "./traceStreams": {
             "import": {
                 "types": "./dist/esm/api/resources/traceStreams/exports.d.mts",
@@ -656,7 +678,40 @@
             },
             "default": "./dist/cjs/api/resources/traceStreams/exports.js"
         },
-        "./package.json": "./package.json"
+        "./chat": {
+            "import": {
+                "types": "./dist/esm/api/resources/chat/exports.d.mts",
+                "default": "./dist/esm/api/resources/chat/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/chat/exports.d.ts",
+                "default": "./dist/cjs/api/resources/chat/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/chat/exports.js"
+        },
+        "./chat/completions": {
+            "import": {
+                "types": "./dist/esm/api/resources/chat/resources/completions/exports.d.mts",
+                "default": "./dist/esm/api/resources/chat/resources/completions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/chat/resources/completions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/chat/resources/completions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/chat/resources/completions/exports.js"
+        },
+        "./package.json": "./package.json",
+        "./inference": {
+            "import": {
+                "types": "./dist/esm/inference.d.mts",
+                "default": "./dist/esm/inference.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/inference.d.ts",
+                "default": "./dist/cjs/inference.js"
+            },
+            "default": "./dist/cjs/inference.js"
+        }
     },
     "files": [
         "dist",

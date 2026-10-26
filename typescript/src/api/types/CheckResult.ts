@@ -17,8 +17,7 @@ export interface CheckResult {
 
 export namespace CheckResult {
     export const Environment = {
-            Managed: "managed",
-            Local: "local"
+            Managed: "managed"
         } as const;
     export type Environment = typeof Environment[keyof typeof Environment];
     export const Status = {

@@ -5,7 +5,8 @@ import typing
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
 from ..types.workspace_checkpoint_view import WorkspaceCheckpointView
-from ..types.workspace_remote_view import WorkspaceRemoteView
+from ..types.workspace_content_view import WorkspaceContentView
+from ..types.workspace_policy_view import WorkspacePolicyView
 from .raw_client import AsyncRawComputeWorkspacesClient, RawComputeWorkspacesClient
 from .types.workspace_checkpoint_input_trigger import WorkspaceCheckpointInputTrigger
 
@@ -33,13 +34,13 @@ class ComputeWorkspacesClient:
         project_id: str,
         attachment_id: str,
         *,
-        commit_sha: str,
+        manifest_digest: str,
         trigger: WorkspaceCheckpointInputTrigger,
         run_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkspaceCheckpointView:
         """
-        Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+        Record a verified uploaded manifest as this session's workspace checkpoint.
 
         Parameters
         ----------
@@ -47,7 +48,7 @@ class ComputeWorkspacesClient:
 
         attachment_id : str
 
-        commit_sha : str
+        manifest_digest : str
 
         trigger : WorkspaceCheckpointInputTrigger
 
@@ -72,25 +73,30 @@ class ComputeWorkspacesClient:
         client.compute_workspaces.record(
             project_id="project_id",
             attachment_id="attachment_id",
-            commit_sha="commit_sha",
+            manifest_digest="manifest_digest",
             trigger="turn",
         )
         """
         _response = self._raw_client.record(
             project_id,
             attachment_id,
-            commit_sha=commit_sha,
+            manifest_digest=manifest_digest,
             trigger=trigger,
             run_id=run_id,
             request_options=request_options,
         )
         return _response.data
 
-    def remote(
-        self, project_id: str, attachment_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> WorkspaceRemoteView:
+    def upload(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkspaceContentView:
         """
-        Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+        Upload file or manifest bytes before acknowledging a workspace checkpoint.
 
         Parameters
         ----------
@@ -98,12 +104,44 @@ class ComputeWorkspacesClient:
 
         attachment_id : str
 
+        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        WorkspaceRemoteView
+        WorkspaceContentView
+            Successful Response
+        """
+        _response = self._raw_client.upload(project_id, attachment_id, request=request, request_options=request_options)
+        return _response.data
+
+    def policy(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkspacePolicyView:
+        """
+        Read the pinned publication rules before capturing workspace files.
+
+        Parameters
+        ----------
+        project_id : str
+
+        attachment_id : str
+
+        run_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WorkspacePolicyView
             Successful Response
 
         Examples
@@ -114,12 +152,12 @@ class ComputeWorkspacesClient:
             channel_credential="YOUR_CHANNEL_CREDENTIAL",
             api_key="YOUR_API_KEY",
         )
-        client.compute_workspaces.remote(
+        client.compute_workspaces.policy(
             project_id="project_id",
             attachment_id="attachment_id",
         )
         """
-        _response = self._raw_client.remote(project_id, attachment_id, request_options=request_options)
+        _response = self._raw_client.policy(project_id, attachment_id, run_id=run_id, request_options=request_options)
         return _response.data
 
 
@@ -143,13 +181,13 @@ class AsyncComputeWorkspacesClient:
         project_id: str,
         attachment_id: str,
         *,
-        commit_sha: str,
+        manifest_digest: str,
         trigger: WorkspaceCheckpointInputTrigger,
         run_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> WorkspaceCheckpointView:
         """
-        Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+        Record a verified uploaded manifest as this session's workspace checkpoint.
 
         Parameters
         ----------
@@ -157,7 +195,7 @@ class AsyncComputeWorkspacesClient:
 
         attachment_id : str
 
-        commit_sha : str
+        manifest_digest : str
 
         trigger : WorkspaceCheckpointInputTrigger
 
@@ -187,7 +225,7 @@ class AsyncComputeWorkspacesClient:
             await client.compute_workspaces.record(
                 project_id="project_id",
                 attachment_id="attachment_id",
-                commit_sha="commit_sha",
+                manifest_digest="manifest_digest",
                 trigger="turn",
             )
 
@@ -197,18 +235,23 @@ class AsyncComputeWorkspacesClient:
         _response = await self._raw_client.record(
             project_id,
             attachment_id,
-            commit_sha=commit_sha,
+            manifest_digest=manifest_digest,
             trigger=trigger,
             run_id=run_id,
             request_options=request_options,
         )
         return _response.data
 
-    async def remote(
-        self, project_id: str, attachment_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> WorkspaceRemoteView:
+    async def upload(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkspaceContentView:
         """
-        Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+        Upload file or manifest bytes before acknowledging a workspace checkpoint.
 
         Parameters
         ----------
@@ -216,12 +259,46 @@ class AsyncComputeWorkspacesClient:
 
         attachment_id : str
 
+        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        WorkspaceRemoteView
+        WorkspaceContentView
+            Successful Response
+        """
+        _response = await self._raw_client.upload(
+            project_id, attachment_id, request=request, request_options=request_options
+        )
+        return _response.data
+
+    async def policy(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> WorkspacePolicyView:
+        """
+        Read the pinned publication rules before capturing workspace files.
+
+        Parameters
+        ----------
+        project_id : str
+
+        attachment_id : str
+
+        run_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        WorkspacePolicyView
             Successful Response
 
         Examples
@@ -237,7 +314,7 @@ class AsyncComputeWorkspacesClient:
 
 
         async def main() -> None:
-            await client.compute_workspaces.remote(
+            await client.compute_workspaces.policy(
                 project_id="project_id",
                 attachment_id="attachment_id",
             )
@@ -245,5 +322,7 @@ class AsyncComputeWorkspacesClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.remote(project_id, attachment_id, request_options=request_options)
+        _response = await self._raw_client.policy(
+            project_id, attachment_id, run_id=run_id, request_options=request_options
+        )
         return _response.data

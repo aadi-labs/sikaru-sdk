@@ -405,7 +405,7 @@ class RawComputeAttachmentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[ClaimView]:
         """
-        Same attachment/key/worker returns the same launch identity, never another launch.
+        Same attachment/key returns the same launch identity, never another launch.
 
         Parameters
         ----------
@@ -1591,7 +1591,7 @@ class RawComputeAttachmentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[AttachmentView]:
         """
-        Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+        Controller attests sandbox teardown; clean parked turns stay resumable.
 
         Parameters
         ----------
@@ -2244,7 +2244,7 @@ class AsyncRawComputeAttachmentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[ClaimView]:
         """
-        Same attachment/key/worker returns the same launch identity, never another launch.
+        Same attachment/key returns the same launch identity, never another launch.
 
         Parameters
         ----------
@@ -3448,7 +3448,7 @@ class AsyncRawComputeAttachmentsClient:
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[AttachmentView]:
         """
-        Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+        Controller attests sandbox teardown; clean parked turns stay resumable.
 
         Parameters
         ----------

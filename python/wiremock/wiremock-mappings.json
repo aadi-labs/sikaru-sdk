@@ -158,6 +158,121 @@
       }
     },
     {
+      "id": "e441a1db-edc2-4cb8-8302-ee6109be533d",
+      "name": "Completions - default",
+      "request": {
+        "urlPathTemplate": "/v1/completions",
+        "method": "POST",
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$[?(@.stream == true)]"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "body": "event: message\ndata: {\"choices\":[{\"finish_reason\":\"finish_reason\",\"index\":1,\"logprobs\":{\"key\":\"value\"},\"text\":\"text\"}],\"created\":1,\"id\":\"id\",\"model\":\"model\",\"object\":\"object\",\"usage\":{\"completion_tokens\":1,\"completion_tokens_details\":{\"key\":\"value\"},\"prompt_tokens\":1,\"prompt_tokens_details\":{\"key\":\"value\"},\"total_tokens\":1}}\n",
+        "headers": {
+          "Content-Type": "text/event-stream"
+        }
+      },
+      "uuid": "e441a1db-edc2-4cb8-8302-ee6109be533d",
+      "persistent": true,
+      "priority": 2,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "7f9264df-4c2e-4e67-ba4d-854764fb5cf5",
+      "name": "Completions - default",
+      "request": {
+        "urlPathTemplate": "/v1/completions",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"choices\": [\n    {\n      \"finish_reason\": \"finish_reason\",\n      \"index\": 1,\n      \"logprobs\": {\n        \"key\": \"value\"\n      },\n      \"text\": \"text\"\n    }\n  ],\n  \"created\": 1,\n  \"id\": \"id\",\n  \"model\": \"model\",\n  \"object\": \"object\",\n  \"usage\": {\n    \"completion_tokens\": 1,\n    \"completion_tokens_details\": {\n      \"key\": \"value\"\n    },\n    \"prompt_tokens\": 1,\n    \"prompt_tokens_details\": {\n      \"key\": \"value\"\n    },\n    \"total_tokens\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "7f9264df-4c2e-4e67-ba4d-854764fb5cf5",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "37fc54ce-7367-4ae8-a296-28d5b52077d5",
+      "name": "Models - default",
+      "request": {
+        "urlPathTemplate": "/v1/models",
+        "method": "GET"
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"data\": [\n    {\n      \"capabilities\": {\n        \"endpoints\": [\n          \"chat\"\n        ],\n        \"input_types\": [\n          \"image_url\"\n        ],\n        \"parameters\": [\n          \"parameters\"\n        ],\n        \"reasoning\": null\n      },\n      \"context_length\": 1,\n      \"created\": 1,\n      \"deprecation_date\": \"2023-01-15\",\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"object\": \"model\",\n      \"owned_by\": \"owned_by\",\n      \"pricing\": {\n        \"completion\": \"completion\",\n        \"prompt\": \"prompt\"\n      }\n    }\n  ],\n  \"object\": \"list\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "37fc54ce-7367-4ae8-a296-28d5b52077d5",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      },
+      "postServeActions": []
+    },
+    {
+      "id": "344a00cf-0be1-4763-89ee-8fa8265d26c1",
+      "name": "Model - default",
+      "request": {
+        "urlPathTemplate": "/v1/models/{model}",
+        "method": "GET",
+        "pathParameters": {
+          "model": {
+            "equalTo": "model"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"capabilities\": {\n    \"endpoints\": [\n      \"chat\"\n    ],\n    \"input_types\": [\n      \"image_url\"\n    ],\n    \"parameters\": [\n      \"parameters\"\n    ],\n    \"reasoning\": {\n      \"budget\": true,\n      \"default_effort\": \"none\",\n      \"default_history\": \"disabled\",\n      \"efforts\": [\n        \"none\"\n      ],\n      \"history\": [\n        \"disabled\"\n      ],\n      \"normalization\": {},\n      \"summary\": true\n    }\n  },\n  \"context_length\": 1,\n  \"created\": 1,\n  \"deprecation_date\": \"2023-01-15\",\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"object\": \"model\",\n  \"owned_by\": \"owned_by\",\n  \"pricing\": {\n    \"completion\": \"completion\",\n    \"prompt\": \"prompt\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "344a00cf-0be1-4763-89ee-8fa8265d26c1",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "7f79bbee-fa7d-44b0-b816-4c8d05154dcb",
       "name": "Message - default",
       "request": {
@@ -3212,11 +3327,11 @@
       }
     },
     {
-      "id": "84f023ea-8d15-4aa1-94bb-48227c25d6d1",
-      "name": "Workspace Remote - default",
+      "id": "984fe30f-5055-4ab4-87cc-e5ce5343e9e9",
+      "name": "Workspace Policy - default",
       "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/workspace-remote",
-        "method": "POST",
+        "urlPathTemplate": "/v1/projects/{project_id}/compute-attachments/{attachment_id}/workspace-policy",
+        "method": "GET",
         "pathParameters": {
           "project_id": {
             "equalTo": "project_id"
@@ -3228,12 +3343,12 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"branch\": \"branch\",\n  \"expires_at\": \"expires_at\",\n  \"head_sha\": \"head_sha\",\n  \"ignore_defaults\": [\n    \"ignore_defaults\"\n  ],\n  \"max_push_bytes\": 1,\n  \"remote_url\": \"remote_url\",\n  \"token\": \"token\",\n  \"username\": \"x-token\"\n}",
+        "body": "{\n  \"credentials\": [\n    \"credentials\"\n  ],\n  \"ignore\": [\n    \"ignore\"\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
-      "uuid": "84f023ea-8d15-4aa1-94bb-48227c25d6d1",
+      "uuid": "984fe30f-5055-4ab4-87cc-e5ce5343e9e9",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -3398,74 +3513,6 @@
         }
       },
       "uuid": "dd6d97de-e7da-4904-a071-f3127962fd50",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "82d46862-979e-4ad6-b26f-91a0357d09e0",
-      "name": "Issue Compute Worker Credential - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments/{environment_id}/credentials",
-        "method": "POST",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "environment_id": {
-            "equalTo": "environment_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"credential_id\": \"credential_id\",\n  \"expires_at\": 1.1,\n  \"token\": \"token\"\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "82d46862-979e-4ad6-b26f-91a0357d09e0",
-      "persistent": true,
-      "priority": 3,
-      "metadata": {
-        "mocklab": {
-          "created": {
-            "at": "2020-01-01T00:00:00.000Z",
-            "via": "SYSTEM"
-          }
-        }
-      }
-    },
-    {
-      "id": "01d7f808-df45-495a-af6f-c2dd0d38cda9",
-      "name": "Poll Compute Queue - default",
-      "request": {
-        "urlPathTemplate": "/v1/projects/{project_id}/compute-environments/{environment_id}/queue",
-        "method": "GET",
-        "pathParameters": {
-          "project_id": {
-            "equalTo": "project_id"
-          },
-          "environment_id": {
-            "equalTo": "environment_id"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": "{\n  \"attachments\": [\n    {\n      \"capabilities\": [\n        \"capabilities\"\n      ],\n      \"cleanup_at\": 1.1,\n      \"cleanup_status\": \"unconfirmed\",\n      \"environment_id\": \"environment_id\",\n      \"id\": \"id\",\n      \"journal_id\": \"journal_id\",\n      \"lease_ttl_seconds\": 1,\n      \"lease_until\": 1.1,\n      \"owner_epoch\": 1,\n      \"owner_id\": \"owner_id\",\n      \"processes\": [\n        {\n          \"evidence\": \"evidence\",\n          \"handle_id\": \"handle_id\",\n          \"status\": \"running\"\n        }\n      ],\n      \"project_id\": \"project_id\",\n      \"protocol_version\": \"protocol_version\",\n      \"provider_id\": \"provider_id\",\n      \"session_id\": \"session_id\",\n      \"startup_deadline\": 1.1,\n      \"status\": \"pending\",\n      \"uncertain_operations\": [\n        {\n          \"method\": \"method\",\n          \"owner_epoch\": 1,\n          \"request_digest\": \"request_digest\",\n          \"run_id\": \"run_id\",\n          \"tool_call_id\": \"tool_call_id\",\n          \"workspace_generation\": \"workspace_generation\"\n        }\n      ],\n      \"workspace_generation\": \"workspace_generation\",\n      \"workspace_provenance\": {\n        \"identity\": \"identity\",\n        \"kind\": \"existing_directory\"\n      }\n    }\n  ],\n  \"poll_after_seconds\": 1\n}",
-        "headers": {
-          "Content-Type": "application/json"
-        }
-      },
-      "uuid": "01d7f808-df45-495a-af6f-c2dd0d38cda9",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -6323,7 +6370,7 @@
       },
       "response": {
         "status": 202,
-        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true,\n    \"stage\": \"admission\"\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"measurementStatus\": \"available\",\n  \"pause\": {\n    \"message\": \"message\",\n    \"reason\": \"reason\",\n    \"requires_action\": true,\n    \"resumable\": true\n  },\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -6372,6 +6419,68 @@
       }
     },
     {
+      "id": "b5bff033-bb15-4a77-ae46-02183c127ba5",
+      "name": "Resume Paused Runs - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/runs/resume",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"results\": [\n    {\n      \"reason\": \"reason\",\n      \"runId\": \"runId\",\n      \"status\": \"queued\"\n    }\n  ]\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "b5bff033-bb15-4a77-ae46-02183c127ba5",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "17d9c452-815a-4aa1-8fb2-1a1a26d04734",
+      "name": "Resumable Count - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/runs/resume/count",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"ready\": 1,\n  \"readyReasons\": {\n    \"key\": 1\n  },\n  \"reasons\": {\n    \"key\": 1\n  },\n  \"total\": 1\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "17d9c452-815a-4aa1-8fb2-1a1a26d04734",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "02fd4751-050e-47e5-873d-5d8c7cf1d9c5",
       "name": "Managed Run Summary - default",
       "request": {
@@ -6388,7 +6497,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true,\n    \"stage\": \"admission\"\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"measurementStatus\": \"available\",\n  \"pause\": {\n    \"message\": \"message\",\n    \"reason\": \"reason\",\n    \"requires_action\": true,\n    \"resumable\": true\n  },\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -6558,12 +6667,46 @@
       },
       "response": {
         "status": 202,
-        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
+        "body": "{\n  \"compatibilityProfileId\": \"compatibilityProfileId\",\n  \"completedAt\": \"completedAt\",\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"contentVisible\": true,\n  \"costSummary\": {\n    \"key\": \"value\"\n  },\n  \"error\": {\n    \"code\": \"code\",\n    \"message\": \"message\",\n    \"recoverable\": true,\n    \"stage\": \"admission\"\n  },\n  \"eventsUrl\": \"eventsUrl\",\n  \"harnessId\": \"harnessId\",\n  \"harnessVersionId\": \"harnessVersionId\",\n  \"latencyMs\": 1.1,\n  \"measurementStatus\": \"available\",\n  \"pause\": {\n    \"message\": \"message\",\n    \"reason\": \"reason\",\n    \"requires_action\": true,\n    \"resumable\": true\n  },\n  \"personal\": true,\n  \"runId\": \"runId\",\n  \"status\": \"status\",\n  \"usageSummary\": {\n    \"key\": \"value\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
       },
       "uuid": "20d71a70-4bd6-440a-a2aa-ae108537d9db",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "fba5636c-e266-434a-8c4d-7fabdc8e1a97",
+      "name": "Resume Run - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/runs/{run_id}/resume",
+        "method": "POST",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "run_id": {
+            "equalTo": "run_id"
+          }
+        }
+      },
+      "response": {
+        "status": 202,
+        "body": "{\n  \"reason\": \"reason\",\n  \"runId\": \"runId\",\n  \"status\": \"queued\"\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "fba5636c-e266-434a-8c4d-7fabdc8e1a97",
       "persistent": true,
       "priority": 3,
       "metadata": {
@@ -6731,7 +6874,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"events\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"id\": \"id\",\n      \"label\": \"label\",\n      \"sequence\": 1\n    }\n  ],\n  \"evidence\": \"retained_snapshot\",\n  \"run\": {\n    \"accountId\": \"accountId\",\n    \"completedAt\": \"completedAt\",\n    \"contentVisible\": true,\n    \"conversationId\": \"conversationId\",\n    \"environment\": \"Draft\",\n    \"error\": {\n      \"code\": \"code\",\n      \"message\": \"message\",\n      \"recoverable\": true\n    },\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"personal\": true,\n    \"sessionId\": \"sessionId\",\n    \"startedAt\": \"startedAt\",\n    \"status\": \"status\",\n    \"traceId\": \"traceId\"\n  },\n  \"trajectory\": {\n    \"agent\": {\n      \"key\": \"value\"\n    },\n    \"extra\": {\n      \"key\": \"value\"\n    },\n    \"final_metrics\": {\n      \"key\": 1\n    },\n    \"schema_version\": \"schema_version\",\n    \"session_id\": \"session_id\",\n    \"steps\": [\n      {\n        \"message\": \"message\",\n        \"results\": [\n          {}\n        ],\n        \"source\": \"user\",\n        \"step_id\": 1,\n        \"tool_calls\": [\n          {}\n        ]\n      }\n    ],\n    \"trajectory_id\": \"trajectory_id\"\n  },\n  \"usage\": {\n    \"cachedTokens\": 1,\n    \"inputTokens\": 1,\n    \"outputTokens\": 1\n  }\n}",
+        "body": "{\n  \"connections\": [\n    {\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"kind\": \"kind\"\n    }\n  ],\n  \"events\": [\n    {\n      \"createdAt\": \"createdAt\",\n      \"id\": \"id\",\n      \"label\": \"label\",\n      \"sequence\": 1,\n      \"waiting\": {\n        \"count\": 1,\n        \"firstAt\": \"firstAt\",\n        \"lastAt\": \"lastAt\",\n        \"reason\": \"credits_exhausted\"\n      }\n    }\n  ],\n  \"evidence\": \"retained_snapshot\",\n  \"progress\": [\n    {\n      \"blocks\": [\n        {\n          \"availability\": \"retained\",\n          \"kind\": \"text\"\n        }\n      ],\n      \"id\": \"id\",\n      \"kind\": \"message\",\n      \"label\": \"label\",\n      \"measurements\": {\n        \"key\": \"value\"\n      },\n      \"observedAt\": \"observedAt\",\n      \"ordering\": \"source_sequence\",\n      \"role\": \"role\",\n      \"status\": \"status\",\n      \"waiting\": {\n        \"count\": 1,\n        \"firstAt\": \"firstAt\",\n        \"lastAt\": \"lastAt\",\n        \"reason\": \"credits_exhausted\"\n      }\n    }\n  ],\n  \"run\": {\n    \"accountId\": \"accountId\",\n    \"completedAt\": \"completedAt\",\n    \"contentVisible\": true,\n    \"conversationId\": \"conversationId\",\n    \"environment\": \"Draft\",\n    \"error\": {\n      \"code\": \"code\",\n      \"message\": \"message\",\n      \"recoverable\": true,\n      \"stage\": \"admission\"\n    },\n    \"harnessVersionId\": \"harnessVersionId\",\n    \"id\": \"id\",\n    \"name\": \"name\",\n    \"personal\": true,\n    \"sessionId\": \"sessionId\",\n    \"startedAt\": \"startedAt\",\n    \"status\": \"status\",\n    \"traceId\": \"traceId\"\n  },\n  \"trajectory\": {\n    \"agent\": {\n      \"key\": \"value\"\n    },\n    \"extra\": {\n      \"key\": \"value\"\n    },\n    \"final_metrics\": {\n      \"key\": 1\n    },\n    \"schema_version\": \"schema_version\",\n    \"session_id\": \"session_id\",\n    \"steps\": [\n      {\n        \"message\": \"message\",\n        \"results\": [\n          {}\n        ],\n        \"source\": \"user\",\n        \"step_id\": 1,\n        \"tool_calls\": [\n          {}\n        ]\n      }\n    ],\n    \"trajectory_id\": \"trajectory_id\"\n  },\n  \"usage\": {\n    \"cachedTokens\": 1,\n    \"inputTokens\": 1,\n    \"outputTokens\": 1\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -6765,7 +6908,7 @@
       },
       "response": {
         "status": 200,
-        "body": "event: message\ndata: {\"createdAt\":\"createdAt\",\"id\":\"id\",\"label\":\"label\",\"sequence\":1}\n",
+        "body": "event: message\ndata: {\"createdAt\":\"createdAt\",\"id\":\"id\",\"label\":\"label\",\"sequence\":1,\"waiting\":{\"count\":1,\"firstAt\":\"firstAt\",\"lastAt\":\"lastAt\",\"reason\":\"credits_exhausted\"}}\n",
         "headers": {
           "Content-Type": "text/event-stream"
         }
@@ -7416,6 +7559,40 @@
       }
     },
     {
+      "id": "6f8d25aa-7f7c-45ef-ac5e-d2ba598309a3",
+      "name": "Get Managed Agent - default",
+      "request": {
+        "urlPathTemplate": "/v1/projects/{project_id}/managed-agents/{agent_slug}",
+        "method": "GET",
+        "pathParameters": {
+          "project_id": {
+            "equalTo": "project_id"
+          },
+          "agent_slug": {
+            "equalTo": "agent_slug"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"managedAgent\": {\n    \"activeHarnessVersionId\": \"activeHarnessVersionId\",\n    \"agentSlug\": \"agentSlug\",\n    \"compatibilityProfileId\": \"compatibilityProfileId\",\n    \"displayName\": \"displayName\",\n    \"harnessId\": \"harnessId\",\n    \"id\": \"id\",\n    \"organizationId\": \"organizationId\",\n    \"personal\": true,\n    \"projectId\": \"projectId\",\n    \"status\": \"status\"\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "6f8d25aa-7f7c-45ef-ac5e-d2ba598309a3",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "f9a819d5-b2df-4748-b4ec-1672897a9e1a",
       "name": "Delete Managed Agent - default",
       "request": {
@@ -7571,7 +7748,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"checks\": [\n    {\n      \"agentSlug\": \"agentSlug\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": {\n        \"computeEnvironmentId\": null,\n        \"kind\": \"managed\"\n      },\n      \"id\": \"id\",\n      \"instruction\": \"instruction\",\n      \"latestResult\": {\n        \"checkId\": \"checkId\",\n        \"createdAt\": \"createdAt\",\n        \"environment\": \"managed\",\n        \"finishedAt\": null,\n        \"id\": \"id\",\n        \"reason\": \"reason\",\n        \"reward\": null,\n        \"runId\": \"runId\",\n        \"sessionId\": \"sessionId\",\n        \"status\": \"running\",\n        \"traceId\": \"traceId\",\n        \"trajectoryUrl\": \"trajectoryUrl\"\n      },\n      \"name\": \"name\",\n      \"source\": {\n        \"datasetId\": \"datasetId\",\n        \"datasetVersion\": 1,\n        \"exampleId\": \"exampleId\"\n      },\n      \"verification\": \"script\"\n    }\n  ]\n}",
+        "body": "{\n  \"checks\": [\n    {\n      \"agentSlug\": \"agentSlug\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": {\n        \"kind\": \"managed\"\n      },\n      \"id\": \"id\",\n      \"instruction\": \"instruction\",\n      \"latestResult\": {\n        \"checkId\": \"checkId\",\n        \"createdAt\": \"createdAt\",\n        \"environment\": \"managed\",\n        \"finishedAt\": null,\n        \"id\": \"id\",\n        \"reason\": \"reason\",\n        \"reward\": null,\n        \"runId\": \"runId\",\n        \"sessionId\": \"sessionId\",\n        \"status\": \"running\",\n        \"traceId\": \"traceId\",\n        \"trajectoryUrl\": \"trajectoryUrl\"\n      },\n      \"name\": \"name\",\n      \"source\": {\n        \"datasetId\": \"datasetId\",\n        \"datasetVersion\": 1,\n        \"exampleId\": \"exampleId\"\n      },\n      \"verification\": \"script\"\n    }\n  ]\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -7605,7 +7782,7 @@
       },
       "response": {
         "status": 201,
-        "body": "{\n  \"check\": {\n    \"agentSlug\": \"agentSlug\",\n    \"createdAt\": \"createdAt\",\n    \"environment\": {\n      \"computeEnvironmentId\": \"computeEnvironmentId\",\n      \"kind\": \"managed\"\n    },\n    \"id\": \"id\",\n    \"instruction\": \"instruction\",\n    \"latestResult\": {\n      \"checkId\": \"checkId\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": \"managed\",\n      \"finishedAt\": \"finishedAt\",\n      \"id\": \"id\",\n      \"reason\": \"reason\",\n      \"reward\": 1.1,\n      \"runId\": \"runId\",\n      \"sessionId\": \"sessionId\",\n      \"status\": \"running\",\n      \"traceId\": \"traceId\",\n      \"trajectoryUrl\": \"trajectoryUrl\"\n    },\n    \"name\": \"name\",\n    \"source\": {\n      \"agentVersion\": \"agentVersion\",\n      \"datasetId\": \"datasetId\",\n      \"datasetName\": \"datasetName\",\n      \"datasetVersion\": 1,\n      \"exampleId\": \"exampleId\"\n    },\n    \"verification\": \"script\"\n  }\n}",
+        "body": "{\n  \"check\": {\n    \"agentSlug\": \"agentSlug\",\n    \"createdAt\": \"createdAt\",\n    \"environment\": {\n      \"kind\": \"managed\"\n    },\n    \"id\": \"id\",\n    \"instruction\": \"instruction\",\n    \"latestResult\": {\n      \"checkId\": \"checkId\",\n      \"createdAt\": \"createdAt\",\n      \"environment\": \"managed\",\n      \"finishedAt\": \"finishedAt\",\n      \"id\": \"id\",\n      \"reason\": \"reason\",\n      \"reward\": 1.1,\n      \"runId\": \"runId\",\n      \"sessionId\": \"sessionId\",\n      \"status\": \"running\",\n      \"traceId\": \"traceId\",\n      \"trajectoryUrl\": \"trajectoryUrl\"\n    },\n    \"name\": \"name\",\n    \"source\": {\n      \"agentVersion\": \"agentVersion\",\n      \"datasetId\": \"datasetId\",\n      \"datasetName\": \"datasetName\",\n      \"datasetVersion\": 1,\n      \"exampleId\": \"exampleId\"\n    },\n    \"verification\": \"script\"\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -9099,6 +9276,63 @@
       }
     },
     {
+      "id": "08b0877f-ee78-4bc2-9654-8aed32f7a578",
+      "name": "Responses - default",
+      "request": {
+        "urlPathTemplate": "/v1/responses",
+        "method": "POST",
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$[?(@.stream == true)]"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "body": "event: message\ndata: {\"annotation\":{\"key\":\"value\"},\"annotation_index\":1,\"arguments\":\"arguments\",\"code\":\"code\",\"command\":\"command\",\"command_index\":1,\"content_index\":1,\"delta\":\"delta\",\"input\":\"input\",\"item\":{\"key\":\"value\"},\"item_id\":\"item_id\",\"logprobs\":[{\"key\":\"value\"}],\"message\":\"message\",\"output\":[{\"key\":\"value\"}],\"output_format\":\"output_format\",\"output_index\":1,\"param\":\"param\",\"part\":{\"key\":\"value\"},\"partial_image_b64\":\"partial_image_b64\",\"partial_image_index\":1,\"quality\":\"quality\",\"refusal\":\"refusal\",\"response\":{\"completed_at\":1.1,\"created_at\":1.1,\"error\":{\"key\":\"value\"},\"id\":\"id\",\"incomplete_details\":{\"key\":\"value\"},\"instructions\":\"instructions\",\"max_output_tokens\":1,\"max_tool_calls\":1,\"model\":\"model\",\"object\":\"object\",\"output\":[{\"key\":\"value\"}],\"output_text\":\"output_text\",\"parallel_tool_calls\":true,\"reasoning\":{\"key\":\"value\"},\"status\":\"status\",\"temperature\":1.1,\"text\":{\"key\":\"value\"},\"tool_choice\":\"tool_choice\",\"tools\":[{\"key\":\"value\"}],\"top_logprobs\":1,\"top_p\":1.1,\"truncation\":\"truncation\",\"usage\":{\"input_tokens\":1,\"input_tokens_details\":{\"key\":\"value\"},\"output_tokens\":1,\"output_tokens_details\":{\"key\":\"value\"},\"total_tokens\":1}},\"sequence_number\":1,\"size\":\"size\",\"status\":\"status\",\"summary_index\":1,\"text\":\"text\",\"type\":\"type\"}\n",
+        "headers": {
+          "Content-Type": "text/event-stream"
+        }
+      },
+      "uuid": "08b0877f-ee78-4bc2-9654-8aed32f7a578",
+      "persistent": true,
+      "priority": 2,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "f6467dfe-393c-4199-8350-b99d9405d3a7",
+      "name": "Responses - default",
+      "request": {
+        "urlPathTemplate": "/v1/responses",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"completed_at\": 1.1,\n  \"created_at\": 1.1,\n  \"error\": {\n    \"key\": \"value\"\n  },\n  \"id\": \"id\",\n  \"incomplete_details\": {\n    \"key\": \"value\"\n  },\n  \"instructions\": \"instructions\",\n  \"max_output_tokens\": 1,\n  \"max_tool_calls\": 1,\n  \"model\": \"model\",\n  \"object\": \"object\",\n  \"output\": [\n    {\n      \"key\": \"value\"\n    }\n  ],\n  \"output_text\": \"output_text\",\n  \"parallel_tool_calls\": true,\n  \"reasoning\": {\n    \"key\": \"value\"\n  },\n  \"status\": \"status\",\n  \"temperature\": 1.1,\n  \"text\": {\n    \"key\": \"value\"\n  },\n  \"tool_choice\": \"tool_choice\",\n  \"tools\": [\n    {\n      \"key\": \"value\"\n    }\n  ],\n  \"top_logprobs\": 1,\n  \"top_p\": 1.1,\n  \"truncation\": \"truncation\",\n  \"usage\": {\n    \"input_tokens\": 1,\n    \"input_tokens_details\": {\n      \"key\": \"value\"\n    },\n    \"output_tokens\": 1,\n    \"output_tokens_details\": {\n      \"key\": \"value\"\n    },\n    \"total_tokens\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "f6467dfe-393c-4199-8350-b99d9405d3a7",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
       "id": "8649a25e-5283-43cc-b1ae-af88ef34d35e",
       "name": "Stream Openinference Spans - default",
       "request": {
@@ -9123,9 +9357,66 @@
           }
         }
       }
+    },
+    {
+      "id": "f6690495-2e3b-499a-934f-2142368fec66",
+      "name": "Chat - default",
+      "request": {
+        "urlPathTemplate": "/v1/chat/completions",
+        "method": "POST",
+        "bodyPatterns": [
+          {
+            "matchesJsonPath": "$[?(@.stream == true)]"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "body": "event: message\ndata: {\"choices\":[{\"finish_reason\":\"finish_reason\",\"index\":1,\"logprobs\":{\"key\":\"value\"}}],\"created\":1,\"id\":\"id\",\"model\":\"model\",\"object\":\"object\",\"usage\":{\"completion_tokens\":1,\"completion_tokens_details\":{\"key\":\"value\"},\"prompt_tokens\":1,\"prompt_tokens_details\":{\"key\":\"value\"},\"total_tokens\":1}}\n",
+        "headers": {
+          "Content-Type": "text/event-stream"
+        }
+      },
+      "uuid": "f6690495-2e3b-499a-934f-2142368fec66",
+      "persistent": true,
+      "priority": 2,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
+    },
+    {
+      "id": "ee3bc8cf-3333-4836-9034-b3812f66ec6c",
+      "name": "Chat - default",
+      "request": {
+        "urlPathTemplate": "/v1/chat/completions",
+        "method": "POST"
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"choices\": [\n    {\n      \"finish_reason\": \"finish_reason\",\n      \"index\": 1,\n      \"logprobs\": {\n        \"key\": \"value\"\n      }\n    }\n  ],\n  \"created\": 1,\n  \"id\": \"id\",\n  \"model\": \"model\",\n  \"object\": \"object\",\n  \"usage\": {\n    \"completion_tokens\": 1,\n    \"completion_tokens_details\": {\n      \"key\": \"value\"\n    },\n    \"prompt_tokens\": 1,\n    \"prompt_tokens_details\": {\n      \"key\": \"value\"\n    },\n    \"total_tokens\": 1\n  }\n}",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "uuid": "ee3bc8cf-3333-4836-9034-b3812f66ec6c",
+      "persistent": true,
+      "priority": 3,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2020-01-01T00:00:00.000Z",
+            "via": "SYSTEM"
+          }
+        }
+      }
     }
   ],
   "meta": {
-    "total": 273
+    "total": 283
   }
 }

@@ -6,6 +6,7 @@ export interface RunTranscript {
     connections?: Sikaru.PersonalConnectionPrompt[] | undefined;
     events: Sikaru.TranscriptEvent[];
     evidence: RunTranscript.Evidence;
+    progress?: Sikaru.TranscriptProgressEvent[] | undefined;
     run: Sikaru.TranscriptRun;
     trajectory: Sikaru.TranscriptTrajectory | null;
     usage?: (Sikaru.TranscriptUsage | null) | undefined;
@@ -14,6 +15,7 @@ export interface RunTranscript {
 export namespace RunTranscript {
     export const Evidence = {
             RetainedSnapshot: "retained_snapshot",
+            RetainedProgress: "retained_progress",
             Unavailable: "unavailable",
             Personal: "personal"
         } as const;

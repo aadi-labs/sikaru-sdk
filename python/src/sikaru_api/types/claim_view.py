@@ -14,7 +14,7 @@ class ClaimView(UniversalBaseModel):
     owner_id: str
     startup_ttl_seconds: typing.Optional[int] = pydantic.Field(default=None)
     """
-    Initial launch bound anchored at the first claim request start; idempotent claim retries never restart this clock. Workers cannot renew a ready executor lease.
+    Initial launch bound anchored at the first claim request start; idempotent claim retries never restart this clock. The claiming controller cannot renew a ready executor lease.
     """
 
     status: str

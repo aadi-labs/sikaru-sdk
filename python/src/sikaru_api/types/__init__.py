@@ -52,6 +52,12 @@ if typing.TYPE_CHECKING:
     from .channel_identity_app import ChannelIdentityApp
     from .channel_identity_app_id import ChannelIdentityAppId
     from .channel_identity_app_ur_ls import ChannelIdentityAppUrLs
+    from .chat_completion import ChatCompletion
+    from .chat_completion_choice import ChatCompletionChoice
+    from .chat_completion_chunk import ChatCompletionChunk
+    from .chat_completion_chunk_choice import ChatCompletionChunkChoice
+    from .chat_completion_delta import ChatCompletionDelta
+    from .chat_completion_message import ChatCompletionMessage
     from .check import Check
     from .check_agent import CheckAgent
     from .check_environment import CheckEnvironment
@@ -69,6 +75,9 @@ if typing.TYPE_CHECKING:
     from .check_verification import CheckVerification
     from .claim_view import ClaimView
     from .complete_authorization import CompleteAuthorization
+    from .completion import Completion
+    from .completion_choice import CompletionChoice
+    from .completion_usage import CompletionUsage
     from .connection import Connection
     from .connection_agent_usage import ConnectionAgentUsage
     from .connection_app import ConnectionApp
@@ -158,6 +167,8 @@ if typing.TYPE_CHECKING:
     from .execution_turn_response import ExecutionTurnResponse
     from .execution_turn_run import ExecutionTurnRun
     from .execution_view import ExecutionView
+    from .funding_wait import FundingWait
+    from .funding_wait_reason import FundingWaitReason
     from .git_credential import GitCredential
     from .harbor_task_files import HarborTaskFiles
     from .http_credential import HttpCredential
@@ -180,12 +191,21 @@ if typing.TYPE_CHECKING:
     from .judgment_target import JudgmentTarget
     from .judgment_target_kind import JudgmentTargetKind
     from .live_handle import LiveHandle
+    from .managed_agent_read import ManagedAgentRead
     from .managed_agent_view import ManagedAgentView
     from .managed_run import ManagedRun
+    from .managed_run_measurement_status import ManagedRunMeasurementStatus
+    from .managed_run_pause import ManagedRunPause
     from .memory_tool_setting import MemoryToolSetting
     from .memory_tool_setting_policy import MemoryToolSettingPolicy
     from .mention import Mention
     from .mention_resource import MentionResource
+    from .model_list import ModelList
+    from .model_list_object import ModelListObject
+    from .model_pricing import ModelPricing
+    from .model_response import ModelResponse
+    from .model_response_instructions import ModelResponseInstructions
+    from .model_response_tool_choice import ModelResponseToolChoice
     from .new_dataset import NewDataset
     from .new_dataset_purpose import NewDatasetPurpose
     from .o_auth_result import OAuthResult
@@ -210,7 +230,17 @@ if typing.TYPE_CHECKING:
     from .personal_slack_status_status import PersonalSlackStatusStatus
     from .process_observation import ProcessObservation
     from .process_observation_status import ProcessObservationStatus
-    from .queue_page import QueuePage
+    from .public_model import PublicModel
+    from .public_model_object import PublicModelObject
+    from .published_capabilities import PublishedCapabilities
+    from .published_capabilities_endpoints_item import PublishedCapabilitiesEndpointsItem
+    from .published_capabilities_input_types_item import PublishedCapabilitiesInputTypesItem
+    from .published_reasoning import PublishedReasoning
+    from .published_reasoning_default_effort import PublishedReasoningDefaultEffort
+    from .published_reasoning_default_history import PublishedReasoningDefaultHistory
+    from .published_reasoning_efforts_item import PublishedReasoningEffortsItem
+    from .published_reasoning_history_item import PublishedReasoningHistoryItem
+    from .published_reasoning_normalization_value import PublishedReasoningNormalizationValue
     from .ready_input import ReadyInput
     from .ready_input_capabilities_item import ReadyInputCapabilitiesItem
     from .ready_input_protocol_version import ReadyInputProtocolVersion
@@ -227,11 +257,19 @@ if typing.TYPE_CHECKING:
     from .replace_credentials import ReplaceCredentials
     from .resolved_mention import ResolvedMention
     from .resource_budget import ResourceBudget
+    from .response_stream_event import ResponseStreamEvent
+    from .response_stream_event_delta import ResponseStreamEventDelta
+    from .response_usage import ResponseUsage
+    from .resume_counts import ResumeCounts
     from .resume_improvement_input import ResumeImprovementInput
     from .resume_input import ResumeInput
+    from .resume_result import ResumeResult
+    from .resume_result_status import ResumeResultStatus
+    from .resume_results import ResumeResults
     from .reviewed_access import ReviewedAccess
     from .room import Room
     from .run_error import RunError
+    from .run_error_stage import RunErrorStage
     from .run_event import RunEvent
     from .run_events import RunEvents
     from .run_spend import RunSpend
@@ -268,6 +306,14 @@ if typing.TYPE_CHECKING:
     from .trace_import_scope_request import TraceImportScopeRequest
     from .trace_metadata import TraceMetadata
     from .transcript_event import TranscriptEvent
+    from .transcript_host_tool_call import TranscriptHostToolCall
+    from .transcript_progress_block import TranscriptProgressBlock
+    from .transcript_progress_block_availability import TranscriptProgressBlockAvailability
+    from .transcript_progress_block_format import TranscriptProgressBlockFormat
+    from .transcript_progress_block_kind import TranscriptProgressBlockKind
+    from .transcript_progress_event import TranscriptProgressEvent
+    from .transcript_progress_event_kind import TranscriptProgressEventKind
+    from .transcript_progress_event_ordering import TranscriptProgressEventOrdering
     from .transcript_run import TranscriptRun
     from .transcript_run_environment import TranscriptRunEnvironment
     from .transcript_step import TranscriptStep
@@ -284,10 +330,10 @@ if typing.TYPE_CHECKING:
     from .work_page_execution_phase import WorkPageExecutionPhase
     from .work_page_transport import WorkPageTransport
     from .workspace_checkpoint_view import WorkspaceCheckpointView
+    from .workspace_content_view import WorkspaceContentView
+    from .workspace_policy_view import WorkspacePolicyView
     from .workspace_provenance import WorkspaceProvenance
     from .workspace_provenance_kind import WorkspaceProvenanceKind
-    from .workspace_remote_view import WorkspaceRemoteView
-    from .workspace_remote_view_username import WorkspaceRemoteViewUsername
 _dynamic_imports: typing.Dict[str, str] = {
     "AgentDefinition": ".agent_definition",
     "AgentDefinitionSchema": ".agent_definition_schema",
@@ -335,6 +381,12 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ChannelIdentityApp": ".channel_identity_app",
     "ChannelIdentityAppId": ".channel_identity_app_id",
     "ChannelIdentityAppUrLs": ".channel_identity_app_ur_ls",
+    "ChatCompletion": ".chat_completion",
+    "ChatCompletionChoice": ".chat_completion_choice",
+    "ChatCompletionChunk": ".chat_completion_chunk",
+    "ChatCompletionChunkChoice": ".chat_completion_chunk_choice",
+    "ChatCompletionDelta": ".chat_completion_delta",
+    "ChatCompletionMessage": ".chat_completion_message",
     "Check": ".check",
     "CheckAgent": ".check_agent",
     "CheckEnvironment": ".check_environment",
@@ -352,6 +404,9 @@ _dynamic_imports: typing.Dict[str, str] = {
     "CheckVerification": ".check_verification",
     "ClaimView": ".claim_view",
     "CompleteAuthorization": ".complete_authorization",
+    "Completion": ".completion",
+    "CompletionChoice": ".completion_choice",
+    "CompletionUsage": ".completion_usage",
     "Connection": ".connection",
     "ConnectionAgentUsage": ".connection_agent_usage",
     "ConnectionApp": ".connection_app",
@@ -441,6 +496,8 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ExecutionTurnResponse": ".execution_turn_response",
     "ExecutionTurnRun": ".execution_turn_run",
     "ExecutionView": ".execution_view",
+    "FundingWait": ".funding_wait",
+    "FundingWaitReason": ".funding_wait_reason",
     "GitCredential": ".git_credential",
     "HarborTaskFiles": ".harbor_task_files",
     "HttpCredential": ".http_credential",
@@ -463,12 +520,21 @@ _dynamic_imports: typing.Dict[str, str] = {
     "JudgmentTarget": ".judgment_target",
     "JudgmentTargetKind": ".judgment_target_kind",
     "LiveHandle": ".live_handle",
+    "ManagedAgentRead": ".managed_agent_read",
     "ManagedAgentView": ".managed_agent_view",
     "ManagedRun": ".managed_run",
+    "ManagedRunMeasurementStatus": ".managed_run_measurement_status",
+    "ManagedRunPause": ".managed_run_pause",
     "MemoryToolSetting": ".memory_tool_setting",
     "MemoryToolSettingPolicy": ".memory_tool_setting_policy",
     "Mention": ".mention",
     "MentionResource": ".mention_resource",
+    "ModelList": ".model_list",
+    "ModelListObject": ".model_list_object",
+    "ModelPricing": ".model_pricing",
+    "ModelResponse": ".model_response",
+    "ModelResponseInstructions": ".model_response_instructions",
+    "ModelResponseToolChoice": ".model_response_tool_choice",
     "NewDataset": ".new_dataset",
     "NewDatasetPurpose": ".new_dataset_purpose",
     "OAuthResult": ".o_auth_result",
@@ -493,7 +559,17 @@ _dynamic_imports: typing.Dict[str, str] = {
     "PersonalSlackStatusStatus": ".personal_slack_status_status",
     "ProcessObservation": ".process_observation",
     "ProcessObservationStatus": ".process_observation_status",
-    "QueuePage": ".queue_page",
+    "PublicModel": ".public_model",
+    "PublicModelObject": ".public_model_object",
+    "PublishedCapabilities": ".published_capabilities",
+    "PublishedCapabilitiesEndpointsItem": ".published_capabilities_endpoints_item",
+    "PublishedCapabilitiesInputTypesItem": ".published_capabilities_input_types_item",
+    "PublishedReasoning": ".published_reasoning",
+    "PublishedReasoningDefaultEffort": ".published_reasoning_default_effort",
+    "PublishedReasoningDefaultHistory": ".published_reasoning_default_history",
+    "PublishedReasoningEffortsItem": ".published_reasoning_efforts_item",
+    "PublishedReasoningHistoryItem": ".published_reasoning_history_item",
+    "PublishedReasoningNormalizationValue": ".published_reasoning_normalization_value",
     "ReadyInput": ".ready_input",
     "ReadyInputCapabilitiesItem": ".ready_input_capabilities_item",
     "ReadyInputProtocolVersion": ".ready_input_protocol_version",
@@ -510,11 +586,19 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ReplaceCredentials": ".replace_credentials",
     "ResolvedMention": ".resolved_mention",
     "ResourceBudget": ".resource_budget",
+    "ResponseStreamEvent": ".response_stream_event",
+    "ResponseStreamEventDelta": ".response_stream_event_delta",
+    "ResponseUsage": ".response_usage",
+    "ResumeCounts": ".resume_counts",
     "ResumeImprovementInput": ".resume_improvement_input",
     "ResumeInput": ".resume_input",
+    "ResumeResult": ".resume_result",
+    "ResumeResultStatus": ".resume_result_status",
+    "ResumeResults": ".resume_results",
     "ReviewedAccess": ".reviewed_access",
     "Room": ".room",
     "RunError": ".run_error",
+    "RunErrorStage": ".run_error_stage",
     "RunEvent": ".run_event",
     "RunEvents": ".run_events",
     "RunSpend": ".run_spend",
@@ -551,6 +635,14 @@ _dynamic_imports: typing.Dict[str, str] = {
     "TraceImportScopeRequest": ".trace_import_scope_request",
     "TraceMetadata": ".trace_metadata",
     "TranscriptEvent": ".transcript_event",
+    "TranscriptHostToolCall": ".transcript_host_tool_call",
+    "TranscriptProgressBlock": ".transcript_progress_block",
+    "TranscriptProgressBlockAvailability": ".transcript_progress_block_availability",
+    "TranscriptProgressBlockFormat": ".transcript_progress_block_format",
+    "TranscriptProgressBlockKind": ".transcript_progress_block_kind",
+    "TranscriptProgressEvent": ".transcript_progress_event",
+    "TranscriptProgressEventKind": ".transcript_progress_event_kind",
+    "TranscriptProgressEventOrdering": ".transcript_progress_event_ordering",
     "TranscriptRun": ".transcript_run",
     "TranscriptRunEnvironment": ".transcript_run_environment",
     "TranscriptStep": ".transcript_step",
@@ -567,10 +659,10 @@ _dynamic_imports: typing.Dict[str, str] = {
     "WorkPageExecutionPhase": ".work_page_execution_phase",
     "WorkPageTransport": ".work_page_transport",
     "WorkspaceCheckpointView": ".workspace_checkpoint_view",
+    "WorkspaceContentView": ".workspace_content_view",
+    "WorkspacePolicyView": ".workspace_policy_view",
     "WorkspaceProvenance": ".workspace_provenance",
     "WorkspaceProvenanceKind": ".workspace_provenance_kind",
-    "WorkspaceRemoteView": ".workspace_remote_view",
-    "WorkspaceRemoteViewUsername": ".workspace_remote_view_username",
 }
 
 
@@ -642,6 +734,12 @@ __all__ = [
     "ChannelIdentityApp",
     "ChannelIdentityAppId",
     "ChannelIdentityAppUrLs",
+    "ChatCompletion",
+    "ChatCompletionChoice",
+    "ChatCompletionChunk",
+    "ChatCompletionChunkChoice",
+    "ChatCompletionDelta",
+    "ChatCompletionMessage",
     "Check",
     "CheckAgent",
     "CheckEnvironment",
@@ -659,6 +757,9 @@ __all__ = [
     "CheckVerification",
     "ClaimView",
     "CompleteAuthorization",
+    "Completion",
+    "CompletionChoice",
+    "CompletionUsage",
     "Connection",
     "ConnectionAgentUsage",
     "ConnectionApp",
@@ -748,6 +849,8 @@ __all__ = [
     "ExecutionTurnResponse",
     "ExecutionTurnRun",
     "ExecutionView",
+    "FundingWait",
+    "FundingWaitReason",
     "GitCredential",
     "HarborTaskFiles",
     "HttpCredential",
@@ -770,12 +873,21 @@ __all__ = [
     "JudgmentTarget",
     "JudgmentTargetKind",
     "LiveHandle",
+    "ManagedAgentRead",
     "ManagedAgentView",
     "ManagedRun",
+    "ManagedRunMeasurementStatus",
+    "ManagedRunPause",
     "MemoryToolSetting",
     "MemoryToolSettingPolicy",
     "Mention",
     "MentionResource",
+    "ModelList",
+    "ModelListObject",
+    "ModelPricing",
+    "ModelResponse",
+    "ModelResponseInstructions",
+    "ModelResponseToolChoice",
     "NewDataset",
     "NewDatasetPurpose",
     "OAuthResult",
@@ -800,7 +912,17 @@ __all__ = [
     "PersonalSlackStatusStatus",
     "ProcessObservation",
     "ProcessObservationStatus",
-    "QueuePage",
+    "PublicModel",
+    "PublicModelObject",
+    "PublishedCapabilities",
+    "PublishedCapabilitiesEndpointsItem",
+    "PublishedCapabilitiesInputTypesItem",
+    "PublishedReasoning",
+    "PublishedReasoningDefaultEffort",
+    "PublishedReasoningDefaultHistory",
+    "PublishedReasoningEffortsItem",
+    "PublishedReasoningHistoryItem",
+    "PublishedReasoningNormalizationValue",
     "ReadyInput",
     "ReadyInputCapabilitiesItem",
     "ReadyInputProtocolVersion",
@@ -817,11 +939,19 @@ __all__ = [
     "ReplaceCredentials",
     "ResolvedMention",
     "ResourceBudget",
+    "ResponseStreamEvent",
+    "ResponseStreamEventDelta",
+    "ResponseUsage",
+    "ResumeCounts",
     "ResumeImprovementInput",
     "ResumeInput",
+    "ResumeResult",
+    "ResumeResultStatus",
+    "ResumeResults",
     "ReviewedAccess",
     "Room",
     "RunError",
+    "RunErrorStage",
     "RunEvent",
     "RunEvents",
     "RunSpend",
@@ -858,6 +988,14 @@ __all__ = [
     "TraceImportScopeRequest",
     "TraceMetadata",
     "TranscriptEvent",
+    "TranscriptHostToolCall",
+    "TranscriptProgressBlock",
+    "TranscriptProgressBlockAvailability",
+    "TranscriptProgressBlockFormat",
+    "TranscriptProgressBlockKind",
+    "TranscriptProgressEvent",
+    "TranscriptProgressEventKind",
+    "TranscriptProgressEventOrdering",
     "TranscriptRun",
     "TranscriptRunEnvironment",
     "TranscriptStep",
@@ -874,8 +1012,8 @@ __all__ = [
     "WorkPageExecutionPhase",
     "WorkPageTransport",
     "WorkspaceCheckpointView",
+    "WorkspaceContentView",
+    "WorkspacePolicyView",
     "WorkspaceProvenance",
     "WorkspaceProvenanceKind",
-    "WorkspaceRemoteView",
-    "WorkspaceRemoteViewUsername",
 ]

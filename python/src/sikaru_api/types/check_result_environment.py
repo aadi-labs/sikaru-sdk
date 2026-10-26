@@ -2,4 +2,4 @@
 
 import typing
 
-CheckResultEnvironment = typing.Union[typing.Literal["managed", "local"], typing.Any]
+CheckResultEnvironment = typing.Union[typing.Literal["managed"], typing.Any]

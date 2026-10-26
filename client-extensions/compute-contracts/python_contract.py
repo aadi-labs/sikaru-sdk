@@ -8,18 +8,17 @@ def client(token):
     return SikaruApi(base_url=os.environ['CONTRACT_URL'], api_key=token, max_retries=5)
 
 
-def create_and_ready(controller, worker, provenance):
+def create_and_ready(controller, provenance):
     attachment = controller.compute_attachments.create('project', 'session', environment_id='environment',
         idempotency_key='create', workspace_provenance=provenance)
     assert attachment.owner_id is None
     assert attachment.workspace_generation == 'generation' and attachment.status == 'pending'
     assert controller.compute_attachments.get('project', 'attachment').journal_id == 'journal'
-    assert worker.compute_workers.poll('project', 'environment', wait_seconds=0).attachments[0].id == 'attachment'
-    claim = worker.compute_attachments.claim('project', 'attachment', idempotency_key='claim')
+    claim = controller.compute_attachments.claim('project', 'attachment', idempotency_key='claim')
     assert claim.attachment_id == 'attachment'
-    assert claim.owner_id == 'worker'
+    assert claim.owner_id == 'controller:claim'
     assert claim.owner_epoch == 1
-    credential = worker.compute_attachments.issue_credential('project', 'attachment',
+    credential = controller.compute_attachments.issue_credential('project', 'attachment',
         owner_id=claim.owner_id, owner_epoch=claim.owner_epoch)
     assert credential.credential_id == 'executor-credential'
     assert credential.expires_at == 2000000000.0
@@ -61,9 +60,9 @@ def verify_failures(executor, receipt):
 
 
 def main():
-    controller, worker = client('controller'), client('sk_compute_worker')
+    controller = client('controller')
     provenance = {'kind': 'existing_directory', 'identity': 'workspace'}
-    executor = create_and_ready(controller, worker, provenance)
+    executor = create_and_ready(controller, provenance)
     receipt = execute_and_reconcile(executor, provenance)
     verify_failures(executor, receipt)
 

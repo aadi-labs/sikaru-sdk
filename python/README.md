@@ -115,9 +115,9 @@ client = SikaruApi(
     api_key="<token>",
 )
 
-client.runs.stream_events(
-    project_id="project_id",
-    run_id="run_id",
+client.completions.create_stream(
+    model="model",
+    prompt="prompt",
 )
 ```
 

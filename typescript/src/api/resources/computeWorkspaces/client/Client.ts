@@ -26,7 +26,7 @@ export class ComputeWorkspacesClient {
     }
 
     /**
-     * Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+     * Record a verified uploaded manifest as this session's workspace checkpoint.
      *
      * @param {string} project_id
      * @param {string} attachment_id
@@ -44,7 +44,7 @@ export class ComputeWorkspacesClient {
      *
      * @example
      *     await client.computeWorkspaces.record("project_id", "attachment_id", {
-     *         commit_sha: "commit_sha",
+     *         manifest_digest: "manifest_digest",
      *         trigger: "turn"
      *     })
      */
@@ -95,11 +95,11 @@ export class ComputeWorkspacesClient {
     }
 
     /**
-     * Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+     * Upload file or manifest bytes before acknowledging a workspace checkpoint.
      *
+     * @param {core.file.Uploadable} uploadable
      * @param {string} project_id
      * @param {string} attachment_id
-     * @param {Sikaru.WorkspaceRemoteInput} request
      * @param {ComputeWorkspacesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Sikaru.UnauthorizedError}
@@ -110,26 +110,25 @@ export class ComputeWorkspacesClient {
      * @throws {@link Sikaru.ServiceUnavailableError}
      * @throws {@link errors.SikaruError}
      * @throws {@link errors.SikaruTimeoutError}
-     *
-     * @example
-     *     await client.computeWorkspaces.remote("project_id", "attachment_id")
      */
-    public remote(project_id: string, attachment_id: string, request: Sikaru.WorkspaceRemoteInput = {}, requestOptions?: ComputeWorkspacesClient.RequestOptions): core.HttpResponsePromise<Sikaru.WorkspaceRemoteView> {
-        return core.HttpResponsePromise.fromPromise(this.__remote(project_id, attachment_id, request, requestOptions));
+    public upload(uploadable: core.file.Uploadable, project_id: string, attachment_id: string, requestOptions?: ComputeWorkspacesClient.RequestOptions): core.HttpResponsePromise<Sikaru.WorkspaceContentView> {
+        return core.HttpResponsePromise.fromPromise(this.__upload(uploadable, project_id, attachment_id, requestOptions));
     }
 
-    private async __remote(project_id: string, attachment_id: string, request: Sikaru.WorkspaceRemoteInput = {}, requestOptions?: ComputeWorkspacesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.WorkspaceRemoteView>> {
+    private async __upload(uploadable: core.file.Uploadable, project_id: string, attachment_id: string, requestOptions?: ComputeWorkspacesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.WorkspaceContentView>> {
         const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _binaryUploadRequest = await core.file.toBinaryUploadRequest(uploadable);
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, _binaryUploadRequest.headers, requestOptions?.headers);
         const _response = await core.fetcher({
-            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/compute-attachments/${core.url.encodePathParam(attachment_id)}/workspace-remote`),
-            method: "POST",
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/compute-attachments/${core.url.encodePathParam(attachment_id)}/workspace-content`),
+            method: "PUT",
             headers: _headers,
-            contentType: "application/json",
+            contentType: "application/octet-stream",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
+            requestType: "bytes",
+            duplex: "half",
+            body: _binaryUploadRequest.body,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: 0,
             abortSignal: requestOptions?.abortSignal,
@@ -138,7 +137,7 @@ export class ComputeWorkspacesClient {
             logging: this._options.logging
         });
         if (_response.ok) {
-            return { data: _response.body as Sikaru.WorkspaceRemoteView, rawResponse: _response.rawResponse };
+            return { data: _response.body as Sikaru.WorkspaceContentView, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -157,6 +156,73 @@ export class ComputeWorkspacesClient {
             }
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/projects/{project_id}/compute-attachments/{attachment_id}/workspace-remote");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PUT", "/v1/projects/{project_id}/compute-attachments/{attachment_id}/workspace-content");
+    }
+
+    /**
+     * Read the pinned publication rules before capturing workspace files.
+     *
+     * @param {string} project_id
+     * @param {string} attachment_id
+     * @param {Sikaru.PolicyComputeWorkspacesRequest} request
+     * @param {ComputeWorkspacesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.ConflictError}
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link Sikaru.ServiceUnavailableError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.computeWorkspaces.policy("project_id", "attachment_id")
+     */
+    public policy(project_id: string, attachment_id: string, request: Sikaru.PolicyComputeWorkspacesRequest = {}, requestOptions?: ComputeWorkspacesClient.RequestOptions): core.HttpResponsePromise<Sikaru.WorkspacePolicyView> {
+        return core.HttpResponsePromise.fromPromise(this.__policy(project_id, attachment_id, request, requestOptions));
+    }
+
+    private async __policy(project_id: string, attachment_id: string, request: Sikaru.PolicyComputeWorkspacesRequest = {}, requestOptions?: ComputeWorkspacesClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.WorkspacePolicyView>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const { "run_id": runId } = request;
+        const _queryParams: Record<string, unknown> = {
+            run_id: runId
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/compute-attachments/${core.url.encodePathParam(attachment_id)}/workspace-policy`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().addMany(_queryParams).mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.WorkspacePolicyView, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 409: throw new Sikaru.ConflictError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                case 503: throw new Sikaru.ServiceUnavailableError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/compute-attachments/{attachment_id}/workspace-policy");
     }
 }

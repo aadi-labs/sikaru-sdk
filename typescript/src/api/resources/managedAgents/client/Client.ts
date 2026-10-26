@@ -142,6 +142,64 @@ export class ManagedAgentsClient {
     }
 
     /**
+     * One managed agent in the project: the same public summary the list returns.
+     *
+     * @param {string} project_id
+     * @param {string} agent_slug
+     * @param {ManagedAgentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Sikaru.UnauthorizedError}
+     * @throws {@link Sikaru.ForbiddenError}
+     * @throws {@link Sikaru.NotFoundError}
+     * @throws {@link Sikaru.UnprocessableEntityError}
+     * @throws {@link errors.SikaruError}
+     * @throws {@link errors.SikaruTimeoutError}
+     *
+     * @example
+     *     await client.managedAgents.get("project_id", "agent_slug")
+     */
+    public get(project_id: string, agent_slug: string, requestOptions?: ManagedAgentsClient.RequestOptions): core.HttpResponsePromise<Sikaru.ManagedAgentRead> {
+        return core.HttpResponsePromise.fromPromise(this.__get(project_id, agent_slug, requestOptions));
+    }
+
+    private async __get(project_id: string, agent_slug: string, requestOptions?: ManagedAgentsClient.RequestOptions): Promise<core.WithRawResponse<Sikaru.ManagedAgentRead>> {
+        const _metadata: core.EndpointMetadata = { security: [{ BearerAuth: [] }] };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest({ endpointMetadata: _metadata });
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(_authRequest.headers, this._options?.headers, requestOptions?.headers);
+        const _response = await core.fetcher({
+            url: core.url.join(await core.Supplier.get(this._options.baseUrl) ?? (await core.Supplier.get(this._options.environment) ?? environments.SikaruEnvironment.Default), `v1/projects/${core.url.encodePathParam(project_id)}/managed-agents/${core.url.encodePathParam(agent_slug)}`),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            endpointMetadata: _metadata,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging
+        });
+        if (_response.ok) {
+            return { data: _response.body as Sikaru.ManagedAgentRead, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401: throw new Sikaru.UnauthorizedError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 403: throw new Sikaru.ForbiddenError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 404: throw new Sikaru.NotFoundError(_response.error.body as Sikaru.ErrorResponse, _response.rawResponse);
+                case 422: throw new Sikaru.UnprocessableEntityError(_response.error.body as Sikaru.HttpValidationError, _response.rawResponse);
+                default: throw new errors.SikaruError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.body,
+                    rawResponse: _response.rawResponse
+                });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/projects/{project_id}/managed-agents/{agent_slug}");
+    }
+
+    /**
      * Delete an agent that has never gone live, with its drafts, checks and schedules.
      *
      * @param {string} project_id

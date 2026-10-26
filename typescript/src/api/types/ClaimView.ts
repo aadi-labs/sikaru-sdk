@@ -6,7 +6,7 @@ export interface ClaimView {
     lease_until: number;
     owner_epoch: number;
     owner_id: string;
-    /** Initial launch bound anchored at the first claim request start; idempotent claim retries never restart this clock. Workers cannot renew a ready executor lease. */
+    /** Initial launch bound anchored at the first claim request start; idempotent claim retries never restart this clock. The claiming controller cannot renew a ready executor lease. */
     startup_ttl_seconds?: number | undefined;
     status: string;
 }

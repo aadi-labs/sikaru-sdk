@@ -9,6 +9,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel, update
 from .personal_connection_prompt import PersonalConnectionPrompt
 from .run_transcript_evidence import RunTranscriptEvidence
 from .transcript_event import TranscriptEvent
+from .transcript_progress_event import TranscriptProgressEvent
 from .transcript_run import TranscriptRun
 from .transcript_usage import TranscriptUsage
 
@@ -17,6 +18,7 @@ class RunTranscript(UniversalBaseModel):
     connections: typing.Optional[typing.List[PersonalConnectionPrompt]] = None
     events: typing.List[TranscriptEvent]
     evidence: RunTranscriptEvidence
+    progress: typing.Optional[typing.List[TranscriptProgressEvent]] = None
     run: TranscriptRun
     trajectory: typing.Optional["TranscriptTrajectory"] = None
     usage: typing.Optional[TranscriptUsage] = None

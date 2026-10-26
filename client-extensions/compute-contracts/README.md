@@ -1,9 +1,9 @@
 # Generated compute lifecycle wire contracts
 
 These authored programs call the real adjacent generated SDK packages. `wire.py`
-starts a bounded loopback HTTP server, runs one program, and validates all fourteen
-requests including controller/worker/executor bearer credentials, request bodies,
-worker claim and executor credential issuance. Each driver checks the typed claim
+starts a bounded loopback HTTP server, runs one program, and validates all thirteen
+requests including controller and executor bearer credentials, request bodies,
+the controller's claim and executor credential issuance. Each driver checks the typed claim
 owner and epoch, submits that authority to issuance, and uses the returned token
 for executor requests. The oracle randomizes that token on every run so a
 hardcoded executor credential cannot bypass issuance. The suites also verify

@@ -2,4 +2,4 @@
 
 import typing
 
-CheckEnvironmentViewKind = typing.Union[typing.Literal["managed", "local"], typing.Any]
+CheckEnvironmentViewKind = typing.Union[typing.Literal["managed"], typing.Any]

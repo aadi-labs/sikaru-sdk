@@ -9,7 +9,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { "branch" : "branch" , "commit_sha" : "commit_sha" , "recorded_at" : "recorded_at" };
         
         server
@@ -22,7 +22,7 @@ describe("ComputeWorkspacesClient", () => {
         
                         
                                 const response = await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 });
                                 expect(response).toEqual(rawResponseBody);
@@ -33,7 +33,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
@@ -46,7 +46,7 @@ describe("ComputeWorkspacesClient", () => {
         
             await expect(async () => {
                 return await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.UnauthorizedError);
@@ -55,7 +55,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
@@ -68,7 +68,7 @@ describe("ComputeWorkspacesClient", () => {
         
             await expect(async () => {
                 return await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.ForbiddenError);
@@ -77,7 +77,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
@@ -90,7 +90,7 @@ describe("ComputeWorkspacesClient", () => {
         
             await expect(async () => {
                 return await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.NotFoundError);
@@ -99,7 +99,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
@@ -112,7 +112,7 @@ describe("ComputeWorkspacesClient", () => {
         
             await expect(async () => {
                 return await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.ConflictError);
@@ -121,7 +121,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { };
         
         server
@@ -134,7 +134,7 @@ describe("ComputeWorkspacesClient", () => {
         
             await expect(async () => {
                 return await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
@@ -143,7 +143,7 @@ describe("ComputeWorkspacesClient", () => {
     test("record (7)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { "commit_sha" : "commit_sha" , "trigger" : "turn" };
+        const rawRequestBody = { "manifest_digest" : "manifest_digest" , "trigger" : "turn" };
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
@@ -156,144 +156,137 @@ describe("ComputeWorkspacesClient", () => {
         
             await expect(async () => {
                 return await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 })
             }).rejects.toThrow(Sikaru.ServiceUnavailableError);
     });
           
-    test("remote (1)", async () => {
+    test("policy (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
-        const rawResponseBody = { "branch" : "branch" , "expires_at" : "expires_at" , "head_sha" : "head_sha" , "ignore_defaults" : [ "ignore_defaults" ] , "max_push_bytes" : 1 , "remote_url" : "remote_url" , "token" : "token" , "username" : "x-token" };
+        
+        const rawResponseBody = { "credentials" : [ "credentials" ] , "ignore" : [ "ignore" ] };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(200).jsonBody(rawResponseBody)
                 .build();
 
         
                         
-                                const response = await client.computeWorkspaces.remote("project_id", "attachment_id");
+                                const response = await client.computeWorkspaces.policy("project_id", "attachment_id");
                                 expect(response).toEqual(rawResponseBody);
                               
                     
     });
           
-    test("remote (2)", async () => {
+    test("policy (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
+        
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(401).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+                return await client.computeWorkspaces.policy("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.UnauthorizedError);
     });
           
-    test("remote (3)", async () => {
+    test("policy (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
+        
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(403).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+                return await client.computeWorkspaces.policy("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.ForbiddenError);
     });
           
-    test("remote (4)", async () => {
+    test("policy (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
+        
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(404).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+                return await client.computeWorkspaces.policy("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.NotFoundError);
     });
           
-    test("remote (5)", async () => {
+    test("policy (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
+        
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(409).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+                return await client.computeWorkspaces.policy("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.ConflictError);
     });
           
-    test("remote (6)", async () => {
+    test("policy (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
+        
         const rawResponseBody = { };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(422).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+                return await client.computeWorkspaces.policy("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
-    test("remote (7)", async () => {
+    test("policy (7)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
-        const rawRequestBody = { };
+        
         const rawResponseBody = { "code" : "code" , "detail" : "detail" };
         
         server
             .mockEndpoint()
-            .post("/v1/projects/project_id/compute-attachments/attachment_id/workspace-remote").jsonBody(rawRequestBody)
-                .respondWith()
+            .get("/v1/projects/project_id/compute-attachments/attachment_id/workspace-policy").respondWith()
             .statusCode(503).jsonBody(rawResponseBody)
                 .build();
 
         
             await expect(async () => {
-                return await client.computeWorkspaces.remote("project_id", "attachment_id")
+                return await client.computeWorkspaces.policy("project_id", "attachment_id")
             }).rejects.toThrow(Sikaru.ServiceUnavailableError);
     });
           

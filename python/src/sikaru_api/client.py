@@ -19,12 +19,13 @@ if typing.TYPE_CHECKING:
     from .capability_ceilings.client import AsyncCapabilityCeilingsClient, CapabilityCeilingsClient
     from .changesets.client import AsyncChangesetsClient, ChangesetsClient
     from .channels.client import AsyncChannelsClient, ChannelsClient
+    from .chat.client import AsyncChatClient, ChatClient
     from .checks.client import AsyncChecksClient, ChecksClient
+    from .completions.client import AsyncCompletionsClient, CompletionsClient
     from .compute_attachments.client import AsyncComputeAttachmentsClient, ComputeAttachmentsClient
     from .compute_credentials.client import AsyncComputeCredentialsClient, ComputeCredentialsClient
     from .compute_environments.client import AsyncComputeEnvironmentsClient, ComputeEnvironmentsClient
     from .compute_operations.client import AsyncComputeOperationsClient, ComputeOperationsClient
-    from .compute_workers.client import AsyncComputeWorkersClient, ComputeWorkersClient
     from .compute_workspaces.client import AsyncComputeWorkspacesClient, ComputeWorkspacesClient
     from .connections.client import AsyncConnectionsClient, ConnectionsClient
     from .context_registry.client import AsyncContextRegistryClient, ContextRegistryClient
@@ -51,9 +52,11 @@ if typing.TYPE_CHECKING:
     from .memory_registry.client import AsyncMemoryRegistryClient, MemoryRegistryClient
     from .model_gateway.client import AsyncModelGatewayClient, ModelGatewayClient
     from .model_settings.client import AsyncModelSettingsClient, ModelSettingsClient
+    from .models.client import AsyncModelsClient, ModelsClient
     from .online_evaluations.client import AsyncOnlineEvaluationsClient, OnlineEvaluationsClient
     from .personal_channels.client import AsyncPersonalChannelsClient, PersonalChannelsClient
     from .release_watches.client import AsyncReleaseWatchesClient, ReleaseWatchesClient
+    from .responses.client import AsyncResponsesClient, ResponsesClient
     from .retention_policies.client import AsyncRetentionPoliciesClient, RetentionPoliciesClient
     from .review_queue.client import AsyncReviewQueueClient, ReviewQueueClient
     from .run_references.client import AsyncRunReferencesClient, RunReferencesClient
@@ -161,6 +164,8 @@ class SikaruApi:
         )
         self._auth: typing.Optional[AuthClient] = None
         self._http_channels: typing.Optional[HttpChannelsClient] = None
+        self._completions: typing.Optional[CompletionsClient] = None
+        self._models: typing.Optional[ModelsClient] = None
         self._personal_channels: typing.Optional[PersonalChannelsClient] = None
         self._activation: typing.Optional[ActivationClient] = None
         self._agent_documents: typing.Optional[AgentDocumentsClient] = None
@@ -174,7 +179,6 @@ class SikaruApi:
         self._compute_workspaces: typing.Optional[ComputeWorkspacesClient] = None
         self._compute_credentials: typing.Optional[ComputeCredentialsClient] = None
         self._compute_environments: typing.Optional[ComputeEnvironmentsClient] = None
-        self._compute_workers: typing.Optional[ComputeWorkersClient] = None
         self._connections: typing.Optional[ConnectionsClient] = None
         self._context_registry: typing.Optional[ContextRegistryClient] = None
         self._conversations: typing.Optional[ConversationsClient] = None
@@ -216,7 +220,9 @@ class SikaruApi:
         self._workflow_intents: typing.Optional[WorkflowIntentsClient] = None
         self._workflow_runs: typing.Optional[WorkflowRunsClient] = None
         self._workflows: typing.Optional[WorkflowsClient] = None
+        self._responses: typing.Optional[ResponsesClient] = None
         self._trace_streams: typing.Optional[TraceStreamsClient] = None
+        self._chat: typing.Optional[ChatClient] = None
 
     @property
     def auth(self):
@@ -233,6 +239,22 @@ class SikaruApi:
 
             self._http_channels = HttpChannelsClient(client_wrapper=self._client_wrapper)
         return self._http_channels
+
+    @property
+    def completions(self):
+        if self._completions is None:
+            from .completions.client import CompletionsClient  # noqa: E402
+
+            self._completions = CompletionsClient(client_wrapper=self._client_wrapper)
+        return self._completions
+
+    @property
+    def models(self):
+        if self._models is None:
+            from .models.client import ModelsClient  # noqa: E402
+
+            self._models = ModelsClient(client_wrapper=self._client_wrapper)
+        return self._models
 
     @property
     def personal_channels(self):
@@ -337,14 +359,6 @@ class SikaruApi:
 
             self._compute_environments = ComputeEnvironmentsClient(client_wrapper=self._client_wrapper)
         return self._compute_environments
-
-    @property
-    def compute_workers(self):
-        if self._compute_workers is None:
-            from .compute_workers.client import ComputeWorkersClient  # noqa: E402
-
-            self._compute_workers = ComputeWorkersClient(client_wrapper=self._client_wrapper)
-        return self._compute_workers
 
     @property
     def connections(self):
@@ -675,12 +689,28 @@ class SikaruApi:
         return self._workflows
 
     @property
+    def responses(self):
+        if self._responses is None:
+            from .responses.client import ResponsesClient  # noqa: E402
+
+            self._responses = ResponsesClient(client_wrapper=self._client_wrapper)
+        return self._responses
+
+    @property
     def trace_streams(self):
         if self._trace_streams is None:
             from .trace_streams.client import TraceStreamsClient  # noqa: E402
 
             self._trace_streams = TraceStreamsClient(client_wrapper=self._client_wrapper)
         return self._trace_streams
+
+    @property
+    def chat(self):
+        if self._chat is None:
+            from .chat.client import ChatClient  # noqa: E402
+
+            self._chat = ChatClient(client_wrapper=self._client_wrapper)
+        return self._chat
 
 
 def _make_default_async_client(
@@ -794,6 +824,8 @@ class AsyncSikaruApi:
         )
         self._auth: typing.Optional[AsyncAuthClient] = None
         self._http_channels: typing.Optional[AsyncHttpChannelsClient] = None
+        self._completions: typing.Optional[AsyncCompletionsClient] = None
+        self._models: typing.Optional[AsyncModelsClient] = None
         self._personal_channels: typing.Optional[AsyncPersonalChannelsClient] = None
         self._activation: typing.Optional[AsyncActivationClient] = None
         self._agent_documents: typing.Optional[AsyncAgentDocumentsClient] = None
@@ -807,7 +839,6 @@ class AsyncSikaruApi:
         self._compute_workspaces: typing.Optional[AsyncComputeWorkspacesClient] = None
         self._compute_credentials: typing.Optional[AsyncComputeCredentialsClient] = None
         self._compute_environments: typing.Optional[AsyncComputeEnvironmentsClient] = None
-        self._compute_workers: typing.Optional[AsyncComputeWorkersClient] = None
         self._connections: typing.Optional[AsyncConnectionsClient] = None
         self._context_registry: typing.Optional[AsyncContextRegistryClient] = None
         self._conversations: typing.Optional[AsyncConversationsClient] = None
@@ -849,7 +880,9 @@ class AsyncSikaruApi:
         self._workflow_intents: typing.Optional[AsyncWorkflowIntentsClient] = None
         self._workflow_runs: typing.Optional[AsyncWorkflowRunsClient] = None
         self._workflows: typing.Optional[AsyncWorkflowsClient] = None
+        self._responses: typing.Optional[AsyncResponsesClient] = None
         self._trace_streams: typing.Optional[AsyncTraceStreamsClient] = None
+        self._chat: typing.Optional[AsyncChatClient] = None
 
     @property
     def auth(self):
@@ -866,6 +899,22 @@ class AsyncSikaruApi:
 
             self._http_channels = AsyncHttpChannelsClient(client_wrapper=self._client_wrapper)
         return self._http_channels
+
+    @property
+    def completions(self):
+        if self._completions is None:
+            from .completions.client import AsyncCompletionsClient  # noqa: E402
+
+            self._completions = AsyncCompletionsClient(client_wrapper=self._client_wrapper)
+        return self._completions
+
+    @property
+    def models(self):
+        if self._models is None:
+            from .models.client import AsyncModelsClient  # noqa: E402
+
+            self._models = AsyncModelsClient(client_wrapper=self._client_wrapper)
+        return self._models
 
     @property
     def personal_channels(self):
@@ -970,14 +1019,6 @@ class AsyncSikaruApi:
 
             self._compute_environments = AsyncComputeEnvironmentsClient(client_wrapper=self._client_wrapper)
         return self._compute_environments
-
-    @property
-    def compute_workers(self):
-        if self._compute_workers is None:
-            from .compute_workers.client import AsyncComputeWorkersClient  # noqa: E402
-
-            self._compute_workers = AsyncComputeWorkersClient(client_wrapper=self._client_wrapper)
-        return self._compute_workers
 
     @property
     def connections(self):
@@ -1308,12 +1349,28 @@ class AsyncSikaruApi:
         return self._workflows
 
     @property
+    def responses(self):
+        if self._responses is None:
+            from .responses.client import AsyncResponsesClient  # noqa: E402
+
+            self._responses = AsyncResponsesClient(client_wrapper=self._client_wrapper)
+        return self._responses
+
+    @property
     def trace_streams(self):
         if self._trace_streams is None:
             from .trace_streams.client import AsyncTraceStreamsClient  # noqa: E402
 
             self._trace_streams = AsyncTraceStreamsClient(client_wrapper=self._client_wrapper)
         return self._trace_streams
+
+    @property
+    def chat(self):
+        if self._chat is None:
+            from .chat.client import AsyncChatClient  # noqa: E402
+
+            self._chat = AsyncChatClient(client_wrapper=self._client_wrapper)
+        return self._chat
 
 
 def _get_base_url(*, base_url: typing.Optional[str] = None, environment: SikaruEnvironment) -> str:

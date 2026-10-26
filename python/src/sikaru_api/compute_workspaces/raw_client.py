@@ -19,7 +19,8 @@ from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.error_response import ErrorResponse
 from ..types.http_validation_error import HttpValidationError
 from ..types.workspace_checkpoint_view import WorkspaceCheckpointView
-from ..types.workspace_remote_view import WorkspaceRemoteView
+from ..types.workspace_content_view import WorkspaceContentView
+from ..types.workspace_policy_view import WorkspacePolicyView
 from .types.workspace_checkpoint_input_trigger import WorkspaceCheckpointInputTrigger
 from pydantic import ValidationError
 
@@ -36,13 +37,13 @@ class RawComputeWorkspacesClient:
         project_id: str,
         attachment_id: str,
         *,
-        commit_sha: str,
+        manifest_digest: str,
         trigger: WorkspaceCheckpointInputTrigger,
         run_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> HttpResponse[WorkspaceCheckpointView]:
         """
-        Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+        Record a verified uploaded manifest as this session's workspace checkpoint.
 
         Parameters
         ----------
@@ -50,7 +51,7 @@ class RawComputeWorkspacesClient:
 
         attachment_id : str
 
-        commit_sha : str
+        manifest_digest : str
 
         trigger : WorkspaceCheckpointInputTrigger
 
@@ -72,7 +73,7 @@ class RawComputeWorkspacesClient:
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-checkpoints",
             method="POST",
             json={
-                "commit_sha": commit_sha,
+                "manifest_digest": manifest_digest,
                 "run_id": run_id,
                 "trigger": trigger,
             },
@@ -168,11 +169,16 @@ class RawComputeWorkspacesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def remote(
-        self, project_id: str, attachment_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[WorkspaceRemoteView]:
+    def upload(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[WorkspaceContentView]:
         """
-        Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+        Upload file or manifest bytes before acknowledging a workspace checkpoint.
 
         Parameters
         ----------
@@ -180,12 +186,14 @@ class RawComputeWorkspacesClient:
 
         attachment_id : str
 
+        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[WorkspaceRemoteView]
+        HttpResponse[WorkspaceContentView]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
@@ -193,12 +201,12 @@ class RawComputeWorkspacesClient:
         )
         _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
         _response = self._client_wrapper.httpx_client.request(
-            f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-remote",
-            method="POST",
-            json={},
+            f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-content",
+            method="PUT",
+            content=request,
             headers={
                 **_endpoint_auth_headers,
-                "content-type": "application/json",
+                "content-type": "application/octet-stream",
             },
             request_options=_request_options_with_retries_disabled,
             omit=OMIT,
@@ -206,9 +214,133 @@ class RawComputeWorkspacesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    WorkspaceRemoteView,
+                    WorkspaceContentView,
                     parse_obj_as(
-                        type_=WorkspaceRemoteView,  # type: ignore
+                        type_=WorkspaceContentView,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 503:
+                raise ServiceUnavailableError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def policy(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> HttpResponse[WorkspacePolicyView]:
+        """
+        Read the pinned publication rules before capturing workspace files.
+
+        Parameters
+        ----------
+        project_id : str
+
+        attachment_id : str
+
+        run_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[WorkspacePolicyView]
+            Successful Response
+        """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-policy",
+            method="GET",
+            params={
+                "run_id": run_id,
+            },
+            headers={
+                **_endpoint_auth_headers,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    WorkspacePolicyView,
+                    parse_obj_as(
+                        type_=WorkspacePolicyView,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -298,13 +430,13 @@ class AsyncRawComputeWorkspacesClient:
         project_id: str,
         attachment_id: str,
         *,
-        commit_sha: str,
+        manifest_digest: str,
         trigger: WorkspaceCheckpointInputTrigger,
         run_id: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> AsyncHttpResponse[WorkspaceCheckpointView]:
         """
-        Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+        Record a verified uploaded manifest as this session's workspace checkpoint.
 
         Parameters
         ----------
@@ -312,7 +444,7 @@ class AsyncRawComputeWorkspacesClient:
 
         attachment_id : str
 
-        commit_sha : str
+        manifest_digest : str
 
         trigger : WorkspaceCheckpointInputTrigger
 
@@ -336,7 +468,7 @@ class AsyncRawComputeWorkspacesClient:
             f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-checkpoints",
             method="POST",
             json={
-                "commit_sha": commit_sha,
+                "manifest_digest": manifest_digest,
                 "run_id": run_id,
                 "trigger": trigger,
             },
@@ -432,11 +564,16 @@ class AsyncRawComputeWorkspacesClient:
             )
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def remote(
-        self, project_id: str, attachment_id: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[WorkspaceRemoteView]:
+    async def upload(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[WorkspaceContentView]:
         """
-        Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+        Upload file or manifest bytes before acknowledging a workspace checkpoint.
 
         Parameters
         ----------
@@ -444,12 +581,14 @@ class AsyncRawComputeWorkspacesClient:
 
         attachment_id : str
 
+        request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[WorkspaceRemoteView]
+        AsyncHttpResponse[WorkspaceContentView]
             Successful Response
         """
         _request_options_with_retries_disabled: typing.Optional[RequestOptions] = (
@@ -459,12 +598,12 @@ class AsyncRawComputeWorkspacesClient:
             security=[{"BearerAuth": []}]
         )
         _response = await self._client_wrapper.httpx_client.request(
-            f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-remote",
-            method="POST",
-            json={},
+            f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-content",
+            method="PUT",
+            content=request,
             headers={
                 **_endpoint_auth_headers,
-                "content-type": "application/json",
+                "content-type": "application/octet-stream",
             },
             request_options=_request_options_with_retries_disabled,
             omit=OMIT,
@@ -472,9 +611,135 @@ class AsyncRawComputeWorkspacesClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    WorkspaceRemoteView,
+                    WorkspaceContentView,
                     parse_obj_as(
-                        type_=WorkspaceRemoteView,  # type: ignore
+                        type_=WorkspaceContentView,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 409:
+                raise ConflictError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 503:
+                raise ServiceUnavailableError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def policy(
+        self,
+        project_id: str,
+        attachment_id: str,
+        *,
+        run_id: typing.Optional[str] = None,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> AsyncHttpResponse[WorkspacePolicyView]:
+        """
+        Read the pinned publication rules before capturing workspace files.
+
+        Parameters
+        ----------
+        project_id : str
+
+        attachment_id : str
+
+        run_id : typing.Optional[str]
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[WorkspacePolicyView]
+            Successful Response
+        """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/compute-attachments/{encode_path_param(attachment_id)}/workspace-policy",
+            method="GET",
+            params={
+                "run_id": run_id,
+            },
+            headers={
+                **_endpoint_auth_headers,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    WorkspacePolicyView,
+                    parse_obj_as(
+                        type_=WorkspacePolicyView,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

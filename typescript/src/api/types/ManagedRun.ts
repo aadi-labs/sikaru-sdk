@@ -14,8 +14,26 @@ export interface ManagedRun {
     harnessId: string;
     harnessVersionId: string;
     latencyMs?: (number | null) | undefined;
+    measurementStatus?: ManagedRun.MeasurementStatus | undefined;
+    pause?: (ManagedRun.Pause | null) | undefined;
     personal?: boolean | undefined;
     runId: string;
     status: string;
     usageSummary?: (Record<string, unknown> | null) | undefined;
+}
+
+export namespace ManagedRun {
+    export const MeasurementStatus = {
+            Available: "available",
+            Unmeasured: "unmeasured",
+            Unavailable: "unavailable"
+        } as const;
+    export type MeasurementStatus = typeof MeasurementStatus[keyof typeof MeasurementStatus];
+
+    export interface Pause {
+        message: string;
+        reason: string;
+        requires_action: boolean;
+        resumable: boolean;
+    }
 }

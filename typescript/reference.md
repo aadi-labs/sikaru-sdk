@@ -294,6 +294,205 @@ await client.httpChannels.unlinkSlackIdentity("binding_id", "installation_id");
 </dl>
 </details>
 
+## Completions
+<details><summary><code>client.completions.<a href="/src/api/resources/completions/client/Client.ts">createStream</a>({ ...params }) -> core.Stream&lt;Sikaru.Completion&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.completions.createStream({
+    model: "model",
+    prompt: "prompt"
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CompletionCreateParamsStreaming` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CompletionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.completions.<a href="/src/api/resources/completions/client/Client.ts">create</a>({ ...params }) -> Sikaru.Completion</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.completions.create({
+    model: "model",
+    prompt: "prompt"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.CompletionCreateParams` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CompletionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Models
+<details><summary><code>client.models.<a href="/src/api/resources/models/client/Client.ts">list</a>() -> Sikaru.ModelList</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.models.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.models.<a href="/src/api/resources/models/client/Client.ts">retrieve</a>(model) -> Sikaru.PublicModel</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.models.retrieve("model");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**model:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ModelsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## PersonalChannels
 <details><summary><code>client.personalChannels.<a href="/src/api/resources/personalChannels/client/Client.ts">getMessage</a>(binding_id, receipt_id, { ...params }) -> Sikaru.PersonalChannelReceipt</code></summary>
 <dl>
@@ -5100,7 +5299,7 @@ await client.computeAttachments.cancel("project_id", "attachment_id");
 <dl>
 <dd>
 
-Same attachment/key/worker returns the same launch identity, never another launch.
+Same attachment/key returns the same launch identity, never another launch.
 </dd>
 </dl>
 </dd>
@@ -5736,7 +5935,7 @@ await client.computeAttachments.stop("project_id", "attachment_id");
 <dl>
 <dd>
 
-Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+Controller attests sandbox teardown; clean parked turns stay resumable.
 </dd>
 </dl>
 </dd>
@@ -6063,7 +6262,7 @@ await client.computeOperations.poll("project_id", "attachment_id");
 <dl>
 <dd>
 
-Record a pushed commit as this session's workspace checkpoint. Idempotent on ``commit_sha``.
+Record a verified uploaded manifest as this session's workspace checkpoint.
 </dd>
 </dl>
 </dd>
@@ -6079,7 +6278,7 @@ Record a pushed commit as this session's workspace checkpoint. Idempotent on ``c
 
 ```typescript
 await client.computeWorkspaces.record("project_id", "attachment_id", {
-    commit_sha: "commit_sha",
+    manifest_digest: "manifest_digest",
     trigger: "turn"
 });
 
@@ -6133,7 +6332,7 @@ await client.computeWorkspaces.record("project_id", "attachment_id", {
 </dl>
 </details>
 
-<details><summary><code>client.computeWorkspaces.<a href="/src/api/resources/computeWorkspaces/client/Client.ts">remote</a>(project_id, attachment_id, { ...params }) -> Sikaru.WorkspaceRemoteView</code></summary>
+<details><summary><code>client.computeWorkspaces.<a href="/src/api/resources/computeWorkspaces/client/Client.ts">policy</a>(project_id, attachment_id, { ...params }) -> Sikaru.WorkspacePolicyView</code></summary>
 <dl>
 <dd>
 
@@ -6145,7 +6344,7 @@ await client.computeWorkspaces.record("project_id", "attachment_id", {
 <dl>
 <dd>
 
-Scoped git remote for this session's workspace branch. Request it again before ``expires_at``.
+Read the pinned publication rules before capturing workspace files.
 </dd>
 </dl>
 </dd>
@@ -6160,7 +6359,7 @@ Scoped git remote for this session's workspace branch. Request it again before `
 <dd>
 
 ```typescript
-await client.computeWorkspaces.remote("project_id", "attachment_id");
+await client.computeWorkspaces.policy("project_id", "attachment_id");
 
 ```
 </dd>
@@ -6192,7 +6391,7 @@ await client.computeWorkspaces.remote("project_id", "attachment_id");
 <dl>
 <dd>
 
-**request:** `Sikaru.WorkspaceRemoteInput` 
+**request:** `Sikaru.PolicyComputeWorkspacesRequest` 
     
 </dd>
 </dl>
@@ -6511,157 +6710,6 @@ await client.computeEnvironments.disable("project_id", "environment_id");
 <dd>
 
 **requestOptions:** `ComputeEnvironmentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## ComputeWorkers
-<details><summary><code>client.computeWorkers.<a href="/src/api/resources/computeWorkers/client/Client.ts">issueCredential</a>(project_id, environment_id) -> Sikaru.CredentialIssued</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Issue a new secret once; retries issue independent revocable credentials.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.computeWorkers.issueCredential("project_id", "environment_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**environment_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ComputeWorkersClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.computeWorkers.<a href="/src/api/resources/computeWorkers/client/Client.ts">poll</a>(project_id, environment_id, { ...params }) -> Sikaru.QueuePage</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Bounded queue snapshot. wait_seconds is a maximum; server may return immediately.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.computeWorkers.poll("project_id", "environment_id");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**project_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**environment_id:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Sikaru.PollComputeWorkersRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ComputeWorkersClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -12205,6 +12253,140 @@ await client.runs.record("project_id", {
 </dl>
 </details>
 
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">resumeAll</a>(project_id, { ...params }) -> Sikaru.ResumeResults</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Recheck up to 100 authorized needs-action runs and jobs; only cleared stops resume.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runs.resumeAll("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ResumeFilter` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">resumeCount</a>(project_id) -> Sikaru.ResumeCounts</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Count needs-action work the caller can control, grouped by funding reason.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runs.resumeCount("project_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">get</a>(project_id, run_id) -> Sikaru.ManagedRun</code></summary>
 <dl>
 <dd>
@@ -12572,6 +12754,77 @@ await client.runs.recover("project_id", "run_id", {});
 <dd>
 
 **request:** `Sikaru.RecoverRunRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `RunsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.runs.<a href="/src/api/resources/runs/client/Client.ts">resume</a>(project_id, run_id) -> Sikaru.ResumeResult</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resume the same retained turn. A refused request does not change its state.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.runs.resume("project_id", "run_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**run_id:** `string` 
     
 </dd>
 </dl>
@@ -14147,6 +14400,77 @@ await client.managedAgents.createManagedAgent("project_id", {
 <dd>
 
 **request:** `Sikaru.CreateManagedAgentRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ManagedAgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.managedAgents.<a href="/src/api/resources/managedAgents/client/Client.ts">get</a>(project_id, agent_slug) -> Sikaru.ManagedAgentRead</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+One managed agent in the project: the same public summary the list returns.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.managedAgents.get("project_id", "agent_slug");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**project_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**agent_slug:** `string` 
     
 </dd>
 </dl>
@@ -17375,6 +17699,112 @@ await client.workflows.createProjectWorkflowVersion("project_id", "workflow_id")
 </dl>
 </details>
 
+## Responses
+<details><summary><code>client.responses.<a href="/src/api/resources/responses/client/Client.ts">createStream</a>({ ...params }) -> core.Stream&lt;Sikaru.ResponseStreamEvent&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.responses.createStream({
+    model: "model"
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ResponseCreateParamsStreaming` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ResponsesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.responses.<a href="/src/api/resources/responses/client/Client.ts">create</a>({ ...params }) -> Sikaru.ModelResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.responses.create({
+    model: "model"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.ResponseCreateParams` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ResponsesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## TraceStreams
 <details><summary><code>client.traceStreams.<a href="/src/api/resources/traceStreams/client/Client.ts">streamOpeninferenceSpans</a>({ ...params }) -> Record&lt;string, unknown&gt;</code></summary>
 <dl>
@@ -17421,6 +17851,118 @@ await client.traceStreams.streamOpeninferenceSpans({
 <dd>
 
 **requestOptions:** `TraceStreamsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Chat Completions
+<details><summary><code>client.chat.completions.<a href="/src/api/resources/chat/resources/completions/client/Client.ts">createStream</a>({ ...params }) -> core.Stream&lt;Sikaru.ChatCompletionChunk&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.chat.completions.createStream({
+    messages: [{
+            "key": "value"
+        }],
+    model: "model"
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.chat.ChatCompletionCreateParamsStreaming` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CompletionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.chat.completions.<a href="/src/api/resources/chat/resources/completions/client/Client.ts">create</a>({ ...params }) -> Sikaru.ChatCompletion</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.chat.completions.create({
+    messages: [{
+            "key": "value"
+        }],
+    model: "model"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Sikaru.chat.ChatCompletionCreateParams` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CompletionsClient.RequestOptions` 
     
 </dd>
 </dl>

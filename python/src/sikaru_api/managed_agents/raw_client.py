@@ -22,6 +22,7 @@ from ..types.definition_revision_result import DefinitionRevisionResult
 from ..types.definition_revision_view import DefinitionRevisionView
 from ..types.error_response import ErrorResponse
 from ..types.http_validation_error import HttpValidationError
+from ..types.managed_agent_read import ManagedAgentRead
 from ..types.renamed_managed_agent import RenamedManagedAgent
 from .types.create_managed_agent_request_initial_channel import CreateManagedAgentRequestInitialChannel
 from .types.create_managed_agent_request_status import CreateManagedAgentRequestStatus
@@ -205,6 +206,98 @@ class RawManagedAgentsClient:
                     CreatedManagedAgent,
                     parse_obj_as(
                         type_=CreatedManagedAgent,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    def get(
+        self, project_id: str, agent_slug: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[ManagedAgentRead]:
+        """
+        One managed agent in the project: the same public summary the list returns.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        HttpResponse[ManagedAgentRead]
+            Successful Response
+        """
+        _endpoint_auth_headers = self._client_wrapper.get_auth_headers_for_endpoint(security=[{"BearerAuth": []}])
+        _response = self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}",
+            method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ManagedAgentRead,
+                    parse_obj_as(
+                        type_=ManagedAgentRead,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -845,6 +938,100 @@ class AsyncRawManagedAgentsClient:
                     CreatedManagedAgent,
                     parse_obj_as(
                         type_=CreatedManagedAgent,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
+            if _response.status_code == 401:
+                raise UnauthorizedError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 403:
+                raise ForbiddenError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 404:
+                raise NotFoundError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        ErrorResponse,
+                        parse_obj_as(
+                            type_=ErrorResponse,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            if _response.status_code == 422:
+                raise UnprocessableEntityError(
+                    headers=dict(_response.headers),
+                    body=typing.cast(
+                        HttpValidationError,
+                        parse_obj_as(
+                            type_=HttpValidationError,  # type: ignore
+                            object_=_response.json(),
+                        ),
+                    ),
+                )
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
+        except ValidationError as e:
+            raise ParsingError(
+                status_code=_response.status_code, headers=dict(_response.headers), body=_response.json(), cause=e
+            )
+        raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
+
+    async def get(
+        self, project_id: str, agent_slug: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[ManagedAgentRead]:
+        """
+        One managed agent in the project: the same public summary the list returns.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        AsyncHttpResponse[ManagedAgentRead]
+            Successful Response
+        """
+        _endpoint_auth_headers = await self._client_wrapper.async_get_auth_headers_for_endpoint(
+            security=[{"BearerAuth": []}]
+        )
+        _response = await self._client_wrapper.httpx_client.request(
+            f"v1/projects/{encode_path_param(project_id)}/managed-agents/{encode_path_param(agent_slug)}",
+            method="GET",
+            headers={
+                **_endpoint_auth_headers,
+            },
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                _data = typing.cast(
+                    ManagedAgentRead,
+                    parse_obj_as(
+                        type_=ManagedAgentRead,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

@@ -205,6 +205,98 @@ describe("ManagedAgentsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("get (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "managedAgent" : { "activeHarnessVersionId" : "activeHarnessVersionId" , "agentSlug" : "agentSlug" , "compatibilityProfileId" : "compatibilityProfileId" , "displayName" : "displayName" , "harnessId" : "harnessId" , "id" : "id" , "organizationId" : "organizationId" , "personal" : true , "projectId" : "projectId" , "status" : "status" } };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.managedAgents.get("project_id", "agent_slug");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("get (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.get("project_id", "agent_slug")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("get (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.get("project_id", "agent_slug")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("get (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.get("project_id", "agent_slug")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("get (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/managed-agents/agent_slug").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.managedAgents.get("project_id", "agent_slug")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("delete_managed_agent (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });

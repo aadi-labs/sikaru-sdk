@@ -6,6 +6,8 @@ import pydantic
 import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from ..core.serialization import FieldMetadata
+from .managed_run_measurement_status import ManagedRunMeasurementStatus
+from .managed_run_pause import ManagedRunPause
 from .personal_connection_prompt import PersonalConnectionPrompt
 from .run_error import RunError
 
@@ -41,6 +43,12 @@ class ManagedRun(UniversalBaseModel):
     latency_ms: typing_extensions.Annotated[
         typing.Optional[float], FieldMetadata(alias="latencyMs"), pydantic.Field(alias="latencyMs")
     ] = None
+    measurement_status: typing_extensions.Annotated[
+        typing.Optional[ManagedRunMeasurementStatus],
+        FieldMetadata(alias="measurementStatus"),
+        pydantic.Field(alias="measurementStatus"),
+    ] = None
+    pause: typing.Optional[ManagedRunPause] = None
     personal: typing.Optional[bool] = None
     run_id: typing_extensions.Annotated[str, FieldMetadata(alias="runId"), pydantic.Field(alias="runId")]
     status: str

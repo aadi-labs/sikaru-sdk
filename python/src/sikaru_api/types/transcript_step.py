@@ -13,6 +13,7 @@ class TranscriptStep(UniversalBaseModel):
     llm_call_count: typing.Optional[int] = None
     message: str
     metrics: typing.Optional[typing.Dict[str, int]] = None
+    reasoning_content: typing.Optional[str] = None
     results: typing.List[TranscriptToolResult]
     source: TranscriptStepSource
     step_id: int

@@ -33,6 +33,30 @@ def test_runs_record() -> None:
     verify_auth_headers(test_id, "POST", "/v1/projects/project_id/runs/record", {"Authorization": r"Bearer .+"}, [])
 
 
+def test_runs_resume_all() -> None:
+    """Test resume_all endpoint with WireMock"""
+    test_id = "runs.resume_all.0"
+    client = get_client(test_id)
+    client.runs.resume_all(
+        project_id="project_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/resume", None, 1)
+    verify_auth_headers(test_id, "POST", "/v1/projects/project_id/runs/resume", {"Authorization": r"Bearer .+"}, [])
+
+
+def test_runs_resume_count() -> None:
+    """Test resume_count endpoint with WireMock"""
+    test_id = "runs.resume_count.0"
+    client = get_client(test_id)
+    client.runs.resume_count(
+        project_id="project_id",
+    )
+    verify_request_count(test_id, "GET", "/v1/projects/project_id/runs/resume/count", None, 1)
+    verify_auth_headers(
+        test_id, "GET", "/v1/projects/project_id/runs/resume/count", {"Authorization": r"Bearer .+"}, []
+    )
+
+
 def test_runs_get() -> None:
     """Test get endpoint with WireMock"""
     test_id = "runs.get.0"
@@ -113,6 +137,20 @@ def test_runs_recover() -> None:
     verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/recover", None, 1)
     verify_auth_headers(
         test_id, "POST", "/v1/projects/project_id/runs/run_id/recover", {"Authorization": r"Bearer .+"}, []
+    )
+
+
+def test_runs_resume() -> None:
+    """Test resume endpoint with WireMock"""
+    test_id = "runs.resume.0"
+    client = get_client(test_id)
+    client.runs.resume(
+        project_id="project_id",
+        run_id="run_id",
+    )
+    verify_request_count(test_id, "POST", "/v1/projects/project_id/runs/run_id/resume", None, 1)
+    verify_auth_headers(
+        test_id, "POST", "/v1/projects/project_id/runs/run_id/resume", {"Authorization": r"Bearer .+"}, []
     )
 
 

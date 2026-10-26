@@ -3,12 +3,12 @@
 /**
  * @example
  *     {
- *         commit_sha: "commit_sha",
+ *         manifest_digest: "manifest_digest",
  *         trigger: "turn"
  *     }
  */
 export interface WorkspaceCheckpointInput {
-    commit_sha: string;
+    manifest_digest: string;
     run_id?: string | null;
     trigger: WorkspaceCheckpointInput.Trigger;
 }

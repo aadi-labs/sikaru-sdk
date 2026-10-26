@@ -10,7 +10,7 @@ describe("RunsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "input" : { "key" : "value" } , "policy" : { "key" : "value" } , "product_context" : { "key" : "value" } , "tenant_id" : "tenant_id" , "user_id" : "user_id" };
-        const rawResponseBody = { "compatibilityProfileId" : "compatibilityProfileId" , "completedAt" : "completedAt" , "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "contentVisible" : true , "costSummary" : { "key" : "value" } , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true } , "eventsUrl" : "eventsUrl" , "harnessId" : "harnessId" , "harnessVersionId" : "harnessVersionId" , "latencyMs" : 1.1 , "personal" : true , "runId" : "runId" , "status" : "status" , "usageSummary" : { "key" : "value" } };
+        const rawResponseBody = { "compatibilityProfileId" : "compatibilityProfileId" , "completedAt" : "completedAt" , "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "contentVisible" : true , "costSummary" : { "key" : "value" } , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true , "stage" : "admission" } , "eventsUrl" : "eventsUrl" , "harnessId" : "harnessId" , "harnessVersionId" : "harnessVersionId" , "latencyMs" : 1.1 , "measurementStatus" : "available" , "pause" : { "message" : "message" , "reason" : "reason" , "requires_action" : true , "resumable" : true } , "personal" : true , "runId" : "runId" , "status" : "status" , "usageSummary" : { "key" : "value" } };
         
         server
             .mockEndpoint()
@@ -391,6 +391,28 @@ describe("RunsClient", () => {
             .mockEndpoint()
             .post("/v1/projects/project_id/runs/record").jsonBody(rawRequestBody)
                 .respondWith()
+            .statusCode(402).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.record("project_id", {
+    input: "x",
+    output: "output"
+})
+            }).rejects.toThrow(Sikaru.PaymentRequiredError);
+    });
+          
+    test("record (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "input" : "x" , "output" : "output" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/record").jsonBody(rawRequestBody)
+                .respondWith()
             .statusCode(403).jsonBody(rawResponseBody)
                 .build();
 
@@ -403,7 +425,7 @@ describe("RunsClient", () => {
             }).rejects.toThrow(Sikaru.ForbiddenError);
     });
           
-    test("record (4)", async () => {
+    test("record (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "input" : "x" , "output" : "output" };
@@ -425,7 +447,7 @@ describe("RunsClient", () => {
             }).rejects.toThrow(Sikaru.NotFoundError);
     });
           
-    test("record (5)", async () => {
+    test("record (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "input" : "x" , "output" : "output" };
@@ -447,7 +469,7 @@ describe("RunsClient", () => {
             }).rejects.toThrow(Sikaru.ConflictError);
     });
           
-    test("record (6)", async () => {
+    test("record (7)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { "input" : "x" , "output" : "output" };
@@ -469,11 +491,222 @@ describe("RunsClient", () => {
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
     });
           
+    test("record (8)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { "input" : "x" , "output" : "output" };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/record").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(503).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.record("project_id", {
+    input: "x",
+    output: "output"
+})
+            }).rejects.toThrow(Sikaru.ServiceUnavailableError);
+    });
+          
+    test("resume_all (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "results" : [ { "reason" : "reason" , "runId" : "runId" , "status" : "queued" } ] };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/resume").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runs.resumeAll("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("resume_all (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/resume").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeAll("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("resume_all (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/resume").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeAll("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("resume_all (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/resume").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeAll("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("resume_all (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        const rawRequestBody = { };
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/resume").jsonBody(rawRequestBody)
+                .respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeAll("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("resume_count (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "ready" : 1 , "readyReasons" : { "key" : 1 } , "reasons" : { "key" : 1 } , "total" : 1 };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/resume/count").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runs.resumeCount("project_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("resume_count (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/resume/count").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeCount("project_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("resume_count (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/resume/count").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeCount("project_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("resume_count (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/resume/count").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeCount("project_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("resume_count (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .get("/v1/projects/project_id/runs/resume/count").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resumeCount("project_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
     test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "compatibilityProfileId" : "compatibilityProfileId" , "completedAt" : "completedAt" , "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "contentVisible" : true , "costSummary" : { "key" : "value" } , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true } , "eventsUrl" : "eventsUrl" , "harnessId" : "harnessId" , "harnessVersionId" : "harnessVersionId" , "latencyMs" : 1.1 , "personal" : true , "runId" : "runId" , "status" : "status" , "usageSummary" : { "key" : "value" } };
+        const rawResponseBody = { "compatibilityProfileId" : "compatibilityProfileId" , "completedAt" : "completedAt" , "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "contentVisible" : true , "costSummary" : { "key" : "value" } , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true , "stage" : "admission" } , "eventsUrl" : "eventsUrl" , "harnessId" : "harnessId" , "harnessVersionId" : "harnessVersionId" , "latencyMs" : 1.1 , "measurementStatus" : "available" , "pause" : { "message" : "message" , "reason" : "reason" , "requires_action" : true , "resumable" : true } , "personal" : true , "runId" : "runId" , "status" : "status" , "usageSummary" : { "key" : "value" } };
         
         server
             .mockEndpoint()
@@ -960,7 +1193,7 @@ describe("RunsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         const rawRequestBody = { };
-        const rawResponseBody = { "compatibilityProfileId" : "compatibilityProfileId" , "completedAt" : "completedAt" , "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "contentVisible" : true , "costSummary" : { "key" : "value" } , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true } , "eventsUrl" : "eventsUrl" , "harnessId" : "harnessId" , "harnessVersionId" : "harnessVersionId" , "latencyMs" : 1.1 , "personal" : true , "runId" : "runId" , "status" : "status" , "usageSummary" : { "key" : "value" } };
+        const rawResponseBody = { "compatibilityProfileId" : "compatibilityProfileId" , "completedAt" : "completedAt" , "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "contentVisible" : true , "costSummary" : { "key" : "value" } , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true , "stage" : "admission" } , "eventsUrl" : "eventsUrl" , "harnessId" : "harnessId" , "harnessVersionId" : "harnessVersionId" , "latencyMs" : 1.1 , "measurementStatus" : "available" , "pause" : { "message" : "message" , "reason" : "reason" , "requires_action" : true , "resumable" : true } , "personal" : true , "runId" : "runId" , "status" : "status" , "usageSummary" : { "key" : "value" } };
         
         server
             .mockEndpoint()
@@ -1070,6 +1303,134 @@ describe("RunsClient", () => {
             await expect(async () => {
                 return await client.runs.recover("project_id", "run_id", {})
             }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("resume (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "reason" : "reason" , "runId" : "runId" , "status" : "queued" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(200).jsonBody(rawResponseBody)
+                .build();
+
+        
+                        
+                                const response = await client.runs.resume("project_id", "run_id");
+                                expect(response).toEqual(rawResponseBody);
+                              
+                    
+    });
+          
+    test("resume (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(401).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resume("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.UnauthorizedError);
+    });
+          
+    test("resume (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(403).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resume("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.ForbiddenError);
+    });
+          
+    test("resume (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(404).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resume("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.NotFoundError);
+    });
+          
+    test("resume (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(409).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resume("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.ConflictError);
+    });
+          
+    test("resume (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(422).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resume("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.UnprocessableEntityError);
+    });
+          
+    test("resume (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
+        
+        const rawResponseBody = { "code" : "code" , "detail" : "detail" };
+        
+        server
+            .mockEndpoint()
+            .post("/v1/projects/project_id/runs/run_id/resume").respondWith()
+            .statusCode(503).jsonBody(rawResponseBody)
+                .build();
+
+        
+            await expect(async () => {
+                return await client.runs.resume("project_id", "run_id")
+            }).rejects.toThrow(Sikaru.ServiceUnavailableError);
     });
           
     test("retry (1)", async () => {
@@ -1682,7 +2043,7 @@ describe("RunsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "events" : [ { "createdAt" : "createdAt" , "id" : "id" , "label" : "label" , "sequence" : 1 } ] , "evidence" : "retained_snapshot" , "run" : { "accountId" : "accountId" , "completedAt" : "completedAt" , "contentVisible" : true , "conversationId" : "conversationId" , "environment" : "Draft" , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true } , "harnessVersionId" : "harnessVersionId" , "id" : "id" , "name" : "name" , "personal" : true , "sessionId" : "sessionId" , "startedAt" : "startedAt" , "status" : "status" , "traceId" : "traceId" } , "trajectory" : { "agent" : { "key" : "value" } , "extra" : { "key" : "value" } , "final_metrics" : { "key" : 1 } , "schema_version" : "schema_version" , "session_id" : "session_id" , "steps" : [ { "message" : "message" , "results" : [ { } ] , "source" : "user" , "step_id" : 1 , "tool_calls" : [ { } ] } ] , "trajectory_id" : "trajectory_id" } , "usage" : { "cachedTokens" : 1 , "inputTokens" : 1 , "outputTokens" : 1 } };
+        const rawResponseBody = { "connections" : [ { "display_name" : "display_name" , "id" : "id" , "kind" : "kind" } ] , "events" : [ { "createdAt" : "createdAt" , "id" : "id" , "label" : "label" , "sequence" : 1 , "waiting" : { "count" : 1 , "firstAt" : "firstAt" , "lastAt" : "lastAt" , "reason" : "credits_exhausted" } } ] , "evidence" : "retained_snapshot" , "progress" : [ { "blocks" : [ { "availability" : "retained" , "kind" : "text" } ] , "id" : "id" , "kind" : "message" , "label" : "label" , "measurements" : { "key" : "value" } , "observedAt" : "observedAt" , "ordering" : "source_sequence" , "role" : "role" , "status" : "status" , "waiting" : { "count" : 1 , "firstAt" : "firstAt" , "lastAt" : "lastAt" , "reason" : "credits_exhausted" } } ] , "run" : { "accountId" : "accountId" , "completedAt" : "completedAt" , "contentVisible" : true , "conversationId" : "conversationId" , "environment" : "Draft" , "error" : { "code" : "code" , "message" : "message" , "recoverable" : true , "stage" : "admission" } , "harnessVersionId" : "harnessVersionId" , "id" : "id" , "name" : "name" , "personal" : true , "sessionId" : "sessionId" , "startedAt" : "startedAt" , "status" : "status" , "traceId" : "traceId" } , "trajectory" : { "agent" : { "key" : "value" } , "extra" : { "key" : "value" } , "final_metrics" : { "key" : 1 } , "schema_version" : "schema_version" , "session_id" : "session_id" , "steps" : [ { "message" : "message" , "results" : [ { } ] , "source" : "user" , "step_id" : 1 , "tool_calls" : [ { } ] } ] , "trajectory_id" : "trajectory_id" } , "usage" : { "cachedTokens" : 1 , "inputTokens" : 1 , "outputTokens" : 1 } };
         
         server
             .mockEndpoint()
@@ -1810,7 +2171,7 @@ describe("RunsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = "event: \ndata: {\"createdAt\":\"createdAt\",\"id\":\"id\",\"label\":\"label\",\"sequence\":1}\n\n";
+        const rawResponseBody = "event: \ndata: {\"createdAt\":\"createdAt\",\"id\":\"id\",\"label\":\"label\",\"sequence\":1,\"waiting\":{\"count\":1,\"firstAt\":\"firstAt\",\"lastAt\":\"lastAt\",\"reason\":\"credits_exhausted\"}}\n\n";
         
         server
             .mockEndpoint()
@@ -1828,7 +2189,13 @@ describe("RunsClient", () => {
     createdAt: "createdAt",
     id: "id",
     label: "label",
-    sequence: 1
+    sequence: 1,
+    waiting: {
+        count: 1,
+        firstAt: "firstAt",
+        lastAt: "lastAt",
+        reason: "credits_exhausted"
+    }
 } ]);
     });
           

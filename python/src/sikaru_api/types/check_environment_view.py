@@ -3,16 +3,11 @@
 import typing
 
 import pydantic
-import typing_extensions
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from ..core.serialization import FieldMetadata
 from .check_environment_view_kind import CheckEnvironmentViewKind
 
 
 class CheckEnvironmentView(UniversalBaseModel):
-    compute_environment_id: typing_extensions.Annotated[
-        typing.Optional[str], FieldMetadata(alias="computeEnvironmentId"), pydantic.Field(alias="computeEnvironmentId")
-    ] = None
     kind: CheckEnvironmentViewKind
 
     if IS_PYDANTIC_V2:

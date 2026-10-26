@@ -216,7 +216,7 @@ export class ComputeAttachmentsClient {
     }
 
     /**
-     * Same attachment/key/worker returns the same launch identity, never another launch.
+     * Same attachment/key returns the same launch identity, never another launch.
      *
      * @param {string} project_id
      * @param {string} attachment_id
@@ -819,7 +819,7 @@ export class ComputeAttachmentsClient {
     }
 
     /**
-     * Controller or owning worker attests sandbox teardown; clean parked turns stay resumable.
+     * Controller attests sandbox teardown; clean parked turns stay resumable.
      *
      * @param {string} project_id
      * @param {string} attachment_id

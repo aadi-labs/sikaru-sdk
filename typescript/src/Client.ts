@@ -8,12 +8,13 @@ import { AuthClient } from "./api/resources/auth/client/Client.js";
 import { CapabilityCeilingsClient } from "./api/resources/capabilityCeilings/client/Client.js";
 import { ChangesetsClient } from "./api/resources/changesets/client/Client.js";
 import { ChannelsClient } from "./api/resources/channels/client/Client.js";
+import { ChatClient } from "./api/resources/chat/client/Client.js";
 import { ChecksClient } from "./api/resources/checks/client/Client.js";
+import { CompletionsClient } from "./api/resources/completions/client/Client.js";
 import { ComputeAttachmentsClient } from "./api/resources/computeAttachments/client/Client.js";
 import { ComputeCredentialsClient } from "./api/resources/computeCredentials/client/Client.js";
 import { ComputeEnvironmentsClient } from "./api/resources/computeEnvironments/client/Client.js";
 import { ComputeOperationsClient } from "./api/resources/computeOperations/client/Client.js";
-import { ComputeWorkersClient } from "./api/resources/computeWorkers/client/Client.js";
 import { ComputeWorkspacesClient } from "./api/resources/computeWorkspaces/client/Client.js";
 import { ConnectionsClient } from "./api/resources/connections/client/Client.js";
 import { ContextRegistryClient } from "./api/resources/contextRegistry/client/Client.js";
@@ -39,10 +40,12 @@ import { JudgeAlignmentClient } from "./api/resources/judgeAlignment/client/Clie
 import { ManagedAgentsClient } from "./api/resources/managedAgents/client/Client.js";
 import { MemoryRegistryClient } from "./api/resources/memoryRegistry/client/Client.js";
 import { ModelGatewayClient } from "./api/resources/modelGateway/client/Client.js";
+import { ModelsClient } from "./api/resources/models/client/Client.js";
 import { ModelSettingsClient } from "./api/resources/modelSettings/client/Client.js";
 import { OnlineEvaluationsClient } from "./api/resources/onlineEvaluations/client/Client.js";
 import { PersonalChannelsClient } from "./api/resources/personalChannels/client/Client.js";
 import { ReleaseWatchesClient } from "./api/resources/releaseWatches/client/Client.js";
+import { ResponsesClient } from "./api/resources/responses/client/Client.js";
 import { RetentionPoliciesClient } from "./api/resources/retentionPolicies/client/Client.js";
 import { ReviewQueueClient } from "./api/resources/reviewQueue/client/Client.js";
 import { RunReferencesClient } from "./api/resources/runReferences/client/Client.js";
@@ -74,6 +77,8 @@ export class SikaruApi {
     protected readonly _options: NormalizedClientOptionsWithAuth<SikaruApi.Options>;
     protected _auth: AuthClient | undefined;
     protected _httpChannels: HttpChannelsClient | undefined;
+    protected _completions: CompletionsClient | undefined;
+    protected _models: ModelsClient | undefined;
     protected _personalChannels: PersonalChannelsClient | undefined;
     protected _activation: ActivationClient | undefined;
     protected _agentDocuments: AgentDocumentsClient | undefined;
@@ -87,7 +92,6 @@ export class SikaruApi {
     protected _computeWorkspaces: ComputeWorkspacesClient | undefined;
     protected _computeCredentials: ComputeCredentialsClient | undefined;
     protected _computeEnvironments: ComputeEnvironmentsClient | undefined;
-    protected _computeWorkers: ComputeWorkersClient | undefined;
     protected _connections: ConnectionsClient | undefined;
     protected _contextRegistry: ContextRegistryClient | undefined;
     protected _conversations: ConversationsClient | undefined;
@@ -129,7 +133,9 @@ export class SikaruApi {
     protected _workflowIntents: WorkflowIntentsClient | undefined;
     protected _workflowRuns: WorkflowRunsClient | undefined;
     protected _workflows: WorkflowsClient | undefined;
+    protected _responses: ResponsesClient | undefined;
     protected _traceStreams: TraceStreamsClient | undefined;
+    protected _chat: ChatClient | undefined;
 
     constructor(options: SikaruApi.Options = {}) {
 
@@ -142,6 +148,14 @@ export class SikaruApi {
 
     public get httpChannels(): HttpChannelsClient {
         return (this._httpChannels ??= new HttpChannelsClient(this._options));
+    }
+
+    public get completions(): CompletionsClient {
+        return (this._completions ??= new CompletionsClient(this._options));
+    }
+
+    public get models(): ModelsClient {
+        return (this._models ??= new ModelsClient(this._options));
     }
 
     public get personalChannels(): PersonalChannelsClient {
@@ -194,10 +208,6 @@ export class SikaruApi {
 
     public get computeEnvironments(): ComputeEnvironmentsClient {
         return (this._computeEnvironments ??= new ComputeEnvironmentsClient(this._options));
-    }
-
-    public get computeWorkers(): ComputeWorkersClient {
-        return (this._computeWorkers ??= new ComputeWorkersClient(this._options));
     }
 
     public get connections(): ConnectionsClient {
@@ -364,8 +374,16 @@ export class SikaruApi {
         return (this._workflows ??= new WorkflowsClient(this._options));
     }
 
+    public get responses(): ResponsesClient {
+        return (this._responses ??= new ResponsesClient(this._options));
+    }
+
     public get traceStreams(): TraceStreamsClient {
         return (this._traceStreams ??= new TraceStreamsClient(this._options));
+    }
+
+    public get chat(): ChatClient {
+        return (this._chat ??= new ChatClient(this._options));
     }
 
     /**

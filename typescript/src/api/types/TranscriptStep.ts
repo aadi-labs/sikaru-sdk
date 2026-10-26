@@ -6,6 +6,7 @@ export interface TranscriptStep {
     llm_call_count?: (number | null) | undefined;
     message: string;
     metrics?: Record<string, number> | undefined;
+    reasoning_content?: (string | null) | undefined;
     results: Sikaru.TranscriptToolResult[];
     source: TranscriptStep.Source;
     step_id: number;

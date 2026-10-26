@@ -9,6 +9,7 @@ from ..types.create_managed_agent_source_request import CreateManagedAgentSource
 from ..types.created_managed_agent import CreatedManagedAgent
 from ..types.definition_revision_result import DefinitionRevisionResult
 from ..types.definition_revision_view import DefinitionRevisionView
+from ..types.managed_agent_read import ManagedAgentRead
 from ..types.renamed_managed_agent import RenamedManagedAgent
 from .raw_client import AsyncRawManagedAgentsClient, RawManagedAgentsClient
 from .types.create_managed_agent_request_initial_channel import CreateManagedAgentRequestInitialChannel
@@ -137,6 +138,42 @@ class ManagedAgentsClient:
             status=status,
             request_options=request_options,
         )
+        return _response.data
+
+    def get(
+        self, project_id: str, agent_slug: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ManagedAgentRead:
+        """
+        One managed agent in the project: the same public summary the list returns.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ManagedAgentRead
+            Successful Response
+
+        Examples
+        --------
+        from sikaru_api import SikaruApi
+
+        client = SikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+        client.managed_agents.get(
+            project_id="project_id",
+            agent_slug="agent_slug",
+        )
+        """
+        _response = self._raw_client.get(project_id, agent_slug, request_options=request_options)
         return _response.data
 
     def delete_managed_agent(
@@ -456,6 +493,50 @@ class AsyncManagedAgentsClient:
             status=status,
             request_options=request_options,
         )
+        return _response.data
+
+    async def get(
+        self, project_id: str, agent_slug: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> ManagedAgentRead:
+        """
+        One managed agent in the project: the same public summary the list returns.
+
+        Parameters
+        ----------
+        project_id : str
+
+        agent_slug : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        ManagedAgentRead
+            Successful Response
+
+        Examples
+        --------
+        import asyncio
+
+        from sikaru_api import AsyncSikaruApi
+
+        client = AsyncSikaruApi(
+            channel_credential="YOUR_CHANNEL_CREDENTIAL",
+            api_key="YOUR_API_KEY",
+        )
+
+
+        async def main() -> None:
+            await client.managed_agents.get(
+                project_id="project_id",
+                agent_slug="agent_slug",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.get(project_id, agent_slug, request_options=request_options)
         return _response.data
 
     async def delete_managed_agent(
