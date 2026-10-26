@@ -16,7 +16,7 @@ export interface SessionInput {
     expected_access_digest?: string | null;
     final_output_schema?: Record<string, unknown> | null;
     idempotency_key?: string | null;
-    /** Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default. */
+    /** Default model for this session. Use a Sikaru model catalog ID, such as moonshotai/kimi-k3. Omit to inherit the project default. */
     model?: string | null;
     /** Optional previously serving release generation. Omit to follow promotions. */
     pinned_generation_id?: string | null;

@@ -13,7 +13,7 @@ from .published_reasoning_normalization_value import PublishedReasoningNormaliza
 
 class PublishedReasoning(UniversalBaseModel):
     """
-    A model's reasoning declaration plus what each standard effort value runs at (R20).
+    A model's reasoning declaration plus what each standard effort value runs at.
     """
 
     budget: typing.Optional[bool] = None

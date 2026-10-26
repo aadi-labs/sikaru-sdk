@@ -6,24 +6,23 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .model_pricing import ModelPricing
+from .model_specs import ModelSpecs
 from .public_model_object import PublicModelObject
-from .published_capabilities import PublishedCapabilities
 
 
 class PublicModel(UniversalBaseModel):
     """
-    The typed contract of ``Model.public``, exported to the public API reference (R19).
+    One model in the public catalog.
     """
 
-    capabilities: PublishedCapabilities
-    context_length: int
     created: int
     deprecation_date: typing.Optional[dt.date] = None
+    display_name: str
     id: str
-    name: str
     object: PublicModelObject
     owned_by: str
     pricing: ModelPricing
+    specs: ModelSpecs
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

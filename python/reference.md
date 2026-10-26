@@ -15176,7 +15176,7 @@ client.execution_sessions.create(
 <dl>
 <dd>
 
-**model:** `typing.Optional[str]` — Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+**model:** `typing.Optional[str]` — Default model for this session. Use a Sikaru model catalog ID, such as moonshotai/kimi-k3. Omit to inherit the project default.
     
 </dd>
 </dl>
@@ -25486,6 +25486,14 @@ client.chat.completions.create_stream(
 <dl>
 <dd>
 
+**include_reasoning:** `typing.Optional[bool]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **logit_bias:** `typing.Optional[typing.Dict[str, typing.Any]]` 
     
 </dd>
@@ -25927,6 +25935,14 @@ client.chat.completions.create_stream(
 <dd>
 
 **functions:** `typing.Optional[typing.List[typing.Dict[str, typing.Any]]]` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**include_reasoning:** `typing.Optional[bool]` 
     
 </dd>
 </dl>

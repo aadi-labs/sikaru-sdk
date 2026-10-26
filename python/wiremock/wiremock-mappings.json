@@ -223,7 +223,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"data\": [\n    {\n      \"capabilities\": {\n        \"endpoints\": [\n          \"chat\"\n        ],\n        \"input_types\": [\n          \"image_url\"\n        ],\n        \"parameters\": [\n          \"parameters\"\n        ],\n        \"reasoning\": null\n      },\n      \"context_length\": 1,\n      \"created\": 1,\n      \"deprecation_date\": \"2023-01-15\",\n      \"id\": \"id\",\n      \"name\": \"name\",\n      \"object\": \"model\",\n      \"owned_by\": \"owned_by\",\n      \"pricing\": {\n        \"completion\": \"completion\",\n        \"prompt\": \"prompt\"\n      }\n    }\n  ],\n  \"object\": \"list\"\n}",
+        "body": "{\n  \"data\": [\n    {\n      \"created\": 1,\n      \"deprecation_date\": \"2023-01-15\",\n      \"display_name\": \"display_name\",\n      \"id\": \"id\",\n      \"object\": \"model\",\n      \"owned_by\": \"owned_by\",\n      \"pricing\": {\n        \"input_usd_per_mtok\": 1.1,\n        \"output_usd_per_mtok\": 1.1\n      },\n      \"specs\": {\n        \"context_window\": 1,\n        \"endpoints\": [\n          \"chat\"\n        ],\n        \"max_output_tokens\": 1,\n        \"modalities\": {\n          \"input\": [\n            \"input\"\n          ],\n          \"output\": [\n            \"output\"\n          ]\n        },\n        \"reasoning\": null,\n        \"supported_parameters\": [\n          \"supported_parameters\"\n        ],\n        \"supports_reasoning\": true\n      }\n    }\n  ],\n  \"object\": \"list\"\n}",
         "headers": {
           "Content-Type": "application/json"
         }
@@ -255,7 +255,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"capabilities\": {\n    \"endpoints\": [\n      \"chat\"\n    ],\n    \"input_types\": [\n      \"image_url\"\n    ],\n    \"parameters\": [\n      \"parameters\"\n    ],\n    \"reasoning\": {\n      \"budget\": true,\n      \"default_effort\": \"none\",\n      \"default_history\": \"disabled\",\n      \"efforts\": [\n        \"none\"\n      ],\n      \"history\": [\n        \"disabled\"\n      ],\n      \"normalization\": {},\n      \"summary\": true\n    }\n  },\n  \"context_length\": 1,\n  \"created\": 1,\n  \"deprecation_date\": \"2023-01-15\",\n  \"id\": \"id\",\n  \"name\": \"name\",\n  \"object\": \"model\",\n  \"owned_by\": \"owned_by\",\n  \"pricing\": {\n    \"completion\": \"completion\",\n    \"prompt\": \"prompt\"\n  }\n}",
+        "body": "{\n  \"created\": 1,\n  \"deprecation_date\": \"2023-01-15\",\n  \"display_name\": \"display_name\",\n  \"id\": \"id\",\n  \"object\": \"model\",\n  \"owned_by\": \"owned_by\",\n  \"pricing\": {\n    \"cache_read_usd_per_mtok\": 1.1,\n    \"input_usd_per_mtok\": 1.1,\n    \"output_usd_per_mtok\": 1.1\n  },\n  \"specs\": {\n    \"context_window\": 1,\n    \"endpoints\": [\n      \"chat\"\n    ],\n    \"max_output_tokens\": 1,\n    \"modalities\": {\n      \"input\": [\n        \"input\"\n      ],\n      \"output\": [\n        \"output\"\n      ]\n    },\n    \"reasoning\": {\n      \"budget\": true,\n      \"default_effort\": \"none\",\n      \"default_history\": \"disabled\",\n      \"efforts\": [\n        \"none\"\n      ],\n      \"history\": [\n        \"disabled\"\n      ],\n      \"normalization\": {},\n      \"summary\": true\n    },\n    \"supported_parameters\": [\n      \"supported_parameters\"\n    ],\n    \"supports_reasoning\": true\n  }\n}",
         "headers": {
           "Content-Type": "application/json"
         }

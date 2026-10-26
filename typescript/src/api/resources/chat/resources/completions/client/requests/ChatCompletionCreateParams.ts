@@ -14,6 +14,7 @@ export interface ChatCompletionCreateParams {
     frequency_penalty?: number | null;
     function_call?: ChatCompletionCreateParams.FunctionCall | null;
     functions?: Record<string, unknown>[] | null;
+    include_reasoning?: boolean | null;
     logit_bias?: Record<string, unknown> | null;
     logprobs?: boolean | null;
     max_completion_tokens?: number | null;

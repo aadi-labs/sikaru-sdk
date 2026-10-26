@@ -200,12 +200,15 @@ if typing.TYPE_CHECKING:
     from .memory_tool_setting_policy import MemoryToolSettingPolicy
     from .mention import Mention
     from .mention_resource import MentionResource
+    from .modalities import Modalities
     from .model_list import ModelList
     from .model_list_object import ModelListObject
     from .model_pricing import ModelPricing
     from .model_response import ModelResponse
     from .model_response_instructions import ModelResponseInstructions
     from .model_response_tool_choice import ModelResponseToolChoice
+    from .model_specs import ModelSpecs
+    from .model_specs_endpoints_item import ModelSpecsEndpointsItem
     from .new_dataset import NewDataset
     from .new_dataset_purpose import NewDatasetPurpose
     from .o_auth_result import OAuthResult
@@ -232,9 +235,6 @@ if typing.TYPE_CHECKING:
     from .process_observation_status import ProcessObservationStatus
     from .public_model import PublicModel
     from .public_model_object import PublicModelObject
-    from .published_capabilities import PublishedCapabilities
-    from .published_capabilities_endpoints_item import PublishedCapabilitiesEndpointsItem
-    from .published_capabilities_input_types_item import PublishedCapabilitiesInputTypesItem
     from .published_reasoning import PublishedReasoning
     from .published_reasoning_default_effort import PublishedReasoningDefaultEffort
     from .published_reasoning_default_history import PublishedReasoningDefaultHistory
@@ -529,12 +529,15 @@ _dynamic_imports: typing.Dict[str, str] = {
     "MemoryToolSettingPolicy": ".memory_tool_setting_policy",
     "Mention": ".mention",
     "MentionResource": ".mention_resource",
+    "Modalities": ".modalities",
     "ModelList": ".model_list",
     "ModelListObject": ".model_list_object",
     "ModelPricing": ".model_pricing",
     "ModelResponse": ".model_response",
     "ModelResponseInstructions": ".model_response_instructions",
     "ModelResponseToolChoice": ".model_response_tool_choice",
+    "ModelSpecs": ".model_specs",
+    "ModelSpecsEndpointsItem": ".model_specs_endpoints_item",
     "NewDataset": ".new_dataset",
     "NewDatasetPurpose": ".new_dataset_purpose",
     "OAuthResult": ".o_auth_result",
@@ -561,9 +564,6 @@ _dynamic_imports: typing.Dict[str, str] = {
     "ProcessObservationStatus": ".process_observation_status",
     "PublicModel": ".public_model",
     "PublicModelObject": ".public_model_object",
-    "PublishedCapabilities": ".published_capabilities",
-    "PublishedCapabilitiesEndpointsItem": ".published_capabilities_endpoints_item",
-    "PublishedCapabilitiesInputTypesItem": ".published_capabilities_input_types_item",
     "PublishedReasoning": ".published_reasoning",
     "PublishedReasoningDefaultEffort": ".published_reasoning_default_effort",
     "PublishedReasoningDefaultHistory": ".published_reasoning_default_history",
@@ -882,12 +882,15 @@ __all__ = [
     "MemoryToolSettingPolicy",
     "Mention",
     "MentionResource",
+    "Modalities",
     "ModelList",
     "ModelListObject",
     "ModelPricing",
     "ModelResponse",
     "ModelResponseInstructions",
     "ModelResponseToolChoice",
+    "ModelSpecs",
+    "ModelSpecsEndpointsItem",
     "NewDataset",
     "NewDatasetPurpose",
     "OAuthResult",
@@ -914,9 +917,6 @@ __all__ = [
     "ProcessObservationStatus",
     "PublicModel",
     "PublicModelObject",
-    "PublishedCapabilities",
-    "PublishedCapabilitiesEndpointsItem",
-    "PublishedCapabilitiesInputTypesItem",
     "PublishedReasoning",
     "PublishedReasoningDefaultEffort",
     "PublishedReasoningDefaultHistory",

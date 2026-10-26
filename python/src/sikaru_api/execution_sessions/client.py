@@ -517,7 +517,7 @@ class ExecutionSessionsClient:
         idempotency_key : typing.Optional[str]
 
         model : typing.Optional[str]
-            Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+            Default model for this session. Use a Sikaru model catalog ID, such as moonshotai/kimi-k3. Omit to inherit the project default.
 
         pinned_generation_id : typing.Optional[str]
             Optional previously serving release generation. Omit to follow promotions.
@@ -1185,7 +1185,7 @@ class AsyncExecutionSessionsClient:
         idempotency_key : typing.Optional[str]
 
         model : typing.Optional[str]
-            Default model for this session. Use a Sikaru model catalog ID, such as kimi-k3. Omit to inherit the project default.
+            Default model for this session. Use a Sikaru model catalog ID, such as moonshotai/kimi-k3. Omit to inherit the project default.
 
         pinned_generation_id : typing.Optional[str]
             Optional previously serving release generation. Omit to follow promotions.

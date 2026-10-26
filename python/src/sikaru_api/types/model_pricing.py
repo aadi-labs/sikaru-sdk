@@ -8,11 +8,12 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 class ModelPricing(UniversalBaseModel):
     """
-    Prices per token as decimal strings.
+    US dollars per million tokens.
     """
 
-    completion: str
-    prompt: str
+    cache_read_usd_per_mtok: typing.Optional[float] = None
+    input_usd_per_mtok: float
+    output_usd_per_mtok: float
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

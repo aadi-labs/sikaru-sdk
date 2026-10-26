@@ -46,6 +46,7 @@ class CompletionsClient:
         frequency_penalty: typing.Optional[float] = OMIT,
         function_call: typing.Optional[CreateCompletionsStreamRequestFunctionCall] = OMIT,
         functions: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
+        include_reasoning: typing.Optional[bool] = OMIT,
         logit_bias: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         logprobs: typing.Optional[bool] = OMIT,
         max_completion_tokens: typing.Optional[int] = OMIT,
@@ -104,6 +105,8 @@ class CompletionsClient:
         function_call : typing.Optional[CreateCompletionsStreamRequestFunctionCall]
 
         functions : typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]]
+
+        include_reasoning : typing.Optional[bool]
 
         logit_bias : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -219,6 +222,7 @@ class CompletionsClient:
             frequency_penalty=frequency_penalty,
             function_call=function_call,
             functions=functions,
+            include_reasoning=include_reasoning,
             logit_bias=logit_bias,
             logprobs=logprobs,
             max_completion_tokens=max_completion_tokens,
@@ -274,6 +278,7 @@ class CompletionsClient:
         frequency_penalty: typing.Optional[float] = OMIT,
         function_call: typing.Optional[CreateCompletionsRequestFunctionCall] = OMIT,
         functions: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
+        include_reasoning: typing.Optional[bool] = OMIT,
         logit_bias: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         logprobs: typing.Optional[bool] = OMIT,
         max_completion_tokens: typing.Optional[int] = OMIT,
@@ -332,6 +337,8 @@ class CompletionsClient:
         function_call : typing.Optional[CreateCompletionsRequestFunctionCall]
 
         functions : typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]]
+
+        include_reasoning : typing.Optional[bool]
 
         logit_bias : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -445,6 +452,7 @@ class CompletionsClient:
             frequency_penalty=frequency_penalty,
             function_call=function_call,
             functions=functions,
+            include_reasoning=include_reasoning,
             logit_bias=logit_bias,
             logprobs=logprobs,
             max_completion_tokens=max_completion_tokens,
@@ -516,6 +524,7 @@ class AsyncCompletionsClient:
         frequency_penalty: typing.Optional[float] = OMIT,
         function_call: typing.Optional[CreateCompletionsStreamRequestFunctionCall] = OMIT,
         functions: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
+        include_reasoning: typing.Optional[bool] = OMIT,
         logit_bias: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         logprobs: typing.Optional[bool] = OMIT,
         max_completion_tokens: typing.Optional[int] = OMIT,
@@ -574,6 +583,8 @@ class AsyncCompletionsClient:
         function_call : typing.Optional[CreateCompletionsStreamRequestFunctionCall]
 
         functions : typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]]
+
+        include_reasoning : typing.Optional[bool]
 
         logit_bias : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -697,6 +708,7 @@ class AsyncCompletionsClient:
             frequency_penalty=frequency_penalty,
             function_call=function_call,
             functions=functions,
+            include_reasoning=include_reasoning,
             logit_bias=logit_bias,
             logprobs=logprobs,
             max_completion_tokens=max_completion_tokens,
@@ -753,6 +765,7 @@ class AsyncCompletionsClient:
         frequency_penalty: typing.Optional[float] = OMIT,
         function_call: typing.Optional[CreateCompletionsRequestFunctionCall] = OMIT,
         functions: typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]] = OMIT,
+        include_reasoning: typing.Optional[bool] = OMIT,
         logit_bias: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         logprobs: typing.Optional[bool] = OMIT,
         max_completion_tokens: typing.Optional[int] = OMIT,
@@ -811,6 +824,8 @@ class AsyncCompletionsClient:
         function_call : typing.Optional[CreateCompletionsRequestFunctionCall]
 
         functions : typing.Optional[typing.Sequence[typing.Dict[str, typing.Any]]]
+
+        include_reasoning : typing.Optional[bool]
 
         logit_bias : typing.Optional[typing.Dict[str, typing.Any]]
 
@@ -932,6 +947,7 @@ class AsyncCompletionsClient:
             frequency_penalty=frequency_penalty,
             function_call=function_call,
             functions=functions,
+            include_reasoning=include_reasoning,
             logit_bias=logit_bias,
             logprobs=logprobs,
             max_completion_tokens=max_completion_tokens,

@@ -4,20 +4,23 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
-from .published_capabilities_endpoints_item import PublishedCapabilitiesEndpointsItem
-from .published_capabilities_input_types_item import PublishedCapabilitiesInputTypesItem
+from .modalities import Modalities
+from .model_specs_endpoints_item import ModelSpecsEndpointsItem
 from .published_reasoning import PublishedReasoning
 
 
-class PublishedCapabilities(UniversalBaseModel):
+class ModelSpecs(UniversalBaseModel):
     """
-    The typed contract of ``published``, exported to the public API reference (R19).
+    What a model accepts: limits, modalities, endpoints, reasoning controls and supported parameters.
     """
 
-    endpoints: typing.List[PublishedCapabilitiesEndpointsItem]
-    input_types: typing.List[PublishedCapabilitiesInputTypesItem]
-    parameters: typing.List[str]
+    context_window: int
+    endpoints: typing.List[ModelSpecsEndpointsItem]
+    max_output_tokens: int
+    modalities: Modalities
     reasoning: typing.Optional[PublishedReasoning] = None
+    supported_parameters: typing.List[str]
+    supports_reasoning: bool
 
     if IS_PYDANTIC_V2:
         model_config: typing.ClassVar[pydantic.ConfigDict] = pydantic.ConfigDict(extra="allow", frozen=True)  # type: ignore # Pydantic v2

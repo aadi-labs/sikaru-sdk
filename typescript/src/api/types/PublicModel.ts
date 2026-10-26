@@ -3,18 +3,17 @@
 import * as Sikaru from "../index.js";
 
 /**
- * The typed contract of ``Model.public``, exported to the public API reference (R19).
+ * One model in the public catalog.
  */
 export interface PublicModel {
-    capabilities: Sikaru.PublishedCapabilities;
-    context_length: number;
     created: number;
     deprecation_date?: (string | null) | undefined;
+    display_name: string;
     id: string;
-    name: string;
     object: PublicModel.Object_;
     owned_by: string;
     pricing: Sikaru.ModelPricing;
+    specs: Sikaru.ModelSpecs;
 }
 
 export namespace PublicModel {

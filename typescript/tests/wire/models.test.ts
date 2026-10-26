@@ -9,7 +9,7 @@ describe("ModelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "data" : [ { "capabilities" : { "endpoints" : [ "chat" ] , "input_types" : [ "image_url" ] , "parameters" : [ "parameters" ] } , "context_length" : 1 , "created" : 1 , "deprecation_date" : "2023-01-15" , "id" : "id" , "name" : "name" , "object" : "model" , "owned_by" : "owned_by" , "pricing" : { "completion" : "completion" , "prompt" : "prompt" } } ] , "object" : "list" };
+        const rawResponseBody = { "data" : [ { "created" : 1 , "deprecation_date" : "2023-01-15" , "display_name" : "display_name" , "id" : "id" , "object" : "model" , "owned_by" : "owned_by" , "pricing" : { "input_usd_per_mtok" : 1.1 , "output_usd_per_mtok" : 1.1 } , "specs" : { "context_window" : 1 , "endpoints" : [ "chat" ] , "max_output_tokens" : 1 , "modalities" : { "input" : [ "input" ] , "output" : [ "output" ] } , "supported_parameters" : [ "supported_parameters" ] , "supports_reasoning" : true } } ] , "object" : "list" };
         
         server
             .mockEndpoint()
@@ -29,7 +29,7 @@ describe("ModelsClient", () => {
         const server = mockServerPool.createServer();
         const client = new SikaruApi({ "maxRetries" : 0 , "apiKey" : "test" , "channelCredential" : "test" , "environment" : server.baseUrl });
         
-        const rawResponseBody = { "capabilities" : { "endpoints" : [ "chat" ] , "input_types" : [ "image_url" ] , "parameters" : [ "parameters" ] , "reasoning" : { "budget" : true , "default_effort" : "none" , "default_history" : "disabled" , "efforts" : [ "none" ] , "history" : [ "disabled" ] , "normalization" : { } , "summary" : true } } , "context_length" : 1 , "created" : 1 , "deprecation_date" : "2023-01-15" , "id" : "id" , "name" : "name" , "object" : "model" , "owned_by" : "owned_by" , "pricing" : { "completion" : "completion" , "prompt" : "prompt" } };
+        const rawResponseBody = { "created" : 1 , "deprecation_date" : "2023-01-15" , "display_name" : "display_name" , "id" : "id" , "object" : "model" , "owned_by" : "owned_by" , "pricing" : { "cache_read_usd_per_mtok" : 1.1 , "input_usd_per_mtok" : 1.1 , "output_usd_per_mtok" : 1.1 } , "specs" : { "context_window" : 1 , "endpoints" : [ "chat" ] , "max_output_tokens" : 1 , "modalities" : { "input" : [ "input" ] , "output" : [ "output" ] } , "reasoning" : { "budget" : true , "default_effort" : "none" , "default_history" : "disabled" , "efforts" : [ "none" ] , "history" : [ "disabled" ] , "normalization" : { } , "summary" : true } , "supported_parameters" : [ "supported_parameters" ] , "supports_reasoning" : true } };
         
         server
             .mockEndpoint()
