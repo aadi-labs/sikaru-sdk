@@ -10,6 +10,7 @@ OperationViewMethod = typing.Union[
         "bash.wait",
         "bash.cancel",
         "workspace.write_text",
+        "workspace.edit_text",
         "bash.wait_for",
         "jobs.next_completed",
     ],

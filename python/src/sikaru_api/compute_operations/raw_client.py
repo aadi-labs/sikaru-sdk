@@ -50,6 +50,11 @@ class RawComputeOperationsClient:
         """
         Only exact immutable receipt retries are idempotent; changed content conflicts.
 
+        A 409 is final for this receipt: it can never be recorded as sent (for example a
+        receipt a waiting harness already took). Executors settle delivery and keep the
+        receipt to answer a later issue of the same operation; they never retry a 409.
+        Network failures, 429 and 5xx are transient and may be retried.
+
         Parameters
         ----------
         project_id : str
@@ -337,6 +342,11 @@ class AsyncRawComputeOperationsClient:
     ) -> AsyncHttpResponse[ReceiptView]:
         """
         Only exact immutable receipt retries are idempotent; changed content conflicts.
+
+        A 409 is final for this receipt: it can never be recorded as sent (for example a
+        receipt a waiting harness already took). Executors settle delivery and keep the
+        receipt to answer a later issue of the same operation; they never retry a 409.
+        Network failures, 429 and 5xx are transient and may be retried.
 
         Parameters
         ----------

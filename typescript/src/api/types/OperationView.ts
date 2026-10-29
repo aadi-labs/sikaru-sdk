@@ -24,6 +24,7 @@ export namespace OperationView {
             BashWait: "bash.wait",
             BashCancel: "bash.cancel",
             WorkspaceWriteText: "workspace.write_text",
+            WorkspaceEditText: "workspace.edit_text",
             BashWaitFor: "bash.wait_for",
             JobsNextCompleted: "jobs.next_completed"
         } as const;

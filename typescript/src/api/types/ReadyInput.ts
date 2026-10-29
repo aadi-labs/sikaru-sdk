@@ -3,7 +3,7 @@
 import * as Sikaru from "../index.js";
 
 export interface ReadyInput {
-    /** Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations. */
+    /** Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); 'workspace-edit-v1' serves workspace.edit_text (path and edits of unique old_text/new_text pairs). Only executors declaring a feature receive its operations. */
     capabilities: ReadyInput.Capabilities.Item[];
     executor_instance_id: string;
     journal_id: string;
@@ -18,7 +18,8 @@ export namespace ReadyInput {
         export const Item = {
                 ComputeExecute: "compute.execute",
                 BashRun: "bash.run",
-                ConditionWaitsV1: "condition-waits-v1"
+                ConditionWaitsV1: "condition-waits-v1",
+                WorkspaceEditV1: "workspace-edit-v1"
             } as const;
         export type Item = typeof Item[keyof typeof Item];
     }

@@ -678,7 +678,7 @@ class RawComputeAttachmentsClient:
         attachment_id : str
 
         capabilities : typing.Sequence[ReadyInputCapabilitiesItem]
-            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
+            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); 'workspace-edit-v1' serves workspace.edit_text (path and edits of unique old_text/new_text pairs). Only executors declaring a feature receive its operations.
 
         executor_instance_id : str
 
@@ -1070,7 +1070,7 @@ class RawComputeAttachmentsClient:
         attachment_id : str
 
         capabilities : typing.Sequence[ReadyInputCapabilitiesItem]
-            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
+            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); 'workspace-edit-v1' serves workspace.edit_text (path and edits of unique old_text/new_text pairs). Only executors declaring a feature receive its operations.
 
         executor_instance_id : str
 
@@ -2521,7 +2521,7 @@ class AsyncRawComputeAttachmentsClient:
         attachment_id : str
 
         capabilities : typing.Sequence[ReadyInputCapabilitiesItem]
-            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
+            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); 'workspace-edit-v1' serves workspace.edit_text (path and edits of unique old_text/new_text pairs). Only executors declaring a feature receive its operations.
 
         executor_instance_id : str
 
@@ -2919,7 +2919,7 @@ class AsyncRawComputeAttachmentsClient:
         attachment_id : str
 
         capabilities : typing.Sequence[ReadyInputCapabilitiesItem]
-            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); only executors declaring it receive those operations.
+            Optional features beyond compute.execute. 'condition-waits-v1' serves bash.wait_for (WaitForArguments -> WaitForResult) and jobs.next_completed (NextCompletedArguments -> NextCompletedResult); 'workspace-edit-v1' serves workspace.edit_text (path and edits of unique old_text/new_text pairs). Only executors declaring a feature receive its operations.
 
         executor_instance_id : str
 
